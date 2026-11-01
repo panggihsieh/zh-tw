@@ -2937,3 +2937,11 @@ dialog::backdrop {
 .random-phrase-button:hover {
   background: #e7efdd;
 }
+.read-along-current {
+  background: #ffe078;
+  color: #173e32;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 #ae6d1d;
+  outline: 2px solid #d99a25;
+  padding: 0;
+}

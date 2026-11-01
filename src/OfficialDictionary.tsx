@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReadAlong from "./ReadAlong";
 
 export interface DictionaryData {
   version: string;
@@ -80,7 +81,9 @@ export default function OfficialDictionary({
               {entry[6]}
               {entry[8] && ` ／ ${entry[8]}`}
             </p>
-            <p className="official-definition">{entry[13]}</p>
+            <p className="official-definition">
+              <ReadAlong text={entry[13]} />
+            </p>
             {entry[14] && <p>{entry[14]}</p>}
             <button
               className="text-button"

@@ -51,6 +51,7 @@ import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
+import ReadAlong from "./ReadAlong";
 import {
   randomStartupPhrase,
   refreshOpeningPhrase,
@@ -678,6 +679,7 @@ export default function App() {
     <SpeechContext.Provider
       value={{
         state: speechState,
+        text: speech.getSession()?.text || "",
         voiceLabel: ttsPreference
           ? `${ttsPreference.name}${preferredVoice(ttsVoices, ttsPreference) ? "" : "（目前不可用，暫用自動）"}`
           : "自動選擇（優先臺灣中文）",
@@ -1209,9 +1211,13 @@ export default function App() {
                                 <div className="definition">
                                   <span>先認識這個語詞</span>
                                   <p>
-                                    {PHRASES[collection.sourcePhrase]
-                                      ?.explanation ||
-                                      "下方提供教育部詞語注音與釋義，可搭配官方查詢一起學習。"}
+                                    <ReadAlong
+                                      text={
+                                        PHRASES[collection.sourcePhrase]
+                                          ?.explanation ||
+                                        "下方提供教育部詞語注音與釋義，可搭配官方查詢一起學習。"
+                                      }
+                                    />
                                   </p>
                                 </div>
                                 <OfficialDictionary
@@ -1280,7 +1286,9 @@ export default function App() {
                                   </div>
                                 </div>
                                 <blockquote>
-                                  {simple ? card.simple : card.meaning}
+                                  <ReadAlong
+                                    text={simple ? card.simple : card.meaning}
+                                  />
                                 </blockquote>
                                 <div className="meaning-actions">
                                   <button
@@ -1391,8 +1399,12 @@ export default function App() {
                                         </button>
                                         {revealed.includes(v.word) && (
                                           <div className="word-detail">
-                                            <p>{v.meaning}</p>
-                                            <span>{v.example}</span>
+                                            <p>
+                                              <ReadAlong text={v.meaning} />
+                                            </p>
+                                            <span>
+                                              <ReadAlong text={v.example} />
+                                            </span>
                                           </div>
                                         )}
                                         <div className="word-actions">
