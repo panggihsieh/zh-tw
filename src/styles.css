@@ -3286,3 +3286,46 @@ input:not([type="checkbox"]):not([type="range"]) {
 .structure-ai-settings .api-connection-testing {
   color: #57522d;
 }
+.assembly-part,
+.assembly-complete {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+.assembly-part {
+  animation-name: assemble-real-parts;
+}
+.assembly-complete {
+  animation-name: reveal-complete-glyph;
+}
+@keyframes assemble-real-parts {
+  0%,
+  8%,
+  88%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  18%,
+  72% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  35%,
+  52% {
+    opacity: 1;
+    transform: translate(var(--part-x), var(--part-y));
+  }
+}
+@keyframes reveal-complete-glyph {
+  0%,
+  8%,
+  88%,
+  100% {
+    opacity: 1;
+  }
+  18%,
+  72% {
+    opacity: 0;
+  }
+}

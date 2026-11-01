@@ -55,6 +55,7 @@ import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
 import StructureDiagram from "./StructureDiagram";
+import AssemblyParts from "./AssemblyParts";
 import {
   randomStartupPhrase,
   refreshOpeningPhrase,
@@ -203,7 +204,15 @@ function Glyph({
         strokeDasharray="6 7"
         fill="none"
       />
-      {split ? (
+      {split && scene === 2 ? (
+        <AssemblyParts
+          card={card}
+          regions={regions}
+          playing={playing}
+          speed={speed}
+          reduced={reduced}
+        />
+      ) : split ? (
         regions.map((_, i) => {
           const vertical = card.master.layout === "vertical";
           const distance =
@@ -330,6 +339,7 @@ export default function App() {
   const [scene, setScene] = useState(restored.scene);
   const [playing, setPlaying] = useState(false);
   const [decompositionReplay, setDecompositionReplay] = useState(0);
+  const [decompositionOnly, setDecompositionOnly] = useState(false);
   const [speed, setSpeed] = useState(restored.speed);
   const [showReading, setShowReading] = useState(restored.showReading);
   const [captions, setCaptions] = useState(restored.captions);
@@ -441,6 +451,7 @@ export default function App() {
   }, [notice]);
   useEffect(() => {
     if (!playing || !collection) return;
+    if (scene === 2 && decompositionOnly) return;
     if (scene === 3) {
       setPlaying(false);
       setNotice(
@@ -460,10 +471,19 @@ export default function App() {
           setNotice("這組語詞學完了！可以收藏或下載學習本。");
         }
       },
-      (scene === 5 ? 8000 : 5000) / speed,
+      (scene === 2 ? 7000 : scene === 5 ? 8000 : 5000) / speed,
     );
     return () => clearTimeout(timer);
-  }, [playing, scene, cardIndex, collection?.id, speed, voice, speechState]);
+  }, [
+    playing,
+    scene,
+    cardIndex,
+    collection?.id,
+    speed,
+    voice,
+    speechState,
+    decompositionOnly,
+  ]);
   const previousCard = useRef(`${collection?.id}:${cardIndex}`);
   useEffect(() => {
     const key = `${collection?.id}:${cardIndex}`;
@@ -1321,6 +1341,7 @@ export default function App() {
                                     setDecompositionReplay(
                                       (value) => value + 1,
                                     );
+                                    setDecompositionOnly(true);
                                     setPlaying(true);
                                   }}
                                 >
@@ -1339,11 +1360,11 @@ export default function App() {
                                 </div>
                                 <p>
                                   {card.master.components.length
-                                    ? "同一個字形的區域分離，幫助觀察各部件的位置。"
+                                    ? "部件先分開，再依位置合起，最後對照完整字形。"
                                     : "這個字尚無可用的拆解教材。"}
                                 </p>
                                 <p className="data-note">
-                                  這是依目前字型切分的部件示意，邊界可能因字型不同而有差異；不代表字源或筆順。
+                                  部件採字型縮放與位置示意，合成後以完整字形對照；不代表精確輪廓、字源或筆順。按重播會循環停留本幕。
                                 </p>
                               </>
                             )}
@@ -1584,6 +1605,7 @@ export default function App() {
                             className="icon-btn"
                             aria-label="重播這個字"
                             onClick={() => {
+                              setDecompositionOnly(false);
                               setScene(0);
                               setPlaying(true);
                             }}
