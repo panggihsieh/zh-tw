@@ -24,7 +24,6 @@ import {
   LibraryBig,
   LoaderCircle,
   Play,
-  PanelLeftOpen,
   Plus,
   RotateCcw,
   Search,
@@ -85,40 +84,6 @@ import {
 type Page = "learn" | "library" | "resources" | "tts";
 const err = (e: unknown) =>
   e instanceof Error ? e.message : "發生問題，請再試一次。";
-function Mascot() {
-  return (
-    <svg viewBox="0 0 160 150" className="mascot" aria-hidden="true">
-      <path d="M78 30 Q67 8 45 13 Q44 36 73 40" fill="#a8bd6c" />
-      <path d="M79 34 Q87 7 112 11 Q111 36 79 40" fill="#63855b" />
-      <rect x="27" y="37" width="109" height="94" rx="31" fill="#edc17c" />
-      <rect x="38" y="46" width="87" height="74" rx="23" fill="#fff1cf" />
-      <circle cx="62" cy="77" r="5" fill="#315746" />
-      <circle cx="103" cy="77" r="5" fill="#315746" />
-      <path
-        d="M72 93 Q82 105 94 92"
-        fill="none"
-        stroke="#315746"
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-      <ellipse cx="50" cy="90" rx="8" ry="5" fill="#efb099" />
-      <ellipse cx="113" cy="90" rx="8" ry="5" fill="#efb099" />
-      <path
-        d="M26 89 Q8 79 13 67 M136 89 Q154 77 150 64"
-        fill="none"
-        stroke="#edc17c"
-        strokeWidth="10"
-        strokeLinecap="round"
-      />
-      <path
-        d="M57 130 L53 140 M106 130 L110 140"
-        stroke="#63855b"
-        strokeWidth="8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 function Glyph({
   card,
   scene,
@@ -330,20 +295,16 @@ export default function App() {
   }, [restored]);
 
   const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
-    try { return localStorage.getItem("hanzi-notebook.sidebar-collapsed.v1") === "true"; }
-    catch { return false; }
-  });
-  const sidebarFocusRequested = useRef(false);
-  useEffect(() => {
-    try { localStorage.setItem("hanzi-notebook.sidebar-collapsed.v1", String(sidebarCollapsed)); }
-    catch { /* The sidebar remains usable when browser storage is unavailable. */ }
-    if (sidebarFocusRequested.current) {
-      document.querySelector<HTMLButtonElement>(sidebarCollapsed ? ".sidebar-expand" : "button.brand")?.focus({preventScroll:true});
-      sidebarFocusRequested.current = false;
-    }
-  }, [sidebarCollapsed]);
-  const toggleSidebar = () => { sidebarFocusRequested.current = true; setSidebarCollapsed(value => !value); };
+  const headerRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const measure = () => document.documentElement.style.setProperty("--app-header-height", `${header.getBoundingClientRect().height}px`);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
+  }, []);
   const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
@@ -751,28 +712,12 @@ export default function App() {
         resume: () => speech.resume(),
       }}
     >
-      <div className={`${backendMode ? "app-shell backend-shell" : "app-shell"}${sidebarCollapsed ? " sidebar-collapsed" : ""}`}>
-        <aside id="mainSidebar" className="sidebar" hidden={sidebarCollapsed}>
-          <button
-            type="button"
-            className="brand"
-            aria-label="收合側欄"
-            aria-controls="mainSidebar"
-            aria-expanded={!sidebarCollapsed}
-            title="收合側欄（亦可按滑鼠中鍵）"
-            onClick={toggleSidebar}
-            onMouseDown={event => { if (event.button === 1) event.preventDefault(); }}
-            onAuxClick={event => { if (event.button === 1) { event.preventDefault(); toggleSidebar(); } }}
-          >
-            <span className="brand-icon">
-              <BookOpen size={26} />
-            </span>
-            <span>
-              生字動畫<span className="brand-sub">收藏本</span>
-            </span>
-          </button>
-          <div className="side-label">{backendMode ? "教學管理後台" : "我的學習空間"}</div>
-          <nav aria-label={backendMode ? "後台功能" : "學生功能"}>
+      <div className={backendMode ? "app-shell top-navigation-layout backend-shell" : "app-shell top-navigation-layout"}>
+        <div className="main-wrap">
+          <header ref={headerRef} className="topbar">
+            <div className="header-primary">
+              <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage(backendMode ? "tts" : "learn"); setPlaying(false); }}><BookOpen size={24} /><span>生字動畫收藏本</span></button>
+          <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
@@ -841,37 +786,9 @@ export default function App() {
             </a>
             </>)}
           </nav>
-          <div className="side-garden">
-            <Mascot />
-            <b>每天認識一點點，</b>
-            <span>讓字詞慢慢長成你的力量。</span>
-            <div className="garden-dot">✦　✧　✦</div>
-          </div>
-          <div className="sidebar-bottom">
-            {backendMode && <button className="nav-item" onClick={() => setModal("settings")}>
-              <Settings2 size={19} />
-              學習偏好
-            </button>}
-            <span className="local-label">
-              <span />
-              本機收藏，不用登入
-            </span>
-          </div>
-        </aside>
-        <div className="main-wrap">
-          <header className="topbar">
-            <div className="topbar-leading">
-              {sidebarCollapsed && <button type="button" className="sidebar-expand" aria-label="展開側欄" aria-controls="mainSidebar" aria-expanded={false} title="展開側欄（亦可按滑鼠中鍵）" onClick={toggleSidebar} onMouseDown={event => { if (event.button === 1) event.preventDefault(); }} onAuxClick={event => { if (event.button === 1) { event.preventDefault(); toggleSidebar(); } }}><PanelLeftOpen size={20} /><span>展開側欄</span></button>}
-            <span className="breadcrumb">
-              {backendMode ? "教學管理後台" : "我的學習空間"} <ChevronRight size={14} />{" "}
-              {page === "learn"
-                ? "生字動畫教室"
-                : page === "library"
-                  ? "我的生字收藏本"
-                  : page === "resources"
-                    ? "查字小幫手"
-                    : "TTS 設定後台"}
-            </span>
+              {backendMode
+                ? <button className="teacher-session-button" onClick={() => { speech.stop(); setPlaying(false); window.location.assign("/"); }}>登出</button>
+                : <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
             </div>
             <div className="topbar-actions">
               <SpeechTools
@@ -1963,7 +1880,6 @@ export default function App() {
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
               </span>
               <span>生字動畫收藏本 · 本機學習版</span>
-              <a href={backendMode ? "/" : "/?view=backend"}>{backendMode ? "返回學生前台" : "教師登入（後台）"}</a>
             </footer>
           </main>
         </div>

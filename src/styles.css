@@ -3380,10 +3380,17 @@ input:not([type="checkbox"]):not([type="range"]) {
 
 .backend-shell .sidebar .nav-item{white-space:normal;overflow-wrap:anywhere}.backend-shell .sidebar .nav-item svg{flex-shrink:0}.page-footer a{color:#536d49}@media(max-width:850px){.backend-shell .sidebar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.backend-shell .sidebar .nav-item{font-size:16px;justify-content:flex-start}}
 
-/* Collapsible navigation keeps the reading workspace and page state intact. */
-.sidebar[hidden]{display:none}
-.app-shell.sidebar-collapsed .main-wrap{margin-left:0;width:100%}
-button.brand{border:0;background:transparent;color:inherit;text-align:left;font-family:inherit;cursor:pointer;width:100%}
-.topbar-leading{display:flex;align-items:center;gap:12px;min-width:0}
-.sidebar-expand{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#f0f3ea;color:#285d50;font:inherit;cursor:pointer;white-space:nowrap}
-@media(max-width:620px){.sidebar-expand{padding:6px}.sidebar-expand span{display:none}.topbar-leading{gap:6px}}
+/* Full-width workspace with fixed-to-top student/teacher navigation. */
+html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
+.top-navigation-layout .main-wrap{margin-left:0;width:100%}
+.top-navigation-layout .topbar{position:sticky;top:0;z-index:30;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:12px 28px;min-height:0;height:auto;background:#fafbf7;border-bottom:1px solid var(--border);box-shadow:0 3px 12px #254b4008}
+.header-primary{display:flex;align-items:center;gap:20px;min-width:0;width:100%}
+.app-top-brand{display:flex;align-items:center;gap:9px;flex-shrink:0;color:#285d50;font:inherit;font-size:20px;font-weight:700;padding:8px 0;white-space:nowrap;cursor:pointer}
+.app-top-nav{display:flex;align-items:center;gap:8px;min-width:0;flex:1;overflow-x:auto;padding:3px}
+.topbar .app-top-nav .nav-item{width:auto;flex:none;margin:0;padding:10px 12px;border-radius:9px;white-space:nowrap;gap:8px;font-size:18px;border:1px solid transparent}
+.topbar .app-top-nav .nav-item.active{background:#dfe9d8;border-color:#c8d5bf;color:#285d50}
+.topbar .app-top-nav .nav-item svg{flex-shrink:0}
+.teacher-session-button{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid #b9cbb0;border-radius:9px;background:white;color:#285d50;padding:10px 14px;font:inherit;font-size:17px;white-space:nowrap;cursor:pointer}
+.top-navigation-layout .topbar-actions{align-self:flex-end;margin-left:0;max-width:100%;flex-wrap:wrap}
+@media(max-width:1000px){.header-primary{flex-wrap:wrap;gap:10px}.app-top-nav{order:3;flex-basis:100%;width:100%}.teacher-session-button{margin-left:auto}.top-navigation-layout .topbar{padding:10px 18px}.topbar .app-top-nav .nav-item{font-size:17px}}
+@media(max-width:600px){.top-navigation-layout .topbar{padding:8px 10px}.app-top-brand{font-size:17px}.teacher-session-button{font-size:14px;padding:8px 10px}.top-navigation-layout:not(.backend-shell) .app-top-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;overflow:visible}.topbar .app-top-nav .nav-item{min-width:0;padding:8px 5px;font-size:14px;gap:5px;justify-content:center;white-space:normal;line-height:1.5}.topbar .app-top-nav .nav-item svg{width:17px;height:17px}.topbar .app-top-nav .nav-count{font-size:13px;margin:0}.top-navigation-layout .topbar-actions{width:100%;justify-content:flex-end;gap:6px}}
