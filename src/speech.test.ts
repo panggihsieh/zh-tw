@@ -41,6 +41,24 @@ const end = (u: SpeechSynthesisUtterance) =>
   u.onend?.({} as SpeechSynthesisEvent);
 
 describe("朗讀進度與定位", () => {
+  it("重整還原朗讀位置但不自動出聲，按繼續才朗讀", () => {
+    const t = setup();
+    t.controller.restoreSession({
+      text: "一二三四五。",
+      position: 3,
+      rate: 0.85,
+      preference: null,
+    });
+    expect(t.state).toHaveBeenLastCalledWith("paused");
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 3,
+      total: 6,
+      rate: 0.85,
+    });
+    expect(t.synth.speak).not.toHaveBeenCalled();
+    t.controller.resume();
+    expect(t.utterances[0].text).toBe("四五。");
+  });
   it("全域預設與試聽音色分開，試聽不覆寫前台預設", () => {
     const a = {
       name: "A",

@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -56,6 +62,13 @@ import {
   type SpeechState,
   type SpeechProgress,
 } from "./speech";
+
+import {
+  loadPageSession,
+  defaultPageSession,
+  savePageSession,
+  type PageSession,
+} from "./sessionState";
 
 type Page = "learn" | "library" | "resources" | "tts";
 const err = (e: unknown) =>
@@ -230,29 +243,39 @@ function Modal({
   );
 }
 export default function App() {
-  const [page, setPage] = useState<Page>("learn");
-  const [input, setInput] = useState("感謝");
-  const [phrase, setPhrase] = useState("感謝");
-  const [positions, setPositions] = useState([0, 1]);
+  const [restored] = useState(() => {
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    try {
+      return loadPageSession(sessionStorage, reduced);
+    } catch {
+      return defaultPageSession(reduced);
+    }
+  });
+
+  const [page, setPage] = useState<Page>(restored.page);
+  const [input, setInput] = useState(restored.input);
+  const [phrase, setPhrase] = useState(restored.phrase);
+  const [positions, setPositions] = useState(restored.positions);
   const [validation, setValidation] = useState("");
-  const [collection, setCollection] = useState<Collection | null>(null);
-  const [cardIndex, setCardIndex] = useState(0);
-  const [scene, setScene] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [speed, setSpeed] = useState(1);
-  const [showReading, setShowReading] = useState(true);
-  const [captions, setCaptions] = useState(true);
-  const [voice, setVoice] = useState(false);
-  const [reduced, setReduced] = useState(
-    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+  const [collection, setCollection] = useState<Collection | null>(
+    restored.collection,
   );
-  const [simple, setSimple] = useState(false);
-  const [grade, setGrade] = useState("四年級");
-  const [wordCount, setWordCount] = useState(3);
-  const [revealed, setRevealed] = useState<string[]>([]);
+  const [cardIndex, setCardIndex] = useState(restored.cardIndex);
+  const [scene, setScene] = useState(restored.scene);
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(restored.speed);
+  const [showReading, setShowReading] = useState(restored.showReading);
+  const [captions, setCaptions] = useState(restored.captions);
+  const [voice, setVoice] = useState(restored.voice);
+  const [reduced, setReduced] = useState(restored.reduced);
+  const [simple, setSimple] = useState(restored.simple);
+  const [grade, setGrade] = useState(restored.grade);
+  const [wordCount, setWordCount] = useState(restored.wordCount);
+  const [revealed, setRevealed] = useState<string[]>(restored.revealed);
   const [saved, setSaved] = useState<Collection[]>([]);
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [collectionsLoaded, setCollectionsLoaded] = useState(false);
+  const [search, setSearch] = useState(restored.search);
+  const [filter, setFilter] = useState(restored.filter);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [speechState, setSpeechState] = useState<SpeechState>("idle");
@@ -304,7 +327,7 @@ export default function App() {
   }
   const [busy, setBusy] = useState("");
   const [modal, setModal] = useState<"settings" | "export" | "drive" | null>(
-    null,
+    restored.modal,
   );
   const [driveReady, setDriveReady] = useState(false);
   const [driveResult, setDriveResult] = useState<Awaited<
@@ -313,14 +336,32 @@ export default function App() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const importRef = useRef<HTMLInputElement>(null);
   const card = collection?.cards[cardIndex];
+  const scrollPending = useRef(true);
+  const scrollPage = useRef(page);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [page]);
+    const previous = history.scrollRestoration;
+    history.scrollRestoration = "manual";
+    return () => {
+      history.scrollRestoration = previous;
+    };
+  }, []);
+  useLayoutEffect(() => {
+    if (scrollPage.current !== page) {
+      scrollPage.current = page;
+      scrollPending.current = false;
+      window.scrollTo({ top: 0, behavior: "auto" });
+    } else if (scrollPending.current && collectionsLoaded) {
+      scrollPending.current = false;
+      window.scrollTo({ top: restored.scrollY, behavior: "auto" });
+    }
+  }, [page, collectionsLoaded]);
   async function refresh() {
     try {
       setSaved(await listCollections());
     } catch (e) {
       setError(`讀取收藏失敗：${err(e)}`);
+    } finally {
+      setCollectionsLoaded(true);
     }
   }
   useEffect(() => {
@@ -356,7 +397,11 @@ export default function App() {
     );
     return () => clearTimeout(timer);
   }, [playing, scene, cardIndex, collection?.id, speed, voice, speechState]);
+  const previousCard = useRef(`${collection?.id}:${cardIndex}`);
   useEffect(() => {
+    const key = `${collection?.id}:${cardIndex}`;
+    if (previousCard.current === key) return;
+    previousCard.current = key;
     setRevealed([]);
     setSimple(false);
   }, [cardIndex, collection?.id]);
@@ -390,11 +435,96 @@ export default function App() {
     if (!automatic) setPlaying(false);
     speech.speak(text, speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85);
   }
+  const narrationKey = JSON.stringify([
+    scene,
+    card?.id,
+    voice,
+    simple,
+    wordCount,
+    speed,
+    page,
+    modal,
+    deleteId,
+  ]);
+  const previousNarration = useRef(narrationKey);
   useEffect(() => {
-    if (voice && page === "learn" && card && !modal && !deleteId)
+    const changed = previousNarration.current !== narrationKey;
+    previousNarration.current = narrationKey;
+    if (changed && voice && page === "learn" && card && !modal && !deleteId)
       say(narration, true);
     return () => speech.stop();
   }, [scene, card?.id, voice, simple, wordCount, speed, page, modal, deleteId]);
+  useEffect(() => {
+    if (restored.speech) speech.restoreSession(restored.speech);
+  }, []);
+  const sessionFailureShown = useRef(false);
+  useEffect(() => {
+    const persist = () => {
+      const state: PageSession = {
+        version: 1,
+        page,
+        input,
+        phrase,
+        positions,
+        collection,
+        cardIndex,
+        scene,
+        speed,
+        showReading,
+        captions,
+        voice,
+        reduced,
+        simple,
+        grade,
+        wordCount,
+        revealed,
+        search,
+        filter,
+        modal: modal === "settings" || modal === "export" ? modal : null,
+        scrollY: scrollPending.current ? restored.scrollY : window.scrollY,
+        speech: speech.getSession(),
+      };
+      try {
+        savePageSession(sessionStorage, state);
+      } catch {
+        if (!sessionFailureShown.current) {
+          sessionFailureShown.current = true;
+          setError(
+            "無法保存頁面狀態，重新整理可能重置；請確認瀏覽器允許本機儲存。",
+          );
+        }
+      }
+    };
+    persist();
+    window.addEventListener("pagehide", persist);
+    window.addEventListener("scroll", persist, { passive: true });
+    return () => {
+      window.removeEventListener("pagehide", persist);
+      window.removeEventListener("scroll", persist);
+    };
+  }, [
+    page,
+    input,
+    phrase,
+    positions,
+    collection,
+    cardIndex,
+    scene,
+    speed,
+    showReading,
+    captions,
+    voice,
+    reduced,
+    simple,
+    grade,
+    wordCount,
+    revealed,
+    search,
+    filter,
+    modal,
+    speechProgress,
+    collectionsLoaded,
+  ]);
   function choosePhrase(text: string) {
     const issue = validatePhrase(text);
     setValidation(issue);

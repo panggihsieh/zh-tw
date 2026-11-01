@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, Cloud, Monitor, RefreshCw, Volume2 } from "lucide-react";
 import {
   isChineseVoice,
@@ -24,12 +24,51 @@ export default function TtsSettings({
   save,
   preview,
 }: Props) {
-  const [filter, setFilter] = useState("all");
-  const [draft, setDraft] = useState(saved ? voiceKey(saved) : "auto");
-  const [sample, setSample] = useState(
-    "你好，我們一起認識生字。感謝別人的幫忙，也把今天的小小進步收藏起來。",
+  const savedKey = saved ? voiceKey(saved) : "auto";
+  const [restored] = useState(() => {
+    try {
+      const data = JSON.parse(
+        sessionStorage.getItem("hanzi-notebook.tts-draft.v1") || "null",
+      );
+      return data?.version === 1 ? data : null;
+    } catch {
+      return null;
+    }
+  });
+  const [filter, setFilter] = useState(
+    ["all", "local", "online"].includes(restored?.filter)
+      ? restored.filter
+      : "all",
   );
-  useEffect(() => setDraft(saved ? voiceKey(saved) : "auto"), [saved]);
+  const [draft, setDraft] = useState(
+    restored?.savedKey === savedKey &&
+      typeof restored?.draft === "string" &&
+      restored.draft.length < 2000
+      ? restored.draft
+      : savedKey,
+  );
+  const [sample, setSample] = useState(
+    typeof restored?.sample === "string" && restored.sample.length <= 300
+      ? restored.sample
+      : "你好，我們一起認識生字。感謝別人的幫忙，也把今天的小小進步收藏起來。",
+  );
+  const previousSaved = useRef(savedKey);
+  useEffect(() => {
+    if (previousSaved.current !== savedKey) {
+      previousSaved.current = savedKey;
+      setDraft(savedKey);
+    }
+  }, [savedKey]);
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        "hanzi-notebook.tts-draft.v1",
+        JSON.stringify({ version: 1, filter, draft, sample, savedKey }),
+      );
+    } catch {
+      /* main page persistence already reports blocked storage */
+    }
+  }, [filter, draft, sample, savedKey]);
   const chinese = voices.filter(isChineseVoice);
   const selected = chinese.find((v) => voiceKey(v) === draft);
   const missing = !!saved && !preferredVoice(voices, saved);

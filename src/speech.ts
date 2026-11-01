@@ -76,11 +76,34 @@ export interface SpeechProgress {
   total: number;
   rate: number;
 }
+export interface SpeechSession {
+  text: string;
+  position: number;
+  rate: number;
+  preference: VoicePreference | null;
+}
 export function speechTime(position: number, rate: number) {
   const seconds = Math.max(0, Math.round(position / (4 * rate)));
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 }
 export class SpeechController {
+  getSession(): SpeechSession | null {
+    return this.text
+      ? {
+          text: this.text,
+          position: Math.floor(this.position),
+          rate: this.rate,
+          preference: this.activePreference,
+        }
+      : null;
+  }
+  restoreSession(session: SpeechSession) {
+    this.stop();
+    this.text = session.text;
+    this.rate = session.rate;
+    this.activePreference = session.preference;
+    this.seek(session.position);
+  }
   private preference: VoicePreference | null = null;
   private activePreference: VoicePreference | null = null;
   setVoicePreference(preference: VoicePreference | null) {
