@@ -28,9 +28,14 @@ interface Analysis {
   reviewed: false;
 }
 async function request(path: string, data?: unknown, token = "") {
+  const { cloudServices } = await import("./cloudSync");
+  const user = cloudServices().auth.currentUser;
+  if (!user) throw new Error("請先以管理者 Google 帳號登入");
+  const idToken = await user.getIdToken();
   const response = await fetch(API + path, {
     method: data ? "POST" : "GET",
     headers: {
+      Authorization: `Bearer ${idToken}`,
       ...(token ? { "X-Notebook-Unlock": token } : {}),
       ...(data
         ? {

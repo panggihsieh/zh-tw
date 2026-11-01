@@ -82,3 +82,7 @@ TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；�
 ## 生字收藏雲端備份
 
 「我的生字收藏本」新增 Google 登入、上傳與取回。資料放在獨立的 `hanzi_notebook_users/{uid}/collections`，AI 呼叫維持伺服器處理。設定方式、規則合併與實際啟用狀態見 [Firestore 同步說明](docs/FIRESTORE.md)。
+
+## 教師後台登入與使用者管理
+
+後台採 Google OAuth，固定管理者為 `teacher.hsieh@gmail.com`；結構 API 同時驗證 Firebase ID token。新增使用者名單與啟用／停用功能。雲端啟用狀態及限制見 [後台登入說明](docs/ADMIN_LOGIN.md)。

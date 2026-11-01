@@ -4,7 +4,7 @@
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
     "structure-api": "node server/structure-api.mjs",
-    "test:structure-api": "node --test server/structure-api.check.mjs",
+    "test:structure-api": "node --test server/structure-api.check.mjs server/admin-auth.check.mjs",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
@@ -24,6 +24,7 @@
   "dependencies": {
     "firebase": "^13.1.0",
     "idb": "^8.0.4",
+    "jose": "^6.2.14",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.66.0",
     "react": "^19.3.1",

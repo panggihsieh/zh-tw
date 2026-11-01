@@ -49,6 +49,10 @@ export default function CloudCollections({
     } catch (error) {
       setFailed(true);
       const code = (error as { code?: string }).code;
+      if (error instanceof Error && error.message.startsWith("此帳號已停用")) {
+        setMessage(error.message);
+        return;
+      }
       setMessage(
         code === "permission-denied"
           ? "雲端權限尚未開通，請教師確認生字收藏本的 Firestore 規則。"

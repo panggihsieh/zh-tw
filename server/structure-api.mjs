@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomBytes } from "node:crypto";
+import { authenticateAdmin } from "./admin-auth.mjs";
 import { protectSettings, unprotectSettings } from "./secret-store.mjs";
 import {
   PROVIDERS,
@@ -59,6 +60,7 @@ async function jsonBody(req) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 export function createStructureServer({
+  authenticate = authenticateAdmin,
   configFile = resolve(".local/structure-api.json"),
   fetchProvider = fetch,
   protect = protectSettings,
@@ -151,7 +153,7 @@ export function createStructureServer({
         "Access-Control-Allow-Origin": ORIGIN,
         Vary: "Origin",
         "Access-Control-Allow-Headers":
-          "Content-Type, X-Notebook-Request, X-Notebook-Unlock",
+          "Content-Type, X-Notebook-Request, X-Notebook-Unlock, Authorization",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       });
     const send = (status, data) => {
@@ -173,11 +175,23 @@ export function createStructureServer({
     )
       return send(403, { error: "只允許本機 WebApp 操作" });
     try {
+      let adminUid;
+      try {
+        adminUid = await authenticate(req);
+      } catch {
+        return send(401, { error: "請以管理者 Google 帳號重新登入" });
+      }
       const url = new URL(req.url, "http://127.0.0.1");
       const token = req.headers["x-notebook-unlock"];
       const unlocked =
-        typeof token === "string" && (unlocks.get(token) || 0) > Date.now();
-      if (unlocked) unlocks.set(token, Date.now() + 15 * 60 * 1000);
+        typeof token === "string" &&
+        unlocks.get(token)?.uid === adminUid &&
+        unlocks.get(token).expires > Date.now();
+      if (unlocked)
+        unlocks.set(token, {
+          uid: adminUid,
+          expires: Date.now() + 15 * 60 * 1000,
+        });
       const lockedSettings = () => ({
         provider: "deepseek",
         ...PROVIDERS.deepseek,
@@ -191,7 +205,10 @@ export function createStructureServer({
         // Validate decryptability before issuing an editing session.
         await store();
         const unlockToken = randomBytes(32).toString("hex");
-        unlocks.set(unlockToken, Date.now() + 15 * 60 * 1000);
+        unlocks.set(unlockToken, {
+          uid: adminUid,
+          expires: Date.now() + 15 * 60 * 1000,
+        });
         return send(200, {
           unlockToken,
           ...publicSettings(await settings()),

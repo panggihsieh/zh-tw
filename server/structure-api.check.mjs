@@ -48,6 +48,7 @@ test("local API persists settings, enforces origin, and forwards images to a moc
   const dir = await mkdtemp(join(tmpdir(), "hanzi-api-test-"));
   let providerCalls = 0;
   const api = createStructureServer({
+    authenticate: async () => "test-admin",
     protect: async (value) => ({
       version: 3,
       payload: Buffer.from(JSON.stringify(value)).toString("base64"),
@@ -139,6 +140,7 @@ test("all five cloud providers isolate secrets, redact reads, auto-lock saves an
   let key = "";
   let imageCall = false;
   const api = createStructureServer({
+    authenticate: async () => "test-admin",
     configFile: join(dir, "settings.json"),
     protect: async (v) => ({
       version: 3,

@@ -1,8 +1,38 @@
-// 合併片段：放入既有 match /databases/{database}/documents 區塊內。
-// 不可用本檔取代整份規則；保留原專案所有既有集合規則。
+// 合併至既有 match /databases/{database}/documents；不可取代原專案規則。
+function hanziGoogle() {
+  return request.auth != null
+    && request.auth.token.email_verified == true
+    && request.auth.token.firebase.sign_in_provider == 'google.com';
+}
+function hanziAdmin() {
+  return hanziGoogle() && request.auth.token.email == 'teacher.hsieh@gmail.com';
+}
+function hanziEnabled() {
+  let accessPath = /databases/$(database)/documents/hanzi_notebook_access/$(request.auth.token.email);
+  return !exists(accessPath) || get(accessPath).data.enabled == true;
+}
+match /hanzi_notebook_access/{email} {
+  function validAccess() {
+    return request.resource.data.keys().hasAll(['email', 'displayName', 'enabled'])
+      && request.resource.data.keys().hasOnly(['email', 'displayName', 'enabled'])
+      && request.resource.data.email == email
+      && request.resource.data.displayName is string
+      && request.resource.data.displayName.size() <= 80
+      && request.resource.data.enabled is bool;
+  }
+  allow get: if hanziAdmin() || (hanziGoogle() && request.auth.token.email == email);
+  allow list: if hanziAdmin();
+  allow create: if validAccess()
+    && (email != 'teacher.hsieh@gmail.com' || request.resource.data.enabled == true)
+    && (hanziAdmin() ||
+    (hanziGoogle() && request.auth.token.email == email && request.resource.data.enabled == true));
+  allow update: if hanziAdmin() && validAccess()
+    && (email != 'teacher.hsieh@gmail.com' || request.resource.data.enabled == true);
+  allow delete: if false;
+}
 match /hanzi_notebook_users/{uid}/collections/{collectionId} {
   function isOwner() {
-    return request.auth != null && request.auth.uid == uid;
+    return hanziGoogle() && request.auth.uid == uid && hanziEnabled();
   }
   allow read: if isOwner();
   allow create, update: if isOwner()

@@ -87,6 +87,12 @@ type Page = "learn" | "library" | "resources" | "tts";
 const err = (e: unknown) =>
   e instanceof Error ? e.message : "發生問題，請再試一次。";
 const CloudCollections = lazy(() => import("./CloudCollections"));
+const BackendGate = lazy(() => import("./BackendGate"));
+const UserManagement = lazy(() => import("./UserManagement"));
+export default function ProtectedApp() {
+  if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
+  return <Suspense fallback={<p role="status">載入教師登入…</p>}><BackendGate><App /></BackendGate></Suspense>;
+}
 function Glyph({
   card,
   scene,
@@ -263,7 +269,7 @@ function Modal({
     </dialog>
   );
 }
-export default function App() {
+function App() {
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const [restored] = useState(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -308,7 +314,7 @@ export default function App() {
     observer.observe(header);
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
-  const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | null>(null);
+  const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | "user-management" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -771,6 +777,9 @@ export default function App() {
               <Settings2 size={20} />
               API 設定
             </button>
+            <button className="nav-item" onClick={() => { setPage("tts"); setPlaying(false); setFocusBackendSection("user-management"); }}>
+              <Settings2 size={20} />使用者管理
+            </button>
             <button className="nav-item" onClick={() => { setPage("tts"); setPlaying(false); setFocusBackendSection("structure-help"); }}>
               <Grid2X2 size={20} />
               字形結構說明
@@ -790,7 +799,7 @@ export default function App() {
             </>)}
           </nav>
               {backendMode
-                ? <button className="teacher-session-button" onClick={() => { speech.stop(); setPlaying(false); window.location.assign("/"); }}>登出</button>
+                ? <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
                 : <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
             </div>
             <div className="topbar-actions">
@@ -1864,6 +1873,7 @@ export default function App() {
               </>
             )}
             {page === "tts" && (
+              <>
               <TtsSettings
                 voices={ttsVoices}
                 saved={ttsPreference}
@@ -1880,6 +1890,8 @@ export default function App() {
                   );
                 }}
               />
+              {backendMode && <Suspense fallback={<p role="status">載入使用者管理…</p>}><UserManagement /></Suspense>}
+              </>
             )}
             <footer className="page-footer">
               <span>

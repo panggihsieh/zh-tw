@@ -33,7 +33,19 @@ export function cloudServices() {
   return (services ??= createServices());
 }
 export async function cloudLogin() {
-  return signInWithPopup(cloudServices().auth, new GoogleAuthProvider());
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+  const result = await signInWithPopup(cloudServices().auth, provider);
+  const { registerAppUser, appUserEnabled } = await import("./userAccess");
+  try {
+    await registerAppUser(result.user);
+    if (!(await appUserEnabled(result.user)))
+      throw new Error("此帳號已停用，請聯絡管理者。");
+  } catch (error) {
+    await cloudLogout();
+    throw error;
+  }
+  return result;
 }
 export async function cloudLogout() {
   await signOut(cloudServices().auth);

@@ -3398,3 +3398,12 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   .cloud-collections { padding: 18px; }
   .cloud-actions button { width: 100%; }
 }
+.backend-login { max-width: 680px; margin: 60px auto; padding: 28px; line-height: 1.9; color: #243e32; }
+.backend-login h1 { font-size: 32px; }
+.backend-login p, .backend-login button { font-size: 20px; }
+.user-management { margin: 32px 0; padding: 28px 0; border-top: 2px solid #bccdb9; color: #243e32; }
+.user-management form { display: flex; flex-wrap: wrap; align-items: end; gap: 18px; margin: 24px 0; }
+.user-management label { display: grid; gap: 8px; flex: 1 1 240px; }
+.user-management input { width: 100%; min-height: 48px; padding: 10px; border: 1px solid #718568; border-radius: 6px; }
+.managed-users { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(280px,100%),1fr)); gap: 20px; }
+.managed-users article { padding: 20px; border: 1px solid #bccdb9; border-radius: 8px; background: #f3f7ee; overflow-wrap: anywhere; }
