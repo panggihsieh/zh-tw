@@ -1942,7 +1942,7 @@ export default function App() {
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
               </span>
               <span>生字動畫收藏本 · 本機學習版</span>
-              <a href={backendMode ? "/" : "/?view=backend"}>{backendMode ? "返回學生前台" : "教師後台"}</a>
+              <a href={backendMode ? "/" : "/?view=backend"}>{backendMode ? "返回學生前台" : "教師登入（後台）"}</a>
             </footer>
           </main>
         </div>
