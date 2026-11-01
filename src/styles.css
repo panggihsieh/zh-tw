@@ -3379,3 +3379,11 @@ input:not([type="checkbox"]):not([type="range"]) {
 @media(max-width:600px){.structure-help{padding:18px}.structure-help-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.structure-help summary{font-size:19px}}
 
 .backend-shell .sidebar .nav-item{white-space:normal;overflow-wrap:anywhere}.backend-shell .sidebar .nav-item svg{flex-shrink:0}.page-footer a{color:#536d49}@media(max-width:850px){.backend-shell .sidebar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.backend-shell .sidebar .nav-item{font-size:16px;justify-content:flex-start}}
+
+/* Collapsible navigation keeps the reading workspace and page state intact. */
+.sidebar[hidden]{display:none}
+.app-shell.sidebar-collapsed .main-wrap{margin-left:0;width:100%}
+button.brand{border:0;background:transparent;color:inherit;text-align:left;font-family:inherit;cursor:pointer;width:100%}
+.topbar-leading{display:flex;align-items:center;gap:12px;min-width:0}
+.sidebar-expand{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#f0f3ea;color:#285d50;font:inherit;cursor:pointer;white-space:nowrap}
+@media(max-width:620px){.sidebar-expand{padding:6px}.sidebar-expand span{display:none}.topbar-leading{gap:6px}}

@@ -24,6 +24,7 @@ import {
   LibraryBig,
   LoaderCircle,
   Play,
+  PanelLeftOpen,
   Plus,
   RotateCcw,
   Search,
@@ -329,6 +330,20 @@ export default function App() {
   }, [restored]);
 
   const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try { return localStorage.getItem("hanzi-notebook.sidebar-collapsed.v1") === "true"; }
+    catch { return false; }
+  });
+  const sidebarFocusRequested = useRef(false);
+  useEffect(() => {
+    try { localStorage.setItem("hanzi-notebook.sidebar-collapsed.v1", String(sidebarCollapsed)); }
+    catch { /* The sidebar remains usable when browser storage is unavailable. */ }
+    if (sidebarFocusRequested.current) {
+      document.querySelector<HTMLButtonElement>(sidebarCollapsed ? ".sidebar-expand" : "button.brand")?.focus({preventScroll:true});
+      sidebarFocusRequested.current = false;
+    }
+  }, [sidebarCollapsed]);
+  const toggleSidebar = () => { sidebarFocusRequested.current = true; setSidebarCollapsed(value => !value); };
   const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
@@ -736,15 +751,18 @@ export default function App() {
         resume: () => speech.resume(),
       }}
     >
-      <div className={backendMode ? "app-shell backend-shell" : "app-shell"}>
-        <aside className="sidebar">
-          <a
+      <div className={`${backendMode ? "app-shell backend-shell" : "app-shell"}${sidebarCollapsed ? " sidebar-collapsed" : ""}`}>
+        <aside id="mainSidebar" className="sidebar" hidden={sidebarCollapsed}>
+          <button
+            type="button"
             className="brand"
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              setPage(backendMode ? "tts" : "learn");
-            }}
+            aria-label="收合側欄"
+            aria-controls="mainSidebar"
+            aria-expanded={!sidebarCollapsed}
+            title="收合側欄（亦可按滑鼠中鍵）"
+            onClick={toggleSidebar}
+            onMouseDown={event => { if (event.button === 1) event.preventDefault(); }}
+            onAuxClick={event => { if (event.button === 1) { event.preventDefault(); toggleSidebar(); } }}
           >
             <span className="brand-icon">
               <BookOpen size={26} />
@@ -752,7 +770,7 @@ export default function App() {
             <span>
               生字動畫<span className="brand-sub">收藏本</span>
             </span>
-          </a>
+          </button>
           <div className="side-label">{backendMode ? "教學管理後台" : "我的學習空間"}</div>
           <nav aria-label={backendMode ? "後台功能" : "學生功能"}>
             {!backendMode && (<>
@@ -842,6 +860,8 @@ export default function App() {
         </aside>
         <div className="main-wrap">
           <header className="topbar">
+            <div className="topbar-leading">
+              {sidebarCollapsed && <button type="button" className="sidebar-expand" aria-label="展開側欄" aria-controls="mainSidebar" aria-expanded={false} title="展開側欄（亦可按滑鼠中鍵）" onClick={toggleSidebar} onMouseDown={event => { if (event.button === 1) event.preventDefault(); }} onAuxClick={event => { if (event.button === 1) { event.preventDefault(); toggleSidebar(); } }}><PanelLeftOpen size={20} /><span>展開側欄</span></button>}
             <span className="breadcrumb">
               {backendMode ? "教學管理後台" : "我的學習空間"} <ChevronRight size={14} />{" "}
               {page === "learn"
@@ -852,6 +872,7 @@ export default function App() {
                     ? "查字小幫手"
                     : "TTS 設定後台"}
             </span>
+            </div>
             <div className="topbar-actions">
               <SpeechTools
                 label="朗讀本頁"
