@@ -46,3 +46,5 @@ Cloud Build `4302ffe2-a49c-4a55-a756-c29f756b9725` 成功。Cloud Run URL：`htt
 瀏覽器已驗證正式站逐字學習與教育部詞庫載入；Google 整頁 OAuth 可開啟帳號選擇並返回網站。183 項前端測試、8 項伺服器測試與正式建置通過。AI 供應商尚未設定雲端金鑰，因此不宣稱真實 AI 呼叫驗收已通過。
 
 正式站 Firebase SDK authDomain 使用同源 Hosting 網域，並已在 Google OAuth 用戶端保留原有回呼的前提下，新增專用站點兩個預設網域及各自的 `/__/auth/handler` 回呼，避免整頁登入依賴跨站儲存。
+
+正式站登入最終驗收：使用者完成側邊 Google 帳號登入後，已確認教師後台正常顯示；使用者管理可讀取 `teacher.hsieh@gmail.com` 固定管理者紀錄；AI 設定顯示「雲端後端已連線」及 Secret Manager 保護方式，證明 Hosting 同源轉接、Cloud Run ID token 驗證及秘密讀取權限均正常。雲端尚未設定 AI 金鑰，未執行付費 AI 測試。
