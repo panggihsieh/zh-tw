@@ -350,6 +350,20 @@ function App() {
   const [wordCount, setWordCount] = useState(restored.wordCount);
   const [revealed, setRevealed] = useState<string[]>(restored.revealed);
   const [previewWord, setPreviewWord] = useState<string | null>(null);
+  const [dictionaryWords, setDictionaryWords] = useState<string[]>([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`${import.meta.env.BASE_URL}dictionaries/moe-suggestions.json`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("無法載入語詞建議");
+        return response.json();
+      })
+      .then((words: string[]) => {
+        if (!controller.signal.aborted) setDictionaryWords(words);
+      })
+      .catch(() => { /* Keep built-in suggestions available offline. */ });
+    return () => controller.abort();
+  }, []);
   const [saved, setSaved] = useState<Collection[]>([]);
   const [collectionsLoaded, setCollectionsLoaded] = useState(false);
   const [search, setSearch] = useState(restored.search);
@@ -935,6 +949,8 @@ function App() {
                       {phraseSuggestions(
                         input,
                         saved.map((c) => c.sourcePhrase),
+                        4,
+                        dictionaryWords,
                       ).map((p) => (
                         <button
                           onClick={() => choosePhrase(p)}

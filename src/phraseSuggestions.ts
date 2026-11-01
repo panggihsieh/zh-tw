@@ -25,22 +25,25 @@ export function phraseSuggestions(
   input: string,
   recent: string[] = [],
   limit = 4,
+  dictionaryWords: string[] = [],
 ): string[] {
   const text = input.trim();
   const characters = new Set(Array.from(text));
-  const candidates = [...new Set([...words, ...recent])].filter(
+  const candidates = [...new Set([...words, ...recent, ...dictionaryWords])].filter(
     (word) => word !== text && !hasRepeatedCharacter(word),
   );
   const ranked = candidates.map((word, index) => ({
     word,
     index,
+    related: Array.from(word).some((c) => characters.has(c)),
     score:
       Array.from(new Set(word)).filter((c) => characters.has(c)).length * 10 +
       (text && word.startsWith(Array.from(text)[0]) ? 4 : 0) +
+      (Array.from(word).length === 2 ? 8 : 0) +
       (PHRASES[word] ? 2 : 0),
   }));
   const related = ranked
-    .filter((item) => item.score >= 10)
+    .filter((item) => item.related)
     .sort((a, b) => b.score - a.score || a.index - b.index)
     .map((item) => item.word);
   const fallback = [

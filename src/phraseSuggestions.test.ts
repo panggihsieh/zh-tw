@@ -1,6 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { phraseSuggestions } from "./phraseSuggestions";
 describe("動態選詞建議", () => {
+  it("內建教材沒有的語詞，改用教育部詞目提供同字建議", () => {
+    const words = ["衝鋒", "衝刺", "衝突", "前鋒", "鋒利", "衝衝"];
+    expect(phraseSuggestions("衝鋒", [], 4, words)).toEqual(["衝刺", "衝突", "前鋒", "鋒利"]);
+    expect(phraseSuggestions("衝鋒", [], 4, words)).not.toEqual(phraseSuggestions("銀行", [], 4, words));
+  });
   it("偵測可依相同字找到相關候選，不再固定四詞", () => {
     expect(phraseSuggestions("偵測")).toEqual(["偵查", "探測", "檢測", "測量"]);
   });
