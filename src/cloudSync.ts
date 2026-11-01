@@ -24,6 +24,14 @@ let services: ReturnType<typeof createServices> | undefined;
 function createServices() {
   const config = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG || "{}");
   if (
+    typeof window !== "undefined" &&
+    [
+      "voltaic-circuit-511310-a3-zh-tw.web.app",
+      "voltaic-circuit-511310-a3-zh-tw.firebaseapp.com",
+    ].includes(window.location.hostname)
+  )
+    config.authDomain = window.location.hostname;
+  if (
     config.projectId !== "voltaic-circuit-511310-a3" ||
     !config.apiKey ||
     !config.appId

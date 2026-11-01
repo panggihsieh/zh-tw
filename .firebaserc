@@ -1,0 +1,13 @@
+{
+  "projects": {},
+  "targets": {
+    "voltaic-circuit-511310-a3": {
+      "hosting": {
+        "zh-tw": [
+          "voltaic-circuit-511310-a3-zh-tw"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

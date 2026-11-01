@@ -6,4 +6,5 @@ playwright-report/
 .env.local
 *.log
 .local/
+.firebase/
 __pycache__/

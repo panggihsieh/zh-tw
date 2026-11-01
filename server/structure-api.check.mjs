@@ -17,6 +17,26 @@ const candidate = {
   weights: [38, 62],
   reason: "左窄右寬",
 };
+
+test("cloud mode uses isolated settings storage, hosted origins and never calls local encryption", async () => {
+  let saved = { version: 2, selected: "deepseek", profiles: {} };
+  const origin = "https://voltaic-circuit-511310-a3-zh-tw.web.app";
+  const api = createStructureServer({ cloud: true, origins: [origin], authenticate: async () => "admin",
+    protect: () => { throw new Error("must not use DPAPI"); },
+    configStore: { load: async () => structuredClone(saved), save: async (value) => { saved = value; } } });
+  await new Promise((resolve) => api.listen(0, "127.0.0.1", resolve));
+  try {
+    const base = `http://127.0.0.1:${api.address().port}/api/structure`;
+    const headers = { Origin: origin, "Content-Type": "application/json", "X-Notebook-Request": "structure-settings" };
+    const unlocked = await (await fetch(base + "/unlock", { method: "POST", headers, body: "{}" })).json();
+    assert.equal(unlocked.storageProtection, "google-secret-manager");
+    assert.equal((await fetch(base + "/settings", { method: "OPTIONS", headers: { Origin: "https://attacker.example" } })).status, 403);
+    const response = await fetch(base + "/settings", { method: "POST", headers: { ...headers, "X-Notebook-Unlock": unlocked.unlockToken }, body: JSON.stringify({ provider: "deepseek", model: "test", enabled: true, apiKey: "test-only-secret" }) });
+    assert.equal(response.status, 200);
+    assert.equal(saved.profiles.deepseek.apiKey, "test-only-secret");
+    assert.ok(!(await response.text()).includes("test-only-secret"));
+  } finally { await new Promise((resolve) => api.close(resolve)); }
+});
 test("validates model settings and blocks remote or credential-bearing endpoints", () => {
   assert.equal(
     validateSettings({

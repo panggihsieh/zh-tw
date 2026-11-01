@@ -1,0 +1,8 @@
+{
+  "name": "zh-tw-structure-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "dependencies": { "jose": "6.2.14", "google-auth-library": "11.3.2" }
+}

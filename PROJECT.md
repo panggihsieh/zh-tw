@@ -41,3 +41,7 @@ TTS 更新：六幕完整講稿、全頁與各視窗朗讀、暫停／繼續／�
 ### API 設定及測試
 
 新增多供應商 API 後台、DeepSeek 預設、DPAPI 加密、預設 Lock、Unlock、Save 自動 Lock，及鎖定狀態可用的連線測試。DeepSeek 短文字連線已實測成功，圖片品質及其他供應商真實帳號仍待核對。163＋5 項測試與建置通過；詳細用法見 docs/API後台設定.md。六幕改為大字單列框線按鈕。
+
+### Firebase 正式部署（2026-11-01）
+
+建立 zh-tw 專用 Hosting 站點與 asia-east1 Cloud Run API，保留原 PISA 站點。AI 設定使用獨立 Secret Manager，原本機金鑰不自動遷移。183 項前端測試及 8 項伺服器測試通過；部署與驗收見 docs/FIREBASE_DEPLOY.md。

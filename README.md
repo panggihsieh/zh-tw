@@ -1,6 +1,6 @@
 # 生字動畫收藏本
 
-臺灣繁體中文生字學習前端。輸入語詞、逐字選取、六幕教學、本機收藏及 PNG／PDF／JSON 匯出。提供本機 TTS 設定後台（瀏覽器偏好設定頁），尚未建立伺服器或教師管理後台。
+臺灣繁體中文生字學習前端。輸入語詞、逐字選取、六幕教學、本機收藏及 PNG／PDF／JSON 匯出。提供本機 TTS 偏好、Google 管理者登入、使用者管理及 Cloud Run AI API。
 
 ## 本機使用
 
@@ -28,7 +28,7 @@ npm run dev
 - 「銀行／行走」依語境顯示不同讀音；未收錄的語境不猜讀音。
 - IndexedDB 收藏、字詞搜尋、複習狀態、刪除前確認、JSON 備份匯入。
 - 單字 PNG、每字一頁的語詞 PDF、含語境與分鏡快照的 JSON。
-- 官方查字資源連結，沒有教師登入或受保護的管理端。
+- 官方查字資源連結；教師後台採 Google OAuth 與伺服器端權杖驗證。
 - 「TTS 設定後台」顯示瀏覽器實際提供的中文音色，依 `localService` 分為裝置本機及瀏覽器線上語音。可篩選、試聽、重新偵測、設為前台預設或恢復自動選擇。試聽不改預設；前台顯示預設名稱。設定只保存於目前瀏覽器 `localStorage`，重開後讀回。
 
 ## 資料限制
@@ -57,7 +57,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` 先執行 TypeScript 檢查，再產生 `dist/`。Vite 相對 base 可用於靜態託管；此階段僅本機啟動，未發佈網站。詳細驗收記錄見 [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)。
+`npm run build` 先執行 TypeScript 檢查，再產生 `dist/`。已部署獨立 Firebase Hosting 站點，AI API 經同源轉接至 Cloud Run。詳細驗收記錄見 [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)。
 
 本專案未加入追蹤分析或姓名欄位，也不在前端或原始碼內建 AI 金鑰。使用者自行設定的 AI 金鑰僅於本機後端加密保存。筆順幕會載入教育部第三方頁面，其網路連線及分析工具由該網站管理。收藏只在瀏覽器，清除瀏覽資料前請下載 JSON。
 
@@ -86,3 +86,7 @@ TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；�
 ## 教師後台登入與使用者管理
 
 後台採 Google OAuth，固定管理者為 `teacher.hsieh@gmail.com`；結構 API 同時驗證 Firebase ID token。新增使用者名單與啟用／停用功能。雲端啟用狀態及限制見 [後台登入說明](docs/ADMIN_LOGIN.md)。
+
+## 正式網站
+
+[開啟 zh-tw](https://voltaic-circuit-511310-a3-zh-tw.web.app/) · [教師後台](https://voltaic-circuit-511310-a3-zh-tw.web.app/?view=backend)。部署方式、資料隔離及 AI 金鑰設定見 [Firebase 部署說明](docs/FIREBASE_DEPLOY.md)。

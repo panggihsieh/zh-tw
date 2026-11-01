@@ -60,6 +60,9 @@ async function jsonBody(req) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 export function createStructureServer({
+  cloud = false,
+  origins = [ORIGIN],
+  configStore,
   authenticate = authenticateAdmin,
   configFile = resolve(".local/structure-api.json"),
   fetchProvider = fetch,
@@ -68,6 +71,7 @@ export function createStructureServer({
 } = {}) {
   const unlocks = new Map();
   async function persist(data) {
+    if (configStore) return configStore.save(data);
     await mkdir(dirname(configFile), { recursive: true });
     await writeFile(configFile, JSON.stringify(await protect(data)), {
       encoding: "utf8",
@@ -76,6 +80,7 @@ export function createStructureServer({
   }
   async function store() {
     try {
+      if (configStore) return await configStore.load();
       let value = JSON.parse(await readFile(configFile, "utf8"));
       if (value.version === 3) value = await unprotect(value);
       else {
@@ -113,6 +118,7 @@ export function createStructureServer({
     };
   }
   async function invoke(config, prompt, image) {
+    if (cloud && config.provider === "ollama") throw new Error("雲端 API 不支援本機 Ollama");
     const endpoint =
       config.endpoint +
       (config.provider === "ollama" ? "/api/chat" : "/chat/completions");
@@ -142,7 +148,7 @@ export function createStructureServer({
     return content;
   }
   return http.createServer(async (req, res) => {
-    const allowed = req.headers.origin === ORIGIN;
+    const allowed = origins.includes(req.headers.origin);
     const headers = {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
@@ -150,7 +156,7 @@ export function createStructureServer({
     };
     if (allowed)
       Object.assign(headers, {
-        "Access-Control-Allow-Origin": ORIGIN,
+        "Access-Control-Allow-Origin": req.headers.origin,
         Vary: "Origin",
         "Access-Control-Allow-Headers":
           "Content-Type, X-Notebook-Request, X-Notebook-Unlock, Authorization",
@@ -158,10 +164,10 @@ export function createStructureServer({
       });
     const send = (status, data) => {
       res.writeHead(status, headers);
-      res.end(JSON.stringify(data));
+      res.end(JSON.stringify({ ...data, storageProtection: cloud ? "google-secret-manager" : "windows-dpapi-current-user" }));
     };
     if (
-      !["127.0.0.1:5174", "localhost:5174"].includes(req.headers.host) &&
+      !cloud && !["127.0.0.1:5174", "localhost:5174"].includes(req.headers.host) &&
       !req.headers.host?.startsWith("127.0.0.1:")
     )
       return send(403, { error: "不允許的主機" });
@@ -242,6 +248,7 @@ export function createStructureServer({
       if (req.url === "/api/structure/settings" && req.method === "POST") {
         const input = await jsonBody(req);
         const config = validateSettings(input);
+        if (cloud && config.provider === "ollama") return send(400, { error: "雲端設定不支援本機 Ollama" });
         const data = await store();
         const previous = data.profiles[config.provider];
         const apiKey = input.clearApiKey

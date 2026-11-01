@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-const API = "http://127.0.0.1:5174/api/structure";
+const API =
+  import.meta.env.VITE_STRUCTURE_API_URL ||
+  (["127.0.0.1", "localhost"].includes(window.location.hostname)
+    ? "http://127.0.0.1:5174/api/structure"
+    : "/api/structure");
 interface Settings {
+  storageProtection?: string;
   provider: string;
   vision: boolean;
   hasApiKey: boolean;
@@ -111,11 +116,15 @@ export default function StructureAiSettings() {
       setResult(null);
       setImage("");
       setAvailable(true);
-      setMessage("本機後端已連線。請輸入服務金鑰並儲存，再測試 API。");
+      setMessage(
+        `${value.storageProtection === "google-secret-manager" ? "雲端" : "本機"}後端已連線。請輸入服務金鑰並儲存，再測試 API。`,
+      );
     } catch {
       setAvailable(false);
       setMessage(
-        "本機 AI 後端未啟動，請重新執行啟動生字收藏本，或執行 npm run structure-api。",
+        window.location.protocol === "https:"
+          ? "雲端 AI 後端連線失敗，請稍後重新連線。"
+          : "本機 AI 後端未啟動，請重新執行啟動生字收藏本，或執行 npm run structure-api。",
       );
     }
   }
@@ -131,8 +140,11 @@ export default function StructureAiSettings() {
       <h2>AI 字形結構 API 後台</h2>
       <p>
         <strong>{locked ? "Lock · 設定已鎖定" : "Unlock · 設定可編輯"}</strong>
-        。本機以 Windows DPAPI 帳號綁定加密；預設鎖定、Save 後自動鎖定。Unlock
-        為本機編輯鎖，不另設密碼。
+        。
+        {config.storageProtection === "google-secret-manager"
+          ? "雲端以 Google Secret Manager 保護設定"
+          : "本機以 Windows DPAPI 帳號綁定加密"}
+        ；預設鎖定、Save 後自動鎖定。Unlock 為短期編輯鎖，仍需管理者登入。
       </p>
       <button
         className="secondary"
@@ -260,7 +272,7 @@ export default function StructureAiSettings() {
                 {config.hasApiKey
                   ? "後端已有金鑰，內容不會回傳。"
                   : "尚未設定金鑰。"}
-                金鑰僅存本機後端，不存瀏覽器。
+                金鑰僅由後端保存，不回傳瀏覽器。
               </small>
             </label>
           )}
