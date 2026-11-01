@@ -16,10 +16,12 @@ export default function SpeechTools({
   label,
   read,
   showVoice = true,
+  expanded = false,
 }: {
   label: string;
   read: () => string;
   showVoice?: boolean;
+  expanded?: boolean;
 }) {
   const speech = useContext(SpeechContext);
   return (
@@ -28,10 +30,11 @@ export default function SpeechTools({
         <Volume2 size={16} />
         {label}
       </button>
-      {speech.state !== "idle" && (
+      {(expanded || speech.state !== "idle") && (
         <>
           <button
             className="icon-btn"
+            disabled={speech.state === "idle"}
             aria-label={speech.state === "paused" ? "繼續朗讀" : "暫停朗讀"}
             onClick={speech.state === "paused" ? speech.resume : speech.pause}
           >
@@ -44,45 +47,50 @@ export default function SpeechTools({
           <button
             className="icon-btn"
             aria-label="停止朗讀"
+            disabled={speech.state === "idle" && speech.progress.total === 0}
             onClick={speech.stop}
           >
             <Square size={15} />
           </button>
         </>
       )}
-      {speech.progress.total > 0 && (
+      {(expanded || speech.progress.total > 0) && (
         <>
           <button
             className="icon-btn"
             aria-label="從頭重播朗讀"
-            onClick={speech.replay}
+            onClick={() =>
+              speech.progress.total > 0 ? speech.replay() : speech.say(read())
+            }
           >
             <RotateCcw size={16} />
           </button>
-          <div className="speech-timeline">
-            <label>
-              <span>朗讀進度（估計時間）</span>
-              <span>
-                {speechTime(speech.progress.position, speech.progress.rate)} /{" "}
-                {speechTime(speech.progress.total, speech.progress.rate)}
-              </span>
-              <input
-                type="range"
-                aria-label="朗讀時間位置"
-                min={0}
-                max={speech.progress.total}
-                step={1}
-                value={speech.progress.position}
-                aria-valuetext={`約 ${speechTime(speech.progress.position, speech.progress.rate)}，共約 ${speechTime(speech.progress.total, speech.progress.rate)}`}
-                onChange={(e) => speech.seek(Number(e.target.value))}
-              />
-            </label>
-            <small>
-              {speech.state === "paused"
-                ? "已暫停，可按繼續朗讀。"
-                : "拖曳可定位並暫停，再按繼續朗讀。"}
-            </small>
-          </div>
+          {speech.progress.total > 0 && (
+            <div className="speech-timeline">
+              <label>
+                <span>朗讀進度（估計時間）</span>
+                <span>
+                  {speechTime(speech.progress.position, speech.progress.rate)} /{" "}
+                  {speechTime(speech.progress.total, speech.progress.rate)}
+                </span>
+                <input
+                  type="range"
+                  aria-label="朗讀時間位置"
+                  min={0}
+                  max={speech.progress.total}
+                  step={1}
+                  value={speech.progress.position}
+                  aria-valuetext={`約 ${speechTime(speech.progress.position, speech.progress.rate)}，共約 ${speechTime(speech.progress.total, speech.progress.rate)}`}
+                  onChange={(e) => speech.seek(Number(e.target.value))}
+                />
+              </label>
+              <small>
+                {speech.state === "paused"
+                  ? "已暫停，可按繼續朗讀。"
+                  : "拖曳可定位並暫停，再按繼續朗讀。"}
+              </small>
+            </div>
+          )}
         </>
       )}
       {showVoice && (

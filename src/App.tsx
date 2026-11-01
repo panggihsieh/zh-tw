@@ -629,6 +629,7 @@ export default function App() {
               <SpeechTools
                 label="朗讀本頁"
                 showVoice={false}
+                expanded
                 read={() =>
                   document.querySelector("main")?.innerText ||
                   "目前沒有可朗讀的內容。"
