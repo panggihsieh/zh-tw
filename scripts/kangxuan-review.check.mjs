@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseIds,validateWeights,validateCorrection,suggestedWeights,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel} from '../public/structure-review/review-model.mjs';
+import {parseIds,validateWeights,validateCorrection,suggestedWeights,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel,verticalKind,verticalParts,applyVerticalPreset} from '../public/structure-review/review-model.mjs';
 const data=JSON.parse(readFileSync(new URL('../public/structure-review/books.json',import.meta.url)));
 test('four books contain complete cached lesson sets and valid structural candidates',()=>{
   assert.deepEqual(data.books.map(b=>[b.id,b.lessons.length,b.lessons.reduce((n,l)=>n+l.characters.length,0)]),[['5-上',12,224],['5-下',12,217],['6-上',12,217],['6-下',9,153]]);
@@ -24,4 +24,17 @@ test('horizontal presets label ratios and preserve nested components without inv
   assert.deepEqual(horizontalParts(parseIds('⿰虫文'),'triple'),['虫','','文']);
   assert.throws(()=>applyHorizontalPreset('triple',['虫','','文']));
   assert.deepEqual(horizontalParts(parseIds('⿲彳重亍'),'equal'),['彳','⿰重亍']);
+});
+
+test('vertical presets update height labels and require real third components',()=>{
+  for(const [kind,weights] of [['short',[35,65]],['equal',[50,50]],['tall',[65,35]]]){
+    const value=applyVerticalPreset(kind,['宀','祭']);assert.deepEqual(value,{ids:'⿱宀祭',weights});assert.equal(verticalKind(parseIds(value.ids),weights),kind);
+  }
+  assert.equal(structureLabel(parseIds('⿱宀祭'),[28,72]),'上短下長');
+  assert.equal(structureLabel(parseIds('⿱莫力'),[65,35]),'上長下短');
+  assert.deepEqual(verticalParts(parseIds('⿱亠⿱口衣'),'triple'),['亠','口','衣']);
+  assert.deepEqual(applyVerticalPreset('triple',['亠','口','衣']),{ids:'⿳亠口衣',weights:[33,34,33]});
+  assert.deepEqual(verticalParts(parseIds('⿱宀祭'),'triple'),['宀','','祭']);
+  assert.throws(()=>applyVerticalPreset('triple',['宀','','祭']));
+  assert.deepEqual(verticalParts(parseIds('⿳亠口衣'),'equal'),['亠','⿱口衣']);
 });

@@ -13,7 +13,7 @@ const profiles: Record<
     layout: "vertical",
     parts: ["宀", "祭"],
     weights: [28, 72],
-    label: "上矮下高",
+    label: "上短下長",
   },
 };
 export function structureProfile(master: CharacterMaster) {

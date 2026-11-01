@@ -1,4 +1,4 @@
-import {names,parseIds,suggestedWeights,validateWeights,validateCorrection,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel} from './review-model.mjs';
+import {names,parseIds,suggestedWeights,validateWeights,validateCorrection,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel,verticalKind,verticalParts,applyVerticalPreset} from './review-model.mjs';
 const $=id=>document.getElementById(id);
 const key='kangxuan-structure-corrections-v1', viewKey='kangxuan-structure-view-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -50,22 +50,29 @@ function open(c){
   $('lesson-source').href=c.lesson.source;$('lesson-source').textContent=`${c.lesson.title} · 教育百科來源 ↗`;
   $('error').textContent='';syncHorizontal();preview();$('edit').showModal();
 }
-function formValue(){if($('horizontal').value){const kind=$('horizontal').value;const parts=kind==='triple'?[$('left-part').value,$('middle-part').value,$('right-part').value]:[$('left-part').value,$('right-part').value];if(applyHorizontalPreset(kind,parts).ids!==$('ids').value.trim())throw Error('請完成部件修改並更新預覽。');}const tree=parseIds($('ids').value);return validateCorrection({ids:$('ids').value.trim(),weights:validateWeights($('weights').value,tree.children.length||1),radical:$('radical').value,explanation:$('explanation').value,source:$('source').value,note:$('note').value,status:$('review-status').value,updatedAt:new Date().toISOString()});}
+function formValue(){for(const axis of axes){const kind=$(axis.id).value;if(kind){const parts=readParts(axis,kind);if(axis.apply(kind,parts).ids!==$('ids').value.trim())throw Error('請完成部件修改並更新預覽。');}}const tree=parseIds($('ids').value);return validateCorrection({ids:$('ids').value.trim(),weights:validateWeights($('weights').value,tree.children.length||1),radical:$('radical').value,explanation:$('explanation').value,source:$('source').value,note:$('note').value,status:$('review-status').value,updatedAt:new Date().toISOString()});}
 function preview(){try{const tree=parseIds($('ids').value);$('weights').disabled=!(tree.children.length && '⿰⿲⿱⿳'.includes(tree.value));$('weights-help').textContent=$('weights').disabled?'獨體、包圍與重疊採位置示意，本欄不調整輪廓；可修改結構式及查證紀錄。':'比例調整第一層分區；內層仍採初始示意比例。';$('preview').innerHTML=pair(selected,formValue());$('error').textContent='';}catch(e){$('error').textContent=e.message;}}
+const axes=[
+  {id:'horizontal',fields:['left-part','middle-part','right-part'],middle:'middle-label',kind:horizontalKind,parts:horizontalParts,apply:applyHorizontalPreset},
+  {id:'vertical',fields:['top-part','vertical-middle-part','bottom-part'],middle:'vertical-middle-label',kind:verticalKind,parts:verticalParts,apply:applyVerticalPreset},
+];
+function readParts(axis,kind){return (kind==='triple'?axis.fields:[axis.fields[0],axis.fields[2]]).map(id=>$(id).value);}
 function syncHorizontal(){
-  const tree=parseIds($('ids').value),weights=validateWeights($('weights').value,tree.children.length||1),kind=horizontalKind(tree,weights);
-  $('horizontal').value=kind;showHorizontalParts(kind,tree);
+  const tree=parseIds($('ids').value),weights=validateWeights($('weights').value,tree.children.length||1);
+  for(const axis of axes){const kind=axis.kind(tree,weights);$(axis.id).value=kind;showParts(axis,kind,tree);}
 }
-function showHorizontalParts(kind,tree){
-  $('horizontal-parts').hidden=!kind;$('middle-label').hidden=kind!=='triple';
+function showParts(axis,kind,tree){
+  $(axis.id+'-parts').hidden=!kind;$(axis.middle).hidden=kind!=='triple';
   if(!kind)return;
-  const parts=horizontalParts(tree,kind);$('left-part').value=parts[0]||'';$('right-part').value=parts.at(-1)||'';$('middle-part').value=kind==='triple'?parts[1]||'':'';
+  const parts=axis.parts(tree,kind);$(axis.fields[0]).value=parts[0]||'';$(axis.fields[2]).value=parts.at(-1)||'';$(axis.fields[1]).value=kind==='triple'?parts[1]||'':'';
 }
-function updateHorizontal(){
-  try{const kind=$('horizontal').value;if(!kind)return;const parts=kind==='triple'?[$('left-part').value,$('middle-part').value,$('right-part').value]:[$('left-part').value,$('right-part').value];const value=applyHorizontalPreset(kind,parts);$('ids').value=value.ids;$('weights').value=value.weights.join(',');preview();}catch(e){$('error').textContent=e.message;}
+function updateParts(axis){
+  try{const kind=$(axis.id).value;if(!kind)return;const value=axis.apply(kind,readParts(axis,kind));$('ids').value=value.ids;$('weights').value=value.weights.join(',');preview();}catch(e){$('error').textContent=e.message;}
 }
-$('horizontal').onchange=()=>{try{const kind=$('horizontal').value;showHorizontalParts(kind,parseIds($('ids').value));updateHorizontal();}catch(e){$('error').textContent=e.message;}};
-for(const id of ['left-part','middle-part','right-part'])$(id).oninput=updateHorizontal;
+for(const axis of axes){
+  $(axis.id).onchange=()=>{try{const tree=parseIds($('ids').value),kind=$(axis.id).value;for(const other of axes)if(other!==axis){$(other.id).value='';showParts(other,'',tree);}showParts(axis,kind,tree);updateParts(axis);}catch(e){$('error').textContent=e.message;}};
+  for(const id of axis.fields)$(id).oninput=()=>updateParts(axis);
+}
 $('ids').onchange=()=>{try{$('weights').value=suggestedWeights(parseIds($('ids').value)).join(',');syncHorizontal();preview();}catch(e){$('error').textContent=e.message;}};
 $('weights').onchange=()=>{try{syncHorizontal();}catch{}preview();};$('preview-button').onclick=preview;
 $('operators').innerHTML=Object.entries(names).map(([op,name])=>`<button type="button" data-op="${op}" title="${name}">${op} ${name}</button>`).join('');
