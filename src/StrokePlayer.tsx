@@ -37,15 +37,6 @@ export default function StrokePlayer({ character }: { character: string }) {
         </div>
         <span className="pill">教育部標準字體</span>
       </div>
-      <div className="stroke-guide">
-        <p>
-          <b>動畫播放</b>按下播放器的「播放」，連續觀看；再按一次暫停。
-        </p>
-        <p>
-          <b>逐筆顯示</b>
-          按「下一畫」，每按一次就往下一筆；可按「重播」重新開始。
-        </p>
-      </div>
       <div className="official-player">
         {!loaded && (
           <p className="stroke-loading" role="status">
