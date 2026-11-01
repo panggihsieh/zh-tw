@@ -4,6 +4,7 @@ import {
   useRef,
   useState,
   type ReactNode,
+  type CSSProperties,
 } from "react";
 import {
   ArrowRight,
@@ -121,10 +122,14 @@ function Glyph({
   card,
   scene,
   reduced,
+  playing,
+  speed,
 }: {
   card: Card;
   scene: number;
   reduced: boolean;
+  playing: boolean;
+  speed: number;
 }) {
   const id = `glyph-${card.id}`;
   const split =
@@ -200,19 +205,23 @@ function Glyph({
       />
       {split ? (
         regions.map((_, i) => {
-          const shift =
-            scene === 2
-              ? card.master.layout === "vertical"
-                ? `translate(0,${i === 0 ? -22 : 22})`
-                : `translate(${(i - (regions.length - 1) / 2) * 26},0)`
-              : "translate(0,0)";
+          const vertical = card.master.layout === "vertical";
+          const distance =
+            (i - (regions.length - 1) / 2) * (regions.length === 3 ? 42 : 60);
           return (
             <g
               key={i}
-              style={{
-                transform: shift,
-                transition: reduced ? "none" : "transform 700ms ease",
-              }}
+              className={
+                scene === 2 && !reduced ? "decomposing-part" : undefined
+              }
+              style={
+                {
+                  "--part-x": `${vertical ? 0 : distance}px`,
+                  "--part-y": `${vertical ? distance : 0}px`,
+                  animationDuration: `${4 / speed}s`,
+                  animationPlayState: playing ? "running" : "paused",
+                } as CSSProperties
+              }
             >
               <text
                 x="150"
@@ -319,6 +328,7 @@ export default function App() {
   const [cardIndex, setCardIndex] = useState(restored.cardIndex);
   const [scene, setScene] = useState(restored.scene);
   const [playing, setPlaying] = useState(false);
+  const [decompositionReplay, setDecompositionReplay] = useState(0);
   const [speed, setSpeed] = useState(restored.speed);
   const [showReading, setShowReading] = useState(restored.showReading);
   const [captions, setCaptions] = useState(restored.captions);
@@ -1193,9 +1203,12 @@ export default function App() {
                           {scene < 3 && (
                             <div className="glyph-side">
                               <Glyph
+                                key={`${card.id}-${decompositionReplay}`}
                                 card={card}
                                 scene={scene}
                                 reduced={reduced}
+                                playing={playing}
+                                speed={speed}
                               />
                               {showReading && (
                                 <span className="reading">{card.reading}</span>
@@ -1279,6 +1292,26 @@ export default function App() {
                             {scene === 2 && (
                               <>
                                 <h2>拆開看，再合起來。</h2>
+                                <button
+                                  className="secondary"
+                                  disabled={
+                                    reduced || !card.master.components.length
+                                  }
+                                  onClick={() => {
+                                    setDecompositionReplay(
+                                      (value) => value + 1,
+                                    );
+                                    setPlaying(true);
+                                  }}
+                                >
+                                  <RotateCcw size={17} />
+                                  重播拆合動畫
+                                </button>
+                                {reduced && (
+                                  <p className="data-note">
+                                    目前啟用「減少動態效果」，可在學習設定關閉後播放拆合動畫。
+                                  </p>
+                                )}
                                 <div className="component-tags">
                                   {card.master.components.map((c, i) => (
                                     <span key={i}>{c}</span>
