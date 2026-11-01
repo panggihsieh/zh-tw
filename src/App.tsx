@@ -802,6 +802,10 @@ export default function App() {
               <Settings2 size={20} />
               API 設定
             </button>
+            <a className="nav-item" href="/structure-review/editor.html">
+              <Grid2X2 size={20} />
+              康軒生字結構修正
+            </a>
           </nav>
           <div className="side-garden">
             <Mascot />
