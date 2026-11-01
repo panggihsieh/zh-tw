@@ -40,6 +40,7 @@ import {
 } from "./storage";
 import { download, jsonBlob, pdfBlob, pngBlob } from "./exports";
 import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
+import StrokePlayer from "./StrokePlayer";
 
 type Page = "learn" | "library" | "resources";
 const err = (e: unknown) =>
@@ -266,6 +267,13 @@ export default function App() {
   }, [notice]);
   useEffect(() => {
     if (!playing || !collection) return;
+    if (scene === 3) {
+      setPlaying(false);
+      setNotice(
+        "筆順這一幕請使用官方播放器的「播放」或「下一畫」，學完再按下一步。",
+      );
+      return;
+    }
     const timer = setTimeout(
       () => {
         if (scene < 5) setScene(scene + 1);
@@ -840,7 +848,7 @@ export default function App() {
                         aria-labelledby={`scene-tab-${scene}`}
                         className={`scene-content scene-${scene}`}
                       >
-                        {scene < 4 && (
+                        {scene < 3 && (
                           <div className="glyph-side">
                             <Glyph
                               card={card}
@@ -859,8 +867,15 @@ export default function App() {
                             </button>
                           </div>
                         )}
+                        {scene === 3 && (
+                          <StrokePlayer
+                            key={card.id}
+                            character={card.character}
+                          />
+                        )}
                         <div
                           className="scene-copy"
+                          hidden={scene === 3}
                           key={`${card.id}-${scene}`}
                           style={{ animation: reduced ? "none" : undefined }}
                         >
@@ -926,29 +941,6 @@ export default function App() {
                               <p className="data-note">
                                 這是依目前字型切分的部件示意，邊界可能因字型不同而有差異；不代表字源或筆順。
                               </p>
-                            </>
-                          )}
-                          {scene === 3 && (
-                            <>
-                              <span className="warning-pill">
-                                筆順資料待核對
-                              </span>
-                              <h2>跟著標準筆順學。</h2>
-                              <p>
-                                目前無已核對資料，尚未收錄這個字的臺灣標準筆畫路徑。
-                              </p>
-                              <p className="data-note">
-                                先到教育部筆順網站查詢「{card.character}
-                                」，這裡不會播放猜測的筆順。
-                              </p>
-                              <a
-                                className="secondary link-button"
-                                href={STROKES.url}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                開啟教育部筆順網 <ExternalLink size={16} />
-                              </a>
                             </>
                           )}
                           {scene === 4 && (
@@ -1159,7 +1151,7 @@ export default function App() {
                               : scene === 2
                                 ? "部件幫助觀察字形，不能用來推論字源。"
                                 : scene === 3
-                                  ? "使用經核對的筆順資料，學得更安心。"
+                                  ? "在官方播放器按「播放」看動畫，按「下一畫」逐筆看；學完再按下一步。"
                                   : scene === 4
                                     ? simple
                                       ? card.simple
@@ -1191,6 +1183,10 @@ export default function App() {
                         </button>
                         <button
                           className="play-button"
+                          disabled={scene === 3}
+                          title={
+                            scene === 3 ? "筆順請使用上方官方播放器" : undefined
+                          }
                           onClick={() => setPlaying(!playing)}
                           aria-label={playing ? "暫停" : "播放"}
                         >
@@ -1534,7 +1530,7 @@ export default function App() {
                   此版本提供少量語境教材。白話解說、例句及結構示意為本專案編寫，待教師審定，不能當作已核對的完整字典。參考連結不代表取得來源網站素材的重製授權。
                 </p>
                 <p>
-                  筆順尚無逐字核對且可重製的路徑資料，因此僅提供官方網站查詢，不播放推測動畫；影片輸出留待合法素材備齊後製作。
+                  筆順使用教育部正式嵌入播放器，可連續播放或按「下一畫」逐筆顯示。需連線使用，僅供非商業學習；官方素材不納入本機匯出或影片。
                 </p>
               </div>
             </>
