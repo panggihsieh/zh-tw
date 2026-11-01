@@ -5,6 +5,7 @@ import {
   cloudServices,
   cloudLogin,
   cloudLogout,
+  finishCloudRedirect,
   uploadCloudCollections,
   downloadCloudCollections,
 } from "./cloudSync";
@@ -23,6 +24,10 @@ export default function CloudCollections({
   useEffect(() => {
     if (!cloudConfigured) return;
     try {
+      void finishCloudRedirect().catch(() => {
+        setFailed(true);
+        setMessage("整頁登入未完成，請重新登入。");
+      });
       return onAuthStateChanged(
         cloudServices().auth,
         (value) => {

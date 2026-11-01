@@ -3,7 +3,10 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
+  type UserCredential,
 } from "firebase/auth";
 import {
   collection,
@@ -32,10 +35,7 @@ function createServices() {
 export function cloudServices() {
   return (services ??= createServices());
 }
-export async function cloudLogin() {
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: "select_account" });
-  const result = await signInWithPopup(cloudServices().auth, provider);
+async function finishLogin(result: UserCredential) {
   const { registerAppUser, appUserEnabled } = await import("./userAccess");
   try {
     await registerAppUser(result.user);
@@ -46,6 +46,18 @@ export async function cloudLogin() {
     throw error;
   }
   return result;
+}
+let redirectResult: Promise<UserCredential | null> | undefined;
+export function finishCloudRedirect() {
+  return (redirectResult ??= getRedirectResult(cloudServices().auth).then(
+    (result) => (result ? finishLogin(result) : null),
+  ));
+}
+export async function cloudLogin(redirect = false) {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+  if (redirect) return signInWithRedirect(cloudServices().auth, provider);
+  return finishLogin(await signInWithPopup(cloudServices().auth, provider));
 }
 export async function cloudLogout() {
   await signOut(cloudServices().auth);

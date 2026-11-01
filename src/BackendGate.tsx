@@ -5,6 +5,7 @@ import {
   cloudLogin,
   cloudLogout,
   cloudServices,
+  finishCloudRedirect,
 } from "./cloudSync";
 import { ADMIN_EMAIL, isAdmin } from "./userAccess";
 
@@ -19,6 +20,11 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       return;
     }
     try {
+      void finishCloudRedirect().catch(() =>
+        setError(
+          "整頁登入未完成，請重新登入；若瀏覽器阻擋 Google 登入，請改用 Chrome 或 Edge 開啟本機網址。",
+        ),
+      );
       return onAuthStateChanged(cloudServices().auth, (value) => {
         setUser(value);
         setReady(true);
@@ -28,6 +34,27 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       setReady(true);
     }
   }, []);
+  async function login(redirect = false) {
+    setBusy(true);
+    setError("");
+    try {
+      if (user) await cloudLogout();
+      await cloudLogin(redirect);
+    } catch (e) {
+      const code = (e as { code?: string }).code;
+      setError(
+        code === "auth/unauthorized-domain"
+          ? "Firebase 尚未允許此網站登入，若剛更新設定請重新整理後重試。"
+          : code === "auth/popup-blocked"
+            ? "瀏覽器阻擋登入視窗，請使用下方整頁登入。"
+            : code === "permission-denied"
+              ? "Google 登入成功，但使用者權限尚未生效，請稍後重試。"
+              : "Google 登入未完成，請重試或改用整頁登入。",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   if (ready && isAdmin(user)) return children;
   return (
     <main className="backend-login">
@@ -44,22 +71,7 @@ export default function BackendGate({ children }: { children: ReactNode }) {
             <button
               className="primary"
               disabled={busy}
-              onClick={async () => {
-                setBusy(true);
-                setError("");
-                try {
-                  if (user) await cloudLogout();
-                  await cloudLogin();
-                } catch (e) {
-                  setError(
-                    (e as { code?: string }).code === "auth/unauthorized-domain"
-                      ? "此網站尚未加入 Firebase 授權網域，請先完成登入來源設定。"
-                      : "Google 登入未完成，請重試。",
-                  );
-                } finally {
-                  setBusy(false);
-                }
-              }}
+              onClick={() => void login()}
             >
               {busy
                 ? "登入中…"
@@ -68,6 +80,18 @@ export default function BackendGate({ children }: { children: ReactNode }) {
                   : "使用 Google 登入"}
             </button>
           )}
+        </>
+      )}
+      {ready && cloudConfigured && (
+        <>
+          {busy && (
+            <p role="status">
+              正在等待 Google 登入視窗。若未出現帳號選擇畫面，請改用整頁登入。
+            </p>
+          )}
+          <button className="secondary" onClick={() => void login(true)}>
+            改用整頁 Google 登入
+          </button>
         </>
       )}
       {error && <p role="alert">{error}</p>}
