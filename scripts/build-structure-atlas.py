@@ -99,3 +99,13 @@ css = '''*{box-sizing:border-box}body{margin:0;color:#254b40;background:#f7f8f2;
 print(f'Generated {len(groups)} groups / {number} text-free square SVG diagrams and overview.svg')
 
 pathlib.Path('src/structureAtlas.json').write_text(json.dumps([dict(title=group, items=[dict(title=title, caption=subtitle, image=f'/structure-atlas/{sum(len(g[1]) for g in groups[:i])+j+1:02}.svg') for j,(title,subtitle,_) in enumerate(items)]) for i,(group,items) in enumerate(groups)], ensure_ascii=False, indent=2), encoding='utf-8')
+
+operators = ['⿰', '⿱', '⿲', '⿳', '⿴', None, '', '品']
+catalog = []
+for group_index, (group, items) in enumerate(groups):
+    for item_index, (title, caption, _) in enumerate(items):
+        number = len(catalog)+1
+        operator = ['⿵','⿶','⿷','⿸','⿹','⿺'][item_index] if group_index == 5 else operators[group_index]
+        weights = [int(x.strip()) for x in caption.split(':')] if ':' in caption else ([100] if operator == '' else [50,50])
+        catalog.append(dict(id=str(number), group=group, title=title, image=f'/structure-atlas/{number:02}.svg', operator=operator, weights=weights))
+(out / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding='utf-8')

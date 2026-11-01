@@ -72,3 +72,7 @@ five-upper.html 將上述五上全部 224 字（12 課）同頁列出，無分�
 ids-catalog.json 是 CJKVI／CHISE ids.txt 的完整選用 IDS 摘錄，依同目錄 GPLv2 授權，優先 T 標記、再無標記、最後首候選。缺少或無法解析的 IDS 僅保留完整字待核，不猜測部件。重建指令：python scripts/build-ids-catalog.py；上游來源及授權同上。
 
 總筆畫、部首、讀音及釋義使用本專案既有教育部《國語辭典簡編本》原資料，總筆畫取「總筆畫數」欄；缺項顯示待核對。moe-stroke-ids.json 複用已核對的教育部可嵌入清單。官方筆順播放器按需載入原版，不下載、不修改、不列入備份。授權說明：https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52 。單字可修正結構與比例並存檔；候選、形音義與字源仍待教師查證。
+
+## 字卡直接修正
+
+右上角顯示後台 SVG 結構縮圖，底部選單依現有 IDS 與比例對應圖例。自訂比例以最近的預設圖作縮圖示意，未改選而直接儲存不會改掉原比例；改選後顯示預覽，按儲存才套用。圖例清單由 scripts/build-structure-atlas.py 產生到 /structure-atlas/catalog.json。儲存沿用同字共用的結構修正資料，可透過原有備份匯出；部件不足時請進詳細修正補齊。

@@ -1,0 +1,262 @@
+[
+  {
+    "id": "1",
+    "group": "左右結構",
+    "title": "左窄右寬",
+    "image": "/structure-atlas/01.svg",
+    "operator": "⿰",
+    "weights": [
+      35,
+      65
+    ]
+  },
+  {
+    "id": "2",
+    "group": "左右結構",
+    "title": "左右等寬",
+    "image": "/structure-atlas/02.svg",
+    "operator": "⿰",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "3",
+    "group": "左右結構",
+    "title": "左寬右窄",
+    "image": "/structure-atlas/03.svg",
+    "operator": "⿰",
+    "weights": [
+      65,
+      35
+    ]
+  },
+  {
+    "id": "4",
+    "group": "上下結構",
+    "title": "上短下長",
+    "image": "/structure-atlas/04.svg",
+    "operator": "⿱",
+    "weights": [
+      35,
+      65
+    ]
+  },
+  {
+    "id": "5",
+    "group": "上下結構",
+    "title": "上下等長",
+    "image": "/structure-atlas/05.svg",
+    "operator": "⿱",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "6",
+    "group": "上下結構",
+    "title": "上長下短",
+    "image": "/structure-atlas/06.svg",
+    "operator": "⿱",
+    "weights": [
+      65,
+      35
+    ]
+  },
+  {
+    "id": "7",
+    "group": "左中右結構",
+    "title": "三部分近等寬",
+    "image": "/structure-atlas/07.svg",
+    "operator": "⿲",
+    "weights": [
+      33,
+      34,
+      33
+    ]
+  },
+  {
+    "id": "8",
+    "group": "左中右結構",
+    "title": "中寬兩側窄",
+    "image": "/structure-atlas/08.svg",
+    "operator": "⿲",
+    "weights": [
+      25,
+      50,
+      25
+    ]
+  },
+  {
+    "id": "9",
+    "group": "左中右結構",
+    "title": "左部較寬",
+    "image": "/structure-atlas/09.svg",
+    "operator": "⿲",
+    "weights": [
+      50,
+      25,
+      25
+    ]
+  },
+  {
+    "id": "10",
+    "group": "左中右結構",
+    "title": "右部較寬",
+    "image": "/structure-atlas/10.svg",
+    "operator": "⿲",
+    "weights": [
+      25,
+      25,
+      50
+    ]
+  },
+  {
+    "id": "11",
+    "group": "上中下結構",
+    "title": "三部分近等長",
+    "image": "/structure-atlas/11.svg",
+    "operator": "⿳",
+    "weights": [
+      33,
+      34,
+      33
+    ]
+  },
+  {
+    "id": "12",
+    "group": "上中下結構",
+    "title": "中長上下短",
+    "image": "/structure-atlas/12.svg",
+    "operator": "⿳",
+    "weights": [
+      25,
+      50,
+      25
+    ]
+  },
+  {
+    "id": "13",
+    "group": "上中下結構",
+    "title": "上部較長",
+    "image": "/structure-atlas/13.svg",
+    "operator": "⿳",
+    "weights": [
+      50,
+      25,
+      25
+    ]
+  },
+  {
+    "id": "14",
+    "group": "上中下結構",
+    "title": "下部較長",
+    "image": "/structure-atlas/14.svg",
+    "operator": "⿳",
+    "weights": [
+      25,
+      25,
+      50
+    ]
+  },
+  {
+    "id": "15",
+    "group": "全包圍結構",
+    "title": "四面包圍",
+    "image": "/structure-atlas/15.svg",
+    "operator": "⿴",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "16",
+    "group": "半包圍結構",
+    "title": "上三包圍",
+    "image": "/structure-atlas/16.svg",
+    "operator": "⿵",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "17",
+    "group": "半包圍結構",
+    "title": "下三包圍",
+    "image": "/structure-atlas/17.svg",
+    "operator": "⿶",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "18",
+    "group": "半包圍結構",
+    "title": "左三包圍",
+    "image": "/structure-atlas/18.svg",
+    "operator": "⿷",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "19",
+    "group": "半包圍結構",
+    "title": "左上包圍",
+    "image": "/structure-atlas/19.svg",
+    "operator": "⿸",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "20",
+    "group": "半包圍結構",
+    "title": "右上包圍",
+    "image": "/structure-atlas/20.svg",
+    "operator": "⿹",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "21",
+    "group": "半包圍結構",
+    "title": "左下包圍",
+    "image": "/structure-atlas/21.svg",
+    "operator": "⿺",
+    "weights": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "22",
+    "group": "獨體結構",
+    "title": "整體一區",
+    "image": "/structure-atlas/22.svg",
+    "operator": "",
+    "weights": [
+      100
+    ]
+  },
+  {
+    "id": "23",
+    "group": "品字形結構",
+    "title": "上一、下二",
+    "image": "/structure-atlas/23.svg",
+    "operator": "品",
+    "weights": [
+      50,
+      50
+    ]
+  }
+]

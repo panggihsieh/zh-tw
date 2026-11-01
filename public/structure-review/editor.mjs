@@ -1,3 +1,4 @@
+import {loadStructurePresets,inlineStructureHeader,inlineStructureControls,bindInlineStructures} from './inline-structure.mjs';
 import {figure} from './structure-figure.mjs';
 import {LESSON_KEY,uniqueCharacters,parseLessonFile,validateLesson,validateLessons} from './lesson-import.mjs';
 import {names,parseIds,suggestedWeights,validateWeights,validateCorrection,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel,verticalKind,verticalParts,applyVerticalPreset} from './review-model.mjs';
@@ -41,11 +42,12 @@ function render(){
   const list=all.filter(c=>(!$('lesson').value||c.lesson.id===$('lesson').value)&&(!$('search').value||$('search').value.includes(c.character))&&(!$('status').value||current(c).status===$('status').value));
   page=Math.max(0,Math.min(page,Math.ceil(list.length/pageSize)-1));
   $('scope').textContent=`${b.title} · ${b.year?b.year.replace('_1',' 學年度上學期').replace('_2',' 學年度下學期'):'本機上傳課文'} · ${b.lessons.length} 課 / ${all.length} 字 · 符合條件 ${list.length} 字 · 本冊已目測確認 ${all.filter(c=>current(c).status==='reviewed').length} 字`;
-  $('grid').innerHTML=list.slice(page*pageSize,page*pageSize+pageSize).map(c=>{const v=current(c),tree=parseIds(v.ids);return `<article class="card ${v.status}"><div class="card-top"><span>${esc(c.lesson.title.split('：')[0])}</span><span>${esc(structureLabel(tree,v.weights))}</span></div>${pair(c,v)}<div class="card-bottom"><span>部首：${esc(v.radical||'待核')}</span><span class="badge">${states[v.status]}</span></div>${lessonMode?`<p class="help">總筆畫：${esc(c.dictionary[0]?.strokes||'待核對')}</p>`:''}<button data-char="${esc(c.character)}">目測／修正 ${esc(c.character)}</button></article>`;}).join('');
+  $('grid').innerHTML=list.slice(page*pageSize,page*pageSize+pageSize).map(c=>{const v=current(c),tree=parseIds(v.ids);return `<article class="card ${v.status}"><div class="card-top"><span>${esc(c.lesson.title.split('：')[0])}</span>${inlineStructureHeader(v)}</div>${pair(c,v)}<div class="card-bottom"><span>部首：${esc(v.radical||'待核')}</span><span class="badge">${states[v.status]}</span></div>${lessonMode?`<p class="help">總筆畫：${esc(c.dictionary[0]?.strokes||'待核對')}</p>`:''}${inlineStructureControls(c.character,v)}<button data-char="${esc(c.character)}">詳細修正 ${esc(c.character)}</button></article>`;}).join('');
   if(lessonMode){const selectedUpload=$('book').value==='uploaded'&&uploaded.some(l=>l.id===$('lesson').value);$('replace-lesson').disabled=!selectedUpload;$('remove-lesson').disabled=!selectedUpload;if(!list.length)$('grid').innerHTML='<p class="empty-review">'+(b.id==='uploaded'&&!uploaded.length?'尚無上傳課別。先上傳生字表或貼上文字，再按「儲存為新課」。':'沒有符合條件的生字。')+'</p>'; }
   $('position').textContent=list.length?`${page+1} / ${Math.ceil(list.length/pageSize)} 頁`:'沒有符合的生字';$('prev').disabled=page===0;$('next').disabled=(page+1)*pageSize>=list.length;
   try{localStorage.setItem(viewKey,JSON.stringify({book:b.id,lesson:$('lesson').value,search:$('search').value,status:$('status').value,page}));}catch{}
-  $('grid').querySelectorAll('button').forEach(btn=>btn.onclick=()=>open(all.find(c=>c.character===btn.dataset.char)));
+  bindInlineStructures($('grid'),list,current,(c,value)=>{const next={...corrections,[c.character]:value};localStorage.setItem(key,JSON.stringify(next));corrections=next;render();$('message').textContent=`已儲存「${c.character}」的結構修正。`;});
+  $('grid').querySelectorAll('button[data-char]').forEach(btn=>btn.onclick=()=>open(all.find(c=>c.character===btn.dataset.char)));
 }
 function open(c){
   selected=c;const v=current(c);$('edit-title').textContent=`${c.character} · 結構修正`;
@@ -124,7 +126,7 @@ if(lessonMode){
   $('animate').onclick=()=>{const running=$('animate').getAttribute('aria-checked')!=='true';$('animate').setAttribute('aria-checked',String(running));$('animate').textContent=`全部拆合動畫 ${running?'ON':'OFF'}`;document.body.classList.toggle('moving',running);};
 }
 const query=new URLSearchParams(location.search);if(query.get('book')==='5-上'&&/^\p{Script=Han}$/u.test(query.get('character')||''))savedView={book:'5-上',search:query.get('character'),lesson:'',status:'',page:0};
-try{const response=await fetch('books.json');if(!response.ok)throw Error('無法載入字表。');data=await response.json();if(lessonMode){
+try{const response=await fetch('books.json');if(!response.ok)throw Error('無法載入字表。');data=await response.json();await loadStructurePresets();if(lessonMode){
   const resources=await Promise.all([fetch('ids-catalog.json'),fetch('/dictionaries/moe-concised.json'),fetch('moe-stroke-ids.json')]);
   if(resources.some(r=>!r.ok))throw Error('本機字形或筆畫資料無法載入。');
   catalog=await resources[0].json();const moe=await resources[1].json();strokeIds=new Set(await resources[2].json());
