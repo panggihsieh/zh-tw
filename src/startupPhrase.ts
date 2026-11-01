@@ -1,4 +1,5 @@
 import { PHRASES } from "./data";
+import { hasRepeatedCharacter } from "./phraseRules";
 import type { PageSession } from "./sessionState";
 export function refreshOpeningPhrase(
   state: PageSession,
@@ -27,7 +28,9 @@ export function randomStartupPhrase(
   previous: string | null,
   random = Math.random,
 ): string {
-  const words = Object.keys(PHRASES).filter((word) => word !== previous);
+  const words = Object.keys(PHRASES).filter(
+    (word) => word !== previous && !hasRepeatedCharacter(word),
+  );
   return (
     words[
       Math.min(

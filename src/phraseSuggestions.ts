@@ -1,4 +1,5 @@
 import { PHRASES, VOCABULARY } from "./data";
+import { hasRepeatedCharacter } from "./phraseRules";
 // 僅供選詞提示；這些詞不代表已建立或審定語境教材。
 const extraWords = [
   "偵測",
@@ -28,7 +29,7 @@ export function phraseSuggestions(
   const text = input.trim();
   const characters = new Set(Array.from(text));
   const candidates = [...new Set([...words, ...recent])].filter(
-    (word) => word !== text,
+    (word) => word !== text && !hasRepeatedCharacter(word),
   );
   const ranked = candidates.map((word, index) => ({
     word,
@@ -47,6 +48,6 @@ export function phraseSuggestions(
       ...recent.filter((word) => PHRASES[word]),
       ...Object.keys(PHRASES),
     ]),
-  ].filter((word) => word !== text);
+  ].filter((word) => word !== text && !hasRepeatedCharacter(word));
   return [...new Set([...related, ...fallback])].slice(0, Math.max(0, limit));
 }

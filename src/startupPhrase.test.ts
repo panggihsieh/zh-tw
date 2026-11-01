@@ -21,6 +21,7 @@ it("uses a known teaching phrase and avoids the previous phrase", () => {
       const phrase = randomStartupPhrase(previous, () => value);
       expect(PHRASES[phrase]).toBeDefined();
       expect(phrase).not.toBe(previous);
+      expect(new Set(Array.from(phrase)).size).toBe(Array.from(phrase).length);
     }
   }
 });
