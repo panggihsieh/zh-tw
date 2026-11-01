@@ -1,3 +1,22 @@
 .inline-structure-header{display:flex;align-items:center;justify-content:flex-end;gap:8px;max-width:75%;color:#61745b}.inline-atlas-thumb{display:block;width:44px;height:44px;flex-shrink:0;border:1px solid #b9cbb0;border-radius:4px;background:white}.inline-structure-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end;margin-top:14px;border-top:1px solid #e1e8db;padding-top:12px}.inline-structure-controls label{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:14px}.inline-structure-controls select{width:100%;min-width:0;max-width:100%;font-size:14px;padding:10px 6px}.card .inline-structure-controls button{width:auto;margin:0;padding:10px 12px;font-size:15px;background:#285d50;color:white;border-color:#285d50;min-height:43px}.inline-structure-message{grid-column:1/-1;font-size:13px;line-height:1.5;margin:0;color:#865024}.inline-structure-message:empty{display:none}#save-message{color:#1456a0}button:focus-visible,select:focus-visible{outline:3px solid #d7a961;outline-offset:2px}
 
 .structure-confirm-dialog{width:calc(100% - 32px);max-width:680px;max-height:90vh;overflow:auto;padding:28px;border:1px solid #b9cbb0;border-radius:16px;color:#254b40;background:#fff;font-family:"Microsoft JhengHei",sans-serif}.structure-confirm-dialog::backdrop{background:#193b3180}.structure-confirm-dialog h2{font-size:24px;margin:0 0 14px}.structure-confirm-images{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}.structure-confirm-images figure{margin:0;min-width:0;padding:0;border:0}.structure-confirm-images figcaption{margin:0 0 12px;font-size:17px}.structure-confirm-images img,.structure-confirm-images svg{display:block;width:100%;height:auto;aspect-ratio:1}.structure-confirm-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:20px}.structure-confirm-actions button{font:inherit;padding:12px 18px;border:1px solid #b9cbb0;border-radius:9px;color:#254b40;background:white;cursor:pointer}.structure-confirm-actions [data-confirm]{background:#285d50;color:white;border-color:#285d50}.structure-confirm-error{color:#a33127}.structure-confirm-dialog .help{font-size:14px;line-height:1.7}@media(max-width:480px){.structure-confirm-dialog{padding:18px}.structure-confirm-images{gap:14px}.structure-confirm-images figcaption{font-size:14px}.structure-confirm-actions button{padding:10px 14px}}
+
+.inline-structure-controls{grid-template-columns:minmax(0,1fr);align-items:stretch}
+.inline-structure-caption{font-size:14px}
+.card .inline-structure-controls [data-inline-choose]{display:flex;align-items:center;gap:10px;justify-content:flex-start;width:100%;text-align:left;color:#285d50;background:#fff;border-color:#b9cbb0}
+[data-inline-choose] img{width:44px;height:44px;flex-shrink:0;border:1px solid #b9cbb0;border-radius:4px;background:#fff}
+[data-inline-choose] span:last-child{margin-left:auto}
+.structure-picker-dialog{max-width:980px;padding-bottom:0;box-sizing:border-box}
+.structure-picker-groups h3{margin:20px 0 10px;font-size:17px}
+.structure-picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.structure-picker-option{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;border:2px solid #dce5d7;border-radius:10px;cursor:pointer;background:#fff;color:#254b40;font-size:14px;text-align:center}
+.structure-picker-option:has(input:checked){border-color:#285d50;background:#edf5eb;box-shadow:0 0 0 1px #285d50}
+.structure-picker-option:focus-within{outline:3px solid #d7a961;outline-offset:2px}
+.structure-picker-option input{position:absolute;top:7px;left:7px;width:16px;height:16px;accent-color:#285d50}
+.structure-picker-option img{display:block;width:88px;height:88px;max-width:100%;aspect-ratio:1}
+.structure-picker-footer{position:sticky;bottom:0;padding:12px 0;background:#fff;border-top:1px solid #dce5d7;margin-top:18px}
+.structure-picker-selection{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px}
+.structure-picker-selection svg{display:block;width:68px;height:68px}
+.structure-picker-footer .structure-confirm-actions{margin-top:8px}
+@media(max-width:480px){.structure-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.structure-picker-dialog{max-height:94vh}.structure-picker-footer{padding-bottom:10px}.structure-picker-option{padding-top:24px}.structure-picker-selection{font-size:13px}}
