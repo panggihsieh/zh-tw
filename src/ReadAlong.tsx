@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { SpeechContext } from "./SpeechTools";
+import { readingText } from "./readingText";
 // Positions are Unicode code points, matching SpeechController (not UTF-16 offsets).
 export function readingIndex(
   text: string,
@@ -7,7 +8,7 @@ export function readingIndex(
   position: number,
 ): number {
   const compact = (value: string) =>
-    Array.from(value).flatMap((character, index) =>
+    Array.from(readingText(value)).flatMap((character, index) =>
       /\s/u.test(character) ? [] : [{ character, index }],
     );
   const visible = compact(text),
@@ -21,7 +22,13 @@ export function readingIndex(
     const match = audio
       .slice(offset, offset + visible.length)
       .findIndex((item) => item.index === position);
-    if (match >= 0) return visible[match].index;
+    if (match >= 0) {
+      const index = visible[match].index;
+      // Do not highlight the label during the pause.
+      if (Array.from(text)[index] !== Array.from(readingText(text))[index])
+        return -1;
+      return index;
+    }
     start = haystack.indexOf(needle, start + needle.length);
   }
   return -1;

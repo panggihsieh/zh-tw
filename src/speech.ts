@@ -1,16 +1,17 @@
 import type { Card } from "./model";
+import { readingText } from "./readingText";
 import { SCENES } from "./model";
 import { selectVoice, type VoicePreference } from "./ttsPreferences";
 export function speechChunks(text: string): string[] {
-  return (text.match(/[^。！？!?；;\n]+[。！？!?；;]*/gu) || []).flatMap(
-    (sentence) => {
-      const chars = Array.from(sentence.trim());
-      const parts: string[] = [];
-      for (let i = 0; i < chars.length; i += 160)
-        parts.push(chars.slice(i, i + 160).join(""));
-      return parts;
-    },
-  );
+  return (
+    readingText(text).match(/[^。！？!?；;\n]+[。！？!?；;]*/gu) || []
+  ).flatMap((sentence) => {
+    const chars = Array.from(sentence.trim());
+    const parts: string[] = [];
+    for (let i = 0; i < chars.length; i += 160)
+      parts.push(chars.slice(i, i + 160).join(""));
+    return parts;
+  });
 }
 export function sceneNarration(
   card: Card,
