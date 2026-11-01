@@ -2917,3 +2917,23 @@ dialog::backdrop {
   border: 1px solid #cbd7c1;
   border-radius: 10px;
 }
+.input-panel .section-kicker {
+  flex-wrap: wrap;
+}
+.random-phrase-button {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid #cbd7c1;
+  border-radius: 10px;
+  background: #f6f8f0;
+  color: #285d50;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+.random-phrase-button:hover {
+  background: #e7efdd;
+}

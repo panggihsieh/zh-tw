@@ -34,6 +34,7 @@ import {
   Volume2,
   X,
   CloudUpload,
+  Shuffle,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
 import { SCENES, validatePhrase } from "./model";
@@ -842,6 +843,16 @@ export default function App() {
                   <section className="input-panel">
                     <div className="section-kicker">
                       01 <span>輸入語詞</span>
+                      <button
+                        type="button"
+                        className="random-phrase-button"
+                        onClick={() =>
+                          choosePhrase(randomStartupPhrase(input.trim()))
+                        }
+                      >
+                        <Shuffle size={17} aria-hidden="true" />
+                        隨機換詞
+                      </button>
                     </div>
                     <form
                       onSubmit={(e) => {
