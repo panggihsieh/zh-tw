@@ -628,6 +628,7 @@ export default function App() {
             <div className="topbar-actions">
               <SpeechTools
                 label="朗讀本頁"
+                showVoice={false}
                 read={() =>
                   document.querySelector("main")?.innerText ||
                   "目前沒有可朗讀的內容。"

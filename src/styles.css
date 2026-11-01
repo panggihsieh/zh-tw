@@ -2628,6 +2628,7 @@ dialog::backdrop {
   padding-bottom: 12px;
 }
 .topbar-actions > .speech-tools {
+  justify-content: flex-end;
   min-width: 0;
   flex: 1;
   max-width: 365px;
@@ -2635,6 +2636,8 @@ dialog::backdrop {
 .topbar-actions {
   flex-wrap: nowrap;
   min-width: 0;
+  margin-left: auto;
+  justify-content: flex-end;
 }
 .topbar-actions > .quiet {
   align-self: flex-start;

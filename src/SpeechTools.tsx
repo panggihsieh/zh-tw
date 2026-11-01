@@ -15,9 +15,11 @@ export const SpeechContext = createContext({
 export default function SpeechTools({
   label,
   read,
+  showVoice = true,
 }: {
   label: string;
   read: () => string;
+  showVoice?: boolean;
 }) {
   const speech = useContext(SpeechContext);
   return (
@@ -83,9 +85,11 @@ export default function SpeechTools({
           </div>
         </>
       )}
-      <span className="speech-voice-label" title={speech.voiceLabel}>
-        預設音色：{speech.voiceLabel}
-      </span>
+      {showVoice && (
+        <span className="speech-voice-label" title={speech.voiceLabel}>
+          預設音色：{speech.voiceLabel}
+        </span>
+      )}
     </div>
   );
 }
