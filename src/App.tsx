@@ -50,6 +50,7 @@ import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
+import { randomStartupPhrase, STARTUP_PHRASE_KEY } from "./startupPhrase";
 import { phraseSuggestions } from "./phraseSuggestions";
 import {
   loadVoicePreference,
@@ -246,12 +247,26 @@ function Modal({
 export default function App() {
   const [restored] = useState(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let previous: string | null = null;
     try {
-      return loadPageSession(sessionStorage, reduced);
+      previous = localStorage.getItem(STARTUP_PHRASE_KEY);
     } catch {
-      return defaultPageSession(reduced);
+      /* storage may be unavailable */
+    }
+    const initialPhrase = randomStartupPhrase(previous);
+    try {
+      return loadPageSession(sessionStorage, reduced, initialPhrase);
+    } catch {
+      return defaultPageSession(reduced, initialPhrase);
     }
   });
+  useEffect(() => {
+    try {
+      localStorage.setItem(STARTUP_PHRASE_KEY, restored.phrase);
+    } catch {
+      /* random defaults still work */
+    }
+  }, [restored]);
 
   const [page, setPage] = useState<Page>(restored.page);
   const [input, setInput] = useState(restored.input);

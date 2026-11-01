@@ -28,13 +28,16 @@ export interface PageSession {
   scrollY: number;
   speech: SpeechSession | null;
 }
-export function defaultPageSession(reduced = false): PageSession {
+export function defaultPageSession(
+  reduced = false,
+  initialPhrase = "感謝",
+): PageSession {
   return {
     version: 1,
     page: "learn",
-    input: "感謝",
-    phrase: "感謝",
-    positions: [0, 1],
+    input: initialPhrase,
+    phrase: initialPhrase,
+    positions: Array.from(initialPhrase).map((_, index) => index),
     collection: null,
     cardIndex: 0,
     scene: 0,
@@ -57,8 +60,9 @@ export function defaultPageSession(reduced = false): PageSession {
 export function loadPageSession(
   storage: Pick<Storage, "getItem">,
   reduced = false,
+  initialPhrase = "感謝",
 ): PageSession {
-  const result = defaultPageSession(reduced);
+  const result = defaultPageSession(reduced, initialPhrase);
   try {
     const text = storage.getItem(SESSION_KEY);
     if (!text || text.length > 2_000_000) return result;
