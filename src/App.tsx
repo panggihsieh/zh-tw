@@ -349,6 +349,7 @@ function App() {
   const [grade, setGrade] = useState(restored.grade);
   const [wordCount, setWordCount] = useState(restored.wordCount);
   const [revealed, setRevealed] = useState<string[]>(restored.revealed);
+  const [previewWord, setPreviewWord] = useState<string | null>(null);
   const [saved, setSaved] = useState<Collection[]>([]);
   const [collectionsLoaded, setCollectionsLoaded] = useState(false);
   const [search, setSearch] = useState(restored.search);
@@ -1441,9 +1442,13 @@ function App() {
                                         </span>
                                         <button
                                           className="word-flip"
+                                          onMouseEnter={() => setPreviewWord(v.word)}
+                                          onMouseLeave={() => setPreviewWord(null)}
+                                          onFocus={() => setPreviewWord(v.word)}
+                                          onBlur={() => setPreviewWord(null)}
                                           aria-expanded={revealed.includes(
                                             v.word,
-                                          )}
+                                          ) || previewWord === v.word}
                                           onClick={() =>
                                             setRevealed((prev) =>
                                               prev.includes(v.word)
@@ -1464,7 +1469,7 @@ function App() {
                                               : "翻開看解釋 ↗"}
                                           </small>
                                         </button>
-                                        {revealed.includes(v.word) && (
+                                        {(revealed.includes(v.word) || previewWord === v.word) && (
                                           <div className="word-detail">
                                             <p>
                                               <ReadAlong text={v.meaning} />
