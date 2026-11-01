@@ -806,6 +806,10 @@ export default function App() {
               <Grid2X2 size={20} />
               字形結構說明
             </button>
+            <a className="nav-item" href="/structure-review/editor.html?mode=lesson">
+              <Grid2X2 size={20} />
+              每課生字結構筆畫查詢
+            </a>
             <a className="nav-item" href="/structure-review/five-upper.html">
               <Grid2X2 size={20} />
               五上生字拆合總覽

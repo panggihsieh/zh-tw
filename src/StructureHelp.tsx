@@ -7,7 +7,7 @@ export default function StructureHelp() {
       <p>八大主結構與子結構縮圖。正方形內只畫部件位置，名稱與比例標在框外。</p>
       <div className="structure-help-links">
         <a href="/structure-atlas/" target="_blank" rel="noreferrer">開啟完整 SVG 圖例 ↗</a>
-        <a href="/structure-review/editor.html">前往生字結構修正</a>
+        <a href="/structure-review/editor.html?mode=lesson">每課生字結構筆畫查詢</a>
       </div>
       {atlas.map((group, index) => (
         <details key={group.title} open={index === 0}>
