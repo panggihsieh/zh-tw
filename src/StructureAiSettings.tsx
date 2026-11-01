@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiTestState } from "./apiSettingsState";
 const API =
   import.meta.env.VITE_STRUCTURE_API_URL ||
   (["127.0.0.1", "localhost"].includes(window.location.hostname)
@@ -89,6 +90,8 @@ export default function StructureAiSettings() {
     [result, setResult] = useState<Analysis | null>(null),
     [image, setImage] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [savedConfig, setSavedConfig] = useState<Settings | null>(null);
+  const testState = apiTestState(config, savedConfig, apiKey, available);
   const [connection, setConnection] = useState<
     "none" | "testing" | "success" | "error"
   >("none");
@@ -104,6 +107,7 @@ export default function StructureAiSettings() {
         token,
       );
       setConfig(value);
+      setSavedConfig(value);
       setConnection(value.lastTest?.ok ? "success" : "none");
       setConnectionMessage(
         value.lastTest?.ok
@@ -117,7 +121,7 @@ export default function StructureAiSettings() {
       setImage("");
       setAvailable(true);
       setMessage(
-        `${value.storageProtection === "google-secret-manager" ? "雲端" : "本機"}後端已連線。請輸入服務金鑰並儲存，再測試 API。`,
+        `${value.storageProtection === "google-secret-manager" ? "雲端" : "本機"}後端已連線。${value.hasApiKey ? "可測試已儲存的 API 設定。" : "請先按「Unlock 解鎖設定」，填入模型與金鑰後儲存。"}`,
       );
     } catch {
       setAvailable(false);
@@ -131,6 +135,12 @@ export default function StructureAiSettings() {
   useEffect(() => {
     void connect();
   }, []);
+  useEffect(() => {
+    if (testState.dirty) {
+      setConnection("none");
+      setConnectionMessage("");
+    }
+  }, [testState.dirty]);
   return (
     <section
       className="structure-ai-settings"
@@ -138,6 +148,16 @@ export default function StructureAiSettings() {
       aria-label="AI 字形結構 API 後台"
     >
       <h2>AI 字形結構 API 後台</h2>
+      <p className="ai-setup-guide">
+        ① 解鎖設定　→　② 填入模型與金鑰，按 Save 儲存　→　③ 測試連線
+      </p>
+      {available &&
+        config.storageProtection === "google-secret-manager" &&
+        !config.hasApiKey && (
+          <p className="ai-setup-note">
+            雲端尚未設定金鑰。本機與雲端設定分開，請在這裡重新設定。
+          </p>
+        )}
       <p>
         <strong>{locked ? "Lock · 設定已鎖定" : "Unlock · 設定可編輯"}</strong>
         。
@@ -147,7 +167,7 @@ export default function StructureAiSettings() {
         ；預設鎖定、Save 後自動鎖定。Unlock 為短期編輯鎖，仍需管理者登入。
       </p>
       <button
-        className="secondary"
+        className={locked ? "primary" : "secondary"}
         type="button"
         disabled={!available || busy}
         onClick={async () => {
@@ -158,13 +178,17 @@ export default function StructureAiSettings() {
               const { unlockToken, ...settings } = value;
               setToken(unlockToken);
               setConfig(settings);
+              setSavedConfig(settings);
               setLocked(false);
-              setMessage("已 Unlock，請設定 API。");
+              setMessage(
+                "已解鎖，可以編輯。填入模型與 API Key 後，請按 Save 儲存。",
+              );
             } else {
               await request("/lock", {}, token);
               setToken("");
               setLocked(true);
               setApiKey("");
+              if (savedConfig) setConfig(savedConfig);
               setMessage("已 Lock。");
             }
           } catch (e) {
@@ -196,6 +220,7 @@ export default function StructureAiSettings() {
       </button>
       <fieldset disabled={locked || busy} className="ai-api-fields">
         <form
+          className="ai-config-form"
           onSubmit={async (e) => {
             e.preventDefault();
             setBusy(true);
@@ -208,7 +233,9 @@ export default function StructureAiSettings() {
               setApiKey("");
               setToken("");
               setLocked(true);
-              setConfig({ ...config, hasApiKey: value.hasApiKey });
+              const updated = { ...config, hasApiKey: value.hasApiKey };
+              setConfig(updated);
+              setSavedConfig(updated);
               setMessage(
                 "Save 完成：API 已加密保存並自動 Lock。可直接按測試連線。",
               );
@@ -221,7 +248,7 @@ export default function StructureAiSettings() {
             }
           }}
         >
-          <label>
+          <label className="ai-field-provider">
             AI 服務
             <select
               aria-label="AI API 服務"
@@ -230,38 +257,49 @@ export default function StructureAiSettings() {
               onChange={(e) => void connect(e.target.value)}
             >
               {Object.entries(config.providers).map(([id, p]) => (
-                <option key={id} value={id}>
+                <option
+                  key={id}
+                  value={id}
+                  disabled={
+                    id === "ollama" &&
+                    config.storageProtection === "google-secret-manager"
+                  }
+                >
                   {p.name}
                 </option>
               ))}
             </select>
           </label>
-          <label>
+          <label className="ai-field-endpoint">
             API Base URL
             <input
               aria-label="AI API Base URL"
+              type="url"
+              required
               value={config.endpoint}
               onChange={(e) =>
                 setConfig({ ...config, endpoint: e.target.value })
               }
             />
           </label>
-          <label>
+          <label className="ai-field-model">
             模型名稱
             <input
               aria-label="AI 模型名稱"
+              required
               value={config.model}
               placeholder="填入帳號可用的模型名稱"
               onChange={(e) => setConfig({ ...config, model: e.target.value })}
             />
           </label>
           {config.provider !== "ollama" && (
-            <label>
+            <label className="ai-field-key">
               API Key
               <input
                 type="password"
                 aria-label="AI API Key"
                 autoComplete="off"
+                required={!config.hasApiKey}
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
                 placeholder={
@@ -276,7 +314,7 @@ export default function StructureAiSettings() {
               </small>
             </label>
           )}
-          <label>
+          <label className="ai-checkbox">
             <input
               type="checkbox"
               checked={config.vision}
@@ -286,7 +324,7 @@ export default function StructureAiSettings() {
             />
             模型支援圖片（依官方模型能力設定）
           </label>
-          <label>
+          <label className="ai-checkbox">
             <input
               type="checkbox"
               checked={config.enabled}
@@ -296,7 +334,10 @@ export default function StructureAiSettings() {
             />
             啟用 AI 結構分析
           </label>
-          <button className="secondary" disabled={!available || busy}>
+          <button
+            className="primary ai-save-button"
+            disabled={!available || busy}
+          >
             Save 加密儲存並設為預設 API
           </button>
         </form>
@@ -311,8 +352,10 @@ export default function StructureAiSettings() {
       <button
         type="button"
         className="secondary"
-        disabled={!available || busy}
+        disabled={!testState.canTest || busy}
+        aria-describedby="ai-test-hint"
         onClick={async () => {
+          if (!testState.canTest) return;
           setBusy(true);
           setConnection("testing");
           setConnectionMessage("正在測試連線…");
@@ -339,6 +382,9 @@ export default function StructureAiSettings() {
       >
         測試已儲存 API 連線
       </button>
+      <p id="ai-test-hint" className="ai-test-hint">
+        {testState.reason || "測試會使用後端已儲存的模型與金鑰。"}
+      </p>
       {config.providers[config.provider] && (
         <p>
           <a

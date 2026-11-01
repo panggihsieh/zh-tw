@@ -3561,3 +3561,21 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   .backend-shell .page-heading h1 { font-size: 24px; }
   .backend-shell .page-heading { padding: 16px; }
 }
+/* API 表單使用明確欄位列，放大或縮窄時不擠出工作區。 */
+.structure-ai-settings .ai-config-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 22px 24px; }
+.structure-ai-settings .ai-config-form > label { min-width: 0; max-width: 100%; }
+.structure-ai-settings .ai-field-provider { grid-column: 1; grid-row: 1; }
+.structure-ai-settings .ai-field-model { grid-column: 2; grid-row: 1; }
+.structure-ai-settings .ai-field-endpoint { grid-column: 1 / -1; grid-row: 2; }
+.structure-ai-settings .ai-field-key { grid-column: 1 / -1; grid-row: 3; }
+.structure-ai-settings .ai-config-form input:not([type="checkbox"]), .structure-ai-settings .ai-config-form select { width: 100%; min-width: 0; min-height: 48px; font-size: 18px; }
+.structure-ai-settings .ai-config-form .ai-checkbox { display: flex; flex-direction: row; align-items: flex-start; gap: 12px; line-height: 1.8; }
+.structure-ai-settings .ai-checkbox input { flex: 0 0 22px; width: 22px; height: 22px; margin: 5px 0 0; }
+.structure-ai-settings .ai-save-button { grid-column: 1 / -1; width: 100%; min-height: 52px; white-space: normal; }
+.structure-ai-settings .ai-setup-guide { padding: 14px 18px; background: #edf4ff; color: #234c7d; border-radius: 10px; line-height: 1.9; }
+.structure-ai-settings .ai-setup-note, .structure-ai-settings .ai-test-hint { color: #3f536c; font-size: 18px; line-height: 1.85; }
+.structure-ai-settings small { overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  .structure-ai-settings .ai-config-form { grid-template-columns: minmax(0, 1fr); }
+  .structure-ai-settings .ai-config-form > label { grid-column: 1; grid-row: auto; }
+}
