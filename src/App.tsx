@@ -23,7 +23,6 @@ import {
   Leaf,
   LibraryBig,
   LoaderCircle,
-  Pause,
   Play,
   Plus,
   RotateCcw,
@@ -451,41 +450,6 @@ export default function App() {
     const timer = setTimeout(() => setNotice(""), 5000);
     return () => clearTimeout(timer);
   }, [notice]);
-  useEffect(() => {
-    if (!playing || !collection) return;
-    if (scene === 2 && decompositionOnly) return;
-    if (scene === 3) {
-      setPlaying(false);
-      setNotice(
-        "筆順這一幕請使用官方播放器的「播放」或「下一畫」，學完再按下一步。",
-      );
-      return;
-    }
-    if (voice && speechState !== "idle") return;
-    const timer = setTimeout(
-      () => {
-        if (scene < 5) setScene(scene + 1);
-        else if (cardIndex < collection.cards.length - 1) {
-          setCardIndex(cardIndex + 1);
-          setScene(0);
-        } else {
-          setPlaying(false);
-          setNotice("這組語詞學完了！可以收藏或下載學習本。");
-        }
-      },
-      (scene === 2 ? 7000 : scene === 5 ? 8000 : 5000) / speed,
-    );
-    return () => clearTimeout(timer);
-  }, [
-    playing,
-    scene,
-    cardIndex,
-    collection?.id,
-    speed,
-    voice,
-    speechState,
-    decompositionOnly,
-  ]);
   const previousCard = useRef(`${collection?.id}:${cardIndex}`);
   useEffect(() => {
     setDecompositionOnly(false);
@@ -1610,7 +1574,7 @@ export default function App() {
                                 : scene === 2
                                   ? "部件幫助觀察字形，不能用來推論字源。"
                                   : scene === 3
-                                    ? "在官方播放器按「播放」看動畫，按「下一畫」逐筆看；學完再按下一步。"
+                                    ? "在官方播放器按「播放」看動畫，按「下一畫」逐筆看；學完再點選下一階段。"
                                     : scene === 4
                                       ? simple
                                         ? card.simple
@@ -1618,69 +1582,6 @@ export default function App() {
                                       : "把同一個字，放回不同語詞裡認識。"}
                           </div>
                         )}
-                        <div className="player">
-                          <button
-                            className="icon-btn"
-                            aria-label="重播這個字"
-                            onClick={() => {
-                              setDecompositionOnly(false);
-                              setScene(0);
-                              setPlaying(true);
-                            }}
-                          >
-                            <RotateCcw size={18} />
-                          </button>
-                          <button
-                            className="icon-btn"
-                            aria-label="上一步"
-                            disabled={scene === 0}
-                            onClick={() => {
-                              setScene(scene - 1);
-                              setPlaying(false);
-                            }}
-                          >
-                            <ChevronLeft size={20} />
-                          </button>
-                          <button
-                            className="play-button"
-                            disabled={scene === 3}
-                            title={
-                              scene === 3
-                                ? "筆順請使用上方官方播放器"
-                                : undefined
-                            }
-                            onClick={() => setPlaying(!playing)}
-                            aria-label={playing ? "暫停" : "播放"}
-                          >
-                            {playing ? <Pause size={18} /> : <Play size={18} />}
-                          </button>
-                          <button
-                            className="icon-btn"
-                            aria-label="下一步"
-                            disabled={scene === 5}
-                            onClick={() => {
-                              setScene(scene + 1);
-                              setPlaying(false);
-                            }}
-                          >
-                            <ChevronRight size={20} />
-                          </button>
-                          <span className="play-status">
-                            {playing ? "播放中" : "已暫停"} · {scene + 1}/6
-                          </span>
-                          <label className="speed-label">
-                            速度
-                            <select
-                              aria-label="播放速度"
-                              value={speed}
-                              onChange={(e) => setSpeed(Number(e.target.value))}
-                            >
-                              <option value={0.65}>慢</option>
-                              <option value={1}>中</option>
-                              <option value={1.5}>快</option>
-                            </select>
-                          </label>
-                        </div>
                         <div className="classroom-footer">
                           <span>
                             <span className="status-dot" />
@@ -1738,11 +1639,11 @@ export default function App() {
                         onClick={() => {
                           setCardIndex(0);
                           setScene(0);
-                          setPlaying(true);
+                          setPlaying(false);
                         }}
                       >
                         <Play size={17} />
-                        合併播放語詞
+                        從第一字開始複習
                       </button>
                       <button className="primary" onClick={() => save()}>
                         <Bookmark size={17} />
