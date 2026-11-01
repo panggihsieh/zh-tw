@@ -46,6 +46,7 @@ def draw(node,x=1,y=1,w=98,h=98,depth=0):
             first, second = children[0][0], children[1][0]
             if vertical and first in '艹宀竹雨龶亠丿': weights=[.28,.72]
             elif vertical and second in '心力土言八': weights=[.7,.3]
+            elif not vertical and first == '耳': weights=[.38,.62]
             elif not vertical and first in '氵扌忄礻糹彳阝亻': weights=[.32,.68]
             elif not vertical and second in '刂力': weights=[.7,.3]
         total=sum(weights)

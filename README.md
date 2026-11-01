@@ -43,7 +43,7 @@ PDF 以瀏覽器 Canvas 轉成逐頁圖片，確保繁體字顯示；PDF 內文�
 
 ## Google Drive（選用）
 
-前端已提供 GIS OAuth token model 與 Drive `drive.file` 上傳流程，沒有後端。須由專案擁有者建立 Google Cloud OAuth Web 用戶端、啟用 Drive API 並設定允許的 origin，將 `.env.example` 複製為 `.env.local`，填入 `VITE_GOOGLE_CLIENT_ID` 後重啟／重建。
+前端已提供 GIS OAuth token model 與 Drive `drive.file` 上傳流程，不經 AI 後端。須由專案擁有者建立 Google Cloud OAuth Web 用戶端、啟用 Drive API 並設定允許的 origin，將 `.env.example` 複製為 `.env.local`，填入 `VITE_GOOGLE_CLIENT_ID` 後重啟／重建。
 
 只按「Google Drive」才載入 GIS，只按「Google 授權並上傳」才請求授權；token 只在該次函式執行記憶體中使用。不保存 token，不要求讀寫整個 Drive。以應用程式標記找回專用 folderId，每次上傳建立新的子資料夾並回傳檔案連結。失敗可重試，部分已上傳的檔案保留在上次子資料夾，不覆寫或清除。
 
@@ -59,7 +59,7 @@ npm run preview
 
 `npm run build` 先執行 TypeScript 檢查，再產生 `dist/`。Vite 相對 base 可用於靜態託管；此階段僅本機啟動，未發佈網站。詳細驗收記錄見 [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)。
 
-本專案未加入追蹤分析、姓名欄位或 AI 金鑰。筆順幕會載入教育部第三方頁面，其網路連線及分析工具由該網站管理。收藏只在瀏覽器，清除瀏覽資料前請下載 JSON。
+本專案未加入追蹤分析或姓名欄位，也不在前端或原始碼內建 AI 金鑰。使用者自行設定的 AI 金鑰僅於本機後端加密保存。筆順幕會載入教育部第三方頁面，其網路連線及分析工具由該網站管理。收藏只在瀏覽器，清除瀏覽資料前請下載 JSON。
 
 TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；自動模式優先 zh-TW，其次使用裝置可用的中文語音。指定音色失效時會提示並暫用自動模式；沒有中文語音時不保證朗讀效果。多音字讀法、音色及是否連網由系統語音引擎決定，本機前端不含雲端 TTS 金鑰或音檔下載。教育部 iframe 內的字音仍由其「聲音」按鈕控制，本頁 TTS 只朗讀筆順操作說明，不能跨來源控制或混音。
 
@@ -74,3 +74,7 @@ TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；�
 認識生字與語詞中的意思兩幕會依目前語詞顯示教育部《國語辭典簡編本》官方注音、完整詞義與例句，可按「朗讀官方詞義」。本機附帶 2014_20260929 版 45,178 筆詞目；首次進入相關幕時載入約 10.8 MB，並非即時同步 API。國教院詞語分級按鈕會帶入目前語詞開啟官方查詢。官方詞義與本專案自編的逐字語境教學分開呈現，完整授權及重建方法見 docs/DATA_SOURCES.md。
 
 朗讀提示：分鏡說明、字義、展開詞卡與官方釋義會以黃色標示目前朗讀字。暫停保留、停止清除；音色不提供逐字事件時使用估計進度，可能與實際發音略有差距。第三方筆順播放器不受此提示控制。
+
+## AI 結構 API 設定
+
+左側「API 設定」可設定 DeepSeek（預設）、Qwen、MiniMax、Gemini、OpenAI 或本機 Ollama。提供 Windows DPAPI 本機加密、預設 Lock、Unlock、Save 後自動 Lock，以及藍色成功／紅色失敗的連線測試。詳見 [API 後台設定](docs/API後台設定.md)。這是結構分析 API，不是 TTS 精準時間定位方案；AI 圖形與比例仍為待核候選。

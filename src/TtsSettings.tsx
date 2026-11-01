@@ -8,6 +8,7 @@ import {
   type VoicePreference,
 } from "./ttsPreferences";
 import SpeechTools from "./SpeechTools";
+import StructureAiSettings from "./StructureAiSettings";
 interface Props {
   voices: SpeechSynthesisVoice[];
   saved: VoicePreference | null;
@@ -245,6 +246,7 @@ export default function TtsSettings({
           金鑰不會放在這個前端設定頁。
         </p>
       </section>
+      <StructureAiSettings />
       <p className="backup-note">
         此頁管理這台瀏覽器的朗讀偏好，沒有管理員登入或跨裝置同步；其他電腦需要重新設定。教育部筆順播放器的聲音仍獨立控制。
       </p>

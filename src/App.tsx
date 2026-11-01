@@ -318,6 +318,7 @@ export default function App() {
   }, [restored]);
 
   const [page, setPage] = useState<Page>(restored.page);
+  const [focusApiSettings, setFocusApiSettings] = useState(false);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -704,6 +705,15 @@ export default function App() {
     }
   }
   const learned = saved.filter((c) => c.reviewState === "learned").length;
+  useEffect(() => {
+    if (page === "tts" && focusApiSettings) {
+      scrollPending.current = false;
+      document
+        .getElementById("ai-api-settings")
+        ?.scrollIntoView({ block: "start" });
+      setFocusApiSettings(false);
+    }
+  }, [page, focusApiSettings]);
   const visibleSaved = saved.filter(
     (c) =>
       (c.sourcePhrase.includes(search) ||
@@ -792,6 +802,16 @@ export default function App() {
             >
               <Settings2 size={20} />
               TTS 設定後台
+            </button>
+            <button
+              className="nav-item"
+              onClick={() => {
+                setPage("tts");
+                setFocusApiSettings(true);
+              }}
+            >
+              <Settings2 size={20} />
+              API 設定
             </button>
           </nav>
           <div className="side-garden">

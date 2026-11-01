@@ -3056,18 +3056,41 @@ body {
 }
 .scene-tabs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px 10px;
+  grid-template-columns: repeat(6, minmax(164px, 1fr));
+  gap: 10px;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 24px;
+  background: #f7f9f2;
 }
 .scene-tabs button {
-  padding: 10px 4px;
-  min-height: 80px;
+  padding: 14px 8px;
+  min-height: 108px;
+  border: 2px solid #c6d3bc;
+  border-radius: 12px;
+  background: #fff;
 }
 .scene-tabs button b {
-  white-space: normal;
+  white-space: nowrap;
+  font-size: 24px;
+  letter-spacing: 0;
   text-align: center;
   line-height: 1.5;
   color: #354b3e;
+}
+.scene-tabs button:hover {
+  background: #edf3e6;
+  border-color: #65876d;
+}
+.scene-tabs button.current {
+  background: #e2edda;
+  border-color: #285d50;
+  box-shadow: inset 0 0 0 1px #285d50;
+}
+.scene-tabs button.visited {
+  background: #f0f5e9;
 }
 .scene-tabs button > span {
   width: 32px;
@@ -3194,4 +3217,72 @@ input:not([type="checkbox"]):not([type="range"]) {
   65% {
     transform: translate(var(--part-x), var(--part-y));
   }
+}
+.structure-ai-settings {
+  margin-top: 40px;
+  border-top: 1px solid #cbd7c1;
+  padding-top: 24px;
+}
+.structure-ai-settings form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  margin: 20px 0;
+}
+.ai-api-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.structure-ai-settings form > label:has(input:not([type="checkbox"])) {
+  flex: 1 1 280px;
+}
+.structure-ai-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.structure-ai-settings input:not([type="checkbox"]) {
+  padding: 10px;
+  border: 1px solid #a4b69b;
+  border-radius: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+.structure-ai-settings [role="status"] {
+  padding: 12px 0;
+  color: #68512a;
+}
+.ai-structure-preview {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 20px;
+}
+.ai-structure-preview img {
+  width: 240px;
+  max-width: 100%;
+}
+.api-connection-result {
+  margin: 18px 0 10px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.structure-ai-settings .api-connection-success {
+  color: #075aaa;
+  background: #eef6ff;
+  border-left: 4px solid #075aaa;
+  padding: 12px 16px;
+}
+.structure-ai-settings .api-connection-error {
+  color: #a12d24;
+  background: #fff3f0;
+  padding: 12px 16px;
+}
+.structure-ai-settings .api-connection-testing {
+  color: #57522d;
 }

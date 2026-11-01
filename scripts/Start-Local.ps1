@@ -3,6 +3,7 @@ $ErrorActionPreference = 'Stop'
 $projectDirectory = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 Set-Location -LiteralPath $projectDirectory
 $appUrl = 'http://127.0.0.1:5173/'
+& (Join-Path $PSScriptRoot 'Start-StructureApi.ps1')
 try {
     $existingResponse = Invoke-WebRequest -Uri $appUrl -TimeoutSec 2 -UseBasicParsing
     if ($existingResponse.Content -notmatch 'content="hanzi-animation-notebook"') {
