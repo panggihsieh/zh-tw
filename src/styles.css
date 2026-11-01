@@ -2955,3 +2955,55 @@ dialog::backdrop {
     transform: none;
   }
 }
+.structure-diagram {
+  margin: 20px 0;
+}
+.structure-square {
+  display: grid;
+  width: min(240px, 100%);
+  aspect-ratio: 1;
+  border: 2px solid #63856a;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f2f6eb;
+  gap: 2px;
+}
+.structure-vertical {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+.structure-horizontal {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.structure-triple {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.structure-cell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8efde;
+  color: #285d50;
+  border: 1px dashed #a1b495;
+  font-family: "Noto Serif TC", serif;
+  font-size: 42px;
+}
+.structure-cell:nth-child(2) {
+  background: #f7eadd;
+  color: #a45f32;
+}
+.structure-cell:nth-child(3) {
+  background: #e5eef3;
+  color: #3c6173;
+}
+.structure-cell span {
+  writing-mode: horizontal-tb;
+  text-align: center;
+}
+.structure-diagram figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #69765f;
+}

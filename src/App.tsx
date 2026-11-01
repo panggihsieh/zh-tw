@@ -52,6 +52,7 @@ import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
+import StructureDiagram from "./StructureDiagram";
 import {
   randomStartupPhrase,
   refreshOpeningPhrase,
@@ -1234,6 +1235,7 @@ export default function App() {
                             {scene === 1 && (
                               <>
                                 <h2>{card.master.structure}</h2>
+                                <StructureDiagram master={card.master} />
                                 <p>
                                   {card.master.components.length
                                     ? "看看這個字，各部分怎麼住在一起？"
