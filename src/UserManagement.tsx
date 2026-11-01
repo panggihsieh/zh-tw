@@ -1,3 +1,4 @@
+import BackendCard from "./BackendCard";
 import { useEffect, useState } from "react";
 import {
   ADMIN_EMAIL,
@@ -46,76 +47,86 @@ export default function UserManagement() {
         固定管理者：{ADMIN_EMAIL}
         。管理生字網站的雲端存取權限；停用後，該帳號無法讀寫雲端收藏，本機收藏仍保留。
       </p>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          void run(async () => {
-            await saveAppUser({ email, displayName: name, enabled: true });
-            setEmail("");
-            setName("");
-          });
-        }}
+      <BackendCard
+        title="新增或啟用使用者"
+        description="設定 Google 帳號與顯示名稱"
       >
-        <label>
-          Google 帳號電子郵件
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          顯示名稱
-          <input
-            maxLength={80}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <button className="primary" disabled={busy}>
-          新增／啟用使用者
-        </button>
-      </form>
-      <button
-        className="secondary"
-        disabled={busy}
-        onClick={() => void run(refresh)}
-      >
-        重新整理名單
-      </button>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            void run(async () => {
+              await saveAppUser({ email, displayName: name, enabled: true });
+              setEmail("");
+              setName("");
+            });
+          }}
+        >
+          <label>
+            Google 帳號電子郵件
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            顯示名稱
+            <input
+              maxLength={80}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <button className="primary" disabled={busy}>
+            新增／啟用使用者
+          </button>
+        </form>
+      </BackendCard>
       <p role="status">{busy ? "處理中…" : message}</p>
-      {!users.length && (
-        <p>尚無使用者紀錄。可先新增帳號，或由使用者首次登入時建立紀錄。</p>
-      )}
-      <div className="managed-users">
-        {users.map((item) => (
-          <article key={item.email}>
-            <h3>{item.displayName || item.email}</h3>
-            <p>{item.email}</p>
-            <p>
-              {item.email === ADMIN_EMAIL
-                ? "固定管理者"
-                : item.enabled
-                  ? "已啟用"
-                  : "已停用"}
-            </p>
-            {item.email !== ADMIN_EMAIL && (
-              <button
-                className="secondary"
-                disabled={busy}
-                onClick={() =>
-                  void run(() =>
-                    saveAppUser({ ...item, enabled: !item.enabled }),
-                  )
-                }
-              >
-                {item.enabled ? "停用" : "啟用"}
-              </button>
-            )}
-          </article>
-        ))}
-      </div>
+      <BackendCard
+        title="使用者名單與權限"
+        description={`${users.length} 位使用者 · 查看帳號與啟停權限`}
+      >
+        <button
+          className="secondary"
+          disabled={busy}
+          onClick={() => void run(refresh)}
+        >
+          重新整理名單
+        </button>
+        {!users.length && (
+          <p>尚無使用者紀錄。可先新增帳號，或由使用者首次登入時建立紀錄。</p>
+        )}
+        <div className="managed-users">
+          {users.map((item) => (
+            <article key={item.email}>
+              <h3>{item.displayName || item.email}</h3>
+              <p>{item.email}</p>
+              <p>
+                {item.email === ADMIN_EMAIL
+                  ? "固定管理者"
+                  : item.enabled
+                    ? "已啟用"
+                    : "已停用"}
+              </p>
+              {item.email !== ADMIN_EMAIL && (
+                <button
+                  className="secondary"
+                  disabled={busy}
+                  onClick={() =>
+                    void run(() =>
+                      saveAppUser({ ...item, enabled: !item.enabled }),
+                    )
+                  }
+                >
+                  {item.enabled ? "停用" : "啟用"}
+                </button>
+              )}
+            </article>
+          ))}
+        </div>
+      </BackendCard>
     </section>
   );
 }

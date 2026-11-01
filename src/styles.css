@@ -3552,6 +3552,50 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 }
 .backend-shell .structure-ai-settings .ai-config-form :is(input:not([type="checkbox"]), select),
 .backend-shell .structure-ai-settings :is(.ai-setup-note, .ai-test-hint) { font-size: 16px; }
+
+.backend-function-card {
+  margin: 14px 0;
+  border: 1px solid #cfdeee;
+  border-radius: 12px;
+  background: #fff;
+  overflow: clip;
+}
+.backend-function-card > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  color: #193b65;
+}
+.backend-function-card > summary::-webkit-details-marker { display: none; }
+.backend-function-card > summary:hover { background: #f1f6fd; }
+.backend-function-card > summary:focus-visible { outline: 3px solid #3478cb; outline-offset: -3px; }
+.backend-function-card > summary > span { display: grid; gap: 5px; min-width: 0; }
+.backend-function-card > summary strong { font-size: 17px; line-height: 1.5; }
+.backend-function-card > summary span span { font-size: 14px; line-height: 1.6; color: #526987; }
+.backend-function-card > summary > svg { flex-shrink: 0; transition: transform .15s; }
+.backend-function-card[open] > summary { background: #f1f6fd; border-bottom: 1px solid #dae6f2; }
+.backend-function-card[open] > summary > svg { transform: rotate(180deg); }
+.backend-function-content { padding: 20px; }
+.backend-function-content > :first-child { margin-top: 0; }
+.backend-function-content > :last-child { margin-bottom: 0; }
+.backend-shell .backend-panel { padding: 0; border: 0; border-radius: 0; background: transparent; }
+.backend-function-content :is(.tts-config, .tts-cloud-note) { max-width: none; padding: 0; border: 0; background: transparent; }
+.backend-function-content :is(.tts-config, .tts-cloud-note) > h2 { display: none; }
+.backend-shell .structure-ai-settings > h2 { display: none; }
+.backend-shell .structure-help > details {
+  margin: 14px 0; padding: 0; border: 1px solid #cfdeee; border-radius: 12px; background: white;
+}
+.backend-shell .structure-help > details > summary { padding: 18px 20px; color: #193b65; }
+.backend-shell .structure-help > details[open] > summary { border-bottom: 1px solid #dae6f2; background: #f1f6fd; }
+.backend-shell .structure-help-grid { margin: 0; padding: 20px; }
+@media (max-width: 600px) {
+  .backend-function-card > summary, .backend-function-content,
+  .backend-shell .structure-help > details > summary { padding: 16px; }
+}
 .backend-shell main :is(button, select, input:not([type="checkbox"]):not([type="radio"])) { min-height: 40px; }
 .backend-auth-shell .backend-login h1 { font-size: 26px; }
 .backend-auth-shell .backend-login :is(p, button),

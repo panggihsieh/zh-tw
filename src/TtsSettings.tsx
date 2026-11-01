@@ -1,3 +1,4 @@
+import BackendCard from "./BackendCard";
 import { useEffect, useRef, useState } from "react";
 import { Check, Cloud, Monitor, RefreshCw, Volume2 } from "lucide-react";
 import {
@@ -111,144 +112,159 @@ export default function TtsSettings({
           </p>
         )}
       </div>
-      <div className="tts-sources">
-        <div>
-          <Monitor size={22} />
-          <span>裝置本機語音</span>
-          <b>{chinese.filter((v) => v.localService).length} 種</b>
-          <small>作業系統提供，依瀏覽器回報分類。</small>
+      <BackendCard
+        title="語音來源概況"
+        description="查看裝置與瀏覽器提供的中文語音"
+      >
+        <div className="tts-sources">
+          <div>
+            <Monitor size={22} />
+            <span>裝置本機語音</span>
+            <b>{chinese.filter((v) => v.localService).length} 種</b>
+            <small>作業系統提供，依瀏覽器回報分類。</small>
+          </div>
+          <div>
+            <Cloud size={22} />
+            <span>瀏覽器線上語音</span>
+            <b>{chinese.filter((v) => !v.localService).length} 種</b>
+            <small>由瀏覽器提供，可能需要網路連線。</small>
+          </div>
         </div>
-        <div>
-          <Cloud size={22} />
-          <span>瀏覽器線上語音</span>
-          <b>{chinese.filter((v) => !v.localService).length} 種</b>
-          <small>由瀏覽器提供，可能需要網路連線。</small>
-        </div>
-      </div>
+      </BackendCard>
       {!supported && (
         <p className="alert error" role="alert">
           此瀏覽器沒有 Web Speech TTS，請使用支援中文朗讀的瀏覽器。
         </p>
       )}
-      <section className="tts-config" aria-label="TTS 音色設定">
-        <h2>選擇前台預設音色</h2>
-        <p className="small-copy">
-          只列出裝置實際提供的中文音色。試聽不會變更目前預設。
-        </p>
-        <label className="tts-auto-option">
-          <input
-            type="radio"
-            name="tts-voice"
-            checked={draft === "auto"}
-            onChange={() => setDraft("auto")}
-          />
-          自動選擇（優先臺灣中文）
-        </label>
-        <label className="tts-filter">
-          篩選來源
-          <select
-            aria-label="篩選 TTS 來源"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="all">所有可用來源</option>
-            <option value="local">裝置本機語音</option>
-            <option value="online">瀏覽器線上語音</option>
-          </select>
-        </label>
-        <div className="tts-voice-list">
-          {filtered.map((v) => (
-            <label
-              key={voiceKey(v)}
-              className={
-                draft === voiceKey(v)
-                  ? "tts-voice-row selected"
-                  : "tts-voice-row"
+      <BackendCard
+        title="選擇與試聽預設音色"
+        description="篩選音色、試聽並儲存前台預設"
+      >
+        <section className="tts-config" aria-label="TTS 音色設定">
+          <h2>選擇前台預設音色</h2>
+          <p className="small-copy">
+            只列出裝置實際提供的中文音色。試聽不會變更目前預設。
+          </p>
+          <label className="tts-auto-option">
+            <input
+              type="radio"
+              name="tts-voice"
+              checked={draft === "auto"}
+              onChange={() => setDraft("auto")}
+            />
+            自動選擇（優先臺灣中文）
+          </label>
+          <label className="tts-filter">
+            篩選來源
+            <select
+              aria-label="篩選 TTS 來源"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="all">所有可用來源</option>
+              <option value="local">裝置本機語音</option>
+              <option value="online">瀏覽器線上語音</option>
+            </select>
+          </label>
+          <div className="tts-voice-list">
+            {filtered.map((v) => (
+              <label
+                key={voiceKey(v)}
+                className={
+                  draft === voiceKey(v)
+                    ? "tts-voice-row selected"
+                    : "tts-voice-row"
+                }
+              >
+                <input
+                  type="radio"
+                  name="tts-voice"
+                  aria-label={`選擇音色 ${v.name} ${v.lang}`}
+                  checked={draft === voiceKey(v)}
+                  onChange={() => setDraft(voiceKey(v))}
+                />
+                <span>
+                  <strong>{v.name}</strong>
+                  <small>
+                    {v.lang} · {v.localService ? "裝置本機" : "瀏覽器線上"}
+                    {v.default ? " · 系統預設" : ""}
+                  </small>
+                </span>
+                {saved && voiceKey(saved) === voiceKey(v) && (
+                  <span className="tts-saved">
+                    <Check size={14} />
+                    前台預設
+                  </span>
+                )}
+              </label>
+            ))}
+          </div>
+          {!filtered.length && (
+            <p className="tts-empty" role="status">
+              {chinese.length
+                ? "這個來源目前沒有可用的中文音色。"
+                : "尚未偵測到中文音色。可按重新偵測；若仍為空，請先在作業系統安裝中文語音，或換用其他瀏覽器。"}
+            </p>
+          )}
+          <label className="tts-sample">
+            試聽文字
+            <textarea
+              aria-label="試聽文字"
+              rows={3}
+              maxLength={300}
+              value={sample}
+              onChange={(e) => setSample(e.target.value)}
+            />
+          </label>
+          <div className="tts-config-actions">
+            <button
+              className="secondary"
+              disabled={
+                !supported || !sample.trim() || (draft !== "auto" && !selected)
+              }
+              onClick={() =>
+                preview(
+                  sample,
+                  draft === "auto" ? null : voicePreference(selected!),
+                )
               }
             >
-              <input
-                type="radio"
-                name="tts-voice"
-                aria-label={`選擇音色 ${v.name} ${v.lang}`}
-                checked={draft === voiceKey(v)}
-                onChange={() => setDraft(voiceKey(v))}
-              />
-              <span>
-                <strong>{v.name}</strong>
-                <small>
-                  {v.lang} · {v.localService ? "裝置本機" : "瀏覽器線上"}
-                  {v.default ? " · 系統預設" : ""}
-                </small>
-              </span>
-              {saved && voiceKey(saved) === voiceKey(v) && (
-                <span className="tts-saved">
-                  <Check size={14} />
-                  前台預設
-                </span>
-              )}
-            </label>
-          ))}
-        </div>
-        {!filtered.length && (
-          <p className="tts-empty" role="status">
-            {chinese.length
-              ? "這個來源目前沒有可用的中文音色。"
-              : "尚未偵測到中文音色。可按重新偵測；若仍為空，請先在作業系統安裝中文語音，或換用其他瀏覽器。"}
-          </p>
-        )}
-        <label className="tts-sample">
-          試聽文字
-          <textarea
-            aria-label="試聽文字"
-            rows={3}
-            maxLength={300}
-            value={sample}
-            onChange={(e) => setSample(e.target.value)}
+              <Volume2 size={17} />
+              試聽所選音色
+            </button>
+            <button
+              className="primary"
+              disabled={draft !== "auto" && !selected}
+              onClick={() =>
+                save(draft === "auto" ? null : voicePreference(selected!))
+              }
+            >
+              <Check size={17} />
+              設為前台預設
+            </button>
+          </div>
+          <SpeechTools
+            label="朗讀設定說明"
+            read={() =>
+              "這裡可以選擇 TTS 語音來源。選擇中文音色後，先按試聽；確認喜歡後按設為前台預設。設定只影響目前瀏覽器。"
+            }
           />
-        </label>
-        <div className="tts-config-actions">
-          <button
-            className="secondary"
-            disabled={
-              !supported || !sample.trim() || (draft !== "auto" && !selected)
-            }
-            onClick={() =>
-              preview(
-                sample,
-                draft === "auto" ? null : voicePreference(selected!),
-              )
-            }
-          >
-            <Volume2 size={17} />
-            試聽所選音色
-          </button>
-          <button
-            className="primary"
-            disabled={draft !== "auto" && !selected}
-            onClick={() =>
-              save(draft === "auto" ? null : voicePreference(selected!))
-            }
-          >
-            <Check size={17} />
-            設為前台預設
-          </button>
-        </div>
-        <SpeechTools
-          label="朗讀設定說明"
-          read={() =>
-            "這裡可以選擇 TTS 語音來源。選擇中文音色後，先按試聽；確認喜歡後按設為前台預設。設定只影響目前瀏覽器。"
-          }
-        />
-      </section>
-      <section className="tts-cloud-note">
-        <h2>其他雲端 TTS 服務</h2>
-        <span className="warning-pill">尚未串接</span>
-        <p>
-          Google Cloud、Azure、OpenAI 等獨立 API
-          服務，目前不能選為前台預設。需另建安全後端及服務授權，API
-          金鑰不會放在這個前端設定頁。
-        </p>
-      </section>
+        </section>
+      </BackendCard>
+      <BackendCard
+        title="其他雲端 TTS 服務"
+        description="查看獨立語音 API 的串接狀態"
+      >
+        <section className="tts-cloud-note">
+          <h2>其他雲端 TTS 服務</h2>
+          <span className="warning-pill">尚未串接</span>
+          <p>
+            Google Cloud、Azure、OpenAI 等獨立 API
+            服務，目前不能選為前台預設。需另建安全後端及服務授權，API
+            金鑰不會放在這個前端設定頁。
+          </p>
+        </section>
+      </BackendCard>
       {includeTools && (
         <>
           <StructureAiSettings />

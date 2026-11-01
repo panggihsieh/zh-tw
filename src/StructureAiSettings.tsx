@@ -1,3 +1,4 @@
+import BackendCard from "./BackendCard";
 import { useEffect, useState } from "react";
 import { apiTestState } from "./apiSettingsState";
 const API =
@@ -200,15 +201,20 @@ export default function StructureAiSettings() {
       >
         {locked ? "Unlock 解鎖設定" : "Lock 鎖定設定"}
       </button>
-      <p>
-        現有結構圖來自資料與教學比例設定，並非 AI 即時判斷。可設定
-        DeepSeek、Qwen、MiniMax、Gemini、OpenAI，或本機
-        Ollama，分析完整字形並產生待核候選。
-      </p>
-      <p>
-        左側完整字不變；AI 只建議右側結構分區，不自動覆寫教材。雲端 API
-        依供應商計費；只有按測試或分析才會呼叫服務。
-      </p>
+      <BackendCard
+        title="使用說明與分析範圍"
+        description="支援服務、候選結構與費用說明"
+      >
+        <p>
+          現有結構圖來自資料與教學比例設定，並非 AI 即時判斷。可設定
+          DeepSeek、Qwen、MiniMax、Gemini、OpenAI，或本機
+          Ollama，分析完整字形並產生待核候選。
+        </p>
+        <p>
+          左側完整字不變；AI 只建議右側結構分區，不自動覆寫教材。雲端 API
+          依供應商計費；只有按測試或分析才會呼叫服務。
+        </p>
+      </BackendCard>
       <div role="status">{message}</div>
       <button
         className="secondary"
@@ -218,130 +224,137 @@ export default function StructureAiSettings() {
       >
         重新連線 AI 後端
       </button>
-      <fieldset disabled={locked || busy} className="ai-api-fields">
-        <form
-          className="ai-config-form"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setBusy(true);
-            try {
-              const value = await request(
-                "/settings",
-                { ...config, apiKey },
-                token,
-              );
-              setApiKey("");
-              setToken("");
-              setLocked(true);
-              const updated = { ...config, hasApiKey: value.hasApiKey };
-              setConfig(updated);
-              setSavedConfig(updated);
-              setMessage(
-                "Save 完成：API 已加密保存並自動 Lock。可直接按測試連線。",
-              );
-              setConnection("none");
-              setConnectionMessage("");
-            } catch (e) {
-              setMessage((e as Error).message);
-            } finally {
-              setBusy(false);
-            }
-          }}
-        >
-          <label className="ai-field-provider">
-            AI 服務
-            <select
-              aria-label="AI API 服務"
-              value={config.provider}
-              disabled={busy || !available}
-              onChange={(e) => void connect(e.target.value)}
-            >
-              {Object.entries(config.providers).map(([id, p]) => (
-                <option
-                  key={id}
-                  value={id}
-                  disabled={
-                    id === "ollama" &&
-                    config.storageProtection === "google-secret-manager"
-                  }
-                >
-                  {p.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="ai-field-endpoint">
-            API Base URL
-            <input
-              aria-label="AI API Base URL"
-              type="url"
-              required
-              value={config.endpoint}
-              onChange={(e) =>
-                setConfig({ ...config, endpoint: e.target.value })
+      <BackendCard
+        title="API 模型與金鑰"
+        description="選擇供應商、編輯模型與加密儲存"
+      >
+        <fieldset disabled={locked || busy} className="ai-api-fields">
+          <form
+            className="ai-config-form"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setBusy(true);
+              try {
+                const value = await request(
+                  "/settings",
+                  { ...config, apiKey },
+                  token,
+                );
+                setApiKey("");
+                setToken("");
+                setLocked(true);
+                const updated = { ...config, hasApiKey: value.hasApiKey };
+                setConfig(updated);
+                setSavedConfig(updated);
+                setMessage(
+                  "Save 完成：API 已加密保存並自動 Lock。可直接按測試連線。",
+                );
+                setConnection("none");
+                setConnectionMessage("");
+              } catch (e) {
+                setMessage((e as Error).message);
+              } finally {
+                setBusy(false);
               }
-            />
-          </label>
-          <label className="ai-field-model">
-            模型名稱
-            <input
-              aria-label="AI 模型名稱"
-              required
-              value={config.model}
-              placeholder="填入帳號可用的模型名稱"
-              onChange={(e) => setConfig({ ...config, model: e.target.value })}
-            />
-          </label>
-          {config.provider !== "ollama" && (
-            <label className="ai-field-key">
-              API Key
+            }}
+          >
+            <label className="ai-field-provider">
+              AI 服務
+              <select
+                aria-label="AI API 服務"
+                value={config.provider}
+                disabled={busy || !available}
+                onChange={(e) => void connect(e.target.value)}
+              >
+                {Object.entries(config.providers).map(([id, p]) => (
+                  <option
+                    key={id}
+                    value={id}
+                    disabled={
+                      id === "ollama" &&
+                      config.storageProtection === "google-secret-manager"
+                    }
+                  >
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="ai-field-endpoint">
+              API Base URL
               <input
-                type="password"
-                aria-label="AI API Key"
-                autoComplete="off"
-                required={!config.hasApiKey}
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder={
-                  config.hasApiKey ? "已儲存金鑰；留空保留" : "在此輸入金鑰"
+                aria-label="AI API Base URL"
+                type="url"
+                required
+                value={config.endpoint}
+                onChange={(e) =>
+                  setConfig({ ...config, endpoint: e.target.value })
                 }
               />
-              <small>
-                {config.hasApiKey
-                  ? "後端已有金鑰，內容不會回傳。"
-                  : "尚未設定金鑰。"}
-                金鑰僅由後端保存，不回傳瀏覽器。
-              </small>
             </label>
-          )}
-          <label className="ai-checkbox">
-            <input
-              type="checkbox"
-              checked={config.vision}
-              onChange={(e) =>
-                setConfig({ ...config, vision: e.target.checked })
-              }
-            />
-            模型支援圖片（依官方模型能力設定）
-          </label>
-          <label className="ai-checkbox">
-            <input
-              type="checkbox"
-              checked={config.enabled}
-              onChange={(e) =>
-                setConfig({ ...config, enabled: e.target.checked })
-              }
-            />
-            啟用 AI 結構分析
-          </label>
-          <button
-            className="primary ai-save-button"
-            disabled={!available || busy}
-          >
-            Save 加密儲存並設為預設 API
-          </button>
-        </form>
-      </fieldset>
+            <label className="ai-field-model">
+              模型名稱
+              <input
+                aria-label="AI 模型名稱"
+                required
+                value={config.model}
+                placeholder="填入帳號可用的模型名稱"
+                onChange={(e) =>
+                  setConfig({ ...config, model: e.target.value })
+                }
+              />
+            </label>
+            {config.provider !== "ollama" && (
+              <label className="ai-field-key">
+                API Key
+                <input
+                  type="password"
+                  aria-label="AI API Key"
+                  autoComplete="off"
+                  required={!config.hasApiKey}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder={
+                    config.hasApiKey ? "已儲存金鑰；留空保留" : "在此輸入金鑰"
+                  }
+                />
+                <small>
+                  {config.hasApiKey
+                    ? "後端已有金鑰，內容不會回傳。"
+                    : "尚未設定金鑰。"}
+                  金鑰僅由後端保存，不回傳瀏覽器。
+                </small>
+              </label>
+            )}
+            <label className="ai-checkbox">
+              <input
+                type="checkbox"
+                checked={config.vision}
+                onChange={(e) =>
+                  setConfig({ ...config, vision: e.target.checked })
+                }
+              />
+              模型支援圖片（依官方模型能力設定）
+            </label>
+            <label className="ai-checkbox">
+              <input
+                type="checkbox"
+                checked={config.enabled}
+                onChange={(e) =>
+                  setConfig({ ...config, enabled: e.target.checked })
+                }
+              />
+              啟用 AI 結構分析
+            </label>
+            <button
+              className="primary ai-save-button"
+              disabled={!available || busy}
+            >
+              Save 加密儲存並設為預設 API
+            </button>
+          </form>
+        </fieldset>
+      </BackendCard>
       <div
         className={`api-connection-result api-connection-${connection}`}
         role="status"
@@ -349,149 +362,159 @@ export default function StructureAiSettings() {
       >
         {connectionMessage}
       </div>
-      <button
-        type="button"
-        className="secondary"
-        disabled={!testState.canTest || busy}
-        aria-describedby="ai-test-hint"
-        onClick={async () => {
-          if (!testState.canTest) return;
-          setBusy(true);
-          setConnection("testing");
-          setConnectionMessage("正在測試連線…");
-          setMessage("正在測試已儲存的 API…");
-          try {
-            const value = await request(
-              "/test",
-              { provider: config.provider },
-              token,
-            );
-            setMessage(value.message);
-            setConnection("success");
-            setConnectionMessage(
-              `連線成功：${config.providers[value.provider]?.name || value.provider} / ${value.model}`,
-            );
-          } catch (e) {
-            setMessage((e as Error).message);
-            setConnection("error");
-            setConnectionMessage(`連線失敗：${(e as Error).message}`);
-          } finally {
-            setBusy(false);
-          }
-        }}
+      <BackendCard
+        title="測試 API 連線"
+        description="確認已儲存模型與金鑰能否使用"
       >
-        測試已儲存 API 連線
-      </button>
-      <p id="ai-test-hint" className="ai-test-hint">
-        {testState.reason || "測試會使用後端已儲存的模型與金鑰。"}
-      </p>
-      {config.providers[config.provider] && (
-        <p>
-          <a
-            href={config.providers[config.provider].docs}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {config.providers[config.provider].name} 官方 API 文件 ↗
-          </a>
-          。Qwen 區域與金鑰須一致；qwen-plus
-          為文字用途，圖像分析需改用可用的視覺模型。
-        </p>
-      )}
-      <fieldset disabled={locked || busy} className="ai-api-fields">
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            if (!/^\p{Script=Han}$/u.test(character)) {
-              setMessage("請輸入一個中文字");
-              return;
-            }
+        <button
+          type="button"
+          className="secondary"
+          disabled={!testState.canTest || busy}
+          aria-describedby="ai-test-hint"
+          onClick={async () => {
+            if (!testState.canTest) return;
             setBusy(true);
-            setResult(null);
-            const png = glyphImage(character);
-            setImage(png);
-            setMessage("正在分析字形，等待 API 回覆…");
+            setConnection("testing");
+            setConnectionMessage("正在測試連線…");
+            setMessage("正在測試已儲存的 API…");
             try {
               const value = await request(
-                "/analyze",
-                {
-                  provider: config.provider,
-                  character,
-                  image: png.split(",")[1],
-                },
+                "/test",
+                { provider: config.provider },
                 token,
               );
-              setResult(value);
-              setMessage("分析完成：候選結果，尚未核對。");
+              setMessage(value.message);
+              setConnection("success");
+              setConnectionMessage(
+                `連線成功：${config.providers[value.provider]?.name || value.provider} / ${value.model}`,
+              );
             } catch (e) {
               setMessage((e as Error).message);
+              setConnection("error");
+              setConnectionMessage(`連線失敗：${(e as Error).message}`);
             } finally {
               setBusy(false);
             }
           }}
         >
-          <label>
-            測試生字
-            <input
-              aria-label="AI 結構測試生字"
-              value={character}
-              onChange={(e) => {
-                setCharacter(e.target.value);
-                setResult(null);
-                setImage("");
-              }}
-              maxLength={2}
-            />
-          </label>
-          <button className="secondary" disabled={!available || busy}>
-            {busy ? "處理中…" : "分析字形（產生待核候選）"}
-          </button>
-        </form>
-      </fieldset>
-      {image && (
-        <div className="ai-structure-preview">
-          <img src={image} alt={`送交 AI 分析的完整字形：${character}`} />
-          {result && (
-            <div>
-              <div
-                className="structure-square"
-                style={
-                  result.layout === "vertical"
-                    ? {
-                        gridTemplateRows: result.weights
-                          .map((w) => `${w}fr`)
-                          .join(" "),
-                      }
-                    : {
-                        gridTemplateColumns: result.weights
-                          .map((w) => `${w}fr`)
-                          .join(" "),
-                      }
-                }
-              >
-                {result.parts.map((p, i) => (
-                  <div className="structure-cell" key={i}>
-                    <span>{p}</span>
-                  </div>
-                ))}
-              </div>
-              <p>AI 建議比例：{result.weights.join("：")} · 待核對</p>
-            </div>
-          )}
-        </div>
-      )}
-      {result && (
-        <>
-          <p>{result.reason}</p>
-          <p>模型：{result.model}。此結果不代表教育部標準比例。</p>
-          <a
-            download={`${result.character}-結構候選.json`}
-            href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`}
+          測試已儲存 API 連線
+        </button>
+        <p id="ai-test-hint" className="ai-test-hint">
+          {testState.reason || "測試會使用後端已儲存的模型與金鑰。"}
+        </p>
+        {config.providers[config.provider] && (
+          <p>
+            <a
+              href={config.providers[config.provider].docs}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {config.providers[config.provider].name} 官方 API 文件 ↗
+            </a>
+            。Qwen 區域與金鑰須一致；qwen-plus
+            為文字用途，圖像分析需改用可用的視覺模型。
+          </p>
+        )}
+      </BackendCard>
+      <BackendCard
+        title="生字結構分析"
+        description="分析完整字形、檢查候選結果與下載"
+      >
+        <fieldset disabled={locked || busy} className="ai-api-fields">
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (!/^\p{Script=Han}$/u.test(character)) {
+                setMessage("請輸入一個中文字");
+                return;
+              }
+              setBusy(true);
+              setResult(null);
+              const png = glyphImage(character);
+              setImage(png);
+              setMessage("正在分析字形，等待 API 回覆…");
+              try {
+                const value = await request(
+                  "/analyze",
+                  {
+                    provider: config.provider,
+                    character,
+                    image: png.split(",")[1],
+                  },
+                  token,
+                );
+                setResult(value);
+                setMessage("分析完成：候選結果，尚未核對。");
+              } catch (e) {
+                setMessage((e as Error).message);
+              } finally {
+                setBusy(false);
+              }
+            }}
           >
-            下載待核結果 JSON
-          </a>
-        </>
-      )}
+            <label>
+              測試生字
+              <input
+                aria-label="AI 結構測試生字"
+                value={character}
+                onChange={(e) => {
+                  setCharacter(e.target.value);
+                  setResult(null);
+                  setImage("");
+                }}
+                maxLength={2}
+              />
+            </label>
+            <button className="secondary" disabled={!available || busy}>
+              {busy ? "處理中…" : "分析字形（產生待核候選）"}
+            </button>
+          </form>
+        </fieldset>
+        {image && (
+          <div className="ai-structure-preview">
+            <img src={image} alt={`送交 AI 分析的完整字形：${character}`} />
+            {result && (
+              <div>
+                <div
+                  className="structure-square"
+                  style={
+                    result.layout === "vertical"
+                      ? {
+                          gridTemplateRows: result.weights
+                            .map((w) => `${w}fr`)
+                            .join(" "),
+                        }
+                      : {
+                          gridTemplateColumns: result.weights
+                            .map((w) => `${w}fr`)
+                            .join(" "),
+                        }
+                  }
+                >
+                  {result.parts.map((p, i) => (
+                    <div className="structure-cell" key={i}>
+                      <span>{p}</span>
+                    </div>
+                  ))}
+                </div>
+                <p>AI 建議比例：{result.weights.join("：")} · 待核對</p>
+              </div>
+            )}
+          </div>
+        )}
+        {result && (
+          <>
+            <p>{result.reason}</p>
+            <p>模型：{result.model}。此結果不代表教育部標準比例。</p>
+            <a
+              download={`${result.character}-結構候選.json`}
+              href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`}
+            >
+              下載待核結果 JSON
+            </a>
+          </>
+        )}
+      </BackendCard>
     </section>
   );
 }
