@@ -2476,3 +2476,79 @@ dialog::backdrop {
     margin-bottom: 15px;
   }
 }
+
+.topbar-actions,
+.speech-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.speech-tools .secondary {
+  min-height: 35px;
+  font-size: 11px;
+  padding: 8px 11px;
+  white-space: nowrap;
+}
+.speech-tools .icon-btn {
+  min-width: 34px;
+  min-height: 35px;
+}
+.scene-speech {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 22px;
+  background: #f5f8ef;
+  border-bottom: 1px solid #e1e6db;
+}
+.auto-speech,
+.tts-rate {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #617454;
+}
+.auto-speech input {
+  accent-color: #285d50;
+  width: 16px;
+  height: 16px;
+}
+.tts-rate {
+  margin-left: auto;
+}
+.tts-rate select {
+  min-height: 35px;
+}
+.modal-head + .speech-tools {
+  margin-bottom: 18px;
+}
+@media (max-width: 620px) {
+  .topbar {
+    height: auto;
+    min-height: 65px;
+    padding: 12px 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .topbar-actions {
+    margin-left: auto;
+    gap: 6px;
+  }
+  .scene-speech {
+    padding: 14px;
+    gap: 12px;
+  }
+  .speech-tools .secondary,
+  .speech-tools .icon-btn {
+    min-height: 40px;
+  }
+  .auto-speech {
+    font-size: 10px;
+  }
+  .tts-rate {
+    margin-left: 0;
+  }
+}
