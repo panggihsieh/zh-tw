@@ -295,6 +295,7 @@ function Modal({
   );
 }
 export default function App() {
+  const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const [restored] = useState(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let previous: string | null = null;
@@ -305,7 +306,7 @@ export default function App() {
     }
     const initialPhrase = randomStartupPhrase(previous);
     try {
-      const state = loadPageSession(sessionStorage, reduced, initialPhrase);
+      const state = loadPageSession({ getItem: (key) => sessionStorage.getItem(key + (backendMode ? ".backend" : "")) }, reduced, initialPhrase);
       const next = refreshOpeningPhrase(state, previous, initialPhrase);
       return {
         ...next,
@@ -327,7 +328,7 @@ export default function App() {
     }
   }, [restored]);
 
-  const [page, setPage] = useState<Page>(restored.page);
+  const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page);
   const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
@@ -541,7 +542,7 @@ export default function App() {
         speech: speech.getSession(),
       };
       try {
-        savePageSession(sessionStorage, state);
+        savePageSession({ setItem: (key, value) => sessionStorage.setItem(key + (backendMode ? ".backend" : ""), value) }, state);
       } catch {
         if (!sessionFailureShown.current) {
           sessionFailureShown.current = true;
@@ -735,14 +736,14 @@ export default function App() {
         resume: () => speech.resume(),
       }}
     >
-      <div className="app-shell">
+      <div className={backendMode ? "app-shell backend-shell" : "app-shell"}>
         <aside className="sidebar">
           <a
             className="brand"
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              setPage("learn");
+              setPage(backendMode ? "tts" : "learn");
             }}
           >
             <span className="brand-icon">
@@ -752,8 +753,9 @@ export default function App() {
               生字動畫<span className="brand-sub">收藏本</span>
             </span>
           </a>
-          <div className="side-label">我的學習空間</div>
-          <nav>
+          <div className="side-label">{backendMode ? "教學管理後台" : "我的學習空間"}</div>
+          <nav aria-label={backendMode ? "後台功能" : "學生功能"}>
+            {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
               onClick={() => setPage("learn")}
@@ -782,7 +784,8 @@ export default function App() {
               <Grid2X2 size={20} />
               查字小幫手
             </button>
-            <button
+            </>)}
+            {backendMode && (<>            <button
               className={page === "tts" ? "nav-item active" : "nav-item"}
               onClick={() => {
                 setPage("tts");
@@ -818,6 +821,7 @@ export default function App() {
               <Grid2X2 size={20} />
               康軒生字結構修正
             </a>
+            </>)}
           </nav>
           <div className="side-garden">
             <Mascot />
@@ -826,10 +830,10 @@ export default function App() {
             <div className="garden-dot">✦　✧　✦</div>
           </div>
           <div className="sidebar-bottom">
-            <button className="nav-item" onClick={() => setModal("settings")}>
+            {backendMode && <button className="nav-item" onClick={() => setModal("settings")}>
               <Settings2 size={19} />
               學習偏好
-            </button>
+            </button>}
             <span className="local-label">
               <span />
               本機收藏，不用登入
@@ -839,7 +843,7 @@ export default function App() {
         <div className="main-wrap">
           <header className="topbar">
             <span className="breadcrumb">
-              我的學習空間 <ChevronRight size={14} />{" "}
+              {backendMode ? "教學管理後台" : "我的學習空間"} <ChevronRight size={14} />{" "}
               {page === "learn"
                 ? "生字動畫教室"
                 : page === "library"
@@ -1938,13 +1942,14 @@ export default function App() {
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
               </span>
               <span>生字動畫收藏本 · 本機學習版</span>
+              <a href={backendMode ? "/" : "/?view=backend"}>{backendMode ? "返回學生前台" : "教師後台"}</a>
             </footer>
           </main>
         </div>
         {modal === "settings" && (
           <Modal title="學習偏好" close={() => setModal(null)}>
             <p className="modal-description">讓教室變成適合自己的樣子。</p>
-            <button
+            {backendMode && <button
               className="secondary full"
               onClick={() => {
                 setModal(null);
@@ -1954,7 +1959,7 @@ export default function App() {
             >
               管理 TTS 來源與預設音色
               <ArrowRight size={16} />
-            </button>
+            </button>}
             {[
               { label: "顯示注音", checked: showReading, set: setShowReading },
               { label: "顯示重點字幕", checked: captions, set: setCaptions },
