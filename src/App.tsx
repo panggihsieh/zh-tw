@@ -53,6 +53,8 @@ import StrokePlayer from "./StrokePlayer";
 import { structureProfile } from "./structureProfiles";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
+import BackendApi from "./StructureAiSettings";
+import BackendStructure from "./StructureHelp";
 import OfficialDictionary from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
 import StructureDiagram from "./StructureDiagram";
@@ -89,6 +91,10 @@ const err = (e: unknown) =>
 const CloudCollections = lazy(() => import("./CloudCollections"));
 const BackendGate = lazy(() => import("./BackendGate"));
 const UserManagement = lazy(() => import("./UserManagement"));
+type BackendSection = "tts" | "api" | "users" | "structure";
+const backendTitles: Record<BackendSection, string> = {
+  tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
+};
 export default function ProtectedApp() {
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
   return <Suspense fallback={<p role="status">載入教師登入…</p>}><BackendGate><App /></BackendGate></Suspense>;
@@ -271,6 +277,13 @@ function Modal({
 }
 function App() {
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
+  const NavigationContainer = backendMode ? "aside" : "header";
+  const [backendMenuOpen, setBackendMenuOpen] = useState(false);
+  const [backendSection, setBackendSection] = useState<BackendSection>(() => {
+    try { const value = sessionStorage.getItem("hanzi-notebook.backend-section.v1"); return value && Object.hasOwn(backendTitles, value) ? value as BackendSection : "tts"; }
+    catch { return "tts"; }
+  });
+  useEffect(() => { if (backendMode) { try { sessionStorage.setItem("hanzi-notebook.backend-section.v1", backendSection); } catch {} } }, [backendMode, backendSection]);
   const [restored] = useState(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let previous: string | null = null;
@@ -314,7 +327,6 @@ function App() {
     observer.observe(header);
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
-  const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | "user-management" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -680,15 +692,10 @@ function App() {
     }
   }
   const learned = saved.filter((c) => c.reviewState === "learned").length;
-  useEffect(() => {
-    if (page === "tts" && focusBackendSection) {
-      scrollPending.current = false;
-      document
-        .getElementById(focusBackendSection)
-        ?.scrollIntoView({ block: "start" });
-      setFocusBackendSection(null);
-    }
-  }, [page, focusBackendSection]);
+  function openBackendSection(section: BackendSection) {
+    setBackendSection(section); setBackendMenuOpen(false); setPage("tts"); setPlaying(false); speech.stop();
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
   const visibleSaved = saved.filter(
     (c) =>
       (c.sourcePhrase.includes(search) ||
@@ -721,11 +728,20 @@ function App() {
         resume: () => speech.resume(),
       }}
     >
-      <div className={backendMode ? "app-shell top-navigation-layout backend-shell" : "app-shell top-navigation-layout"}>
+      <div data-backend-section={backendMode ? backendSection : undefined} className={backendMode ? `app-shell top-navigation-layout backend-shell${backendMenuOpen ? " backend-menu-open" : ""}` : "app-shell top-navigation-layout"}>
         <div className="main-wrap">
-          <header ref={headerRef} className="topbar">
+          {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
+            <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "功能選單"}</button>
+            <div><span>教師工作區</span><strong>{backendTitles[backendSection]}</strong></div>
+            <div className="backend-account-actions"><span className="backend-account-label">管理者</span>
+              <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
+              <a className="backend-student-link" href="/">前往學生網站 <ArrowRight size={18} /></a>
+            </div>
+          </header>}
+          <NavigationContainer ref={backendMode ? undefined : headerRef} id={backendMode ? "backend-navigation" : undefined} className="topbar">
             <div className="header-primary">
-              <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage(backendMode ? "tts" : "learn"); setPlaying(false); }}><BookOpen size={24} /><span>生字動畫收藏本</span></button>
+              {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
+              {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BookOpen size={24} /><span>生字動畫收藏本</span></button>}
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {!backendMode && (<>
             <button
@@ -758,29 +774,29 @@ function App() {
             </button>
             </>)}
             {backendMode && (<>            <button
-              className={page === "tts" ? "nav-item active" : "nav-item"}
+              className={backendSection === "tts" ? "nav-item active" : "nav-item"}
+              aria-current={backendSection === "tts" ? "page" : undefined}
               onClick={() => {
-                setPage("tts");
-                setPlaying(false);
+                openBackendSection("tts");
               }}
             >
               <Settings2 size={20} />
               TTS 設定後台
             </button>
             <button
-              className="nav-item"
+              className={backendSection === "api" ? "nav-item active" : "nav-item"}
+              aria-current={backendSection === "api" ? "page" : undefined}
               onClick={() => {
-                setPage("tts");
-                setFocusBackendSection("ai-api-settings");
+                openBackendSection("api");
               }}
             >
               <Settings2 size={20} />
               API 設定
             </button>
-            <button className="nav-item" onClick={() => { setPage("tts"); setPlaying(false); setFocusBackendSection("user-management"); }}>
+            <button aria-current={backendSection === "users" ? "page" : undefined} className={backendSection === "users" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("users")}>
               <Settings2 size={20} />使用者管理
             </button>
-            <button className="nav-item" onClick={() => { setPage("tts"); setPlaying(false); setFocusBackendSection("structure-help"); }}>
+            <button aria-current={backendSection === "structure" ? "page" : undefined} className={backendSection === "structure" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("structure")}>
               <Grid2X2 size={20} />
               字形結構說明
             </button>
@@ -798,12 +814,10 @@ function App() {
             </a>
             </>)}
           </nav>
-              {backendMode
-                ? <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
-                : <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
+              {!backendMode && <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
             </div>
             <div className="topbar-actions">
-              <SpeechTools
+              {!backendMode && <SpeechTools
                 label="朗讀本頁"
                 showVoice={false}
                 expanded
@@ -811,7 +825,7 @@ function App() {
                   document.querySelector("main")?.innerText ||
                   "目前沒有可朗讀的內容。"
                 }
-              />
+              />}
               <button
                 className="quiet"
                 aria-label="學習設定"
@@ -821,7 +835,7 @@ function App() {
                 <span>學習設定</span>
               </button>
             </div>
-          </header>
+          </NavigationContainer>
           <main>
             {error && (
               <div className="alert error" role="alert">
@@ -1874,7 +1888,9 @@ function App() {
             )}
             {page === "tts" && (
               <>
+              {(!backendMode || backendSection === "tts") &&
               <TtsSettings
+                includeTools={!backendMode}
                 voices={ttsVoices}
                 saved={ttsPreference}
                 supported={"speechSynthesis" in window}
@@ -1889,8 +1905,15 @@ function App() {
                     preference,
                   );
                 }}
-              />
-              {backendMode && <Suspense fallback={<p role="status">載入使用者管理…</p>}><UserManagement /></Suspense>}
+              />}
+              {backendMode && backendSection !== "tts" && <>
+                <div className="page-heading"><div><p className="eyebrow">教師工作區</p><h1>{backendTitles[backendSection]}</h1></div></div>
+                <div className="backend-panel"><Suspense fallback={<p role="status">載入設定內容…</p>}>
+                  {backendSection === "api" && <BackendApi />}
+                  {backendSection === "users" && <UserManagement />}
+                  {backendSection === "structure" && <BackendStructure />}
+                </Suspense></div>
+              </>}
               </>
             )}
             <footer className="page-footer">

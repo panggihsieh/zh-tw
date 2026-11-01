@@ -3407,3 +3407,101 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .user-management input { width: 100%; min-height: 48px; padding: 10px; border: 1px solid #718568; border-radius: 6px; }
 .managed-users { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(280px,100%),1fr)); gap: 20px; }
 .managed-users article { padding: 20px; border: 1px solid #bccdb9; border-radius: 8px; background: #f3f7ee; overflow-wrap: anywhere; }
+/* 教師工作區：參考 PISA 後台的側欄、帳號列與獨立內容區。 */
+.backend-shell, .backend-auth-shell {
+  --green: #2369b7;
+  --border: #d4e2f0;
+  display: block;
+  min-height: 100dvh;
+  color: #193656;
+  background: linear-gradient(115deg, #dcecff 0%, #eef7ff 75%);
+}
+.backend-shell .main-wrap { margin-left: 280px; width: calc(100% - 280px); }
+.backend-workspace-bar {
+  position: sticky; top: 0; z-index: 35;
+  display: flex; align-items: center; gap: 24px;
+  min-height: 88px; padding: 16px 32px;
+  background: #e8f3fff2; border-bottom: 1px solid #d3e2f0;
+  backdrop-filter: blur(12px);
+}
+.backend-workspace-bar > div { min-width: 0; }
+.backend-workspace-bar span { display: block; font-size: 16px; color: #425b79; }
+.backend-workspace-bar strong { display: block; font-size: 23px; line-height: 1.5; color: #16365f; }
+.backend-student-link { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; color: #245a96; font-size: 18px; }
+.backend-menu-toggle { display: none; }
+.backend-shell .topbar {
+  position: fixed; left: 16px; top: 16px; bottom: 16px; z-index: 40;
+  display: flex; flex-direction: column; align-items: stretch;
+  width: 248px; height: calc(100dvh - 32px); min-height: 0;
+  padding: 20px 14px; gap: 14px; overflow-y: auto;
+  background: #ffffffed; border: 1px solid #e1eaf5; border-radius: 24px;
+  box-shadow: 0 8px 30px #274d7510;
+}
+.backend-shell .header-primary { display: flex; flex-direction: column; align-items: stretch; flex: 1 0 auto; gap: 20px; }
+.backend-menu-heading { padding: 6px 10px; font-size: 26px; font-weight: 800; color: #16365f; }
+.backend-menu-heading span { display: block; margin-top: 8px; font-size: 18px; font-weight: 500; color: #526987; }
+.backend-shell .app-top-nav { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; flex: none; overflow: visible; padding: 0; order: initial; }
+.backend-shell .topbar .app-top-nav .nav-item {
+  width: 100%; min-width: 0; min-height: 56px; padding: 12px 10px;
+  font-size: 18px; line-height: 1.6; white-space: normal; overflow-wrap: anywhere;
+  justify-content: flex-start; text-align: left; border-radius: 12px; color: #193b65;
+}
+.backend-shell .topbar .app-top-nav .nav-item.active { color: white; background: linear-gradient(115deg, #3478cb, #2788d7); border-color: #3b80c9; box-shadow: 0 4px 12px #2b73bd20; }
+.backend-shell .topbar .app-top-nav .nav-item:hover:not(.active) { background: #e9f2fd; }
+.backend-shell .teacher-session-button { width: 100%; margin: auto 0 0; min-height: 48px; font-size: 18px; background: #f4f8fe; color: #235990; border-color: #cfdded; order: 1; }
+.backend-shell .topbar-actions { width: 100%; max-width: none; margin: 0; align-self: stretch; justify-content: stretch; order: 2; }
+.backend-shell .topbar-actions > .quiet { width: 100%; min-height: 48px; padding: 8px 12px; font-size: 18px; color: #294f7b; }
+.backend-shell main { padding: 28px 32px 0; max-width: 1560px; margin: 0 auto; overflow-wrap: anywhere; }
+.backend-shell .page-heading { padding: 24px 28px; margin-bottom: 24px; background: #ffffffdf; border: 1px solid #e0eaf6; border-radius: 22px; gap: 20px; flex-wrap: wrap; }
+.backend-shell .page-heading h1 { color: #17355e; font-size: 32px; line-height: 1.5; }
+.backend-shell .page-heading p { font-size: 18px; color: #435c79; }
+.backend-shell .tts-default { background: #edf5ff; border-color: #729cce; color: #23476d; }
+.backend-shell .tts-sources > div, .backend-shell .tts-config, .backend-shell .tts-cloud-note { background: white; border-color: #d7e3ef; border-radius: 18px; }
+.backend-panel { padding: 28px; background: #ffffffed; border: 1px solid #dae6f2; border-radius: 22px; }
+.backend-panel > .structure-ai-settings, .backend-panel > .structure-help, .backend-panel > .user-management { margin: 0; padding: 0; border: 0; }
+.backend-shell[data-backend-section="users"] .user-management > h2,
+.backend-shell[data-backend-section="structure"] #structure-help > h2 { display: none; }
+.backend-shell .page-footer { color: #415b79; flex-wrap: wrap; gap: 16px; }
+.backend-auth-shell { padding: 1px 24px 40px 304px; }
+.backend-auth-aside { position: fixed; top: 16px; left: 16px; bottom: 16px; width: 248px; padding: 32px 24px; background: #ffffffed; border-radius: 24px; color: #193b65; }
+.backend-auth-aside h2 { font-size: 28px; line-height: 1.6; margin-top: 18px; }
+.backend-auth-aside p { font-size: 18px; line-height: 1.9; }
+.backend-auth-shell .backend-login { margin: 100px auto; padding: 36px; background: white; border-radius: 24px; border: 1px solid #e0eaf6; }
+@media (max-width: 1100px) and (min-width: 981px) {
+  .backend-shell .topbar { left: 12px; width: 224px; padding: 18px 10px; }
+  .backend-shell .main-wrap { margin-left: 248px; width: calc(100% - 248px); }
+  .backend-shell main { padding: 24px 22px 0; }
+}
+@media (max-width: 980px) {
+  .backend-shell .main-wrap { margin-left: 0; width: 100%; }
+  .backend-workspace-bar { padding: 14px 20px; gap: 16px; }
+  .backend-menu-toggle { display: inline-flex; min-height: 48px; white-space: nowrap; font-size: 18px; padding: 8px 14px; }
+  .backend-shell .topbar { display: none; position: relative; top: auto; left: auto; bottom: auto; width: auto; height: auto; max-height: calc(100dvh - 110px); margin: 16px 20px; overflow-y: auto; }
+  .backend-menu-open .topbar { display: flex; }
+  .backend-menu-heading { font-size: 22px; }
+  .backend-menu-heading span { display: none; }
+  .backend-shell .app-top-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .backend-shell .teacher-session-button, .backend-shell .topbar-actions { width: auto; align-self: flex-end; }
+  .backend-shell main { padding: 24px 20px 0; }
+  .backend-auth-shell { padding: 1px 20px 40px; }
+  .backend-auth-aside { display: none; }
+  .backend-auth-shell .backend-login { margin: 50px auto; }
+}
+@media (max-width: 600px) {
+  .backend-workspace-bar { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 14px; padding: 12px 16px; }
+  .backend-workspace-bar strong { font-size: 20px; }
+  .backend-student-link { grid-column: 1 / -1; justify-self: end; margin: 0; }
+  .backend-shell .topbar { margin: 12px 16px; padding: 16px 10px; }
+  .backend-shell .topbar .app-top-nav .nav-item { padding: 10px 8px; }
+  .backend-shell main { padding: 20px 16px 0; }
+  .backend-shell .page-heading, .backend-panel { padding: 20px; border-radius: 18px; }
+  .backend-shell .page-heading h1 { font-size: 28px; }
+  .backend-shell .tts-sources { grid-template-columns: minmax(0, 1fr); }
+  .backend-auth-shell .backend-login { padding: 24px; }
+}
+.backend-account-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; flex-shrink: 0; }
+.backend-account-actions .backend-student-link { margin: 0; white-space: nowrap; }
+.backend-account-actions .teacher-session-button { width: auto; margin: 0; min-height: 44px; padding: 8px 14px; order: initial; }
+.backend-account-actions .backend-account-label { font-size: 18px; color: #294f7b; }
+@media (max-width: 1100px) { .backend-account-actions .backend-account-label { display: none; } }
+@media (max-width: 600px) { .backend-account-actions { grid-column: 1 / -1; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin: 0; } }

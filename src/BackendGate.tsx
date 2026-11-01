@@ -57,47 +57,54 @@ export default function BackendGate({ children }: { children: ReactNode }) {
   }
   if (ready && isAdmin(user)) return children;
   return (
-    <main className="backend-login">
-      <h1>教師後台登入</h1>
-      <p>請使用管理者 Google 帳號登入：{ADMIN_EMAIL}</p>
-      {!ready ? (
-        <p role="status">確認登入狀態…</p>
-      ) : (
-        <>
-          {user && <p role="alert">目前帳號 {user.email} 沒有後台權限。</p>}
-          {!cloudConfigured ? (
-            <p role="alert">尚未設定 Firebase Google 登入。</p>
-          ) : (
-            <button
-              className="primary"
-              disabled={busy}
-              onClick={() => void login()}
-            >
-              {busy
-                ? "登入中…"
-                : user
-                  ? "切換 Google 帳號"
-                  : "使用 Google 登入"}
+    <div className="backend-auth-shell">
+      <aside className="backend-auth-aside">
+        <span>教師工作區</span>
+        <h2>生字教學管理</h2>
+        <p>教學設定 · 雲端資料 · 帳號管理</p>
+      </aside>
+      <main className="backend-login">
+        <h1>教師後台登入</h1>
+        <p>請使用管理者 Google 帳號登入：{ADMIN_EMAIL}</p>
+        {!ready ? (
+          <p role="status">確認登入狀態…</p>
+        ) : (
+          <>
+            {user && <p role="alert">目前帳號 {user.email} 沒有後台權限。</p>}
+            {!cloudConfigured ? (
+              <p role="alert">尚未設定 Firebase Google 登入。</p>
+            ) : (
+              <button
+                className="primary"
+                disabled={busy}
+                onClick={() => void login()}
+              >
+                {busy
+                  ? "登入中…"
+                  : user
+                    ? "切換 Google 帳號"
+                    : "使用 Google 登入"}
+              </button>
+            )}
+          </>
+        )}
+        {ready && cloudConfigured && (
+          <>
+            {busy && (
+              <p role="status">
+                正在等待 Google 登入視窗。若未出現帳號選擇畫面，請改用整頁登入。
+              </p>
+            )}
+            <button className="secondary" onClick={() => void login(true)}>
+              改用整頁 Google 登入
             </button>
-          )}
-        </>
-      )}
-      {ready && cloudConfigured && (
-        <>
-          {busy && (
-            <p role="status">
-              正在等待 Google 登入視窗。若未出現帳號選擇畫面，請改用整頁登入。
-            </p>
-          )}
-          <button className="secondary" onClick={() => void login(true)}>
-            改用整頁 Google 登入
-          </button>
-        </>
-      )}
-      {error && <p role="alert">{error}</p>}
-      <p>
-        <a href="/">返回學生網站</a>
-      </p>
-    </main>
+          </>
+        )}
+        {error && <p role="alert">{error}</p>}
+        <p>
+          <a href="/">返回學生網站</a>
+        </p>
+      </main>
+    </div>
   );
 }

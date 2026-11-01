@@ -11,6 +11,7 @@ import SpeechTools from "./SpeechTools";
 import StructureAiSettings from "./StructureAiSettings";
 import StructureHelp from "./StructureHelp";
 interface Props {
+  includeTools?: boolean;
   voices: SpeechSynthesisVoice[];
   saved: VoicePreference | null;
   supported: boolean;
@@ -25,6 +26,7 @@ export default function TtsSettings({
   refresh,
   save,
   preview,
+  includeTools = true,
 }: Props) {
   const savedKey = saved ? voiceKey(saved) : "auto";
   const [restored] = useState(() => {
@@ -247,10 +249,15 @@ export default function TtsSettings({
           金鑰不會放在這個前端設定頁。
         </p>
       </section>
-      <StructureAiSettings />
-      <StructureHelp />
+      {includeTools && (
+        <>
+          <StructureAiSettings />
+          <StructureHelp />
+        </>
+      )}
       <p className="backup-note">
-        此頁的朗讀偏好儲存在這台瀏覽器，其他電腦需要重新設定。教師後台使用 Google 管理者登入；教育部筆順播放器的聲音仍獨立控制。
+        此頁的朗讀偏好儲存在這台瀏覽器，其他電腦需要重新設定。教師後台使用
+        Google 管理者登入；教育部筆順播放器的聲音仍獨立控制。
       </p>
     </>
   );
