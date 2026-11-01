@@ -1,0 +1,17 @@
+// 合併片段：放入既有 match /databases/{database}/documents 區塊內。
+// 不可用本檔取代整份規則；保留原專案所有既有集合規則。
+match /hanzi_notebook_users/{uid}/collections/{collectionId} {
+  function isOwner() {
+    return request.auth != null && request.auth.uid == uid;
+  }
+  allow read: if isOwner();
+  allow create, update: if isOwner()
+    && request.resource.data.keys().hasAll(['schemaVersion', 'updatedAt', 'payload'])
+    && request.resource.data.keys().hasOnly(['schemaVersion', 'updatedAt', 'payload'])
+    && request.resource.data.schemaVersion == 1
+    && request.resource.data.updatedAt is string
+    && request.resource.data.updatedAt.size() <= 40
+    && request.resource.data.payload is string
+    && request.resource.data.payload.size() <= 700000;
+  allow delete: if false;
+}

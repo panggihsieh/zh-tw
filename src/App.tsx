@@ -1,4 +1,6 @@
 import {
+  lazy,
+  Suspense,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -84,6 +86,7 @@ import {
 type Page = "learn" | "library" | "resources" | "tts";
 const err = (e: unknown) =>
   e instanceof Error ? e.message : "發生問題，請再試一次。";
+const CloudCollections = lazy(() => import("./CloudCollections"));
 function Glyph({
   card,
   scene,
@@ -1667,6 +1670,9 @@ export default function App() {
                     }}
                   />
                 </div>
+                <Suspense fallback={<p role="status">載入雲端收藏功能…</p>}>
+                  <CloudCollections onRefresh={refresh} />
+                </Suspense>
                 <div className="library-stats">
                   <span>
                     <b>{saved.length}</b>份語詞收藏

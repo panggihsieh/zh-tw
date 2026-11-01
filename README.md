@@ -78,3 +78,7 @@ TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；�
 ## AI 結構 API 設定
 
 左側「API 設定」可設定 DeepSeek（預設）、Qwen、MiniMax、Gemini、OpenAI 或本機 Ollama。提供 Windows DPAPI 本機加密、預設 Lock、Unlock、Save 後自動 Lock，以及藍色成功／紅色失敗的連線測試。詳見 [API 後台設定](docs/API後台設定.md)。這是結構分析 API，不是 TTS 精準時間定位方案；AI 圖形與比例仍為待核候選。
+
+## 生字收藏雲端備份
+
+「我的生字收藏本」新增 Google 登入、上傳與取回。資料放在獨立的 `hanzi_notebook_users/{uid}/collections`，AI 呼叫維持伺服器處理。設定方式、規則合併與實際啟用狀態見 [Firestore 同步說明](docs/FIRESTORE.md)。

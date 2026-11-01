@@ -3382,3 +3382,19 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .top-navigation-layout .topbar-actions{align-self:flex-end;margin-left:0;max-width:100%;flex-wrap:wrap}
 @media(max-width:1000px){.header-primary{flex-wrap:wrap;gap:10px}.app-top-nav{order:3;flex-basis:100%;width:100%}.teacher-session-button{margin-left:auto}.top-navigation-layout .topbar{padding:10px 18px}.topbar .app-top-nav .nav-item{font-size:17px}}
 @media(max-width:600px){.top-navigation-layout .topbar{padding:8px 10px}.app-top-brand{font-size:17px}.teacher-session-button{font-size:14px;padding:8px 10px}.top-navigation-layout:not(.backend-shell) .app-top-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;overflow:visible}.topbar .app-top-nav .nav-item{min-width:0;padding:8px 5px;font-size:14px;gap:5px;justify-content:center;white-space:normal;line-height:1.5}.topbar .app-top-nav .nav-item svg{width:17px;height:17px}.topbar .app-top-nav .nav-count{font-size:13px;margin:0}.top-navigation-layout .topbar-actions{width:100%;justify-content:flex-end;gap:6px}}
+.cloud-collections {
+  margin: 24px 0;
+  padding: 24px;
+  background: #f0f5eb;
+  border: 1px solid #bccdb9;
+  border-radius: 10px;
+  color: #243e32;
+}
+.cloud-collections h2 { font-size: 26px; }
+.cloud-collections p { font-size: 18px; line-height: 1.85; overflow-wrap: anywhere; }
+.cloud-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.cloud-collections .cloud-error { color: #8b2828; }
+@media (max-width: 620px) {
+  .cloud-collections { padding: 18px; }
+  .cloud-actions button { width: 100%; }
+}

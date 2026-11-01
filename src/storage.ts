@@ -23,6 +23,21 @@ export async function deleteCollection(id: string) {
   const database = await db();
   await database.delete("collections", id);
 }
+export async function mergeCloudCollections(items: Collection[]) {
+  const database = await db();
+  const checked = items.map((item) => parseBackup(JSON.stringify(item)));
+  const tx = database.transaction("collections", "readwrite");
+  let count = 0;
+  for (const item of checked) {
+    const local = await tx.store.get(item.id);
+    if (!local || Date.parse(item.updatedAt) > Date.parse(local.updatedAt)) {
+      await tx.store.put(item);
+      count++;
+    }
+  }
+  await tx.done;
+  return count;
+}
 export function parseBackup(text: string): Collection {
   const data = JSON.parse(text);
   if (
