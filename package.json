@@ -1,0 +1,40 @@
+{
+  "name": "hanzi-animation-notebook",
+  "version": "1.0.0",
+  "description": "生字動畫收藏本：本機繁體中文學習工具",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panggihsieh/zh-tw.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/panggihsieh/zh-tw/issues"
+  },
+  "homepage": "https://github.com/panggihsieh/zh-tw#readme",
+  "dependencies": {
+    "idb": "^8.0.4",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.66.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "fake-indexeddb": "^6.2.7",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^4.1.12"
+  },
+  "private": true
+}

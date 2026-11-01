@@ -1,0 +1,1719 @@
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  ArrowRight,
+  BookOpen,
+  Bookmark,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  ExternalLink,
+  FileText,
+  Flower2,
+  Grid2X2,
+  HelpCircle,
+  Image,
+  Leaf,
+  LibraryBig,
+  LoaderCircle,
+  Pause,
+  Play,
+  Plus,
+  RotateCcw,
+  Search,
+  Settings2,
+  Sparkles,
+  Trash2,
+  Upload,
+  Volume2,
+  X,
+  CloudUpload,
+} from "lucide-react";
+import type { Card, Collection } from "./model";
+import { SCENES, validatePhrase } from "./model";
+import { buildCollection, PHRASES, STROKES, DICTIONARY } from "./data";
+import {
+  deleteCollection,
+  listCollections,
+  parseBackup,
+  saveCollection,
+} from "./storage";
+import { download, jsonBlob, pdfBlob, pngBlob } from "./exports";
+import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
+
+type Page = "learn" | "library" | "resources";
+const err = (e: unknown) =>
+  e instanceof Error ? e.message : "發生問題，請再試一次。";
+function Mascot() {
+  return (
+    <svg viewBox="0 0 160 150" className="mascot" aria-hidden="true">
+      <path d="M78 30 Q67 8 45 13 Q44 36 73 40" fill="#a8bd6c" />
+      <path d="M79 34 Q87 7 112 11 Q111 36 79 40" fill="#63855b" />
+      <rect x="27" y="37" width="109" height="94" rx="31" fill="#edc17c" />
+      <rect x="38" y="46" width="87" height="74" rx="23" fill="#fff1cf" />
+      <circle cx="62" cy="77" r="5" fill="#315746" />
+      <circle cx="103" cy="77" r="5" fill="#315746" />
+      <path
+        d="M72 93 Q82 105 94 92"
+        fill="none"
+        stroke="#315746"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <ellipse cx="50" cy="90" rx="8" ry="5" fill="#efb099" />
+      <ellipse cx="113" cy="90" rx="8" ry="5" fill="#efb099" />
+      <path
+        d="M26 89 Q8 79 13 67 M136 89 Q154 77 150 64"
+        fill="none"
+        stroke="#edc17c"
+        strokeWidth="10"
+        strokeLinecap="round"
+      />
+      <path
+        d="M57 130 L53 140 M106 130 L110 140"
+        stroke="#63855b"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+function Glyph({
+  card,
+  scene,
+  reduced,
+}: {
+  card: Card;
+  scene: number;
+  reduced: boolean;
+}) {
+  const id = `glyph-${card.id}`;
+  const split =
+    (scene === 1 || scene === 2) && card.master.components.length > 0;
+  const regions =
+    card.master.layout === "vertical"
+      ? [
+          [0, 0, 300, 195],
+          [0, 195, 300, 105],
+        ]
+      : card.master.layout === "triple"
+        ? [
+            [0, 0, 100, 300],
+            [100, 0, 110, 300],
+            [210, 0, 90, 300],
+          ]
+        : [
+            [0, 0, 145, 300],
+            [145, 0, 155, 300],
+          ];
+  const colors = ["#315f50", "#b66b42", "#5a8092"];
+  return (
+    <svg
+      className={`glyph ${reduced ? "reduced" : ""}`}
+      viewBox="-45 -45 390 390"
+      role="img"
+      aria-label={`${card.character}${split ? "字形部件示意" : ""}`}
+    >
+      <defs>
+        {regions.map((r, i) => (
+          <clipPath id={`${id}-${i}`} key={i}>
+            <rect x={r[0]} y={r[1]} width={r[2]} height={r[3]} />
+          </clipPath>
+        ))}
+      </defs>
+      <rect
+        width="300"
+        height="300"
+        x="0"
+        y="0"
+        rx="4"
+        fill="none"
+        stroke="#bccdb9"
+      />
+      <path
+        d="M150 0V300 M0 150H300 M0 0L300 300 M300 0L0 300"
+        stroke="#cbd7c4"
+        strokeDasharray="6 7"
+        fill="none"
+      />
+      {split ? (
+        regions.map((_, i) => {
+          const shift =
+            scene === 2
+              ? card.master.layout === "vertical"
+                ? `translate(0,${i === 0 ? -22 : 22})`
+                : `translate(${(i - (regions.length - 1) / 2) * 26},0)`
+              : "translate(0,0)";
+          return (
+            <g
+              key={i}
+              style={{
+                transform: shift,
+                transition: reduced ? "none" : "transform 700ms ease",
+              }}
+            >
+              <text
+                x="150"
+                y="242"
+                textAnchor="middle"
+                fontSize="262"
+                fill={colors[i]}
+                clipPath={`url(#${id}-${i})`}
+              >
+                {card.character}
+              </text>
+            </g>
+          );
+        })
+      ) : (
+        <text x="150" y="242" textAnchor="middle" fontSize="262" fill="#315f50">
+          {card.character}
+        </text>
+      )}
+    </svg>
+  );
+}
+function Modal({
+  title,
+  children,
+  close,
+}: {
+  title: string;
+  children: ReactNode;
+  close: () => void;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    el?.showModal();
+    return () => el?.close();
+  }, []);
+  return (
+    <dialog
+      ref={ref}
+      onCancel={(e) => {
+        e.preventDefault();
+        close();
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) close();
+      }}
+    >
+      <div className="modal-head">
+        <h2>{title}</h2>
+        <button className="icon-btn" onClick={close} aria-label="關閉">
+          <X size={20} />
+        </button>
+      </div>
+      {children}
+    </dialog>
+  );
+}
+export default function App() {
+  const [page, setPage] = useState<Page>("learn");
+  const [input, setInput] = useState("感謝");
+  const [phrase, setPhrase] = useState("感謝");
+  const [positions, setPositions] = useState([0, 1]);
+  const [validation, setValidation] = useState("");
+  const [collection, setCollection] = useState<Collection | null>(null);
+  const [cardIndex, setCardIndex] = useState(0);
+  const [scene, setScene] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const [showReading, setShowReading] = useState(true);
+  const [captions, setCaptions] = useState(true);
+  const [voice, setVoice] = useState(false);
+  const [reduced, setReduced] = useState(
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const [simple, setSimple] = useState(false);
+  const [grade, setGrade] = useState("四年級");
+  const [wordCount, setWordCount] = useState(3);
+  const [revealed, setRevealed] = useState<string[]>([]);
+  const [saved, setSaved] = useState<Collection[]>([]);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [notice, setNotice] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState("");
+  const [modal, setModal] = useState<"settings" | "export" | "drive" | null>(
+    null,
+  );
+  const [driveReady, setDriveReady] = useState(false);
+  const [driveResult, setDriveResult] = useState<Awaited<
+    ReturnType<typeof uploadCollection>
+  > | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const importRef = useRef<HTMLInputElement>(null);
+  const card = collection?.cards[cardIndex];
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [page]);
+  async function refresh() {
+    try {
+      setSaved(await listCollections());
+    } catch (e) {
+      setError(`讀取收藏失敗：${err(e)}`);
+    }
+  }
+  useEffect(() => {
+    void refresh();
+  }, []);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(""), 5000);
+    return () => clearTimeout(timer);
+  }, [notice]);
+  useEffect(() => {
+    if (!playing || !collection) return;
+    const timer = setTimeout(
+      () => {
+        if (scene < 5) setScene(scene + 1);
+        else if (cardIndex < collection.cards.length - 1) {
+          setCardIndex(cardIndex + 1);
+          setScene(0);
+        } else {
+          setPlaying(false);
+          setNotice("這組語詞學完了！可以收藏或下載學習本。");
+        }
+      },
+      (scene === 5 ? 8000 : 5000) / speed,
+    );
+    return () => clearTimeout(timer);
+  }, [playing, scene, cardIndex, collection?.id, speed]);
+  useEffect(() => {
+    setRevealed([]);
+    setSimple(false);
+  }, [cardIndex, collection?.id]);
+  useEffect(() => {
+    if (!collection || !card) return;
+    setCollection((prev) => {
+      if (!prev || prev.cards[cardIndex].visitedScenes.includes(scene))
+        return prev;
+      return {
+        ...prev,
+        cards: prev.cards.map((c, i) =>
+          i === cardIndex
+            ? { ...c, visitedScenes: [...c.visitedScenes, scene] }
+            : c,
+        ),
+      };
+    });
+  }, [scene, cardIndex, collection?.id]);
+  function say(text: string) {
+    if (!("speechSynthesis" in window)) {
+      setError("此瀏覽器未提供朗讀功能，仍可閱讀文字。");
+      return;
+    }
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85;
+    const voices = speechSynthesis.getVoices();
+    const tw = voices.find((v) => v.lang === "zh-TW");
+    if (tw) utterance.voice = tw;
+    utterance.onerror = (e) => {
+      if (e.error !== "interrupted" && e.error !== "canceled")
+        setError("朗讀未成功，請確認裝置有可用的中文語音。");
+    };
+    speechSynthesis.speak(utterance);
+  }
+  useEffect(() => {
+    if (voice && playing && card)
+      say(
+        scene === 0
+          ? `${collection!.sourcePhrase}，${card.character}`
+          : scene === 4
+            ? card.simple
+            : scene === 5
+              ? card.vocabulary
+                  .slice(0, wordCount)
+                  .map((v) => v.word)
+                  .join("，")
+              : SCENES[scene],
+      );
+    return () => {
+      if ("speechSynthesis" in window) speechSynthesis.cancel();
+    };
+  }, [scene, cardIndex, voice, playing]);
+  function choosePhrase(text: string) {
+    const issue = validatePhrase(text);
+    setValidation(issue);
+    if (issue) return;
+    setPhrase(text.trim());
+    setInput(text.trim());
+    setPositions(Array.from(text.trim()).map((_, i) => i));
+  }
+  function start() {
+    if (!positions.length) {
+      setValidation("至少選一個想學的字。");
+      return;
+    }
+    setCollection(buildCollection(phrase, positions));
+    setCardIndex(0);
+    setScene(0);
+    setPlaying(false);
+    setPage("learn");
+    setDriveResult(null);
+    setValidation("");
+  }
+  function openCollection(c: Collection) {
+    setCollection(structuredClone(c));
+    setInput(c.sourcePhrase);
+    setPhrase(c.sourcePhrase);
+    setPositions(c.cards.map((card) => card.position));
+    setCardIndex(0);
+    setScene(0);
+    setPlaying(false);
+    setPage("learn");
+    setDriveResult(null);
+  }
+  async function save(c = collection) {
+    if (!c) return;
+    try {
+      await saveCollection(c);
+      await refresh();
+      setNotice("已收藏到這台裝置的生字本。");
+    } catch (e) {
+      setError(`收藏失敗：${err(e)}，你仍可下載 JSON 備份。`);
+    }
+  }
+  async function exportFile(type: "json" | "pdf" | "png") {
+    if (!collection || !card) return;
+    setBusy("正在準備下載…");
+    setError("");
+    try {
+      const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+      if (type === "json")
+        download(
+          jsonBlob(collection),
+          `${collection.sourcePhrase}_${stamp}.json`,
+        );
+      if (type === "png")
+        download(
+          await pngBlob(card, collection.sourcePhrase),
+          `${card.character}_${stamp}.png`,
+        );
+      if (type === "pdf")
+        download(
+          await pdfBlob(collection),
+          `${collection.sourcePhrase}_${stamp}.pdf`,
+        );
+      setNotice("檔案已產生，請查看瀏覽器下載項目。");
+    } catch (e) {
+      setError(err(e));
+    } finally {
+      setBusy("");
+    }
+  }
+  async function importFile(file: File) {
+    try {
+      if (file.size > 5 * 1024 * 1024)
+        throw new Error("請匯入 5 MB 以下的 JSON 備份。");
+      const imported = parseBackup(await file.text());
+      imported.id = crypto.randomUUID();
+      await saveCollection(imported);
+      await refresh();
+      setNotice("備份已匯入，另存為一份收藏。");
+    } catch (e) {
+      setError(`匯入失敗：${err(e)}`);
+    }
+  }
+  async function openDrive() {
+    setModal("drive");
+    setError("");
+    if (CLIENT_ID) {
+      try {
+        await loadGoogle();
+        setDriveReady(true);
+      } catch (e) {
+        setError(err(e));
+      }
+    }
+  }
+  async function sendDrive() {
+    if (!collection) return;
+    setBusy("等待 Google 授權…");
+    setError("");
+    try {
+      const token = await authorize();
+      await saveCollection(collection);
+      await refresh();
+      const result = await uploadCollection(token, collection, setBusy);
+      setDriveResult(result);
+      setNotice("Google Drive 上傳完成。");
+    } catch (e) {
+      setError(err(e));
+    } finally {
+      setBusy("");
+    }
+  }
+  const learned = saved.filter((c) => c.reviewState === "learned").length;
+  const visibleSaved = saved.filter(
+    (c) =>
+      (c.sourcePhrase.includes(search) ||
+        c.cards.some((c) => c.character.includes(search))) &&
+      (filter === "all" || c.reviewState === filter),
+  );
+  return (
+    <div className="app-shell">
+      <aside className="sidebar">
+        <a
+          className="brand"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setPage("learn");
+          }}
+        >
+          <span className="brand-icon">
+            <BookOpen size={26} />
+          </span>
+          <span>
+            生字動畫<span className="brand-sub">收藏本</span>
+          </span>
+        </a>
+        <div className="side-label">我的學習空間</div>
+        <nav>
+          <button
+            className={page === "learn" ? "nav-item active" : "nav-item"}
+            onClick={() => setPage("learn")}
+          >
+            <Sparkles size={20} />
+            生字動畫教室
+          </button>
+          <button
+            className={page === "library" ? "nav-item active" : "nav-item"}
+            onClick={() => {
+              setPage("library");
+              setPlaying(false);
+              void refresh();
+            }}
+          >
+            <LibraryBig size={20} />
+            我的生字收藏本<span className="nav-count">{saved.length}</span>
+          </button>
+          <button
+            className={page === "resources" ? "nav-item active" : "nav-item"}
+            onClick={() => {
+              setPage("resources");
+              setPlaying(false);
+            }}
+          >
+            <Grid2X2 size={20} />
+            查字小幫手
+          </button>
+        </nav>
+        <div className="side-garden">
+          <Mascot />
+          <b>每天認識一點點，</b>
+          <span>讓字詞慢慢長成你的力量。</span>
+          <div className="garden-dot">✦　✧　✦</div>
+        </div>
+        <div className="sidebar-bottom">
+          <button className="nav-item" onClick={() => setModal("settings")}>
+            <Settings2 size={19} />
+            學習偏好
+          </button>
+          <span className="local-label">
+            <span />
+            本機收藏，不用登入
+          </span>
+        </div>
+      </aside>
+      <div className="main-wrap">
+        <header className="topbar">
+          <span className="breadcrumb">
+            我的學習空間 <ChevronRight size={14} />{" "}
+            {page === "learn"
+              ? "生字動畫教室"
+              : page === "library"
+                ? "我的生字收藏本"
+                : "查字小幫手"}
+          </span>
+          <button
+            className="quiet"
+            aria-label="學習設定"
+            onClick={() => setModal("settings")}
+          >
+            <Settings2 size={17} />
+            <span>學習設定</span>
+          </button>
+        </header>
+        <main>
+          {error && (
+            <div className="alert error" role="alert">
+              <span>{error}</span>
+              <button onClick={() => setError("")} aria-label="關閉錯誤訊息">
+                <X size={17} />
+              </button>
+            </div>
+          )}
+          {notice && (
+            <div className="toast" role="status">
+              <Check size={18} />
+              {notice}
+            </div>
+          )}
+          {page === "learn" && (
+            <>
+              <div className="page-heading">
+                <div>
+                  <div className="eyebrow">
+                    <Leaf size={15} /> 一個字，一次小小的發現
+                  </div>
+                  <h1>
+                    {collection ? "把生字，慢慢看懂。" : "今天，想認識哪個字？"}
+                  </h1>
+                  <p>從一個語詞開始，拆開看、慢慢讀，再收藏成自己的知識。</p>
+                </div>
+                <span className="edition">繁體中文 · 四～六年級</span>
+              </div>
+              <div
+                className={`learning-layout ${collection ? "has-session" : ""}`}
+              >
+                <section className="input-panel">
+                  <div className="section-kicker">
+                    01 <span>輸入語詞</span>
+                  </div>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      choosePhrase(input);
+                    }}
+                  >
+                    <label htmlFor="phrase">想學習的語詞</label>
+                    <div className="input-row">
+                      <input
+                        id="phrase"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        maxLength={16}
+                        placeholder="例如：感謝"
+                        autoComplete="off"
+                      />
+                      {input && (
+                        <button
+                          type="button"
+                          className="clear-input"
+                          aria-label="清除語詞"
+                          onClick={() => {
+                            setInput("");
+                            setPhrase("");
+                            setPositions([]);
+                            setValidation("");
+                            document.getElementById("phrase")?.focus();
+                          }}
+                        >
+                          <X size={15} />
+                        </button>
+                      )}
+                      <button
+                        type="submit"
+                        className="icon-submit"
+                        aria-label="確認語詞"
+                      >
+                        <ArrowRight size={20} />
+                      </button>
+                    </div>
+                    <span className="field-note">
+                      建議 2–8 字，保留你輸入的原字形。
+                    </span>
+                  </form>
+                  <div className="suggestions">
+                    試試看
+                    {["感謝", "觀察", "銀行", "行走"].map((p) => (
+                      <button onClick={() => choosePhrase(p)} key={p}>
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                  {saved.length > 0 && (
+                    <div className="suggestions recent-phrases">
+                      最近收藏
+                      {[...new Set(saved.map((c) => c.sourcePhrase))]
+                        .slice(0, 3)
+                        .map((p) => (
+                          <button
+                            key={p}
+                            aria-label={`最近語詞 ${p}`}
+                            onClick={() => choosePhrase(p)}
+                          >
+                            {p}
+                          </button>
+                        ))}
+                    </div>
+                  )}
+                  <div className="panel-divider" />
+                  <div className="section-kicker">
+                    02 <span>選出還不熟悉的字</span>
+                  </div>
+                  <p className="small-copy">這些字，我想再認識一下。</p>
+                  <div className="character-select">
+                    {Array.from(phrase).map((c, i) => (
+                      <button
+                        key={i}
+                        aria-label={`選取第 ${i + 1} 個字 ${c}`}
+                        aria-pressed={positions.includes(i)}
+                        className={
+                          positions.includes(i)
+                            ? "char-option selected"
+                            : "char-option"
+                        }
+                        onClick={() => {
+                          setPositions((prev) =>
+                            prev.includes(i)
+                              ? prev.filter((p) => p !== i)
+                              : [...prev, i].sort((a, b) => a - b),
+                          );
+                          setValidation("");
+                        }}
+                      >
+                        <span className="char-check">
+                          {positions.includes(i) && <Check size={13} />}
+                        </span>
+                        <strong>{c}</strong>
+                        <span>
+                          {positions.includes(i)
+                            ? "這個字我不會"
+                            : "我已經認識"}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                  {validation && (
+                    <p className="validation" role="alert">
+                      {validation}
+                    </p>
+                  )}
+                  {phrase && !PHRASES[phrase] && (
+                    <p className="data-note">
+                      這個語詞尚未收錄語境教材。可以建立字卡，讀音與字義需再核對；字形不會自動轉換。
+                    </p>
+                  )}
+                  <button
+                    className="primary start-button"
+                    onClick={start}
+                    disabled={!positions.length}
+                  >
+                    開始逐字學習 <ArrowRight size={18} />
+                  </button>
+                  <span className="selection-count">
+                    已選 {positions.length} 個字 · 每個字都有自己的學習卡
+                  </span>
+                  <div className="tip">
+                    <Flower2 size={21} />
+                    <p>
+                      不用一次全部學會，
+                      <br />
+                      今天多認識一個字就很棒。
+                    </p>
+                  </div>
+                </section>
+                {!collection ? (
+                  <section className="welcome-panel">
+                    <div className="welcome-top">
+                      <span className="pill">
+                        <Sparkles size={14} />
+                        今天的第一個小發現
+                      </span>
+                      <span>LEARN · COLLECT · GROW</span>
+                    </div>
+                    <div className="welcome-art">
+                      <div className="sample-char">
+                        <span className="tiny-label">咸 ＋ 心</span>
+                        <strong>感</strong>
+                        <span>ㄍㄢˇ</span>
+                      </div>
+                      <div className="floating-note note-one">
+                        <Leaf size={17} />
+                        把感受，放在心上
+                      </div>
+                      <div className="floating-note note-two">
+                        感謝 <span>·</span> 感動 <span>·</span> 感覺
+                      </div>
+                      <div className="art-orbit" />
+                      <div className="art-spark">✦</div>
+                    </div>
+                    <div className="welcome-caption">
+                      <span className="handwritten">
+                        原來，字可以這樣認識。
+                      </span>
+                      <h2>
+                        讓每個陌生的字，
+                        <br />
+                        成為熟悉的朋友。
+                      </h2>
+                      <p>六個小步驟，陪你從字形走到字義。</p>
+                    </div>
+                    <div className="journey-preview">
+                      {["看字形", "拆部件", "讀字義", "學造詞"].map((s, i) => (
+                        <span key={s}>
+                          <i>0{i + 1}</i>
+                          {s}
+                          {i < 3 && <ChevronRight size={14} />}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="welcome-foot">
+                      <BookOpen size={17} /> 本機收藏 · 隨時複習 ·
+                      支援圖片與學習本下載
+                    </div>
+                  </section>
+                ) : (
+                  card && (
+                    <section className="classroom" aria-label="單字動畫教室">
+                      <div className="classroom-head">
+                        <div>
+                          <span className="overline">正在學習的語詞</span>
+                          <strong>{collection.sourcePhrase}</strong>
+                          <span className="card-counter">
+                            第 {cardIndex + 1} / {collection.cards.length}{" "}
+                            張字卡
+                          </span>
+                        </div>
+                        <div className="card-arrows">
+                          <button
+                            className="icon-btn"
+                            disabled={cardIndex === 0}
+                            aria-label="上一個字"
+                            onClick={() => {
+                              setCardIndex(cardIndex - 1);
+                              setScene(0);
+                              setPlaying(false);
+                            }}
+                          >
+                            <ChevronLeft size={19} />
+                          </button>
+                          <button
+                            className="icon-btn"
+                            disabled={cardIndex === collection.cards.length - 1}
+                            aria-label="下一個字"
+                            onClick={() => {
+                              setCardIndex(cardIndex + 1);
+                              setScene(0);
+                              setPlaying(false);
+                            }}
+                          >
+                            <ChevronRight size={19} />
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        className="scene-tabs"
+                        role="tablist"
+                        aria-label="六幕學習"
+                      >
+                        {SCENES.map((s, i) => (
+                          <button
+                            key={s}
+                            role="tab"
+                            aria-selected={scene === i}
+                            aria-controls="scene-content"
+                            id={`scene-tab-${i}`}
+                            className={
+                              scene === i
+                                ? "current"
+                                : card.visitedScenes.includes(i)
+                                  ? "visited"
+                                  : ""
+                            }
+                            onClick={() => {
+                              setScene(i);
+                              setPlaying(false);
+                            }}
+                          >
+                            <span>
+                              {card.visitedScenes.includes(i) && scene !== i ? (
+                                <Check size={12} />
+                              ) : (
+                                i + 1
+                              )}
+                            </span>
+                            <b>{s}</b>
+                          </button>
+                        ))}
+                      </div>
+                      <div
+                        id="scene-content"
+                        role="tabpanel"
+                        aria-labelledby={`scene-tab-${scene}`}
+                        className={`scene-content scene-${scene}`}
+                      >
+                        {scene < 4 && (
+                          <div className="glyph-side">
+                            <Glyph
+                              card={card}
+                              scene={scene}
+                              reduced={reduced}
+                            />
+                            {showReading && (
+                              <span className="reading">{card.reading}</span>
+                            )}
+                            <button
+                              className="read-button"
+                              onClick={() => say(collection.sourcePhrase)}
+                            >
+                              <Volume2 size={16} />
+                              聽語詞發音
+                            </button>
+                          </div>
+                        )}
+                        <div
+                          className="scene-copy"
+                          key={`${card.id}-${scene}`}
+                          style={{ animation: reduced ? "none" : undefined }}
+                        >
+                          <span className="overline">
+                            第 {scene + 1} 幕 / {SCENES[scene]}
+                          </span>
+                          {scene === 0 && (
+                            <>
+                              <h2>
+                                你好，<em>{card.character}</em>。
+                              </h2>
+                              <p>
+                                這是「{collection.sourcePhrase}」裡，第{" "}
+                                {card.position + 1} 個字。
+                              </p>
+                              <div className="definition">
+                                <span>先認識這個語詞</span>
+                                <p>
+                                  {PHRASES[collection.sourcePhrase]
+                                    ?.explanation ||
+                                    "目前無已核對資料。先和老師一起查詢語詞。"}
+                                </p>
+                              </div>
+                              <span className="mini-status">
+                                {card.source
+                                  ? "語境教材 · 白話待教師審定"
+                                  : "語境讀音與字義待核對"}
+                              </span>
+                            </>
+                          )}
+                          {scene === 1 && (
+                            <>
+                              <h2>{card.master.structure}</h2>
+                              <p>
+                                {card.master.components.length
+                                  ? "看看這個字，各部分怎麼住在一起？"
+                                  : "目前無已核對的結構拆解資料。"}
+                              </p>
+                              <div className="component-tags">
+                                {card.master.components.map((c, i) => (
+                                  <span key={i}>{c}</span>
+                                ))}
+                              </div>
+                              <p className="data-note">
+                                部首：{card.master.radical}
+                                。字形結構為教學示意，待教師審定。
+                              </p>
+                            </>
+                          )}
+                          {scene === 2 && (
+                            <>
+                              <h2>拆開看，再合起來。</h2>
+                              <div className="component-tags">
+                                {card.master.components.map((c, i) => (
+                                  <span key={i}>{c}</span>
+                                ))}
+                              </div>
+                              <p>
+                                {card.master.components.length
+                                  ? "同一個字形的區域分離，幫助觀察各部件的位置。"
+                                  : "這個字尚無可用的拆解教材。"}
+                              </p>
+                              <p className="data-note">
+                                這是依目前字型切分的部件示意，邊界可能因字型不同而有差異；不代表字源或筆順。
+                              </p>
+                            </>
+                          )}
+                          {scene === 3 && (
+                            <>
+                              <span className="warning-pill">
+                                筆順資料待核對
+                              </span>
+                              <h2>跟著標準筆順學。</h2>
+                              <p>
+                                目前無已核對資料，尚未收錄這個字的臺灣標準筆畫路徑。
+                              </p>
+                              <p className="data-note">
+                                先到教育部筆順網站查詢「{card.character}
+                                」，這裡不會播放猜測的筆順。
+                              </p>
+                              <a
+                                className="secondary link-button"
+                                href={STROKES.url}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                開啟教育部筆順網 <ExternalLink size={16} />
+                              </a>
+                            </>
+                          )}
+                          {scene === 4 && (
+                            <>
+                              <div className="meaning-title">
+                                <span className="meaning-character">
+                                  {card.character}
+                                </span>
+                                <div>
+                                  <h2>
+                                    在「{collection.sourcePhrase}」裡的意思
+                                  </h2>
+                                  {showReading && (
+                                    <span className="reading">
+                                      {card.reading}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <blockquote>
+                                {simple ? card.simple : card.meaning}
+                              </blockquote>
+                              <div className="meaning-actions">
+                                <button
+                                  className={
+                                    simple ? "secondary selected" : "secondary"
+                                  }
+                                  onClick={() => setSimple(!simple)}
+                                >
+                                  <Sparkles size={16} />
+                                  {simple ? "回到原來說法" : "講簡單一點"}
+                                </button>
+                                <label>
+                                  閱讀程度
+                                  <select
+                                    value={grade}
+                                    onChange={(e) => {
+                                      setGrade(e.target.value);
+                                      setSimple(e.target.value === "低一年級");
+                                    }}
+                                  >
+                                    <option>四年級</option>
+                                    <option>五年級</option>
+                                    <option>六年級</option>
+                                    <option>低一年級</option>
+                                  </select>
+                                </label>
+                              </div>
+                              <p className="data-note">
+                                {grade === "五年級" || grade === "六年級"
+                                  ? "五、六年級目前共用同一份白話教材。"
+                                  : "白話解釋為本專案編寫，待教師審定。"}
+                              </p>
+                              <button
+                                className="read-button"
+                                onClick={() =>
+                                  say(simple ? card.simple : card.meaning)
+                                }
+                              >
+                                <Volume2 size={17} />
+                                讀給我聽
+                              </button>
+                            </>
+                          )}
+                          {scene === 5 && (
+                            <>
+                              <div className="vocab-heading">
+                                <div>
+                                  <h2>一個字，好多種用法。</h2>
+                                  <p>翻開詞卡，看看它在句子裡的樣子。</p>
+                                </div>
+                                <label>
+                                  顯示
+                                  <select
+                                    aria-label="造詞數量"
+                                    value={wordCount}
+                                    onChange={(e) =>
+                                      setWordCount(Number(e.target.value))
+                                    }
+                                  >
+                                    <option value={3}>常用 3 組</option>
+                                    <option value={6}>常用＋延伸 6 組</option>
+                                  </select>
+                                </label>
+                              </div>
+                              <div className="vocab-grid">
+                                {card.vocabulary
+                                  .slice(0, wordCount)
+                                  .map((v) => (
+                                    <article
+                                      className="vocab-card"
+                                      key={v.word}
+                                    >
+                                      <span className="word-sense">
+                                        {v.sense}
+                                      </span>
+                                      <button
+                                        className="word-flip"
+                                        aria-expanded={revealed.includes(
+                                          v.word,
+                                        )}
+                                        onClick={() =>
+                                          setRevealed((prev) =>
+                                            prev.includes(v.word)
+                                              ? prev.filter((x) => x !== v.word)
+                                              : [...prev, v.word],
+                                          )
+                                        }
+                                      >
+                                        <strong>{v.word}</strong>
+                                        {showReading && (
+                                          <span>{v.reading}</span>
+                                        )}
+                                        <small>
+                                          {revealed.includes(v.word)
+                                            ? "收起解釋"
+                                            : "翻開看解釋 ↗"}
+                                        </small>
+                                      </button>
+                                      {revealed.includes(v.word) && (
+                                        <div className="word-detail">
+                                          <p>{v.meaning}</p>
+                                          <span>{v.example}</span>
+                                        </div>
+                                      )}
+                                      <div className="word-actions">
+                                        <button
+                                          onClick={() =>
+                                            say(`${v.word}。${v.example}`)
+                                          }
+                                          aria-label={`朗讀${v.word}`}
+                                        >
+                                          <Volume2 size={16} />
+                                        </button>
+                                        <button
+                                          aria-label={`記住${v.word}`}
+                                          aria-pressed={card.rememberedWords.includes(
+                                            v.word,
+                                          )}
+                                          onClick={() =>
+                                            setCollection(
+                                              (prev) =>
+                                                prev && {
+                                                  ...prev,
+                                                  cards: prev.cards.map(
+                                                    (c, i) =>
+                                                      i === cardIndex
+                                                        ? {
+                                                            ...c,
+                                                            rememberedWords:
+                                                              c.rememberedWords.includes(
+                                                                v.word,
+                                                              )
+                                                                ? c.rememberedWords.filter(
+                                                                    (w) =>
+                                                                      w !==
+                                                                      v.word,
+                                                                  )
+                                                                : [
+                                                                    ...c.rememberedWords,
+                                                                    v.word,
+                                                                  ],
+                                                          }
+                                                        : c,
+                                                  ),
+                                                },
+                                            )
+                                          }
+                                        >
+                                          {card.rememberedWords.includes(
+                                            v.word,
+                                          ) ? (
+                                            <Check size={15} />
+                                          ) : (
+                                            <Plus size={15} />
+                                          )}
+                                          想記住
+                                        </button>
+                                      </div>
+                                    </article>
+                                  ))}
+                              </div>
+                              {!card.vocabulary.length && (
+                                <p className="empty-inline">
+                                  目前無已核對的造詞資料，請和老師一起查字典。
+                                </p>
+                              )}
+                              {card.vocabulary.length < wordCount && (
+                                <p className="data-note">
+                                  目前收錄 {card.vocabulary.length}{" "}
+                                  組，不補上未收錄的詞語。
+                                </p>
+                              )}
+                              <p className="data-note">
+                                詞義、注音及例句為編寫教材，待教師審定。不同義項以標籤區分。
+                              </p>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      {captions && (
+                        <div className="scene-caption">
+                          <span>本幕重點</span>
+                          {scene === 0
+                            ? `在「${collection.sourcePhrase}」中認識「${card.character}」。`
+                            : scene === 1
+                              ? `結構示意：${card.master.structure}`
+                              : scene === 2
+                                ? "部件幫助觀察字形，不能用來推論字源。"
+                                : scene === 3
+                                  ? "使用經核對的筆順資料，學得更安心。"
+                                  : scene === 4
+                                    ? simple
+                                      ? card.simple
+                                      : card.meaning
+                                    : "把同一個字，放回不同語詞裡認識。"}
+                        </div>
+                      )}
+                      <div className="player">
+                        <button
+                          className="icon-btn"
+                          aria-label="重播這個字"
+                          onClick={() => {
+                            setScene(0);
+                            setPlaying(true);
+                          }}
+                        >
+                          <RotateCcw size={18} />
+                        </button>
+                        <button
+                          className="icon-btn"
+                          aria-label="上一步"
+                          disabled={scene === 0}
+                          onClick={() => {
+                            setScene(scene - 1);
+                            setPlaying(false);
+                          }}
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
+                        <button
+                          className="play-button"
+                          onClick={() => setPlaying(!playing)}
+                          aria-label={playing ? "暫停" : "播放"}
+                        >
+                          {playing ? <Pause size={18} /> : <Play size={18} />}
+                        </button>
+                        <button
+                          className="icon-btn"
+                          aria-label="下一步"
+                          disabled={scene === 5}
+                          onClick={() => {
+                            setScene(scene + 1);
+                            setPlaying(false);
+                          }}
+                        >
+                          <ChevronRight size={20} />
+                        </button>
+                        <span className="play-status">
+                          {playing ? "播放中" : "已暫停"} · {scene + 1}/6
+                        </span>
+                        <label className="speed-label">
+                          速度
+                          <select
+                            aria-label="播放速度"
+                            value={speed}
+                            onChange={(e) => setSpeed(Number(e.target.value))}
+                          >
+                            <option value={0.65}>慢</option>
+                            <option value={1}>中</option>
+                            <option value={1.5}>快</option>
+                          </select>
+                        </label>
+                      </div>
+                      <div className="classroom-footer">
+                        <span>
+                          <span className="status-dot" />
+                          教材部分收錄 · 待教師審定
+                        </span>
+                        <a
+                          href={card.source?.url || DICTIONARY.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          查看查核參考 <ExternalLink size={13} />
+                        </a>
+                      </div>
+                    </section>
+                  )
+                )}
+              </div>
+              {collection && (
+                <section className="session-summary">
+                  <div className="summary-title">
+                    <span className="eyebrow">這一次的小小收穫</span>
+                    <h2>「{collection.sourcePhrase}」的學習卡</h2>
+                  </div>
+                  <div className="summary-cards">
+                    {collection.cards.map((c, i) => (
+                      <button
+                        key={c.id}
+                        className={
+                          i === cardIndex
+                            ? "summary-card current"
+                            : "summary-card"
+                        }
+                        onClick={() => {
+                          setCardIndex(i);
+                          setScene(0);
+                          setPlaying(false);
+                        }}
+                      >
+                        <strong>{c.character}</strong>
+                        <span>
+                          {c.visitedScenes.length}/6 幕已看過
+                          <small>
+                            {c.visitedScenes.length === 6
+                              ? "已看完，記得再複習"
+                              : "慢慢來，一步一步學"}
+                          </small>
+                        </span>
+                        {c.visitedScenes.length === 6 && <Check size={19} />}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="summary-actions">
+                    <button
+                      className="secondary"
+                      onClick={() => {
+                        setCardIndex(0);
+                        setScene(0);
+                        setPlaying(true);
+                      }}
+                    >
+                      <Play size={17} />
+                      合併播放語詞
+                    </button>
+                    <button className="primary" onClick={() => save()}>
+                      <Bookmark size={17} />
+                      收藏到我的生字本
+                    </button>
+                    <button
+                      className="secondary"
+                      onClick={() => setModal("export")}
+                    >
+                      <Download size={17} />
+                      下載學習卡／學習本
+                    </button>
+                    <button className="quiet" onClick={openDrive}>
+                      <CloudUpload size={18} />
+                      Google Drive
+                    </button>
+                  </div>
+                </section>
+              )}
+              {!collection && (
+                <div className="bottom-guide">
+                  <span>
+                    <i>01</i>輸入與選字
+                  </span>
+                  <ArrowRight size={16} />
+                  <span>
+                    <i>02</i>六幕慢慢學
+                  </span>
+                  <ArrowRight size={16} />
+                  <span>
+                    <i>03</i>收藏每個小進步
+                  </span>
+                </div>
+              )}
+            </>
+          )}
+          {page === "library" && (
+            <>
+              <div className="page-heading">
+                <div>
+                  <div className="eyebrow">
+                    <Bookmark size={15} /> 把小小進步，收藏起來
+                  </div>
+                  <h1>我的生字收藏本</h1>
+                  <p>同一個字、不同的語詞，每一次發現都值得留下。</p>
+                </div>
+                <button
+                  className="secondary"
+                  onClick={() => importRef.current?.click()}
+                >
+                  <Upload size={17} />
+                  匯入 JSON 備份
+                </button>
+                <input
+                  type="file"
+                  accept=".json,application/json"
+                  hidden
+                  ref={importRef}
+                  onChange={(e) => {
+                    if (e.target.files?.[0]) void importFile(e.target.files[0]);
+                    e.target.value = "";
+                  }}
+                />
+              </div>
+              <div className="library-stats">
+                <span>
+                  <b>{saved.length}</b>份語詞收藏
+                </span>
+                <span>
+                  <b>{saved.reduce((n, c) => n + c.cards.length, 0)}</b>
+                  張獨立字卡
+                </span>
+                <span>
+                  <b>{learned}</b>份已經學會
+                </span>
+              </div>
+              <div className="library-toolbar">
+                <div className="search-input">
+                  <Search size={18} />
+                  <input
+                    aria-label="搜尋收藏"
+                    placeholder="搜尋字或語詞…"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+                <select
+                  aria-label="篩選複習狀態"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                >
+                  <option value="all">全部收藏</option>
+                  <option value="practice">再練習</option>
+                  <option value="learned">我會了</option>
+                </select>
+              </div>
+              {!visibleSaved.length ? (
+                <div className="empty-state">
+                  <LibraryBig size={45} />
+                  <h2>
+                    {saved.length
+                      ? "沒有符合的收藏"
+                      : "你的生字本，等著第一個朋友。"}
+                  </h2>
+                  <p>
+                    {saved.length
+                      ? "試試其他關鍵字或複習狀態。"
+                      : "選一個想學的語詞，學完後就能收藏在這裡。"}
+                  </p>
+                  <button
+                    className="primary"
+                    onClick={() => {
+                      if (saved.length) {
+                        setSearch("");
+                        setFilter("all");
+                      } else setPage("learn");
+                    }}
+                  >
+                    {saved.length ? "清除篩選" : "開始認識生字"}
+                    <ArrowRight size={17} />
+                  </button>
+                </div>
+              ) : (
+                <div className="collection-grid">
+                  {visibleSaved.map((c) => (
+                    <article className="collection-card" key={c.id}>
+                      <div className="collection-meta">
+                        <span>
+                          {new Date(c.createdAt).toLocaleDateString("zh-TW")}
+                        </span>
+                        <button
+                          className="icon-btn"
+                          aria-label={`刪除收藏${c.sourcePhrase}`}
+                          onClick={() => setDeleteId(c.id)}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                      <div className="collected-chars">
+                        {c.cards.map((card) => (
+                          <span key={card.id}>{card.character}</span>
+                        ))}
+                      </div>
+                      <h2>{c.sourcePhrase}</h2>
+                      <p>{c.cards.length} 張字卡 · 保留學習當下的內容</p>
+                      <div className="collection-bottom">
+                        <button
+                          className="secondary"
+                          onClick={() => openCollection(c)}
+                        >
+                          重新學習
+                          <ArrowRight size={16} />
+                        </button>
+                        <button
+                          className={
+                            c.reviewState === "learned"
+                              ? "review learned"
+                              : "review"
+                          }
+                          onClick={async () => {
+                            try {
+                              await saveCollection({
+                                ...c,
+                                reviewState:
+                                  c.reviewState === "learned"
+                                    ? "practice"
+                                    : "learned",
+                              });
+                              await refresh();
+                            } catch (e) {
+                              setError(err(e));
+                            }
+                          }}
+                        >
+                          {c.reviewState === "learned" ? (
+                            <Check size={15} />
+                          ) : (
+                            <RotateCcw size={15} />
+                          )}{" "}
+                          {c.reviewState === "learned" ? "我會了" : "再練習"}
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+              <p className="backup-note">
+                <HelpCircle size={16} />
+                收藏保存在目前瀏覽器。清除瀏覽資料前，請下載 JSON 備份。
+              </p>
+            </>
+          )}
+          {page === "resources" && (
+            <>
+              <div className="page-heading">
+                <div>
+                  <div className="eyebrow">
+                    <BookOpen size={15} /> 和可靠的資料一起學
+                  </div>
+                  <h1>查字小幫手</h1>
+                  <p>讀音、字義與筆順，遇到疑問就回到原始資料查一查。</p>
+                </div>
+              </div>
+              <div className="resource-grid">
+                {[
+                  STROKES,
+                  DICTIONARY,
+                  {
+                    title: "教育部《重編國語辭典修訂本》",
+                    url: "https://dict.revised.moe.edu.tw/",
+                  },
+                  {
+                    title: "CNS11643 全字庫",
+                    url: "https://www.cns11643.gov.tw/",
+                  },
+                ].map((s, i) => (
+                  <a
+                    className="resource-card"
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={s.url}
+                  >
+                    <span className="resource-number">0{i + 1}</span>
+                    <BookOpen size={28} />
+                    <h2>{s.title}</h2>
+                    <p>
+                      {
+                        [
+                          "對照臺灣標準字體與筆順，確認每一筆的寫法。",
+                          "查詢常用字詞、注音與適合一般學習的釋義。",
+                          "查詢更多義項及用法，古義需要與老師一起辨讀。",
+                          "查詢字形與編碼資料，作為字形核對參考。",
+                        ][i]
+                      }
+                    </p>
+                    <span>
+                      開啟網站
+                      <ExternalLink size={16} />
+                    </span>
+                  </a>
+                ))}
+              </div>
+              <div className="source-statement">
+                <h2>關於教材與資料</h2>
+                <p>
+                  此版本提供少量語境教材。白話解說、例句及結構示意為本專案編寫，待教師審定，不能當作已核對的完整字典。參考連結不代表取得來源網站素材的重製授權。
+                </p>
+                <p>
+                  筆順尚無逐字核對且可重製的路徑資料，因此僅提供官方網站查詢，不播放推測動畫；影片輸出留待合法素材備齊後製作。
+                </p>
+              </div>
+            </>
+          )}
+          <footer className="page-footer">
+            <span>
+              <Leaf size={14} /> 每天一點點，字詞都會記得。
+            </span>
+            <span>生字動畫收藏本 · 本機學習版</span>
+          </footer>
+        </main>
+      </div>
+      {modal === "settings" && (
+        <Modal title="學習偏好" close={() => setModal(null)}>
+          <p className="modal-description">讓教室變成適合自己的樣子。</p>
+          {[
+            { label: "顯示注音", checked: showReading, set: setShowReading },
+            { label: "顯示重點字幕", checked: captions, set: setCaptions },
+            { label: "自動播放時朗讀", checked: voice, set: setVoice },
+            { label: "減少動態效果", checked: reduced, set: setReduced },
+          ].map((item) => (
+            <label className="setting-row" key={item.label}>
+              {item.label}
+              <input
+                type="checkbox"
+                role="switch"
+                checked={item.checked}
+                onChange={(e) => item.set(e.target.checked)}
+              />
+            </label>
+          ))}
+          <p className="data-note">
+            朗讀使用裝置提供的中文語音，聲音品質依瀏覽器與系統設定而異。
+          </p>
+          <button className="primary full" onClick={() => setModal(null)}>
+            完成
+          </button>
+        </Modal>
+      )}
+      {modal === "export" && collection && (
+        <Modal
+          title={`下載「${collection.sourcePhrase}」的學習成果`}
+          close={() => {
+            if (!busy) setModal(null);
+          }}
+        >
+          <p className="modal-description">
+            每個字獨立留存，也能合成一本學習本。
+          </p>
+          <div className="export-options">
+            <button disabled={!!busy} onClick={() => exportFile("png")}>
+              <Image size={25} />
+              <span>
+                <b>「{card?.character}」學習卡</b>
+                <small>PNG 圖片 · 目前這一個字</small>
+              </span>
+              <Download size={18} />
+            </button>
+            <button disabled={!!busy} onClick={() => exportFile("pdf")}>
+              <FileText size={25} />
+              <span>
+                <b>整組語詞學習本</b>
+                <small>PDF · 每字一頁，含造詞與來源</small>
+              </span>
+              <Download size={18} />
+            </button>
+            <button disabled={!!busy} onClick={() => exportFile("json")}>
+              <BookOpen size={25} />
+              <span>
+                <b>完整學習資料備份</b>
+                <small>JSON · 保留語境、分鏡與複習進度</small>
+              </span>
+              <Download size={18} />
+            </button>
+          </div>
+          {busy && (
+            <p role="status" className="busy">
+              <LoaderCircle className="spin" size={18} />
+              {busy}
+            </p>
+          )}
+          <p className="data-note">
+            本版尚無已核對且可重製的筆順素材，暫不提供影片下載。
+          </p>
+        </Modal>
+      )}
+      {modal === "drive" && (
+        <Modal
+          title="收藏到 Google Drive"
+          close={() => {
+            if (!busy) setModal(null);
+          }}
+        >
+          {CLIENT_ID ? (
+            <>
+              <p className="modal-description">
+                經你同意後，在自己的 Drive
+                建立「生字動畫收藏本」專用資料夾，上傳 JSON、PDF 與逐字
+                PNG。本機收藏會先保留。
+              </p>
+              {driveResult ? (
+                <div className="drive-success">
+                  <Check size={30} />
+                  <h3>上傳完成</h3>
+                  <a href={driveResult.url} target="_blank" rel="noreferrer">
+                    開啟專用資料夾
+                    <ExternalLink size={16} />
+                  </a>
+                  <ul>
+                    {driveResult.files.map((f) => (
+                      <li key={f.id}>
+                        <a href={f.url} target="_blank" rel="noreferrer">
+                          {f.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <button
+                  className="primary full"
+                  disabled={!driveReady || !!busy}
+                  onClick={sendDrive}
+                >
+                  {busy ? (
+                    <LoaderCircle size={18} className="spin" />
+                  ) : (
+                    <CloudUpload size={18} />
+                  )}{" "}
+                  {busy || "Google 授權並上傳"}
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="drive-setup">
+                <CloudUpload size={36} />
+                <h3>Google 雲端收藏尚未設定</h3>
+                <p>
+                  這個本機版本還沒有 Google OAuth 用戶端
+                  ID，因此不能登入或上傳。前端收藏與下載都可以照常使用。
+                </p>
+              </div>
+              <button
+                className="primary full"
+                onClick={() => setModal("export")}
+              >
+                <Download size={17} />
+                先下載到這台裝置
+              </button>
+            </>
+          )}
+        </Modal>
+      )}
+      {deleteId && (
+        <Modal title="刪除這份收藏？" close={() => setDeleteId(null)}>
+          <p>刪除後無法復原，已下載的備份不受影響。</p>
+          <div className="modal-actions">
+            <button className="secondary" onClick={() => setDeleteId(null)}>
+              保留收藏
+            </button>
+            <button
+              className="danger"
+              onClick={async () => {
+                try {
+                  await deleteCollection(deleteId);
+                  await refresh();
+                  setDeleteId(null);
+                  setNotice("已刪除收藏。");
+                } catch (e) {
+                  setError(err(e));
+                }
+              }}
+            >
+              確定刪除
+            </button>
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}

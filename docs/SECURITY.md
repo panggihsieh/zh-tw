@@ -1,0 +1,11 @@
+# 本機資料與雲端
+
+- IndexedDB 保存收藏，不收姓名。`127.0.0.1:5173` 與其他來源隔離。
+- 匯入只接受 5 MB 以下 JSON，檢查 schema、字卡、分鏡與 HTTPS 來源。每次匯入分配新收藏 ID，避免默默覆寫。
+- React 以文字輸出資料，不用 `dangerouslySetInnerHTML`。來源新分頁使用 noreferrer。
+- OAuth client ID 為公開識別碼，client secret／access token／refresh token 不可填入前端環境或提交 Git。
+- Google access token 只存在授權當次記憶體，不存 localStorage、IndexedDB 或匯出。
+- `drive.file` 僅找回應用程式標記的專用根資料夾，子目錄用回傳 folderId，不對任意同名資料夾上傳。
+- 上傳失敗保持本機副本；每次重試新增子資料夾，部分成功的遠端檔案不自動刪除。
+- 預設無 Google 用戶端設定，不會發生實際授權或上傳。GIS 在使用者開啟雲端視窗時才載入。
+- 字型可從 Google Fonts 載入，失敗時使用本機字型；不向字型服務送出語詞。此版不是 PWA，也不承諾重新啟動後無網路仍能載入應用程式。
