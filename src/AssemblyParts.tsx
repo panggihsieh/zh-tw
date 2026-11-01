@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import type { Card } from "./model";
-import { fitInk, relativeInkBox } from "./assemblyGeometry";
+import { fitInkProportionally, relativeInkBox } from "./assemblyGeometry";
 import { structureProfile } from "./structureProfiles";
+import "./assemblyParts.css";
 export default function AssemblyParts({
   card,
   regions,
@@ -47,7 +48,7 @@ export default function AssemblyParts({
         const target = profile?.assemblyBoxes?.[i]
           ? relativeInkBox(full, profile.assemblyBoxes[i])
           : { x: r[0] + 3, y: r[1] + 3, width: r[2] - 6, height: r[3] - 6 };
-        return fitInk(profile?.assemblyBoxes?.[i] ? ink(text) : { x: 0, y: 0, width: 300, height: 300 }, target);
+        return fitInkProportionally(ink(text), target);
       });
       setTransforms(next);
     };
@@ -68,7 +69,7 @@ export default function AssemblyParts({
       </text>
     );
   return (
-    <g ref={root}>
+    <g ref={root} className="assembly-natural">
       {card.master.components.map((part, i) => {
         const region = regions[i];
         if (!region) return null;

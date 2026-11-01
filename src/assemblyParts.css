@@ -1,0 +1,15 @@
+/* Independent parts retain their ink aspect ratio. The unscaled complete glyph
+   is the endpoint: standalone components cannot reproduce contextual shaping. */
+.assembly-natural .assembly-part { animation-name: natural-part-assembly; }
+.assembly-natural .assembly-complete { animation-name: natural-complete-glyph; }
+@keyframes natural-part-assembly {
+  0%, 12% { opacity: 0; transform: translate(0, 0); }
+  24%, 46% { opacity: 1; transform: translate(var(--part-x), var(--part-y)); }
+  62% { opacity: 1; transform: translate(0, 0); }
+  72%, 100% { opacity: 0; transform: translate(0, 0); }
+}
+@keyframes natural-complete-glyph {
+  0%, 12% { opacity: 1; }
+  24%, 62% { opacity: 0; }
+  72%, 100% { opacity: 1; }
+}
