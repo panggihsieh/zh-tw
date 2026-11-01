@@ -50,7 +50,11 @@ import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
-import { randomStartupPhrase, STARTUP_PHRASE_KEY } from "./startupPhrase";
+import {
+  randomStartupPhrase,
+  refreshOpeningPhrase,
+  STARTUP_PHRASE_KEY,
+} from "./startupPhrase";
 import { phraseSuggestions } from "./phraseSuggestions";
 import {
   loadVoicePreference,
@@ -255,14 +259,23 @@ export default function App() {
     }
     const initialPhrase = randomStartupPhrase(previous);
     try {
-      return loadPageSession(sessionStorage, reduced, initialPhrase);
+      const state = loadPageSession(sessionStorage, reduced, initialPhrase);
+      const next = refreshOpeningPhrase(state, previous, initialPhrase);
+      return {
+        ...next,
+        randomOpening: next !== state || state.input === initialPhrase,
+      };
     } catch {
-      return defaultPageSession(reduced, initialPhrase);
+      return {
+        ...defaultPageSession(reduced, initialPhrase),
+        randomOpening: true,
+      };
     }
   });
   useEffect(() => {
     try {
-      localStorage.setItem(STARTUP_PHRASE_KEY, restored.phrase);
+      if (restored.randomOpening)
+        localStorage.setItem(STARTUP_PHRASE_KEY, restored.phrase);
     } catch {
       /* random defaults still work */
     }

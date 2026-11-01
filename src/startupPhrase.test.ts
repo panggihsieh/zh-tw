@@ -1,6 +1,19 @@
 import { expect, it } from "vitest";
 import { PHRASES } from "./data";
-import { randomStartupPhrase } from "./startupPhrase";
+import { randomStartupPhrase, refreshOpeningPhrase } from "./startupPhrase";
+import { defaultPageSession } from "./sessionState";
+import { buildCollection } from "./data";
+it("refreshes an untouched opening but preserves drafts, selections and learning", () => {
+  const state = defaultPageSession();
+  expect(refreshOpeningPhrase(state, "感謝", "觀察").input).toBe("觀察");
+  for (const changed of [
+    { ...state, input: "測量" },
+    { ...state, positions: [1] },
+    { ...state, collection: buildCollection("感謝", [0]) },
+  ]) {
+    expect(refreshOpeningPhrase(changed, "感謝", "觀察")).toBe(changed);
+  }
+});
 import { loadPageSession } from "./sessionState";
 it("uses a known teaching phrase and avoids the previous phrase", () => {
   for (const previous of Object.keys(PHRASES)) {
