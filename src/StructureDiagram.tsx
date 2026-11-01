@@ -28,10 +28,8 @@ export default function StructureDiagram({
         role="img"
         aria-label={`${master.character}：${master.structure}${profile ? `，${profile.label}` : ""}，${parts.join("、")}，部件位置示意`}
       >
-        {parts.map((part, index) => (
-          <div className="structure-cell" key={index}>
-            <span>{part}</span>
-          </div>
+        {parts.map((_, index) => (
+          <div className="structure-cell" key={index} aria-hidden="true" />
         ))}
       </div>
       <figcaption>
