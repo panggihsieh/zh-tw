@@ -125,12 +125,14 @@ function Glyph({
   reduced,
   playing,
   speed,
+  assemblyEnabled,
 }: {
   card: Card;
   scene: number;
   reduced: boolean;
   playing: boolean;
   speed: number;
+  assemblyEnabled: boolean;
 }) {
   const id = `glyph-${card.id}`;
   const split =
@@ -210,7 +212,7 @@ function Glyph({
           regions={regions}
           playing={playing}
           speed={speed}
-          reduced={reduced}
+          reduced={reduced || !assemblyEnabled}
         />
       ) : split ? (
         regions.map((_, i) => {
@@ -485,6 +487,9 @@ export default function App() {
     decompositionOnly,
   ]);
   const previousCard = useRef(`${collection?.id}:${cardIndex}`);
+  useEffect(() => {
+    setDecompositionOnly(false);
+  }, [scene, card?.id]);
   useEffect(() => {
     const key = `${collection?.id}:${cardIndex}`;
     if (previousCard.current === key) return;
@@ -1249,6 +1254,7 @@ export default function App() {
                                 reduced={reduced}
                                 playing={playing}
                                 speed={speed}
+                                assemblyEnabled={decompositionOnly}
                               />
                               {showReading && (
                                 <span className="reading">{card.reading}</span>
@@ -1333,20 +1339,32 @@ export default function App() {
                               <>
                                 <h2>拆開看，再合起來。</h2>
                                 <button
-                                  className="secondary"
+                                  className="assembly-toggle"
+                                  type="button"
+                                  role="switch"
+                                  aria-label="拆合動畫"
+                                  aria-checked={decompositionOnly}
                                   disabled={
                                     reduced || !card.master.components.length
                                   }
                                   onClick={() => {
-                                    setDecompositionReplay(
-                                      (value) => value + 1,
-                                    );
-                                    setDecompositionOnly(true);
-                                    setPlaying(true);
+                                    const enabled = !decompositionOnly;
+                                    if (enabled)
+                                      setDecompositionReplay(
+                                        (value) => value + 1,
+                                      );
+                                    setDecompositionOnly(enabled);
+                                    setPlaying(enabled);
                                   }}
                                 >
-                                  <RotateCcw size={17} />
-                                  重播拆合動畫
+                                  <span
+                                    className="assembly-toggle-track"
+                                    aria-hidden="true"
+                                  >
+                                    <span />
+                                  </span>
+                                  <span>拆合動畫</span>
+                                  <b>{decompositionOnly ? "ON" : "OFF"}</b>
                                 </button>
                                 {reduced && (
                                   <p className="data-note">
@@ -1364,7 +1382,7 @@ export default function App() {
                                     : "這個字尚無可用的拆解教材。"}
                                 </p>
                                 <p className="data-note">
-                                  部件採字型縮放與位置示意，合成後以完整字形對照；不代表精確輪廓、字源或筆順。按重播會循環停留本幕。
+                                  部件採字型縮放與位置示意，合成後以完整字形對照；不代表精確輪廓、字源或筆順。開啟後循環停留本幕。
                                 </p>
                               </>
                             )}

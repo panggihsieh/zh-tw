@@ -3329,3 +3329,45 @@ input:not([type="checkbox"]):not([type="range"]) {
     opacity: 0;
   }
 }
+.assembly-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #b7c7ad;
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: #f4f6ef;
+  color: #3e5547;
+  font-size: 21px;
+}
+.assembly-toggle-track {
+  display: inline-flex;
+  align-items: center;
+  width: 48px;
+  height: 28px;
+  padding: 3px;
+  border-radius: 999px;
+  background: #9ba898;
+}
+.assembly-toggle-track > span {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+}
+.assembly-toggle[aria-checked="true"] {
+  background: #e6f0df;
+  border-color: #285d50;
+}
+.assembly-toggle[aria-checked="true"] .assembly-toggle-track {
+  background: #285d50;
+  justify-content: flex-end;
+}
+.assembly-toggle b {
+  min-width: 3ch;
+  font-size: 17px;
+}
+.assembly-toggle:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
