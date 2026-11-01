@@ -2938,10 +2938,20 @@ dialog::backdrop {
   background: #e7efdd;
 }
 .read-along-current {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transform: scale(1.35);
+  transform-origin: center 65%;
   background: #ffe078;
   color: #173e32;
   border-radius: 3px;
   box-shadow: 0 2px 0 #ae6d1d;
   outline: 2px solid #d99a25;
   padding: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .read-along-current {
+    transform: none;
+  }
 }
