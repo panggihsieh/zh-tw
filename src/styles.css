@@ -2628,10 +2628,21 @@ dialog::backdrop {
   padding-bottom: 12px;
 }
 .topbar-actions > .speech-tools {
+  display: grid;
+  grid-template-columns: max-content repeat(3, 34px);
   justify-content: flex-end;
   min-width: 0;
-  flex: 1;
-  max-width: 365px;
+  flex: 0 0 auto;
+  max-width: none;
+}
+.topbar-actions .speech-tools:has(.speech-timeline) {
+  flex: 0 0 auto;
+  max-width: none;
+}
+.topbar-actions > .speech-tools > .speech-timeline {
+  grid-column: 1/-1;
+  width: 100%;
+  max-width: none;
 }
 .topbar-actions {
   flex-wrap: nowrap;
