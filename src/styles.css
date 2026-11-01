@@ -3056,28 +3056,33 @@ body {
 }
 .scene-tabs {
   display: grid;
-  grid-template-columns: repeat(6, minmax(164px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
   max-width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 20px 24px;
+  container-type: inline-size;
+  overflow: visible;
+  padding: 12px;
   background: #f7f9f2;
 }
 .scene-tabs button {
-  padding: 14px 8px;
-  min-height: 108px;
+  padding: 8px 4px;
+  gap: 5px;
+  justify-content: center;
+  min-height: 74px;
   border: 2px solid #c6d3bc;
-  border-radius: 12px;
+  border-radius: 9px;
   background: #fff;
 }
 .scene-tabs button b {
-  white-space: nowrap;
-  font-size: 24px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  font-size: 16px;
+  font-size: clamp(12px, 1.7cqw, 18px);
   letter-spacing: 0;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #354b3e;
 }
 .scene-tabs button:hover {
@@ -3093,8 +3098,10 @@ body {
   background: #f0f5e9;
 }
 .scene-tabs button > span {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  flex-shrink: 0;
   color: #354b3e;
 }
 .scene-tabs button.current > span {
