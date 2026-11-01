@@ -1,0 +1,157 @@
+[
+  {
+    "title": "左右結構",
+    "items": [
+      {
+        "title": "左窄右寬",
+        "caption": "35 : 65",
+        "image": "/structure-atlas/01.svg"
+      },
+      {
+        "title": "左右等寬",
+        "caption": "50 : 50",
+        "image": "/structure-atlas/02.svg"
+      },
+      {
+        "title": "左寬右窄",
+        "caption": "65 : 35",
+        "image": "/structure-atlas/03.svg"
+      }
+    ]
+  },
+  {
+    "title": "上下結構",
+    "items": [
+      {
+        "title": "上短下長",
+        "caption": "35 : 65",
+        "image": "/structure-atlas/04.svg"
+      },
+      {
+        "title": "上下等長",
+        "caption": "50 : 50",
+        "image": "/structure-atlas/05.svg"
+      },
+      {
+        "title": "上長下短",
+        "caption": "65 : 35",
+        "image": "/structure-atlas/06.svg"
+      }
+    ]
+  },
+  {
+    "title": "左中右結構",
+    "items": [
+      {
+        "title": "三部分近等寬",
+        "caption": "33 : 34 : 33",
+        "image": "/structure-atlas/07.svg"
+      },
+      {
+        "title": "中寬兩側窄",
+        "caption": "25 : 50 : 25",
+        "image": "/structure-atlas/08.svg"
+      },
+      {
+        "title": "左部較寬",
+        "caption": "50 : 25 : 25",
+        "image": "/structure-atlas/09.svg"
+      },
+      {
+        "title": "右部較寬",
+        "caption": "25 : 25 : 50",
+        "image": "/structure-atlas/10.svg"
+      }
+    ]
+  },
+  {
+    "title": "上中下結構",
+    "items": [
+      {
+        "title": "三部分近等長",
+        "caption": "33 : 34 : 33",
+        "image": "/structure-atlas/11.svg"
+      },
+      {
+        "title": "中長上下短",
+        "caption": "25 : 50 : 25",
+        "image": "/structure-atlas/12.svg"
+      },
+      {
+        "title": "上部較長",
+        "caption": "50 : 25 : 25",
+        "image": "/structure-atlas/13.svg"
+      },
+      {
+        "title": "下部較長",
+        "caption": "25 : 25 : 50",
+        "image": "/structure-atlas/14.svg"
+      }
+    ]
+  },
+  {
+    "title": "全包圍結構",
+    "items": [
+      {
+        "title": "四面包圍",
+        "caption": "外框＋內部",
+        "image": "/structure-atlas/15.svg"
+      }
+    ]
+  },
+  {
+    "title": "半包圍結構",
+    "items": [
+      {
+        "title": "上三包圍",
+        "caption": "下方開口",
+        "image": "/structure-atlas/16.svg"
+      },
+      {
+        "title": "下三包圍",
+        "caption": "上方開口",
+        "image": "/structure-atlas/17.svg"
+      },
+      {
+        "title": "左三包圍",
+        "caption": "右方開口",
+        "image": "/structure-atlas/18.svg"
+      },
+      {
+        "title": "左上包圍",
+        "caption": "左側＋上側",
+        "image": "/structure-atlas/19.svg"
+      },
+      {
+        "title": "右上包圍",
+        "caption": "右側＋上側",
+        "image": "/structure-atlas/20.svg"
+      },
+      {
+        "title": "左下包圍",
+        "caption": "左側＋下側",
+        "image": "/structure-atlas/21.svg"
+      }
+    ]
+  },
+  {
+    "title": "獨體結構",
+    "items": [
+      {
+        "title": "整體一區",
+        "caption": "不再分區",
+        "image": "/structure-atlas/22.svg"
+      }
+    ]
+  },
+  {
+    "title": "品字形結構",
+    "items": [
+      {
+        "title": "上一、下二",
+        "caption": "三個同類部件",
+        "image": "/structure-atlas/23.svg"
+      }
+    ]
+  }
+]

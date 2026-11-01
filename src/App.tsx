@@ -328,7 +328,7 @@ export default function App() {
   }, [restored]);
 
   const [page, setPage] = useState<Page>(restored.page);
-  const [focusApiSettings, setFocusApiSettings] = useState(false);
+  const [focusBackendSection, setFocusBackendSection] = useState<"ai-api-settings" | "structure-help" | null>(null);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -695,14 +695,14 @@ export default function App() {
   }
   const learned = saved.filter((c) => c.reviewState === "learned").length;
   useEffect(() => {
-    if (page === "tts" && focusApiSettings) {
+    if (page === "tts" && focusBackendSection) {
       scrollPending.current = false;
       document
-        .getElementById("ai-api-settings")
+        .getElementById(focusBackendSection)
         ?.scrollIntoView({ block: "start" });
-      setFocusApiSettings(false);
+      setFocusBackendSection(null);
     }
-  }, [page, focusApiSettings]);
+  }, [page, focusBackendSection]);
   const visibleSaved = saved.filter(
     (c) =>
       (c.sourcePhrase.includes(search) ||
@@ -796,11 +796,15 @@ export default function App() {
               className="nav-item"
               onClick={() => {
                 setPage("tts");
-                setFocusApiSettings(true);
+                setFocusBackendSection("ai-api-settings");
               }}
             >
               <Settings2 size={20} />
               API 設定
+            </button>
+            <button className="nav-item" onClick={() => { setPage("tts"); setPlaying(false); setFocusBackendSection("structure-help"); }}>
+              <Grid2X2 size={20} />
+              字形結構說明
             </button>
             <a className="nav-item" href="/structure-review/five-upper.html">
               <Grid2X2 size={20} />

@@ -3371,3 +3371,9 @@ input:not([type="checkbox"]):not([type="range"]) {
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+.structure-help{margin-top:32px;padding:28px;border:1px solid #c7d3bd;border-radius:16px;background:#fff;scroll-margin-top:24px}
+.structure-help h2{margin-top:0}.structure-help-links{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0}.structure-help a{color:#286c60}
+.structure-help details{border-top:1px solid #c7d3bd;padding:16px 0}.structure-help summary{cursor:pointer;font-size:21px;font-weight:600}.structure-help summary span{font-size:15px;font-weight:400;margin-left:18px;color:#687a61}
+.structure-help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,190px));gap:22px;margin-top:20px}.structure-help figure{margin:0}.structure-help img{display:block;width:100%;height:auto;aspect-ratio:1}.structure-help figcaption{margin-top:12px;display:flex;flex-direction:column;gap:4px;font-size:17px}.structure-help figcaption span{font-size:15px;color:#687a61}
+@media(max-width:600px){.structure-help{padding:18px}.structure-help-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.structure-help summary{font-size:19px}}
