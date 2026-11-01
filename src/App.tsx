@@ -48,6 +48,7 @@ import {
 import { download, jsonBlob, pdfBlob, pngBlob } from "./exports";
 import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
 import StrokePlayer from "./StrokePlayer";
+import { structureProfile } from "./structureProfiles";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import OfficialDictionary from "./OfficialDictionary";
@@ -128,8 +129,19 @@ function Glyph({
   const id = `glyph-${card.id}`;
   const split =
     (scene === 1 || scene === 2) && card.master.components.length > 0;
-  const regions =
-    card.master.layout === "vertical"
+  const profile = structureProfile(card.master);
+  let offset = 0;
+  const regions = profile
+    ? profile.weights.map((weight) => {
+        const size = (weight / profile.weights.reduce((a, b) => a + b)) * 300;
+        const region =
+          card.master.layout === "vertical"
+            ? [0, offset, 300, size]
+            : [offset, 0, size, 300];
+        offset += size;
+        return region;
+      })
+    : card.master.layout === "vertical"
       ? [
           [0, 0, 300, 195],
           [0, 195, 300, 105],
@@ -159,6 +171,18 @@ function Glyph({
           </clipPath>
         ))}
       </defs>
+      {split &&
+        regions.map((r, i) => (
+          <rect
+            key={`background-${i}`}
+            x={r[0]}
+            y={r[1]}
+            width={r[2]}
+            height={r[3]}
+            fill={["#e8efde", "#f7eadd", "#e5eef3"][i]}
+            fillOpacity="0.7"
+          />
+        ))}
       <rect
         width="300"
         height="300"
