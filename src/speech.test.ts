@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { buildCollection, PHRASES } from "./data";
+import { voicePreference } from "./ttsPreferences";
 import {
   sceneNarration,
   speechChunks,
@@ -40,6 +41,31 @@ const end = (u: SpeechSynthesisUtterance) =>
   u.onend?.({} as SpeechSynthesisEvent);
 
 describe("朗讀進度與定位", () => {
+  it("全域預設與試聽音色分開，試聽不覆寫前台預設", () => {
+    const a = {
+      name: "A",
+      lang: "zh-TW",
+      voiceURI: "a",
+      localService: true,
+    } as SpeechSynthesisVoice;
+    const b = {
+      name: "B",
+      lang: "zh-CN",
+      voiceURI: "b",
+      localService: false,
+    } as SpeechSynthesisVoice;
+    const t = setup([a, b]);
+    t.controller.setVoicePreference(voicePreference(b));
+    t.controller.speak("預設。", 1);
+    expect(t.utterances.at(-1)?.voice).toBe(b);
+    expect(t.utterances.at(-1)?.lang).toBe("zh-CN");
+    t.controller.speak("試聽。", 1, voicePreference(a));
+    expect(t.utterances.at(-1)?.voice).toBe(a);
+    t.controller.replay();
+    expect(t.utterances.at(-1)?.voice).toBe(a);
+    t.controller.speak("回前台。", 1);
+    expect(t.utterances.at(-1)?.voice).toBe(b);
+  });
   it("暫停後收到延遲文字邊界事件不移動進度", () => {
     const t = setup();
     t.controller.speak("感謝你的幫忙。", 1);

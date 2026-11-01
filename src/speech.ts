@@ -1,5 +1,6 @@
 import type { Card } from "./model";
 import { SCENES } from "./model";
+import { selectVoice, type VoicePreference } from "./ttsPreferences";
 export function speechChunks(text: string): string[] {
   return (text.match(/[^。！？!?；;\n]+[。！？!?；;]*/gu) || []).flatMap(
     (sentence) => {
@@ -80,6 +81,11 @@ export function speechTime(position: number, rate: number) {
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 }
 export class SpeechController {
+  private preference: VoicePreference | null = null;
+  private activePreference: VoicePreference | null = null;
+  setVoicePreference(preference: VoicePreference | null) {
+    this.preference = preference;
+  }
   private generation = 0;
   private current: SpeechSynthesisUtterance | null = null;
   private text = "";
@@ -137,7 +143,7 @@ export class SpeechController {
     this.state("speaking");
   }
   replay() {
-    if (this.text) this.speak(this.text, this.rate);
+    if (this.text) this.speak(this.text, this.rate, this.activePreference);
   }
   seek(position: number) {
     if (!this.text) return;
@@ -150,8 +156,9 @@ export class SpeechController {
     this.pendingSeek = true;
     this.state("paused");
   }
-  speak(text: string, rate: number) {
+  speak(text: string, rate: number, override?: VoicePreference | null) {
     this.stop();
+    this.activePreference = override === undefined ? this.preference : override;
     this.text = speechChunks(text).join("");
     this.rate = rate;
     if (!this.text) return;
@@ -170,10 +177,7 @@ export class SpeechController {
     const chunks = speechChunks(characters.slice(offset).join(""));
     const generation = this.generation;
     const voices = this.synth.getVoices();
-    const voice =
-      voices.find((v) => /^zh[-_]TW$/i.test(v.lang)) ||
-      voices.find((v) => /^zh[-_]Hant/i.test(v.lang)) ||
-      voices.find((v) => /^zh/i.test(v.lang));
+    const voice = selectVoice(voices, this.activePreference);
     if (voices.length && !voice) {
       this.stop();
       this.onError(
@@ -197,7 +201,7 @@ export class SpeechController {
           length = Array.from(text).length;
         const utterance = this.makeUtterance(text);
         this.current = utterance;
-        utterance.lang = "zh-TW";
+        utterance.lang = voice?.lang || "zh-TW";
         utterance.rate = this.rate;
         if (voice) utterance.voice = voice;
         utterance.onboundary = (e) => {

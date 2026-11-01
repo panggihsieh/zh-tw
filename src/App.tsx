@@ -42,6 +42,13 @@ import { download, jsonBlob, pdfBlob, pngBlob } from "./exports";
 import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
 import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
+import TtsSettings from "./TtsSettings";
+import {
+  loadVoicePreference,
+  saveVoicePreference,
+  preferredVoice,
+  type VoicePreference,
+} from "./ttsPreferences";
 import {
   SpeechController,
   sceneNarration,
@@ -49,7 +56,7 @@ import {
   type SpeechProgress,
 } from "./speech";
 
-type Page = "learn" | "library" | "resources";
+type Page = "learn" | "library" | "resources" | "tts";
 const err = (e: unknown) =>
   e instanceof Error ? e.message : "發生問題，請再試一次。";
 function Mascot() {
@@ -248,6 +255,25 @@ export default function App() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [speechState, setSpeechState] = useState<SpeechState>("idle");
+  const [ttsPreference, setTtsPreference] = useState<VoicePreference | null>(
+    () => {
+      try {
+        return loadVoicePreference(localStorage);
+      } catch {
+        return null;
+      }
+    },
+  );
+  const [ttsVoices, setTtsVoices] = useState<SpeechSynthesisVoice[]>([]);
+  function refreshTtsVoices() {
+    setTtsVoices(window.speechSynthesis?.getVoices() || []);
+  }
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    refreshTtsVoices();
+    synth?.addEventListener("voiceschanged", refreshTtsVoices);
+    return () => synth?.removeEventListener("voiceschanged", refreshTtsVoices);
+  }, []);
   const [speechProgress, setSpeechProgress] = useState<SpeechProgress>({
     position: 0,
     total: 0,
@@ -263,6 +289,18 @@ export default function App() {
       setSpeechProgress,
     );
   const speech = speechRef.current;
+  useEffect(() => speech.setVoicePreference(ttsPreference), [ttsPreference]);
+  function saveTtsDefault(preference: VoicePreference | null) {
+    try {
+      saveVoicePreference(localStorage, preference);
+      speech.stop();
+      speech.setVoicePreference(preference);
+      setTtsPreference(preference);
+      setNotice("已設為這台瀏覽器的前台預設音色。");
+    } catch {
+      setError("無法保存 TTS 預設，請確認瀏覽器允許本機儲存。原設定仍保留。");
+    }
+  }
   const [busy, setBusy] = useState("");
   const [modal, setModal] = useState<"settings" | "export" | "drive" | null>(
     null,
@@ -479,6 +517,9 @@ export default function App() {
     <SpeechContext.Provider
       value={{
         state: speechState,
+        voiceLabel: ttsPreference
+          ? `${ttsPreference.name}${preferredVoice(ttsVoices, ttsPreference) ? "" : "（目前不可用，暫用自動）"}`
+          : "自動選擇（優先臺灣中文）",
         progress: speechProgress,
         seek: (position: number) => {
           setPlaying(false);
@@ -544,6 +585,16 @@ export default function App() {
               <Grid2X2 size={20} />
               查字小幫手
             </button>
+            <button
+              className={page === "tts" ? "nav-item active" : "nav-item"}
+              onClick={() => {
+                setPage("tts");
+                setPlaying(false);
+              }}
+            >
+              <Settings2 size={20} />
+              TTS 設定後台
+            </button>
           </nav>
           <div className="side-garden">
             <Mascot />
@@ -570,7 +621,9 @@ export default function App() {
                 ? "生字動畫教室"
                 : page === "library"
                   ? "我的生字收藏本"
-                  : "查字小幫手"}
+                  : page === "resources"
+                    ? "查字小幫手"
+                    : "TTS 設定後台"}
             </span>
             <div className="topbar-actions">
               <SpeechTools
@@ -1619,6 +1672,24 @@ export default function App() {
                 </div>
               </>
             )}
+            {page === "tts" && (
+              <TtsSettings
+                voices={ttsVoices}
+                saved={ttsPreference}
+                supported={"speechSynthesis" in window}
+                refresh={refreshTtsVoices}
+                save={saveTtsDefault}
+                preview={(text, preference) => {
+                  setError("");
+                  setPlaying(false);
+                  speech.speak(
+                    text,
+                    speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85,
+                    preference,
+                  );
+                }}
+              />
+            )}
             <footer className="page-footer">
               <span>
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
@@ -1630,6 +1701,17 @@ export default function App() {
         {modal === "settings" && (
           <Modal title="學習偏好" close={() => setModal(null)}>
             <p className="modal-description">讓教室變成適合自己的樣子。</p>
+            <button
+              className="secondary full"
+              onClick={() => {
+                setModal(null);
+                setPage("tts");
+                setPlaying(false);
+              }}
+            >
+              管理 TTS 來源與預設音色
+              <ArrowRight size={16} />
+            </button>
             {[
               { label: "顯示注音", checked: showReading, set: setShowReading },
               { label: "顯示重點字幕", checked: captions, set: setCaptions },

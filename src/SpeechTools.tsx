@@ -3,6 +3,7 @@ import { Volume2, Pause, Play, Square, RotateCcw } from "lucide-react";
 import { speechTime, type SpeechState } from "./speech";
 export const SpeechContext = createContext({
   state: "idle" as SpeechState,
+  voiceLabel: "自動選擇（優先臺灣中文）",
   progress: { position: 0, total: 0, rate: 0.85 },
   seek: (_position: number) => {},
   replay: () => {},
@@ -82,6 +83,9 @@ export default function SpeechTools({
           </div>
         </>
       )}
+      <span className="speech-voice-label" title={speech.voiceLabel}>
+        預設音色：{speech.voiceLabel}
+      </span>
     </div>
   );
 }
