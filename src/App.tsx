@@ -49,6 +49,7 @@ import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
 import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
+import OfficialDictionary from "./OfficialDictionary";
 import { phraseSuggestions } from "./phraseSuggestions";
 import {
   loadVoicePreference,
@@ -1171,9 +1172,13 @@ export default function App() {
                                   <p>
                                     {PHRASES[collection.sourcePhrase]
                                       ?.explanation ||
-                                      "目前無已核對資料。先和老師一起查詢語詞。"}
+                                      "下方提供教育部詞語注音與釋義，可搭配官方查詢一起學習。"}
                                   </p>
                                 </div>
+                                <OfficialDictionary
+                                  phrase={collection.sourcePhrase}
+                                  speak={say}
+                                />
                                 <span className="mini-status">
                                   {card.source
                                     ? "語境教材 · 白話待教師審定"
@@ -1282,6 +1287,10 @@ export default function App() {
                                   <Volume2 size={17} />
                                   讀給我聽
                                 </button>
+                                <OfficialDictionary
+                                  phrase={collection.sourcePhrase}
+                                  speak={say}
+                                />
                               </>
                             )}
                             {scene === 5 && (

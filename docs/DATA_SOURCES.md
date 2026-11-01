@@ -26,3 +26,17 @@
 一般未知語詞即使含已收錄的字，也不沿用其他語詞讀音或意義。須先補充語境校對資料。書面語讀音與裝置 TTS 可能不同，朗讀只作輔助。
 
 程式碼依專案授權設定；不宣稱取得教育部網站素材重製授權。白話與例句為本專案原創，正式課堂使用前建議教師審定。
+
+## 教育部官方詞庫（2026-11-01）
+
+中華民國教育部（Ministry of Education, R.O.C.）。《國語辭典簡編本》（版本編號：2014_20260929）。原典：https://dict.concised.moe.edu.tw/
+
+- 官方下載頁：https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/dict_concised_download.html
+- 原始 ZIP：https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/download/dict_concised_2014_20260929.zip
+- XLSX SHA256：AF2E9BA3655799080E0F7214646BDE11CA5CC5E16226BCA1E9A461285E05EEC6
+- 45,178 筆詞目，全部 15 欄保留，未改寫原文。僅解碼 SpreadsheetML 換行表示並轉為 JSON；腳本 scripts/import-moe.py 可從官方 XLSX 重建。
+- CC BY-ND 3.0 TW。完整官方公眾授權使用說明隨應用保留於 public/dictionaries/moe-usage.pdf，介面提供連結與版本標示。
+- 認識生字與語詞中的意思兩幕依目前語詞精確比對，呈現所有相同詞目的讀音及完整釋義。保留多音條目，不任選讀音對應到單字。此詞庫不會把逐字教材、拆字、筆順或白話解說變成已審定資料。
+- 詞庫約 10.8 MB，進入相關分鏡才載入，當次頁面共用快取。這是本機版本快照，不宣稱連線即時同步；空結果與失敗提供官方入口及重試。
+- 國教院詞語分級官方入口：https://coct.naer.edu.tw/word.jsp ，WORD 參數隨語詞更新。僅開啟官方查詢，未擷取或複製分級／詞頻資料。
+- 「試試看」建議目前仍使用原有有限詞表，未改為完整詞庫推薦。

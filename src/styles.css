@@ -2869,3 +2869,51 @@ dialog::backdrop {
     max-width: 100%;
   }
 }
+/* Official dictionary entries remain separate from editorial teaching text. */
+.official-dictionary {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #ccd7c2;
+  min-width: 0;
+}
+.official-dictionary h3 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+.official-dictionary .official-reading {
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+.official-dictionary .official-definition {
+  white-space: pre-wrap;
+  font-size: 19px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.official-dictionary article + article {
+  border-top: 1px solid #dde4d5;
+  margin-top: 16px;
+}
+.official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 16px 0;
+  font-size: 16px;
+}
+.official-dictionary a {
+  color: #285d50;
+  text-underline-offset: 4px;
+}
+.official-dictionary small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #657563;
+}
+.official-dictionary .text-button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid #cbd7c1;
+  border-radius: 10px;
+}
