@@ -42,7 +42,12 @@ import { download, jsonBlob, pdfBlob, pngBlob } from "./exports";
 import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
 import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
-import { SpeechController, sceneNarration, type SpeechState } from "./speech";
+import {
+  SpeechController,
+  sceneNarration,
+  type SpeechState,
+  type SpeechProgress,
+} from "./speech";
 
 type Page = "learn" | "library" | "resources";
 const err = (e: unknown) =>
@@ -243,6 +248,11 @@ export default function App() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [speechState, setSpeechState] = useState<SpeechState>("idle");
+  const [speechProgress, setSpeechProgress] = useState<SpeechProgress>({
+    position: 0,
+    total: 0,
+    rate: 0.85,
+  });
   const speechRef = useRef<SpeechController | null>(null);
   if (!speechRef.current)
     speechRef.current = new SpeechController(
@@ -250,6 +260,7 @@ export default function App() {
       (text) => new SpeechSynthesisUtterance(text),
       setSpeechState,
       setError,
+      setSpeechProgress,
     );
   const speech = speechRef.current;
   const [busy, setBusy] = useState("");
@@ -468,6 +479,15 @@ export default function App() {
     <SpeechContext.Provider
       value={{
         state: speechState,
+        progress: speechProgress,
+        seek: (position: number) => {
+          setPlaying(false);
+          speech.seek(position);
+        },
+        replay: () => {
+          setPlaying(false);
+          speech.replay();
+        },
         say,
         stop: () => {
           speech.stop();

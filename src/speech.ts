@@ -70,39 +70,104 @@ export function sceneNarration(
   );
 }
 export type SpeechState = "idle" | "speaking" | "paused";
+export interface SpeechProgress {
+  position: number;
+  total: number;
+  rate: number;
+}
+export function speechTime(position: number, rate: number) {
+  const seconds = Math.max(0, Math.round(position / (4 * rate)));
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
 export class SpeechController {
   private generation = 0;
   private current: SpeechSynthesisUtterance | null = null;
+  private text = "";
+  private rate = 0.85;
+  private position = 0;
+  private playbackState: SpeechState = "idle";
+  private pendingSeek = false;
+  private timer: ReturnType<typeof setInterval> | null = null;
   constructor(
     private synth: SpeechSynthesis | undefined,
     private makeUtterance: (text: string) => SpeechSynthesisUtterance,
     private onState: (state: SpeechState) => void,
     private onError: (text: string) => void,
+    private onProgress: (progress: SpeechProgress) => void = () => {},
   ) {}
-  stop() {
+  private state(value: SpeechState) {
+    this.playbackState = value;
+    this.onState(value);
+  }
+  private report() {
+    this.onProgress({
+      position: Math.floor(this.position),
+      total: Array.from(this.text).length,
+      rate: this.rate,
+    });
+  }
+  private halt() {
     this.generation++;
     this.current = null;
+    this.pendingSeek = false;
+    if (this.timer) clearInterval(this.timer);
+    this.timer = null;
     this.synth?.cancel();
-    this.onState("idle");
+  }
+  stop() {
+    this.halt();
+    this.text = "";
+    this.position = 0;
+    this.state("idle");
+    this.report();
   }
   pause() {
     if (!this.current) return;
     this.synth?.pause();
-    this.onState("paused");
+    this.state("paused");
   }
   resume() {
+    if (this.pendingSeek) {
+      this.pendingSeek = false;
+      this.startAt(Math.floor(this.position));
+      return;
+    }
     if (!this.current) return;
     this.synth?.resume();
-    this.onState("speaking");
+    this.state("speaking");
+  }
+  replay() {
+    if (this.text) this.speak(this.text, this.rate);
+  }
+  seek(position: number) {
+    if (!this.text) return;
+    this.halt();
+    this.position = Math.max(
+      0,
+      Math.min(Array.from(this.text).length, Math.round(position)),
+    );
+    this.report();
+    this.pendingSeek = true;
+    this.state("paused");
   }
   speak(text: string, rate: number) {
     this.stop();
+    this.text = speechChunks(text).join("");
+    this.rate = rate;
+    if (!this.text) return;
+    this.report();
+    this.startAt(0);
+  }
+  private startAt(offset: number) {
     if (!this.synth) {
+      this.stop();
       this.onError("此瀏覽器未提供 TTS 朗讀功能，仍可閱讀文字。");
       return;
     }
-    const chunks = speechChunks(text);
-    if (!chunks.length) return;
+    const characters = Array.from(this.text);
+    while (offset < characters.length && /\s/u.test(characters[offset]))
+      offset++;
+    const chunks = speechChunks(characters.slice(offset).join(""));
     const generation = this.generation;
     const voices = this.synth.getVoices();
     const voice =
@@ -110,38 +175,67 @@ export class SpeechController {
       voices.find((v) => /^zh[-_]Hant/i.test(v.lang)) ||
       voices.find((v) => /^zh/i.test(v.lang));
     if (voices.length && !voice) {
+      this.stop();
       this.onError(
         "裝置目前沒有可用的中文語音，請先在系統安裝中文語音，再重新嘗試。",
       );
       return;
     }
-    const next = (index: number) => {
+    const next = (index: number, base: number) => {
       if (generation !== this.generation) return;
+      if (this.timer) clearInterval(this.timer);
+      this.timer = null;
+      this.position = base;
+      this.report();
       if (index >= chunks.length) {
         this.current = null;
-        this.onState("idle");
+        this.state("idle");
         return;
       }
       try {
-        const utterance = this.makeUtterance(chunks[index]);
+        const text = chunks[index],
+          length = Array.from(text).length;
+        const utterance = this.makeUtterance(text);
         this.current = utterance;
         utterance.lang = "zh-TW";
-        utterance.rate = rate;
+        utterance.rate = this.rate;
         if (voice) utterance.voice = voice;
-        utterance.onend = () => next(index + 1);
+        utterance.onboundary = (e) => {
+          if (
+            generation !== this.generation ||
+            this.playbackState !== "speaking"
+          )
+            return;
+          this.position = base + Array.from(text.slice(0, e.charIndex)).length;
+          this.report();
+        };
+        utterance.onend = () => next(index + 1, base + length);
         utterance.onerror = (e) => {
           if (generation !== this.generation) return;
           this.stop();
           if (e.error !== "interrupted" && e.error !== "canceled")
             this.onError("朗讀未成功，請確認裝置有可用的中文語音，然後重試。");
         };
-        this.onState("speaking");
+        this.state("speaking");
+        let last = Date.now();
+        this.timer = setInterval(() => {
+          const now = Date.now();
+          if (this.playbackState === "speaking") {
+            this.position = Math.min(
+              base + length - 1,
+              this.position + ((now - last) / 1000) * 4 * this.rate,
+            );
+            this.report();
+          }
+          last = now;
+        }, 250);
+        if (this.synth!.paused) this.synth!.resume();
         this.synth!.speak(utterance);
       } catch {
         this.stop();
         this.onError("裝置無法啟動中文朗讀，請換用支援 TTS 的瀏覽器。");
       }
     };
-    next(0);
+    next(0, offset);
   }
 }

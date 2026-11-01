@@ -1,6 +1,16 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { buildCollection, PHRASES } from "./data";
-import { sceneNarration, speechChunks, SpeechController } from "./speech";
+import {
+  sceneNarration,
+  speechChunks,
+  SpeechController,
+  speechTime,
+} from "./speech";
+beforeEach(() => vi.useFakeTimers());
+afterEach(() => {
+  vi.clearAllTimers();
+  vi.useRealTimers();
+});
 function setup(voices: SpeechSynthesisVoice[] = []) {
   const utterances: SpeechSynthesisUtterance[] = [];
   const synth = {
@@ -12,6 +22,7 @@ function setup(voices: SpeechSynthesisVoice[] = []) {
   };
   const state = vi.fn(),
     error = vi.fn();
+  const progress = vi.fn();
   const controller = new SpeechController(
     synth as unknown as SpeechSynthesis,
     (text) => {
@@ -21,11 +32,146 @@ function setup(voices: SpeechSynthesisVoice[] = []) {
     },
     state,
     error,
+    progress,
   );
-  return { controller, synth, utterances, state, error };
+  return { controller, synth, utterances, state, error, progress };
 }
 const end = (u: SpeechSynthesisUtterance) =>
   u.onend?.({} as SpeechSynthesisEvent);
+
+describe("朗讀進度與定位", () => {
+  it("暫停後收到延遲文字邊界事件不移動進度", () => {
+    const t = setup();
+    t.controller.speak("感謝你的幫忙。", 1);
+    t.controller.pause();
+    t.utterances[0].onboundary?.({ charIndex: 4 } as SpeechSynthesisEvent);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 0,
+      total: 7,
+      rate: 1,
+    });
+  });
+  it("原生引擎已暫停時，定位繼續或重播會喚醒引擎", () => {
+    const t = setup();
+    Object.assign(t.synth, { paused: true });
+    t.controller.speak("感謝你的幫忙。", 1);
+    expect(t.synth.resume).toHaveBeenCalledOnce();
+    t.controller.seek(2);
+    t.controller.resume();
+    expect(t.synth.resume).toHaveBeenCalledTimes(2);
+  });
+  it("顯示估計時間並格式化分鐘", () => {
+    expect(speechTime(240, 1)).toBe("1:00");
+    expect(speechTime(120, 0.5)).toBe("1:00");
+  });
+  it("進度隨朗讀估算前進，暫停時凍結", () => {
+    const t = setup();
+    t.controller.speak("字".repeat(100), 1);
+    vi.advanceTimersByTime(2000);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 8,
+      total: 100,
+      rate: 1,
+    });
+    t.controller.pause();
+    vi.advanceTimersByTime(5000);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 8,
+      total: 100,
+      rate: 1,
+    });
+    t.controller.resume();
+    vi.advanceTimersByTime(1000);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 12,
+      total: 100,
+      rate: 1,
+    });
+  });
+  it("拖曳定位會取消舊語音並停在所選文字，繼續才接著讀", () => {
+    const t = setup();
+    t.controller.speak("一二三四五六七八九十。", 1);
+    const old = t.utterances[0];
+    t.controller.seek(5);
+    expect(t.state).toHaveBeenLastCalledWith("paused");
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 5,
+      total: 11,
+      rate: 1,
+    });
+    end(old);
+    expect(t.synth.speak).toHaveBeenCalledTimes(1);
+    t.controller.resume();
+    expect(t.utterances[1].text).toBe("六七八九十。");
+  });
+  it("重播從第一個字開始，而非接著定位處", () => {
+    const t = setup();
+    t.controller.speak("感謝你的幫忙。", 1);
+    t.controller.seek(3);
+    t.controller.resume();
+    t.controller.replay();
+    expect(t.utterances.at(-1)?.text).toBe("感謝你的幫忙。");
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 0,
+      total: 7,
+      rate: 1,
+    });
+  });
+  it("定位保留代理字元，不將罕字切成兩半", () => {
+    const t = setup();
+    t.controller.speak("甲𠮷乙丙。", 1);
+    t.controller.seek(1);
+    t.controller.resume();
+    expect(t.utterances.at(-1)?.text).toBe("𠮷乙丙。");
+  });
+  it("定位限制在有效範圍，定位結尾不會重播", () => {
+    const t = setup();
+    t.controller.speak("謝謝。", 1);
+    t.controller.seek(500);
+    t.controller.resume();
+    expect(t.state).toHaveBeenLastCalledWith("idle");
+    expect(t.synth.speak).toHaveBeenCalledTimes(1);
+  });
+  it("實際文字邊界事件同步位置，UTF16 轉為字元位置", () => {
+    const t = setup();
+    t.controller.speak("甲𠮷乙丙。", 1);
+    t.utterances[0].onboundary?.({ charIndex: 3 } as SpeechSynthesisEvent);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 2,
+      total: 5,
+      rate: 1,
+    });
+  });
+  it("停止清除進度及定位，舊事件不能復活時間列", () => {
+    const t = setup();
+    t.controller.speak("感謝。", 1);
+    const old = t.utterances[0];
+    t.controller.stop();
+    old.onboundary?.({ charIndex: 2 } as SpeechSynthesisEvent);
+    vi.advanceTimersByTime(2000);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 0,
+      total: 0,
+      rate: 1,
+    });
+  });
+  it("分段結束時進度銜接且最後到達總長", () => {
+    const t = setup();
+    t.controller.speak("第一句。第二句。", 1);
+    end(t.utterances[0]);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 4,
+      total: 8,
+      rate: 1,
+    });
+    end(t.utterances[1]);
+    expect(t.progress).toHaveBeenLastCalledWith({
+      position: 8,
+      total: 8,
+      rate: 1,
+    });
+  });
+});
 describe("各幕完整朗讀內容", () => {
   const card = buildCollection("感謝", [1]).cards[0];
   it.each([0, 1, 2, 3, 4, 5])("第 %i 幕有教學內容而非只有標題", (scene) =>
