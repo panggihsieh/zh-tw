@@ -1458,6 +1458,7 @@ function App() {
                                         </span>
                                         <button
                                           className="word-flip"
+                                          title={`${v.meaning}\n例句：${v.example}`}
                                           onMouseEnter={() => setPreviewWord(v.word)}
                                           onMouseLeave={() => setPreviewWord(null)}
                                           onFocus={() => setPreviewWord(v.word)}
@@ -1479,7 +1480,7 @@ function App() {
                                           {showReading && (
                                             <span>{v.reading}</span>
                                           )}
-                                          <small>
+                                          <small title={`${v.meaning}\n例句：${v.example}`}>
                                             {revealed.includes(v.word)
                                               ? "收起解釋"
                                               : "翻開看解釋 ↗"}
