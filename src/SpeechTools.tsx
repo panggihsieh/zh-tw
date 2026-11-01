@@ -68,28 +68,13 @@ export default function SpeechTools({
           </button>
           {speech.progress.total > 0 && (
             <div className="speech-timeline">
-              <label>
+              <div className="speech-time-values">
                 <span>朗讀進度（估計時間）</span>
                 <span>
                   {speechTime(speech.progress.position, speech.progress.rate)} /{" "}
                   {speechTime(speech.progress.total, speech.progress.rate)}
                 </span>
-                <input
-                  type="range"
-                  aria-label="朗讀時間位置"
-                  min={0}
-                  max={speech.progress.total}
-                  step={1}
-                  value={speech.progress.position}
-                  aria-valuetext={`約 ${speechTime(speech.progress.position, speech.progress.rate)}，共約 ${speechTime(speech.progress.total, speech.progress.rate)}`}
-                  onChange={(e) => speech.seek(Number(e.target.value))}
-                />
-              </label>
-              <small>
-                {speech.state === "paused"
-                  ? "已暫停，可按繼續朗讀。"
-                  : "拖曳可定位並暫停，再按繼續朗讀。"}
-              </small>
+              </div>
             </div>
           )}
         </>

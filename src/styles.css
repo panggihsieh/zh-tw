@@ -2560,24 +2560,11 @@ dialog::backdrop {
   color: #424f39;
   font-size: 18px;
 }
-.speech-timeline label {
+.speech-time-values {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 7px 14px;
   align-items: center;
-}
-.speech-timeline input {
-  grid-column: 1/-1;
-  width: 100%;
-  height: 20px;
-  margin: 0;
-  accent-color: #285d50;
-  cursor: pointer;
-}
-.speech-timeline small {
-  font-size: 18px;
-  display: block;
-  line-height: 1.6;
 }
 .topbar:has(.speech-timeline) {
   height: auto;
@@ -2602,12 +2589,6 @@ dialog::backdrop {
   }
   .speech-timeline {
     max-width: none;
-  }
-  .speech-timeline input {
-    height: 30px;
-  }
-  .speech-timeline small {
-    font-size: 18px;
   }
 }
 
