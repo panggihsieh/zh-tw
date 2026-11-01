@@ -38,3 +38,35 @@ export function validateCorrection(value) {
   if(!['pending','corrected','reviewed'].includes(value.status)) throw Error('核對狀態錯誤。');
   return value;
 }
+export const horizontalPresets = {
+  narrow: {label:'左窄右寬', weights:[35,65]},
+  equal: {label:'左右等寬', weights:[50,50]},
+  wide: {label:'左寬右窄', weights:[65,35]},
+  triple: {label:'左中右', weights:[33,34,33]},
+};
+export function horizontalKind(tree,weights) {
+  if(tree.value==='⿲') return 'triple';
+  if(tree.value!=='⿰') return '';
+  return weights[0]===weights[1]?'equal':weights[0]<weights[1]?'narrow':'wide';
+}
+export function structureLabel(tree,weights) {
+  return horizontalPresets[horizontalKind(tree,weights)]?.label || names[tree.value] || '獨體／未再拆分';
+}
+export function serializeIds(tree) {return tree.value+tree.children.map(serializeIds).join('');}
+export function horizontalParts(tree,kind) {
+  let parts=tree.children.map(serializeIds);
+  if(kind==='triple' && tree.children.length===2){
+    const [left,right]=tree.children;
+    if(right.value==='⿰') parts=[serializeIds(left),...right.children.map(serializeIds)];
+    else if(left.value==='⿰') parts=[...left.children.map(serializeIds),serializeIds(right)];
+    else parts=[parts[0],'',parts[1]];
+  }
+  if(kind!=='triple' && parts.length===3) parts=[parts[0],'⿰'+parts[1]+parts[2]];
+  return parts.length ? parts : ['',...(kind==='triple'?['']:[]),''];
+}
+export function applyHorizontalPreset(kind,parts) {
+  const preset=horizontalPresets[kind];
+  if(!preset || parts.length!==preset.weights.length || parts.some(p=>!p.trim())) throw Error(kind==='triple'?'請填寫左、中、右三個部件；不會自動猜補中間部件。':'請填寫左、右兩個部件。');
+  parts.forEach(parseIds);
+  return {ids:(kind==='triple'?'⿲':'⿰')+parts.map(p=>p.trim()).join(''),weights:[...preset.weights]};
+}

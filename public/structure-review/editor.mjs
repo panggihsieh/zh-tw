@@ -1,4 +1,4 @@
-import {names,parseIds,suggestedWeights,validateWeights,validateCorrection} from './review-model.mjs';
+import {names,parseIds,suggestedWeights,validateWeights,validateCorrection,horizontalKind,horizontalParts,applyHorizontalPreset,structureLabel} from './review-model.mjs';
 const $=id=>document.getElementById(id);
 const key='kangxuan-structure-corrections-v1', viewKey='kangxuan-structure-view-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -27,7 +27,7 @@ function diagram(ids,weights){
     if(op==='⿻') inner=[x+w*.35,y+h*.35,w*.65,h*.65];
     return rect(x,y,w,h,colors[depth%3])+draw(n.children[0],...outer,depth+1)+draw(n.children[1],...inner,depth+2);
   }
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${esc(names[tree.value]||'獨體／未再拆分')}結構候選"><g fill="#285d50" font-family="MingLiU-ExtB,PMingLiU,Microsoft JhengHei,serif">${draw(tree,1,1,98,98)}</g></svg>`;
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${esc(structureLabel(tree,weights))}結構候選"><g fill="#285d50" font-family="MingLiU-ExtB,PMingLiU,Microsoft JhengHei,serif">${draw(tree,1,1,98,98)}</g></svg>`;
 }
 function pair(c,v){return `<div class="pair"><div class="character">${esc(c.character)}</div>${diagram(v.ids,v.weights)}</div>`;}
 function book(){return data.books.find(b=>b.id===$('book').value);}
@@ -37,7 +37,7 @@ function render(){
   const list=all.filter(c=>(!$('lesson').value||c.lesson.id===$('lesson').value)&&(!$('search').value||$('search').value.includes(c.character))&&(!$('status').value||current(c).status===$('status').value));
   page=Math.max(0,Math.min(page,Math.ceil(list.length/24)-1));
   $('scope').textContent=`${b.title} · ${b.year.replace('_1',' 學年度上學期').replace('_2',' 學年度下學期')} · ${b.lessons.length} 課 / ${all.length} 字 · 符合條件 ${list.length} 字 · 本冊已目測確認 ${all.filter(c=>current(c).status==='reviewed').length} 字`;
-  $('grid').innerHTML=list.slice(page*24,page*24+24).map(c=>{const v=current(c),tree=parseIds(v.ids);return `<article class="card ${v.status}"><div class="card-top"><span>${esc(c.lesson.title.split('：')[0])}</span><span>${esc(names[tree.value]||'獨體／未再拆分')}</span></div>${pair(c,v)}<div class="card-bottom"><span>部首：${esc(v.radical||'待核')}</span><span class="badge">${states[v.status]}</span></div><button data-char="${esc(c.character)}">目測／修正 ${esc(c.character)}</button></article>`;}).join('');
+  $('grid').innerHTML=list.slice(page*24,page*24+24).map(c=>{const v=current(c),tree=parseIds(v.ids);return `<article class="card ${v.status}"><div class="card-top"><span>${esc(c.lesson.title.split('：')[0])}</span><span>${esc(structureLabel(tree,v.weights))}</span></div>${pair(c,v)}<div class="card-bottom"><span>部首：${esc(v.radical||'待核')}</span><span class="badge">${states[v.status]}</span></div><button data-char="${esc(c.character)}">目測／修正 ${esc(c.character)}</button></article>`;}).join('');
   $('position').textContent=list.length?`${page+1} / ${Math.ceil(list.length/24)} 頁`:'沒有符合的生字';$('prev').disabled=page===0;$('next').disabled=(page+1)*24>=list.length;
   try{localStorage.setItem(viewKey,JSON.stringify({book:b.id,lesson:$('lesson').value,search:$('search').value,status:$('status').value,page}));}catch{}
   $('grid').querySelectorAll('button').forEach(btn=>btn.onclick=()=>open(all.find(c=>c.character===btn.dataset.char)));
@@ -48,12 +48,26 @@ function open(c){
   $('weights').value=v.weights.join(',');$('review-status').value=v.status;
   $('dictionary').textContent=c.dictionary.length?c.dictionary.map(d=>`部首：${d.radical}｜讀音：${d.reading}｜${d.meaning}`).join('\n'):'教育部簡編本未收錄此單字，部首、音義待核對。';
   $('lesson-source').href=c.lesson.source;$('lesson-source').textContent=`${c.lesson.title} · 教育百科來源 ↗`;
-  $('error').textContent='';preview();$('edit').showModal();
+  $('error').textContent='';syncHorizontal();preview();$('edit').showModal();
 }
-function formValue(){const tree=parseIds($('ids').value);return validateCorrection({ids:$('ids').value.trim(),weights:validateWeights($('weights').value,tree.children.length||1),radical:$('radical').value,explanation:$('explanation').value,source:$('source').value,note:$('note').value,status:$('review-status').value,updatedAt:new Date().toISOString()});}
+function formValue(){if($('horizontal').value){const kind=$('horizontal').value;const parts=kind==='triple'?[$('left-part').value,$('middle-part').value,$('right-part').value]:[$('left-part').value,$('right-part').value];if(applyHorizontalPreset(kind,parts).ids!==$('ids').value.trim())throw Error('請完成部件修改並更新預覽。');}const tree=parseIds($('ids').value);return validateCorrection({ids:$('ids').value.trim(),weights:validateWeights($('weights').value,tree.children.length||1),radical:$('radical').value,explanation:$('explanation').value,source:$('source').value,note:$('note').value,status:$('review-status').value,updatedAt:new Date().toISOString()});}
 function preview(){try{const tree=parseIds($('ids').value);$('weights').disabled=!(tree.children.length && '⿰⿲⿱⿳'.includes(tree.value));$('weights-help').textContent=$('weights').disabled?'獨體、包圍與重疊採位置示意，本欄不調整輪廓；可修改結構式及查證紀錄。':'比例調整第一層分區；內層仍採初始示意比例。';$('preview').innerHTML=pair(selected,formValue());$('error').textContent='';}catch(e){$('error').textContent=e.message;}}
-$('ids').onchange=()=>{try{$('weights').value=suggestedWeights(parseIds($('ids').value)).join(',');preview();}catch(e){$('error').textContent=e.message;}};
-$('weights').onchange=preview;$('preview-button').onclick=preview;
+function syncHorizontal(){
+  const tree=parseIds($('ids').value),weights=validateWeights($('weights').value,tree.children.length||1),kind=horizontalKind(tree,weights);
+  $('horizontal').value=kind;showHorizontalParts(kind,tree);
+}
+function showHorizontalParts(kind,tree){
+  $('horizontal-parts').hidden=!kind;$('middle-label').hidden=kind!=='triple';
+  if(!kind)return;
+  const parts=horizontalParts(tree,kind);$('left-part').value=parts[0]||'';$('right-part').value=parts.at(-1)||'';$('middle-part').value=kind==='triple'?parts[1]||'':'';
+}
+function updateHorizontal(){
+  try{const kind=$('horizontal').value;if(!kind)return;const parts=kind==='triple'?[$('left-part').value,$('middle-part').value,$('right-part').value]:[$('left-part').value,$('right-part').value];const value=applyHorizontalPreset(kind,parts);$('ids').value=value.ids;$('weights').value=value.weights.join(',');preview();}catch(e){$('error').textContent=e.message;}
+}
+$('horizontal').onchange=()=>{try{const kind=$('horizontal').value;showHorizontalParts(kind,parseIds($('ids').value));updateHorizontal();}catch(e){$('error').textContent=e.message;}};
+for(const id of ['left-part','middle-part','right-part'])$(id).oninput=updateHorizontal;
+$('ids').onchange=()=>{try{$('weights').value=suggestedWeights(parseIds($('ids').value)).join(',');syncHorizontal();preview();}catch(e){$('error').textContent=e.message;}};
+$('weights').onchange=()=>{try{syncHorizontal();}catch{}preview();};$('preview-button').onclick=preview;
 $('operators').innerHTML=Object.entries(names).map(([op,name])=>`<button type="button" data-op="${op}" title="${name}">${op} ${name}</button>`).join('');
 $('operators').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{$('ids').value=btn.dataset.op;$('ids').focus();});
 $('close').onclick=()=>$('edit').close();
