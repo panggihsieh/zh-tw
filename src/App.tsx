@@ -43,6 +43,7 @@ import { authorize, CLIENT_ID, loadGoogle, uploadCollection } from "./drive";
 import StrokePlayer from "./StrokePlayer";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
+import { phraseSuggestions } from "./phraseSuggestions";
 import {
   loadVoicePreference,
   saveVoicePreference,
@@ -729,12 +730,26 @@ export default function App() {
                     </form>
                     <div className="suggestions">
                       試試看
-                      {["感謝", "觀察", "銀行", "行走"].map((p) => (
-                        <button onClick={() => choosePhrase(p)} key={p}>
+                      {phraseSuggestions(
+                        input,
+                        saved.map((c) => c.sourcePhrase),
+                      ).map((p) => (
+                        <button
+                          onClick={() => choosePhrase(p)}
+                          key={p}
+                          title={
+                            PHRASES[p]
+                              ? "已收錄語境教材"
+                              : "建議語詞；語境教材待核對"
+                          }
+                        >
                           {p}
                         </button>
                       ))}
                     </div>
+                    <span className="field-note">
+                      建議會隨輸入更新，部分語詞的教材仍待補充。
+                    </span>
                     {saved.length > 0 && (
                       <div className="suggestions recent-phrases">
                         最近收藏
