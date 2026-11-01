@@ -91,9 +91,10 @@ const err = (e: unknown) =>
 const CloudCollections = lazy(() => import("./CloudCollections"));
 const BackendGate = lazy(() => import("./BackendGate"));
 const UserManagement = lazy(() => import("./UserManagement"));
-type BackendSection = "tts" | "api" | "users" | "structure";
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review";
 const backendTitles: Record<BackendSection, string> = {
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
+  lesson: "每課生字結構筆畫查詢", overview: "五上生字拆合總覽", review: "康軒生字結構修正",
 };
 export default function ProtectedApp() {
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
@@ -800,18 +801,18 @@ function App() {
               <Grid2X2 size={20} />
               字形結構說明
             </button>
-            <a className="nav-item" href="/structure-review/editor.html?mode=lesson">
+            <button aria-current={backendSection === "lesson" ? "page" : undefined} className={backendSection === "lesson" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("lesson")}>
               <Grid2X2 size={20} />
               每課生字結構筆畫查詢
-            </a>
-            <a className="nav-item" href="/structure-review/five-upper.html">
+            </button>
+            <button aria-current={backendSection === "overview" ? "page" : undefined} className={backendSection === "overview" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("overview")}>
               <Grid2X2 size={20} />
               五上生字拆合總覽
-            </a>
-            <a className="nav-item" href="/structure-review/editor.html">
+            </button>
+            <button aria-current={backendSection === "review" ? "page" : undefined} className={backendSection === "review" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("review")}>
               <Grid2X2 size={20} />
               康軒生字結構修正
-            </a>
+            </button>
             </>)}
           </nav>
               {!backendMode && <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
@@ -1912,6 +1913,14 @@ function App() {
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "structure" && <BackendStructure />}
+                  {(["lesson", "overview", "review"] as string[]).includes(backendSection) && (
+                    <iframe
+                      key={backendSection}
+                      className="backend-tool-frame"
+                      title={backendTitles[backendSection]}
+                      src={backendSection === "lesson" ? "/structure-review/editor.html?mode=lesson" : backendSection === "overview" ? "/structure-review/five-upper.html" : "/structure-review/editor.html"}
+                    />
+                  )}
                 </Suspense></div>
               </>}
               </>

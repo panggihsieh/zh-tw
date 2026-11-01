@@ -3560,6 +3560,15 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   background: #fff;
   overflow: clip;
 }
+.backend-tool-frame {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: max(560px, calc(100dvh - 260px));
+  border: 1px solid #cfdeee;
+  border-radius: 12px;
+  background: #f6f8f1;
+}
 .backend-function-card > summary {
   display: flex;
   justify-content: space-between;
