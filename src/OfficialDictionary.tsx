@@ -16,7 +16,7 @@ export function officialLinks(phrase: string) {
   };
 }
 let pending: Promise<DictionaryData> | undefined;
-function loadDictionary() {
+export function loadDictionary() {
   return (pending ??= fetch(
     `${import.meta.env.BASE_URL}dictionaries/moe-concised.json`,
   )

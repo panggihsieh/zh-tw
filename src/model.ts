@@ -18,7 +18,7 @@ export interface VocabularyEntry {
   meaning: string;
   example: string;
   sense: string;
-  reviewStatus: "editorial";
+  reviewStatus: "editorial" | "official";
   source: Source;
 }
 export interface PhraseContext {
@@ -43,6 +43,7 @@ export interface Card {
   source: Source | null;
 }
 export interface Collection {
+  curriculum?: { publisher: string; grade: number; term: string; year: string; title: string; source: string };
   schemaVersion: 1;
   id: string;
   sourcePhrase: string;

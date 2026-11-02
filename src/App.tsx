@@ -39,7 +39,7 @@ import {
   Shuffle,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
-import { SCENES, validatePhrase } from "./model";
+import { validatePhrase } from "./model";
 import { buildCollection, PHRASES, STROKES, DICTIONARY } from "./data";
 import {
   deleteCollection,
@@ -91,10 +91,12 @@ const err = (e: unknown) =>
 const CloudCollections = lazy(() => import("./CloudCollections"));
 const BackendGate = lazy(() => import("./BackendGate"));
 const UserManagement = lazy(() => import("./UserManagement"));
+const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase";
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum";
 const backendTitles: Record<BackendSection, string> = {
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
+  curriculum: "三家出版社生字資料庫",
   handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
   lesson: "每課生字結構筆畫查詢", overview: "五上生字拆合總覽", review: "康軒生字結構修正",
 };
@@ -496,11 +498,11 @@ function App() {
     card && collection
       ? sceneNarration(
           card,
-          collection.sourcePhrase,
+          collection.curriculum ? card.character : collection.sourcePhrase,
           scene,
           simple,
           wordCount,
-          PHRASES[collection.sourcePhrase]?.explanation,
+          collection.curriculum ? "" : PHRASES[collection.sourcePhrase]?.explanation,
         )
       : "";
   function say(text: string, automatic = false) {
@@ -818,6 +820,9 @@ function App() {
               <Grid2X2 size={20} />
               字形結構說明
             </button>
+            <button aria-current={backendSection === "curriculum" ? "page" : undefined} className={backendSection === "curriculum" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("curriculum")}>
+              <LibraryBig size={20} />三家出版社生字資料庫
+            </button>
             <button aria-current={backendSection === "handwriting" ? "page" : undefined} className={backendSection === "handwriting" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("handwriting")}>
               <Grid2X2 size={20} />平板手寫檢核測試
             </button>
@@ -1115,7 +1120,7 @@ function App() {
                       <section className="classroom" aria-label="單字動畫教室">
                         <div className="classroom-head">
                           <div>
-                            <span className="overline">正在學習的語詞</span>
+                            <span className="overline">{collection.curriculum ? `${collection.curriculum.publisher} ${collection.curriculum.grade}${collection.curriculum.term} · ${collection.curriculum.title}` : "正在學習的語詞"}</span>
                             <strong>{collection.sourcePhrase}</strong>
                             <span className="card-counter">
                               第 {cardIndex + 1} / {collection.cards.length}{" "}
@@ -1182,7 +1187,7 @@ function App() {
                           role="tablist"
                           aria-label="六幕學習"
                         >
-                          {SCENES.map((s, i) => (
+                          {collection.scenes.map((s, i) => (
                             <button
                               key={s}
                               role="tab"
@@ -1255,7 +1260,7 @@ function App() {
                             style={{ animation: reduced ? "none" : undefined }}
                           >
                             <span className="overline">
-                              第 {scene + 1} 幕 / {SCENES[scene]}
+                              第 {scene + 1} 幕 / {collection.scenes[scene]}
                             </span>
                             {scene === 0 && (
                               <>
@@ -1263,27 +1268,25 @@ function App() {
                                   你好，<em>{card.character}</em>。
                                 </h2>
                                 <p>
-                                  這是「{collection.sourcePhrase}」裡，第{" "}
-                                  {card.position + 1} 個字。
+                                  {collection.curriculum ? `這是本批第 ${card.position + 1} 個生字。` : `這是「${collection.sourcePhrase}」裡，第 ${card.position + 1} 個字。`}
                                 </p>
                                 <div className="definition">
                                   <span>先認識這個語詞</span>
                                   <p>
                                     <ReadAlong
                                       text={
-                                        PHRASES[collection.sourcePhrase]
-                                          ?.explanation ||
+                                        (collection.curriculum ? "下方依目前生字提供教育部字典完整釋義，多音、多義請由老師配合課文核對。" : PHRASES[collection.sourcePhrase]?.explanation) ||
                                         "下方提供教育部詞語注音與釋義，可搭配官方查詢一起學習。"
                                       }
                                     />
                                   </p>
                                 </div>
                                 <OfficialDictionary
-                                  phrase={collection.sourcePhrase}
+                                  phrase={collection.curriculum ? card.character : collection.sourcePhrase}
                                   speak={say}
                                 />
                                 <span className="mini-status">
-                                  {card.source
+                                  {collection.curriculum ? "教育部字典資料 · 課文語境待教師核對" : card.source
                                     ? "語境教材 · 白話待教師審定"
                                     : "語境讀音與字義待核對"}
                                 </span>
@@ -1368,7 +1371,7 @@ function App() {
                                   </span>
                                   <div>
                                     <h2>
-                                      在「{collection.sourcePhrase}」裡的意思
+                                      {collection.curriculum ? `「${card.character}」的字典釋義` : `在「${collection.sourcePhrase}」裡的意思`}
                                     </h2>
                                     {showReading && (
                                       <span className="reading">
@@ -1427,7 +1430,7 @@ function App() {
                                   讀給我聽
                                 </button>
                                 <OfficialDictionary
-                                  phrase={collection.sourcePhrase}
+                                  phrase={collection.curriculum ? card.character : collection.sourcePhrase}
                                   speak={say}
                                 />
                               </>
@@ -1573,7 +1576,7 @@ function App() {
                                   </p>
                                 )}
                                 <p className="data-note">
-                                  詞義、注音及例句為編寫教材，待教師審定。不同義項以標籤區分。
+                                  {collection.curriculum ? "詞義及注音為教育部官方詞目原文；須另核對課文中的讀音與用法，未生成例句。" : "詞義、注音及例句為編寫教材，待教師審定。不同義項以標籤區分。"}
                                 </p>
                               </>
                             )}
@@ -1917,6 +1920,7 @@ function App() {
                 </div>
               </>
             )}
+            {backendMode && page === "learn" && collection?.curriculum && <div className="curriculum-preview-return"><button className="secondary" onClick={() => openBackendSection("curriculum")}>返回三家出版社生字資料庫</button><p>課本生字測試預覽 · 所選各字分別查字典，不將字串當成語詞解釋。結構及課文語境待教師核對。</p></div>}
             {page === "tts" && (
               <>
               {(!backendMode || backendSection === "tts") &&
@@ -1943,6 +1947,13 @@ function App() {
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "structure" && <BackendStructure />}
+                  {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
+                    const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
+                    const resources=await loadLearningResources();
+                    const value=buildCurriculumCollection(chars,context,resources);
+                    setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
+                    setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
+                  }} />}
                   {(backendSection === "handwriting" || backendSection === "strokeDatabase") && <HandwritingLab mode={backendSection === "handwriting" ? "test" : "database"} onPractice={() => openBackendSection("handwriting")} />}
                   {(["lesson", "overview", "review"] as string[]).includes(backendSection) && (
                     <iframe

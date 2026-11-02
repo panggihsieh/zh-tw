@@ -57,6 +57,23 @@ export function parseBackup(text: string): Collection {
     !Array.isArray(data.selectedCharacters)
   )
     throw new Error("不是有效的生字本備份。");
+  if (
+    data.curriculum &&
+    (!["南一", "康軒", "翰林"].includes(data.curriculum.publisher) ||
+      !Number.isInteger(data.curriculum.grade) ||
+      data.curriculum.grade < 1 ||
+      data.curriculum.grade > 6 ||
+      !["上", "下"].includes(data.curriculum.term) ||
+      typeof data.curriculum.title !== "string" ||
+      data.curriculum.title.length > 100 ||
+      typeof data.curriculum.year !== "string" ||
+      !/^\d{3}_[12]$/.test(data.curriculum.year) ||
+      typeof data.curriculum.source !== "string" ||
+      !data.curriculum.source.startsWith(
+        "https://pedia.cloud.edu.tw/Bookmark/",
+      ))
+  )
+    throw new Error("課本來源資料格式不符。");
   for (const c of data.cards) {
     if (
       typeof c?.id !== "string" ||

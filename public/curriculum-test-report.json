@@ -1,0 +1,2042 @@
+{
+  "generatedAt": "2026-11-02T20:40:45.589Z",
+  "sourceHash": "f36a6a079ccbfe20327277bc0fb939f786c28761f04a7eb26feacb40d759df68",
+  "scope": "資料格式、六幕講稿、結構圖伺服器渲染及字卡備份；非逐字真人教材審定或所有外部播放器連線驗收",
+  "publishers": [
+    {
+      "publisher": "南一",
+      "books": 12,
+      "lessons": 137,
+      "uniqueCharacters": 2192,
+      "passed": true,
+      "missingDictionary": 1,
+      "missingStructure": 45,
+      "missingOfficialStroke": 1,
+      "missingVocabulary": 35,
+      "gaps": [
+        {
+          "character": "在",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "印",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "不",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鳥",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "誰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "龍",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "帶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "很",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "長",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鼠",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "您",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "棵",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "黑",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "留",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "北",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鹿",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "赤",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "馬",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "候",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "段",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "烏",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "其",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "旅",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "朗",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "班",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "齊",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "免",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "籽",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "曹",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "咦",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "幢",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "島",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "之",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "華",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "骨",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "即",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "存",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "與",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "爭",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "亞",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "踮",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "妞",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "郎",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "既",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "妻",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "慶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "甚",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "扛",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "浹",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "畢",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "垂",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "壼",
+          "dictionary": true,
+          "structure": false,
+          "officialStroke": true,
+          "vocabulary": true
+        },
+        {
+          "character": "徐",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "辨",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "喂",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "栩",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "咂",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "兼",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "樽",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "醅",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "潺",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "摟",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "跆",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "裊",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "艘",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "鼎",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "亦",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "嘖",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "擤",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "鎂",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "吁",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "諄",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "奄",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "曰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "膾",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "典",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "屹",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "濺",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "兢",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "繭",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        }
+      ],
+      "failures": []
+    },
+    {
+      "publisher": "康軒",
+      "books": 12,
+      "lessons": 135,
+      "uniqueCharacters": 2231,
+      "passed": true,
+      "missingDictionary": 0,
+      "missingStructure": 44,
+      "missingOfficialStroke": 1,
+      "missingVocabulary": 44,
+      "gaps": [
+        {
+          "character": "鳥",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "班",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "您",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "黑",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "馬",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "很",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "誰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "不",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "長",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "在",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "帶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "埔",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "烏",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "旅",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "曹",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "北",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鼠",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "候",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "慶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "棵",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "其",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "之",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "島",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "艘",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "踮",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "專",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "留",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "段",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "喵",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "免",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "徐",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "垂",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "濺",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "鰓",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "鹿",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "砰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "爭",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "與",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "朗",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "印",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "華",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "妻",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "嘖",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "甚",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "既",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "粿",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "蹼",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "嫦",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "吳",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "箍",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "齊",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "存",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "虯",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "典",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "即",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "畢",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "咚",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "奄",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "覷",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "姍",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "隼",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "骨",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "龍",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "吁",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "亦",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鏽",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "栩",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "縷",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "惠",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鼎",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "甸",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "嗤",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "嗯",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "劉",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "鷸",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "曰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "虛",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "魏",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "耶",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "櫛",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "岌",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "秘",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "拴",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "郭",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "裊",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "孜",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "埡",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": true,
+          "vocabulary": false
+        },
+        {
+          "character": "鍥",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        }
+      ],
+      "failures": []
+    },
+    {
+      "publisher": "翰林",
+      "books": 12,
+      "lessons": 136,
+      "uniqueCharacters": 2212,
+      "passed": true,
+      "missingDictionary": 1,
+      "missingStructure": 47,
+      "missingOfficialStroke": 2,
+      "missingVocabulary": 38,
+      "gaps": [
+        {
+          "character": "在",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "不",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "誰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "帶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鳥",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "很",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "棵",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "長",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "班",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "段",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "候",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "烏",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "留",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "印",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "粄",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": true,
+          "vocabulary": false
+        },
+        {
+          "character": "馬",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "旅",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "黑",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "北",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "其",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "釜",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "郎",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "即",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "專",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "骨",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "妳",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "蘚",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "龍",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "之",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "徐",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "免",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "既",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "朗",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鼠",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "咦",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "島",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "與",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "爭",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "存",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "叼",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "齊",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "赳",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "呷",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "艘",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "慶",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "華",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "踮",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "侯",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "吔",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "盃",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "吱",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "喳",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "妻",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "甚",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "縷",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "哏",
+          "dictionary": true,
+          "structure": false,
+          "officialStroke": true,
+          "vocabulary": true
+        },
+        {
+          "character": "呎",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "娓",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "幔",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "虛",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "曰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "矣",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "焉",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "亦",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "辨",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鵰",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "垂",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鹿",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "鏽",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "典",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "郭",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "芡",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "袪",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "剌",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "馱",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "濺",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "嗤",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "嗯",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "劉",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "栩",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "纍",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        },
+        {
+          "character": "兼",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "畢",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "秉",
+          "dictionary": false,
+          "structure": true,
+          "officialStroke": false,
+          "vocabulary": false
+        },
+        {
+          "character": "俱",
+          "dictionary": false,
+          "structure": false,
+          "officialStroke": false,
+          "vocabulary": true
+        }
+      ],
+      "failures": []
+    }
+  ],
+  "browser": {
+    "checkedAt": "2026-11-02T20:46:37.032Z",
+    "scope": "每冊第一批代表字的六階段操作、選課與返回；並非全部字逐一真人操作或官方筆順連線驗收",
+    "checks": [
+      {
+        "publisher": "南一",
+        "grade": 1,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 1,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 2,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 2,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 3,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 3,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 4,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 4,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 5,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 5,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 6,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "南一",
+        "grade": 6,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 1,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 1,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 2,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 2,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 3,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 3,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 4,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 4,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 5,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 5,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 6,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "康軒",
+        "grade": 6,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 1,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 1,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 2,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 2,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 3,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 3,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 4,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 4,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 5,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 5,
+        "term": "下",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 6,
+        "term": "上",
+        "scenes": 6
+      },
+      {
+        "publisher": "翰林",
+        "grade": 6,
+        "term": "下",
+        "scenes": 6
+      }
+    ]
+  }
+}
