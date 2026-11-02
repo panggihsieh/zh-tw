@@ -91,6 +91,7 @@ const err = (e: unknown) =>
 const CloudCollections = lazy(() => import("./CloudCollections"));
 const BackendGate = lazy(() => import("./BackendGate"));
 const UserManagement = lazy(() => import("./UserManagement"));
+const StudentCharacterFinder = lazy(() => import("./StudentCharacterFinder"));
 const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
 type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum";
@@ -332,6 +333,7 @@ function App() {
     observer.observe(header);
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
+  const [studentFinderOpen, setStudentFinderOpen] = useState(false);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -894,8 +896,15 @@ function App() {
                     </h1>
                     <p>從一個語詞開始，拆開看、慢慢讀，再收藏成自己的知識。</p>
                   </div>
-                  <span className="edition">繁體中文 · 四～六年級</span>
+                  <span className="edition">繁體中文 · 一～六年級</span>
                 </div>
+                {collection && <button className="secondary" onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
+                {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
+                  const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
+                  const value=buildCurriculumCollection(chars,context,await loadLearningResources());
+                  setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
+                  setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
+                }}/></Suspense>}
                 <div
                   className={`learning-layout ${collection ? "has-session" : ""}`}
                 >
@@ -1382,10 +1391,10 @@ function App() {
                                 </div>
                                 <blockquote>
                                   <ReadAlong
-                                    text={simple ? card.simple : card.meaning}
+                                    text={simple && !collection.curriculum ? card.simple : card.meaning}
                                   />
                                 </blockquote>
-                                <div className="meaning-actions">
+                                {!collection.curriculum && <div className="meaning-actions">
                                   <button
                                     className={
                                       simple
@@ -1414,9 +1423,9 @@ function App() {
                                       <option>低一年級</option>
                                     </select>
                                   </label>
-                                </div>
+                                </div>}
                                 <p className="data-note">
-                                  {grade === "五年級" || grade === "六年級"
+                                  {collection.curriculum ? "字典原文，請配合課文確認讀音與用法。" : grade === "五年級" || grade === "六年級"
                                     ? "五、六年級目前共用同一份白話教材。"
                                     : "白話解釋為本專案編寫，待教師審定。"}
                                 </p>
@@ -1586,7 +1595,7 @@ function App() {
                           <div className="scene-caption">
                             <span>本幕重點</span>
                             {scene === 0
-                              ? `在「${collection.sourcePhrase}」中認識「${card.character}」。`
+                              ? collection.curriculum ? `認識本課生字「${card.character}」。` : `在「${collection.sourcePhrase}」中認識「${card.character}」。`
                               : scene === 1
                                 ? `結構示意：${card.master.structure}`
                                 : scene === 2

@@ -1,0 +1,69 @@
+.student-lookup {
+  margin: 24px 0;
+  padding: 24px 0;
+  border-top: 2px solid #bccdb9;
+  color: #183c34;
+}
+.student-lookup h2 {
+  font-size: 26px;
+}
+.student-lookup p {
+  line-height: 1.85;
+}
+.student-lookup label,
+.student-lookup summary {
+  font-size: 20px;
+  font-weight: 700;
+}
+.student-lookup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0;
+}
+.student-lookup input {
+  min-width: 0;
+  width: min(100%, 340px);
+  font-size: 24px;
+  padding: 12px;
+  border: 1px solid #657e70;
+  border-radius: 8px;
+}
+.student-lookup button {
+  min-height: 48px;
+  white-space: normal;
+  font-size: 18px;
+}
+.student-lookup details {
+  margin-top: 24px;
+}
+.student-lookup summary {
+  cursor: pointer;
+  padding: 16px 0;
+}
+.student-search-results {
+  max-height: 460px;
+  overflow: auto;
+}
+.student-lookup .school-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  margin: 10px 0;
+}
+.school-result strong {
+  font-size: 28px;
+}
+.student-lookup .handwriting-filters {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.student-lookup .handwriting-lab {
+  padding: 0;
+}
+.student-lookup .field-note {
+  color: #38564c;
+  font-size: 16px;
+}

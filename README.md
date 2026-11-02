@@ -90,3 +90,8 @@ TTS 使用瀏覽器 Web Speech API，優先採用後台指定的可用音色；�
 ## 正式網站
 
 [開啟 zh-tw](https://voltaic-circuit-511310-a3-zh-tw.web.app/) · [教師後台](https://voltaic-circuit-511310-a3-zh-tw.web.app/?view=backend)。部署方式、資料隔離及 AI 金鑰設定見 [Firebase 部署說明](docs/FIREBASE_DEPLOY.md)。
+
+## 學生念字與課本找字
+
+前台支援按鍵啟動 zh-TW STT、確認候選後查詢三家出版社一至六年級生字，再進入六幕教室；亦可依課別分批選字。字表含 36 冊、408 課（115 上／114 下），不宣稱逐頁紙本與課文語境已審定。本站不保存錄音；瀏覽器語音服務可能需連網。詳見 [學生 STT 說明](docs/STT_STUDENT.md)。
+

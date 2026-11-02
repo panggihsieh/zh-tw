@@ -11,8 +11,9 @@ interface Book {
   lessons: { title: string; characters: string; source: string }[];
 }
 export default function CurriculumDatabase({
-  onLearn,
+  onLearn, student = false,
 }: {
+  student?: boolean;
   onLearn: (chars: string[], context: LessonContext) => Promise<void>;
 }) {
   const [draft] = useState(() => {
@@ -256,7 +257,7 @@ export default function CurriculumDatabase({
           </p>
         </>
       )}
-      <BackendCard
+      {!student && <BackendCard
         title="三家出版社逐字測試結果"
         description="全量程式檢查與教材缺漏分開記錄"
       >
@@ -289,7 +290,7 @@ export default function CurriculumDatabase({
         ) : (
           <p>尚無可用測試報告。</p>
         )}
-      </BackendCard>
+      </BackendCard>}
     </section>
   );
 }
