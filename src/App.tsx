@@ -91,9 +91,11 @@ const err = (e: unknown) =>
 const CloudCollections = lazy(() => import("./CloudCollections"));
 const BackendGate = lazy(() => import("./BackendGate"));
 const UserManagement = lazy(() => import("./UserManagement"));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review";
+const HandwritingLab = lazy(() => import("./HandwritingLab"));
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase";
 const backendTitles: Record<BackendSection, string> = {
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
+  handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
   lesson: "每課生字結構筆畫查詢", overview: "五上生字拆合總覽", review: "康軒生字結構修正",
 };
 export default function ProtectedApp() {
@@ -815,6 +817,12 @@ function App() {
             <button aria-current={backendSection === "structure" ? "page" : undefined} className={backendSection === "structure" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("structure")}>
               <Grid2X2 size={20} />
               字形結構說明
+            </button>
+            <button aria-current={backendSection === "handwriting" ? "page" : undefined} className={backendSection === "handwriting" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("handwriting")}>
+              <Grid2X2 size={20} />平板手寫檢核測試
+            </button>
+            <button aria-current={backendSection === "strokeDatabase" ? "page" : undefined} className={backendSection === "strokeDatabase" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("strokeDatabase")}>
+              <LibraryBig size={20} />筆順資料庫
             </button>
             <button aria-current={backendSection === "lesson" ? "page" : undefined} className={backendSection === "lesson" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("lesson")}>
               <Grid2X2 size={20} />
@@ -1935,6 +1943,7 @@ function App() {
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "structure" && <BackendStructure />}
+                  {(backendSection === "handwriting" || backendSection === "strokeDatabase") && <HandwritingLab mode={backendSection === "handwriting" ? "test" : "database"} onPractice={() => openBackendSection("handwriting")} />}
                   {(["lesson", "overview", "review"] as string[]).includes(backendSection) && (
                     <iframe
                       key={backendSection}

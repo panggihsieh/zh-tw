@@ -23,6 +23,7 @@
   "homepage": "https://github.com/panggihsieh/zh-tw#readme",
   "dependencies": {
     "firebase": "^13.1.0",
+    "hanzi-writer": "^3.7.3",
     "idb": "^8.0.4",
     "jose": "^6.2.14",
     "jspdf": "^4.2.1",
@@ -36,6 +37,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "fake-indexeddb": "^6.2.7",
     "google-auth-library": "^11.3.2",
+    "hanzi-writer-data": "^2.0.1",
     "prettier": "^3.9.10",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",

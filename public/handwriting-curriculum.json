@@ -1,0 +1,2849 @@
+{
+  "books": [
+    {
+      "publisher": "康軒",
+      "grade": 1,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103011140201",
+          "title": "第一課：看",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140201",
+          "characters": "要靜天空雲水蟲鳥草先完再去"
+        },
+        {
+          "id": "0103011140202",
+          "title": "第二課：花園裡有什麼？",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140202",
+          "characters": "園聽沒正唱著輕快歌出新芽聞身香呢"
+        },
+        {
+          "id": "0103011140203",
+          "title": "第三課：媽媽的音樂會",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140203",
+          "characters": "媽音樂會始來重短陣過後吃菜就桌真"
+        },
+        {
+          "id": "0103011140204",
+          "title": "第四課：鞋",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140204",
+          "characters": "鞋回家把脫爸靠見像船港口享受溫暖"
+        },
+        {
+          "id": "0103011140205",
+          "title": "第五課：小種子快長大",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140205",
+          "characters": "種問怎做它才需於澆陽光放院公話伴"
+        },
+        {
+          "id": "0103011140206",
+          "title": "第六課：奶奶的小跟班",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140206",
+          "characters": "奶跟班床弟她酒拿卡片給寫喜歡您都"
+        },
+        {
+          "id": "0103011140207",
+          "title": "第七課：作夢的雲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140207",
+          "characters": "作夢躺自己變成棉糖黑鵝得更漂亮"
+        },
+        {
+          "id": "0103011140208",
+          "title": "第八課：妹妹的紅雨鞋",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140208",
+          "characters": "妹雨雙穿滴遊戲顆珍珠落面魚缸金游"
+        },
+        {
+          "id": "0103011140209",
+          "title": "第九課：七彩的虹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140209",
+          "characters": "彩虹太國掃除洗淨馬低刷樹葉很認送"
+        },
+        {
+          "id": "0103011140210",
+          "title": "第十課：和你在一起",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140210",
+          "characters": "地化趣線風箏升神奇跑跳笑每件事情"
+        },
+        {
+          "id": "0103011140211",
+          "title": "第十一課：生日快樂",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140211",
+          "characters": "生日今記時知道嗎學收張祝福第次謝"
+        },
+        {
+          "id": "0103011140212",
+          "title": "第十二課：小黑",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011140212",
+          "characters": "想燈前點半清楚停休息兒吧幫加油慢"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 1,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103011150101",
+          "title": "第一課：拍拍手",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150101",
+          "characters": "拍手左右你他也上下"
+        },
+        {
+          "id": "0103011150102",
+          "title": "第二課：這是誰的?",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150102",
+          "characters": "這是誰的我分好了啊多個"
+        },
+        {
+          "id": "0103011150103",
+          "title": "第三課：秋千",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150103",
+          "characters": "秋千和玩陪高山到大海朋友們起"
+        },
+        {
+          "id": "0103011150104",
+          "title": "第四課：大個子，小個子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150104",
+          "characters": "子小課兩人拉看找隻青蛙開心"
+        },
+        {
+          "id": "0103011150105",
+          "title": "第五課：比一比",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150105",
+          "characters": "比門裡外有什麼不同早晚王主又"
+        },
+        {
+          "id": "0103011150106",
+          "title": "第六課：小路",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103011150106",
+          "characters": "路長白花紅走在向說朵從頭那"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 2,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103021150101",
+          "title": "第一課：新學年新希望",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150101",
+          "characters": "年希望坐位本淡書老師以為故用力只現還聲矮"
+        },
+        {
+          "id": "0103021150102",
+          "title": "第二課：一起做早餐",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150102",
+          "characters": "全蛋煎圓番茄切輪司夾吐中方城堡接畫臉餐醬"
+        },
+        {
+          "id": "0103021150103",
+          "title": "第三課：走過小巷",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150103",
+          "characters": "巷叔貓屋捧蝴蝶忙娶娘黃筆打扮樣越美麗牆模"
+        },
+        {
+          "id": "0103021150104",
+          "title": "第四課：運動會",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150104",
+          "characters": "運動飄熱鬧舞哇往容步汗腳協聲河氣最可賽拔"
+        },
+        {
+          "id": "0103021150105",
+          "title": "第五課：坐竹籃船",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150105",
+          "characters": "竹籃鄉南暑假帶等跨划吹邊叫原近捕活識碗轉"
+        },
+        {
+          "id": "0103021150106",
+          "title": "第六課：小鎮的柿餅節",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150106",
+          "characters": "鎮餅節因此進排遠色愛月乾甜客買親如意柿埔"
+        },
+        {
+          "id": "0103021150107",
+          "title": "第七課：國王的新衣裳",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150107",
+          "characters": "衣胖針簡單聰明臣敢東西直棒街滿眼哪思裳慌"
+        },
+        {
+          "id": "0103021150108",
+          "title": "第八課：「聰明」的小熊",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150108",
+          "characters": "渴烏喝瓶法森林物旅行午裝許石難忘哈但熊鴉"
+        },
+        {
+          "id": "0103021150109",
+          "title": "第九課：大象有多重?",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150109",
+          "characters": "象操粗腿柱砍幾部搖沖首牽沉少沿然紀竟曹秤"
+        },
+        {
+          "id": "0103021150110",
+          "title": "第十課：新年快樂",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150110",
+          "characters": "雪梨夜卻冷冬臺季相反煙火待雖春貨期飯灣綻"
+        },
+        {
+          "id": "0103021150111",
+          "title": "第十一課：遠方來的黑皮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150111",
+          "characters": "皮具飛者洋寒北嘴伸飽沙急服站翅膀充念戴扁"
+        },
+        {
+          "id": "0103021150112",
+          "title": "第十二課：我愛冬天",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021150112",
+          "characters": "灰涼牠鼓絡欣發居冒冰圍咪幸團聚愉鍋妙聊"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 2,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103021140201",
+          "title": "第一課：春天的顏色",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140201",
+          "characters": "顏池塘藍田洞綠蜜蜂窩粉桃興處景鼠燕"
+        },
+        {
+          "id": "0103021140202",
+          "title": "第二課：花衣裳",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140202",
+          "characters": "裳驚所躲房間討論指裙而且紫將工合貼候剪慶"
+        },
+        {
+          "id": "0103021140203",
+          "title": "第三課：彩色王國",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140203",
+          "characters": "座對微表各突強被綻特舌賞果定互換共漸壞融"
+        },
+        {
+          "id": "0103021140204",
+          "title": "第四課：爸爸",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140204",
+          "characters": "散芒透暗照掛角揚星閃晶當睡悄常旁臂永窗避"
+        },
+        {
+          "id": "0103021140205",
+          "title": "第五課：我的家人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140205",
+          "characters": "剛品爺採蕉軍告訴辛苦流堅固安寶貝幅管機蓋"
+        },
+        {
+          "id": "0103021140206",
+          "title": "第六課：愛笑的大樹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140206",
+          "characters": "教室棵及終立刻抱並猜文借枝鉛校車哥牛騎踏"
+        },
+        {
+          "id": "0103021140207",
+          "title": "第七課：月光河",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140207",
+          "characters": "久條祕兔其猴病探體惜無辦之請鼻吸模度挖坑"
+        },
+        {
+          "id": "0103021140208",
+          "title": "第八課：黃狗生蛋",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140208",
+          "characters": "狗雞經怪羊鴨信錯睛仔細能消傳嚇忍住顧議鴕"
+        },
+        {
+          "id": "0103021140209",
+          "title": "第九課：神筆馬良",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140209",
+          "characters": "良孩錢醒尾巴村貪皇帝派抓銀准島元波浪艘掀"
+        },
+        {
+          "id": "0103021140210",
+          "title": "第十課：小熊的邀請",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140210",
+          "characters": "熊朝踮尖木架些足蹈轉趕耳啄袋鼠摸讀琅邀蹦"
+        },
+        {
+          "id": "0103021140211",
+          "title": "第十一課：小讀者樂園",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140211",
+          "characters": "圖館參題士講甲形志約數迎交令世界險庫索奧"
+        },
+        {
+          "id": "0103021140212",
+          "title": "第十二課：巨人山",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103021140212",
+          "characters": "巨累髮根牆狂呼差睜緊餓百食桶倒量底"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 3,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103031150101",
+          "title": "第一課：字的小旅行",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150101",
+          "characters": "字舟灑載航忌妒失讓"
+        },
+        {
+          "id": "0103031150102",
+          "title": "第二課：妙故事點點名",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150102",
+          "characters": "窗戶名板答案專穫賽已傘似追喊歪霧晃亂"
+        },
+        {
+          "id": "0103031150103",
+          "title": "第三課：繞口令村",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150103",
+          "characters": "由暴迷岸撞扶店闆機料實繞留觀獅"
+        },
+        {
+          "id": "0103031150104",
+          "title": "第四課：小丑魚和海葵",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150104",
+          "characters": "擺露懷準射刺痛使毒欺負感遇危丑葵觸"
+        },
+        {
+          "id": "0103031150105",
+          "title": "第五課：飛舞的絲帶",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150105",
+          "characters": "球練習努總段利壓秒整該必通場導貴絲綁鬆翩"
+        },
+        {
+          "id": "0103031150106",
+          "title": "第六課：小女生",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150106",
+          "characters": "非關澡怕奮應平毛肚蓋柔揉副膠喵茸黏"
+        },
+        {
+          "id": "0103031150107",
+          "title": "第七課：淡水小鎮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150107",
+          "characters": "統商古阿婆鐵硬愈蒼坡憶夕盪網嚼"
+        },
+        {
+          "id": "0103031150108",
+          "title": "第八課：安平古堡參觀記",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150108",
+          "characters": "育博史型功敗守護勇兵附瞭頂標荷蘭鄭駐炮"
+        },
+        {
+          "id": "0103031150109",
+          "title": "第九課：馬太鞍的巴拉告",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150109",
+          "characters": "蓮溼族別式造語層植或釣智慧態鞍蝦"
+        },
+        {
+          "id": "0103031150110",
+          "title": "第十課：狐狸的故事",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150110",
+          "characters": "狐里兄密呀踢泥棄酸鴉肉塊計壯狸萬葡萄"
+        },
+        {
+          "id": "0103031150111",
+          "title": "第十一課：巨人的花園",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150111",
+          "characters": "曲悅拜訪免離漫盼枯鑽悟拆盛隨築顯極恍"
+        },
+        {
+          "id": "0103031150112",
+          "title": "第十二課：模仿貓",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031150112",
+          "characters": "農羨慕仿冠優雅救淚松咬羽易揮啼啞脖齒髒掌"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 3,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103031140201",
+          "title": "第一課：許願",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140201",
+          "characters": "願晨苗徐嫩築巢虔誠爛杜鮮耀翔燦鵑豔"
+        },
+        {
+          "id": "0103031140202",
+          "title": "第二課：下雨的時候",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140202",
+          "characters": "披紗順垂股涼覺舒味軟踩陷連摺撐簷溝"
+        },
+        {
+          "id": "0103031140203",
+          "title": "第三課：遇見美如奶奶",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140203",
+          "characters": "髮鏡架拾區吵麻腦電展術助製椅戴雀魔號"
+        },
+        {
+          "id": "0103031140204",
+          "title": "第四課：工匠之祖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140204",
+          "characters": "匠祖宮惱便解斧割鋒速善察考尺魯鈍齒鋸"
+        },
+        {
+          "id": "0103031140205",
+          "title": "第五課：學田鼠開路",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140205",
+          "characters": "市倫決糾紛律改挖設議員付費建敦爾擁擠"
+        },
+        {
+          "id": "0103031140206",
+          "title": "第六課：神奇密碼",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140206",
+          "characters": "慶描目程結資影周例產券包類技碼票省優"
+        },
+        {
+          "id": "0103031140207",
+          "title": "第七課：油桐花．五月雪",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140207",
+          "characters": "桐初夏腰取抬梢禮肩掌瓣鋪童染覆椏簇蕊"
+        },
+        {
+          "id": "0103031140208",
+          "title": "第八課：大自然的美術館",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140208",
+          "characters": "野柳質岬趴仙列潤岩菇豆雕塑鬼龜燭濺腐"
+        },
+        {
+          "id": "0103031140209",
+          "title": "第九課：臺灣的山椒魚",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140209",
+          "characters": "灣冰爬陸肺膚黏液保持敵縫伐球椒鰓隙卵"
+        },
+        {
+          "id": "0103031140210",
+          "title": "第十課：漁夫和金魚",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140210",
+          "characters": "漁夫婦拖求恩報盆值寬暴聊隆破藻濤僕轟"
+        },
+        {
+          "id": "0103031140211",
+          "title": "第十一課：聰明的鼠鹿",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140211",
+          "characters": "鹿幕虎布夠損威餐填理胃撲槍逃獵砰"
+        },
+        {
+          "id": "0103031140212",
+          "title": "第十二課：還要跌幾次",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103031140212",
+          "characters": "跌陡民措編謠提伯萬糟糕唉救毫跤"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 4,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103041150101",
+          "title": "第一課：水陸小高手",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150101",
+          "characters": "泳串般姿溜耳鷹滑遨緩陀螺轉躍煩"
+        },
+        {
+          "id": "0103041150102",
+          "title": "第二課：放學後",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150102",
+          "characters": "招湯拋糧姐爭警偷則繩依捨束暫幸"
+        },
+        {
+          "id": "0103041150103",
+          "title": "第三課：我的籃球夢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150103",
+          "characters": "社邀與遙投熟巧彈曾揮彼秒喧優弧"
+        },
+        {
+          "id": "0103041150104",
+          "title": "第四課：永遠的馬偕",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150104",
+          "characters": "偕醫命奉獻療衛藥治翻嶺捐宿堂濃"
+        },
+        {
+          "id": "0103041150105",
+          "title": "第五課：假如給我三天光明",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150105",
+          "characters": "凱勒業勵寧視注憑蓓蕾何毯適繽盡"
+        },
+        {
+          "id": "0103041150106",
+          "title": "第六課：攀登生命的高峰",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150106",
+          "characters": "秀稱朗登穆瑪峰母酷磨攀氧訓谷響"
+        },
+        {
+          "id": "0103041150107",
+          "title": "第七課：美味的一堂課",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150107",
+          "characters": "薄烙沾咖哩印甩材醬義麵郁壽醋未"
+        },
+        {
+          "id": "0103041150108",
+          "title": "第八課：建築界的長頸鹿",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150108",
+          "characters": "臨樓頸代濟阻尼器震京晴塔訊吉橋"
+        },
+        {
+          "id": "0103041150109",
+          "title": "第九課：請到我的家鄉來",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150109",
+          "characters": "佛泰廟華尚逛埃羅勢窪堤防潮鬱划"
+        },
+        {
+          "id": "0103041150110",
+          "title": "第十課：奇幻旋律",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150110",
+          "characters": "幻旋扁瞬驗牙芝盜邁困龐搓榮富遍"
+        },
+        {
+          "id": "0103041150111",
+          "title": "第十一課：兔子先生等等我",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150111",
+          "characters": "背錶掉深鎖鑰匙汁示迫袋哭盒扇遲"
+        },
+        {
+          "id": "0103041150112",
+          "title": "第十二課：老鞋匠和小精靈",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041150112",
+          "characters": "妻耐革賣倍謎鐘敲靈鎚嘖足蹈蹦內"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 4,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103041140201",
+          "title": "第一課：一束鮮花",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140201",
+          "characters": "潔環境甚至懶梳髒臭雜調叢暢格言"
+        },
+        {
+          "id": "0103041140202",
+          "title": "第二課：心動不如行動",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140202",
+          "characters": "川缺窮繼研既租備缽緣達慚愧慮絆"
+        },
+        {
+          "id": "0103041140203",
+          "title": "第三課：選拔動物之星",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140203",
+          "characters": "啟宣選勤健厲蝸寸駱駝皺眉艘艇拭"
+        },
+        {
+          "id": "0103041140204",
+          "title": "第四課：米食飄香",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140204",
+          "characters": "稻米粒蘿蔔漿蒸鹹財粿艾康粽推陳"
+        },
+        {
+          "id": "0103041140205",
+          "title": "第五課：讀書報告-藍色小洋裝",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140205",
+          "characters": "籍繪版介峽玉泣敏癢麥封淺查酵讚"
+        },
+        {
+          "id": "0103041140206",
+          "title": "第六課：我愛鹿港",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140206",
+          "characters": "插拌磚昂繁葫蘆彎狹窄喻曉井芬芳"
+        },
+        {
+          "id": "0103041140207",
+          "title": "第七課：未來的模樣",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140207",
+          "characters": "跡移搭輸鍵盤饑荒配均遷致惡攜眨"
+        },
+        {
+          "id": "0103041140208",
+          "title": "第八課：動物老師的智慧",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140208",
+          "characters": "眾領獨厚蹼趾膜構潛易壁舉究肢絕"
+        },
+        {
+          "id": "0103041140209",
+          "title": "第九課：向太空出發",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140209",
+          "characters": "僅號姆斯仍津嘗試測署億翁嚮引催"
+        },
+        {
+          "id": "0103041140210",
+          "title": "第十課：小青蛙想看海",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140210",
+          "characters": "豪忽瞧灘苔滾禁際廣丈災旱耗遺憾"
+        },
+        {
+          "id": "0103041140211",
+          "title": "第十一課：窗前的月光",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140211",
+          "characters": "皎瘦嫦娥搗吳霜映勾浮盞否舊淚孤"
+        },
+        {
+          "id": "0103041140212",
+          "title": "第十二課：如來佛的手掌心",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103041140212",
+          "characters": "乖筋斗箍喚掀修咒橘擋掏齊聖砰壓"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103051150101",
+          "title": "第一課：蚊帳大使",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150101",
+          "characters": "蚊帳洲瘧疾死叮存募集寄贈獎狀藏誌基赴"
+        },
+        {
+          "id": "0103051150102",
+          "title": "第二課：從空中看臺灣",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150102",
+          "characters": "德乎血攝颱錄哀巒縱臍禍殘檳榔降鏟汙斷"
+        },
+        {
+          "id": "0103051150103",
+          "title": "第三課：攀岩高手",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150103",
+          "characters": "峭勁聳飢隱扯銳箭韌虯鬚茂止蔓藉豐挫折"
+        },
+        {
+          "id": "0103051150104",
+          "title": "第四課：恆久的美",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150104",
+          "characters": "恆澄穗養源藝樸堆撿巾痠素尊嚴勞怨慷慨滋"
+        },
+        {
+          "id": "0103051150105",
+          "title": "第五課：它抓得住你—商標的故事",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150105",
+          "characters": "譽務聯核申局松註冊企毅歷英銷售勝霸項"
+        },
+        {
+          "id": "0103051150106",
+          "title": "第六課：故事「動」起來",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150106",
+          "characters": "娛汽哨典框劇父責判鳴穎獲佳膩效隊益貌官增"
+        },
+        {
+          "id": "0103051150107",
+          "title": "第七課：為生命找到出口",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150107",
+          "characters": "逆穩憐競抗逸鄰脈絡緻弱噴嚏織碌盎膽圈疲"
+        },
+        {
+          "id": "0103051150108",
+          "title": "第八課：最勇敢的女孩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150108",
+          "characters": "坦性恐怖組占播控制傷攻擊權脅復武撼懼"
+        },
+        {
+          "id": "0103051150109",
+          "title": "第九課：在挫折中成長",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150109",
+          "characters": "維戰崎嶇拳癌症銅牌屢減予幼椰即腐衝鍛鍊"
+        },
+        {
+          "id": "0103051150110",
+          "title": "第十課：山中寄情",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150110",
+          "characters": "唐恬罷暮掩柴扉歸畢陋傍確閒詠幽眠職吟曠"
+        },
+        {
+          "id": "0103051150111",
+          "title": "第十一課：與達駭黑熊走入山林",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150111",
+          "characters": "駭疤痕罐咚碰傾寮營殺崇置奄翼祈禱吼喉嚨"
+        },
+        {
+          "id": "0103051150112",
+          "title": "第十二課：荒島上的國王",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051150112",
+          "characters": "烈暈昏艙途捲喪獸渾擱礁筏塌捏燒臼烤爐欲"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103051140201",
+          "title": "第一課：你會怎麼回答",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140201",
+          "characters": "簽遞傻瓜若續痺患握艱博聆埋稿雷擔談懸符"
+        },
+        {
+          "id": "0103051140202",
+          "title": "第二課：智救養馬人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140202",
+          "characters": "匹怒廷妥諫閉覷犯罪仁政斥蒙羞懂委婉勸"
+        },
+        {
+          "id": "0103051140203",
+          "title": "第三課：真正的「聰明」",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140203",
+          "characters": "輛姍抵迅返率梭隼較贏逐遭評普價承搏"
+        },
+        {
+          "id": "0103051140204",
+          "title": "第四課：小記者，出動！",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140204",
+          "characters": "診繃緒疫篩偉雄補驟菊罩塵槌餘撥廓拼湊骨"
+        },
+        {
+          "id": "0103051140205",
+          "title": "第五課：奇幻光芒的祕密",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140205",
+          "characters": "盈浸稀儲寵寂螢仿彿悉賦龍冠鳳紋飾閱激湧"
+        },
+        {
+          "id": "0103051140206",
+          "title": "第六課：人「聲」就是戲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140206",
+          "characters": "份睹杯奏盯燦魔嗓啞咳促喘吁伏唷須憂詮魅"
+        },
+        {
+          "id": "0103051140207",
+          "title": "第七課：題西林壁",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140207",
+          "characters": "淵凡擅亦橫側廬江寺霧瀰延含哲謂"
+        },
+        {
+          "id": "0103051140208",
+          "title": "第八課：海洋的殺手",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140208",
+          "characters": "珊瑚積噸垃圾循菌鉤鏈孔倖鯨據宜估廢踐殼"
+        },
+        {
+          "id": "0103051140209",
+          "title": "第九課：你想做人魚嗎？",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140209",
+          "characters": "涵葵鯊豚抹汐譟鏽錨牧窺筒琉璃凸襯托玻"
+        },
+        {
+          "id": "0103051140210",
+          "title": "第十課：玉米人的奇蹟",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140210",
+          "characters": "蹟蕩吶洪誕沼澤豹栩跺葦堪洶鵡狼雅挑剔"
+        },
+        {
+          "id": "0103051140211",
+          "title": "第十一課：幸福的火苗",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140211",
+          "characters": "婪嚎群抖疼魂規違駕屑瀑瀉燃噬籠焰霆俯啄"
+        },
+        {
+          "id": "0103051140212",
+          "title": "第十二課：神農嘗百草",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103051140212",
+          "characters": "穀亡授臟誤眩燥咀嗚犧牲赭鞭檢藤摘佑"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0103061150101",
+          "title": "第一課：跑道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150101",
+          "characters": "軸奪屈偏搬芥蒂抑拒尷尬悔拱距默鬥扭猛愣"
+        },
+        {
+          "id": "0103061150102",
+          "title": "第二課：朱子治家格言選",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150102",
+          "characters": "粥縷碗綢繆毋掘纏縛瓦缶蔬饈腹陶施惠勿預悲"
+        },
+        {
+          "id": "0103061150103",
+          "title": "第三課：談遇見更好的自己",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150103",
+          "characters": "卓培裁瑣仲耕賺異惋欠砥礪驕傲耘隔茁"
+        },
+        {
+          "id": "0103061150104",
+          "title": "第四課：臺灣美食詩選",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150104",
+          "characters": "鼎颳廚淋晒筍丁醃攪炸瑩饗宴彰煮豬"
+        },
+        {
+          "id": "0103061150105",
+          "title": "第五課：最好的味覺禮物",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150105",
+          "characters": "削沫茶嗅按碎舍熬砂混焦舀勺熄騰啜淌沛舔"
+        },
+        {
+          "id": "0103061150106",
+          "title": "第六課：珍珠奶茶",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150106",
+          "characters": "靡嫁贊干烹薯末添擴袂稠衡徜徉撫薩乳"
+        },
+        {
+          "id": "0103061150107",
+          "title": "第七課：大小剛好的鞋子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150107",
+          "characters": "仰緬甸踝絨濺襬弄恣批徑謹恰乏皆嗤嗯"
+        },
+        {
+          "id": "0103061150108",
+          "title": "第八課：狐假虎威",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150108",
+          "characters": "策劉纂寓鷸蚌述赫畏詢曰吾遂諷蔽妨虛誘"
+        },
+        {
+          "id": "0103061150109",
+          "title": "第九課：空城計",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150109",
+          "characters": "亭支縣懿剩魏旗幟崗姓倘僮薰撤諸葛慎丞"
+        },
+        {
+          "id": "0103061150110",
+          "title": "第十課：耶誕節",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150110",
+          "characters": "耶郊慈祥劈啪零厭倦辯私貧係趁稍罕烘衷鋼"
+        },
+        {
+          "id": "0103061150111",
+          "title": "第十一課：下午茶風波",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150111",
+          "characters": "楓恢潑莓廳額灌醉釀替諒脣奔乞某煥橇鈴迴"
+        },
+        {
+          "id": "0103061150112",
+          "title": "第十二課：橘子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061150112",
+          "characters": "廂頰袱瘡狽憊淒隧卯貫岔欄柵矮陰扔茫悶"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "康軒",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E5%BA%B7%E8%BB%92%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0103061140201",
+          "title": "第一課：馬達加斯加，出發！",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140201",
+          "characters": "嶼獨馳輾櫛鱗幣莊瀕撒掠覓紳濛亢凌岌"
+        },
+        {
+          "id": "0103061140202",
+          "title": "第二課：沉睡的天空之城",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140202",
+          "characters": "址屏秘魯璀璨愜振氛序澎湃砌梯玄拴盎眸杏"
+        },
+        {
+          "id": "0103061140203",
+          "title": "第三課：走進太陽之城",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140203",
+          "characters": "萊瑞霍茅唯爆供府購碳騎駛箱嬉乒乓鬆欄"
+        },
+        {
+          "id": "0103061140204",
+          "title": "第四課：送友人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140204",
+          "characters": "郭征茲蕭澈辭臥蹤逢抒泊暉摯誼"
+        },
+        {
+          "id": "0103061140205",
+          "title": "第五課：蚵鄉風情",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140205",
+          "characters": "蚵嬸攏柄笨拙疲憊鈔剖棚裹樁巡甦豎媒沸宛"
+        },
+        {
+          "id": "0103061140206",
+          "title": "第六課：童年‧夏日‧棉花糖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140206",
+          "characters": "碧疏凰株巔戀蔭紡緯纖裊袖鋁廠孜猶陰逝斑"
+        },
+        {
+          "id": "0103061140207",
+          "title": "第七課：我的少年夢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140207",
+          "characters": "斜閣匱攤冥篷徒籌埡訝脈紮窸窣誦宇宙浩瀚"
+        },
+        {
+          "id": "0103061140208",
+          "title": "第八課：如何張開追夢的翅膀",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140208",
+          "characters": "瞻愚汲庶鍥垮嶄輩赴構諺羹坪斤貫拓"
+        },
+        {
+          "id": "0103061140209",
+          "title": "第九課：成為人生的開拓者",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0103061140209",
+          "characters": "恭份荊棘俗窘溝闖涯曙帆槳"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 1,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102011150100",
+          "title": "魔法文字",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150100",
+          "characters": "日月山木水人手門"
+        },
+        {
+          "id": "0102011150101",
+          "title": "第一課：小船",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150101",
+          "characters": "小上走左右向魚也來加船前油"
+        },
+        {
+          "id": "0102011150102",
+          "title": "第二課：印手印",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150102",
+          "characters": "開出招車子地花朵在笑印張臉"
+        },
+        {
+          "id": "0102011150103",
+          "title": "第三課：吹泡泡",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150103",
+          "characters": "泡玩大起好多我的你抱吹家像"
+        },
+        {
+          "id": "0102011150104",
+          "title": "第四課：你好",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150104",
+          "characters": "爸到青叫下那和要他朋友跟頭想做"
+        },
+        {
+          "id": "0102011150105",
+          "title": "第五課：外星人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150105",
+          "characters": "外住個們這裡有沒是什麼星哪球河流"
+        },
+        {
+          "id": "0102011150106",
+          "title": "第六課：小金魚",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150106",
+          "characters": "金說句話兩都悄尾巴滿紅吐缸搖"
+        },
+        {
+          "id": "0102011150107",
+          "title": "第七課：紅紅的春",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011150107",
+          "characters": "春貼呢了請天家把不房福為幸"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 1,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102011140201",
+          "title": "第一課：太陽是充電機",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140201",
+          "characters": "太充電雨過後為冬土草冒哭心陽機"
+        },
+        {
+          "id": "0102011140202",
+          "title": "第二課：春雨是什麼顏色",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140202",
+          "characters": "顏色細著問鳥綠看藍空媽彩中虹蜻蜓"
+        },
+        {
+          "id": "0102011140203",
+          "title": "第三課：山中音樂會",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140203",
+          "characters": "音樂會坡忙布場入口河林間風跑置"
+        },
+        {
+          "id": "0102011140204",
+          "title": "第四課：書是我的好朋友",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140204",
+          "characters": "書打跳陪去險海找歡神奇猜次誰跟恐龍豚"
+        },
+        {
+          "id": "0102011140205",
+          "title": "第五課：風喜歡和我玩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140205",
+          "characters": "喜帶氣球始吹突然得高樹給可理只輕飛還"
+        },
+        {
+          "id": "0102011140206",
+          "title": "第六課：鄰居的小孩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140206",
+          "characters": "居孩常躲發現就頭回想但怎知道先鄰縮讓"
+        },
+        {
+          "id": "0102011140207",
+          "title": "第七課：畫畫",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140207",
+          "characters": "畫愛送寫祝張臉感謝老師啊還漂亮顆蛋糕"
+        },
+        {
+          "id": "0102011140208",
+          "title": "第八課：給松鼠的卡片",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140208",
+          "characters": "卡片秋採果吃飽方埋進很久嗎長敬松鼠從等"
+        },
+        {
+          "id": "0102011140209",
+          "title": "第九課：張奶奶的寶貝",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140209",
+          "characters": "奶貝早校園工作她邊汗學您樣當成寶擦澆"
+        },
+        {
+          "id": "0102011140210",
+          "title": "第十課：井裡的小青蛙",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140210",
+          "characters": "井隻除睡覺東西拍肚唉幾世界連裝蛙窪"
+        },
+        {
+          "id": "0102011140211",
+          "title": "第十一課：吃星星的小鴨子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140211",
+          "characters": "星面許池圈波紋見快告訴光拉怪呀鴨塘"
+        },
+        {
+          "id": "0102011140212",
+          "title": "第十二課：快樂不止一半",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102011140212",
+          "characters": "止半羊田再瓜苗辛苦油能收甜分享豬種葉"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 2,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102021150101",
+          "title": "第一課：打招呼",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150101",
+          "characters": "呼白雲柔前游噴美麗柱試吸用力哇又第功擠"
+        },
+        {
+          "id": "0102021150102",
+          "title": "第二課：爬梯子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150102",
+          "characters": "爬梯紙條線像身生迫及待站沿頂格哪才最"
+        },
+        {
+          "id": "0102021150103",
+          "title": "第三課：勇氣樹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150103",
+          "characters": "勇教室棵葉克服害怕努完事倒時黑低聲故跌騎"
+        },
+        {
+          "id": "0102021150104",
+          "title": "第四課：一天的時間",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150104",
+          "characters": "塊圓形芝麻餅咬飯做課洗澡拾整包遊戲剩"
+        },
+        {
+          "id": "0102021150105",
+          "title": "第五課：小書蟲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150105",
+          "characters": "蟲森動物王坐午停座急百科全原從此管種橋圖館"
+        },
+        {
+          "id": "0102021150106",
+          "title": "第六課：從自己開始",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150106",
+          "characters": "自己沙撿垃圾眼膠對牠安吧如該留便減少灘塑"
+        },
+        {
+          "id": "0102021150107",
+          "title": "第七課：等兔子來撞樹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150107",
+          "characters": "等兔撞農夫夏剛趕路幸運以耕守夜晚北搖"
+        },
+        {
+          "id": "0102021150108",
+          "title": "第八課：角和腳",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150108",
+          "characters": "角腳渴鹿喝影意卻獅追被枝掙脫速度直救瘦嚇"
+        },
+        {
+          "id": "0102021150109",
+          "title": "第九課：赤腳國王",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150109",
+          "characters": "赤國熱宮涼踩毯暖馬壞難定更隨主法於舒燙蹺"
+        },
+        {
+          "id": "0102021150110",
+          "title": "第十課：去農場玩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150110",
+          "characters": "群靜抬非趣近堆棉遠景忽聽揮慢依捨放假"
+        },
+        {
+          "id": "0102021150111",
+          "title": "第十一課：幸福湯圓",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150111",
+          "characters": "湯今至妹升陽因期盯米團粉南黃真呵接牛糯變"
+        },
+        {
+          "id": "0102021150112",
+          "title": "第十二課：到野外上課",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021150112",
+          "characters": "野本模型蜜蜂蝴蝶飛活圖筆料湖調迷逛兒盤"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 2,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102021140201",
+          "title": "第一課：彩色心情",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140201",
+          "characters": "情候翠溜滑傳深泳淚火奔怒拋潔舞各同受藏"
+        },
+        {
+          "id": "0102021140202",
+          "title": "第二課：勇敢超人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140202",
+          "characters": "敢超弟院正破所伸點重石消失合掉乾淨哥盆"
+        },
+        {
+          "id": "0102021140203",
+          "title": "第三課：小波氣球飛上天",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140203",
+          "characters": "綿已經輸鼓取越竟飄抓啦喊踢結變讓終冷脾"
+        },
+        {
+          "id": "0102021140204",
+          "title": "第四課：小水珠，去哪裡?",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140204",
+          "characters": "珠微醒甲瓢腰香掛閃晶串項鍊仙禮探幫姐懶滾"
+        },
+        {
+          "id": "0102021140205",
+          "title": "第五課：生日快樂",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140205",
+          "characters": "病睛份牽步段毛晃籃亭忍祕耳聞味浪寶清"
+        },
+        {
+          "id": "0102021140206",
+          "title": "第六課：給地球的一封信",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140206",
+          "characters": "封信親貴洋蝦植量汙染使決具資源費康復餐"
+        },
+        {
+          "id": "0102021140207",
+          "title": "第七課：傘",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140207",
+          "characters": "傘烏暗爺字謎語屋枴杖滴答叩嘻哈落街案撐"
+        },
+        {
+          "id": "0102021140208",
+          "title": "第八課：老園丁的話",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140208",
+          "characters": "丁公每認比客相興照皮摘立位新它欣賞妙牌"
+        },
+        {
+          "id": "0102021140209",
+          "title": "第九課：小小說書人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140209",
+          "characters": "排介紹其賣帽蛋糕扶買休息拿精采希望讀戴猴"
+        },
+        {
+          "id": "0102021140210",
+          "title": "第十課：點金術",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140210",
+          "characters": "銀女願摸品指桌椅食年幼純慌並切狀明而術"
+        },
+        {
+          "id": "0102021140211",
+          "title": "第十一課：我喜歡你",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140211",
+          "characters": "敗操旁脖瞇密件特別唱歌練習彈琴講論颳勵"
+        },
+        {
+          "id": "0102021140212",
+          "title": "第十二課：如果，我的房間...",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102021140212",
+          "characters": "牆壁窗床鋪錯輪搬冰且交往刻顆鮮汁晨由極磚"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 3,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102031150101",
+          "title": "第一課：你好，新朋友",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150101",
+          "characters": "泥化雀輕羽衣脆髮處旅行平男朗足"
+        },
+        {
+          "id": "0102031150102",
+          "title": "第二課：我們的約定",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150102",
+          "characters": "廊訂班級約紛持記錄聊言烈些提愁"
+        },
+        {
+          "id": "0102031150103",
+          "title": "第三課：下課十分鐘",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150103",
+          "characters": "短鐘鬼鬧準朝蹈表暢無總響忘盡責"
+        },
+        {
+          "id": "0102031150104",
+          "title": "第四課：一顆黑點",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150104",
+          "characters": "悶煩惱吵勉強耐脾解央霧緊尖雖嗓"
+        },
+        {
+          "id": "0102031150105",
+          "title": "第五課：火大了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150105",
+          "characters": "龍沖體兄吐轉歪防警鈴注員傷死諒"
+        },
+        {
+          "id": "0102031150106",
+          "title": "第六課：我該怎麼辦?",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150106",
+          "characters": "幕杯流溼透雙胸負逃辦露題部灰剪"
+        },
+        {
+          "id": "0102031150107",
+          "title": "第七課：最年輕的奶奶",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150107",
+          "characters": "背斑皺淘懂凡梳夾藏捏摺仔藝術創"
+        },
+        {
+          "id": "0102031150108",
+          "title": "第八課：魔「髮」哥哥",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150108",
+          "characters": "店魔圍巾視框誤愉數桶刀曾機鏡齊"
+        },
+        {
+          "id": "0102031150109",
+          "title": "第九課：穿白袍的醫生伯伯",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150109",
+          "characters": "醫穿袍戴筒啄備幹敲毒蘋般溫乖藥"
+        },
+        {
+          "id": "0102031150110",
+          "title": "第十課：唉呀!誤會大了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150110",
+          "characters": "極熊雪腦實根反射膚豬呆印象憶滾"
+        },
+        {
+          "id": "0102031150111",
+          "title": "第十一課：石虎的告白",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150111",
+          "characters": "額虎貓臺灣獨萬祖蛙捉類占雞肉威"
+        },
+        {
+          "id": "0102031150112",
+          "title": "第十二課：昆蟲的保命妙招",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031150112",
+          "characters": "昆攻擊演保命翅敵周免竹節技退屁"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 3,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102031140201",
+          "title": "第一課：最美的模樣",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140201",
+          "characters": "撐首符膀鼻環搗亂恐尖嘴吼"
+        },
+        {
+          "id": "0102031140202",
+          "title": "第二課：玩玩具",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140202",
+          "characters": "鐵碗另彎鉤推羨慕娃捲躺裙擺參容"
+        },
+        {
+          "id": "0102031140203",
+          "title": "第三課：愛玉的變身術",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140203",
+          "characters": "炎玉凍薄暑品籽晒摸刺器袋綁搓糖"
+        },
+        {
+          "id": "0102031140204",
+          "title": "第四課：楊修猜字",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140204",
+          "characters": "名丞曹楊修智應官府差思報闊酪驚"
+        },
+        {
+          "id": "0102031140205",
+          "title": "第五課：唱反調",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140205",
+          "characters": "鞠躬弄文厲鬥千普睜閉錢偏察偷胡"
+        },
+        {
+          "id": "0102031140206",
+          "title": "第六課：一飛沖天",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140206",
+          "characters": "村猴抖造助展簧摔巨引觀咦松鼠混"
+        },
+        {
+          "id": "0102031140207",
+          "title": "第七課：井仔腳鹽田",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140207",
+          "characters": "盤擠燦爛鹽耙攪抹塔棋幢堂雕霞霄"
+        },
+        {
+          "id": "0102031140208",
+          "title": "第八課：和魚一起游泳",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140208",
+          "characters": "叔潛島浮珊瑚船航母丑寬岸郵寄底"
+        },
+        {
+          "id": "0102031140209",
+          "title": "第九課：三峽老街樂藍染",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140209",
+          "characters": "峽隧古窄磚拱騎樓燈籠治示施獎傻"
+        },
+        {
+          "id": "0102031140210",
+          "title": "第十課：地球的眼淚",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140210",
+          "characters": "鹹之川蒸降令凝刷岩將或雜質積累"
+        },
+        {
+          "id": "0102031140211",
+          "title": "第十一課：枯木是大飯店",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140211",
+          "characters": "枯孤零義柴代適洞築巢菇腐沉斷僅"
+        },
+        {
+          "id": "0102031140212",
+          "title": "第十二課：騎樓",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102031140212",
+          "characters": "淋遮易側吞旗砂砌館建華社區擋商"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 4,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102041150101",
+          "title": "第一課：窗口邊的臺灣欒樹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150101",
+          "characters": "戶漫季素嫩繁墨姿簇週淡穫迎幅伴"
+        },
+        {
+          "id": "0102041150102",
+          "title": "第二課：奶奶的排骨粥",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150102",
+          "characters": "汽煮骨粥燙換即菜齒餐矯餓彷彿濃"
+        },
+        {
+          "id": "0102041150103",
+          "title": "第三課：充滿希望的五味屋",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150103",
+          "characters": "蓮式士拆民志酸辣存靠獲態與支未"
+        },
+        {
+          "id": "0102041150104",
+          "title": "第四課：玉山之歌",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150104",
+          "characters": "淺搧針縫嶼峰領拂頑奏曲溪聆翻"
+        },
+        {
+          "id": "0102041150105",
+          "title": "第五課：高舉臺灣之光",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150105",
+          "characters": "困舉挑戰爭佩斤紀震竭棄程捐驕傲"
+        },
+        {
+          "id": "0102041150106",
+          "title": "第六課：臺灣的驕傲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150106",
+          "characters": "尺亞洲跨鋼護層鈔仍標融仰內俯煙"
+        },
+        {
+          "id": "0102041150107",
+          "title": "第七課：到此「藝」遊",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150107",
+          "characters": "育晴陶目芒返劇斗索禁渡念麵統值"
+        },
+        {
+          "id": "0102041150108",
+          "title": "第八課：四季的頭髮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150108",
+          "characters": "陣披嚇眶乘龐絲板辮踮挺散里"
+        },
+        {
+          "id": "0102041150109",
+          "title": "第九課：阿白觀察記",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150109",
+          "characters": "促振碎者偶褐巧塑凶繞衝雷牌豐擾"
+        },
+        {
+          "id": "0102041150110",
+          "title": "第十課：老鼠嫁女兒",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150110",
+          "characters": "妞郎丈哄眾羞強嫁架初丟既轎隊伍"
+        },
+        {
+          "id": "0102041150111",
+          "title": "第十一課：豆粥婆婆",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150111",
+          "characters": "婆頰陰血哀嘗蓆栗橫蟹缸漆黏痛拚"
+        },
+        {
+          "id": "0102041150112",
+          "title": "第十二課：戴斗笠的地藏",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041150112",
+          "characters": "貧妻茫算祈繼續宜耐離傍隱託納漸"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 4,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102041140201",
+          "title": "第一課：𪹚龍慶元宵",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140201",
+          "characters": "慶懷祥儀序毫挨吉潮炸旺爆梭徵揚"
+        },
+        {
+          "id": "0102041140202",
+          "title": "第二課：看戲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140202",
+          "characters": "驗拳谷扮勢芳則搭配達製效兵優需"
+        },
+        {
+          "id": "0102041140203",
+          "title": "第三課：舞吧！小飛魚",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140203",
+          "characters": "甩褲童贏識族尤勵飾甚顧慮肯邀豪"
+        },
+        {
+          "id": "0102041140204",
+          "title": "第四課：蝶之生",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140204",
+          "characters": "蛹蟻移蛻煉絕曉殼奮晾翩"
+        },
+        {
+          "id": "0102041140205",
+          "title": "第五課：活出生命奇蹟",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140205",
+          "characters": "健肢激蹦父扎弓異喪豚嘆執限蹟"
+        },
+        {
+          "id": "0102041140206",
+          "title": "第六課：走過就知道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140206",
+          "characters": "裂通付關糊坦危吊壯膽腿軟扛晰懼"
+        },
+        {
+          "id": "0102041140207",
+          "title": "第七課：不一樣的母親花",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140207",
+          "characters": "瓣絹束莖政議致橙昏凋憂雅茶跪誠"
+        },
+        {
+          "id": "0102041140208",
+          "title": "第八課：屋頂上的小貓",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140208",
+          "characters": "吵歲慰制必須煤瑩養替疼箱撒嬌善"
+        },
+        {
+          "id": "0102041140209",
+          "title": "第九課：用一公斤愛嘉明湖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140209",
+          "characters": "泊拔澈湛夢幻永登踏填喚折浹喘隔"
+        },
+        {
+          "id": "0102041140210",
+          "title": "第十課：想像與發明",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140210",
+          "characters": "慧燃誕啟境考材攜聯絡彼網計鍵"
+        },
+        {
+          "id": "0102041140211",
+          "title": "第十一課：小事物　大驚奇",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140211",
+          "characters": "譜欄煎廚尋靈縮組匠蔭悠構集改"
+        },
+        {
+          "id": "0102041140212",
+          "title": "第十二課：九蛙傳奇",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102041140212",
+          "characters": "巫衰判旱導災疊陷弱端魂聚順寧詳"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102051150101",
+          "title": "第一課：幸福筆記本",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150101",
+          "characters": "灘某邁拖疲擁灌倦恩遇擦痕賠償焦謹慎較"
+        },
+        {
+          "id": "0102051150102",
+          "title": "第二課：做人做事做長久",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150102",
+          "characters": "傅釘延遞富穩按熟確掃務讚碑績障率涵預"
+        },
+        {
+          "id": "0102051150103",
+          "title": "第三課：孔雀錯了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150103",
+          "characters": "評性似卷楚綵橡塗拼眉秀妒忌屏惜慈慚愧"
+        },
+        {
+          "id": "0102051150104",
+          "title": "第四課：特別的海",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150104",
+          "characters": "乳渲臭滲漿泉產囪列羅耀螢眩係漲殊呈貌"
+        },
+        {
+          "id": "0102051150105",
+          "title": "第五課：漫遊花東",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150105",
+          "characters": "駛陡峭蕾崖躍凹凸坑斧雄偉臨縱稻澄曳醉"
+        },
+        {
+          "id": "0102051150106",
+          "title": "第六課：護送螃蟹過馬路",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150106",
+          "characters": "綻暇螃乎召溝緩蹲腹浸陸殖愈悲顯阻孵歷"
+        },
+        {
+          "id": "0102051150107",
+          "title": "第七課：高第的魔法建築",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150107",
+          "characters": "設弧杆棟磁鱗薑霜爪聖際瞪繪玻璃遺投堅"
+        },
+        {
+          "id": "0102051150108",
+          "title": "第八課：嘗嘗我的家鄉味",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150108",
+          "characters": "鄉撲螺鮭葵稠旋律麥噓硬扁抗筋椒蒜漢蓋"
+        },
+        {
+          "id": "0102051150109",
+          "title": "第九課：小小力量將世界照亮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150109",
+          "characters": "股藉訪購票售協譯局亡款挖賺鄰幣夠基諸"
+        },
+        {
+          "id": "0102051150110",
+          "title": "第十課：男生說，女生說",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150110",
+          "characters": "閒罵究營擔彆扭規勸仇討鍋繫互誼畢訊磊"
+        },
+        {
+          "id": "0102051150111",
+          "title": "第十一課：耶誕禮物",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150111",
+          "characters": "瀑垂財炫黯錶衛鬍盈逝貨司禱帝訝恍悟昂"
+        },
+        {
+          "id": "0102051150112",
+          "title": "第十二課：漫遊詩情",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051150112",
+          "characters": "鳴澗桂幽繚詩描煩敏銳城辭猿啼舟赦歸箭"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102051140201",
+          "title": "第一課：穿越時空的味道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140201",
+          "characters": "廳盞灑壼菊閱附眸戀飲氛闔籤溶咖啡券粹"
+        },
+        {
+          "id": "0102051140202",
+          "title": "第二課：在黑暗中乘著音樂飛翔",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140202",
+          "characters": "席徐掌映冠軍逆盲扇遭盆階鑽轟隆途鑑繽"
+        },
+        {
+          "id": "0102051140203",
+          "title": "第三課：色香味的陽光",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140203",
+          "characters": "霧吻株芭紫橘趴駐巡闖嚴庫澀餘瞥狂罩歉"
+        },
+        {
+          "id": "0102051140204",
+          "title": "第四課：縣官審石頭",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140204",
+          "characters": "闆販攤賊冤枉辨惡武嫌疑押審罰沾貪饒謀"
+        },
+        {
+          "id": "0102051140205",
+          "title": "第五課：高明說話術",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140205",
+          "characters": "俗良寒燎瓦焚鬆默批啞增禍逞舌鋒若距倘"
+        },
+        {
+          "id": "0102051140206",
+          "title": "第六課：讀書報告—佐賀的超級阿嬤",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140206",
+          "characters": "版姨勤儉繩廢攔蔬稱市慣鞋馨喻缺刃窮頓"
+        },
+        {
+          "id": "0102051140207",
+          "title": "第七課：魔術師爸爸",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140207",
+          "characters": "徑渾痱魁梧眠枚絢湊癢任何概爾"
+        },
+        {
+          "id": "0102051140208",
+          "title": "第八課：八歲，一個人去旅行",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140208",
+          "characters": "盒瞌癟嚼剎礦澆螞怯孫喂遲穴聰孝釋塞銅"
+        },
+        {
+          "id": "0102051140209",
+          "title": "第九課：紅鼻子醫生",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140209",
+          "characters": "謐乍惑搜瀏覽拜磨療癒職證核詢況症裁誇"
+        },
+        {
+          "id": "0102051140210",
+          "title": "第十課：沉默的動物園",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140210",
+          "characters": "絮斜傑滔廣漠燥博織史辰曆址擎狗渺膜佳"
+        },
+        {
+          "id": "0102051140211",
+          "title": "第十一課：地下護衛軍",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140211",
+          "characters": "秦俑皇君陵墓掘葬含栩單煥堪巔盛撼研價"
+        },
+        {
+          "id": "0102051140212",
+          "title": "第十二課：金字塔之謎",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102051140212",
+          "characters": "瞰埃蘊割編橇潤劑摩號據測礫妥脂裹諺矗"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E5%8D%97%E4%B8%80%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0102061150101",
+          "title": "第一課：在天晴了的時候",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150101",
+          "characters": "爽塵垢鳳頁曝涉霾暈跡"
+        },
+        {
+          "id": "0102061150102",
+          "title": "第二課：珍珠鳥",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150102",
+          "characters": "栽茂藤蔓掀悉添免隙尚櫃稿顫暮肩絨咂瀉賴"
+        },
+        {
+          "id": "0102061150103",
+          "title": "第三課：客至",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150103",
+          "characters": "舍皆緣蓬飧兼樽酒舊醅籬簡陋鎮濾潺笆寂陳"
+        },
+        {
+          "id": "0102061150104",
+          "title": "第四課：贏得喝采的輸家",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150104",
+          "characters": "衫肌沸騰兀唯勺吶握抵置頒屬榮搞黝襯惹摟"
+        },
+        {
+          "id": "0102061150105",
+          "title": "第五課：哇！原來如此",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150105",
+          "characters": "載益副監噪避迅滅援燒液蝕觸承陌攝檔撈註"
+        },
+        {
+          "id": "0102061150106",
+          "title": "第六課：登月先鋒",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150106",
+          "characters": "艇劃荒垠宇宙朽誌系訓械艙駕凌隕眺奪億征"
+        },
+        {
+          "id": "0102061150107",
+          "title": "第七課：明智的抉擇",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150107",
+          "characters": "勞抉擇跆抽叢履蹣跚灶搔壤苞芽衡維犧牲"
+        },
+        {
+          "id": "0102061150108",
+          "title": "第八課：飢渴好「火」伴",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150108",
+          "characters": "怨艾枕臂膝焰熄惱跌鬚剝竄瞬頹熾炭飢裊緒"
+        },
+        {
+          "id": "0102061150109",
+          "title": "第九課：火燒連環船",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150109",
+          "characters": "懸寡勃棍糧顛簸獻艘鎖策否欠江瀰倉鞏固鼎"
+        },
+        {
+          "id": "0102061150110",
+          "title": "第十課：戲術",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150110",
+          "characters": "亦傾頃猶墊舀複蕩勾篇鉅靡嘖述鑼俐詫莫"
+        },
+        {
+          "id": "0102061150111",
+          "title": "第十一課：紀念照",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150111",
+          "characters": "斥肅遍玄痘腫敷央瞞庭徽袖擤涕鎂泛枇杷"
+        },
+        {
+          "id": "0102061150112",
+          "title": "第十二課：少年筆耕",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061150112",
+          "characters": "拮据抄躡仿昨辯憊熬瘦咳徒懊悔啜泣吁撫酣"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E5%8D%97%E4%B8%80%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0102061140201",
+          "title": "第一課：風中騎士",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140201",
+          "characters": "矛盾娛帥跤厚供諄誨竅嘯叮嚀廟尿煞霎疤臊"
+        },
+        {
+          "id": "0102061140202",
+          "title": "第二課：達駭黑熊",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140202",
+          "characters": "獵尚括糞寮狩迫脅殺遵骸窩杉翼奄黎喉嚨吟"
+        },
+        {
+          "id": "0102061140203",
+          "title": "第三課：楊氏之子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140203",
+          "characters": "梁氏詣乃梅曰禽姓尊選軼膾炙典寓邏輯例捷"
+        },
+        {
+          "id": "0102061140204",
+          "title": "第四課：談夢想",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140204",
+          "characters": "蜿蜒荊棘嚮逐伐域楷憾岔契遐邇奠屹沮餒豫"
+        },
+        {
+          "id": "0102061140205",
+          "title": "第五課：蒂烈娜",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140205",
+          "characters": "畔巒鰭韌鞭蒼恰倚胖搶頸勁洶湧湍猛濺"
+        },
+        {
+          "id": "0102061140206",
+          "title": "第六課：不怕",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140206",
+          "characters": "賓紐匯遙赴竊查葡萄忐忑按愚蠢犯憤恨涯汰"
+        },
+        {
+          "id": "0102061140207",
+          "title": "第七課：打開心中的窗",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140207",
+          "characters": "扉狹寞疏潑憐循矩稔蝸兢攀繭懇敦咀殷彌"
+        },
+        {
+          "id": "0102061140208",
+          "title": "第八課：努力愛春華",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140208",
+          "characters": "權糾德諱凰驪伏邋遢拘遜冊摯厭濤迴盪囑"
+        },
+        {
+          "id": "0102061140209",
+          "title": "第九課：每一個孩子都有一條自己的小路",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0102061140209",
+          "characters": "蔚忠夥檻蒲曠綺誦"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 1,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101011150101",
+          "title": "第一課：一起走",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150101",
+          "characters": "起走你在左我右和向前"
+        },
+        {
+          "id": "0101011150102",
+          "title": "第二課：大風吹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150102",
+          "characters": "大風吹們來玩不停的跑"
+        },
+        {
+          "id": "0101011150103",
+          "title": "第三課：火車過山洞",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150103",
+          "characters": "火車山洞個又出小堆開心過做"
+        },
+        {
+          "id": "0101011150104",
+          "title": "第四課：請問",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150104",
+          "characters": "請問草天有多高星少太了水去陽珠哪"
+        },
+        {
+          "id": "0101011150105",
+          "title": "第五課：七彩滑梯",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150105",
+          "characters": "彩上好想爬看沒棉花下泡池滑梯糖"
+        },
+        {
+          "id": "0101011150106",
+          "title": "第六課：秋千",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150106",
+          "characters": "秋千子空說早田是誰陪他低找"
+        },
+        {
+          "id": "0101011150107",
+          "title": "第七課：回音",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011150107",
+          "characters": "回音到谷叫人嗎也笑哈"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 1,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=1&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101011140201",
+          "title": "第一課：春天來了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140201",
+          "characters": "春裡綠美呀媽弟坐還路著氣暖就園"
+        },
+        {
+          "id": "0101011140202",
+          "title": "第二課：小雨",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140202",
+          "characters": "雨唱歌過河輕快樂街興魚朋友招手愛稻苗"
+        },
+        {
+          "id": "0101011140203",
+          "title": "第三課：美好的一天",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140203",
+          "characters": "涼地真朵拍照粉紅色衣服妹像會動帶給鳥滿穿"
+        },
+        {
+          "id": "0101011140204",
+          "title": "第四課：送什麼呢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140204",
+          "characters": "送什呢生日要爸姐束做張卡片畫寫話麼"
+        },
+        {
+          "id": "0101011140205",
+          "title": "第五課：窗外的小麻雀",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140205",
+          "characters": "窗外麻雀找字但課才可以急跳先再遊戲"
+        },
+        {
+          "id": "0101011140206",
+          "title": "第六課：毛毛蟲過河",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140206",
+          "characters": "毛陽光兒站中游青幫忙面葉船拉推蟲邊蛙"
+        },
+        {
+          "id": "0101011140207",
+          "title": "第七課：借筆",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140207",
+          "characters": "借筆跟她把拿很都每家今自己背書包剛整"
+        },
+        {
+          "id": "0101011140208",
+          "title": "第八課：兩張卡片",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140208",
+          "characters": "兩教室見桌等意思忍住忽然啊忘用吧對樣"
+        },
+        {
+          "id": "0101011140209",
+          "title": "第九課：友情的枴杖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140209",
+          "characters": "情杖時受傷疼直步健康覺得溫雙枴蹲矮"
+        },
+        {
+          "id": "0101011140210",
+          "title": "第十課：一棵小樹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140210",
+          "characters": "棵樹打雷土抖害怕長咬羊吃勇敢這發柔聽"
+        },
+        {
+          "id": "0101011140211",
+          "title": "第十一課：鉛筆和橡皮擦",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140211",
+          "characters": "鉛皮常錯久哭加油試後正漂亮進需學橡擦確"
+        },
+        {
+          "id": "0101011140212",
+          "title": "第十二課：上臺說故事",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101011140212",
+          "characters": "故事期全班記麼能決定狼間完段物同臺演"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 2,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101021150101",
+          "title": "第一課：我的心情",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150101",
+          "characters": "候颳冷躲閃電難烏雲密布盆充滿放晴現虹傾麗"
+        },
+        {
+          "id": "0101021150102",
+          "title": "第二課：彩色的天空",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150102",
+          "characters": "老師新希望卻始緊因為知道怎消失習最掛轉熟辦舞"
+        },
+        {
+          "id": "0101021150103",
+          "title": "第三課：國王做新衣",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150103",
+          "characters": "國王喜歡穿只件點改領越設計發方法分享臣袖驚讓"
+        },
+        {
+          "id": "0101021150104",
+          "title": "第四課：水草下的呱呱",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150104",
+          "characters": "呱聞聲猜蛙別靠近抓如果乖腦袋瓜證明頂影蝦蟆擔"
+        },
+        {
+          "id": "0101021150105",
+          "title": "第五課：沙灘上的畫",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150105",
+          "characters": "沙灘海邊退遠螃蟹愛注夕腳丫橫留印挖麗"
+        },
+        {
+          "id": "0101021150106",
+          "title": "第六課：草叢裡的星星",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150106",
+          "characters": "月奶晚飯散屋竹林頭溪旁暗眼睛那聚成顆叢盡"
+        },
+        {
+          "id": "0101021150107",
+          "title": "第七課：不一樣的美食",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150107",
+          "characters": "樣食郊活奇筒香味便當盒客清節保平安南祖艾粄捲"
+        },
+        {
+          "id": "0101021150108",
+          "title": "第八課：美食分享日",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150108",
+          "characters": "介圓形白紙米變軟搶材蝦線各種菜接聽更紹舉"
+        },
+        {
+          "id": "0101021150109",
+          "title": "第九課：好味道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150109",
+          "characters": "黃沖澡蘿蔔哪粒熱浴蒸胖名苔蛋蔬通細淡黏飄"
+        },
+        {
+          "id": "0101021150110",
+          "title": "第十課：加加減減",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150110",
+          "characters": "減表讀認識謎答搖百嘴哥數題趕突異口對嘟"
+        },
+        {
+          "id": "0101021150111",
+          "title": "第十一課：奇怪的門",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150111",
+          "characters": "怪門扇立刻閒馬闖耳主播報力竟巴東西底慌仔擠妖"
+        },
+        {
+          "id": "0101021150112",
+          "title": "第十二課：詠鵝",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021150112",
+          "characters": "念曲項浮掌撥波詩作首指伸脖身體隻倒肚詠鵝歲翻"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 2,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=2&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101021140201",
+          "title": "第一課：種子旅行真奇妙",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140201",
+          "characters": "旅行妙公園針尖狗士貓探險黑傘由哇世界鬼刺昭飛"
+        },
+        {
+          "id": "0101021140202",
+          "title": "第二課：小水滴愛上探險",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140202",
+          "characters": "滴躺次落荷珍珠第被轉甩浪救植提漠令及滾"
+        },
+        {
+          "id": "0101021140203",
+          "title": "第三課：紫斑蝶向北飛",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140203",
+          "characters": "紫北悄擔翅膀讓溜滑梯碰遇鳥終於木些伴斑蝶盪"
+        },
+        {
+          "id": "0101021140204",
+          "title": "第四課：一場雨",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140204",
+          "characters": "場農夫渴稻喝飽洗蚯蚓扭尾泥蝌蚪努爺剛淹"
+        },
+        {
+          "id": "0101021140205",
+          "title": "第五課：笑容回來了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140205",
+          "characters": "容丟負責收漸臉雖換工總親切慢利合式露亂資源謝微"
+        },
+        {
+          "id": "0101021140206",
+          "title": "第六課：好好的說話",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140206",
+          "characters": "從臺夠昨球捧腹告訴整廁所踢足比校信祝搬禮貌"
+        },
+        {
+          "id": "0101021140207",
+          "title": "第七課：色彩變變變",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140207",
+          "characters": "調盤配藍顏魔料幾已經趣呵將混橙棒神"
+        },
+        {
+          "id": "0101021140208",
+          "title": "第八課：孵蛋的男孩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140208",
+          "characters": "男孩靜晨傳雞吵雜女窩根羽啄母求助凡孵離"
+        },
+        {
+          "id": "0101021140209",
+          "title": "第九課：點亮世界的人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140209",
+          "characters": "歲燈賣非貴買燒壞功費絲敗實驗呼良持宜"
+        },
+        {
+          "id": "0101021140210",
+          "title": "第十課：醜小鴨",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140210",
+          "characters": "醜鴨其特抱破碗煩雪餓縮孤單掉淚鵝飛迎蘆葦"
+        },
+        {
+          "id": "0101021140211",
+          "title": "第十一課：蜘蛛救蛋",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140211",
+          "characters": "蜘蛛鴿裂痕拜託寶貝處補內石算吐顧離"
+        },
+        {
+          "id": "0101021140212",
+          "title": "第十二課：玉兔搗藥",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101021140212",
+          "characters": "玉兔搗藥姑娘養仙重鬧桂砍嚇棍操夜運"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 3,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101031150101",
+          "title": "第一課：時間是什麼",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150101",
+          "characters": "待蝸牛牠吞寸碌奔彈簧它短悲流永"
+        },
+        {
+          "id": "0101031150102",
+          "title": "第二課：妙用便利貼",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150102",
+          "characters": "貼使醒準睡鐘效序而且排冰箱原條顯隔"
+        },
+        {
+          "id": "0101031150103",
+          "title": "第三課：提早五分鐘",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150103",
+          "characters": "統票角板業本況該喊文具理此備易匆餘"
+        },
+        {
+          "id": "0101031150104",
+          "title": "第四課：水滾了",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150104",
+          "characters": "堂鈴徒傅撿柴鍋冒騰揚湯止抽解薪舀沸釜"
+        },
+        {
+          "id": "0101031150105",
+          "title": "第五課：為梨花撐傘用",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150105",
+          "characters": "梨撐甜汁綿腐爛結筷膠綁夾遮固景"
+        },
+        {
+          "id": "0101031150106",
+          "title": "第六課：小鉛筆大學問",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150106",
+          "characters": "墨製部芯斷機器凹槽入另治桿削"
+        },
+        {
+          "id": "0101031150107",
+          "title": "第七課：風的味道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150107",
+          "characters": "鹹蔚航乘橇坡野閉深吸欣賞瞞"
+        },
+        {
+          "id": "0101031150108",
+          "title": "第八課：寄居蟹找新家",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150108",
+          "characters": "寄居幕杯殼類瓶蓋淨志垃圾位護應"
+        },
+        {
+          "id": "0101031150109",
+          "title": "第九課：阿塱壹古道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150109",
+          "characters": "挑戰交隨導鳳投繼續岸淺沿踩疊般棧"
+        },
+        {
+          "id": "0101031150110",
+          "title": "第十課：秋千上的婚禮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150110",
+          "characters": "婚飾郎參響代福連酒敬藏俗惜互精"
+        },
+        {
+          "id": "0101031150111",
+          "title": "第十一課：一路平安",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150111",
+          "characters": "除嬸煙陣附店休息修廠檢查托幸零關擺擾"
+        },
+        {
+          "id": "0101031150112",
+          "title": "第十二課：不一樣的團圓",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031150112",
+          "characters": "團剩默樓視訊叔鏡逗娃壓錢透握"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 3,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=3&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101031140201",
+          "title": "第一課：拔不起來的筆",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140201",
+          "characters": "拔牆壁往究父練肯願即專仍牢嚇勁潔膽罰棄村"
+        },
+        {
+          "id": "0101031140202",
+          "title": "第二課：還差一點",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140202",
+          "characters": "差擋祕藏管橫埋模感奮示範苦讚微訣缸豎"
+        },
+        {
+          "id": "0101031140203",
+          "title": "第三課：用膝蓋跳舞的女孩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140203",
+          "characters": "演姿病引克肢夾琴雙骨敲疼痛戰環膝截臂跪腕"
+        },
+        {
+          "id": "0101031140204",
+          "title": "第四課：靜靜的淡水河",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140204",
+          "characters": "廣松妳染媚市映躍茫暮祥耀金泰銀蘚緣勉霞凝"
+        },
+        {
+          "id": "0101031140205",
+          "title": "第五課：茶鄉鹿谷",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140205",
+          "characters": "茶鄉城參烏龍程傅摘晒酵乾燥嘆驗霧揉烘焙講"
+        },
+        {
+          "id": "0101031140206",
+          "title": "第六課：月世界之旅",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140206",
+          "characters": "之境懷訪目丘象灰許紋濃密漿驚集嗝噴蹦"
+        },
+        {
+          "id": "0101031140207",
+          "title": "第七課：做泡菜",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140207",
+          "characters": "漬疑惑產適益腸健康裝封厲騙承貪罐醃菌"
+        },
+        {
+          "id": "0101031140208",
+          "title": "第八課：行人的守護者",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140208",
+          "characters": "護者展潑談秩倍疾徐抬胸或某扮型芒邁伐挺"
+        },
+        {
+          "id": "0101031140209",
+          "title": "第九課：就愛兩兩在一起",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140209",
+          "characters": "湯筷慣較圍餐套煮端免取垃圾化舉扁廚"
+        },
+        {
+          "id": "0101031140210",
+          "title": "第十課：飛行員和小王子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140210",
+          "characters": "員幕無際幅帽圖蛇瞪呆揮既胃瞧豎鯨寵拇"
+        },
+        {
+          "id": "0101031140211",
+          "title": "第十一課：畫龍點睛",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140211",
+          "characters": "維肖寺尚困擾邀逼孫追旦相朗布蹤佛梁糞鷹"
+        },
+        {
+          "id": "0101031140212",
+          "title": "第十二課：掉進一個兔子洞",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101031140212",
+          "characters": "夏聊幻糕跌央鼠咦刺牌后脾令夢兵錶槌賽鶴蝟"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 4,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101041150101",
+          "title": "第一課：美麗島",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150101",
+          "characters": "島唾沫忠衛寒椰隊蕉街灣甜糖童"
+        },
+        {
+          "id": "0101041150102",
+          "title": "第二課：請到我的家鄉來",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150102",
+          "characters": "泉抹訝牙齒架速彷彿汽區恐陀螺聚"
+        },
+        {
+          "id": "0101041150103",
+          "title": "第三課：鏡頭下的家鄉",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150103",
+          "characters": "鏡軌樓與耕耘蔬鼓腮烤柳丁粉網錄"
+        },
+        {
+          "id": "0101041150104",
+          "title": "第四課：飛行夢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150104",
+          "characters": "兄翔鷹論控制命義標良研靈升紀碑"
+        },
+        {
+          "id": "0101041150105",
+          "title": "第五課：月光下",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150105",
+          "characters": "掛皎凝曾考輪徘徊瑤妝科登循尋案"
+        },
+        {
+          "id": "0101041150106",
+          "title": "第六課：又遠又近的月亮",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150106",
+          "characters": "館億隕撞擊坑射狀距萬里均騎餅揭"
+        },
+        {
+          "id": "0101041150107",
+          "title": "第七課：松鼠先生的麵包",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150107",
+          "characters": "麵焦揉批爐徵啟禁沾依度滋必"
+        },
+        {
+          "id": "0101041150108",
+          "title": "第八課：平凡的大俠",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150108",
+          "characters": "俠頓江鞋溼柱止措撐概折根脫愣帥"
+        },
+        {
+          "id": "0101041150109",
+          "title": "第九課：王子折箭",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150109",
+          "characters": "箭善民爭復祈惱鬥博弓欺惡懶晉盡"
+        },
+        {
+          "id": "0101041150110",
+          "title": "第十課：海中的熱帶雨林",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150110",
+          "characters": "珊瑚礁積存稱株縫隙繽紛捕撈汙藻"
+        },
+        {
+          "id": "0101041150111",
+          "title": "第十一課：美食島",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150111",
+          "characters": "闊鯊拼虎鯨叼餵嘗鮮籠沉豚鑽纏潮"
+        },
+        {
+          "id": "0101041150112",
+          "title": "第十二課：寧靜的意樂會",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041150112",
+          "characters": "寧譯脣達愉悅章齊載嘉賓辦優籟"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 4,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=4&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101041140201",
+          "title": "第一課：稻間鴨",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140201",
+          "characters": "苗雄赳昂巡呷甲喚禾豐季穗燦"
+        },
+        {
+          "id": "0101041140202",
+          "title": "第二課：綠色魔法學校",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140202",
+          "characters": "建築致棟囪強覽塔設悶施簾瓢僅碳"
+        },
+        {
+          "id": "0101041140203",
+          "title": "第三課：石虎兄妹",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140203",
+          "characters": "傍橘敏捷朝舍伏蒼翠巨周臨黯溪迴"
+        },
+        {
+          "id": "0101041140204",
+          "title": "第四課：阿里棒棒",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140204",
+          "characters": "艘舟列戴盔召賜饒佑順串激共餘予"
+        },
+        {
+          "id": "0101041140205",
+          "title": "第五課：快樂兒童日",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140205",
+          "characters": "慶褲華披紗袍巾袖鯉庭旗偶未翁"
+        },
+        {
+          "id": "0101041140206",
+          "title": "第六課：阿公的秘密",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140206",
+          "characters": "簇碎彎層鋪漫遍潔桐瞬踮亭芝磨擂"
+        },
+        {
+          "id": "0101041140207",
+          "title": "第七課：棒球英雄夢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140207",
+          "characters": "曉賽弱哀准觸振局反輸討支壘菠勝"
+        },
+        {
+          "id": "0101041140208",
+          "title": "第八課：夢幻全壘打",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140208",
+          "characters": "領喘愈噪拚衝猶豫膽插腰贏硬挨罵"
+        },
+        {
+          "id": "0101041140209",
+          "title": "第九課：單車遊日月潭",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140209",
+          "characters": "盛劃選途霧舒緩巧透棧捉似眺秀趟"
+        },
+        {
+          "id": "0101041140210",
+          "title": "第十課：孫悟空三借芭蕉扇",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140210",
+          "characters": "芭焰擔搧熄獨嫂菩薩丹關椅訣乃聖"
+        },
+        {
+          "id": "0101041140211",
+          "title": "第十一課：最後一片葉子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140211",
+          "characters": "租蒙瘦肺炎咳醫危嚴藤磚薄賺搬梯"
+        },
+        {
+          "id": "0101041140212",
+          "title": "第十二課：閱讀課",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101041140212",
+          "characters": "閱扶捐烈犧牲踴穫任務鐘響欄"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101051150101",
+          "title": "第一課：你我之間",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150101",
+          "characters": "堅耐勞元蝟擁繩刷膏遭係充供凸彼協融洽諦"
+        },
+        {
+          "id": "0101051150102",
+          "title": "第二課：風起，大家都在",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150102",
+          "characters": "笛奏簡旋律縈繞梢廊熟悉諧階須絮伍威"
+        },
+        {
+          "id": "0101051150103",
+          "title": "第三課：廉頗與藺相如",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150103",
+          "characters": "璧歸諸侯挺官軍羞辱懦恥權勢攻君鎮愧荊肝"
+        },
+        {
+          "id": "0101051150104",
+          "title": "第四課：來場快樂的桌遊",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150104",
+          "characters": "筍廳眾據逐棋撲富純寓超炒氛齡技例憶培患"
+        },
+        {
+          "id": "0101051150105",
+          "title": "第五課：超級英雄",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150105",
+          "characters": "英采揚媲搜劇螢拯預脈院授犯吔違司潤愕創"
+        },
+        {
+          "id": "0101051150106",
+          "title": "第六課：世足賽的贏家",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150106",
+          "characters": "盃缺席塑廢質飲掩焚熔抽紡極複織耗至摩屆"
+        },
+        {
+          "id": "0101051150107",
+          "title": "第七課：美景閒情—詩兩首",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150107",
+          "characters": "返寨曠寂茂鳴澗悠乎谷描幽隱貌漆乍添"
+        },
+        {
+          "id": "0101051150108",
+          "title": "第八課：葫蘆瓜",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150108",
+          "characters": "葫蘆幼鄰蔓攀莖蜂營蝴蝶翩吱喳灌溉誠盼"
+        },
+        {
+          "id": "0101051150109",
+          "title": "第九課：窗邊的鳴聲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150109",
+          "characters": "玻璃測棲覓昆誘繡尊慮側褐掀暑圃籬戀捨淋"
+        },
+        {
+          "id": "0101051150110",
+          "title": "第十課：敏銳觀察",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150110",
+          "characters": "銳膩偉格納德洲洋湊陸移評飾髮詞丈銷售臘"
+        },
+        {
+          "id": "0101051150111",
+          "title": "第十一課：你一定會聽見的",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150111",
+          "characters": "蒲梳蓬砂螞蟻楓噗炸逃拂狂掃颱溝籃聰擇脆編"
+        },
+        {
+          "id": "0101051150112",
+          "title": "第十二課：藍色連身裙",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150112",
+          "characters": "裙煦置髒嘈塵裳咪蹈妻柵闢政府糟皆蹟"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=5&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101051140201",
+          "title": "第一課：鵝鑾鼻詩",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140201",
+          "characters": "符坎坷澎湃垠限陵北瞭跡仰俯碧漾歷史喻遷"
+        },
+        {
+          "id": "0101051140202",
+          "title": "第二課：山與海的交響樂—東海岸鐵道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140202",
+          "characters": "巒障喧翅膀態翱隧嘩灑綻降掠轟隆震顫覆吟"
+        },
+        {
+          "id": "0101051140203",
+          "title": "第三課：我眼中的東方之最",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140203",
+          "characters": "廟拾綴若峰杜鵑皇宇宙付簽擅拘厚欲璞屬"
+        },
+        {
+          "id": "0101051140204",
+          "title": "第四課：滿修女採訪記",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140204",
+          "characters": "採殘藹爽撼慈驕傲尷尬恢輝甚佩怨悔偏奉私"
+        },
+        {
+          "id": "0101051140205",
+          "title": "第五課：誰該被派去非洲",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140205",
+          "characters": "派囑咐武肉裕哲悟憐講役末慎瞄錶礙攔阻乞"
+        },
+        {
+          "id": "0101051140206",
+          "title": "第六課：幸福的味道",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140206",
+          "characters": "瀰暫耍猛索煞肅替否鬼蓆嗅股聯絡簿塗"
+        },
+        {
+          "id": "0101051140207",
+          "title": "第七課：生活有感—詩兩首",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140207",
+          "characters": "縷勸莫堪編禿椏畝鑑渠澈陰遺憾繪竭絕"
+        },
+        {
+          "id": "0101051140208",
+          "title": "第八課：懶人包大解密",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140208",
+          "characters": "媒謂詳泛繁哏詼瀏略刪篇婦頁價擷誤澄謠妨"
+        },
+        {
+          "id": "0101051140209",
+          "title": "第九課：良言一句三冬暖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140209",
+          "characters": "疏謹懇誼訓委婉懈刀迥恰勵渾獲敵仗榮劍"
+        },
+        {
+          "id": "0101051140210",
+          "title": "第十課：擅長推理的人",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140210",
+          "characters": "呎鼻廓劑娓邏輯瀑謬露釋黝腕皙臂"
+        },
+        {
+          "id": "0101051140211",
+          "title": "第十一課：草船借箭",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140211",
+          "characters": "帳辭督殺侍酬詐匠延幔紮牽吶率抵擋恍丞庫"
+        },
+        {
+          "id": "0101051140212",
+          "title": "第十二課：三個問題",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051140212",
+          "characters": "佳避儘茅睿鏟鬍虛呻血疲累檻諒財誓仇宮豁"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=115_1",
+      "lessons": [
+        {
+          "id": "0101061150101",
+          "title": "第一課：遇見自己",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150101",
+          "characters": "漣漪皺晃弄摯蛹翼註噴儲勉邁詢惘赴恆"
+        },
+        {
+          "id": "0101061150102",
+          "title": "第二課：為什麼大家不理我？",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150102",
+          "characters": "眶固執辯胞胎郵暈稚溜慘憤慨狠憂涕寬慰寞"
+        },
+        {
+          "id": "0101061150103",
+          "title": "第三課：孔子說的話",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150103",
+          "characters": "杏婆娑鏗鏘撫壇徒鍊曰矣舊焉亦辨警惕慧"
+        },
+        {
+          "id": "0101061150104",
+          "title": "第四課：向大自然學習",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150104",
+          "characters": "鰭奧仿迫蚊叮膚組鋸擴液蓮奈構藉鵰霸翹垂"
+        },
+        {
+          "id": "0101061150105",
+          "title": "第五課：樹的聯想",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150105",
+          "characters": "濘躁霎呈淘蔭賀遮踏穩稀襟初仁酥栽駐庇"
+        },
+        {
+          "id": "0101061150106",
+          "title": "第六課：善用自嘲，展現幽默",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150106",
+          "characters": "嘲揶揄僵侃競醜哄判倘諷丐屑貶捏吻坦窘魅"
+        },
+        {
+          "id": "0101061150107",
+          "title": "第七課：跟著公共藝術去旅行",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150107",
+          "characters": "姨雕拓蒐蕨梅鹿佇冽澤錦眨鏽鋼涵銅籍迭"
+        },
+        {
+          "id": "0101061150108",
+          "title": "第八課：街頭藝術家",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150108",
+          "characters": "墩撇咧攏副羈伙鈔幣喇脹筋吉儼按廂弦矩羨"
+        },
+        {
+          "id": "0101061150109",
+          "title": "第九課：戲臺上的她與他",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150109",
+          "characters": "份鬟涯辛劈腿獅丑甘井騰素絢典吊蘭尤"
+        },
+        {
+          "id": "0101061150110",
+          "title": "第十課：過故人莊",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150110",
+          "characters": "莊村暢黍郭斜軒桑菊穀曆綿殷勤樸訂恬"
+        },
+        {
+          "id": "0101061150111",
+          "title": "第十一課：來一碗溫暖的羹湯",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150111",
+          "characters": "羹芡稠鍋喉巷袪販醬攪拌狹蹲縱餃裹菇塞嬌"
+        },
+        {
+          "id": "0101061150112",
+          "title": "第十二課：存根",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061150112",
+          "characters": "擬銜豪碩割嫁竊賊攤憑鑿傢駁誣監蒂粗毫虧"
+        }
+      ],
+      "complete": true,
+      "error": null
+    },
+    {
+      "publisher": "翰林",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "source": "https://pedia.cloud.edu.tw/Bookmark/Textword?category=%E5%9C%8B%E8%AA%9E&degree=6&press=%E7%BF%B0%E6%9E%97%E7%89%88&year=114_2",
+      "lessons": [
+        {
+          "id": "0101061140201",
+          "title": "第一課：遊走在世界的市場裡",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140201",
+          "characters": "遛逛繫陌俐醬咖啡倚貨築恨贈剌豔辣襯托彰購"
+        },
+        {
+          "id": "0101061140202",
+          "title": "第二課：到不來梅當個樂師吧",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140202",
+          "characters": "疆港摒諺罐驢馱衰盜頤怖嘶啞嗓嚥爪梁喻惦初"
+        },
+        {
+          "id": "0101061140203",
+          "title": "第三課：大小剛好的鞋子",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140203",
+          "characters": "踝絨號濺屈嫌埃縱攝氏逢倨嗤欠陋寡嗯"
+        },
+        {
+          "id": "0101061140204",
+          "title": "第四課：王戎辨苦李",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140204",
+          "characters": "戎李劉彙晉軼撰遣辭栩唯濬致纍澀賅敘述"
+        },
+        {
+          "id": "0101061140205",
+          "title": "第五課：童年‧夏日‧棉花糖",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140205",
+          "characters": "巷凰葵巔盎梭緯勺晶瑩攪拌剪裁鋁防鈴逝恆恬"
+        },
+        {
+          "id": "0101061140206",
+          "title": "第六課：兒童的保護傘",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140206",
+          "characters": "輔仆傾窘貧兼職畢飢刊斤貸捍含歧抑濟績凌妨"
+        },
+        {
+          "id": "0101061140207",
+          "title": "第七課：你為何而學",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140207",
+          "characters": "驅衷迭滯崗謂秉俱誕旺鑰匙挫蔽域侷掘釐燃"
+        },
+        {
+          "id": "0101061140208",
+          "title": "第八課：我的武俠大夢",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140208",
+          "characters": "駕拈豬蜘蛛詫啼抉苛塌稿湛鍛旨柢茁懵驟"
+        },
+        {
+          "id": "0101061140209",
+          "title": "第九課：雛鳥試飛",
+          "source": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101061140209",
+          "characters": "雛膛芒啾拙懼凶漲鷗嘹滔襲陷阱"
+        }
+      ],
+      "complete": true,
+      "error": null
+    }
+  ],
+  "collectedAt": "2026-11-02"
+}

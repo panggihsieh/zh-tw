@@ -1,0 +1,175 @@
+.handwriting-lab {
+  color: #193b65;
+  line-height: 1.7;
+}
+.handwriting-notice {
+  padding: 14px 18px;
+  background: #fff6df;
+  border: 1px solid #ead3a0;
+  border-radius: 10px;
+}
+.handwriting-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 2fr;
+  gap: 14px;
+}
+.handwriting-lab label {
+  display: grid;
+  gap: 6px;
+}
+.handwriting-lab :is(input, textarea, select) {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #bacde1;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+  color: inherit;
+  font: inherit;
+}
+.handwriting-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 0;
+}
+.handwriting-characters button {
+  min-width: 44px;
+}
+.handwriting-workspace {
+  display: grid;
+  grid-template-columns: minmax(240px, 420px) minmax(200px, 1fr);
+  gap: 24px;
+  margin: 24px 0;
+}
+.handwriting-character-form {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.handwriting-character-form label {
+  flex: 1;
+  min-width: 0;
+}
+.handwriting-guided {
+  display: flex !important;
+  align-items: center;
+  gap: 8px !important;
+  margin-bottom: 14px;
+}
+.handwriting-guided input {
+  width: 18px;
+  height: 18px;
+}
+.handwriting-pad {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  border: 1px solid #bdcfc4;
+  border-radius: 10px;
+  touch-action: none;
+  background-color: #fff;
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(50% - 0.5px),
+      #d5dfd8 50%,
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(50% - 0.5px),
+      #d5dfd8 50%,
+      transparent calc(50% + 0.5px)
+    );
+  overflow: hidden;
+}
+.handwriting-pad svg {
+  display: block;
+  max-width: 100%;
+}
+.handwriting-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.handwriting-controls h2 {
+  margin: 0;
+}
+.handwriting-controls [role="status"] {
+  padding: 14px;
+  border: 1px solid #d4e2f0;
+  border-radius: 10px;
+  background: white;
+  min-height: 86px;
+}
+.handwriting-controls p {
+  margin: 0;
+}
+.handwriting-controls p:last-child {
+  font-size: 14px !important;
+  color: #526987;
+}
+.handwriting-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.handwriting-data-grid article {
+  display: grid;
+  gap: 8px;
+  background: white;
+  border: 1px solid #cfdeee;
+  padding: 14px;
+  border-radius: 10px;
+}
+.handwriting-data-grid strong {
+  font-family: "DFKai-SB", serif;
+  font-size: 38px;
+}
+.handwriting-data-grid span {
+  font-size: 13px;
+}
+.handwriting-course-form {
+  display: grid;
+  gap: 12px;
+}
+.handwriting-course-form p {
+  margin: 0;
+}
+.handwriting-course-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.handwriting-coverage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 6px;
+}
+.handwriting-coverage p {
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+.handwriting-lab li {
+  margin: 8px 0;
+}
+.handwriting-lab .secondary {
+  white-space: normal;
+}
+@media (max-width: 700px) {
+  .handwriting-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .handwriting-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .handwriting-pad {
+    margin: auto;
+  }
+  .handwriting-character-form {
+    flex-wrap: wrap;
+  }
+}
