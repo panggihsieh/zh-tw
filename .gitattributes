@@ -1,0 +1,4 @@
+# Preserve upstream stroke files and licenses byte-for-byte across Windows checkouts.
+public/handwriting-data/*.json -text
+public/handwriting-data/ARPHICPL.TXT -text whitespace=-blank-at-eol
+public/handwriting-data/HANZI-WRITER-LICENSE.txt -text
