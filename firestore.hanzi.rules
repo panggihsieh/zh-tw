@@ -7,6 +7,32 @@ function hanziGoogle() {
 function hanziAdmin() {
   return hanziGoogle() && request.auth.token.email == 'teacher.hsieh@gmail.com';
 }
+function validHanziTheme() {
+  let t = request.resource.data;
+  let c = t.colors;
+  return t.keys().hasAll(['id','name','colors','radius'])
+    && t.keys().hasOnly(['id','name','colors','radius'])
+    && t.id is string && t.id.matches('^[a-z0-9-]{1,60}$')
+    && t.name is string && t.name.size() > 0 && t.name.size() <= 40
+    && t.radius is int && t.radius >= 8 && t.radius <= 32
+    && c is map
+    && c.keys().hasAll(['primary','dark','accent','background','surface','ink','border'])
+    && c.keys().hasOnly(['primary','dark','accent','background','surface','ink','border'])
+    && c.primary.matches('^#[0-9a-fA-F]{6}$') && c.dark.matches('^#[0-9a-fA-F]{6}$')
+    && c.accent.matches('^#[0-9a-fA-F]{6}$') && c.background.matches('^#[0-9a-fA-F]{6}$')
+    && c.surface.matches('^#[0-9a-fA-F]{6}$') && c.ink.matches('^#[0-9a-fA-F]{6}$')
+    && c.border.matches('^#[0-9a-fA-F]{6}$');
+}
+match /hanzi_notebook_themes/{themeId} {
+  allow read: if true;
+  allow create, update: if hanziAdmin() && validHanziTheme() && request.resource.data.id == themeId;
+  allow delete: if false;
+}
+match /hanzi_notebook_settings/websiteTheme {
+  allow get: if true;
+  allow create, update: if hanziAdmin() && validHanziTheme();
+  allow delete: if false;
+}
 function hanziEnabled() {
   let accessPath = /databases/$(database)/documents/hanzi_notebook_access/$(request.auth.token.email);
   return !exists(accessPath) || get(accessPath).data.enabled == true;

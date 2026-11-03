@@ -1,0 +1,85 @@
+:root[data-site-theme] {
+  --green: var(--theme-primary); --soft: var(--theme-background); --muted: var(--theme-ink);
+  --border: var(--theme-border); --orange: var(--theme-dark);
+  color: var(--theme-ink); background: var(--theme-background);
+}
+:root[data-site-theme] body { background: radial-gradient(ellipse at 5% 5%, color-mix(in srgb, var(--theme-accent) 18%, transparent), transparent 45%), var(--theme-background); color: var(--theme-ink); }
+:root[data-site-theme] .top-navigation-layout .topbar,
+:root[data-site-theme] .backend-workspace-bar {
+  background: linear-gradient(115deg, var(--theme-primary), var(--theme-dark));
+  border-bottom: 4px solid var(--theme-border); color: white; box-shadow: 0 5px 20px #163e2920;
+}
+:root[data-site-theme] .topbar :is(.app-top-brand,.nav-item,.quiet,.header-user-role) { color: white; }
+:root[data-site-theme] .topbar .app-top-nav .nav-item { border-radius: 28px; background: #ffffff10; }
+:root[data-site-theme] .topbar .app-top-nav .nav-item.active { color: var(--theme-dark); background: linear-gradient(white,var(--theme-background)); border: 2px solid var(--theme-border); box-shadow: 0 3px 0 #00000012; }
+:root[data-site-theme] .topbar .teacher-session-button { color: var(--theme-dark); background: var(--theme-surface); border: 2px solid var(--theme-border); border-radius: 24px; }
+:root[data-site-theme] .topbar .speech-tools button { color: var(--theme-dark); background: var(--theme-surface); }
+:root[data-site-theme] .page-collapse-toggle { background: var(--theme-dark); color: var(--theme-accent); border: 1px solid #ffffff55; }
+:root[data-site-theme] .page-heading h1 { color: var(--theme-dark); font-weight: 800; }
+:root[data-site-theme] :is(.student-lookup,.input-panel,.welcome-panel,.library-card,.resource-card,.backend-function-card,.backend-panel,.cloud-collections) {
+  background: var(--theme-surface); border: 2px solid var(--theme-border); border-radius: var(--theme-radius);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--theme-border) 60%, transparent);
+  color: var(--theme-ink);
+}
+:root[data-site-theme] .student-lookup { padding: 24px; scroll-margin-top: calc(var(--app-header-height, 140px) + 16px); }
+:root[data-site-theme] :is(.primary,.adventure-start) {
+  background: linear-gradient(var(--theme-primary),var(--theme-dark)); color: #fff;
+  border: 2px solid var(--theme-border); border-radius: var(--theme-radius); box-shadow: 0 4px 0 var(--theme-dark);
+}
+:root[data-site-theme] .primary:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+:root[data-site-theme] .adventure-welcome .adventure-start { color: white; }
+:root[data-site-theme] .topbar .nav-count { color: var(--theme-dark); background: var(--theme-background); }
+:root[data-site-theme] :is(.secondary,.text-button,.read-button) { background: var(--theme-surface); color: var(--theme-dark); border: 1px solid var(--theme-border); border-radius: calc(var(--theme-radius) * .65); }
+:root[data-site-theme] :is(input,select,textarea) { border-color: var(--theme-border); border-radius: calc(var(--theme-radius) * .45); color: var(--theme-ink); background: var(--theme-surface); accent-color: var(--theme-primary); }
+:root[data-site-theme] :is(a,.eyebrow,.edition,.section-kicker,.student-lookup h2,.student-lookup label,.student-lookup summary) { color: var(--theme-dark); }
+:root[data-site-theme] .scene-content { background: radial-gradient(ellipse at 15% 20%, var(--theme-background), transparent 65%),var(--theme-surface); border-color: var(--theme-border); border-radius: 0 0 var(--theme-radius) var(--theme-radius); }
+:root[data-site-theme] .scene-tabs button { background: var(--theme-background); border-color: var(--theme-border); border-radius: calc(var(--theme-radius) * .6); color: var(--theme-ink); }
+:root[data-site-theme] .scene-tabs button.current { background: var(--theme-primary); color: white; border-color: var(--theme-dark); }
+:root[data-site-theme] .scene-tabs button.current span { color: var(--theme-dark); background: var(--theme-accent); }
+:root[data-site-theme] .curriculum-character-selection label { background: var(--theme-surface); border-color: var(--theme-border); border-radius: calc(var(--theme-radius) * .6); }
+:root[data-site-theme] .curriculum-character-selection label:has(input:checked) { background: var(--theme-background); border: 2px solid var(--theme-primary); }
+:root[data-site-theme] .welcome-panel { background: linear-gradient(145deg,var(--theme-background),var(--theme-surface)); }
+:root[data-site-theme] :is(.backend-menu-heading,.backend-menu-heading span,.backend-shell .backend-menu-heading) { color: white; }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item { color: white; }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item.active { background: var(--theme-background); color: var(--theme-dark); border-color: var(--theme-border); }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item:hover:not(.active) { background: #ffffff22; }
+:root[data-site-theme] .backend-shell { background: var(--theme-background); }
+:root[data-site-theme] .backend-workspace-bar :is(strong,span,a) { color: white; }
+.adventure-welcome { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 24px; padding: 28px 32px; margin: 0 0 28px; overflow: hidden; border: 3px solid var(--theme-border); border-radius: calc(var(--theme-radius) + 10px); background: radial-gradient(ellipse at 85% 100%, var(--theme-border) 0 22%,transparent 22.5%),radial-gradient(ellipse at 65% 110%,var(--theme-background) 0 45%,transparent 45.5%),linear-gradient(125deg,var(--theme-surface),var(--theme-background)); box-shadow: 0 7px 0 var(--theme-border); }
+.adventure-welcome h2 { font-size: clamp(24px,3vw,34px); color: var(--theme-dark); margin: 6px 0 8px; }
+.adventure-welcome p { margin: 0 0 18px; color: var(--theme-ink); }
+.adventure-kicker { font-size: 14px; font-weight: 700; color: var(--theme-dark); }
+.adventure-start { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; font-weight: 800; }
+.adventure-stops { display: flex; gap: 12px; margin-left: auto; flex-wrap: wrap; }
+.adventure-stops span { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px; border: 2px solid var(--theme-border); border-radius: var(--theme-radius); background: var(--theme-surface); font-weight: 700; color: var(--theme-dark); }
+.adventure-stops svg { color: var(--theme-primary); width: 30px; height: 30px; }
+.theme-library-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 14px; margin: 22px 0; }
+.theme-choice { padding: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; border: 2px solid var(--theme-border); border-radius: 16px; background: var(--theme-surface); text-align: left; }
+.theme-choice.selected { outline: 3px solid var(--theme-primary); outline-offset: 2px; }
+.theme-choice span:last-child { font-size: 14px; }
+.theme-swatches { display: flex; }
+.theme-swatches i { display: block; width: 38px; height: 38px; border-radius: 50%; border: 2px solid #ffffff; margin-right: -5px; box-shadow: 0 0 0 1px #00000018; }
+.theme-editor { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+.theme-fields label { display: flex; flex-direction: column; gap: 8px; font-weight: 600; }
+.theme-fields input:not([type=color]) { width: 100%; min-width: 0; padding: 10px; }
+.theme-colors { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; margin: 20px 0; }
+.theme-colors input[type=color] { width: 100%; height: 44px; padding: 3px; }
+.theme-colors small { font-size: 12px; }
+.theme-preview { color: var(--theme-ink); background: var(--theme-background); border: 2px solid var(--theme-border); border-radius: var(--theme-radius); overflow: hidden; }
+.theme-preview-bar { background: var(--theme-primary); color: white; display: flex; gap: 8px; padding: 16px; font-weight: 700; }
+.theme-preview-card { padding: 28px; }
+.theme-preview-card > svg { color: var(--theme-accent); fill: var(--theme-accent); }
+.theme-preview-card h2 { color: var(--theme-dark); }
+.theme-preview-card button { background: var(--theme-primary); color: white; padding: 14px 20px; border-radius: var(--theme-radius); font-weight: 700; }
+.theme-preview-card span { display: flex; align-items: center; gap: 8px; padding: 18px 0 0; }
+.theme-save-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.theme-save-actions button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; }
+.theme-reference { display: block; max-width: 100%; height: auto; margin: 16px 0; border-radius: 16px; }
+@media(max-width:760px) {
+ .theme-editor { grid-template-columns: 1fr; }
+ .theme-colors { grid-template-columns: repeat(3,minmax(0,1fr)); }
+ .adventure-welcome { padding: 20px; gap: 16px; }
+ .adventure-stops { margin-left: 0; width: 100%; }
+ .adventure-stops span { flex: 1; padding: 10px 6px; font-size: 14px; }
+ :root[data-site-theme] .student-lookup { padding: 16px; }
+}

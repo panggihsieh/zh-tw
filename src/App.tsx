@@ -37,6 +37,8 @@ import {
   X,
   CloudUpload,
   Shuffle,
+  Palette,
+  Trees,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
 import { validatePhrase } from "./model";
@@ -58,6 +60,9 @@ import BackendStructure from "./StructureHelp";
 import OfficialDictionary, { loadDictionary, lookupEntries } from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
 import StructureDiagram from "./StructureDiagram";
+import { useSiteTheme } from "./siteThemes";
+import BirdMascot, { BirdMascotIcon } from "./BirdMascot";
+import "./siteThemes.css";
 import { useUserRole, useStructureReview, confirmedStructureLabel } from "./structureReview";
 import AssemblyParts from "./AssemblyParts";
 import {
@@ -95,8 +100,10 @@ const UserManagement = lazy(() => import("./UserManagement"));
 const StudentCharacterFinder = lazy(() => import("./StudentCharacterFinder"));
 const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum";
+const SiteThemeLibrary = lazy(() => import("./SiteThemeLibrary"));
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "themes";
 const backendTitles: Record<BackendSection, string> = {
+  themes: "網站樣式資料庫",
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
   curriculum: "三家出版社生字資料庫",
   handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
@@ -283,6 +290,7 @@ function Modal({
   );
 }
 function App() {
+  const siteTheme = useSiteTheme();
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
@@ -784,7 +792,7 @@ function App() {
                 }}
               >{pageCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}{pageCollapsed ? "展開本頁" : "合起來"}</button>}
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
-              {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BookOpen size={24} /><span>生字動畫收藏本</span></button>}
+              {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>}
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {!backendMode && (<>
             <button
@@ -826,6 +834,7 @@ function App() {
               <Settings2 size={20} />
               TTS 設定後台
             </button>
+            <button aria-current={backendSection === "themes" ? "page" : undefined} className={backendSection === "themes" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("themes")}><Palette size={20}/>網站樣式資料庫</button>
             <button
               className={backendSection === "api" ? "nav-item active" : "nav-item"}
               aria-current={backendSection === "api" ? "page" : undefined}
@@ -922,6 +931,11 @@ function App() {
                   </div>
                   <span className="edition">繁體中文 · 一～六年級</span>
                 </div>
+                {!backendMode && !collection && <section className="adventure-welcome" aria-label="生字探索旅程">
+                  <BirdMascot />
+                  <div><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
+                  <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
+                </section>}
                 {collection && <button className="secondary" onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
@@ -1999,6 +2013,7 @@ function App() {
                 <div className="backend-panel"><Suspense fallback={<p role="status">載入設定內容…</p>}>
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === "users" && <UserManagement />}
+                  {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
                   {backendSection === "structure" && <BackendStructure />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
                     const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
