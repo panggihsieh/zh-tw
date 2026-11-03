@@ -118,6 +118,8 @@ export class SpeechController {
   private playbackState: SpeechState = "idle";
   private pendingSeek = false;
   private timer: ReturnType<typeof setInterval> | null = null;
+  private gapTimer: ReturnType<typeof setTimeout> | null = null;
+  private numberedPause = 0;
   constructor(
     private synth: SpeechSynthesis | undefined,
     private makeUtterance: (text: string) => SpeechSynthesisUtterance,
@@ -137,6 +139,8 @@ export class SpeechController {
     });
   }
   private halt() {
+    if (this.gapTimer) clearTimeout(this.gapTimer);
+    this.gapTimer = null;
     this.generation++;
     this.current = null;
     this.pendingSeek = false;
@@ -152,6 +156,13 @@ export class SpeechController {
     this.report();
   }
   pause() {
+    if (this.gapTimer) {
+      clearTimeout(this.gapTimer);
+      this.gapTimer = null;
+      this.pendingSeek = true;
+      this.state("paused");
+      return;
+    }
     if (!this.current) return;
     this.synth?.pause();
     this.state("paused");
@@ -167,7 +178,7 @@ export class SpeechController {
     this.state("speaking");
   }
   replay() {
-    if (this.text) this.speak(this.text, this.rate, this.activePreference);
+    if (this.text) this.speak(this.text, this.rate, this.activePreference, this.numberedPause);
   }
   seek(position: number) {
     if (!this.text) return;
@@ -180,8 +191,9 @@ export class SpeechController {
     this.pendingSeek = true;
     this.state("paused");
   }
-  speak(text: string, rate: number, override?: VoicePreference | null) {
+  speak(text: string, rate: number, override?: VoicePreference | null, numberedPause = 0) {
     this.stop();
+    this.numberedPause = numberedPause;
     this.activePreference = override === undefined ? this.preference : override;
     this.text = speechChunks(text).join("");
     this.rate = rate;
@@ -198,7 +210,9 @@ export class SpeechController {
     const characters = Array.from(this.text);
     while (offset < characters.length && /\s/u.test(characters[offset]))
       offset++;
-    const chunks = speechChunks(characters.slice(offset).join(""));
+    const chunks = speechChunks(characters.slice(offset).join("")).flatMap((chunk) =>
+      this.numberedPause ? chunk.split(/(?<!\d)(?=\d+[.．、])/u).filter(Boolean) : [chunk],
+    );
     const generation = this.generation;
     const voices = this.synth.getVoices();
     const voice = selectVoice(voices, this.activePreference);
@@ -237,7 +251,20 @@ export class SpeechController {
           this.position = base + Array.from(text.slice(0, e.charIndex)).length;
           this.report();
         };
-        utterance.onend = () => next(index + 1, base + length);
+        utterance.onend = () => {
+          if (generation !== this.generation) return;
+          if (this.numberedPause && /^\d+[.．、]/u.test(chunks[index + 1] || "")) {
+            if (this.timer) clearInterval(this.timer);
+            this.timer = null;
+            this.current = null;
+            this.position = base + length;
+            this.report();
+            this.gapTimer = setTimeout(() => {
+              this.gapTimer = null;
+              next(index + 1, base + length);
+            }, this.numberedPause);
+          } else next(index + 1, base + length);
+        };
         utterance.onerror = (e) => {
           if (generation !== this.generation) return;
           this.stop();

@@ -58,6 +58,7 @@ import BackendStructure from "./StructureHelp";
 import OfficialDictionary, { loadDictionary, lookupEntries } from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
 import StructureDiagram from "./StructureDiagram";
+import { useUserRole, useStructureReview, confirmedStructureLabel } from "./structureReview";
 import AssemblyParts from "./AssemblyParts";
 import {
   randomStartupPhrase,
@@ -435,6 +436,11 @@ function App() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const importRef = useRef<HTMLInputElement>(null);
   const card = collection?.cards[cardIndex];
+  const userRole = useUserRole();
+  const structureReview = useStructureReview(card?.master, userRole.admin);
+  const reviewedMaster = card && structureReview.confirmed
+    ? { ...card.master, structure: confirmedStructureLabel(card.master.structure) }
+    : card?.master;
   const scrollPending = useRef(true);
   const scrollPage = useRef(page);
   useEffect(() => {
@@ -511,6 +517,10 @@ function App() {
   function say(text: string, automatic = false) {
     if (!automatic) setPlaying(false);
     speech.speak(text, speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85);
+  }
+  function sayOfficialDefinition(text: string) {
+    setPlaying(false);
+    speech.speak(text, speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85, undefined, 1000);
   }
   const narrationKey = JSON.stringify([
     scene,
@@ -856,7 +866,10 @@ function App() {
             </button>
             </>)}
           </nav>
-              {!backendMode && <a className="teacher-session-button" href="/?view=backend">教師登入（後台）</a>}
+              {!backendMode && <div className="header-user-role">
+                <span role="status">{!userRole.ready ? "確認登入中…" : userRole.admin ? "教師 · 管理者已登入" : userRole.user ? "學生 · 已登入" : "學生 · 未登入"}</span>
+                <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
+              </div>}
             </div>
             <div className="topbar-actions">
               {!backendMode && <SpeechTools
@@ -1268,7 +1281,7 @@ function App() {
                                       setError("此版本未找到官方詞義，請使用右側官方網站查詢。");
                                       return;
                                     }
-                                    say(`${phrase}。${entries.map((entry) => entry[13]).join("。")}`);
+                                    sayOfficialDefinition(`${phrase}。${entries.map((entry) => entry[13]).join("。")}`);
                                   } catch {
                                     setError("官方詞庫暫時無法載入，請稍後重試。");
                                   }
@@ -1316,7 +1329,7 @@ function App() {
                                 </div>
                                 <OfficialDictionary
                                   phrase={collection.curriculum ? card.character : collection.sourcePhrase}
-                                  speak={say}
+                                  speak={sayOfficialDefinition}
                                 />
                                 <span className="mini-status">
                                   {collection.curriculum ? "教育部字典資料 · 課文語境待教師核對" : card.source
@@ -1327,8 +1340,15 @@ function App() {
                             )}
                             {scene === 1 && (
                               <>
-                                <h2>{card.master.structure}</h2>
-                                <StructureDiagram master={card.master} />
+                                <div className="structure-review-heading">
+                                  <h2>{reviewedMaster!.structure}</h2>
+                                  {userRole.admin && !structureReview.confirmed && card.master.verificationStatus !== "unavailable" &&
+                                    <button className="secondary" disabled={structureReview.loading || structureReview.saving} onClick={() => void structureReview.confirm()}>
+                                      <Check size={18} />{structureReview.saving ? "儲存中…" : "確認結構"}
+                                    </button>}
+                                </div>
+                                {structureReview.error && <p role="alert">{structureReview.error}</p>}
+                                <StructureDiagram master={reviewedMaster!} />
                                 <p>
                                   {card.master.components.length
                                     ? "看看這個字，各部分怎麼住在一起？"
@@ -1341,7 +1361,7 @@ function App() {
                                 </div>
                                 <p className="data-note">
                                   部首：{card.master.radical}
-                                  。字形結構為教學示意，待教師審定。
+                                  。{structureReview.confirmed ? "此版本字形結構已由管理者確認；比例仍為教學示意。" : "字形結構為教學示意，待教師審定。"}
                                 </p>
                               </>
                             )}
@@ -1464,7 +1484,7 @@ function App() {
                                 </button>
                                 <OfficialDictionary
                                   phrase={collection.curriculum ? card.character : collection.sourcePhrase}
-                                  speak={say}
+                                  speak={sayOfficialDefinition}
                                 />
                               </>
                             )}
@@ -1621,7 +1641,7 @@ function App() {
                             {scene === 0
                               ? collection.curriculum ? `認識本課生字「${card.character}」。` : `在「${collection.sourcePhrase}」中認識「${card.character}」。`
                               : scene === 1
-                                ? `結構示意：${card.master.structure}`
+                                ? `結構示意：${reviewedMaster!.structure}`
                                 : scene === 2
                                   ? "部件幫助觀察字形，不能用來推論字源。"
                                   : scene === 3

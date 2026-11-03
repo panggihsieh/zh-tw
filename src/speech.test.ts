@@ -41,6 +41,33 @@ const end = (u: SpeechSynthesisUtterance) =>
   u.onend?.({} as SpeechSynthesisEvent);
 
 describe("朗讀進度與定位", () => {
+  it("官方詞義各編號之間停頓一秒，包含沒有句號的例詞", () => {
+    const t = setup();
+    t.controller.speak("1.車馬快速的跑。[例]奔馳、飛馳\n2.操控交通工具。", 1, undefined, 1000);
+    expect(t.utterances[0].text).toBe("1.車馬快速的跑。");
+    end(t.utterances[0]);
+    expect(t.utterances[1].text).toContain("奔馳、飛馳");
+    end(t.utterances[1]);
+    vi.advanceTimersByTime(999);
+    expect(t.utterances).toHaveLength(2);
+    vi.advanceTimersByTime(1);
+    expect(t.utterances[2].text).toBe("2.操控交通工具。");
+  });
+  it("在詞義停頓時停止或暫停，不會自動播放下一項", () => {
+    const t = setup();
+    t.controller.speak("1.第一項。2.第二項。", 1, undefined, 1000);
+    end(t.utterances[0]);
+    t.controller.pause();
+    vi.advanceTimersByTime(2000);
+    expect(t.utterances).toHaveLength(1);
+    t.controller.resume();
+    expect(t.utterances[1].text).toBe("2.第二項。");
+    t.controller.speak("1.第一項。2.第二項。", 1, undefined, 1000);
+    end(t.utterances[2]);
+    t.controller.stop();
+    vi.advanceTimersByTime(2000);
+    expect(t.utterances).toHaveLength(3);
+  });
   it("重整還原朗讀位置但不自動出聲，按繼續才朗讀", () => {
     const t = setup();
     t.controller.restoreSession({

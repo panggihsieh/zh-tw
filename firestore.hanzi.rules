@@ -24,6 +24,20 @@ match /hanzi_notebook_settings/curriculum {
     && request.resource.data.lesson.size() > 0 && request.resource.data.lesson.size() <= 200;
   allow delete: if false;
 }
+match /hanzi_notebook_structure_reviews/{character} {
+  allow get: if true;
+  allow create, update: if hanziAdmin()
+    && request.resource.data.keys().hasAll(['character', 'fingerprint', 'confirmed', 'confirmedAt', 'confirmedBy'])
+    && request.resource.data.keys().hasOnly(['character', 'fingerprint', 'confirmed', 'confirmedAt', 'confirmedBy'])
+    && request.resource.data.character == character
+    && character.size() >= 1 && character.size() <= 2
+    && request.resource.data.fingerprint is string
+    && request.resource.data.fingerprint.size() <= 4000
+    && request.resource.data.confirmed == true
+    && request.resource.data.confirmedAt == request.time
+    && request.resource.data.confirmedBy == request.auth.uid;
+  allow delete: if false;
+}
 match /hanzi_notebook_access/{email} {
   function validAccess() {
     return request.resource.data.keys().hasAll(['email', 'displayName', 'enabled'])
