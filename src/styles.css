@@ -804,6 +804,28 @@ main {
   flex: 0 1 48%;
   min-width: 0;
 }
+.glyph-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+.glyph-definition-button {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #c8d5bf;
+  border-radius: 50%;
+  background: #fafbf7;
+  color: #285d50;
+  cursor: pointer;
+}
+.glyph-definition-button:hover { background: #dfe9d8; }
+.glyph-definition-button:focus-visible { outline: 3px solid #b66b42; outline-offset: 3px; }
 .glyph {
   display: block;
   width: 100%;
@@ -3373,6 +3395,11 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .top-navigation-layout .main-wrap{margin-left:0;width:100%}
 .top-navigation-layout .topbar{position:sticky;top:0;z-index:30;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:12px 28px;min-height:0;height:auto;background:#fafbf7;border-bottom:1px solid var(--border);box-shadow:0 3px 12px #254b4008}
 .header-primary{display:flex;align-items:center;gap:20px;min-width:0;width:100%}
+.page-collapse-toggle{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex-shrink:0;padding:8px 12px;border-radius:999px;background:#17251e;color:#ffe29a;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.page-collapse-toggle:hover{background:#2b4537}
+.page-collapse-toggle:focus-visible{outline:3px solid #b66b42;outline-offset:3px}
+.page-collapsed .app-top-nav,.page-collapsed .teacher-session-button,.page-collapsed .topbar-actions{display:none!important}
+#app-page-content[hidden]{display:none}
 .app-top-brand{display:flex;align-items:center;gap:9px;flex-shrink:0;color:#285d50;font:inherit;font-size:20px;font-weight:700;padding:8px 0;white-space:nowrap;cursor:pointer}
 .app-top-nav{display:flex;align-items:center;gap:8px;min-width:0;flex:1;overflow-x:auto;padding:3px}
 .topbar .app-top-nav .nav-item{width:auto;flex:none;margin:0;padding:10px 12px;border-radius:9px;white-space:nowrap;gap:8px;font-size:18px;border:1px solid transparent}

@@ -120,6 +120,10 @@ export default function StudentCharacterFinder({
     <section className="student-lookup" aria-label="念生字與課本找字">
       <h2>念生字，找課本，一起學</h2>
       <p>南一・康軒・翰林，一至六年級。可念字找字，也可直接選課。</p>
+      <details open>
+        <summary>依出版社、年級與課別選字</summary>
+        <CurriculumDatabase student onLearn={onLearn} />
+      </details>
       <p className="field-note">
         語音可能由瀏覽器送至語音服務處理；本站不保存錄音。辨識文字需自行確認，同音字可改字；這不是發音評分。
       </p>
@@ -216,10 +220,6 @@ export default function StudentCharacterFinder({
           ))}
         </div>
       )}
-      <details>
-        <summary>依出版社、年級與課別選字</summary>
-        <CurriculumDatabase student onLearn={onLearn} />
-      </details>
     </section>
   );
 }

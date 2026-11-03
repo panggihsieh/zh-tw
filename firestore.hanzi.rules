@@ -11,6 +11,19 @@ function hanziEnabled() {
   let accessPath = /databases/$(database)/documents/hanzi_notebook_access/$(request.auth.token.email);
   return !exists(accessPath) || get(accessPath).data.enabled == true;
 }
+match /hanzi_notebook_settings/curriculum {
+  allow get: if true;
+  allow create, update: if hanziAdmin()
+    && request.resource.data.keys().hasAll(['publisher', 'grade', 'term', 'lesson'])
+    && request.resource.data.keys().hasOnly(['publisher', 'grade', 'term', 'lesson'])
+    && request.resource.data.publisher in ['南一', '康軒', '翰林']
+    && request.resource.data.grade is int
+    && request.resource.data.grade >= 1 && request.resource.data.grade <= 6
+    && request.resource.data.term in ['上', '下']
+    && request.resource.data.lesson is string
+    && request.resource.data.lesson.size() > 0 && request.resource.data.lesson.size() <= 200;
+  allow delete: if false;
+}
 match /hanzi_notebook_access/{email} {
   function validAccess() {
     return request.resource.data.keys().hasAll(['email', 'displayName', 'enabled'])

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { LessonContext } from "./curriculumLearning";
 import BackendCard from "./BackendCard";
+import { loadCurriculumDefault, saveCurriculumDefault } from "./curriculumDefault";
+import { Bookmark } from "lucide-react";
 import "./handwriting.css";
 interface Book {
   publisher: string;
@@ -16,7 +18,7 @@ export default function CurriculumDatabase({
   student?: boolean;
   onLearn: (chars: string[], context: LessonContext) => Promise<void>;
 }) {
-  const [draft] = useState(() => {
+  const [draft, setDraft] = useState(() => {
     try {
       const value = JSON.parse(
         sessionStorage.getItem("hanzi-notebook.curriculum-selection.v1") ||
@@ -44,6 +46,7 @@ export default function CurriculumDatabase({
     [selected, setSelected] = useState<string[]>([]),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
+  const [savingDefault, setSavingDefault] = useState(false);
   const [report, setReport] = useState<{
     generatedAt: string;
     browser?: { scope: string; checks: unknown[] };
@@ -72,7 +75,24 @@ export default function CurriculumDatabase({
         if (!r.ok) throw Error("字表載入失敗");
         return r.json();
       })
-      .then((data) => {
+      .then(async (data) => {
+        if (student) {
+          try {
+            const preset = await loadCurriculumDefault();
+            const exists = preset && data.books.some((b: Book) =>
+              b.publisher === preset.publisher && b.grade === preset.grade &&
+              b.term === preset.term && b.lessons.some((l) => l.title === preset.lesson));
+            if (!abort.signal.aborted && preset && exists) {
+              setDraft(null);
+              setPublisher(preset.publisher);
+              setGrade(preset.grade);
+              setTerm(preset.term);
+              setLesson(preset.lesson);
+            }
+          } catch {
+            if (!abort.signal.aborted) setMessage("老師預設課別載入失敗，仍可自行選課。");
+          }
+        }
         if (!abort.signal.aborted) setBooks(data.books);
       })
       .catch((e) => {
@@ -174,6 +194,15 @@ export default function CurriculumDatabase({
       </div>
       {current && (
         <>
+          {!student && <button className="secondary" disabled={savingDefault} onClick={async () => {
+            setSavingDefault(true);
+            try {
+              await saveCurriculumDefault({ publisher, grade, term, lesson: current.title });
+              setMessage("已儲存：學生開啟前台時會預設顯示此課。");
+            } catch (error) {
+              setMessage(error instanceof Error ? error.message : "預設課別儲存失敗，請重試。");
+            } finally { setSavingDefault(false); }
+          }}><Bookmark size={18} />{savingDefault ? "正在儲存…" : "設為學生預設課別"}</button>}
           <h2>
             {publisher} {grade}
             {term} · {current.title}
