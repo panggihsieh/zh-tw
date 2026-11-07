@@ -1,0 +1,308 @@
+{
+  "rea": {
+    "id": "ev_1493da32393bdb314c81d593de73cff8db7725d6ff75a6e32ea3c47cb83b30a7",
+    "summary": {
+      "browser_windows": 0,
+      "explicit_web_preferences": 0,
+      "preload_entrypoints": 0,
+      "context_bridge_apis": 0,
+      "exposed_api_members": 0,
+      "ipc": {
+        "operations": 0,
+        "literal_channels": 0,
+        "dynamic_channel_operations": 0,
+        "renderer_transmissions": 0,
+        "renderer_listeners": 0,
+        "main_handlers": 0,
+        "paired_renderer_transmissions": 0,
+        "ambiguous_renderer_transmissions": 0,
+        "unpaired_literal_renderer_transmissions": 0
+      },
+      "sender_validation_observations": 0,
+      "utility_processes": 0,
+      "resolved_utility_entrypoints": 0,
+      "native_addon_bindings": 0,
+      "resolved_native_addon_bindings": 0
+    },
+    "statistics": {
+      "relevant_files": 4,
+      "nested_asar_containers": 0,
+      "text_bytes_read": 305205,
+      "invalid_utf8_files": 0,
+      "parsed_javascript_files": 4,
+      "visited_ast_nodes": 44150,
+      "findings": 45,
+      "modules": 0,
+      "parse_failures": 0,
+      "truncated_scopes": 0
+    }
+  },
+  "craft": {
+    "id": "ev_73af21e3847ac55d3fe7d1c3d5a2c061a495c64c1c22030b71c72f88de483cb0",
+    "summary": "JavaScript code web: 4 source files, 0 IPC channel(s) (0 paired), 0 window(s), 4 endpoint(s), 0 route(s).",
+    "endpoints": [
+      {
+        "api": "literal",
+        "function": "<anonymous@2>",
+        "line": 46,
+        "literal": true,
+        "method": null,
+        "module": "script-0.js",
+        "role": "unknown",
+        "url": "https://www.mandaringo.ai"
+      },
+      {
+        "api": "literal",
+        "function": "start",
+        "line": 59,
+        "literal": true,
+        "method": null,
+        "module": "script-0.js",
+        "role": "unknown",
+        "url": "https://www.googletagmanager.com/gtag/js?id="
+      },
+      {
+        "api": "fetch",
+        "function": "form.addEventListener(submit)",
+        "line": 30,
+        "literal": true,
+        "method": "POST",
+        "module": "script-2.js",
+        "role": "unknown",
+        "url": "/v1/app-waitlist"
+      },
+      {
+        "api": "fetch",
+        "function": "trackSiteEvent",
+        "line": 329,
+        "literal": true,
+        "method": "POST",
+        "module": "script-3.js",
+        "role": "unknown",
+        "url": "/v1/site-events"
+      },
+      {
+        "api": "fetch",
+        "function": "api",
+        "line": 427,
+        "literal": false,
+        "method": null,
+        "module": "script-3.js",
+        "role": "unknown",
+        "url": "{path}"
+      },
+      {
+        "api": "literal",
+        "function": "startSocialLogin",
+        "line": 560,
+        "literal": true,
+        "method": null,
+        "module": "script-3.js",
+        "role": "unknown",
+        "url": "https://api.mandaringo.ai"
+      },
+      {
+        "api": "fetch",
+        "function": "setupPricing",
+        "line": 653,
+        "literal": true,
+        "method": null,
+        "module": "script-3.js",
+        "role": "unknown",
+        "url": "/v1/billing/config"
+      }
+    ],
+    "storage": [
+      {
+        "api": "sessionStorage.setItem",
+        "arg": "mandaringo.growthCampaign.v1",
+        "function": "readCampaign",
+        "line": 35,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.growthCampaign.v1",
+        "function": "readCampaign",
+        "line": 35,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.getItem",
+        "arg": "mandaringo.growthCampaign.v1",
+        "function": "readCampaign",
+        "line": 38,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.growthCampaign.v1",
+        "function": "readCampaign",
+        "line": 40,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.getItem",
+        "arg": "mandaringo.analyticsConsent.v1",
+        "function": "<anonymous@2>",
+        "line": 45,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.setItem",
+        "arg": "mandaringo.analyticsConsent.v1",
+        "function": "save",
+        "line": 62,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.growthCampaign.v1",
+        "function": "save",
+        "line": 65,
+        "module": "script-0.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.getItem",
+        "arg": null,
+        "function": "storage.get",
+        "line": 193,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.setItem",
+        "arg": null,
+        "function": "storage.set",
+        "line": 193,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.removeItem",
+        "arg": null,
+        "function": "storage.remove",
+        "line": 193,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.getItem",
+        "arg": null,
+        "function": "appLinkIntent.read",
+        "line": 205,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.setItem",
+        "arg": null,
+        "function": "appLinkIntent.save",
+        "line": 206,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": null,
+        "function": "appLinkIntent.clear",
+        "line": 207,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.setItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "startSocialLogin",
+        "line": 556,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.setItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "startSocialLogin",
+        "line": 561,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "startSocialLogin",
+        "line": 565,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.getItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "resumeSocialAuthentication",
+        "line": 576,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "resumeSocialAuthentication",
+        "line": 585,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "sessionStorage.removeItem",
+        "arg": "mandaringo.socialRedirect.v1",
+        "function": "resumeSocialAuthentication",
+        "line": 591,
+        "module": "script-3.js",
+        "role": "unknown"
+      },
+      {
+        "api": "localStorage.setItem",
+        "arg": null,
+        "function": "saveQuickCheck",
+        "line": 898,
+        "module": "script-3.js",
+        "role": "unknown"
+      }
+    ]
+  },
+  "limitations": [
+    "Public scripts only; no private API calls or login bypass.",
+    "Static candidates do not prove runtime behavior.",
+    "Original site HTML and scripts retained locally only, not copied into the new app."
+  ],
+  "newApp": {
+    "rea": {
+      "id": "ev_c259d179d2d38758ad17f6c93d8f337d83c405f61419e48eb900bb01f1ca33f1",
+      "statistics": {
+        "relevant_files": 2,
+        "nested_asar_containers": 0,
+        "text_bytes_read": 21707,
+        "invalid_utf8_files": 0,
+        "parsed_javascript_files": 1,
+        "visited_ast_nodes": 2857,
+        "findings": 5,
+        "modules": 0,
+        "parse_failures": 0,
+        "truncated_scopes": 0
+      }
+    },
+    "craft": {
+      "id": "ev_13b579e65829bbe914afadf3f73b63e895f0dddaf53ed9ad18a5683defa03008",
+      "summary": "Web app public: 2 source files, 0 IPC channel(s) (0 paired), 0 window(s), 2 endpoint(s), 0 route(s).",
+      "endpoints": [
+        "/api/feedback",
+        "/api/status"
+      ]
+    }
+  }
+}

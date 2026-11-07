@@ -1,0 +1,10 @@
+{
+  "name": "say-again-bilingual-coach",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev.mjs",
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

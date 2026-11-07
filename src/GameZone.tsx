@@ -12,6 +12,7 @@ import CurriculumDatabase from "./CurriculumDatabase";
 import WritingPractice from "./WritingPractice";
 import GameReview from "./GameReview";
 import type { LessonContext } from "./curriculumLearning";
+import { useSiteTheme } from "./siteThemes";
 import "./games.css";
 // New vocabulary games share this course/account entry; only playable games are listed.
 const games = [
@@ -23,6 +24,7 @@ const games = [
   },
 ];
 export default function GameZone() {
+  useSiteTheme();
   const [allowed,setAllowed]=useState<Set<string>|null>(null);
   const [sourceError,setSourceError]=useState('');
   useEffect(()=>{const abort=new AbortController();fetch('/game-strokes/catalog.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('筆順目錄載入失敗');return r.json()}).then(v=>setAllowed(new Set(v.characters.map((c:{character:string})=>c.character)))).catch(e=>{if(!abort.signal.aborted)setSourceError(e.message)});return()=>abort.abort()},[]);

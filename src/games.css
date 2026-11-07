@@ -363,3 +363,38 @@
     font-size: 13px;
   }
 }
+
+/* Follow the same live theme as the main classroom; handwriting ink stays semantic. */
+:root[data-site-theme] .game-zone {
+  background: transparent;
+  color: var(--theme-ink);
+}
+:root[data-site-theme] .game-header {
+  background: linear-gradient(115deg, var(--theme-primary), var(--theme-dark));
+  border-bottom: 4px solid var(--theme-border);
+  color: white;
+  box-shadow: 0 5px 20px #163e2920;
+}
+:root[data-site-theme] .game-header a { color: white; }
+:root[data-site-theme] .game-zone :is(h1,h2,h3) { color: var(--theme-dark); }
+:root[data-site-theme] .game-zone :is(.game-tile,.game-submission,.game-character-nav button) {
+  background: var(--theme-surface);
+  color: var(--theme-ink);
+  border-color: var(--theme-border);
+  border-radius: var(--theme-radius);
+}
+:root[data-site-theme] .game-tile {
+  border-width: 2px;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--theme-border) 60%, transparent);
+}
+:root[data-site-theme] .game-zone :is(.game-icon,.game-feedback,.game-character-nav button.active) {
+  background: var(--theme-background);
+  color: var(--theme-dark);
+  border-color: var(--theme-primary);
+}
+:root[data-site-theme] .game-zone :is(.game-pill,.game-course,.game-footer,.game-submit,.game-work-detail,.game-writing-pad,.game-snapshot) {
+  border-color: var(--theme-border);
+}
+:root[data-site-theme] .game-zone :is(.game-pill,.game-tile p,.game-source,.game-future,.game-footer) { color: var(--theme-ink); }
+:root[data-site-theme] .game-progress progress { accent-color: var(--theme-primary); }
+:root[data-site-theme] .game-character-nav button span { color: var(--theme-dark); }
