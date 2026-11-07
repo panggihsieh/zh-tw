@@ -13,9 +13,11 @@ interface Book {
   lessons: { title: string; characters: string; source: string }[];
 }
 export default function CurriculumDatabase({
-  onLearn, student = false,
+  onLearn, student = false, actionLabel, allowedCharacters,
 }: {
   student?: boolean;
+  actionLabel?: string;
+  allowedCharacters?: Set<string>;
   onLearn: (chars: string[], context: LessonContext) => Promise<void>;
 }) {
   const [draft, setDraft] = useState(() => {
@@ -125,8 +127,8 @@ export default function CurriculumDatabase({
             )
             .slice(0, 8)
         : null;
-    setSelected(restored || Array.from(current.characters).slice(0, 8));
-  }, [current]);
+    setSelected((restored || Array.from(current.characters)).filter((c:string)=>!allowedCharacters||allowedCharacters.has(c)).slice(0,8));
+  }, [current, allowedCharacters]);
   useEffect(() => {
     if (current)
       try {
@@ -218,6 +220,7 @@ export default function CurriculumDatabase({
               <label key={c}>
                 <input
                   type="checkbox"
+                  disabled={!!allowedCharacters&&!allowedCharacters.has(c)}
                   checked={selected.includes(c)}
                   onChange={(e) => {
                     if (e.target.checked && selected.length >= 8) {
@@ -236,6 +239,7 @@ export default function CurriculumDatabase({
               </label>
             ))}
           </div>
+          {allowedCharacters && Array.from(current.characters).some(c=>!allowedCharacters.has(c)) && <p>本課尚缺可檢核筆順：{Array.from(current.characters).filter(c=>!allowedCharacters.has(c)).join('、')}。暫不列入書寫作業，不以其他字形替代。</p>}
           <div className="curriculum-batches">
             {Array.from(
               { length: Math.ceil(Array.from(current.characters).length / 8) },
@@ -245,7 +249,7 @@ export default function CurriculumDatabase({
                   key={i}
                   onClick={() => {
                     setSelected(
-                      Array.from(current.characters).slice(i * 8, i * 8 + 8),
+                      Array.from(current.characters).slice(i * 8, i * 8 + 8).filter(c=>!allowedCharacters||allowedCharacters.has(c)),
                     );
                     setMessage("");
                   }}
@@ -279,7 +283,7 @@ export default function CurriculumDatabase({
               }
             }}
           >
-            {busy ? "正在準備…" : "開始逐字學習"}
+            {busy ? "正在準備…" : actionLabel || "開始逐字學習"}
           </button>
           <p role="status">
             {message || `已選 ${selected.length} 個字 · 每批最多 8 字`}

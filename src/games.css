@@ -1,0 +1,365 @@
+.game-zone {
+  min-height: 100vh;
+  background: #f5f7f1;
+  color: #203d36;
+}
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: #fff;
+  padding: 18px 4%;
+  border-bottom: 1px solid #dce4dd;
+  flex-wrap: wrap;
+}
+.game-brand {
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #234d3d;
+  text-decoration: none;
+}
+.game-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+.game-account span {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.game-main {
+  max-width: 1160px;
+  margin: auto;
+  padding: 32px 24px 64px;
+}
+.game-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.game-intro {
+  margin: 0 0 28px;
+}
+.game-zone h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  margin: 8px 0 12px;
+}
+.game-zone h2 {
+  font-size: 24px;
+}
+.game-zone button {
+  min-height: 46px;
+}
+.game-zone .primary,
+.game-zone .secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.game-login {
+  max-width: 640px;
+  margin: 48px auto;
+  padding: 36px;
+  text-align: center;
+}
+.game-login > svg {
+  color: #35735d;
+}
+.game-login button {
+  margin: 8px;
+}
+.game-course {
+  border-top: 1px solid #cddace;
+  border-bottom: 1px solid #cddace;
+  padding: 22px 0;
+  margin-bottom: 30px;
+}
+.game-course h2 {
+  margin: 7px 0;
+}
+.game-course .curriculum-database {
+  margin-top: 24px;
+}
+.game-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+  gap: 24px;
+}
+.game-tile {
+  position: relative;
+  background: #fffdf7;
+  border: 1px solid #d6dfcf;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 5px 14px #23452e07;
+}
+.game-icon {
+  color: #2f6d54;
+  background: #e8f1df;
+  border-radius: 15px;
+  display: inline-flex;
+  padding: 17px;
+  margin-bottom: 24px;
+}
+.game-pill {
+  position: absolute;
+  right: 22px;
+  top: 30px;
+  border: 1px solid #d7e1cb;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #50663d;
+}
+.game-tile p {
+  line-height: 1.9;
+  color: #50675e;
+  min-height: 60px;
+}
+.game-tile .primary {
+  width: 100%;
+  margin-top: 18px;
+}
+.game-future {
+  margin-top: 28px;
+  color: #66796f;
+}
+.game-footer {
+  max-width: 1160px;
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #dce4dd;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #66796f;
+}
+.game-character-nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 24px 0 16px;
+}
+.game-character-nav button {
+  background: white;
+  border: 1px solid #d4dfd5;
+  border-radius: 12px;
+  min-width: 65px;
+  font-size: 30px;
+  padding: 10px 14px;
+  position: relative;
+}
+.game-character-nav button span {
+  font-size: 12px;
+  margin-left: 8px;
+  color: #47755c;
+}
+.game-character-nav button.active {
+  background: #e8f2dd;
+  border-color: #3d7358;
+  box-shadow: 0 0 0 2px #3d735822;
+}
+.game-progress {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+.game-progress progress {
+  accent-color: #467e5a;
+  flex: 1;
+  height: 10px;
+}
+.writing-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 540px) minmax(240px, 1fr);
+  gap: 32px;
+}
+.writing-layout h2 small {
+  font-size: 17px;
+  font-weight: 400;
+  margin-left: 14px;
+}
+.game-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.game-toggle input {
+  width: auto;
+}
+.game-writing-pad {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid #b6cab7;
+  border-radius: 16px;
+  touch-action: none;
+  user-select: none;
+  cursor: crosshair;
+  box-shadow: 0 8px 20px #2948330b;
+}
+.game-ink-legend {
+  font-size: 14px;
+  color: #175d9a;
+}
+.game-ink-legend span {
+  color: #b45a32;
+}
+.game-writing-tools {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.game-feedback {
+  background: #e9f0e1;
+  padding: 18px;
+  border-radius: 12px;
+  line-height: 1.9;
+  min-height: 90px;
+  margin: 0 0 8px;
+}
+.game-source {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #607064;
+}
+.game-source a {
+  display: block;
+}
+.game-official-frame {
+  width: 100%;
+  height: 540px;
+  border: 1px solid #d9e1d3;
+  background: white;
+}
+.game-submit {
+  margin-top: 32px;
+  border-top: 1px solid #cddace;
+  padding-top: 22px;
+}
+.game-submit .game-row {
+  justify-content: flex-start;
+}
+.game-snapshot {
+  display: block;
+  max-width: 100%;
+  width: 660px;
+  margin-top: 24px;
+  border: 1px solid #d4dfd5;
+}
+.game-review label,
+.game-work-detail form label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.game-review input,
+.game-review textarea {
+  max-width: 600px;
+}
+.game-submissions {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.game-submission {
+  text-align: left;
+  display: grid;
+  gap: 8px;
+  background: white;
+  border: 1px solid #d1dce0;
+  border-radius: 12px;
+  padding: 18px;
+  color: #203d36;
+}
+.game-submission:hover {
+  border-color: #3d7358;
+}
+.game-submission span {
+  font-size: 15px;
+}
+.game-work-detail {
+  border-top: 2px solid #b9cdbd;
+  margin-top: 25px;
+  padding-top: 20px;
+}
+.game-work-detail img {
+  display: block;
+  max-width: 100%;
+  width: 760px;
+  border: 1px solid #dce4dd;
+  margin: 16px 0;
+}
+.game-work-detail details {
+  margin: 24px 0;
+  overflow-wrap: anywhere;
+}
+.game-work-detail form {
+  max-width: 600px;
+}
+.game-work-detail textarea {
+  min-height: 110px;
+}
+.game-zone button:focus-visible,
+.game-zone a:focus-visible {
+  outline: 3px solid #b7752d;
+  outline-offset: 3px;
+}
+.game-zone button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+@media (max-width: 720px) {
+  .game-main {
+    padding: 24px 16px 40px;
+  }
+  .game-header {
+    gap: 14px;
+    padding: 14px 16px;
+  }
+  .game-header > a:nth-child(2) {
+    display: none;
+  }
+  .game-account {
+    font-size: 14px;
+  }
+  .game-account span {
+    max-width: 130px;
+  }
+  .writing-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .game-writing-tools {
+    padding: 0;
+  }
+  .game-login {
+    margin: 16px auto;
+    padding: 24px 0;
+  }
+  .game-character-nav button {
+    min-width: 54px;
+    font-size: 25px;
+    padding: 8px;
+  }
+  .game-intro h1 {
+    font-size: 30px;
+  }
+  .game-review h2 {
+    font-size: 23px;
+  }
+  .game-footer {
+    font-size: 13px;
+  }
+}

@@ -68,6 +68,7 @@ export function createStructureServer({
   fetchProvider = fetch,
   protect = protectSettings,
   unprotect = unprotectSettings,
+  writingHandler,
 } = {}) {
   const unlocks = new Map();
   async function persist(data) {
@@ -148,6 +149,7 @@ export function createStructureServer({
     return content;
   }
   return http.createServer(async (req, res) => {
+    if (req.url?.startsWith('/api/structure/writing/') && writingHandler) return writingHandler(req, res);
     const allowed = origins.includes(req.headers.origin);
     const headers = {
       "Content-Type": "application/json; charset=utf-8",

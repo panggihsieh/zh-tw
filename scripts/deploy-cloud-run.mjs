@@ -92,6 +92,20 @@ await ensure(
   },
 );
 const stage = resolve(".local/cloud-build");
+// Dedicated private student-work bucket; no public ACL or shared Firestore rule changes.
+const writingBucket = `${project}-zh-tw-writing`;
+await ensure(`https://storage.googleapis.com/storage/v1/b?project=${project}`, 'POST', {
+  name: writingBucket, location:'ASIA-EAST1',
+  iamConfiguration:{uniformBucketLevelAccess:{enabled:true},publicAccessPrevention:'enforced'},
+  labels:{app:'zh-tw',purpose:'student-writing'},
+});
+const writingPolicyUrl=`https://storage.googleapis.com/storage/v1/b/${writingBucket}/iam`;
+const writingPolicy=await api(writingPolicyUrl);
+writingPolicy.bindings ||= [];
+let writingBinding=writingPolicy.bindings.find(b=>b.role==='roles/storage.objectAdmin'&&!b.condition);
+if(!writingBinding) writingPolicy.bindings.push(writingBinding={role:'roles/storage.objectAdmin',members:[]});
+if(!writingBinding.members.includes(`serviceAccount:${email}`)) writingBinding.members.push(`serviceAccount:${email}`);
+await api(writingPolicyUrl,'PUT',writingPolicy);
 await mkdir(resolve(stage, "server"), { recursive: true });
 for (const file of [
   "structure-api.mjs",
@@ -99,6 +113,7 @@ for (const file of [
   "secret-store.mjs",
   "admin-auth.mjs",
   "cloud-run.mjs",
+  "writing-api.mjs",
 ])
   await copyFile(`server/${file}`, resolve(stage, "server", file));
 for (const file of ["package.json", "package-lock.json", "Dockerfile"])

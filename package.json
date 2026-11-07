@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
+    "test:writing-api": "node --test server/writing-api.check.mjs",
     "structure-api": "node server/structure-api.mjs",
     "test:structure-api": "node --test server/structure-api.check.mjs server/admin-auth.check.mjs",
     "dev": "vite",

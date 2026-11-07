@@ -1,5 +1,6 @@
 import { GoogleAuth } from "google-auth-library";
 import { createStructureServer } from "./structure-api.mjs";
+import {createWritingHandler,createWritingCloudStore} from './writing-api.mjs';
 
 const project = "voltaic-circuit-511310-a3";
 const secret = `projects/${project}/secrets/zh-tw-ai-settings`;
@@ -49,6 +50,7 @@ const configStore = {
 const site = process.env.HOSTING_SITE;
 if (!site || !/^[a-z0-9-]+$/.test(site)) throw new Error("HOSTING_SITE 未設定");
 const server = createStructureServer({
+  writingHandler:createWritingHandler({store:createWritingCloudStore(auth,`${project}-zh-tw-writing`),origins:[`https://${site}.web.app`,`https://${site}.firebaseapp.com`]}),
   cloud: true,
   configStore,
   origins: [`https://${site}.web.app`, `https://${site}.firebaseapp.com`],
