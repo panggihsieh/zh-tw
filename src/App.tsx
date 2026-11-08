@@ -793,9 +793,7 @@ function App() {
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
 
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
-            {!backendMode && <a className="nav-item" href="/?view=quiz">國語錯題本</a>}
             {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>國語母題與錯題管理</button>}
-            {!backendMode && <a className="nav-item" href="#games"><Grid2X2 size={20}/>生詞遊戲專區</a>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
             {!backendMode && (<>
             <button
@@ -806,6 +804,18 @@ function App() {
               生字動畫教室
             </button>
             <button
+              className={page === "resources" ? "nav-item active" : "nav-item"}
+              onClick={() => {
+                setPage("resources");
+                setPlaying(false);
+              }}
+            >
+              <Grid2X2 size={20} />
+              查字小幫手
+            </button>
+            <a className="nav-item" href="#games"><Grid2X2 size={20}/>生詞遊戲專區</a>
+            <a className="nav-item" href="/?view=quiz">國語錯題本</a>
+            <button
               className={page === "library" ? "nav-item active" : "nav-item"}
               onClick={() => {
                 setPage("library");
@@ -815,16 +825,6 @@ function App() {
             >
               <LibraryBig size={20} />
               我的生字收藏本<span className="nav-count">{saved.length}</span>
-            </button>
-            <button
-              className={page === "resources" ? "nav-item active" : "nav-item"}
-              onClick={() => {
-                setPage("resources");
-                setPlaying(false);
-              }}
-            >
-              <Grid2X2 size={20} />
-              查字小幫手
             </button>
             </>)}
             {backendMode && (<>            <button
