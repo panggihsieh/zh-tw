@@ -305,6 +305,8 @@ function App() {
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
   const [backendSection, setBackendSection] = useState<BackendSection>(() => {
+    const section = new URLSearchParams(window.location.search).get('section');
+    if (section && Object.hasOwn(backendTitles,section)) return section as BackendSection;
     try { const value = sessionStorage.getItem("hanzi-notebook.backend-section.v1"); return value && Object.hasOwn(backendTitles, value) ? value as BackendSection : "tts"; }
     catch { return "tts"; }
   });

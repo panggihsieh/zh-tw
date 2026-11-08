@@ -1,21 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { quizRequest } from "./quizApi";
-interface Resource {
-  id: string;
-  publisher: string;
-  grade: number;
-  term: string;
-  year: string;
-  title: string;
-  url: string;
-  kind: string;
-  status: string;
-  courseComparison?: string;
-  lastError?: string;
-  lastDraftError?: string;
-  draftId?: string;
-  rawHash?: string;
-}
+import {
+  draftBooks,
+  bookResources,
+  canCreateDraft,
+  resourceDraftStatus,
+  draftReviewUrl,
+  type PublisherResource as Resource,
+} from "./publisherSelection";
 interface Discovery {
   publisher: string;
   analysis: string;
@@ -23,20 +15,33 @@ interface Discovery {
   checkedAt: string;
 }
 export default function PublisherSync({
-  onDraft,
-}: {
-  onDraft: (id: string) => void;
-}) {
+  request = quizRequest,
+}: { request?: typeof quizRequest } = {}) {
   const [items, setItems] = useState<Resource[]>([]),
     [reports, setReports] = useState<Discovery[]>([]),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [limit, setLimit] = useState("1");
+    [bookKey, setBookKey] = useState(""),
+    [lessonId, setLessonId] = useState("");
+  const books = draftBooks(items);
+  const selectedBookKey = books.some((b) => b.key === bookKey)
+    ? bookKey
+    : books[0]?.key || "";
+  const lessons = bookResources(items, selectedBookKey);
+  const selectedLessonId =
+    lessonId === "all" || lessons.some((r) => r.id === lessonId)
+      ? lessonId
+      : lessons[0]?.id || "";
+  const selectedResources =
+    selectedLessonId === "all"
+      ? lessons
+      : lessons.filter((r) => r.id === selectedLessonId);
+  const draftTargets = selectedResources.filter(canCreateDraft);
   const stop = useRef(false);
   async function load() {
     const [a, b] = await Promise.all([
-      quizRequest<{ items: Resource[] }>("/resources"),
-      quizRequest<{ items: Discovery[] }>("/resources/discoveries"),
+      request<{ items: Resource[] }>("/resources"),
+      request<{ items: Discovery[] }>("/resources/discoveries"),
     ]);
     setItems(a.items);
     setReports(b.items);
@@ -53,16 +58,9 @@ export default function PublisherSync({
     const targets =
       kind === "discover"
         ? ["南一", "康軒", "翰林"]
-        : items
-            .filter(
-              (x) =>
-                kind === "update" ||
-                (x.publisher === "南一" &&
-                  [5, 6].includes(x.grade) &&
-                  x.rawHash &&
-                  !x.draftId),
-            )
-            .slice(0, kind === "draft" && limit !== "all" ? +limit : undefined);
+        : kind === "draft"
+          ? draftTargets
+          : items;
     let ok = 0,
       failed = 0;
     for (let i = 0; i < targets.length && !stop.current; i++) {
@@ -71,7 +69,7 @@ export default function PublisherSync({
         `${kind === "discover" ? "AI盤點" : kind === "update" ? "下載與比對" : "AI製作母題"} ${i + 1}/${targets.length}：${typeof x === "string" ? x : x.title}`,
       );
       try {
-        const result = await quizRequest<{
+        const result = await request<{
           status?: string;
           lastError?: string;
         }>(
@@ -165,7 +163,7 @@ export default function PublisherSync({
             setBusy(true);
             try {
               const json = JSON.parse(await file.text());
-              const r = await quizRequest<{ registered: number }>(
+              const r = await request<{ registered: number }>(
                 "/resources/register",
                 json,
               );
@@ -180,28 +178,84 @@ export default function PublisherSync({
           }}
         />
       </label>
-      <label>
-        南一高年級待審母題製作批次
-        <select
-          value={limit}
-          disabled={busy}
-          onChange={(e) => setLimit(e.target.value)}
-        >
-          <option value="1">先做1課讓老師檢查</option>
-          <option value="5">5課</option>
-          <option value="all">所有已下載的南一五六年級</option>
-        </select>
-      </label>
-      <button
-        className="primary"
-        disabled={
-          busy ||
-          !items.some((x) => x.publisher === "南一" && x.rawHash && !x.draftId)
-        }
-        onClick={() => void batch("draft")}
+      <section
+        className="publisher-draft-selection"
+        aria-label="按年段與課別製作母題"
       >
-        AI 建立南一高年級母題草稿
-      </button>
+        <h2>南一待審母題草稿</h2>
+        <div className="quiz-grid">
+          <label>
+            年段／學期
+            <select
+              value={selectedBookKey}
+              disabled={busy || !books.length}
+              onChange={(e) => {
+                setBookKey(e.target.value);
+                setLessonId("");
+              }}
+            >
+              {!books.length && (
+                <option value="">尚無已登記的南一五、六年級來源</option>
+              )}
+              {books.map((b) => (
+                <option key={b.key} value={b.key}>
+                  {b.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            課別
+            <select
+              value={selectedLessonId}
+              disabled={busy || !lessons.length}
+              onChange={(e) => setLessonId(e.target.value)}
+            >
+              {!lessons.length && <option value="">本冊尚無課別</option>}
+              {lessons.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.title.replace(/\.pdf$/i, "")}
+                  {r.draftId ? " · 已有草稿" : ""}
+                </option>
+              ))}
+              {lessons.length > 0 && (
+                <option value="all">本冊全部課別（{lessons.length} 課）</option>
+              )}
+            </select>
+          </label>
+        </div>
+        <p>
+          所選 {selectedResources.length} 課 · 可建立 {draftTargets.length} 課 ·
+          已有草稿 {selectedResources.filter((r) => r.draftId).length}{" "}
+          課。已有草稿會保留，不重複製作。
+        </p>
+        <button
+          className="primary"
+          disabled={busy || !draftTargets.length}
+          onClick={() => void batch("draft")}
+        >
+          AI 建立所選課別母題草稿（{draftTargets.length} 課）
+        </button>
+        <div className="publisher-selected-resources">
+          {selectedResources.map((r) => (
+            <article key={r.id}>
+              <strong>{r.title.replace(/\.pdf$/i, "")}</strong>
+              <p>{resourceDraftStatus(r)}</p>
+              {r.lastDraftError && <p>待確認：{r.lastDraftError}</p>}
+              {r.draftId && (
+                <a
+                  className="secondary publisher-review-link"
+                  href={draftReviewUrl(r.draftId)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  另開視窗檢視查核 ↗
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
       <p role="status">{message}</p>
       <p>
         已登記 {items.length} 份 · 已取得{" "}
@@ -239,12 +293,14 @@ export default function PublisherSync({
                   {!x.draftId && <p>尚無母題草稿，待製作或核對。</p>}
                   {x.lastDraftError && <p>母題待確認：{x.lastDraftError}</p>}
                   {x.draftId && (
-                    <button
-                      className="secondary"
-                      onClick={() => onDraft(x.draftId!)}
+                    <a
+                      className="secondary publisher-review-link"
+                      href={draftReviewUrl(x.draftId)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      檢查本課母題草稿
-                    </button>
+                      另開視窗檢視查核 ↗
+                    </a>
                   )}
                   <a href={x.url} target="_blank" rel="noreferrer">
                     官方原檔 ↗

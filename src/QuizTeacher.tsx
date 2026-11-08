@@ -8,6 +8,7 @@ import {
 } from "./quizApi";
 import "./quiz.css";
 import PublisherSync from "./PublisherSync";
+import {reviewPaperId} from './publisherSelection';
 interface Book {
   publisher: string;
   grade: number;
@@ -16,6 +17,7 @@ interface Book {
   lessons: { title: string; characters: string; source: string }[];
 }
 export default function QuizTeacher() {
+  const [reviewId] = useState(()=>reviewPaperId(window.location.search));
   const [papers, setPapers] = useState<QuizPaper[]>([]),
     [paper, setPaper] = useState<QuizPaper | null>(null),
     [stats, setStats] = useState<QuizStat[]>([]),
@@ -57,7 +59,7 @@ export default function QuizTeacher() {
     setMessage("");
   }
   useEffect(() => {
-    void run(load);
+    void run(reviewId ? ()=>open(reviewId) : load);
     fetch("/handwriting-curriculum.json")
       .then((r) => {
         if (!r.ok) throw Error();
@@ -111,16 +113,9 @@ export default function QuizTeacher() {
     lesson = book?.lessons[lessonIndex];
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
-      <h1>國語母題與錯題複習</h1>
-      <PublisherSync
-        onDraft={(id) =>
-          void run(async () => {
-            await open(id);
-            await load();
-          })
-        }
-      />
-      <div className="quiz-actions">
+      <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
+      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : <PublisherSync/>}
+      {!reviewId && <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
         </button>
@@ -140,7 +135,7 @@ export default function QuizTeacher() {
         >
           重新整理題庫
         </button>
-      </div>
+      </div>}
       <p role="status">{message}</p>
       {tab === "generate" && (
         <form
@@ -332,7 +327,7 @@ export default function QuizTeacher() {
       )}
       {tab !== "generate" && (
         <>
-          <h2>母題題庫與已發布試卷</h2>
+          {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
           <div className="quiz-paper-list">
             {papers.map((q) => (
@@ -346,7 +341,7 @@ export default function QuizTeacher() {
                 {q.status === "published" ? "已發布" : "待審草稿"}
               </button>
             ))}
-          </div>
+          </div></>}
           {paper && (
             <>
               <h2>{paper.title}</h2>

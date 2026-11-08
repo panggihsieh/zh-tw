@@ -111,6 +111,9 @@
   border-bottom: 1px solid #bbcdbf;
   overflow-wrap: anywhere;
 }
+.publisher-draft-selection { margin: 24px 0; padding: 18px 0; border-top: 2px solid var(--theme-border, #bbcdbf); border-bottom: 2px solid var(--theme-border, #bbcdbf); }
+.publisher-review-link { display: inline-flex; align-items: center; padding: 10px 16px; text-decoration: none; margin-right: 16px; }
+.publisher-selected-resources { margin-top: 16px; }
 .quiz-workspace [role="status"] {
   white-space: pre-wrap;
   font-weight: 600;
