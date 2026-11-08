@@ -304,7 +304,6 @@ function App() {
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
-  const [pageCollapsed, setPageCollapsed] = useState(false);
   const [backendSection, setBackendSection] = useState<BackendSection>(() => {
     try { const value = sessionStorage.getItem("hanzi-notebook.backend-section.v1"); return value && Object.hasOwn(backendTitles, value) ? value as BackendSection : "tts"; }
     catch { return "tts"; }
@@ -789,20 +788,10 @@ function App() {
               <a className="backend-student-link" href="/">前往學生網站 <ArrowRight size={18} /></a>
             </div>
           </header>}
-          <NavigationContainer ref={backendMode ? undefined : headerRef} id={backendMode ? "backend-navigation" : undefined} className={`topbar${!backendMode && pageCollapsed ? " page-collapsed" : ""}`}>
+          <NavigationContainer ref={backendMode ? undefined : headerRef} id={backendMode ? "backend-navigation" : undefined} className="topbar">
             <div className="header-primary">
-              {!backendMode && <button
-                className="page-collapse-toggle"
-                aria-expanded={!pageCollapsed}
-                aria-controls="app-page-content"
-                onClick={() => {
-                  setPageCollapsed(!pageCollapsed);
-                  speech.stop();
-                  setPlaying(false);
-                }}
-              >{pageCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}{pageCollapsed ? "展開本頁" : "合起來"}</button>}
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
-              {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>}
+
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {!backendMode && <a className="nav-item" href="/?view=quiz">國語錯題本</a>}
             {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>國語母題與錯題管理</button>}
@@ -894,6 +883,8 @@ function App() {
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}
             </div>
+            <div className="header-secondary">
+              {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>}
             <div className="topbar-actions">
               {!backendMode && <SpeechTools
                 label="朗讀本頁"
@@ -913,8 +904,9 @@ function App() {
                 <span>學習設定</span>
               </button>
             </div>
+            </div>
           </NavigationContainer>
-          <main id="app-page-content" hidden={!backendMode && pageCollapsed}>
+          <main id="app-page-content">
             {error && (
               <div className="alert error" role="alert">
                 <span>{error}</span>

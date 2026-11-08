@@ -3664,3 +3664,28 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   .structure-ai-settings .ai-config-form { grid-template-columns: minmax(0, 1fr); }
   .structure-ai-settings .ai-config-form > label { grid-column: 1; grid-row: auto; }
 }
+
+/* Student navigation: full-width links above the brand and reading tools. */
+.top-navigation-layout:not(.backend-shell) .header-primary { gap: 16px; flex-wrap: nowrap; }
+.top-navigation-layout:not(.backend-shell) .app-top-nav { order: initial; width: auto; flex: 1; flex-basis: auto; gap: 6px; overflow: visible; }
+.top-navigation-layout:not(.backend-shell) .topbar .app-top-nav .nav-item { font-size: clamp(14px, 1.25vw, 18px); padding: 9px 12px; gap: 6px; }
+.top-navigation-layout:not(.backend-shell) .header-user-role { flex-shrink: 0; flex-wrap: nowrap; font-size: 13px; }
+.top-navigation-layout:not(.backend-shell) .teacher-session-button { font-size: 15px; padding: 9px 12px; }
+.header-secondary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; }
+.header-secondary .topbar-actions { margin-left: auto; }
+.backend-shell .header-secondary { display: contents; }
+@media(max-width:1100px) {
+  .top-navigation-layout:not(.backend-shell) .header-primary { flex-wrap: wrap; gap: 8px; }
+  .top-navigation-layout:not(.backend-shell) .app-top-nav { flex-basis: 100%; flex-wrap: wrap; }
+  .top-navigation-layout:not(.backend-shell) .header-user-role { margin-left: auto; }
+  .top-navigation-layout:not(.backend-shell) .header-secondary { flex-wrap: wrap; gap: 8px; }
+}
+@media(max-width:600px) {
+  .top-navigation-layout:not(.backend-shell) .app-top-nav { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .top-navigation-layout:not(.backend-shell) .topbar .app-top-nav .nav-item { font-size: 14px; padding: 8px 5px; white-space: normal; }
+  .header-secondary .topbar-actions { flex-basis: 100%; }
+}
+@media(max-width:600px) {
+  .top-navigation-layout:not(.backend-shell) .header-secondary .topbar-actions { display: flex; flex-wrap: wrap; width: 100%; }
+  .top-navigation-layout:not(.backend-shell) .header-secondary .topbar-actions > .quiet { flex: 0 0 100%; justify-content: flex-end; }
+}
