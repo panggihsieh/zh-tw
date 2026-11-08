@@ -102,9 +102,12 @@ const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
 const SiteThemeLibrary = lazy(() => import("./SiteThemeLibrary"));
 const GameZone = lazy(() => import('./GameZone'));
+const QuizStudent = lazy(() => import("./QuizStudent"));
+const QuizTeacher = lazy(() => import("./QuizTeacher"));
 const GameReview = lazy(() => import('./GameReview'));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes";
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz";
 const backendTitles: Record<BackendSection, string> = {
+  quiz: "國語母題與錯題管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
@@ -115,6 +118,7 @@ const backendTitles: Record<BackendSection, string> = {
 export default function ProtectedApp() {
   const [hash,setHash]=useState(window.location.hash);
   useEffect(()=>{const changed=()=>setHash(window.location.hash);window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed)},[]);
+  if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
   if(new URLSearchParams(window.location.search).get('view')!=='backend'&&hash.startsWith('#games')) return <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone/></Suspense>;
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
   return <Suspense fallback={<p role="status">載入教師登入…</p>}><BackendGate><App /></BackendGate></Suspense>;
@@ -800,6 +804,8 @@ function App() {
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
               {!backendMode && <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>}
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
+            {!backendMode && <a className="nav-item" href="/?view=quiz">國語錯題本</a>}
+            {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>國語母題與錯題管理</button>}
             {!backendMode && <a className="nav-item" href="#games"><Grid2X2 size={20}/>生詞遊戲專區</a>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
             {!backendMode && (<>
@@ -2020,6 +2026,7 @@ function App() {
                 <div className="page-heading"><div><p className="eyebrow">教師工作區</p><h1>{backendTitles[backendSection]}</h1></div></div>
                 <div className="backend-panel"><Suspense fallback={<p role="status">載入設定內容…</p>}>
                   {backendSection === "api" && <BackendApi />}
+                  {backendSection === 'quiz' && <QuizTeacher/>}
                   {backendSection === 'gameReview' && <GameReview teacher/>}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}

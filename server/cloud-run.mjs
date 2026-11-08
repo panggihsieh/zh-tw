@@ -50,6 +50,7 @@ const configStore = {
 const site = process.env.HOSTING_SITE;
 if (!site || !/^[a-z0-9-]+$/.test(site)) throw new Error("HOSTING_SITE 未設定");
 const server = createStructureServer({
+  quizStore:createWritingCloudStore(auth,`${project}-zh-tw-writing`),
   writingHandler:createWritingHandler({store:createWritingCloudStore(auth,`${project}-zh-tw-writing`),origins:[`https://${site}.web.app`,`https://${site}.firebaseapp.com`]}),
   cloud: true,
   configStore,

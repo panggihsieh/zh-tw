@@ -1,0 +1,123 @@
+.quiz-workspace {
+  color: #173c34;
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+  line-height: 1.8;
+  font-size: 18px;
+}
+.quiz-workspace h1 {
+  font-size: 30px;
+}
+.quiz-workspace label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 14px 0;
+}
+.quiz-workspace input:not([type="checkbox"]):not([type="radio"]),
+.quiz-workspace textarea,
+.quiz-workspace select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  font: inherit;
+  color: #173c34;
+  border: 1px solid #718879;
+  background: #fff;
+  border-radius: 6px;
+}
+.quiz-workspace textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+.quiz-workspace button,
+.quiz-workspace summary {
+  font-size: 18px;
+  min-height: 48px;
+  cursor: pointer;
+  white-space: normal;
+}
+.quiz-actions,
+.quiz-paper-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.quiz-question,
+.quiz-stats article {
+  padding: 22px 0;
+  border: 0;
+  border-bottom: 2px solid #bbcdbf;
+  margin: 20px 0;
+  min-width: 0;
+}
+.quiz-workspace .quiz-check,
+.quiz-workspace .quiz-choice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+.quiz-workspace input[type="checkbox"],
+.quiz-workspace input[type="radio"] {
+  width: 23px;
+  height: 23px;
+  flex: none;
+}
+.quiz-choice {
+  padding: 12px;
+  border: 1px solid #b4c4b6;
+  border-radius: 8px;
+}
+.quiz-choice:has(input:checked) {
+  background: #e6f0e5;
+  border-color: #285e4d;
+}
+.quiz-workspace legend {
+  font-size: 22px;
+  font-weight: bold;
+}
+.quiz-passage {
+  white-space: pre-wrap;
+}
+.quiz-workspace blockquote {
+  white-space: pre-wrap;
+  border-left: 4px solid #58765d;
+  padding-left: 14px;
+}
+.quiz-workspace fieldset {
+  min-width: 0;
+}
+.quiz-workspace p,
+.quiz-workspace h3 {
+  overflow-wrap: anywhere;
+}
+.quiz-workspace details {
+  margin: 14px 0;
+}
+.quiz-workspace [role="status"] {
+  white-space: pre-wrap;
+  font-weight: 600;
+}
+.student-quiz {
+  background: #fafbf7;
+  min-height: 100vh;
+}
+@media (max-width: 700px) {
+  .quiz-workspace {
+    padding: 16px;
+  }
+  .quiz-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .quiz-workspace h1 {
+    font-size: 26px;
+  }
+}

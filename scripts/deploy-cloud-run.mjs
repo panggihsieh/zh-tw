@@ -114,6 +114,7 @@ for (const file of [
   "admin-auth.mjs",
   "cloud-run.mjs",
   "writing-api.mjs",
+  "quiz-api.mjs",
 ])
   await copyFile(`server/${file}`, resolve(stage, "server", file));
 for (const file of ["package.json", "package-lock.json", "Dockerfile"])
