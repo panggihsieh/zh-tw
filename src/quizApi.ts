@@ -18,6 +18,14 @@ export interface QuizQuestion {
   reviewed: boolean;
 }
 export interface QuizPaper {
+  sourceKind?: string;
+  source?: {
+    publisher: string;
+    url: string;
+    title: string;
+    rawHash: string;
+    year: string;
+  };
   roster: string[];
   id: string;
   familyId: string;

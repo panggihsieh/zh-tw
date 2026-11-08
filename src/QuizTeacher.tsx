@@ -7,6 +7,7 @@ import {
   type QuizStat,
 } from "./quizApi";
 import "./quiz.css";
+import PublisherSync from "./PublisherSync";
 interface Book {
   publisher: string;
   grade: number;
@@ -111,6 +112,14 @@ export default function QuizTeacher() {
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
       <h1>國語母題與錯題複習</h1>
+      <PublisherSync
+        onDraft={(id) =>
+          void run(async () => {
+            await open(id);
+            await load();
+          })
+        }
+      />
       <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
@@ -341,6 +350,16 @@ export default function QuizTeacher() {
           {paper && (
             <>
               <h2>{paper.title}</h2>
+              {paper.source && (
+                <p>
+                  來源：{paper.source.publisher} {paper.source.year}{" "}
+                  教用題卷（非課文全文）；原題與答案保留，AI
+                  僅補同義題幹與解析，待教師審核。
+                  <a href={paper.source.url} target="_blank" rel="noreferrer">
+                    開啟官方原卷 ↗
+                  </a>
+                </p>
+              )}
               <p>
                 {paper.className} · {paper.lesson} ·{" "}
                 {paper.questionMode === "original"
@@ -348,6 +367,45 @@ export default function QuizTeacher() {
                   : "AI 同義改寫題"}{" "}
                 · 母題識別碼保留供前後比較
               </p>
+              {paper.status === "draft" && !paper.parentId && (
+                <div className="quiz-grid">
+                  <label>
+                    指派班級名稱
+                    <input
+                      maxLength={80}
+                      value={paper.className}
+                      disabled={busy}
+                      onChange={(e) =>
+                        setPaper({ ...paper, className: e.target.value })
+                      }
+                    />
+                  </label>
+                  <label>
+                    指派學生 Google Email（每行一位）
+                    <textarea
+                      value={paper.roster.join("\n")}
+                      disabled={busy}
+                      onChange={(e) =>
+                        setPaper({
+                          ...paper,
+                          roster: e.target.value.split("\n"),
+                        })
+                      }
+                      onBlur={() =>
+                        setPaper({
+                          ...paper,
+                          roster: paper.roster
+                            .map((x) => x.trim())
+                            .filter(Boolean),
+                        })
+                      }
+                    />
+                    <small>
+                      出版社草稿預設僅供管理者檢查。發布前可改為實際班級學生。
+                    </small>
+                  </label>
+                </div>
+              )}
               {paper.status === "published" ? (
                 <>
                   <div className="quiz-actions">
@@ -581,7 +639,9 @@ export default function QuizTeacher() {
                         />
                       </label>
                       <label>
-                        課文逐字依據
+                        {paper.sourceKind === "assessment"
+                          ? "教用題卷依據（非課文全文）"
+                          : "課文逐字依據"}
                         <textarea
                           value={q.evidence}
                           onChange={(e) =>

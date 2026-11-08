@@ -171,8 +171,13 @@ export default function QuizStudent() {
               </h2>
               <p>本次題目版本已固定，重新整理可接著作答。</p>
               <details>
-                <summary>閱讀課文</summary>
-                <p className="quiz-passage">{attempt.passage}</p>
+                <summary>
+                  {attempt.passage ? "閱讀課文" : "題卷來源說明"}
+                </summary>
+                <p className="quiz-passage">
+                  {attempt.passage ||
+                    "本題來自教用評量卷，未附完整課文，請配合課本閱讀。"}
+                </p>
               </details>
               {attempt.result ? (
                 <>

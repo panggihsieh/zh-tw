@@ -1,4 +1,5 @@
 import { randomUUID, randomInt } from "node:crypto";
+import { makeResourceHandlers } from "./publisher-sync.mjs";
 import { writingIdentity } from "./writing-api.mjs";
 export const CATEGORIES = [
   "字音字形",
@@ -173,6 +174,7 @@ export function createQuizHandler({
   origins,
   authenticate = writingIdentity,
   generate,
+  analyzeLanding,
 }) {
   const generating = new Set();
   async function scan(prefix) {
@@ -192,6 +194,13 @@ export function createQuizHandler({
     } while (cursor);
     return items;
   }
+  const resources = makeResourceHandlers({
+    store,
+    scan,
+    generate,
+    validateQuiz,
+    analyzeLanding,
+  });
   return async (req, res) => {
     const send = (status, data) => {
       res.writeHead(status, {
@@ -290,7 +299,7 @@ export function createQuizHandler({
             quizId: q.id,
             familyId: q.familyId || q.id,
             title: q.title,
-            passage: q.passage,
+            passage: q.sourceKind === "assessment" ? "" : q.passage,
             mode,
             startedAt: new Date().toISOString(),
             questions: questions.map((x) => ({
@@ -347,6 +356,15 @@ export function createQuizHandler({
       }
       if (!user.admin)
         return send(403, { error: "僅管理者可組卷與查看全班統計" });
+      if (path.startsWith("/resources")) {
+        const r = await resources(
+          path,
+          req.method,
+          req.method === "POST" ? await body(req) : null,
+          user.uid,
+        );
+        if (r) return send(200, r);
+      }
       if (path === "/generate" && req.method === "POST") {
         if (generating.has(user.uid))
           return send(429, { error: "上一份試卷仍在產生中" });

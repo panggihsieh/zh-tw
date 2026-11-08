@@ -265,7 +265,15 @@ test("國語錯題端到端：權限、答案隱藏、固定版本、交卷冪�
   assert.equal(retry.questions[0].id, q.questions[0].id);
   assert.equal(retry.questions[0].reviewed, false);
   retry.questions[0].reviewed = true;
-  assert.equal((await request(`/papers/${retry.id}/publish`,{...retry,passage:retry.passage+'追加課文。'})).status,400);
+  assert.equal(
+    (
+      await request(`/papers/${retry.id}/publish`, {
+        ...retry,
+        passage: retry.passage + "追加課文。",
+      })
+    ).status,
+    400,
+  );
   assert.equal(
     (await request(`/papers/${retry.id}/publish`, retry)).status,
     200,
@@ -282,4 +290,20 @@ test("國語錯題端到端：權限、答案隱藏、固定版本、交卷冪�
   const stats = (await request(`/papers/${q.id}/stats`)).data.items[0];
   assert.deepEqual([stats.total, stats.wrong, stats.improved], [1, 0, 1]);
   assert.equal((await request(`/papers/${q.id}/save`, q)).status, 409);
+  const assessmentId = randomUUID();
+  await store.create(`quiz-papers/${assessmentId}.json`, {
+    ...q,
+    id: assessmentId,
+    familyId: assessmentId,
+    status: "published",
+    sourceKind: "assessment",
+    passage: q.passage + "教用答案①，不可交卷前公開。",
+  });
+  const assessment = (
+    await request("/attempts", { quizId: assessmentId }, "student")
+  ).data;
+  assert.equal(assessment.passage, "");
+  assert.ok(!JSON.stringify(assessment).includes("教用答案"));
+  assert.equal(assessment.questions[0].answer, undefined);
+  assert.equal((await request("/resources", null, "student")).status, 403);
 });

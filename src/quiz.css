@@ -102,6 +102,15 @@
 .quiz-workspace details {
   margin: 14px 0;
 }
+.publisher-sync .quiz-paper-list > details {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+.publisher-sync article {
+  padding: 16px 0;
+  border-bottom: 1px solid #bbcdbf;
+  overflow-wrap: anywhere;
+}
 .quiz-workspace [role="status"] {
   white-space: pre-wrap;
   font-weight: 600;

@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
-  "dependencies": { "jose": "6.2.14", "google-auth-library": "11.3.2" }
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "google-auth-library": "11.3.2",
+    "jose": "6.2.14",
+    "pdfjs-dist": "^6.5.438"
+  }
 }
