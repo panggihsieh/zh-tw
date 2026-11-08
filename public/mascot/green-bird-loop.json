@@ -1,0 +1,15 @@
+{
+  "provider": "fal.ai",
+  "endpoint": "alibaba/wan-3.0-prime/image-to-video",
+  "requestId": "01a1baaf-ce14-71b3-a78e-b6e44381d46c",
+  "seed": 1108,
+  "source": "green-bird.png",
+  "reference": "bird-loop-reference.png",
+  "originalOutput": "https://v3b.fal.media/files/b/0ab1a166/D-WxU5W12xD8ss15m2qmI_vLWUpKlv.mp4",
+  "durationMs": 5000,
+  "frames": 100,
+  "loop": "infinite",
+  "size": [160, 160],
+  "processing": "20fps; centered 800x800 crop; magenta chroma key; transparent GIF palette",
+  "reducedMotion": "Uses the original static PNG when prefers-reduced-motion is reduce."
+}

@@ -3,13 +3,10 @@ import "./birdMascot.css";
 
 const source = `${import.meta.env.BASE_URL}mascot/green-bird.png`;
 export function BirdMascotIcon() {
-  return <span className="bird-mascot-icon" aria-hidden="true">
-    <span className="bird-mascot-logo-motion">
-      <img className="bird-logo-part bird-logo-body" src={source} alt="" width={48} height={48}/>
-      <img className="bird-logo-part bird-logo-left-wing" src={source} alt="" width={48} height={48}/>
-      <img className="bird-logo-part bird-logo-right-wing" src={source} alt="" width={48} height={48}/>
-    </span>
-  </span>;
+  return <picture className="bird-mascot-icon" aria-hidden="true">
+    <source media="(prefers-reduced-motion: reduce)" srcSet={source}/>
+    <img src={`${import.meta.env.BASE_URL}mascot/green-bird-loop.gif`} alt="" width={48} height={48}/>
+  </picture>;
 }
 export default function BirdMascot() {
   const [greeting, setGreeting] = useState(false);
