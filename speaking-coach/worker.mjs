@@ -26,10 +26,26 @@ export async function evaluate(input, env, fetcher = fetch) {
   return validateFeedback(parsed);
 }
 const windows = new Map();
+let themeCache = null;
+export function themeCss(fields) {
+  const colors = fields?.colors?.mapValue?.fields;
+  const keys = ['primary','dark','accent','background','surface','ink','border'];
+  const radius = Number(fields?.radius?.integerValue);
+  if (!colors || !keys.every(key => /^#[0-9a-f]{6}$/i.test(colors[key]?.stringValue)) || !Number.isInteger(radius) || radius<8 || radius>32) throw Error('Invalid project theme');
+  return `:root{${keys.map(key=>`--theme-${key}:${colors[key].stringValue}`).join(';')};--theme-radius:${radius}px}`;
+}
 const json = (v, status = 200) => new Response(JSON.stringify(v), {status, headers: {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 export default {
   async fetch(request, env = {}) {
     const url = new URL(request.url);
+    if(url.pathname === '/theme.css' && ['GET','HEAD'].includes(request.method)) {
+      if(!themeCache || Date.now()-themeCache.at>300000) {
+        let css='/* 使用與主專案一致的森林冒險預設樣式。 */';
+        try {const response=await fetch('https://firestore.googleapis.com/v1/projects/voltaic-circuit-511310-a3/databases/(default)/documents/hanzi_notebook_settings/websiteTheme',{signal:AbortSignal.timeout(3000)});if(response.ok)css=themeCss((await response.json()).fields);}catch{}
+        themeCache={at:Date.now(),css};
+      }
+      return new Response(request.method==='HEAD'?null:themeCache.css,{headers:{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'}});
+    }
     if (url.pathname === '/api/status' && request.method === 'GET') return json({configured:!!env.AI_API_KEY,model:env.AI_MODEL || null,provider:env.AI_PROVIDER || null});
     if (url.pathname === '/api/feedback') {
       if (request.method !== 'POST') return json({error:'不支援的操作'},405);
@@ -54,6 +70,7 @@ export default {
     if (request.method !== 'GET' && request.method !== 'HEAD') return json({error:'不支援的操作'},405);
     const asset = typeof ASSETS !== 'undefined' && ASSETS[url.pathname];
     if (!asset) return new Response('Not found',{status:404});
-    return new Response(request.method === 'HEAD' ? null : asset.body, {headers:{'Content-Type':asset.type,'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin','Permissions-Policy':'microphone=(self)','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'self'"}});
+    const body = asset.base64 ? Uint8Array.from(atob(asset.body),c=>c.charCodeAt(0)) : asset.body;
+    return new Response(request.method === 'HEAD' ? null : body, {headers:{'Content-Type':asset.type,'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin','Permissions-Policy':'microphone=(self)','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'self'"}});
   }
 };

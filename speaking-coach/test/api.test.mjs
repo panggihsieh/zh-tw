@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import worker,{evaluate,validateInput,validateFeedback} from '../worker.mjs';
+import worker,{evaluate,validateInput,validateFeedback,themeCss} from '../worker.mjs';
 const input={text:'Yesterday I go hiking.',language:'en',level:'beginner',mode:'free',prompt:'Talk about yesterday.'};
 const feedback={corrected:'Yesterday I went hiking.',natural:'I went for a hike yesterday.',explanation:'過去發生的事情使用過去式。',meaningPreserved:true,taskStatus:'achieved',issues:[{category:'時態',original:'go',correction:'went',reason:'昨天的動作使用過去式。'}]};
 test('validates input and rejects blank, oversized, unsupported options',()=>{assert.equal(validateInput(input).text,input.text);for(const change of [{text:'  '},{text:'x'.repeat(2001)},{language:'xx'},{mode:'unknown'},{level:'advanced'},{prompt:23}])assert.throws(()=>validateInput({...input,...change}));});
@@ -13,3 +13,4 @@ test('rejects cross-origin, invalid method and excessive bodies before provider 
 test('malformed JSON and invalid input are user errors',async()=>{for(const body of ['oops',JSON.stringify({...input,text:''})]){const r=await worker.fetch(new Request('https://example.test/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body}),{});assert.equal(r.status,400);}});
 test('unconfigured production API reports unavailable instead of sample feedback',async()=>{const r=await worker.fetch(new Request('https://example.test/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)}),{});assert.equal(r.status,503);assert.match((await r.json()).error,/尚未設定/);});
 test('limits repeated requests in a single worker/IP window',async()=>{for(let i=0;i<11;i++){const r=await worker.fetch(new Request('https://example.test/api/feedback',{method:'POST',headers:{'Content-Type':'application/json','CF-Connecting-IP':'192.0.2.88'},body:'invalid'}),{});assert.equal(r.status,i<10?400:429);}});
+test('accepts project theme tokens and rejects CSS injection or invalid radius',()=>{const fields={radius:{integerValue:'24'},colors:{mapValue:{fields:Object.fromEntries(['primary','dark','accent','background','surface','ink','border'].map(k=>[k,{stringValue:'#16844d'}]))}}};assert.match(themeCss(fields),/--theme-primary:#16844d/);assert.match(themeCss(fields),/--theme-radius:24px/);assert.throws(()=>themeCss({...fields,radius:{integerValue:'999'}}));fields.colors.mapValue.fields.primary.stringValue='red; background:url(https://other.test)';assert.throws(()=>themeCss(fields));});
