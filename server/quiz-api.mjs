@@ -165,12 +165,12 @@ export function selectStem(q, mode, previous) {
     randomInt(choices.length || q.variants.length)
   ];
 }
-async function body(req) {
+async function body(req, limit = 200000) {
   let size = 0,
     chunks = [];
   for await (const chunk of req) {
     size += chunk.length;
-    if (size > 200000) throw Error("試卷資料過大");
+    if (size > limit) throw Error("資料過大");
     chunks.push(chunk);
   }
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
@@ -235,13 +235,13 @@ export function createQuizHandler({
         if(!user.admin)return send(403,{error:'僅管理者可管理班級'});
         if(req.method==='GET')return send(200,{items:await scan('quiz-classes/')});
         if(req.method==='POST'){
-          const v=await body(req);
+          const v=await body(req, 1_500_000);
           if (Array.isArray(v.students)) {
             if (!text(v.name,80) || !v.students.length || v.students.length > 100)
               throw Error('請輸入班級名稱與 1–100 位學生');
             const seats = new Set(), emails = new Set();
             const students = v.students.map(student => {
-              const { seat, name, active } = student;
+              const { seat, name, active, avatar } = student;
               const email = typeof student.email === 'string' ? student.email.trim().toLowerCase() : '';
               if (!Number.isInteger(seat) || seat < 1 || seat > 999 || seats.has(seat) ||
                   !text(name,80) || typeof active !== 'boolean' ||
@@ -249,7 +249,10 @@ export function createQuizHandler({
                 throw Error('請核對姓名、座號與 Email，座號及 Email 不可重複');
               seats.add(seat);
               if (email) emails.add(email);
-              return {seat, name:name.trim(), email, active};
+              if (avatar !== undefined && (typeof avatar !== 'string' || avatar.length > 12000 ||
+                  !/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(avatar)))
+                throw Error('公仔須為有效的 JPEG 縮圖');
+              return {seat, name:name.trim(), email, active, ...(avatar ? {avatar} : {})};
             }).sort((a,b)=>a.seat-b.seat);
             const fields = {
               name:v.name.trim(), students, revision:randomUUID(),

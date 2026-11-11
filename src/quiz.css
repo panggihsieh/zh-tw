@@ -95,10 +95,11 @@
 .quiz-workspace fieldset {
   min-width: 0;
 }
-.class-roster-table { overflow-x: auto; }
-.class-roster-table table { width: 100%; min-width: 590px; border-collapse: collapse; }
+.class-roster-table { overflow-x: auto; --avatar-size: 64px; }
+.class-roster-table table { width: 100%; min-width: 830px; border-collapse: collapse; }
 .class-roster-table :is(th,td) { padding: 8px; text-align: left; border-bottom: 1px solid var(--theme-border, #bbcdbf); }
-.class-roster-table td:first-child { width: 85px; }
+.class-roster-table td:nth-child(3) { width: 85px; }
+.class-roster-avatar { width: var(--avatar-size); height: 82px; object-fit: contain; background: #fff; border-radius: 8px; }
 .class-roster-table td:last-child { min-width: 85px; }
 .quiz-workspace p,
 .quiz-workspace h3 {

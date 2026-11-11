@@ -6,6 +6,7 @@ interface Student {
   name: string;
   email: string;
   active: boolean;
+  avatar?: string;
 }
 
 export interface QuizClass {
@@ -51,7 +52,7 @@ export default function ClassRoster({ classes, onSaved }: {
       }
       seen.add(seat);
       const previous = next.get(seat);
-      next.set(seat, { seat, name: studentName, email: email || previous?.email || "", active: previous?.active ?? true });
+      next.set(seat, { ...previous, seat, name: studentName, email: email || previous?.email || "", active: previous?.active ?? true });
     }
     if (!seen.size || next.size > 100) {
       setMessage("每班可儲存 1–100 位學生。");
@@ -102,15 +103,49 @@ export default function ClassRoster({ classes, onSaved }: {
         <legend>學生名單</legend>
         <div className="class-roster-table">
           <table>
-            <thead><tr><th>座號</th><th>姓名</th><th>Google Email</th><th>啟用</th><th>操作</th></tr></thead>
+            <thead><tr><th>公仔</th><th>班級</th><th>座號</th><th>姓名</th><th>Google Email</th><th>啟用</th><th>操作</th></tr></thead>
             <tbody>{students.map((student, index) => {
               const change = (patch: Partial<Student>) => setStudents(rows => rows.map((row, i) => i === index ? {...row, ...patch} : row));
               return <tr key={index}>
+                <td>{student.avatar ? <img className="class-roster-avatar" src={student.avatar} alt={student.name + "的公仔"} /> : <span>未設定</span>}</td>
+                <td>{name || "—"}</td>
                 <td><input aria-label={`第 ${index + 1} 列座號`} required type="number" min={1} max={999} value={student.seat || ""} onChange={e => change({seat: Number(e.target.value)})} /></td>
                 <td><input aria-label={`第 ${index + 1} 列姓名`} required maxLength={80} value={student.name} onChange={e => change({name: e.target.value})} /></td>
                 <td><input aria-label={`第 ${index + 1} 列 Google Email`} type="email" maxLength={254} value={student.email} onChange={e => change({email: e.target.value})} /></td>
                 <td><input aria-label={`啟用第 ${index + 1} 列`} type="checkbox" checked={student.active} onChange={e => change({active: e.target.checked})} /></td>
-                <td><button type="button" className="secondary" onClick={() => setStudents(rows => rows.filter((_, i) => i !== index))}>移除</button></td>
+                <td>
+                  <label>更換公仔<input aria-label={`更換第 ${index + 1} 列公仔`} type="file" accept="image/jpeg,image/png,image/webp" onChange={async e => {
+                    const file = e.currentTarget.files?.[0];
+                    e.currentTarget.value = "";
+                    if (!file) return;
+                    if (file.size > 5_000_000 || !["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+                      setMessage("請選擇 5 MB 以下的 JPEG、PNG 或 WebP 圖片。");
+                      return;
+                    }
+                    setBusy(true);
+                    try {
+                      const bitmap = await createImageBitmap(file);
+                      const canvas = document.createElement("canvas");
+                      const scale = Math.min(1, 96 / Math.max(bitmap.width, bitmap.height));
+                      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+                      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+                      const ctx = canvas.getContext("2d")!;
+                      ctx.fillStyle = "#fff";
+                      ctx.fillRect(0, 0, canvas.width, canvas.height);
+                      ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+                      bitmap.close();
+                      const avatar = canvas.toDataURL("image/jpeg", .72);
+                      if (avatar.length > 12000) throw Error("圖片縮圖過大");
+                      change({ avatar });
+                      setMessage("公仔已更換，請儲存名冊。");
+                    } catch {
+                      setMessage("無法讀取這張圖片，請選擇另一張。");
+                    } finally {
+                      setBusy(false);
+                    }
+                  }} /></label>
+                  <button type="button" className="secondary" onClick={() => setStudents(rows => rows.filter((_, i) => i !== index))}>移除</button>
+                </td>
               </tr>;
             })}</tbody>
           </table>
