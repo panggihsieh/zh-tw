@@ -95,6 +95,11 @@
 .quiz-workspace fieldset {
   min-width: 0;
 }
+.class-roster-table { overflow-x: auto; }
+.class-roster-table table { width: 100%; min-width: 590px; border-collapse: collapse; }
+.class-roster-table :is(th,td) { padding: 8px; text-align: left; border-bottom: 1px solid var(--theme-border, #bbcdbf); }
+.class-roster-table td:first-child { width: 85px; }
+.class-roster-table td:last-child { min-width: 85px; }
 .quiz-workspace p,
 .quiz-workspace h3 {
   overflow-wrap: anywhere;

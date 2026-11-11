@@ -8,6 +8,7 @@ import {
 } from "./quizApi";
 import "./quiz.css";
 import PublisherSync from "./PublisherSync";
+import ClassRoster, { type QuizClass } from "./ClassRoster";
 import {reviewPaperId} from './publisherSelection';
 import {readQuizPassage} from './quizPassage';
 interface Book {
@@ -19,7 +20,7 @@ interface Book {
 }
 export default function QuizTeacher({request=quizRequest,showPublisher=true}:{request?:typeof quizRequest;showPublisher?:boolean}={}) {
   const quizRequest=request;
-  const [classes,setClasses]=useState<{id:string;name:string;roster:string[]}[]>([]);
+  const [classes,setClasses]=useState<QuizClass[]>([]);
   const [paperSearch,setPaperSearch]=useState(''),[categoryFilter,setCategoryFilter]=useState(''),[difficultyFilter,setDifficultyFilter]=useState(''),[reviewFilter,setReviewFilter]=useState('');
   const [reviewId] = useState(()=>reviewPaperId(window.location.search));
   const [papers, setPapers] = useState<QuizPaper[]>([]),
@@ -125,6 +126,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
         </button>
+        <button className="secondary" onClick={() => setTab("roster")}>班級學生名冊</button>
         <button
           className="secondary"
           onClick={() => {
@@ -336,7 +338,8 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           </button>
         </form>
       )}
-      {tab !== "generate" && (
+      {tab === "roster" && <ClassRoster classes={classes} onSaved={record => setClasses(items => [...items.filter(item => item.id !== record.id), record])} />}
+      {tab !== "generate" && tab !== "roster" && (
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}

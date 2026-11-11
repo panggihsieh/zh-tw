@@ -47,6 +47,19 @@ test('四類出題、班級派送、選項打亂、試卷快照與期限',async 
  assert.equal((await call('/classes',null,'student')).status,403);
  const classroom=await call('/classes',{name:'五年甲班',roster:['student@example.com']});assert.equal(classroom.status,201);
  assert.equal((await call('/classes')).data.items[0].name,'五年甲班');
+ const students = [
+   {seat:1,name:'測試一',email:'STUDENT@example.com',active:true},
+   {seat:2,name:'測試二',email:'disabled@example.com',active:false},
+   {seat:3,name:'測試三',email:'',active:true},
+ ];
+ const change = {id:classroom.data.id,revision:null,name:'五年甲班',students};
+ assert.equal((await call('/classes',change,'student')).status,403);
+ assert.equal((await call('/classes',{...change,students:[...students,students[0]]})).status,400);
+ const savedRoster = await call('/classes',change);
+ assert.equal(savedRoster.status,200);
+ assert.deepEqual(savedRoster.data.roster,['student@example.com']);
+ assert.equal(savedRoster.data.students.length,3);
+ assert.equal((await call('/classes',change)).status,409);
  const categories=['課文理解（閱讀素養）','成語','修辭','改錯'];
  const created=await call('/generate',{...paper(),count:4,categories,difficulty:'中'});assert.equal(created.status,201);
  const draft=created.data;assert.deepEqual(draft.questions.map(q=>q.category),categories);

@@ -236,6 +236,38 @@ export function createQuizHandler({
         if(req.method==='GET')return send(200,{items:await scan('quiz-classes/')});
         if(req.method==='POST'){
           const v=await body(req);
+          if (Array.isArray(v.students)) {
+            if (!text(v.name,80) || !v.students.length || v.students.length > 100)
+              throw Error('請輸入班級名稱與 1–100 位學生');
+            const seats = new Set(), emails = new Set();
+            const students = v.students.map(student => {
+              const { seat, name, active } = student;
+              const email = typeof student.email === 'string' ? student.email.trim().toLowerCase() : '';
+              if (!Number.isInteger(seat) || seat < 1 || seat > 999 || seats.has(seat) ||
+                  !text(name,80) || typeof active !== 'boolean' ||
+                  (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || emails.has(email))))
+                throw Error('請核對姓名、座號與 Email，座號及 Email 不可重複');
+              seats.add(seat);
+              if (email) emails.add(email);
+              return {seat, name:name.trim(), email, active};
+            }).sort((a,b)=>a.seat-b.seat);
+            const fields = {
+              name:v.name.trim(), students, revision:randomUUID(),
+              roster:students.filter(student=>student.active && student.email).map(student=>student.email),
+            };
+            if (v.id !== undefined) {
+              if (typeof v.id !== 'string' || !/^[0-9a-f-]{36}$/.test(v.id)) throw Error('班級識別碼無效');
+              const key = `quiz-classes/${v.id}.json`;
+              const old = await store.get(key);
+              if ((old.value.revision ?? null) !== v.revision) return send(409,{error:'名冊已有更新，請重新載入'});
+              const record = {...old.value,...fields};
+              await store.update(key,record,old.generation);
+              return send(200,record);
+            }
+            const record = {...fields,id:randomUUID(),createdAt:new Date().toISOString()};
+            await store.create(`quiz-classes/${record.id}.json`,record);
+            return send(201,record);
+          }
           if(!text(v.name,80)||!Array.isArray(v.roster)||!v.roster.length||v.roster.length>100||v.roster.some(x=>typeof x!=='string'||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x)))throw Error('班級需名稱與1–100個有效學生Email');
           const record={id:randomUUID(),name:v.name.trim(),roster:[...new Set(v.roster.map(x=>x.toLowerCase()))],createdAt:new Date().toISOString()};
           await store.create(`quiz-classes/${record.id}.json`,record);return send(201,record);
