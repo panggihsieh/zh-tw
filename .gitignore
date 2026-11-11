@@ -8,3 +8,4 @@ playwright-report/
 .local/
 .firebase/
 __pycache__/
+tmp/pdfs/
