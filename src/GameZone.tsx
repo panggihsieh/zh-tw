@@ -11,6 +11,7 @@ import {
 import CurriculumDatabase from "./CurriculumDatabase";
 import WritingPractice from "./WritingPractice";
 import GameReview from "./GameReview";
+import SentenceCompetition from "./SentenceCompetition";
 import type { LessonContext } from "./curriculumLearning";
 import { useSiteTheme } from "./siteThemes";
 import "./games.css";
@@ -32,7 +33,7 @@ export default function GameZone() {
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [view, setView] = useState<"hub" | "choose" | "writing" | "works">("hub"),
+    [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "sentences">(window.location.hash==='#games/sentence'?'sentences':'hub'),
     [course, setCourse] = useState<{
       characters: string[];
       context: LessonContext;
@@ -47,9 +48,10 @@ export default function GameZone() {
       setUser(u);
       setReady(true);
       setCourse(null);
-      setView("hub");
+      setView(window.location.hash==='#games/sentence'?'sentences':'hub');
     });
   }, []);
+  useEffect(()=>{const changed=()=>setView(window.location.hash==='#games/sentence'?'sentences':'hub');window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed);},[]);
   async function login(redirect = false) {
     setBusy(true);
     setMessage("");
@@ -112,7 +114,7 @@ export default function GameZone() {
             </button>
             {!cloudConfigured && <p>尚未設定 Google 登入。</p>}
           </section>
-        ) : view === "writing" && course ? (
+        ) : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
           <WritingPractice
             key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}
@@ -177,6 +179,7 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
+                  <article className="game-tile"><div className="game-icon"><Gamepad2 size={34}/></div><span className="game-pill">南一高年級 × 說話造句</span><h2>一字多詞造句競賽</h2><p>參加老師派送的限時競賽，看字音、想詞語、說一句話，完成後查看評分與老師評語。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence';setView('sentences');}}>進入造句競賽 →</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
                       <div className="game-icon">

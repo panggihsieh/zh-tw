@@ -38,6 +38,7 @@ import {
   CloudUpload,
   Shuffle,
   Palette,
+  Mic,
   Trees,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
@@ -106,8 +107,10 @@ const GameZone = lazy(() => import('./GameZone'));
 const QuizStudent = lazy(() => import("./QuizStudent"));
 const QuizTeacher = lazy(() => import("./QuizTeacher"));
 const GameReview = lazy(() => import('./GameReview'));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz";
+const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences";
 const backendTitles: Record<BackendSection, string> = {
+  sentences: "一字多詞造句競賽管理",
   quiz: "國語母題與錯題管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
@@ -798,6 +801,7 @@ function App() {
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>國語母題與錯題管理</button>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
+            {backendMode && <button className={backendSection==='sentences'?'nav-item active':'nav-item'} aria-current={backendSection==='sentences'?'page':undefined} onClick={()=>openBackendSection('sentences')}>一字多詞造句競賽管理</button>}
             {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
@@ -817,6 +821,7 @@ function App() {
               查字小幫手
             </button>
             <a className="nav-item" href="#games"><Grid2X2 size={20}/>生詞遊戲專區</a>
+            <a className="nav-item" href="#games/sentence"><Mic size={20}/>造句競賽</a>
             <a className="nav-item" href="/?view=quiz">國語錯題本</a>
             <button
               className={page === "library" ? "nav-item active" : "nav-item"}
@@ -2028,6 +2033,7 @@ function App() {
                   {backendSection === 'quiz' && <QuizTeacher/>}
                   {backendSection === 'gameReview' && <GameReview teacher/>}
                   {backendSection === "users" && <UserManagement />}
+                  {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
                   {backendSection === "structure" && <BackendStructure />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {

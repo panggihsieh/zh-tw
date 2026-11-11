@@ -115,6 +115,8 @@ for (const file of [
   "cloud-run.mjs",
   "writing-api.mjs",
   "quiz-api.mjs",
+  "sentence-api.mjs",
+  "sentence-bank.json",
   "publisher-sync.mjs",
 ])
   await copyFile(`server/${file}`, resolve(stage, "server", file));
@@ -198,13 +200,19 @@ const spec = {
 };
 let deploy;
 try {
-  await api(`${runUrl}/${service}`);
+  const existing = await api(`${runUrl}/${service}`);
+  // Keep runtime settings, environment, secrets and volumes on the existing service.
+  const template = { ...existing.template };
+  delete template.revision;
+  template.containers = existing.template.containers.map((container, index) =>
+    index === 0 ? { ...container, image } : container,
+  );
   deploy = await api(
-    `${runUrl}/${service}?updateMask=template,ingress`,
+    `${runUrl}/${service}?updateMask=template`,
     "PATCH",
     {
       name: `projects/${project}/locations/${region}/services/${service}`,
-      ...spec,
+      template,
     },
   );
 } catch (e) {
