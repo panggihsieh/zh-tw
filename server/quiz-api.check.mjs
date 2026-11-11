@@ -39,6 +39,29 @@ const paper = () => ({
   questionMode: "original",
   questions: [question()],
 });
+test('四類出題、班級派送、選項打亂、試卷快照與期限',async t=>{
+ const store=memoryStore();
+ const handler=createQuizHandler({store,origins:['https://test'],authenticate:async req=>{const uid=req.headers['x-test-user'];if(!uid)throw Error();return {uid,email:uid+'@example.com',admin:uid==='teacher'};},generate:async v=>({questions:v.categories.map((category,i)=>({...question(),category,stem:'測試題'+i,variants:['換句話問'+i,'再問一次'+i]}))})});
+ const server=http.createServer(handler).listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
+ async function call(path,v,user='teacher'){const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/quiz${path}`,{method:v?'POST':'GET',headers:{Origin:'https://test','X-Notebook-Request':'quiz','x-test-user':user,'Content-Type':'application/json'},body:v?JSON.stringify(v):undefined});return {status:r.status,data:await r.json()};}
+ assert.equal((await call('/classes',null,'student')).status,403);
+ const classroom=await call('/classes',{name:'五年甲班',roster:['student@example.com']});assert.equal(classroom.status,201);
+ assert.equal((await call('/classes')).data.items[0].name,'五年甲班');
+ const categories=['課文理解（閱讀素養）','成語','修辭','改錯'];
+ const created=await call('/generate',{...paper(),count:4,categories,difficulty:'中'});assert.equal(created.status,201);
+ const draft=created.data;assert.deepEqual(draft.questions.map(q=>q.category),categories);
+ const saved=await call(`/papers/${draft.id}/save`,draft);assert.equal(saved.data.questions.length,4);
+ const payload={...draft,shuffleOptions:true,dueAt:new Date(Date.now()+60000).toISOString(),questions:draft.questions.slice(0,2).map(q=>({...q,reviewed:true}))};
+ const published=await call(`/papers/${draft.id}/publish`,payload);assert.equal(published.status,200);assert.equal(published.data.questionBank.length,4);assert.equal(published.data.questions.length,2);
+ assert.equal((await call('/attempts',{quizId:draft.id},'other')).status,403);
+ const attempt=await call('/attempts',{quizId:draft.id},'student');assert.equal(attempt.status,201);assert.equal(attempt.data.questions[0].answer,undefined);assert.equal(attempt.data.questions[0].optionOrder,undefined);
+ const answers=attempt.data.questions.map(q=>q.options.indexOf('因為下雨'));
+ const submitted=await call(`/attempts/${attempt.data.id}/submit`,{answers},'student');assert.equal(submitted.data.result.score,100);
+ const stats=await call(`/papers/${draft.id}/stats`);assert.equal(stats.data.items[0].choices[0],1);assert.equal(stats.data.items[0].rate,0);
+ assert.equal((await call(`/papers/${draft.id}/save`,payload)).status,409);
+ const key=`quiz-papers/${draft.id}.json`,stored=await store.get(key);await store.update(key,{...stored.value,dueAt:'2000-01-01T00:00:00Z'},stored.generation);
+ assert.equal((await call('/attempts',{quizId:draft.id},'student')).status,409);
+});
 function memoryStore() {
   const db = new Map();
   return {

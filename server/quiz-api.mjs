@@ -2,6 +2,7 @@ import { randomUUID, randomInt } from "node:crypto";
 import { makeResourceHandlers } from "./publisher-sync.mjs";
 import { writingIdentity } from "./writing-api.mjs";
 export const CATEGORIES = [
+  "課文理解（閱讀素養）", "成語", "修辭", "改錯",
   "字音字形",
   "字詞義及運用",
   "文意理解",
@@ -39,6 +40,7 @@ export function validateQuiz(v) {
       !uuid(q.id) ||
       seen.has(q.id) ||
       !CATEGORIES.includes(q.category) ||
+      (q.readingSkill && !['擷取訊息','推論','統整','評鑑反思'].includes(q.readingSkill)) ||
       !["易", "中", "難"].includes(q.difficulty) ||
       !text(q.stem, 600) ||
       !Array.isArray(q.variants) ||
@@ -71,9 +73,12 @@ export function validateQuiz(v) {
       explanation: q.explanation,
       evidence: q.evidence,
       reviewed: q.reviewed === true,
+      ...(q.readingSkill ? {readingSkill: q.readingSkill} : {}),
     };
   });
   return {
+    dueAt: v.dueAt ? (()=>{if(!Number.isFinite(Date.parse(v.dueAt)))throw Error('截止日期不符');return new Date(v.dueAt).toISOString();})() : '',
+    shuffleOptions: v.shuffleOptions === true,
     roster: [...new Set(v.roster.map((x) => x.toLowerCase()))],
     questionMode: v.questionMode,
     title: v.title.trim(),
@@ -99,7 +104,7 @@ export function quizStats(attempts, questions) {
     }
     const rows = [...byUser.values()],
       choices = [0, 0, 0, 0];
-    for (const r of rows) choices[r.last.choice]++;
+    for (const r of rows) choices[r.last.optionOrder?.[r.last.choice] ?? r.last.choice]++;
     const wrong = rows.filter((r) => !r.last.correct);
     return {
       id: q.id,
@@ -138,6 +143,7 @@ export function wrongBook(attempts) {
 }
 export function attemptView(a) {
   return {
+    dueAt:a.dueAt,
     id: a.id,
     quizId: a.quizId,
     title: a.title,
@@ -225,6 +231,16 @@ export function createQuizHandler({
     try {
       const url = new URL(req.url, "http://localhost"),
         path = url.pathname.replace("/api/structure/quiz", "");
+      if(path==='/classes') {
+        if(!user.admin)return send(403,{error:'僅管理者可管理班級'});
+        if(req.method==='GET')return send(200,{items:await scan('quiz-classes/')});
+        if(req.method==='POST'){
+          const v=await body(req);
+          if(!text(v.name,80)||!Array.isArray(v.roster)||!v.roster.length||v.roster.length>100||v.roster.some(x=>typeof x!=='string'||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x)))throw Error('班級需名稱與1–100個有效學生Email');
+          const record={id:randomUUID(),name:v.name.trim(),roster:[...new Set(v.roster.map(x=>x.toLowerCase()))],createdAt:new Date().toISOString()};
+          await store.create(`quiz-classes/${record.id}.json`,record);return send(201,record);
+        }
+      }
       if (path === "/papers" && req.method === "GET") {
         const papers = await scan("quiz-papers/");
         return send(200, {
@@ -245,6 +261,7 @@ export function createQuizHandler({
               questionMode: q.questionMode,
               status: q.status,
               count: q.questions.length,
+              dueAt:q.dueAt,
             })),
         });
       }
@@ -260,6 +277,7 @@ export function createQuizHandler({
           return send(403, { error: "這份測驗未指派給你的帳號" });
         if (q.status !== "published")
           return send(404, { error: "試卷尚未發布" });
+        if(v.practice!==true&&q.dueAt&&Date.now()>Date.parse(q.dueAt))return send(409,{error:'測驗已超過作答期限；已完成的錯題仍可複習。'});
         let questions = q.questions,
           mode =
             user.admin && !q.roster.includes(user.email?.toLowerCase())
@@ -302,6 +320,7 @@ export function createQuizHandler({
             passage: q.sourceKind === "assessment" ? "" : q.passage,
             mode,
             startedAt: new Date().toISOString(),
+            ...(mode==='test'&&q.dueAt?{dueAt:q.dueAt}:{}),
             questions: questions.map((x) => ({
               ...x,
               stem: selectStem(
@@ -314,6 +333,7 @@ export function createQuizHandler({
               ),
             })),
           };
+        if(q.shuffleOptions)for(const item of a.questions){const order=[0,1,2,3];for(let i=3;i>0;i--){const j=randomInt(i+1);[order[i],order[j]]=[order[j],order[i]];}item.options=order.map(i=>item.options[i]);item.answer=order.indexOf(item.answer);item.optionOrder=order;}
         await store.create(`quiz-attempts/${user.uid}/${id}.json`, a);
         return send(201, attemptView(a));
       }
@@ -325,6 +345,7 @@ export function createQuizHandler({
         if (!match[2] && req.method === "GET") return send(200, attemptView(a));
         if (match[2] && req.method === "POST") {
           if (a.result) return send(200, attemptView(a));
+          if(a.dueAt&&Date.now()>Date.parse(a.dueAt))return send(409,{error:'已超過作答期限，無法交卷。'});
           const v = await body(req);
           if (
             !Array.isArray(v.answers) ||
@@ -409,6 +430,7 @@ export function createQuizHandler({
           });
           if (
             quiz.questions.length !== v.count ||
+            v.categories.some(c=>!quiz.questions.some(q=>q.category===c)) ||
             quiz.questions.some(
               (q) =>
                 !v.categories.includes(q.category) ||
@@ -496,8 +518,8 @@ export function createQuizHandler({
             return send(409, { error: "已發布試卷不可覆寫，請建立錯題再測卷" });
           const v = validateQuiz(await body(req));
           if (
-            q.questions.length !== v.questions.length ||
-            q.questions.some((x, i) => x.id !== v.questions[i].id)
+            (q.parentId && q.questions.length !== v.questions.length) ||
+            v.questions.some(x=>!q.questions.some(original=>original.id===x.id))
           )
             throw Error("母題識別碼不可變更");
           if (
@@ -525,10 +547,12 @@ export function createQuizHandler({
             throw Error("再測卷保留原母題考點與選項，僅可選用既有改寫版");
           if (action === "publish" && !v.questions.every((x) => x.reviewed))
             throw Error("請逐題核對母題、所有改寫、答案、解析及課文依據");
+          if(action==='publish'&&v.dueAt&&Date.parse(v.dueAt)<=Date.now())throw Error('作答期限必須在未來');
           const record = {
             ...q,
             ...v,
             status: action === "publish" ? "published" : "draft",
+            ...(action==='publish'?{questionBank:q.questions}:{}),
             updatedAt: new Date().toISOString(),
             ...(action === "publish"
               ? { publishedAt: new Date().toISOString() }

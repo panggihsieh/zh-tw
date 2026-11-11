@@ -285,6 +285,7 @@ export default function QuizStudent() {
                     {p.title}
                     {linked === p.id ? "・老師分享的試卷" : ""}
                   </h3>
+                    {p.dueAt&&<p>作答期限：{new Date(p.dueAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})}</p>}
                   <p>
                     {p.className} · {p.lesson} · {p.count}題 ·{" "}
                     {p.questionMode === "original" ? "原題" : "AI 同義改寫題"}

@@ -9,6 +9,7 @@ import {
 import "./quiz.css";
 import PublisherSync from "./PublisherSync";
 import {reviewPaperId} from './publisherSelection';
+import {readQuizPassage} from './quizPassage';
 interface Book {
   publisher: string;
   grade: number;
@@ -16,7 +17,10 @@ interface Book {
   year: string;
   lessons: { title: string; characters: string; source: string }[];
 }
-export default function QuizTeacher() {
+export default function QuizTeacher({request=quizRequest,showPublisher=true}:{request?:typeof quizRequest;showPublisher?:boolean}={}) {
+  const quizRequest=request;
+  const [classes,setClasses]=useState<{id:string;name:string;roster:string[]}[]>([]);
+  const [paperSearch,setPaperSearch]=useState(''),[categoryFilter,setCategoryFilter]=useState(''),[difficultyFilter,setDifficultyFilter]=useState(''),[reviewFilter,setReviewFilter]=useState('');
   const [reviewId] = useState(()=>reviewPaperId(window.location.search));
   const [papers, setPapers] = useState<QuizPaper[]>([]),
     [paper, setPaper] = useState<QuizPaper | null>(null),
@@ -34,13 +38,14 @@ export default function QuizTeacher() {
   const [form, setForm] = useState({
     title: "",
     className: "",
-    grade: 1,
+    grade: 5,
     lesson: "",
     passage: "",
-    count: 5,
+    count: 8,
     difficulty: "中",
-    categories: ["文意理解"],
+    categories: ["課文理解（閱讀素養）", "成語", "修辭", "改錯"],
     questionMode: "original",
+    dueAt:'',shuffleOptions:false,
   });
   async function run(fn: () => Promise<void>) {
     setBusy(true);
@@ -60,12 +65,13 @@ export default function QuizTeacher() {
   }
   useEffect(() => {
     void run(reviewId ? ()=>open(reviewId) : load);
+    void quizRequest<{items:typeof classes}>('/classes').then(v=>setClasses(v.items)).catch(e=>setMessage(e.message));
     fetch("/handwriting-curriculum.json")
       .then((r) => {
         if (!r.ok) throw Error();
         return r.json();
       })
-      .then((d) => setBooks(d.books))
+      .then((d) => setBooks(d.books.filter((b:Book)=>b.publisher==='南一'&&[5,6].includes(b.grade))))
       .catch(() => setMessage("課次清單載入失敗，仍可手動填寫課名。"));
   }, []);
   function changeQuestion(index: number, patch: Partial<QuizQuestion>) {
@@ -114,7 +120,7 @@ export default function QuizTeacher() {
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
-      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : <PublisherSync/>}
+      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details><summary>出版社教用題卷匯入（進階）</summary><PublisherSync/></details>}
       {!reviewId && <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
@@ -126,7 +132,7 @@ export default function QuizTeacher() {
             setTab("generate");
           }}
         >
-          AI 建立母題
+          上傳課文・AI 四類出題
         </button>
         <button
           className="secondary"
@@ -154,7 +160,7 @@ export default function QuizTeacher() {
             });
           }}
         >
-          <h2>選課與課文</h2>
+          <h2>1. 選課與上傳課文</h2>
           <p>
             限定國小國語，課次清單只有生字表；請貼上可使用的完整課文，作為出題依據。
           </p>
@@ -190,6 +196,7 @@ export default function QuizTeacher() {
               </select>
             </label>
           </div>
+          <label>選擇已儲存班級<select defaultValue="" onChange={e=>{const c=classes.find(c=>c.id===e.target.value);if(c){setForm({...form,className:c.name});setRosterText(c.roster.join('\n'));}}}><option value="">手動輸入班級與名單</option>{classes.map(c=><option key={c.id} value={c.id}>{c.name}（{c.roster.length}人）</option>)}</select></label>
           <button
             type="button"
             className="secondary"
@@ -267,6 +274,9 @@ export default function QuizTeacher() {
               onChange={(e) => setForm({ ...form, passage: e.target.value })}
             />
           </label>
+          <label>上傳課文（TXT、MD、文字型PDF；最多10MB、30頁）<input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={e=>{const file=e.target.files?.[0];if(file)void run(async()=>{const passage=await readQuizPassage(file);setForm(prev=>({...prev,passage}));setMessage(`已讀取 ${file.name}，請確認下方課文，再按AI出題；尚未傳送AI。`);});e.target.value='';}}/></label>
+          <p>檔案在本機取出文字；掃描PDF請先轉成文字。出題前請核對段落、標點與讀取順序。</p>
+          <button type="button" className="secondary" disabled={busy||!form.className.trim()||!rosterText.trim()} onClick={()=>void run(async()=>{await quizRequest('/classes',{name:form.className,roster:rosterText.split(/[\s,;，；]+/).filter(Boolean)});const v=await quizRequest<{items:typeof classes}>('/classes');setClasses(v.items);setMessage('班級名單已儲存，下次可直接選用。');})}>儲存班級名單供下次使用</button>
           <div className="quiz-grid">
             <label>
               題數（1–10）
@@ -294,7 +304,7 @@ export default function QuizTeacher() {
           </div>
           <fieldset>
             <legend>選擇題類型</legend>
-            {QUIZ_CATEGORIES.map((c) => (
+            {QUIZ_CATEGORIES.slice(0,4).map((c) => (
               <label className="quiz-check" key={c}>
                 <input
                   type="checkbox"
@@ -312,6 +322,7 @@ export default function QuizTeacher() {
               </label>
             ))}
           </fieldset>
+          <p>課文理解包含擷取訊息、推論、統整與評鑑反思，參考閱讀素養方向。成語、修辭與改錯須有課文依據；題材不足時會提示，不能憑空補寫。</p>
           <p>
             使用 API
             設定中已儲存的文字模型。按下後會傳送這份課文與設定，執行出題及 AI
@@ -329,8 +340,9 @@ export default function QuizTeacher() {
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
+          <label>依課別、班級或試卷名稱篩選<input value={paperSearch} onChange={e=>setPaperSearch(e.target.value)}/></label>
           <div className="quiz-paper-list">
-            {papers.map((q) => (
+            {papers.filter(q=>`${q.title} ${q.className} ${q.lesson}`.includes(paperSearch)).map((q) => (
               <button
                 className="secondary"
                 key={q.id}
@@ -401,6 +413,7 @@ export default function QuizTeacher() {
                   </label>
                 </div>
               )}
+              {paper.status==='draft'&&<div className="quiz-grid"><label>作答截止時間（選填，台灣時間）<input type="datetime-local" value={paper.dueAt?new Date(Date.parse(paper.dueAt)+8*3600000).toISOString().slice(0,16):''} onChange={e=>setPaper({...paper,dueAt:e.target.value?new Date(e.target.value+'+08:00').toISOString():''})}/></label><label className="quiz-check"><input type="checkbox" checked={paper.shuffleOptions===true} onChange={e=>setPaper({...paper,shuffleOptions:e.target.checked})}/>每位學生打亂選項順序</label></div>}
               {paper.status === "published" ? (
                 <>
                   <div className="quiz-actions">
@@ -469,6 +482,7 @@ export default function QuizTeacher() {
               )}
               {tab === "stats" && (
                 <>
+                  <h3>四類能力表現（最近一次作答）</h3>{QUIZ_CATEGORIES.filter(c=>paper.questions.some(q=>q.category===c)).map(c=>{const rows=stats.filter(r=>paper.questions.find(q=>q.id===r.id)?.category===c);const total=rows.reduce((n,r)=>n+r.total,0),wrong=rows.reduce((n,r)=>n+r.wrong,0);return <p key={c}>{c}：{total?Math.round((total-wrong)/total*100)+'% 答對':'尚無作答'}（{total}次題目作答）</p>;})}
                   <h3>全班錯題集中再測</h3>
                   <p>
                     錯誤率：答錯人數 ÷
@@ -543,9 +557,11 @@ export default function QuizTeacher() {
                   </button>
                 </>
               )}
+              {tab!=='stats'&&<div className="quiz-grid"><label>題型<select value={categoryFilter} onChange={e=>setCategoryFilter(e.target.value)}><option value="">全部</option>{QUIZ_CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></label><label>難度<select value={difficultyFilter} onChange={e=>setDifficultyFilter(e.target.value)}><option value="">全部</option>{['易','中','難'].map(c=><option key={c}>{c}</option>)}</select></label><label>審核狀態<select value={reviewFilter} onChange={e=>setReviewFilter(e.target.value)}><option value="">全部</option><option value="pending">待審</option><option value="reviewed">已核可</option></select></label></div>}
               {tab !== "stats" &&
-                paper.questions.map((q, i) => (
+                paper.questions.map((q, i) => (!categoryFilter||q.category===categoryFilter)&&(!difficultyFilter||q.difficulty===difficultyFilter)&&(!reviewFilter||(reviewFilter==='reviewed')===q.reviewed)&&(
                   <article className="quiz-question" key={q.id}>
+                    {paper.status==='draft'&&!paper.parentId&&<label className="quiz-check"><input type="checkbox" checked={bankIds.includes(q.id)} onChange={e=>setBankIds(e.target.checked?[...bankIds,q.id]:bankIds.filter(id=>id!==q.id))}/>納入這份試卷</label>}
                     {paper.status === "published" && (
                       <label className="quiz-check">
                         <input
@@ -570,6 +586,8 @@ export default function QuizTeacher() {
                         busy || paper.status === "published" || !!paper.parentId
                       }
                     >
+                      <label>題型<select value={q.category} onChange={e=>changeQuestion(i,{category:e.target.value})}>{QUIZ_CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></label><label>難度<select value={q.difficulty} onChange={e=>changeQuestion(i,{difficulty:e.target.value})}>{['易','中','難'].map(c=><option key={c}>{c}</option>)}</select></label>
+                      {q.category==='課文理解（閱讀素養）'&&<label>閱讀歷程<select value={q.readingSkill||''} onChange={e=>changeQuestion(i,{readingSkill:e.target.value})}><option value="">請核對</option>{['擷取訊息','推論','統整','評鑑反思'].map(c=><option key={c}>{c}</option>)}</select></label>}
                       <label>
                         原題題幹
                         <textarea
@@ -673,17 +691,17 @@ export default function QuizTeacher() {
                       })
                     }
                   >
-                    儲存草稿
+                    儲存全部母題草稿
                   </button>
                   <button
                     className="primary"
-                    disabled={busy || !paper.questions.every((q) => q.reviewed)}
+                    disabled={busy || !bankIds.length || !paper.questions.filter(q=>bankIds.includes(q.id)).every((q) => q.reviewed)}
                     onClick={() =>
                       void run(async () => {
                         setPaper(
                           await quizRequest(
                             `/papers/${paper.id}/publish`,
-                            paper,
+                            {...paper,questions:paper.questions.filter(q=>paper.parentId||bankIds.includes(q.id))},
                           ),
                         );
                         await load();
@@ -691,7 +709,7 @@ export default function QuizTeacher() {
                       })
                     }
                   >
-                    審核完成並發布
+                    審核完成並派送班級
                   </button>
                 </div>
               )}

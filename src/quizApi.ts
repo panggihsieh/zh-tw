@@ -1,4 +1,5 @@
 export const QUIZ_CATEGORIES = [
+  "課文理解（閱讀素養）", "成語", "修辭", "改錯",
   "字音字形",
   "字詞義及運用",
   "文意理解",
@@ -16,8 +17,11 @@ export interface QuizQuestion {
   explanation: string;
   evidence: string;
   reviewed: boolean;
+  readingSkill?: string;
 }
 export interface QuizPaper {
+  dueAt?: string;
+  shuffleOptions?: boolean;
   sourceKind?: string;
   source?: {
     publisher: string;
@@ -49,6 +53,7 @@ export interface QuizRow extends QuizQuestion {
   wrongCount?: number;
 }
 export interface QuizAttempt {
+  dueAt?:string;
   id: string;
   quizId: string;
   title: string;
