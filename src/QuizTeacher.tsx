@@ -36,15 +36,17 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
     [lessonIndex, setLessonIndex] = useState(0);
   const [bankIds, setBankIds] = useState<string[]>([]);
   const [rosterText, setRosterText] = useState("");
+  const [questionRows, setQuestionRows] = useState(() => QUIZ_CATEGORIES.slice(0, 4).map(category => ({
+    category, difficulty: "中", count: 2,
+  })));
+  const questionPlan = questionRows.filter(row => row.count > 0);
+  const questionCount = questionPlan.reduce((total, row) => total + row.count, 0);
   const [form, setForm] = useState({
     title: "",
     className: "",
     grade: 5,
     lesson: "",
     passage: "",
-    count: 8,
-    difficulty: "中",
-    categories: ["課文理解（閱讀素養）", "成語", "修辭", "改錯"],
     questionMode: "original",
     dueAt:'',shuffleOptions:false,
   });
@@ -152,6 +154,10 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
             void run(async () => {
               const q = await quizRequest<QuizPaper>("/generate", {
                 ...form,
+                count: questionCount,
+                categories: questionPlan.map(row => row.category),
+                difficulty: questionPlan[0]?.difficulty,
+                questionPlan,
                 roster: rosterText.split(/[\s,;，；]+/).filter(Boolean),
               });
               setPaper(q);
@@ -279,50 +285,27 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           <label>上傳課文（TXT、MD、文字型PDF；最多10MB、30頁）<input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={e=>{const file=e.target.files?.[0];if(file)void run(async()=>{const passage=await readQuizPassage(file);setForm(prev=>({...prev,passage}));setMessage(`已讀取 ${file.name}，請確認下方課文，再按AI出題；尚未傳送AI。`);});e.target.value='';}}/></label>
           <p>檔案在本機取出文字；掃描PDF請先轉成文字。出題前請核對段落、標點與讀取順序。</p>
           <button type="button" className="secondary" disabled={busy||!form.className.trim()||!rosterText.trim()} onClick={()=>void run(async()=>{await quizRequest('/classes',{name:form.className,roster:rosterText.split(/[\s,;，；]+/).filter(Boolean)});const v=await quizRequest<{items:typeof classes}>('/classes');setClasses(v.items);setMessage('班級名單已儲存，下次可直接選用。');})}>儲存班級名單供下次使用</button>
-          <div className="quiz-grid">
-            <label>
-              題數（1–10）
-              <input
-                type="number"
-                min={1}
-                max={10}
-                value={form.count}
-                onChange={(e) => setForm({ ...form, count: +e.target.value })}
-              />
-            </label>
-            <label>
-              難度
-              <select
-                value={form.difficulty}
-                onChange={(e) =>
-                  setForm({ ...form, difficulty: e.target.value })
-                }
-              >
-                {["易", "中", "難"].map((x) => (
-                  <option key={x}>{x}</option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <fieldset>
-            <legend>選擇題類型</legend>
-            {QUIZ_CATEGORIES.slice(0,4).map((c) => (
-              <label className="quiz-check" key={c}>
-                <input
-                  type="checkbox"
-                  checked={form.categories.includes(c)}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      categories: e.target.checked
-                        ? [...form.categories, c]
-                        : form.categories.filter((x) => x !== c),
-                    })
-                  }
-                />
-                {c}
-              </label>
-            ))}
+          <fieldset className="quiz-question-plan" disabled={busy}>
+            <legend>出題設定</legend>
+            <table>
+              <thead><tr><th scope="col">類型</th><th scope="col">難度</th><th scope="col">題數</th></tr></thead>
+              <tbody>{questionRows.map((row, index) => {
+                const update = (patch: Partial<typeof row>) => setQuestionRows(rows =>
+                  rows.map((item, i) => i === index ? { ...item, ...patch } : item));
+                return <tr key={row.category}>
+                  <th scope="row">{row.category}</th>
+                  <td><select aria-label={row.category + "難度"} value={row.difficulty} disabled={!row.count}
+                    onChange={e => update({ difficulty: e.target.value })}>
+                    <option value="易">低</option><option value="中">中</option><option value="難">高</option>
+                  </select></td>
+                  <td><select aria-label={row.category + "題數"} value={row.count}
+                    onChange={e => update({ count: Number(e.target.value) })}>
+                    {Array.from({ length: 11 }, (_, n) => <option key={n} value={n}>{n === 0 ? "0（不出題）" : n}</option>)}
+                  </select></td>
+                </tr>;
+              })}</tbody>
+            </table>
+            <p aria-live="polite">合計 {questionCount} 題（限 1–10 題）</p>
           </fieldset>
           <p>課文理解包含擷取訊息、推論、統整與評鑑反思，參考閱讀素養方向。成語、修辭與改錯須有課文依據；題材不足時會提示，不能憑空補寫。</p>
           <p>
@@ -332,7 +315,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           </p>
           <button
             className="primary"
-            disabled={busy || !form.categories.length}
+            disabled={busy || questionCount < 1 || questionCount > 10}
           >
             {busy ? "AI 處理中…" : "AI 產生母題＋2個同義改寫"}
           </button>

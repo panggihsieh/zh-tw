@@ -63,6 +63,13 @@ test('四類出題、班級派送、選項打亂、試卷快照與期限',async 
  assert.equal((await call('/classes',{name:'測試班級',students:[{...students[0],avatar:'data:image/svg+xml;base64,AAAA'}]})).status,400);
  assert.equal((await call('/classes',change)).status,409);
  const categories=['課文理解（閱讀素養）','成語','修辭','改錯'];
+ const mixedPlan = [
+   {category:categories[0],difficulty:'易',count:2},
+   {category:categories[1],difficulty:'難',count:1},
+ ];
+ const mixedRequest = {...paper(),categories:categories.slice(0,2),count:3,difficulty:'易',questionPlan:mixedPlan};
+ assert.equal((await call('/generate',{...mixedRequest,count:4})).status,400);
+ assert.equal((await call('/generate',mixedRequest)).status,400);
  const created=await call('/generate',{...paper(),count:4,categories,difficulty:'中'});assert.equal(created.status,201);
  const draft=created.data;assert.deepEqual(draft.questions.map(q=>q.category),categories);
  const saved=await call(`/papers/${draft.id}/save`,draft);assert.equal(saved.data.questions.length,4);

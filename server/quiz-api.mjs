@@ -442,6 +442,15 @@ export function createQuizHandler({
           !["易", "中", "難"].includes(v.difficulty)
         )
           throw Error("請填妥國語課文、班級、年級、題型與1–10題");
+        const plan = v.questionPlan;
+        if (plan !== undefined && (
+          !Array.isArray(plan) || plan.length !== v.categories.length ||
+          new Set(plan.map(row => row?.category)).size !== plan.length ||
+          plan.some(row => !row || !v.categories.includes(row.category) ||
+            !["易", "中", "難"].includes(row.difficulty) ||
+            !Number.isInteger(row.count) || row.count < 1 || row.count > 10) ||
+          plan.reduce((total, row) => total + row.count, 0) !== v.count
+        )) throw Error("各題型的難度或題數設定不符");
         generating.add(user.uid);
         try {
           if (
@@ -469,8 +478,12 @@ export function createQuizHandler({
             quiz.questions.some(
               (q) =>
                 !v.categories.includes(q.category) ||
-                q.difficulty !== v.difficulty,
-            )
+                (!plan && q.difficulty !== v.difficulty),
+            ) ||
+            (plan && plan.some(row => {
+              const questions = quiz.questions.filter(q => q.category === row.category);
+              return questions.length !== row.count || questions.some(q => q.difficulty !== row.difficulty);
+            }))
           )
             throw Error("AI 題數、題型或難度不符合設定");
           const id = randomUUID(),
