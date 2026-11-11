@@ -1,0 +1,10 @@
+.structure-game { max-width:880px;margin:auto;line-height:1.9; }
+.structure-game h1 { display:flex;align-items:center;gap:12px; }
+.structure-game-character { margin:24px auto;text-align:center;font-size:clamp(110px,25vw,180px);font-family:'Noto Serif TC','Microsoft JhengHei',serif;line-height:1.6;background:var(--theme-surface,#fffff5);border:2px solid var(--theme-border,#badb97);border-radius:24px;max-width:300px; }
+.structure-game fieldset { border:1px solid var(--theme-border,#badb97);border-radius:16px;padding:16px; }
+.structure-game-choices { display:flex;gap:12px;flex-wrap:wrap; }
+.structure-game button { min-height:48px;padding:12px 18px;display:inline-flex;align-items:center;gap:8px; }
+.structure-game-feedback { margin-top:24px;padding:24px;background:var(--theme-surface,#fffff5);border:2px solid var(--theme-border,#badb97);border-radius:20px; }
+.structure-game-parts { font-size:36px;color:var(--theme-dark,#075d3e);white-space:pre-line;text-align:center; }
+.structure-game-parts.vertical { line-height:1.3; }
+.structure-game li { margin:12px 0; }

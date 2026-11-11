@@ -35,7 +35,7 @@ export default function SentenceCompetition({user,onBack,request=defaultRequest}
  const pending=answers.filter(a=>a.teacherGrade?.total==null&&a.aiGrade?.total==null).length;
  return <section className="sentence-workspace">
   <div className="sentence-toolbar"><button className="secondary" onClick={onBack}>返回遊戲專區</button><span className="sentence-pill">南一五、六年級 · 一字多詞</span></div>
-  <h1>一字多詞造句競賽</h1><p>聽字音、自己想詞、說一句話。先確認文字，再送出！</p>
+  <h1>語詞 AI 造句遊戲</h1><p>一字多詞造句競賽：聽字音、自己想詞、說一句話。先確認文字，再送出！</p>
   <p className="sentence-notice">語音辨識可能使用瀏覽器語音服務；本站不保存錄音。AI 校對及評分會使用你確認的文字，評的是文字中的字音用法，並非發音檢測。AI 建議分數由老師覆核。</p>
   {!event?<><button className="secondary" disabled={busy} onClick={()=>void run(refresh)}><RefreshCw size={18}/>重新載入競賽</button>{!events.length&&<p>目前沒有派送給你的競賽，請等待老師。</p>}{events.map(e=><article key={e.id} className="sentence-event"><h2>{e.title}</h2><p>{e.lessons.join('、')}</p><p>{e.questions.length}題 · 統一限時{e.minutes}分鐘</p><button className="primary" disabled={busy||e.status!=='running'||(e.endsAt||0)<=tick+offset} onClick={()=>void run(()=>join(e))}>{e.status==='published'?'等待老師開始':e.status==='closed'||(e.endsAt||0)<=tick+offset?'競賽已結束':'進入競賽'}</button><button className="secondary" disabled={busy} onClick={()=>void run(async()=>{const v=await sentenceRequest<{items:SentenceAnswer[]}>(`/events/${e.id}/answers?mine=1`);setAnswers(v.items);setEvent(e);setFinished(true);})}>查看我的已送出作答</button></article>)}</>:<>
    <div className="sentence-toolbar"><h2>{event.title}</h2><span className="sentence-timer" role="timer"><Timer size={22}/>{Math.floor(remaining/60)}:{String(remaining%60).padStart(2,'0')}</span><span>已送出 {answers.length}/{event.questions.length} 題</span></div>

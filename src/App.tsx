@@ -38,7 +38,6 @@ import {
   CloudUpload,
   Shuffle,
   Palette,
-  Mic,
   Trees,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
@@ -810,18 +809,7 @@ function App() {
               <Sparkles size={20} />
               生字動畫教室
             </button>
-            <button
-              className={page === "resources" ? "nav-item active" : "nav-item"}
-              onClick={() => {
-                setPage("resources");
-                setPlaying(false);
-              }}
-            >
-              <Grid2X2 size={20} />
-              查字小幫手
-            </button>
-            <a className="nav-item" href="#games"><Grid2X2 size={20}/>生詞遊戲專區</a>
-            <a className="nav-item" href="#games/sentence"><Mic size={20}/>造句競賽</a>
+            <a className="nav-item" href="#games"><Grid2X2 size={20}/>遊戲專區</a>
             <a className="nav-item" href="/?view=quiz">國語錯題本</a>
             <button
               className={page === "library" ? "nav-item active" : "nav-item"}
@@ -833,6 +821,16 @@ function App() {
             >
               <LibraryBig size={20} />
               我的生字收藏本<span className="nav-count">{saved.length}</span>
+            </button>
+            <button
+              className={page === "resources" ? "nav-item active" : "nav-item"}
+              onClick={() => {
+                setPage("resources");
+                setPlaying(false);
+              }}
+            >
+              <BookOpen size={20} />
+              教育部字辭典
             </button>
             </>)}
             {backendMode && (<>            <button
@@ -1950,7 +1948,7 @@ function App() {
                     <div className="eyebrow">
                       <BookOpen size={15} /> 和可靠的資料一起學
                     </div>
-                    <h1>查字小幫手</h1>
+                    <h1>教育部字辭典</h1>
                     <p>讀音、字義與筆順，遇到疑問就回到原始資料查一查。</p>
                   </div>
                 </div>
