@@ -14,6 +14,7 @@ import GameReview from "./GameReview";
 import SentenceCompetition from "./SentenceCompetition";
 import type { LessonContext } from "./curriculumLearning";
 import { useSiteTheme } from "./siteThemes";
+import { SITE_VERSION, SITE_UPDATED_AT } from "./siteVersion";
 import "./games.css";
 // New vocabulary games share this course/account entry; only playable games are listed.
 const games = [
@@ -69,6 +70,7 @@ export default function GameZone() {
         <a href="/" className="game-brand">
           <BookOpen />
           生字動畫收藏本
+          <span className="game-version">v{SITE_VERSION} · 最後修正 {SITE_UPDATED_AT}</span>
         </a>
         <a href="#games">生詞遊戲專區</a>
         <div className="game-account">
@@ -96,8 +98,8 @@ export default function GameZone() {
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>生詞遊戲專區</h1>
-            <p>選擇正在學的課文，練習生字，收藏自己的進步。</p>
+            <h1>{view==='sentences'?'一字多詞造句競賽':'生詞遊戲專區'}</h1>
+            <p>{view==='sentences'?'登入後參加老師派送的南一高年級限時造句競賽。':'選擇正在學的課文，練習生字，收藏自己的進步。'}</p>
             <button
               className="primary"
               disabled={!cloudConfigured || busy}

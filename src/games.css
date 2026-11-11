@@ -12,7 +12,9 @@
   border-bottom: 1px solid #dce4dd;
   flex-wrap: wrap;
 }
+.game-version { font-size:12px; font-weight:400; line-height:1.6; }
 .game-brand {
+  flex-wrap:wrap;
   font-weight: 750;
   display: flex;
   align-items: center;
