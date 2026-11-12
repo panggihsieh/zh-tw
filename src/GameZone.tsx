@@ -15,7 +15,7 @@ import SentenceCompetition from "./SentenceCompetition";
 import CharacterStructureGame from "./CharacterStructureGame";
 import type { LessonContext } from "./curriculumLearning";
 import { useSiteTheme } from "./siteThemes";
-import { SITE_VERSION, SITE_UPDATED_AT } from "./siteVersion";
+import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
 import "./games.css";
 // New vocabulary games share this course/account entry; only playable games are listed.
 const games = [
@@ -74,7 +74,7 @@ export default function GameZone() {
         <a href="/" className="game-brand">
           <BookOpen />
           生字動畫收藏本
-          <span className="game-version">v{SITE_VERSION} · 最後修正 {SITE_UPDATED_AT}</span>
+          <span className="game-version">v{SITE_VERSION} {SITE_VERSION_NOTE} · 最後修正 {SITE_UPDATED_AT}</span>
         </a>
         <a href="#games">遊戲專區</a>
         <div className="game-account">

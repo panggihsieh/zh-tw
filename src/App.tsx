@@ -62,7 +62,7 @@ import ReadAlong from "./ReadAlong";
 import StructureDiagram from "./StructureDiagram";
 import { useSiteTheme } from "./siteThemes";
 import BirdMascot, { BirdMascotIcon } from "./BirdMascot";
-import { SITE_VERSION, SITE_UPDATED_AT } from "./siteVersion";
+import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
 import "./siteThemes.css";
 import { useUserRole, useStructureReview, confirmedStructureLabel } from "./structureReview";
 import AssemblyParts from "./AssemblyParts";
@@ -899,7 +899,7 @@ function App() {
             <div className="header-secondary">
               {!backendMode && <div className="app-brand-group">
                 <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>
-                <p className="site-version" aria-label="網站版本資訊"><span>版本：v{SITE_VERSION}</span><span>最後修正：<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></span></p>
+                <p className="site-version" aria-label="網站版本資訊"><span>版本：v{SITE_VERSION} {SITE_VERSION_NOTE}</span><span>最後修正：<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></span></p>
               </div>}
             <div className="topbar-actions">
               {!backendMode && <SpeechTools
@@ -923,7 +923,7 @@ function App() {
             </div>
           </NavigationContainer>
           <main id="app-page-content">
-            {backendMode && <p className="site-version" aria-label="網站版本資訊">版本：v{SITE_VERSION}｜最後修正：<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>}
+            {backendMode && <p className="site-version" aria-label="網站版本資訊">版本：v{SITE_VERSION} {SITE_VERSION_NOTE}｜最後修正：<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>}
             {error && (
               <div className="alert error" role="alert">
                 <span>{error}</span>

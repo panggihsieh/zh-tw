@@ -250,6 +250,14 @@ export default function CurriculumDatabase({
                 <button
                   className="secondary"
                   key={i}
+                  aria-pressed={
+                    !custom &&
+                    selected.join("") ===
+                      Array.from(current.characters)
+                        .slice(i * 8, i * 8 + 8)
+                        .filter((c) => !allowedCharacters || allowedCharacters.has(c))
+                        .join("")
+                  }
                   onClick={() => {
                     setCustom(false);
                     setSelected(
