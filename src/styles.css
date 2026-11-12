@@ -2936,6 +2936,12 @@ dialog::backdrop {
   border: 1px solid #cbd7c1;
   border-radius: 10px;
 }
+:root .official-dictionary button.text-button {
+  color: #000;
+  font-weight: 800;
+  background: #e6f2d9;
+  border: 1px solid #000;
+}
 .input-panel .section-kicker {
   flex-wrap: wrap;
 }
