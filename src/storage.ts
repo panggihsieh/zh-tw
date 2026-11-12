@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 import type { Collection } from "./model";
-import { validatePhrase } from "./model";
+import { CURRICULUM_LIMIT, validatePhrase } from "./model";
 const db = () =>
   openDB("hanzi-notebook", 1, {
     upgrade(database) {
@@ -40,14 +40,15 @@ export async function mergeCloudCollections(items: Collection[]) {
 }
 export function parseBackup(text: string): Collection {
   const data = JSON.parse(text);
+  const limit = data?.curriculum ? CURRICULUM_LIMIT : 8;
   if (
     data?.schemaVersion !== 1 ||
     typeof data.id !== "string" ||
     typeof data.sourcePhrase !== "string" ||
-    validatePhrase(data.sourcePhrase) !== "" ||
+    validatePhrase(data.sourcePhrase, limit) !== "" ||
     !Array.isArray(data.cards) ||
     !data.cards.length ||
-    data.cards.length > 8 ||
+    data.cards.length > limit ||
     !Array.isArray(data.scenes) ||
     data.scenes.length !== 6 ||
     !["practice", "learned"].includes(data.reviewState) ||

@@ -1,5 +1,6 @@
 import { buildCollection, DICTIONARY, STROKES } from "./data";
 import type { CharacterMaster, Collection, VocabularyEntry } from "./model";
+import { CURRICULUM_LIMIT } from "./model";
 import { loadDictionary, type DictionaryData } from "./OfficialDictionary";
 export type LessonContext = NonNullable<Collection["curriculum"]>;
 const operators: Record<string, number> = {
@@ -158,10 +159,10 @@ export function buildCurriculumCollection(
   const chars = [...new Set(characters)];
   if (
     !chars.length ||
-    chars.length > 8 ||
+    chars.length > CURRICULUM_LIMIT ||
     chars.some((c) => !/^\p{Script=Han}$/u.test(c))
   )
-    throw Error("每次請選 1–8 個生字。");
+    throw Error(`每次請選 1–${CURRICULUM_LIMIT} 個生字。`);
   const value = buildCollection(
     chars.join(""),
     chars.map((_, i) => i),

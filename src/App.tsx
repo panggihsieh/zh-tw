@@ -647,6 +647,13 @@ function App() {
       setValidation("至少選一個想學的字。");
       return;
     }
+    if (!collection?.curriculum) {
+      const issue = validatePhrase(phrase);
+      if (issue) {
+        setValidation(issue);
+        return;
+      }
+    }
     setCollection(buildCollection(phrase, positions));
     setCardIndex(0);
     setScene(0);

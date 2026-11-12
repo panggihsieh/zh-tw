@@ -3,6 +3,7 @@ import type { LessonContext } from "./curriculumLearning";
 import BackendCard from "./BackendCard";
 import { loadCurriculumDefault, saveCurriculumDefault } from "./curriculumDefault";
 import { Bookmark } from "lucide-react";
+import { CURRICULUM_LIMIT } from "./model";
 import "./handwriting.css";
 interface Book {
   publisher: string;
@@ -46,6 +47,7 @@ export default function CurriculumDatabase({
       typeof draft?.lesson === "string" ? draft.lesson : "",
     ),
     [selected, setSelected] = useState<string[]>([]),
+    [custom, setCustom] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const [savingDefault, setSavingDefault] = useState(false);
@@ -112,6 +114,7 @@ export default function CurriculumDatabase({
   }, []);
   useEffect(() => {
     if (!current) return;
+    setCustom(false);
     const restored =
       draft?.publisher === publisher &&
       draft?.grade === grade &&
@@ -223,8 +226,8 @@ export default function CurriculumDatabase({
                   disabled={!!allowedCharacters&&!allowedCharacters.has(c)}
                   checked={selected.includes(c)}
                   onChange={(e) => {
-                    if (e.target.checked && selected.length >= 8) {
-                      setMessage("每次最多選 8 字；可分批學習本課全部生字。");
+                    if (e.target.checked && selected.length >= (custom ? CURRICULUM_LIMIT : 8)) {
+                      setMessage(custom ? `自訂選取最多 ${CURRICULUM_LIMIT} 字。` : "每批最多選 8 字；可改用「自訂選取」不限批次。");
                       return;
                     }
                     setSelected((prev) =>
@@ -248,6 +251,7 @@ export default function CurriculumDatabase({
                   className="secondary"
                   key={i}
                   onClick={() => {
+                    setCustom(false);
                     setSelected(
                       Array.from(current.characters).slice(i * 8, i * 8 + 8).filter(c=>!allowedCharacters||allowedCharacters.has(c)),
                     );
@@ -257,6 +261,37 @@ export default function CurriculumDatabase({
                   第 {i + 1} 批
                 </button>
               ),
+            )}
+            {!allowedCharacters && (
+            <button
+              className="secondary"
+              aria-pressed={custom}
+              onClick={() => {
+                setCustom(true);
+                setMessage("自訂選取：可勾選本課任意字數，不受每批 8 字限制。");
+              }}
+            >
+              自訂選取
+            </button>
+            )}
+            {custom && (
+              <>
+                <button
+                  className="secondary"
+                  onClick={() =>
+                    setSelected(
+                      Array.from(current.characters)
+                        .filter((c) => !allowedCharacters || allowedCharacters.has(c))
+                        .slice(0, CURRICULUM_LIMIT),
+                    )
+                  }
+                >
+                  全選本課
+                </button>
+                <button className="secondary" onClick={() => setSelected([])}>
+                  清除
+                </button>
+              </>
             )}
           </div>
           <button
@@ -286,7 +321,7 @@ export default function CurriculumDatabase({
             {busy ? "正在準備…" : actionLabel || "開始逐字學習"}
           </button>
           <p role="status">
-            {message || `已選 ${selected.length} 個字 · 每批最多 8 字`}
+            {message || `已選 ${selected.length} 個字 · ${custom ? "自訂選取不限 8 字" : "每批最多 8 字"}`}
           </p>
         </>
       )}

@@ -121,7 +121,7 @@ describe("三家出版社逐字學習：南一優先，其次康軒、翰林", (
       publishers.push(report);
       expect(report.failures).toEqual([]);
     });
-  it("每批最多八字，保留多音、不捏造詞句，不將字串當成課文語詞", () => {
+  it("分批八字、自訂選取可超過八字，保留多音、不捏造詞句，不將字串當成課文語詞", () => {
     const context: LessonContext = {
       publisher: "南一",
       grade: 1,
@@ -138,9 +138,18 @@ describe("三家出版社逐字學習：南一優先，其次康軒、翰林", (
     expect(value.cards).toHaveLength(2);
     expect(value.cards[0].reading).toContain("／");
     expect(parseBackup(JSON.stringify(value)).curriculum).toEqual(context);
+    const custom = buildCurriculumCollection(
+      Array.from("一二三四五六七八九"),
+      context,
+      resources,
+    );
+    expect(parseBackup(JSON.stringify(custom)).cards).toHaveLength(9);
+    expect(() =>
+      parseBackup(JSON.stringify({ ...custom, curriculum: undefined })),
+    ).toThrow();
     expect(() =>
       buildCurriculumCollection(
-        Array.from("一二三四五六七八九"),
+        Array.from({ length: 41 }, (_, i) => String.fromCodePoint(0x4e00 + i)),
         context,
         resources,
       ),

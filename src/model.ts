@@ -63,11 +63,13 @@ export const SCENES = [
   "語詞中的意思",
   "一字多詞",
 ];
-export function validatePhrase(input: string): string {
+/** 課本「自訂選取」一次可學的字數上限（目前各課最多 23 字）。 */
+export const CURRICULUM_LIMIT = 40;
+export function validatePhrase(input: string, max = 8): string {
   const text = input.trim();
   if (!text) return "先輸入一個想學的語詞吧。";
-  if (!/^[\p{Script=Han}]{1,8}$/u.test(text))
-    return "請輸入 1–8 個中文字，不包含空格、標點或英數字。";
+  if (!/^\p{Script=Han}+$/u.test(text) || Array.from(text).length > max)
+    return `請輸入 1–${max} 個中文字，不包含空格、標點或英數字。`;
   return "";
 }
 export function safeFilename(name: string) {

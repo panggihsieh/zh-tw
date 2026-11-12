@@ -1,5 +1,5 @@
 import type { Collection } from "./model";
-import { validatePhrase } from "./model";
+import { CURRICULUM_LIMIT, validatePhrase } from "./model";
 import { parseBackup } from "./storage";
 import type { SpeechSession } from "./speech";
 import { loadVoicePreference } from "./ttsPreferences";
@@ -70,11 +70,11 @@ export function loadPageSession(
     if (data?.version !== 1) return result;
     if (["learn", "library", "resources", "tts"].includes(data.page))
       result.page = data.page;
-    if (typeof data.input === "string" && data.input.length <= 16)
+    if (typeof data.input === "string" && data.input.length <= CURRICULUM_LIMIT * 2)
       result.input = data.input;
     if (
       typeof data.phrase === "string" &&
-      (data.phrase === "" || !validatePhrase(data.phrase))
+      (data.phrase === "" || !validatePhrase(data.phrase, CURRICULUM_LIMIT))
     )
       result.phrase = data.phrase;
     if (Array.isArray(data.positions))
