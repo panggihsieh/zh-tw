@@ -4,6 +4,7 @@ import BackendCard from "./BackendCard";
 import { loadCurriculumDefault, saveCurriculumDefault } from "./curriculumDefault";
 import { Bookmark } from "lucide-react";
 import { CURRICULUM_LIMIT } from "./model";
+import { orderCurriculumSelection } from "./curriculumSelection";
 import "./handwriting.css";
 interface Book {
   publisher: string;
@@ -48,7 +49,6 @@ export default function CurriculumDatabase({
       typeof draft?.lesson === "string" ? draft.lesson : "",
     ),
     [selected, setSelected] = useState<string[]>([]),
-    [custom, setCustom] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const [savingDefault, setSavingDefault] = useState(false);
@@ -116,7 +116,6 @@ export default function CurriculumDatabase({
   }, [student, defaultOnly]);
   useEffect(() => {
     if (!current) return;
-    setCustom(false);
     const restored =
       draft?.publisher === publisher &&
       draft?.grade === grade &&
@@ -130,9 +129,9 @@ export default function CurriculumDatabase({
                 Array.from(c).length === 1 &&
                 current.characters.includes(c),
             )
-            .slice(0, 8)
+            .slice(0, CURRICULUM_LIMIT)
         : null;
-    setSelected((restored || Array.from(current.characters)).filter((c:string)=>!allowedCharacters||allowedCharacters.has(c)).slice(0,8));
+    setSelected((restored || []).filter((c:string)=>!allowedCharacters||allowedCharacters.has(c)).slice(0,CURRICULUM_LIMIT));
   }, [current, allowedCharacters]);
   useEffect(() => {
     if (current && !defaultOnly)
@@ -228,8 +227,8 @@ export default function CurriculumDatabase({
                   disabled={!!allowedCharacters&&!allowedCharacters.has(c)}
                   checked={selected.includes(c)}
                   onChange={(e) => {
-                    if (e.target.checked && selected.length >= (custom ? CURRICULUM_LIMIT : 8)) {
-                      setMessage(custom ? `自訂選取最多 ${CURRICULUM_LIMIT} 字。` : "每批最多選 8 字；可改用「自訂選取」不限批次。");
+                    if (e.target.checked && selected.length >= CURRICULUM_LIMIT) {
+                      setMessage(`每次最多選 ${CURRICULUM_LIMIT} 字。`);
                       return;
                     }
                     setSelected((prev) =>
@@ -246,63 +245,31 @@ export default function CurriculumDatabase({
           </div>
           {allowedCharacters && Array.from(current.characters).some(c=>!allowedCharacters.has(c)) && <p>本課尚缺可檢核筆順：{Array.from(current.characters).filter(c=>!allowedCharacters.has(c)).join('、')}。暫不列入書寫作業，不以其他字形替代。</p>}
           <div className="curriculum-batches">
-            {Array.from(
-              { length: Math.ceil(Array.from(current.characters).length / 8) },
-              (_, i) => (
-                <button
-                  className="secondary"
-                  key={i}
-                  aria-pressed={
-                    !custom &&
-                    selected.join("") ===
-                      Array.from(current.characters)
-                        .slice(i * 8, i * 8 + 8)
-                        .filter((c) => !allowedCharacters || allowedCharacters.has(c))
-                        .join("")
-                  }
-                  onClick={() => {
-                    setCustom(false);
-                    setSelected(
-                      Array.from(current.characters).slice(i * 8, i * 8 + 8).filter(c=>!allowedCharacters||allowedCharacters.has(c)),
-                    );
-                    setMessage("");
-                  }}
-                >
-                  第 {i + 1} 批
-                </button>
-              ),
-            )}
-            {!allowedCharacters && (
             <button
               className="secondary"
-              aria-pressed={custom}
+              aria-pressed="true"
               onClick={() => {
-                setCustom(true);
-                setMessage("自訂選取：可勾選本課任意字數，不受每批 8 字限制。");
+                setMessage("自己選取：請直接勾選想學的生字。");
               }}
             >
-              自訂選取
+              自己選取
             </button>
-            )}
-            {custom && (
-              <>
-                <button
-                  className="secondary"
-                  onClick={() =>
-                    setSelected(
-                      Array.from(current.characters)
-                        .filter((c) => !allowedCharacters || allowedCharacters.has(c))
-                        .slice(0, CURRICULUM_LIMIT),
-                    )
-                  }
-                >
-                  全選本課
-                </button>
-                <button className="secondary" onClick={() => setSelected([])}>
-                  清除
-                </button>
-              </>
-            )}
+            <button className="secondary" onClick={() => { setSelected([]); setMessage("已取消全部選取。"); }}>
+              全部取消
+            </button>
+            <button
+              className="secondary"
+              onClick={() => {
+                setSelected(
+                  Array.from(current.characters)
+                    .filter((c) => !allowedCharacters || allowedCharacters.has(c))
+                    .slice(0, CURRICULUM_LIMIT),
+                );
+                setMessage("已選取本課全部生字。");
+              }}
+            >
+              全部選取
+            </button>
           </div>
           <button
             className="primary"
@@ -311,7 +278,7 @@ export default function CurriculumDatabase({
               setBusy(true);
               setMessage("準備字典與結構候選…");
               try {
-                await onLearn?.(selected, {
+                await onLearn?.(orderCurriculumSelection(current.characters, selected), {
                   publisher,
                   grade,
                   term,
@@ -331,7 +298,7 @@ export default function CurriculumDatabase({
             {busy ? "正在準備…" : actionLabel || "開始逐字學習"}
           </button>
           <p role="status">
-            {message || `已選 ${selected.length} 個字 · ${custom ? "自訂選取不限 8 字" : "每批最多 8 字"}`}
+            {message || `已選 ${selected.length} 個字 · 可自己勾選或全部選取`}
           </p>
           </>}
         </>

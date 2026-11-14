@@ -121,7 +121,7 @@ describe("三家出版社逐字學習：南一優先，其次康軒、翰林", (
       publishers.push(report);
       expect(report.failures).toEqual([]);
     });
-  it("分批八字、自訂選取可超過八字，保留多音、不捏造詞句，不將字串當成課文語詞", () => {
+  it("自行選取可超過八字，保留多音、不捏造詞句，不將字串當成課文語詞", () => {
     const context: LessonContext = {
       publisher: "南一",
       grade: 1,
