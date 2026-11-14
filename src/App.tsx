@@ -1394,28 +1394,13 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                             key={`${card.id}-${scene}`}
                             style={{ animation: reduced ? "none" : undefined }}
                           >
-                            <span className="overline">
-                              第 {scene + 1} 幕 / {collection.scenes[scene]}
-                            </span>
+                            {scene !== 0 && (
+                              <span className="overline">
+                                第 {scene + 1} 幕 / {collection.scenes[scene]}
+                              </span>
+                            )}
                             {scene === 0 && (
                               <>
-                                <h2>
-                                  你好，<em>{card.character}</em>。
-                                </h2>
-                                <p>
-                                  {collection.curriculum ? `這是本批第 ${card.position + 1} 個生字。` : `這是「${collection.sourcePhrase}」裡，第 ${card.position + 1} 個字。`}
-                                </p>
-                                <div className="definition">
-                                  <span>先認識這個語詞</span>
-                                  <p>
-                                    <ReadAlong
-                                      text={
-                                        (collection.curriculum ? "下方依目前生字提供教育部字典完整釋義，多音、多義請由老師配合課文核對。" : PHRASES[collection.sourcePhrase]?.explanation) ||
-                                        "下方提供教育部詞語注音與釋義，可搭配官方查詢一起學習。"
-                                      }
-                                    />
-                                  </p>
-                                </div>
                                 <OfficialDictionary
                                   phrase={collection.curriculum ? card.character : collection.sourcePhrase}
                                   speak={sayOfficialDefinition}

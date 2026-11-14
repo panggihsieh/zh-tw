@@ -47,7 +47,7 @@ export default function WritingAssignmentAdmin() {
     [lessonId, setLessonId] = useState(""),
     [characters, setCharacters] = useState<string[]>([]),
     [wholeLesson, setWholeLesson] = useState(true),
-    [title, setTitle] = useState("書寫小達人作業"),
+    [customTitle, setTitle] = useState<string | null>(null),
     [editingId, setEditingId] = useState("");
   const [selected, setSelected] = useState<Assignment | null>(null),
     [students, setStudents] = useState<StudentStatus[]>([]),
@@ -70,6 +70,11 @@ export default function WritingAssignmentAdmin() {
     ),
     lesson = lessons.find((item) => item.id === lessonId),
     selectedClass = classes.find((item) => item.id === classId);
+  const date = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Taipei" }).format(new Date());
+  const automaticTitle = lesson && selectedClass
+    ? [lesson.title, publisher, selectedClass.name, date].join(" · ")
+    : "書寫小達人作業";
+  const title = customTitle ?? automaticTitle;
   async function load() {
     const [classData, assignmentData] = await Promise.all([
       quizRequest<{ items: QuizClass[] }>("/classes"),
