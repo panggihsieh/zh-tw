@@ -19,3 +19,5 @@ export async function gameRequest(path: string, body?: unknown) {
 export async function submitGame(work: GameSubmission) {
   return gameRequest("/submissions", work);
 }
+export interface WritingAssignment {id:string;title:string;className:string;lesson:string;characters:string[];createdAt:string;submitted?:boolean}
+export async function writingAssignments(){return gameRequest("/assignments") as Promise<{items:WritingAssignment[]}>;}

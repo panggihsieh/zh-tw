@@ -1,4 +1,5 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { randomUUID } from "node:crypto";
 import { ADMIN_EMAIL, FIREBASE_PROJECT } from "./admin-auth.mjs";
 const keys = createRemoteJWKSet(
   new URL(
@@ -150,6 +151,21 @@ export function validateGrade(v) {
     gradedAt: new Date().toISOString(),
   };
 }
+export function validateAssignment(v) {
+  if (!v || typeof v.title !== "string" || !v.title.trim() || v.title.length > 100 ||
+      typeof v.classId !== "string" || !v.classId || typeof v.className !== "string" || !v.className.trim() || v.className.length > 80 ||
+      typeof v.lesson !== "string" || !v.lesson.trim() || v.lesson.length > 150 || !Array.isArray(v.characters) || v.characters.length < 1 || v.characters.length > 8 ||
+      new Set(v.characters).size !== v.characters.length || !v.characters.every(c => typeof c === "string" && /^\p{Script=Han}$/u.test(c)) ||
+      !Array.isArray(v.students) || !v.students.length || v.students.length > 100)
+    throw Error("請選擇班級、課文與 1–8 個生字");
+  const students = v.students.filter(student => student.active !== false).map(student => ({
+    seat: Number(student.seat), name: String(student.name || "").trim(), email: String(student.email || "").trim().toLowerCase(),
+    ...(student.avatar ? { avatar: student.avatar } : {}),
+  }));
+  if (!students.length || new Set(students.map(student => student.email)).size !== students.length || students.some(student => !Number.isInteger(student.seat) || student.seat < 1 || student.seat > 999 || !student.name || student.name.length > 80 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email) || student.avatar && (student.avatar.length > 12000 || !/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(student.avatar))))
+    throw Error("班級學生資料不完整");
+  return { title: v.title.trim(), classId: v.classId, className: v.className.trim(), lesson: v.lesson.trim(), characters: v.characters, students };
+}
 async function body(req) {
   let size = 0;
   const chunks = [];
@@ -189,11 +205,50 @@ export function createWritingHandler({
     try {
       const url = new URL(req.url, "http://localhost");
       const base = "/api/structure/writing";
+      const scan = async prefix => { let cursor, rows = [], pages = 0; do { const page = await store.list(prefix, cursor); rows.push(...await Promise.all(page.names.map(async name => (await store.get(name)).value))); cursor = page.nextCursor; if (++pages > 30) throw Error("資料量過大"); } while (cursor); return rows; };
+      if (url.pathname === `${base}/assignments` && req.method === "GET") {
+        const rows = (await scan("writing-assignments/")).filter(assignment => user.admin || assignment.students.some(student => student.email === user.email.toLowerCase()));
+        const mine = user.admin ? [] : await scan(`submissions/${encodeURIComponent(user.uid)}/`);
+        return send(200, { items: rows.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(assignment => ({ ...assignment, students: user.admin ? assignment.students : undefined, ...(!user.admin && mine.some(item => item.assignmentId === assignment.id) ? { submitted: true } : {}) })) });
+      }
+      if (url.pathname === `${base}/assignments` && req.method === "POST") {
+        if (!user.admin) return send(403, { error: "僅教師可以派發書寫作業" });
+        const value = validateAssignment(await body(req)), id = randomUUID(), createdAt = new Date().toISOString();
+        const assignment = { ...value, id, createdAt, createdBy: user.uid };
+        await store.create(`writing-assignments/${id}.json`, assignment);
+        return send(201, assignment);
+      }
+      const assignmentEditMatch = url.pathname.match(/^\/api\/structure\/writing\/assignments\/([0-9a-f-]{36})$/i);
+      if (assignmentEditMatch && req.method === "POST") {
+        if (!user.admin) return send(403, { error: "僅教師可以編修書寫作業" });
+        const key = `writing-assignments/${assignmentEditMatch[1]}.json`, current = await store.get(key);
+        if ((await scan("submissions/")).some(item => item.assignmentId === assignmentEditMatch[1]))
+          return send(409, { error: "已有學生繳交，為保留作品對應，不能再修改課文或生字" });
+        const value = validateAssignment(await body(req)), updated = { ...current.value, ...value, updatedAt: new Date().toISOString() };
+        await store.update(key, updated, current.generation);
+        return send(200, updated);
+      }
+      const assignmentMatch = url.pathname.match(/^\/api\/structure\/writing\/assignments\/([0-9a-f-]{36})\/status$/i);
+      if (assignmentMatch && req.method === "GET") {
+        if (!user.admin) return send(403, { error: "僅教師可以查看全班進度" });
+        const assignment = (await store.get(`writing-assignments/${assignmentMatch[1]}.json`)).value;
+        const submissions = (await scan("submissions/")).filter(item => item.assignmentId === assignment.id);
+        return send(200, { assignment, students: assignment.students.map(student => { const work = submissions.filter(item => item.email.toLowerCase() === student.email).sort((a,b) => b.submittedAt.localeCompare(a.submittedAt))[0]; return { ...student, status: work?.grade ? "graded" : work ? "submitted" : "pending", submission: work ? { uid: work.uid, id: work.id, image: work.thumbnail || work.image, submittedAt: work.submittedAt, grade: work.grade } : null }; }) });
+      }
       if (url.pathname === `${base}/submissions` && req.method === "POST") {
-        const value = validateSubmission(await body(req));
+        const input = await body(req), value = validateSubmission(input);
+        let assignment;
+        if (input.assignmentId) {
+          if (!/^[0-9a-f-]{36}$/i.test(input.assignmentId)) throw Error("作業代碼格式不符");
+          assignment = (await store.get(`writing-assignments/${input.assignmentId}.json`)).value;
+          if (!assignment.students.some(student => student.email === user.email.toLowerCase()) || assignment.lesson !== value.lesson || JSON.stringify(assignment.characters) !== JSON.stringify(value.characters))
+            return send(403, { error: "這份作品不符合老師指派的作業" });
+        }
         const name = `submissions/${encodeURIComponent(user.uid)}/${value.id}.json`;
         const record = {
           ...value,
+          ...(typeof input.thumbnail === "string" && input.thumbnail.length <= 50000 && /^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(input.thumbnail) ? { thumbnail: input.thumbnail } : {}),
+          ...(assignment ? { assignmentId: assignment.id } : {}),
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,

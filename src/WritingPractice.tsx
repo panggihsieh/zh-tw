@@ -8,6 +8,7 @@ import {
   tracePath,
   snapshot,
   workComplete,
+  makeThumbnail,
   type GameDraft,
   type Point,
 } from "./writingGame";
@@ -446,6 +447,7 @@ export default function WritingPractice({
                 await submit({
                   ...draft,
                   image,
+                  thumbnail: await makeThumbnail(image),
                   sourceRevision: "26f12d65063cc97d2773b7777232277bfca5f563",
                 });
                 setSent(true);
@@ -458,7 +460,7 @@ export default function WritingPractice({
               }
             }}
           >
-            {busy ? "繳交中…" : sent ? "已成功繳交" : "繳交給老師"}
+            {busy ? "繳交中…" : sent ? "已成功繳交" : "產生截圖並繳交"}
           </button>
         </div>
         {!complete && (

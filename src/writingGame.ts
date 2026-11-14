@@ -15,13 +15,16 @@ export interface GameDraft {
 }
 export interface GameSubmission extends GameDraft {
   image: string;
+  thumbnail?: string;
   sourceRevision: string;
   uid?: string;
   email?: string;
   displayName?: string;
   submittedAt?: string;
   grade?: { score: number; comment: string; gradedAt: string };
+  assignmentId?: string;
 }
+export function makeThumbnail(image:string){return new Promise<string>((resolve,reject)=>{const source=new Image();source.onload=()=>{const canvas=document.createElement('canvas');canvas.width=240;canvas.height=Math.max(1,Math.round(source.height/source.width*240));const context=canvas.getContext('2d');if(!context)return reject(Error('無法建立作品縮圖'));context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(source,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.72));};source.onerror=()=>reject(Error('無法建立作品縮圖'));source.src=image;});}
 export function length(points: Point[]) {
   return points
     .slice(1)

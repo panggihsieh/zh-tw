@@ -1,0 +1,146 @@
+.writing-assignment-admin {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.assignment-notice {
+  padding: 16px 18px;
+  border-left: 5px solid #16844d;
+  border-radius: 10px;
+  background: #eef9df;
+  line-height: 1.7;
+}
+.assignment-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.assignment-characters {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.assignment-characters label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border: 1px solid #b9d9a2;
+  border-radius: 10px;
+}
+.assignment-characters input {
+  width: auto;
+}
+.assignment-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+.assignment-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.assignment-list {
+  display: flex;
+  gap: 10px;
+  overflow: auto;
+  padding: 4px 0 14px;
+}
+.assignment-list article {
+  display: grid;
+  gap: 8px;
+  min-width: 250px;
+  padding: 8px;
+  border: 1px solid #cbdcc0;
+  border-radius: 12px;
+  background: #fff;
+}
+.assignment-list article.active {
+  outline: 3px solid #16844d;
+}
+.assignment-list article > button:first-child {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  border: 0;
+  background: transparent;
+}
+.assignment-list span {
+  font-size: 13px;
+  color: #53655c;
+}
+.assignment-status-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+.assignment-student {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  text-align: left;
+  border: 2px solid #dde7d7;
+  border-radius: 14px;
+  background: #fff;
+  color: #173d35;
+}
+.assignment-student.submitted {
+  border-color: #e0a228;
+}
+.assignment-student.graded {
+  border-color: #16844d;
+}
+.assignment-student:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.assignment-student img,
+.assignment-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  border-radius: 9px;
+  background: #f4f7ef;
+}
+.assignment-placeholder {
+  display: grid;
+  place-items: center;
+}
+.assignment-student > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+.writing-grade-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 24px;
+  margin-top: 18px;
+}
+.writing-grade-layout > img {
+  width: 100%;
+  border: 1px solid #ccd8c5;
+  border-radius: 12px;
+}
+.writing-grade-layout form {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .assignment-status-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .assignment-form,
+  .writing-grade-layout {
+    grid-template-columns: 1fr;
+  }
+  .assignment-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -107,10 +107,11 @@ const GameZone = lazy(() => import('./GameZone'));
 const QuizStudent = lazy(() => import("./QuizStudent"));
 const QuizTeacher = lazy(() => import("./QuizTeacher"));
 const GameReview = lazy(() => import('./GameReview'));
+const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
+type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions";
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
   "structure-assignment": "生字結構遊戲指派",
@@ -120,6 +121,7 @@ const backendTitles: Record<BackendSection, string> = {
   quiz: "資料庫管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
+  writingAssignments: '書寫作業管理',
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
   curriculum: "三家出版社生字資料庫",
   handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
@@ -815,6 +817,7 @@ function App() {
             {backendMode && <button className={backendSection==="structure-assignment"?"nav-item active":"nav-item"} onClick={()=>openBackendSection("structure-assignment")}>生字結構遊戲指派</button>}
             {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>資料庫管理</button>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
+            {backendMode && <button className={backendSection==='writingAssignments'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('writingAssignments')}>書寫作業管理</button>}
             {backendMode && <button className={backendSection==='competition'?'nav-item active':'nav-item'} aria-current={backendSection==='competition'?'page':undefined} onClick={()=>openBackendSection('competition')}>Kahoot 競賽開課</button>}
             {backendMode && <button className={backendSection==='versions'?'nav-item active':'nav-item'} aria-current={backendSection==='versions'?'page':undefined} onClick={()=>openBackendSection('versions')}><FileText size={20}/>提交版本紀錄</button>}
             {!backendMode && (<>
@@ -2019,6 +2022,7 @@ function App() {
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === 'quiz' && <QuizTeacher/>}
                   {backendSection === 'gameReview' && <GameReview teacher/>}
+                  {backendSection === 'writingAssignments' && <WritingAssignmentAdmin/>}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}

@@ -18,6 +18,7 @@ import CompetitionPlay from "./CompetitionPlay";
 import type { LessonContext } from "./curriculumLearning";
 import { useSiteTheme } from "./siteThemes";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
+import {submitGame,writingAssignments,type WritingAssignment} from './gameApi';
 import "./games.css";
 // New vocabulary games share this course/account entry; only playable games are listed.
 const games = [
@@ -40,10 +41,12 @@ export default function GameZone() {
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
+    [assignments,setAssignments]=useState<WritingAssignment[]>([]),
     [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "practice" | "sentences" | "structure" | "competition">(gameView),
     [course, setCourse] = useState<{
       characters: string[];
       context: LessonContext;
+      assignmentId?: string;
     } | null>(null);
   useEffect(() => {
     if (!cloudConfigured) {
@@ -56,6 +59,7 @@ export default function GameZone() {
       setReady(true);
       setCourse(null);
       setView(gameView());
+      if(u)void writingAssignments().then(value=>setAssignments(value.items.filter(item=>!item.submitted))).catch(error=>setMessage(error.message));else setAssignments([]);
     });
   }, []);
   useEffect(()=>{const changed=()=>setView(gameView());window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed);},[]);
@@ -69,6 +73,11 @@ export default function GameZone() {
     } finally {
       setBusy(false);
     }
+  }
+  function startWritingAssignment(assignment:WritingAssignment){
+    const [publisherPart,title]=assignment.lesson.split(' · '),match=publisherPart.match(/^(\S+) (\d)年級([上下])$/);
+    setCourse({characters:assignment.characters,context:{publisher:match?.[1]||'',grade:Number(match?.[2]||0),term:match?.[3]||'',title:title||assignment.lesson} as LessonContext,assignmentId:assignment.id});
+    setView('writing');
   }
   return (
     <div className="game-zone">
@@ -129,6 +138,7 @@ export default function GameZone() {
             characters={course.characters}
             lesson={`${course.context.publisher} ${course.context.grade}年級${course.context.term} · ${course.context.title}`}
             onBack={() => setView("hub")}
+            submit={work=>submitGame({...work,...(course.assignmentId?{assignmentId:course.assignmentId}:{})})}
           />
         ) : (
           <>
@@ -150,10 +160,11 @@ export default function GameZone() {
               <GameReview key={user.uid} />
             ) : (
               <>
+                {!!assignments.length&&<section className="game-assignments"><div><span className="eyebrow">老師指派 · 個人作業</span><h2>待完成的書寫作業</h2></div>{assignments.map(assignment=><article key={assignment.id}><div><strong>{assignment.title}</strong><p>{assignment.className} · {assignment.lesson}</p><span>{assignment.characters.join('　')}</span></div><button className="primary" onClick={()=>startWritingAssignment(assignment)}>開始書寫 →</button></article>)}</section>}
                 <section className="game-course">
                   <div className="game-row">
                     <div>
-                      <span className="eyebrow">目前課文</span>
+                      <span className="eyebrow">個人自由練習</span>
                       <h2>
                         {course
                           ? `${course.context.publisher} ${course.context.grade}${course.context.term} · ${course.context.title}`
@@ -196,20 +207,21 @@ export default function GameZone() {
                       <div className="game-icon">
                         <g.icon size={34} />
                       </div>
-                      <span className="game-pill">筆順 × 書寫</span>
+                      <span className="game-pill">個人作業 × 書寫</span>
                       <h2>{g.title}</h2>
                       <p>{g.description}</p>
                       <button
                         className="primary"
-                        onClick={() => setView(course ? "writing" : "choose")}
+                        disabled={!assignments.length}
+                        onClick={() => assignments[0]&&startWritingAssignment(assignments[0])}
                       >
-                        {course ? "開始練習 →" : "先選課文 →"}
+                        {assignments.length ? "開始個人作業 →" : "目前沒有待完成作業"}
                       </button>
                     </article>
                   ))}
                 </div>
                 <p className="game-future">
-                  未來新增的生詞遊戲會集中在這裡，沿用所選課文。
+                  老師指派的書寫內容會顯示在個人作業；自行選課文則屬自由練習，不會列入班級作業進度。
                 </p>
               </>
             )}
