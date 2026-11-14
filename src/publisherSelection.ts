@@ -15,6 +15,11 @@ export interface PublisherResource {
   draftId?: string;
   rawHash?: string;
 }
+export function academicYears(items: PublisherResource[]) {
+  return [...new Set(items.map((item) => item.year))].sort((a, b) =>
+    b.localeCompare(a),
+  );
+}
 export const resourceBookKey = (
   r: Pick<PublisherResource, "grade" | "term" | "year">,
 ) => `${r.grade}|${r.term}|${r.year}`;

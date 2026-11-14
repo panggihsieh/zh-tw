@@ -16,6 +16,32 @@ export const PUBLISHERS = [
     login: "https://edisc3.hle.com.tw/",
   },
 ];
+export const FIXED_REFERENCE_SOURCES = [
+  {
+    id: "moe-concised",
+    name: "教育部國語辭典簡編本",
+    category: "教育部國語教學資源",
+    url: "https://dict.concised.moe.edu.tw/",
+  },
+  {
+    id: "moe-stroke-order",
+    name: "教育部國字標準字體筆順學習網",
+    category: "教育部國語教學資源",
+    url: "https://stroke-order.learningweb.moe.edu.tw/",
+  },
+  {
+    id: "naer-word-level",
+    name: "國教院詞語分級標準檢索系統",
+    category: "國教院國語教學資源",
+    url: "https://coct.naer.edu.tw/word.jsp",
+  },
+  {
+    id: "cbeta",
+    name: "CBETA 電子佛典集成",
+    category: "重要佛教經典",
+    url: "https://cbeta.org/",
+  },
+];
 export const sha = (s) => createHash("sha256").update(s).digest("hex");
 export const normalize = (s) =>
   s.normalize("NFC").replace(/\r\n?/g, "\n").trim();
@@ -254,6 +280,46 @@ export function makeResourceHandlers({
     }
     if (path === "/resources/discoveries" && method === "GET")
       return { items: await scan("publisher-discovery/") };
+    if (path === "/references" && method === "GET") {
+      const records = await scan("reference-source-status/");
+      return {
+        items: FIXED_REFERENCE_SOURCES.map((source) => ({
+          ...source,
+          ...(records.find((record) => record.id === source.id) || {}),
+        })),
+      };
+    }
+    if (path === "/references/check" && method === "POST") {
+      const source = FIXED_REFERENCE_SOURCES.find((item) => item.id === input.id);
+      if (!source) throw Error("固定資料來源不符");
+      const response = await fetchLanding(source.url, {
+        redirect: "follow",
+        signal: AbortSignal.timeout(15000),
+      });
+      if (!response.ok) throw Error(`${source.name} HTTP ${response.status}`);
+      const body = (await response.text()).slice(0, 500000),
+        contentHash = sha(normalize(body)),
+        name = `reference-source-status/${source.id}.json`;
+      let previous;
+      try {
+        previous = await store.get(name);
+      } catch (error) {
+        if (error.status !== 404) throw error;
+      }
+      const record = {
+        ...source,
+        contentHash,
+        checkedAt: new Date().toISOString(),
+        status: previous?.value.contentHash === contentHash ? "unchanged" : "updated",
+        message:
+          previous?.value.contentHash === contentHash
+            ? "來源內容指紋相同，已跳過更新"
+            : "來源入口有新增或異動，待管理者核對版本與授權後更新資料",
+      };
+      if (previous) await store.update(name, record, previous.generation);
+      else await store.create(name, record);
+      return record;
+    }
     const match = path.match(/^\/resources\/([0-9a-f]{64})\/(update|draft)$/);
     if (!match || method !== "POST") return null;
     const id = match[1],

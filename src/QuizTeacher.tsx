@@ -147,7 +147,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           重新整理題庫
         </button>
       </div>}
-      {!reviewId && <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>教材資料庫 SQL</button>}
+      {!reviewId && <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>}
       {tab === "sql" && <CurriculumSql />}
       {tab !== "sql" && <p role="status">{message}</p>}
       {tab === "generate" && (

@@ -124,3 +124,35 @@ test("跨學期更新保留基準；題卷相同不宣稱課文沒變；下載�
   assert.match(failedDraft.lastDraftError, /AI 修改/);
   assert.ok(!failedDraft.draftId);
 });
+test("固定來源內容相同時跳過，異動時只標示待核對", async () => {
+  const db = new Map(),
+    store = {
+      async get(name) {
+        if (!db.has(name)) throw Object.assign(Error(), { status: 404 });
+        return structuredClone(db.get(name));
+      },
+      async create(name, value) {
+        db.set(name, { value: structuredClone(value), generation: 1 });
+      },
+      async update(name, value, generation) {
+        assert.equal(db.get(name).generation, generation);
+        db.set(name, { value: structuredClone(value), generation: generation + 1 });
+      },
+    };
+  let content = "版本一";
+  const handler = makeResourceHandlers({
+    store,
+    scan: async (prefix) =>
+      [...db].filter(([key]) => key.startsWith(prefix)).map(([, row]) => row.value),
+    fetchLanding: async () => ({ ok: true, text: async () => content }),
+  });
+  const first = await handler("/references/check", "POST", { id: "cbeta" });
+  assert.equal(first.status, "updated");
+  const same = await handler("/references/check", "POST", { id: "cbeta" });
+  assert.equal(same.status, "unchanged");
+  assert.match(same.message, /跳過/);
+  content = "版本二";
+  const changed = await handler("/references/check", "POST", { id: "cbeta" });
+  assert.equal(changed.status, "updated");
+  assert.match(changed.message, /待管理者核對/);
+});

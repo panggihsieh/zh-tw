@@ -6,6 +6,7 @@ import {
   canCreateDraft,
   resourceDraftStatus,
   draftReviewUrl,
+  academicYears,
   type PublisherResource as Resource,
 } from "./publisherSelection";
 interface Discovery {
@@ -14,15 +15,29 @@ interface Discovery {
   message: string;
   checkedAt: string;
 }
+interface ReferenceSource {
+  id: string;
+  name: string;
+  category: string;
+  url: string;
+  status?: "updated" | "unchanged";
+  message?: string;
+  checkedAt?: string;
+}
 export default function PublisherSync({
   request = quizRequest,
 }: { request?: typeof quizRequest } = {}) {
   const [items, setItems] = useState<Resource[]>([]),
     [reports, setReports] = useState<Discovery[]>([]),
+    [references, setReferences] = useState<ReferenceSource[]>([]),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [bookKey, setBookKey] = useState(""),
-    [lessonId, setLessonId] = useState("");
+    [lessonId, setLessonId] = useState(""),
+    [academicYear, setAcademicYear] = useState("");
+  const years = academicYears(items);
+  const selectedYear = years.includes(academicYear) ? academicYear : years[0] || "";
+  const yearItems = items.filter((item) => !selectedYear || item.year === selectedYear);
   const books = draftBooks(items);
   const selectedBookKey = books.some((b) => b.key === bookKey)
     ? bookKey
@@ -39,12 +54,14 @@ export default function PublisherSync({
   const draftTargets = selectedResources.filter(canCreateDraft);
   const stop = useRef(false);
   async function load() {
-    const [a, b] = await Promise.all([
+    const [a, b, c] = await Promise.all([
       request<{ items: Resource[] }>("/resources"),
       request<{ items: Discovery[] }>("/resources/discoveries"),
+      request<{ items: ReferenceSource[] }>("/references"),
     ]);
     setItems(a.items);
     setReports(b.items);
+    setReferences(c.items);
   }
   useEffect(() => {
     void load().catch((e) => setMessage(e.message));
@@ -60,9 +77,11 @@ export default function PublisherSync({
         ? ["南一", "康軒", "翰林"]
         : kind === "draft"
           ? draftTargets
-          : items;
+          : yearItems;
     let ok = 0,
-      failed = 0;
+      failed = 0,
+      skipped = 0,
+      updated = 0;
     for (let i = 0; i < targets.length && !stop.current; i++) {
       const x = targets[i];
       setMessage(
@@ -80,6 +99,8 @@ export default function PublisherSync({
         );
         if (result.status === "needs_review")
           throw Error(result.lastError || "教材待核對");
+        if (kind === "update" && result.status === "unchanged") skipped++;
+        if (kind === "update" && result.status === "updated") updated++;
         ok++;
       } catch (e) {
         failed++;
@@ -89,7 +110,7 @@ export default function PublisherSync({
     }
     await load().catch(() => {});
     setMessage(
-      `本批${stop.current ? "已停止" : "已完成"}：處理成功 ${ok}，失敗 ${failed}。下載／辨識失敗不代表課文未變。`,
+      `本批${stop.current ? "已停止" : "已完成"}：處理成功 ${ok}，內容異動 ${updated}，重複跳過 ${skipped}，失敗 ${failed}。下載／辨識失敗不代表課文未變。`,
     );
     setBusy(false);
   }
@@ -111,6 +132,21 @@ export default function PublisherSync({
         盤點與母題製作使用已儲存的模型，會傳送官方頁面／題目資料並可能計費。登入限定資源須先在官方網站確認下載入口；本站不接收出版社帳密或瀏覽器權杖。
       </p>
       <div className="quiz-actions">
+        <label>
+          更新學年度
+          <select
+            value={selectedYear}
+            disabled={busy || !years.length}
+            onChange={(event) => setAcademicYear(event.target.value)}
+          >
+            {!years.length && <option value="">尚無已登記教材</option>}
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year.replace("_1", " 學年度上學期").replace("_2", " 學年度下學期")}
+              </option>
+            ))}
+          </select>
+        </label>
         <button
           className="primary"
           disabled={busy}
@@ -130,7 +166,7 @@ export default function PublisherSync({
           disabled={busy || !items.length}
           onClick={() => void batch("update")}
         >
-          下載／比對已登記教材（{items.length}）
+          下載／比對所選學年度教材（{yearItems.length}）
         </button>
         <button
           className="secondary"
@@ -151,6 +187,55 @@ export default function PublisherSync({
           </button>
         )}
       </div>
+      <section className="publisher-draft-selection" aria-label="固定資料來源狀態">
+        <h2>固定國語與經典資料來源</h2>
+        <p>
+          只檢查官方入口內容指紋；相同即跳過。入口異動不會直接覆蓋詞庫或經典，仍須核對下載版本與授權。
+        </p>
+        <button
+          className="secondary"
+          disabled={busy || !references.length}
+          onClick={() =>
+            void (async () => {
+              setBusy(true);
+              let unchanged = 0,
+                changed = 0,
+                failed = 0;
+              for (const source of references) {
+                setMessage(`檢查固定來源：${source.name}`);
+                try {
+                  const result = await request<ReferenceSource>("/references/check", {
+                    id: source.id,
+                  });
+                  result.status === "unchanged" ? unchanged++ : changed++;
+                } catch {
+                  failed++;
+                }
+              }
+              await load().catch(() => {});
+              setMessage(
+                `固定來源檢查完成：入口異動 ${changed}，重複跳過 ${unchanged}，失敗 ${failed}。`,
+              );
+              setBusy(false);
+            })()
+          }
+        >
+          檢查固定資料來源（{references.length}）
+        </button>
+        <div className="publisher-selected-resources">
+          {references.map((source) => (
+            <article key={source.id}>
+              <strong>{source.name}</strong>
+              <p>
+                {source.category} · {source.message || "尚未檢查"}
+              </p>
+              <a href={source.url} target="_blank" rel="noreferrer">
+                官方來源 ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
       <label>
         登記已確認的官方來源清單（JSON）
         <input

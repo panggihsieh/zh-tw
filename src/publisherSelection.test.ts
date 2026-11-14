@@ -6,6 +6,7 @@ import {
   canCreateDraft,
   draftReviewUrl,
   reviewPaperId,
+  academicYears,
   type PublisherResource,
 } from "./publisherSelection";
 const resource = (
@@ -93,5 +94,14 @@ describe("指定冊別與課別製作母題", () => {
   it("沒有來源時保持空清單，不虛構課次", () => {
     expect(draftBooks([])).toEqual([]);
     expect(bookResources([], "5|上|115_1")).toEqual([]);
+  });
+  it("學年度由新到舊且不重複", () => {
+    expect(
+      academicYears([
+        resource("1", 5, "上", "115_1"),
+        resource("2", 6, "上", "115_1"),
+        resource("3", 5, "下", "114_2"),
+      ]),
+    ).toEqual(["115_1", "114_2"]);
   });
 });

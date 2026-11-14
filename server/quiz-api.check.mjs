@@ -41,10 +41,13 @@ const paper = () => ({
 });
 test('四類出題、班級派送、選項打亂、試卷快照與期限',async t=>{
  const store=memoryStore();
- const handler=createQuizHandler({store,origins:['https://test'],authenticate:async req=>{const uid=req.headers['x-test-user'];if(!uid)throw Error();return {uid,email:uid+'@example.com',admin:uid==='teacher'};},generate:async v=>({questions:v.categories.map((category,i)=>({...question(),category,stem:'測試題'+i,variants:['換句話問'+i,'再問一次'+i]}))})});
+ const handler=createQuizHandler({store,origins:['https://test'],authenticate:async req=>{const uid=req.headers['x-test-user'];if(!uid)throw Error();return {uid,email:uid+'@example.com',admin:uid==='teacher'};},planCurriculumQuery:async question=>({entity:'character',publisher:'南一',grade:5,keyword:question,explanation:'查詢生字'}),generate:async v=>({questions:v.categories.map((category,i)=>({...question(),category,stem:'測試題'+i,variants:['換句話問'+i,'再問一次'+i]}))})});
  const server=http.createServer(handler).listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
  async function call(path,v,user='teacher'){const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/quiz${path}`,{method:v?'POST':'GET',headers:{Origin:'https://test','X-Notebook-Request':'quiz','x-test-user':user,'Content-Type':'application/json'},body:v?JSON.stringify(v):undefined});return {status:r.status,data:await r.json()};}
  assert.equal((await call('/classes',null,'student')).status,403);
+ assert.equal((await call('/database-query-plan',{question:'第七課'},'student')).status,403);
+ const queryPlan=await call('/database-query-plan',{question:'第七課'});
+ assert.equal(queryPlan.status,200);assert.deepEqual(queryPlan.data,{entity:'character',keyword:'第七課',publisher:'南一',grade:5,explanation:'查詢生字'});
  const classroom=await call('/classes',{name:'五年甲班',roster:['student@example.com']});assert.equal(classroom.status,201);
  assert.equal((await call('/classes')).data.items[0].name,'五年甲班');
  const students = [
