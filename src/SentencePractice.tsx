@@ -84,6 +84,7 @@ export default function SentencePractice({
   const [original, setOriginal] = useState("");
   const [sentence, setSentence] = useState("");
   const [suggestion, setSuggestion] = useState("");
+  const [fontSize, setFontSize] = useState(20);
   const [grade, setGrade] = useState<SentencePracticeGrade | null>(null);
   const [listening, setListening] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -126,7 +127,7 @@ export default function SentencePractice({
   }
 
   function startListening() {
-    if (!SpeechRecognition || !character || listening || busy) return;
+    if (!SpeechRecognition || !character || listening || busy || grade) return;
     const current = new SpeechRecognition();
     recognition.current = current;
     finalTranscript.current = "";
@@ -201,8 +202,15 @@ export default function SentencePractice({
   }
 
   return (
-    <section className="sentence-practice sentence-workspace">
+    <section className="sentence-practice sentence-workspace" style={{ fontSize }}>
+      <div className="practice-font-controls" role="group" aria-label="本頁字體大小">
       <button className="secondary" onClick={onBack}>{initialCard ? "返回開課管理" : "返回遊戲專區"}</button>
+        <div className="practice-font-buttons">
+          <button type="button" className="secondary" aria-label="縮小本頁字體" disabled={fontSize <= 18} onClick={() => setFontSize(size => size - 2)}>−</button>
+          <output aria-live="polite">字體 {fontSize}</output>
+          <button type="button" className="secondary" aria-label="放大本頁字體" disabled={fontSize >= 32} onClick={() => setFontSize(size => size + 2)}>＋</button>
+        </div>
+      </div>
       <p className="eyebrow">語詞 × 指定字 × 語音造句</p>
       <h1>一字多詞 AI 造句</h1>
       <p className="sentence-notice">
@@ -253,16 +261,16 @@ export default function SentencePractice({
         <span className="practice-step-number">2</span>
         <div>
           <h2 id="practice-speech-title">說出一句話</h2>
-          <p id="practice-voice-hint" className="practice-voice-hint">請用口說造句。說錯了，點「清除重說」。</p>
+          <p id="practice-voice-hint" className="practice-voice-hint">請用口說造句。{grade ? '評量完成後無法清除重說。' : '說錯了，點「清除重說」。'}</p>
           <p>{character ? <>句子中要使用「<strong>{character}</strong>」。</> : "請先選擇要練習的字。"}</p>
           <div className="sentence-toolbar practice-speech-actions">
-            <button className="primary" disabled={!SpeechRecognition || !character || listening || busy} onClick={startListening}>
+            <button className="primary" disabled={!SpeechRecognition || !character || listening || busy || Boolean(grade)} onClick={startListening}>
               <Mic size={20} />開始語音串流
             </button>
             <button className="secondary" disabled={!listening} onClick={() => recognition.current?.stop()}>
-              <Square size={18} />停止並保留文字
+              <Square size={18} />結束造句送出
             </button>
-            <button className="secondary" disabled={busy || (!sentence && !original)} onClick={clearSentence}>
+            <button className="secondary" disabled={busy || Boolean(grade) || (!sentence && !original)} onClick={clearSentence}>
               <RotateCcw size={18} />清除重說
             </button>
           </div>
@@ -272,7 +280,7 @@ export default function SentencePractice({
             {["，", "。", "、", "？", "！", "：", "；", "「", "」"].map((symbol) => (
               <button type="button" className="secondary" key={symbol}
                 aria-label={`插入 ${symbol}`}
-                disabled={busy}
+                disabled={busy || Boolean(grade)}
                 onClick={() => {
                   if (listening) {
                     if (sentence.length >= 300) return;
@@ -307,7 +315,7 @@ export default function SentencePractice({
           <div className="practice-correction-actions">
             <button
               className="secondary"
-              disabled={busy || listening || !character || !sentence.trim()}
+              disabled={busy || listening || Boolean(grade) || !character || !sentence.trim()}
               onClick={() => void run(async () => {
                 const result = await request<{ suggestion: string }>("/practice/correct", {
                   phrase,
@@ -353,8 +361,9 @@ export default function SentencePractice({
             disabled={busy || listening || !character || !sentence.includes(character) || Array.from(sentence.replace(/[^\p{Script=Han}]/gu, "")).length < 5}
             onClick={() => void run(async () => {
               const result = await request<{ grade: SentencePracticeGrade }>("/practice/grade", { phrase, character, sentence });
+              setSuggestion("");
               setGrade(result.grade);
-              setMessage("評量完成，可以依建議修改後再評一次。");
+              setMessage("評量完成，請查看等第與建議。");
             })}
           >
             <Sparkles size={18} />評量這個句子

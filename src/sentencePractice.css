@@ -29,3 +29,15 @@
 .practice-comparison ins { text-decoration: none; }
 
 .practice-correction-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+
+.practice-font-controls, .practice-font-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.practice-font-controls { justify-content: space-between; }
+.practice-font-buttons button { min-width: 44px; min-height: 44px; }
+.sentence-practice.sentence-workspace :is(p, label, button, input, textarea, legend) {
+  font-size: 1em;
+}
