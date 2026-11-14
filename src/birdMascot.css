@@ -37,3 +37,6 @@
   .adventure-welcome .adventure-stops { grid-column: 1 / -1; }
   .bird-mascot-guide { grid-row: 2; }
 }
+
+.adventure-tools { grid-column: 1 / -1; justify-self: end; max-width: 100%; min-width: 0; }
+.adventure-tools .student-page-tools { margin-bottom: 0; }

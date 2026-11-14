@@ -779,6 +779,28 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
         c.cards.some((c) => c.character.includes(search))) &&
       (filter === "all" || c.reviewState === filter),
   );
+  const studentPageTools = (
+    <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
+              <SpeechTools
+                label="朗讀本頁"
+                showVoice={false}
+                expanded
+                read={() =>
+                  document.getElementById("app-page-content")?.innerText ||
+                  "目前沒有可朗讀的內容。"
+                }
+              />
+              <button
+                className="quiet"
+                aria-label="學習設定"
+                onClick={() => setModal("settings")}
+              >
+                <Settings2 size={17} />
+                <span>學習設定</span>
+              </button>
+            </div>
+  );
+
   return (
     <SpeechContext.Provider
       value={{
@@ -905,25 +927,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           </NavigationContainer>
           {gamesOpen && <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone /></Suspense>}
           <main id="app-page-content" hidden={gamesOpen}>
-            {!backendMode && (page !== "learn" || collection) && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
-              <SpeechTools
-                label="朗讀本頁"
-                showVoice={false}
-                expanded
-                read={() =>
-                  document.querySelector("main")?.innerText ||
-                  "目前沒有可朗讀的內容。"
-                }
-              />
-              <button
-                className="quiet"
-                aria-label="學習設定"
-                onClick={() => setModal("settings")}
-              >
-                <Settings2 size={17} />
-                <span>學習設定</span>
-              </button>
-            </div>}
+            {!backendMode && page !== "learn" && studentPageTools}
             {backendMode && <p className="site-version" aria-label="網站版本資訊">v{SITE_VERSION}｜{SITE_VERSION_NOTE}｜<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>}
             {error && (
               <div className="alert error" role="alert">
@@ -945,6 +949,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
                   <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={() => setStudentFinderOpen(true)}><Play size={20}/>開始學習</a></div>
                   <BirdMascot />
+                  <div className="adventure-tools">{studentPageTools}</div>
                 </section>}
                 <div id="curriculum-entry">
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
