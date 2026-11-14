@@ -860,7 +860,7 @@ function App() {
               className={page === "learn" ? "nav-item active" : "nav-item"}
               onClick={() => setPage("learn")}
             >
-              <Sparkles size={20} />
+              <BirdMascotIcon />
               生字動畫教室
             </button>
             <a className="nav-item" href="#games"><Grid2X2 size={20}/>遊戲專區</a>
@@ -895,8 +895,8 @@ function App() {
             </div>
             <div className="header-secondary">
               {!backendMode && <div className="app-brand-group">
-                <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><BirdMascotIcon /><span>生字動畫收藏本</span></button>
-                <p className="site-version" aria-label="網站版本資訊">v{SITE_VERSION}｜{SITE_VERSION_NOTE}｜<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>
+                <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><span>生字動畫收藏本</span></button>
+                <p className="site-version" aria-label="網站版本資訊">v{SITE_VERSION}｜<span className="mobile-version-note">{SITE_VERSION_NOTE}｜</span><time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>
               </div>}
             <div className="topbar-actions">
               {!backendMode && <SpeechTools

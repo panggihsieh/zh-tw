@@ -3817,3 +3817,23 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 :root[data-site-theme] .backend-nav-group :is(h2, summary) {
   color: #fff;
 }
+@media (max-width: 600px) {
+  .top-navigation-layout:not(.backend-shell) .app-top-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .top-navigation-layout:not(.backend-shell) .topbar .app-top-nav .nav-item {
+    white-space: nowrap;
+    padding-inline: 10px;
+  }
+
+  .top-navigation-layout:not(.backend-shell) .header-secondary .topbar-actions > .quiet {
+    flex: 0 0 auto;
+  }
+
+  .topbar .app-brand-group .site-version .mobile-version-note {
+    display: none;
+  }
+}

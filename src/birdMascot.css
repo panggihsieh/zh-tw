@@ -1,5 +1,5 @@
 .bird-mascot-icon { display: block; width: 32px; height: 32px; flex-shrink: 0; }
-.app-top-brand .bird-mascot-icon { width: 2em; height: 2em; }
+.app-top-nav .nav-item .bird-mascot-icon { width: 2em; height: 2em; }
 .bird-mascot-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .bird-mascot-guide { flex: 0 0 min(400px, 38%); min-width: 0; align-self: stretch; position: relative; }
 .bird-mascot-character { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
