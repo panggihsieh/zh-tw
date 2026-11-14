@@ -1,7 +1,7 @@
 import { version } from "../package.json";
 
 export const SITE_VERSION = version;
-export const SITE_UPDATED_AT = "2026/11/14";
+export const SITE_UPDATED_AT = "2026/11/15";
 /** 本版修改內容，顯示於版本編號旁。 */
-export const SITE_VERSION_NOTE = "AI API 設定新增每堂課的 tokens 與美元預算估算";
-export const SITE_VERSION_SHORT_NOTE = "開課費用估算";
+export const SITE_VERSION_NOTE = "新增作業紀錄分頁與後台功能名稱設定";
+export const SITE_VERSION_SHORT_NOTE = "遊戲作業紀錄";

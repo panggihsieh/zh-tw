@@ -111,7 +111,7 @@ const sceneIcons = [BookOpen, Grid2X2, Puzzle, Pencil, FileText, LibraryBig];
 const GameZone = lazy(() => import('./GameZone'));
 const QuizStudent = lazy(() => import("./QuizStudent"));
 const QuizTeacher = lazy(() => import("./QuizTeacher"));
-const GameReview = lazy(() => import('./GameReview'));
+const GameAssignmentRecords = lazy(() => import('./GameAssignmentRecords'));
 const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
@@ -127,7 +127,7 @@ const backendTitles: Record<BackendSection, string> = {
   security: "安全事件紀錄",
   quiz: "資料庫管理",
   themes: "網站樣式資料庫",
-  gameReview: '遊戲作品與評分',
+  gameReview: '遊戲作業紀錄',
   writingAssignments: '書寫作業管理',
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
   curriculum: "三家出版社生字資料庫",
@@ -322,6 +322,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
+  const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
+    try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
+    catch { return {}; }
+  });
   const [backendSection, setBackendSection] = useState<BackendSection>(() => {
     const section = new URLSearchParams(window.location.search).get('section');
     if (section && Object.hasOwn(backendTitles,section)) return section as BackendSection;
@@ -876,7 +880,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
         <div className="main-wrap">
           {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
             <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "功能選單"}</button>
-            <div><span>教師工作區</span><strong>{backendTitles[backendSection]}</strong></div>
+            <div><span>教師工作區</span><strong>{backendLabels[backendSection] || backendTitles[backendSection]}</strong></div>
             <div className="backend-account-actions"><span className="backend-account-label">管理者</span>
               <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
               <a className="backend-student-link" href="/">前往學生網站 <ArrowRight size={18} /></a>
@@ -900,7 +904,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "structure-assignment", label: "生字結構遊戲指派" },
                 { section: "writingAssignments", label: "書寫作業管理" },
                 { section: "competition", label: "Kahoot 競賽開課" },
-                { section: "gameReview", label: "遊戲作品與評分" },
+                { section: "gameReview", label: "遊戲作業紀錄" },
               ] },
               { title: "全站管理與設定", items: [
                 { section: "users", label: "使用者管理", icon: Settings2 },
@@ -914,7 +918,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               const buttons = items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
                 <button type="button" key={section} className={active ? "nav-item active" : "nav-item"}
                   aria-current={active ? "page" : undefined} onClick={() => openBackendSection(section)}>
-                  {Icon && <Icon size={20} />}{label}
+                  {Icon && <Icon size={20} />}{backendLabels[section] || label}
                 </button>
               ));
               return title === "全站管理與設定" ? (
@@ -2082,18 +2086,35 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 }}
               />}
               {backendMode && backendSection !== "tts" && <>
-                <div className="page-heading"><div><p className="eyebrow">教師工作區</p><h1>{backendTitles[backendSection]}</h1></div></div>
+                <div className="page-heading"><div><p className="eyebrow">教師工作區</p><h1>{backendLabels[backendSection] || backendTitles[backendSection]}</h1></div></div>
                 <div className="backend-panel"><Suspense fallback={<p role="status">載入設定內容…</p>}>
                   {backendSection === "api" && <><ClassroomCostEstimate /><BackendApi /></>}
                   {backendSection === 'quiz' && <QuizTeacher/>}
-                  {backendSection === 'gameReview' && <GameReview teacher/>}
+                  {backendSection === 'gameReview' && <GameAssignmentRecords />}
                   {backendSection === 'writingAssignments' && <WritingAssignmentAdmin/>}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "security" && <SecurityLog />}
-                  {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
+                  {backendSection === "themes" && <>
+                    <SiteThemeLibrary active={siteTheme} />
+                    <details className="theme-library">
+                      <summary>修改後台功能名稱</summary>
+                      <p>留空可恢復預設名稱。設定儲存在此瀏覽器。</p>
+                      <div className="competition-form-grid">
+                        {(Object.entries(backendTitles) as [BackendSection, string][]).map(([section, title]) => (
+                          <label key={section}>{title}
+                            <input maxLength={32} placeholder={title} defaultValue={backendLabels[section]} onBlur={event => {
+                              const next = { ...backendLabels, [section]: event.target.value.trim() };
+                              localStorage.setItem("zh-tw.backend-labels", JSON.stringify(next));
+                              setBackendLabels(next);
+                            }} />
+                          </label>
+                        ))}
+                      </div>
+                    </details>
+                  </>}
                   {structureSections.some(section => section === backendSection) && (
                     <div className="competition-actions" role="group" aria-label="字形結構分頁">
                       {structureSections.map(section => (
@@ -2131,7 +2152,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     <iframe
                       key={backendSection}
                       className="backend-tool-frame"
-                      title={backendTitles[backendSection]}
+                      title={backendLabels[backendSection] || backendTitles[backendSection]}
                       src={backendSection === "lesson" ? "/structure-review/editor.html?mode=lesson" : backendSection === "overview" ? "/structure-review/five-upper.html" : "/structure-review/editor.html"}
                     />
                   )}
