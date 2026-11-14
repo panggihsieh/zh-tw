@@ -880,11 +880,8 @@ function App() {
             <button aria-current={backendSection === "curriculum" ? "page" : undefined} className={backendSection === "curriculum" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("curriculum")}>
               <LibraryBig size={20} />三家出版社生字資料庫
             </button>
-            <button aria-current={backendSection === "handwriting" ? "page" : undefined} className={backendSection === "handwriting" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("handwriting")}>
-              <Grid2X2 size={20} />平板手寫檢核測試
-            </button>
-            <button aria-current={backendSection === "strokeDatabase" ? "page" : undefined} className={backendSection === "strokeDatabase" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("strokeDatabase")}>
-              <LibraryBig size={20} />筆順資料庫
+            <button aria-current={(backendSection === "handwriting" || backendSection === "strokeDatabase") ? "page" : undefined} className={(backendSection === "handwriting" || backendSection === "strokeDatabase") ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("handwriting")}>
+              <Grid2X2 size={20} />手寫檢核與筆順
             </button>
             </>)}
           </nav>
@@ -2047,7 +2044,20 @@ function App() {
                     setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
                     setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
                   }} />}
-                  {(backendSection === "handwriting" || backendSection === "strokeDatabase") && <HandwritingLab mode={backendSection === "handwriting" ? "test" : "database"} onPractice={() => openBackendSection("handwriting")} />}
+                  {(backendSection === "handwriting" || backendSection === "strokeDatabase") && (
+                    <>
+                      <div className="competition-actions" role="group" aria-label="手寫檢核與筆順分頁">
+                        {(["handwriting", "strokeDatabase"] as const).map(section => (
+                          <button key={section} type="button" aria-pressed={backendSection === section}
+                            className={backendSection === section ? "primary" : "secondary"}
+                            onClick={() => openBackendSection(section)}>
+                            {backendTitles[section]}
+                          </button>
+                        ))}
+                      </div>
+                      <HandwritingLab mode={backendSection === "handwriting" ? "test" : "database"} onPractice={() => openBackendSection("handwriting")} />
+                    </>
+                  )}
                   {(["lesson", "overview", "review"] as string[]).includes(backendSection) && (
                     <iframe
                       key={backendSection}
