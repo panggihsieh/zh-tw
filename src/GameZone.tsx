@@ -1,3 +1,4 @@
+import TimedActivity from "./TimedActivity";
 import { gameRequest } from "./gameApi";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
@@ -89,6 +90,11 @@ export default function GameZone() {
     setCourse({characters:assignment.characters,context:{publisher:match?.[1]||'',grade:Number(match?.[2]||0),term:match?.[3]||'',title:title||assignment.lesson} as LessonContext,assignmentId:assignment.id});
     setView('writing');
   }
+  function returnToHub() {
+    window.location.hash = "games";
+    setView("hub");
+  }
+
   return (
     <div className="game-zone">
       <header className="game-header">
@@ -118,10 +124,13 @@ export default function GameZone() {
       </header>
       <main className="game-main">
         {view === "strokes" ? (
-          <WritingPractice user={null} characters={["永","字","學"]} lesson="筆順自由練習"
-            onBack={()=>{window.location.hash="games";setView("hub");}}/>
+          <TimedActivity key="strokes" minutes={5} onBack={returnToHub}>
+            <WritingPractice user={null} characters={["永", "字", "學"]} lesson="筆順自由練習" onBack={returnToHub} />
+          </TimedActivity>
         ) : view === "structure" ? (
-          <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/>
+          <TimedActivity key="structure" minutes={5} onBack={returnToHub}>
+            <CharacterStructureGame onBack={returnToHub} />
+          </TimedActivity>
         ) : !ready ? (
           <p role="status">確認登入狀態…</p>
         ) : !user && view !== "hub" && view !== "choose" && view !== "practice" ? (
@@ -148,15 +157,20 @@ export default function GameZone() {
             <a className="secondary" href="#games/structure">免登入玩生字結構</a>
             <a className="secondary" href="#games/strokes">免登入練習筆順</a>
           </section>
-        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" && user ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course && user ? (
+        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? (
+          <TimedActivity key="practice" minutes={10} onBack={returnToHub}>
+            <SentencePractice lessonTitle={course?.context.title} onBack={returnToHub} />
+          </TimedActivity>
+        ) : view === "sentences" && user ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course && user ? (
+          <TimedActivity key={`writing/${user.uid}/${JSON.stringify(course)}`} minutes={20} onBack={returnToHub}>
           <WritingPractice
-            key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}
             characters={course.characters}
             lesson={`${course.context.publisher} ${course.context.grade}年級${course.context.term} · ${course.context.title}`}
             onBack={() => setView("hub")}
             submit={work=>submitGame({...work,...(course.assignmentId?{assignmentId:course.assignmentId}:{})})}
           />
+          </TimedActivity>
         ) : (
           <>
             <div className="game-row game-intro">

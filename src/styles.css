@@ -3901,3 +3901,34 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 
 .scene-tabs button b { display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
 .scene-tabs button[aria-selected="true"] b { color: #fff; }
+
+/* Compact controls for the flashcard toolbar. */
+.scene-speech {
+  gap: 6px 12px;
+  padding: 8px 12px;
+}
+.scene-speech .speech-tools,
+.scene-speech .speech-tools:has(.speech-timeline) {
+  flex: 0 1 auto;
+  min-width: 0;
+  gap: 6px;
+}
+.scene-speech :is(.speech-timeline, .speech-voice-label) {
+  flex: 0 1 auto;
+  font-size: 13px;
+}
+.scene-speech .speech-time-values {
+  gap: 4px 8px;
+}
+.scene-speech :is(.auto-speech, .tts-rate, .speech-tools .secondary, .tts-rate select) {
+  font-size: 14px;
+  margin: 0;
+}
+.scene-speech :is(.speech-tools .secondary, .tts-rate select) {
+  min-height: 40px;
+  padding: 4px 8px;
+}
+.scene-speech .auto-speech input {
+  width: 16px;
+  height: 16px;
+}
