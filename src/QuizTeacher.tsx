@@ -22,7 +22,8 @@ interface Book {
 export default function QuizTeacher({request=quizRequest,showPublisher=true}:{request?:typeof quizRequest;showPublisher?:boolean}={}) {
   const quizRequest=request;
   const [classes,setClasses]=useState<QuizClass[]>([]);
-  const [paperSearch,setPaperSearch]=useState(''),[categoryFilter,setCategoryFilter]=useState(''),[difficultyFilter,setDifficultyFilter]=useState(''),[reviewFilter,setReviewFilter]=useState('');
+  const [publisher,setPublisher]=useState(""),[semester,setSemester]=useState(""),[lessonFilter,setLessonFilter]=useState(""),[bookGrade,setBookGrade]=useState("");
+  const [categoryFilter,setCategoryFilter]=useState(''),[difficultyFilter,setDifficultyFilter]=useState(''),[reviewFilter,setReviewFilter]=useState('');
   const [reviewId] = useState(()=>reviewPaperId(window.location.search));
   const [papers, setPapers] = useState<QuizPaper[]>([]),
     [paper, setPaper] = useState<QuizPaper | null>(null),
@@ -121,10 +122,14 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
   }
   const book = books[bookIndex],
     lesson = book?.lessons[lessonIndex];
+  const paperPublisher = (item: QuizPaper) => item.source?.publisher || ["南一", "康軒", "翰林"].find(name => item.className.includes(name)) || "未標示";
+  const paperSemester = (item: QuizPaper) => /_1$/.test(item.source?.year ?? "") ? "上" : /_2$/.test(item.source?.year ?? "") ? "下" : item.title.match(/[1-6]([上下])國語/u)?.[1] || "未標示";
+  const matchingBooks = papers.filter(item => (!publisher || paperPublisher(item) === publisher) && (!semester || paperSemester(item) === semester) && (!bookGrade || String(item.grade) === bookGrade));
+  const matchingPapers = matchingBooks.filter(item => item.lesson === lessonFilter);
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
-      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details><summary>三家出版社教材更新與題卷匯入</summary><PublisherSync/></details>}
+      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details id="quiz-publisher-tools"><summary>三家出版社教材更新與題卷匯入</summary><PublisherSync request={quizRequest} updateButtonId="quiz-update-publishers" /></details>}
       {!reviewId && <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
@@ -145,6 +150,14 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         >
           重新整理題庫
         </button>
+        {!reviewId && showPublisher && <button className="secondary" onClick={()=>{
+          const details = document.querySelector<HTMLDetailsElement>("#quiz-publisher-tools");
+          const update = document.querySelector<HTMLButtonElement>("#quiz-update-publishers");
+          if (details && update) {
+            details.open = true;
+            if (window.confirm("更新將使用已設定的 AI 模型，可能使用 API 額度。開始更新教材？")) update.click();
+          }
+        }}>一鍵更新教材資料庫</button>}
       <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>
       </div>}
       {tab === "sql" && <CurriculumSql />}
@@ -327,9 +340,23 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
-          <label>依課別、班級或試卷名稱篩選<input value={paperSearch} onChange={e=>setPaperSearch(e.target.value)}/></label>
+          <div className="quiz-actions">
+            <label>出版社<select value={publisher} onChange={e=>{setPublisher(e.target.value);setLessonFilter("");}}>
+              <option value="">全部出版社</option>{[...new Set(papers.map(paperPublisher))].sort().map(name=><option key={name}>{name}</option>)}
+            </select></label>
+            <label>學期<select value={semester} onChange={e=>{setSemester(e.target.value);setLessonFilter("");}}>
+              <option value="">全部學期</option><option value="上">上學期</option><option value="下">下學期</option><option>未標示</option>
+            </select></label>
+            <label>課本年級<select value={bookGrade} onChange={e=>{setBookGrade(e.target.value);setLessonFilter("");}}>
+              <option value="">全部年級</option>{[...new Set(papers.map(item=>item.grade))].sort((a,b)=>a-b).map(grade=><option key={grade} value={grade}>{grade} 年級</option>)}
+            </select></label>
+            <label>課本課別<select value={lessonFilter} onChange={e=>setLessonFilter(e.target.value)}>
+              <option value="">請選擇課別</option>{[...new Set(matchingBooks.map(item=>item.lesson))].sort((a,b)=>a.localeCompare(b,"zh-TW")).map(lesson=><option key={lesson}>{lesson}</option>)}
+            </select></label>
+          </div>
+          {!lessonFilter && <p>選擇課別後顯示對應的母題與試卷。</p>}
           <div className="quiz-paper-list">
-            {papers.filter(q=>`${q.title} ${q.className} ${q.lesson}`.includes(paperSearch)).map((q) => (
+            {matchingPapers.map((q) => (
               <button
                 className="secondary"
                 key={q.id}

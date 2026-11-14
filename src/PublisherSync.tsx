@@ -26,7 +26,8 @@ interface ReferenceSource {
 }
 export default function PublisherSync({
   request = quizRequest,
-}: { request?: typeof quizRequest } = {}) {
+  updateButtonId,
+}: { request?: typeof quizRequest; updateButtonId?: string } = {}) {
   const [items, setItems] = useState<Resource[]>([]),
     [reports, setReports] = useState<Discovery[]>([]),
     [references, setReferences] = useState<ReferenceSource[]>([]),
@@ -150,6 +151,7 @@ export default function PublisherSync({
         <button
           className="primary"
           disabled={busy}
+          id={updateButtonId}
           onClick={() => void updateAll()}
         >
           AI 即時抓取更新三家國語教材

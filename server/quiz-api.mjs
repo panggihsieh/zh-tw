@@ -294,6 +294,7 @@ export function createQuizHandler({
               className: q.className,
               grade: q.grade,
               lesson: q.lesson,
+              ...(user.admin && q.source ? { source: { publisher: q.source.publisher, year: q.source.year } } : {}),
               questionMode: q.questionMode,
               status: q.status,
               count: q.questions.length,
