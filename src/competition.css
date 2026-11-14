@@ -23,14 +23,16 @@
   line-height: 1.4;
 }
 
-.competition-admin .competition-real-ai {
+:root .competition-admin .competition-real-ai {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
+  background: #e5e5e5;
   color: #9b161c;
+  border: 2px solid #171717;
   font-weight: 700;
   cursor: pointer;
 }
