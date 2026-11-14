@@ -108,10 +108,12 @@ const QuizTeacher = lazy(() => import("./QuizTeacher"));
 const GameReview = lazy(() => import('./GameReview'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition";
+const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
 const backendTitles: Record<BackendSection, string> = {
   sentences: "一字多詞造句競賽管理",
   competition: "Kahoot 競賽開課管理",
+  versions: "提交版本紀錄",
   quiz: "國語母題與錯題管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
@@ -811,6 +813,7 @@ function App() {
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
             {backendMode && <button className={backendSection==='sentences'?'nav-item active':'nav-item'} aria-current={backendSection==='sentences'?'page':undefined} onClick={()=>openBackendSection('sentences')}>一字多詞造句競賽管理</button>}
             {backendMode && <button className={backendSection==='competition'?'nav-item active':'nav-item'} aria-current={backendSection==='competition'?'page':undefined} onClick={()=>openBackendSection('competition')}>Kahoot 競賽開課</button>}
+            {backendMode && <button className={backendSection==='versions'?'nav-item active':'nav-item'} aria-current={backendSection==='versions'?'page':undefined} onClick={()=>openBackendSection('versions')}><FileText size={20}/>提交版本紀錄</button>}
             {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
@@ -2031,6 +2034,7 @@ function App() {
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin />}
+                  {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
                   {backendSection === "structure" && <BackendStructure />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
