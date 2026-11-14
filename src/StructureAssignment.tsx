@@ -1,8 +1,20 @@
+import { gameRequest } from "./gameApi";
+import { quizRequest } from "./quizApi";
+import type { QuizClass } from "./ClassRoster";
 import "./structureAssignment.css";
 import { useEffect, useState } from "react";
 
 type Book = { publisher: string; grade: number; term: string; year: string; lessons: { title: string; characters: string }[] };
 export default function StructureAssignment() {
+  const [classes, setClasses] = useState<QuizClass[]>([]);
+  const [classId, setClassId] = useState("");
+  const [sending, setSending] = useState(false);
+  const [notice, setNotice] = useState("");
+  useEffect(() => {
+    void quizRequest<{ items: QuizClass[] }>("/classes")
+      .then(result => setClasses(result.items))
+      .catch(() => setError("班級名冊載入失敗。"));
+  }, []);
   const [books, setBooks] = useState<Book[]>([]);
   const [bookIndex, setBook] = useState(0);
   const [lessonIndex, setLesson] = useState(0);
@@ -66,6 +78,30 @@ export default function StructureAssignment() {
           onClick={() => setSelected(items => items.includes(char) ? items.filter(item => item !== char) : [...items,char])}>{char}</button>)}
     </fieldset>
     <p>可選有明確兩部件候選資料的生字。</p>
+    <label>派送班級<select value={classId} onChange={e => setClassId(e.target.value)}>
+      <option value="">選擇班級</option>
+      {classes.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
+    </select></label>
+    <button type="button" className="primary" disabled={sending || !classId || !selected.length} onClick={async () => {
+      const classroom = classes.find(item => item.id === classId);
+      if (!classroom || !lesson || !book) return;
+      setSending(true);
+      setNotice("");
+      try {
+        await gameRequest("/structure-assignments", {
+          title: "生字結構練習",
+          classId,
+          className: classroom.name,
+          lesson: `${book.publisher}・${book.grade}年級${book.term}・${book.year}・${lesson.title}`,
+          characters: selected,
+          students: classroom.students?.filter(student => student.active && student.email).map(({seat,name,email}) => ({seat,name,email})),
+        });
+        setNotice(`已派送至${classroom.name}。`);
+      } catch (error) {
+        setNotice(error instanceof Error ? error.message : "派送失敗。");
+      } finally { setSending(false); }
+    }}>{sending ? "派送中…" : "派送練習"}</button>
+    <p role="status">{notice}</p>
     {!!selected.length && <label>學生練習連結<input readOnly value={href} onFocus={e => e.target.select()} /></label>}
   </section>;
 }

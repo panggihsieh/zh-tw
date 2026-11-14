@@ -3,4 +3,4 @@ import { version } from "../package.json";
 export const SITE_VERSION = version;
 export const SITE_UPDATED_AT = "2026/11/14";
 /** 本版修改內容，顯示於版本編號旁。 */
-export const SITE_VERSION_NOTE = "生字結構練習依教材、年級、學期和課文篩選";
+export const SITE_VERSION_NOTE = "生字結構練習班級派送";

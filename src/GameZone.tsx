@@ -1,3 +1,4 @@
+import { gameRequest } from "./gameApi";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Trophy, Sparkles } from "lucide-react";
@@ -41,6 +42,7 @@ export default function GameZone() {
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
+    [structureTasks,setStructureTasks]=useState<WritingAssignment[]>([]),
     [assignments,setAssignments]=useState<WritingAssignment[]>([]),
     [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "practice" | "sentences" | "structure" | "competition">(gameView),
     [course, setCourse] = useState<{
@@ -59,6 +61,8 @@ export default function GameZone() {
       setReady(true);
       setCourse(null);
       setView(gameView());
+      setStructureTasks([]);
+      if(u)void gameRequest("/structure-assignments").then(value=>setStructureTasks(value.items)).catch(()=>{});
       if(u)void writingAssignments().then(value=>setAssignments(value.items.filter(item=>!item.submitted))).catch(error=>setMessage(error.message));else setAssignments([]);
     });
   }, []);
@@ -160,6 +164,13 @@ export default function GameZone() {
               <GameReview key={user.uid} />
             ) : (
               <>
+                {!!structureTasks.length && <section className="game-assignments">
+                  <h2>老師指派的生字結構練習</h2>
+                  {structureTasks.map(task => <article key={task.id}>
+                    <div><strong>{task.lesson}</strong><p>{task.characters.join("、")}</p></div>
+                    <a className="primary" href={"#games/structure/" + encodeURIComponent(task.characters.join(""))}>開始練習</a>
+                  </article>)}
+                </section>}
                 {!!assignments.length&&<section className="game-assignments"><div><span className="eyebrow">老師指派 · 個人作業</span><h2>待完成的書寫作業</h2></div>{assignments.map(assignment=><article key={assignment.id}><div><strong>{assignment.title}</strong><p>{assignment.className} · {assignment.lesson}</p><span>{assignment.characters.join('　')}</span></div><button className="primary" onClick={()=>startWritingAssignment(assignment)}>開始書寫 →</button></article>)}</section>}
                 <section className="game-course">
                   <div className="game-row">

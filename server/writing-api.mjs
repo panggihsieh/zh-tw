@@ -206,6 +206,21 @@ export function createWritingHandler({
       const url = new URL(req.url, "http://localhost");
       const base = "/api/structure/writing";
       const scan = async prefix => { let cursor, rows = [], pages = 0; do { const page = await store.list(prefix, cursor); rows.push(...await Promise.all(page.names.map(async name => (await store.get(name)).value))); cursor = page.nextCursor; if (++pages > 30) throw Error("資料量過大"); } while (cursor); return rows; };
+      if (url.pathname === `${base}/structure-assignments`) {
+        if (req.method === "GET") {
+          const items = (await scan("structure-assignments/"))
+            .filter(item => user.admin || item.students.some(student => student.email === user.email.toLowerCase()))
+            .map(({students, ...item}) => item);
+          return send(200, { items });
+        }
+        if (req.method === "POST") {
+          if (!user.admin) return send(403, { error: "僅管理者可派送練習" });
+          const value = validateAssignment(await body(req));
+          const id = randomUUID();
+          await store.create(`structure-assignments/${id}.json`, { ...value, id, createdAt: new Date().toISOString() });
+          return send(201, { id });
+        }
+      }
       if (url.pathname === `${base}/assignments` && req.method === "GET") {
         const rows = (await scan("writing-assignments/")).filter(assignment => user.admin || assignment.students.some(student => student.email === user.email.toLowerCase()));
         const mine = user.admin ? [] : await scan(`submissions/${encodeURIComponent(user.uid)}/`);
