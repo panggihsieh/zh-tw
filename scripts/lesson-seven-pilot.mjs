@@ -90,9 +90,14 @@ for (const [glyph, entry] of Object.entries(verified.entries)) {
 assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
 const audit = JSON.parse(readFileSync('src/soundClueAudit.json','utf8'));
 const curriculum = JSON.parse(readFileSync('public/handwriting-curriculum.json','utf8'));
-db.exec(`CREATE TABLE sound_clue_audit (
-  glyph TEXT PRIMARY KEY REFERENCES characters(glyph), status TEXT NOT NULL CHECK(status IN ('documented','pending','unavailable','unchecked')),
-  component TEXT, source_url TEXT REFERENCES sources(url)
+db.exec(`CREATE TABLE character_etymologies (
+  glyph TEXT PRIMARY KEY REFERENCES characters(glyph),
+  formation_type TEXT NOT NULL DEFAULT 'unknown' CHECK(formation_type IN ('phono-semantic','unknown')),
+  status TEXT NOT NULL CHECK(status IN ('documented','reviewed','pending','unavailable','unchecked')),
+  semantic_component TEXT,
+  phonetic_component TEXT,
+  source_url TEXT REFERENCES sources(url),
+  first_recorded_at TEXT
 )`);
 const dictionary = verified.sources[0];
 const glyphs = new Set(curriculum.books.flatMap(book => book.lessons.flatMap(lesson => [...lesson.characters])));
@@ -103,8 +108,17 @@ for (const glyph of glyphs) {
   url.searchParams.set('word',glyph);
   db.prepare('INSERT OR IGNORE INTO characters VALUES (?)').run(glyph);
   db.prepare('INSERT OR IGNORE INTO sources VALUES (?, ?, ?)').run(url.href,dictionary.title,dictionary.kind);
-  db.prepare('INSERT INTO sound_clue_audit VALUES (?, ?, ?, ?)').run(glyph,row?.status ?? 'unchecked',row?.component ?? null,url.href);
+  db.prepare('INSERT INTO character_etymologies VALUES (?, ?, ?, ?, ?, ?, ?)').run(
+    glyph,
+    row?.semanticComponent && row?.component ? 'phono-semantic' : 'unknown',
+    row?.status ?? 'unchecked',
+    row?.semanticComponent ?? null,
+    row?.component ?? null,
+    row?.sourceUrl ?? url.href,
+    row?.firstRecordedAt ?? null,
+  );
 }
 assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
+assert.equal(db.prepare("SELECT COUNT(*) AS total FROM character_etymologies WHERE semantic_component IS NOT NULL AND phonetic_component IS NOT NULL").get().total > 0, true);
 rmSync("src/lessonSeven.sqlite", { force: true });
 db.exec("VACUUM INTO 'src/lessonSeven.sqlite'");

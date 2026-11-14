@@ -18,13 +18,14 @@ await Promise.all(Array.from({length: 12}, async () => {
       const intro = html.match(/&nbsp;略說:<\/span>([\s\S]*?)<br\s*\/?\s*>/i)?.[1]?.replace(/<[^>]+>/g, '').trim();
       const match = intro?.match(/^從「([^」]+)」[，、\s]*「([^」]+)」(?:亦|也)?聲[。．，、；]/u);
       records[glyph] = match ? {
+        ...records[glyph],
         status:'documented',
         semanticComponent:match[1],
         component:match[2],
         sourceUrl:base + encodeURIComponent(glyph),
         firstRecordedAt:records[glyph]?.firstRecordedAt ?? new Date().toISOString(),
-      } : {status:'pending'};
-    } catch { records[glyph] = {status:'unavailable'}; }
+      } : {...records[glyph], status:'pending'};
+    } catch { records[glyph] = {...records[glyph], status:'unavailable'}; }
     processed++;
     if (processed % 25 === 0) save();
     await new Promise(resolve => setTimeout(resolve, 100));

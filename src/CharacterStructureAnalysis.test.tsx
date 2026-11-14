@@ -42,6 +42,13 @@ describe("analyzeStructure", () => {
   it("keeps sound and meaning clues tied to reviewed components", () => {
     expect(structureClues("銀")?.sound?.componentIndexes).toEqual([1]);
     expect(structureClues("銀")?.meaning?.componentIndexes).toEqual([0]);
+    const glass = structureClues("璃", ["王", "离"]);
+    expect(glass?.sound?.title).toContain("离");
+    expect(glass?.sound?.componentIndexes).toEqual([1]);
+    expect(glass?.meaning?.title).toContain("玉");
+    expect(glass?.meaning?.componentIndexes).toEqual([0]);
+    expect(glass?.sound?.sources?.length).toBeGreaterThan(0);
+    expect(glass?.meaning?.sources?.length).toBeGreaterThan(0);
     expect(structureClues("未收錄")).toBeNull();
   });
 });
