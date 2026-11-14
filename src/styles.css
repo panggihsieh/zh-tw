@@ -3421,6 +3421,50 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .structure-review-heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .structure-review-heading h2{margin-bottom:0}
 .structure-review-heading button{display:inline-flex;align-items:center;gap:5px}
+.character-structure-analysis{width:min(100%,720px);margin:10px auto 18px;text-align:left}
+.structure-analysis-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.structure-analysis-heading h2{margin:3px 0 0;font-size:clamp(28px,5vw,42px);line-height:1.15}
+.structure-radical{flex:0 0 auto;padding:7px 12px;border:1px solid #9bb7aa;border-radius:999px;background:#f4f8f2;color:#274f42;font-weight:700}
+.structure-analysis-overview{display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr);gap:24px;align-items:center}
+.structure-part-map{margin:0}
+.structure-part-grid{display:grid;width:100%;aspect-ratio:1;border:3px solid #315f50;border-radius:18px;overflow:hidden;background:#fbfcf8;box-shadow:0 7px 18px rgba(42,74,61,.1)}
+.structure-part-grid.structure-vertical{grid-template-rows:repeat(2,minmax(0,1fr))}
+.structure-part-grid.structure-horizontal{grid-template-columns:repeat(2,minmax(0,1fr))}
+.structure-part-grid.structure-triple{grid-template-columns:repeat(3,minmax(0,1fr))}
+.structure-part-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:0;padding:10px;background:#e8efde;border:1px dashed #83a08e;border-radius:0;color:#24483d;text-align:center;cursor:pointer;transition:filter .16s ease,box-shadow .16s ease,transform .16s ease}
+.structure-part-cell:nth-child(2){background:#f7eadd;color:#70452e}
+.structure-part-cell:nth-child(3){background:#e5eef3;color:#34566a}
+.structure-part-cell:hover{filter:brightness(.97)}
+.structure-part-cell:focus-visible{position:relative;z-index:2;outline:4px solid #e2a94b;outline-offset:-4px}
+.structure-part-cell.selected{position:relative;z-index:1;box-shadow:inset 0 0 0 5px #315f50;transform:scale(.96)}
+.structure-part-cell b{font-size:clamp(25px,6vw,42px);line-height:1.05;overflow-wrap:anywhere}
+.structure-part-cell span{font-size:14px;font-weight:700;opacity:.78}
+.structure-whole-character{display:grid;place-items:center;font-size:clamp(80px,16vw,136px);color:#315f50}
+.structure-part-map figcaption{margin-top:9px;color:#60736b;font-size:14px;text-align:center}
+.structure-analysis-summary>p{margin:0 0 14px;font-size:18px;line-height:1.8}
+.structure-part-list{display:grid;gap:8px;margin:0}
+.structure-part-list>button{display:grid;grid-template-columns:minmax(90px,.7fr) minmax(130px,1fr);align-items:center;gap:12px;width:100%;padding:10px 12px;border:1px solid transparent;border-bottom-color:#d9e2dc;border-radius:10px;background:transparent;color:inherit;text-align:left}
+.structure-part-list>button:hover{background:#f4f7f2}
+.structure-part-list>button.selected{border-color:#86a393;background:#edf4e9;box-shadow:0 2px 8px rgba(42,74,61,.08)}
+.structure-part-list strong{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:800}
+.structure-part-list strong span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#315f50;color:#fff;font-size:14px}
+.structure-part-list small{color:#53685f;font-size:16px}
+.structure-selection-feedback{margin:12px 0 0;padding:9px 12px;border-left:4px solid #e2a94b;background:#fff8e8;color:#55411d}
+.structure-analysis-note,.structure-analysis-empty{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:#f2f5ef;color:#53685f;font-size:14px;line-height:1.65}
+.structure-analysis-empty{border:1px dashed #9bb0a3;font-size:16px}
+.structure-clue-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px}
+.structure-clue-tabs button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:8px 12px;border:1px solid #b8c9bf;border-radius:13px;background:#fff;color:#425a50}
+.structure-clue-tabs button b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e9efe9;font-size:20px}
+.structure-clue-tabs button span{font-size:15px}.structure-clue-tabs button.selected{border-color:#315f50;background:#315f50;color:#fff;box-shadow:0 4px 10px rgba(49,95,80,.18)}.structure-clue-tabs button.selected b{background:#fff;color:#315f50}
+.structure-part-cell.muted{filter:grayscale(.7);opacity:.35;transform:scale(.94)}
+.structure-part-cell.clue-sound{position:relative;z-index:1;box-shadow:inset 0 0 0 5px #5578a3;transform:scale(.96)}
+.structure-part-cell.clue-meaning{position:relative;z-index:1;box-shadow:inset 0 0 0 5px #b56a36;transform:scale(.96)}
+.structure-clue-explanation{padding:15px 17px;border-left:5px solid;border-radius:10px;background:#f4f6f9}.structure-clue-explanation.clue-sound{border-color:#5578a3;background:#eef3fa}.structure-clue-explanation.clue-meaning{border-color:#b56a36;background:#fff3e9}
+.structure-clue-explanation span{font-size:14px;font-weight:800}.structure-clue-explanation h3{margin:4px 0 7px;font-size:21px}.structure-clue-explanation p{margin:0;line-height:1.75}
+.structure-clue-missing{padding:17px;border:1px dashed #9eada5;border-radius:10px;background:#f6f7f4;color:#5d6c64;line-height:1.7}
+.structure-clue-synthesis{margin:14px 0 0!important;padding:11px 13px;border-radius:10px;background:#fff9df;font-size:16px!important;line-height:1.65!important}
+@media(max-width:640px){.structure-analysis-heading{align-items:flex-start}.structure-analysis-overview{grid-template-columns:1fr}.structure-part-map{width:min(100%,250px);margin:auto}.structure-part-list>button{grid-template-columns:1fr 1.25fr}.structure-radical{font-size:14px}}
+@media(max-width:480px){.structure-clue-tabs button{flex-direction:column;gap:3px}.structure-clue-tabs button span{font-size:13px}}
 .page-collapsed .header-user-role{display:none}
 .page-collapse-toggle{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex-shrink:0;padding:8px 12px;border-radius:999px;background:#17251e;color:#ffe29a;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
 .page-collapse-toggle:hover{background:#2b4537}

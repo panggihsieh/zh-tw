@@ -59,7 +59,7 @@ import BackendApi from "./StructureAiSettings";
 import BackendStructure from "./StructureHelp";
 import OfficialDictionary, { loadDictionary, lookupEntries } from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
-import StructureDiagram from "./StructureDiagram";
+import CharacterStructureAnalysis from "./CharacterStructureAnalysis";
 import { useSiteTheme } from "./siteThemes";
 import BirdMascot, { BirdMascotIcon } from "./BirdMascot";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
@@ -1381,27 +1381,15 @@ function App() {
                             {scene === 1 && (
                               <>
                                 <div className="structure-review-heading">
-                                  <h2>{reviewedMaster!.structure}</h2>
                                   {userRole.admin && !structureReview.confirmed && card.master.verificationStatus !== "unavailable" &&
                                     <button className="secondary" disabled={structureReview.loading || structureReview.saving} onClick={() => void structureReview.confirm()}>
                                       <Check size={18} />{structureReview.saving ? "儲存中…" : "確認結構"}
                                     </button>}
                                 </div>
                                 {structureReview.error && <p role="alert">{structureReview.error}</p>}
-                                <StructureDiagram master={reviewedMaster!} />
-                                <p>
-                                  {card.master.components.length
-                                    ? "看看這個字，各部分怎麼住在一起？"
-                                    : "目前無已核對的結構拆解資料。"}
-                                </p>
-                                <div className="component-tags">
-                                  {card.master.components.map((c, i) => (
-                                    <span key={i}>{c}</span>
-                                  ))}
-                                </div>
+                                <CharacterStructureAnalysis master={reviewedMaster!} />
                                 <p className="data-note">
-                                  部首：{card.master.radical}
-                                  。{structureReview.confirmed ? "此版本字形結構已由管理者確認；比例仍為教學示意。" : "字形結構為教學示意，待教師審定。"}
+                                  {structureReview.confirmed ? "此版本字形結構已由管理者確認；比例仍為教學示意。" : "字形結構為教學示意，待教師審定。"}
                                 </p>
                               </>
                             )}

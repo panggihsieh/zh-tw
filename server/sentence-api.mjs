@@ -34,6 +34,21 @@ export function scoreSentence(sentence,question,analysis) {
   const idiomScore=analysis.idiom.appropriate&&Array.from(idiom).length>=4?40:0;
   return {targetOk,readingOk:analysis.readingOk,idiom:{text:idiom,score:idiomScore},elements,fluency:analysis.fluency,feedback:analysis.feedback,uncertain:analysis.uncertain,total:analysis.uncertain?null:targetOk?idiomScore+Object.values(elements).reduce((n,v)=>n+v.score,0)+analysis.fluency:0};
 }
+export function gradePractice(sentence,character,analysis) {
+  if(!analysis||typeof analysis.targetOk!=='boolean'||typeof analysis.meaningOk!=='boolean'||typeof analysis.uncertain!=='boolean'||!bounded(analysis.feedback,1200))fail('AI 等第格式不符，請稍後再試。');
+  const scores={};
+  for(const key of ['correctness','fluency','expression']) {
+    const score=analysis[key];
+    if(!Number.isInteger(score)||score<0||score>4)fail('AI 等第分項格式不符，請稍後再試。');
+    scores[key]=score;
+  }
+  const highlight=analysis.highlight||'';
+  if(typeof highlight!=='string'||highlight.length>100||highlight&&!sentence.includes(highlight))fail('AI 評語引用內容不在原句中。');
+  const targetOk=sentence.includes(character)&&analysis.targetOk&&analysis.meaningOk;
+  const total=analysis.uncertain?null:targetOk?Object.values(scores).reduce((sum,score)=>sum+score,0):0;
+  const level=total===null?'待確認':total>=11?'優等':total>=9?'甲等':total>=6?'乙等':'待加強';
+  return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback};
+}
 export function validateTeacherGrade(v) {
   if(!v||typeof v.targetOk!=='boolean'||![0,40].includes(v.idiom)||!Number.isInteger(v.fluency)||v.fluency<0||v.fluency>10||!bounded(v.feedback,1200)||!v.elements||['person','event','time','place','object'].some(k=>![0,10].includes(v.elements[k])))fail('覆核配分不符：成語0/40、人事時地物各0/10、順暢0–10。');
   const elements=Object.fromEntries(['person','event','time','place','object'].map(k=>[k,v.elements[k]]));
@@ -56,6 +71,20 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
     try {
       const url=new URL(req.url,'http://localhost');
       const path=url.pathname.replace('/api/structure/sentence','');
+      if(path==='/practice/correct'&&req.method==='POST'){
+        const v=await body(req);
+        if(!/^[\p{Script=Han}]{2,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入2–8字語詞、選擇其中一個字，並先說一句話。');
+        const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript});
+        const suggestion=result?.sentence;
+        if(!bounded(suggestion,300)||Array.from(suggestion).length>Array.from(v.transcript).length*1.5+2||Array.from(suggestion).length<Array.from(v.transcript).length*.5)fail('無法確定同音語意修正，請自行修改或再說一次。');
+        return send(200,{original:v.transcript,suggestion,notice:'請確認修正後句子仍是你原本想表達的意思。'});
+      }
+      if(path==='/practice/grade'&&req.method==='POST'){
+        const v=await body(req);
+        if(!/^[\p{Script=Han}]{2,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
+        const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence});
+        return send(200,{grade:gradePractice(v.sentence,v.character,analysis)});
+      }
       if(path==='/events'&&req.method==='GET')return send(200,{now:now(),items:(await scan('sentence-events/')).filter(e=>access(e,user)&&(user.admin||e.status!=='draft')).sort((a,b)=>b.createdAt-a.createdAt).map(e=>publicEvent(e,user.admin))});
       if(path==='/events'&&req.method==='POST'){
         if(!user.admin)fail('僅管理者可派送競賽。',403);
