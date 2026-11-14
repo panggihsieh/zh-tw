@@ -3875,3 +3875,12 @@ button.secondary.reopen-student-finder {
 @keyframes reopen-student-finder-pulse {
   50% { box-shadow: 0 0 0 3px #9f171755; }
 }
+
+/* Keep student navigation at the viewport edge and reserve its measured height. */
+.top-navigation-layout:not(.backend-shell) .topbar {
+  position: fixed;
+  inset: 0 0 auto;
+}
+.top-navigation-layout:not(.backend-shell) .main-wrap {
+  padding-top: var(--app-header-height, 160px);
+}

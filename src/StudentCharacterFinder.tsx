@@ -117,7 +117,7 @@ export default function StudentCharacterFinder({
   }
   const matches = findSchoolCharacters(books, searched);
   return (
-    <section id="curriculum-entry" className="student-lookup" aria-label="念生字與課本找字">
+    <section className="student-lookup" aria-label="念生字與課本找字">
       <h2>念生字，找課本，一起學</h2>
       <p>南一・康軒・翰林，一至六年級。可念字找字，也可直接選課。</p>
       <details open>
