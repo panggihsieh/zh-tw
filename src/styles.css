@@ -3860,22 +3860,6 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   margin: 0 0 12px auto;
 }
 
-button.secondary.reopen-student-finder {
-  color: #9f1717;
-  border: 2px solid #9f1717;
-  font-weight: 700;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  button.secondary.reopen-student-finder {
-    animation: reopen-student-finder-pulse 1s ease-in-out 3;
-  }
-}
-
-@keyframes reopen-student-finder-pulse {
-  50% { box-shadow: 0 0 0 3px #9f171755; }
-}
-
 /* Keep student navigation at the viewport edge and reserve its measured height. */
 .top-navigation-layout:not(.backend-shell) .topbar {
   position: fixed;

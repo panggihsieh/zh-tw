@@ -905,7 +905,6 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           </NavigationContainer>
           {gamesOpen && <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone /></Suspense>}
           <main id="app-page-content" hidden={gamesOpen}>
-            {!backendMode && page === "learn" && collection && <button type="button" aria-controls="curriculum-entry" aria-expanded={studentFinderOpen} className={studentFinderOpen ? "secondary" : "secondary reopen-student-finder"} onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
             {!backendMode && (page !== "learn" || collection) && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
               <SpeechTools
                 label="朗讀本頁"
