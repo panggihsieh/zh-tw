@@ -1,3 +1,4 @@
+import ClassroomCostEstimate from "./ClassroomCostEstimate";
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
 import { readVersionRecords } from "./versionRecords";
 import {
@@ -2083,7 +2084,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               {backendMode && backendSection !== "tts" && <>
                 <div className="page-heading"><div><p className="eyebrow">教師工作區</p><h1>{backendTitles[backendSection]}</h1></div></div>
                 <div className="backend-panel"><Suspense fallback={<p role="status">載入設定內容…</p>}>
-                  {backendSection === "api" && <BackendApi />}
+                  {backendSection === "api" && <><ClassroomCostEstimate /><BackendApi /></>}
                   {backendSection === 'quiz' && <QuizTeacher/>}
                   {backendSection === 'gameReview' && <GameReview teacher/>}
                   {backendSection === 'writingAssignments' && <WritingAssignmentAdmin/>}
