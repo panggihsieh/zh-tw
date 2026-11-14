@@ -111,9 +111,10 @@ const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin')
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
 type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
+const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
-  sentences: "一字多詞造句競賽管理",
   "structure-assignment": "生字結構遊戲指派",
+  sentences: "一字多詞造句競賽管理",
   competition: "Kahoot 競賽開課管理",
   versions: "提交版本紀錄",
   quiz: "資料庫管理",
@@ -872,9 +873,9 @@ function App() {
             <button aria-current={backendSection === "users" ? "page" : undefined} className={backendSection === "users" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("users")}>
               <Settings2 size={20} />使用者管理
             </button>
-            <button aria-current={backendSection === "structure" ? "page" : undefined} className={backendSection === "structure" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("structure")}>
+            <button aria-current={structureSections.some(section => section === backendSection) ? "page" : undefined} className={structureSections.some(section => section === backendSection) ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("structure")}>
               <Grid2X2 size={20} />
-              字形結構說明
+              字形結構
             </button>
             <button aria-current={backendSection === "curriculum" ? "page" : undefined} className={backendSection === "curriculum" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("curriculum")}>
               <LibraryBig size={20} />三家出版社生字資料庫
@@ -884,18 +885,6 @@ function App() {
             </button>
             <button aria-current={backendSection === "strokeDatabase" ? "page" : undefined} className={backendSection === "strokeDatabase" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("strokeDatabase")}>
               <LibraryBig size={20} />筆順資料庫
-            </button>
-            <button aria-current={backendSection === "lesson" ? "page" : undefined} className={backendSection === "lesson" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("lesson")}>
-              <Grid2X2 size={20} />
-              每課生字結構筆畫查詢
-            </button>
-            <button aria-current={backendSection === "overview" ? "page" : undefined} className={backendSection === "overview" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("overview")}>
-              <Grid2X2 size={20} />
-              五上生字拆合總覽
-            </button>
-            <button aria-current={backendSection === "review" ? "page" : undefined} className={backendSection === "review" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("review")}>
-              <Grid2X2 size={20} />
-              康軒生字結構修正
             </button>
             </>)}
           </nav>
@@ -2038,8 +2027,19 @@ function App() {
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
-                  {backendSection === "structure-assignment" && <StructureAssignment />}
+                  {structureSections.some(section => section === backendSection) && (
+                    <div className="competition-actions" role="group" aria-label="字形結構分頁">
+                      {structureSections.map(section => (
+                        <button key={section} type="button" aria-pressed={backendSection === section}
+                          className={backendSection === section ? "primary" : "secondary"}
+                          onClick={() => openBackendSection(section)}>
+                          {backendTitles[section]}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   {backendSection === "structure" && <BackendStructure />}
+                  {backendSection === "structure-assignment" && <StructureAssignment />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
                     const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
                     const resources=await loadLearningResources();
