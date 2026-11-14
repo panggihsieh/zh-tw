@@ -1,5 +1,5 @@
 import {useEffect,useMemo,useState} from 'react';
-import {Copy,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Users} from 'lucide-react';
+import {Copy,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest} from './quizApi';
 import type {QuizClass} from './ClassRoster';
@@ -7,6 +7,7 @@ import {sentenceRequest,type SentenceLesson} from './sentenceApi';
 import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type CompetitionQuestion,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
 import './competition.css';
 import SentencePractice from './SentencePractice';
+import {parseQuestionCsv,questionCsvExample} from './competitionQuestionCsv';
 
 async function previewRequest<T>(path: string, body?: unknown): Promise<T> {
  const sentence = body as { transcript?: string; sentence?: string };
@@ -26,6 +27,7 @@ function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'
 }
 export default function CompetitionAdmin(){
  const [selectedRooms,setSelectedRooms]=useState<string[]>([]);
+ const [importNotice,setImportNotice]=useState('');
  const [useRealAi,setUseRealAi]=useState(false);
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState('一字多詞 Kahoot 練習'),[questions,setQuestions]=useState<CompetitionQuestion[]>([]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
@@ -50,6 +52,12 @@ export default function CompetitionAdmin(){
   setMessage(failed?`已移除 ${removed.length} 堂課，${failed} 堂未能移除，請重試。`:`已移除 ${removed.length} 堂課。`);
  }
  function patchQuestion(index:number,patch:Partial<CompetitionQuestion>){setQuestions(rows=>rows.map((row,i)=>i===index?{...row,...patch}:row));}
+ function downloadQuestionExample(){const url=URL.createObjectURL(new Blob([questionCsvExample],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='四選一題庫範例.csv';link.click();URL.revokeObjectURL(url);}
+ async function importQuestions(file?:File){
+  if(!file)return;setImportNotice('');
+  try{if(file.size>1024*1024)throw Error('題庫檔案不可超過 1 MB。');const imported=parseQuestionCsv(await file.text());setQuestions(imported);setImportNotice(`已匯入 ${imported.length} 題，請確認內容後再建立開課大廳。`);}
+  catch(error){setImportNotice((error as Error).message);}
+ }
  function makeCards(){setQuestions(candidates.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已依勾選課文自動產生 ${candidates.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
   <p>學生語音測試</p>
@@ -67,6 +75,8 @@ export default function CompetitionAdmin(){
    {!!questions.length&&<><p className="competition-budget">本場最多呼叫 AI <strong>{questions.length*maxParticipants}</strong> 次（{questions.length} 題 × {maxParticipants} 人）；模擬學生不呼叫 AI。</p><div className="competition-card-preview">{questions.map((q,index)=><article key={`${q.character}-${index}`}><button type="button" aria-label={`移除${q.character}`} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/></button><strong>{q.character}</strong><span>{q.reading||'讀音待核對'}</span><p>{q.prompt}</p></article>)}</div></>}
   </>:<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>輸入選擇題</h2></div><strong>{questions.length} 題</strong></div>
+   <div className="competition-question-import"><button type="button" className="secondary" onClick={downloadQuestionExample}><Download size={18}/>下載題庫範例</button><label className="secondary competition-upload"><Upload size={18}/><span>上傳 CSV 題庫</span><input type="file" accept=".csv,text/csv" onChange={event=>{void importQuestions(event.target.files?.[0]);event.currentTarget.value='';}}/></label><span>下載範例後可用 Excel 編輯，再以相同欄位上傳；一次最多 100 題。</span></div>
+   {importNotice&&<p className="competition-import-notice" role="status">{importNotice}</p>}
    <div className="competition-question-list">{questions.map((q,index)=><article className="competition-question-editor" key={index}><div className="competition-question-title"><strong>第 {index+1} 題</strong><button type="button" className="secondary" disabled={questions.length===1} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/>移除</button></div><label>題目<input maxLength={500} value={q.prompt} onChange={e=>patchQuestion(index,{prompt:e.target.value})}/></label><div className="competition-options">{q.options!.map((option,optionIndex)=><label key={optionIndex} className={q.answer===optionIndex?'is-answer':''}><input type="radio" name={`answer-${index}`} checked={q.answer===optionIndex} onChange={()=>patchQuestion(index,{answer:optionIndex})}/><span>{String.fromCharCode(65+optionIndex)}</span><input aria-label={`第 ${index+1} 題選項 ${optionIndex+1}`} value={option} onChange={e=>patchQuestion(index,{options:q.options!.map((v,i)=>i===optionIndex?e.target.value:v)})}/></label>)}</div></article>)}</div><button className="secondary" disabled={questions.length>=100} onClick={()=>setQuestions(rows=>[...rows,emptyQuestion()])}><Plus size={18}/>新增題目</button>
   </>}
   <div className="competition-actions"><button className="primary" disabled={busy||!selectedClass||loginMode==='roster'&&!roster.length||!title.trim()||!questions.length||duration<1||duration>120||maxParticipants<1||maxParticipants>100||gameType==='quiz'&&questions.some(q=>!q.prompt.trim()||q.options?.some(o=>!o.trim()))} onClick={()=>void run(async()=>{await competitionRequest('/rooms',{title,classId:selectedClass!.id,className:selectedClass!.name,students,roster,questions,gameType,loginMode,duration:duration*60,maxParticipants,testRoom});setQuestions(gameType==='quiz'?[emptyQuestion()]:[]);await load();setMessage('課堂大廳已建立，請先確認學生與公仔，再開始課程。');})}><Send size={18}/>建立開課大廳</button><label className="primary competition-test-toggle"><input type="checkbox" checked={testRoom} onChange={e=>setTestRoom(e.target.checked)}/><span>虛擬課堂測試用（非正式）</span></label></div>
