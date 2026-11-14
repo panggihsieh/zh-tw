@@ -904,6 +904,7 @@ function App() {
             </div></div>}
           </NavigationContainer>
           <main id="app-page-content">
+            {!backendMode && page === "learn" && collection && <button type="button" aria-controls="curriculum-entry" aria-expanded={studentFinderOpen} className={studentFinderOpen ? "secondary" : "secondary reopen-student-finder"} onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
             {!backendMode && (page !== "learn" || collection) && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
               <SpeechTools
                 label="朗讀本頁"
@@ -946,7 +947,6 @@ function App() {
                   <BirdMascot />
                 </section>}
                 <div id="curriculum-entry">
-                {collection && <button type="button" aria-expanded={studentFinderOpen} className={studentFinderOpen ? "secondary" : "secondary reopen-student-finder"} onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
                   setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
