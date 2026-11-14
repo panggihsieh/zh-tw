@@ -1,8 +1,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 
-export default function TimedActivity({ minutes, onBack, children }: {
+export default function TimedActivity({ minutes, onBack, onExpire, children }: {
   minutes: number;
   onBack: () => void;
+  onExpire: () => void;
   children: ReactNode;
 }) {
   const [deadline, setDeadline] = useState<number | null>(null);
@@ -12,6 +13,10 @@ export default function TimedActivity({ minutes, onBack, children }: {
     const timer = window.setTimeout(() => setNow(Date.now()), Math.min(1000, deadline - now));
     return () => window.clearTimeout(timer);
   }, [deadline, now]);
+
+  useEffect(() => {
+    if (deadline !== null && now >= deadline) onExpire();
+  }, [deadline, now, onExpire]);
 
   if (deadline === null) return (
     <section>

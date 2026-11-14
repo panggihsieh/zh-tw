@@ -90,6 +90,12 @@ export default function GameZone() {
     setCourse({characters:assignment.characters,context:{publisher:match?.[1]||'',grade:Number(match?.[2]||0),term:match?.[3]||'',title:title||assignment.lesson} as LessonContext,assignmentId:assignment.id});
     setView('writing');
   }
+  const [expiredNotice, setExpiredNotice] = useState(false);
+  function expireActivity() {
+    setExpiredNotice(true);
+    returnToHub();
+  }
+
   function returnToHub() {
     window.location.hash = "games";
     setView("hub");
@@ -123,12 +129,13 @@ export default function GameZone() {
         </div>
       </header>
       <main className="game-main">
+        {view === "hub" && expiredNotice && <p role="status">時間到，活動已結束。<button className="secondary" onClick={() => setExpiredNotice(false)}>關閉提示</button></p>}
         {view === "strokes" ? (
-          <TimedActivity key="strokes" minutes={5} onBack={returnToHub}>
+          <TimedActivity key="strokes" minutes={5} onBack={returnToHub} onExpire={expireActivity}>
             <WritingPractice user={null} characters={["永", "字", "學"]} lesson="筆順自由練習" onBack={returnToHub} />
           </TimedActivity>
         ) : view === "structure" ? (
-          <TimedActivity key="structure" minutes={5} onBack={returnToHub}>
+          <TimedActivity key="structure" minutes={5} onBack={returnToHub} onExpire={expireActivity}>
             <CharacterStructureGame onBack={returnToHub} />
           </TimedActivity>
         ) : !ready ? (
@@ -157,12 +164,12 @@ export default function GameZone() {
             <a className="secondary" href="#games/structure">免登入玩生字結構</a>
             <a className="secondary" href="#games/strokes">免登入練習筆順</a>
           </section>
-        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? (
-          <TimedActivity key="practice" minutes={10} onBack={returnToHub}>
+        ) : view === "competition" ? <CompetitionPlay onBack={returnToHub} onExpire={expireActivity} /> : view === "practice" ? (
+          <TimedActivity key="practice" minutes={10} onBack={returnToHub} onExpire={expireActivity}>
             <SentencePractice lessonTitle={course?.context.title} onBack={returnToHub} />
           </TimedActivity>
-        ) : view === "sentences" && user ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course && user ? (
-          <TimedActivity key={`writing/${user.uid}/${JSON.stringify(course)}`} minutes={20} onBack={returnToHub}>
+        ) : view === "sentences" && user ? <SentenceCompetition key={user.uid} user={user} onBack={returnToHub} onExpire={expireActivity} /> : view === "writing" && course && user ? (
+          <TimedActivity key={`writing/${user.uid}/${JSON.stringify(course)}`} minutes={20} onBack={returnToHub} onExpire={expireActivity}>
           <WritingPractice
             user={user}
             characters={course.characters}

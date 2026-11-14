@@ -6,7 +6,7 @@ import speechText from './sentenceSpeechText.json';
 import './sentenceCompetition.css';
 interface Recognition {lang:string;continuous:boolean;interimResults:boolean;maxAlternatives:number;onresult:((e:{results:ArrayLike<ArrayLike<{transcript:string}>>})=>void)|null;onerror:((e:{error:string})=>void)|null;onend:(()=>void)|null;start():void;abort():void;}
 type VoiceWindow=Window&{SpeechRecognition?:new()=>Recognition;webkitSpeechRecognition?:new()=>Recognition};
-export default function SentenceCompetition({user,onBack,request=defaultRequest}:{user:User;onBack:()=>void;request?:typeof defaultRequest}){
+export default function SentenceCompetition({user,onBack,onExpire,request=defaultRequest}:{user:User;onBack:()=>void;onExpire?:()=>void;request?:typeof defaultRequest}){
  const sentenceRequest=request;
  const [events,setEvents]=useState<SentenceEvent[]>([]),[event,setEvent]=useState<SentenceEvent|null>(null),[answers,setAnswers]=useState<SentenceAnswer[]>([]),[index,setIndex]=useState(0),[sentence,setSentence]=useState(''),[original,setOriginal]=useState(''),[suggestion,setSuggestion]=useState(''),[confirmed,setConfirmed]=useState(false),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[listening,setListening]=useState(false),[finished,setFinished]=useState(false),[grading,setGrading]=useState(false),[tick,setTick]=useState(Date.now()),[offset,setOffset]=useState(0);
  const recognition=useRef<Recognition|null>(null),voiceTimeout=useRef<ReturnType<typeof setTimeout>|undefined>(undefined),finishing=useRef(false);
@@ -29,7 +29,7 @@ export default function SentenceCompetition({user,onBack,request=defaultRequest}
     }
   }catch(e){setMessage((e as Error).message);}finally{setGrading(false);finishing.current=false;}
  }
- useEffect(()=>{if(event&&!finished&&!busy&&remaining===0)void finish();},[remaining,event?.id,finished,busy]);
+ useEffect(()=>{if(event&&remaining===0){if(!finished&&busy)return;if(!finished){void finish();return;}onExpire?.();}},[remaining,event?.id,finished,busy,onExpire]);
  async function join(e:SentenceEvent){const v=await sentenceRequest<{event:SentenceEvent;participant:{finished:boolean};answers:SentenceAnswer[];now:number}>(`/events/${e.id}/join`,{});setEvent(v.event);setAnswers(v.answers);setOffset(v.now-Date.now());setTick(Date.now());setFinished(v.participant.finished);setIndex(v.event.questions.findIndex(q=>!v.answers.some(a=>a.questionId===q.id))<0?0:v.event.questions.findIndex(q=>!v.answers.some(a=>a.questionId===q.id)));}
  function listen(){if(!Constructor||listening||busy||remaining===0)return;const r=new Constructor();recognition.current=r;clearTimeout(voiceTimeout.current);r.lang='zh-TW';r.continuous=false;r.interimResults=false;r.maxAlternatives=1;r.onresult=e=>{const text=e.results[0]?.[0]?.transcript||'';setOriginal(text.slice(0,300));setSentence(text.slice(0,300));setSuggestion('');setConfirmed(false);setMessage('請確認辨識文字；可修改同音錯字，再勾選確認。');};r.onerror=e=>setMessage(e.error==='not-allowed'?'麥克風未獲允許，可改用打字。':'語音辨識未完成，請重試或用打字。');r.onend=()=>{clearTimeout(voiceTimeout.current);setListening(false);};try{r.start();setListening(true);voiceTimeout.current=setTimeout(()=>r.abort(),15000);}catch{setListening(false);setMessage('無法啟動語音，可改用打字。');}}
  function clearDraft(){
