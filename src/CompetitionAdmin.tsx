@@ -51,7 +51,7 @@ export default function CompetitionAdmin(){
  function makeCards(){setQuestions(candidates.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已依勾選課文自動產生 ${candidates.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
   <p>學生語音測試</p>
-  <label><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/> 使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</label>
+  <label className="competition-real-ai"><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/> 使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</label>
   <SentencePractice initialCard={previewCard} simulated={!useRealAi} request={useRealAi ? sentenceRequest : previewRequest} onBack={()=>{setUseRealAi(false);setPreviewCard(null);}}/>
  </section>;
  return <section className="competition-admin">
