@@ -10,11 +10,28 @@ const definition=()=>({title:'南一五上測試競賽',minutes:1,lessonIds:[les
 const analysis=sentence=>({targetOk:true,readingOk:true,uncertain:false,idiom:{text:'日積月累',appropriate:true},elements:{person:'小明',event:'閱讀',time:'今天',place:'圖書館',object:'故事書'},fluency:10,feedback:'能交代人物、時間、地點與事件，請再確認成語使用。'});
 const text=()=>`今天小明在圖書館閱讀故事書，日積月累，認識了「${character.character}」的用法。`;
 function memoryStore(){const data=new Map();return {data,async list(prefix){return {names:[...data.keys()].filter(k=>k.startsWith(prefix))};},async get(key){if(!data.has(key))throw Object.assign(Error('missing'),{status:404});return structuredClone(data.get(key));},async create(key,value){if(data.has(key))throw Object.assign(Error('conflict'),{status:412});data.set(key,{value:structuredClone(value),generation:1});},async update(key,value,generation){if(data.get(key)?.generation!==generation)throw Object.assign(Error('conflict'),{status:412});data.set(key,{value:structuredClone(value),generation:generation+1});}};}
-async function fixture(t,ai=async()=>analysis()){
- const store=memoryStore();let clock=100000;const server=http.createServer(createSentenceHandler({store,origins:['https://test'],now:()=>clock,analyze:ai,authenticate:async req=>{const id=req.headers['x-test-user'];if(!id)throw Error('no user');return {uid:id,email:`${id}@example.com`,displayName:id,admin:id==='teacher'};}}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
+async function fixture(t,ai=async()=>analysis(),requirePracticeCode=false){
+ const store=memoryStore();let clock=100000;const server=http.createServer(createSentenceHandler({store,origins:['https://test'],now:()=>clock,analyze:ai,requirePracticeCode,authenticate:async req=>{const id=req.headers['x-test-user'];if(!id)throw Error('no user');return {uid:id,email:`${id}@example.com`,displayName:id,admin:id==='teacher'};}}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
  const request=async(path,body,user='teacher',origin='https://test')=>{const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/sentence${path}`,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','x-test-user':user,'x-notebook-request':'sentence-game',Origin:origin},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:r.status,...await r.json()};};
  return {store,request,setTime:v=>clock=v};
 }
+test('個人造句代碼僅教師可開放，名冊學生可進入至截止',async t=>{
+ let calls=0;
+ const {request,setTime}=await fixture(t,async()=>{calls++;return {sentence:'今天我去圖書館看書。'};},true);
+ const input={phrase:'書',character:'書',transcript:'今天我去圖書館看書。'};
+ assert.equal((await request('/practice/correct',input,'student')).status,403);
+ const settings={minutes:1,roster:['student@example.com']};
+ assert.equal((await request('/practice/open',settings,'student')).status,403);
+ const session=await request('/practice/open',settings);
+ assert.equal(session.status,201);
+ assert.equal((await request('/practice/access',{code:session.code},'other')).status,403);
+ assert.equal((await request('/practice/access',{code:session.code},'student')).status,200);
+ assert.equal((await request('/practice/correct',{...input,code:session.code},'student')).status,200);
+ setTime(session.expiresAt);
+ assert.equal((await request('/practice/access',{code:session.code},'student')).status,403);
+ assert.equal((await request('/practice/correct',{...input,code:session.code},'student')).status,403);
+ assert.equal(calls,1);
+});
 test('題庫只包含南一五六年級45課，派送要求教師核對並驗證題目讀音',()=>{
  assert.equal(bank.lessons.length,45);assert.ok(bank.lessons.every(l=>[5,6].includes(l.grade)));
  assert.equal(validateCompetition(definition()).questions.length,1);

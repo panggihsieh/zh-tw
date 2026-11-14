@@ -31,13 +31,13 @@ export default function WritingPractice({
   onBack,
   submit = submitGame,
 }: {
-  user: User;
+  user: User | null;
   characters: string[];
   lesson: string;
   onBack: () => void;
   submit?: typeof submitGame;
 }) {
-  const key = JSON.stringify([user.uid, lesson, characters]);
+  const key = JSON.stringify([user?.uid ?? "guest", lesson, characters]);
   const [draft, setDraft] = useState<GameDraft | null>(null),
     [index, setIndex] = useState(0),
     [strokes, setStrokes] = useState<Stroke[] | null>(null),
@@ -417,7 +417,7 @@ export default function WritingPractice({
           </p>
         </aside>
       </div>
-      <section className="game-submit">
+      {user && <section className="game-submit">
         <h2>把今天的練習交給老師</h2>
         <p>預覽會保存所有生字的原始筆跡與重試紀錄；完成全部生字後即可繳交。</p>
         <div className="game-row">
@@ -472,7 +472,7 @@ export default function WritingPractice({
         {preview && (
           <img className="game-snapshot" src={preview} alt="本次書寫作品預覽" />
         )}
-      </section>
+      </section>}
     </section>
   );
 }

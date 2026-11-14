@@ -16,6 +16,13 @@ export default function CompetitionPlay({onBack}:{onBack:()=>void}){
  async function refresh(){if(!room||!participant)return;const value=await competitionRequest<{room:CompetitionRoom;participant:CompetitionParticipant;question:CompetitionQuestion|null}>(`/rooms/${room.id}/state`,{});setRoom(value.room);setParticipant(value.participant);setQuestion(value.question);if(value.participant.finished||value.room.status==='closed')await loadRanking(value.room);}
  async function loadRanking(target=room){if(!target)return;const value=await competitionRequest<{items:LeaderboardItem[]}>(`/rooms/${target.id}/leaderboard`);setRanking(value.items);}
  useEffect(()=>{if(initialCode)void run(find);return()=>recognition.current?.abort();},[]);
+ useEffect(()=>{
+   if(room?.gameType!=='sentence-practice')return;
+   if(room.status==='closed'){onBack();return;}
+   if(!room.expiresAt)return;
+   const timer=window.setTimeout(onBack,Math.max(0,room.expiresAt-Date.now()));
+   return()=>window.clearTimeout(timer);
+ },[room?.gameType,room?.status,room?.expiresAt,onBack]);
  useEffect(()=>{if(!room||!participant||room.status==='closed'||participant.finished)return;const timer=window.setInterval(()=>{setNow(Date.now());void refresh().catch(e=>setMessage(e.message));},3000);return()=>window.clearInterval(timer);},[room?.id,room?.status,participant?.finished]);
  async function answer(value:number|string){if(!room)return;const body=typeof value==='number'?{answer:value}:{sentence:value};const result=await competitionRequest<{correct:boolean;points:number;participant:CompetitionParticipant;question:CompetitionQuestion|null;grade?:{level:string;feedback:string}}>(`/rooms/${room.id}/answer`,body);setFeedback({correct:result.correct,points:result.points,text:result.grade?`${result.grade.level}：${result.grade.feedback}`:undefined});setParticipant(result.participant);setSentence('');window.setTimeout(()=>{setFeedback(null);setQuestion(result.question);if(result.participant.finished)void loadRanking(room);},1600);}
  function listen(){if(!SpeechRecognition||listening)return;const instance=new SpeechRecognition();recognition.current=instance;finalText.current='';instance.lang='zh-TW';instance.continuous=true;instance.interimResults=true;instance.onresult=event=>{let interim='';for(let i=event.resultIndex;i<event.results.length;i++){const text=event.results[i][0]?.transcript||'';if(event.results[i].isFinal)finalText.current+=text;else interim+=text;}setSentence((finalText.current+interim).slice(0,300));};instance.onend=()=>{setListening(false);recognition.current=null;};instance.onerror=()=>{setListening(false);setMessage('語音辨識中斷，可以直接輸入文字。');};instance.start();setListening(true);}

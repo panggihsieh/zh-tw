@@ -194,6 +194,7 @@ export default function CurriculumDatabase({
         <label>
           出版社
           <select
+            data-curriculum-publisher
             value={publisher}
             onChange={(e) => setPublisher(e.target.value)}
           >

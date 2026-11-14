@@ -63,6 +63,7 @@ export async function uploadCollection(
   token: string,
   collection: Collection,
   progress: (text: string) => void,
+  screenshot?: File,
 ) {
   const request = async (url: string, options: RequestInit = {}) => {
     const response = await fetch(url, {
@@ -133,6 +134,7 @@ export async function uploadCollection(
     });
   };
   await upload(`${collection.sourcePhrase}_資料.json`, jsonBlob(collection));
+  if (screenshot) await upload(screenshot.name, screenshot);
   await upload(
     `${collection.sourcePhrase}_學習本.pdf`,
     await pdfBlob(collection),

@@ -372,6 +372,25 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
   const [studentFinderOpen, setStudentFinderOpen] = useState(false);
+  const [publisherFocusRequest, setPublisherFocusRequest] = useState(0);
+  useEffect(() => {
+    if (!publisherFocusRequest) return;
+    const entry = document.getElementById("curriculum-entry");
+    if (!entry) return;
+    const focusPublisher = () => {
+      const publisher = entry.querySelector<HTMLSelectElement>("[data-curriculum-publisher]");
+      if (!publisher) return;
+      const details = publisher.closest("details");
+      if (details) details.open = true;
+      publisher.scrollIntoView({ block: "center" });
+      publisher.focus({ preventScroll: true });
+      observer.disconnect();
+    };
+    const observer = new MutationObserver(focusPublisher);
+    observer.observe(entry, { childList: true, subtree: true });
+    focusPublisher();
+    return () => observer.disconnect();
+  }, [publisherFocusRequest]);
   const [input, setInput] = useState(restored.input);
   const [phrase, setPhrase] = useState(restored.phrase);
   const [positions, setPositions] = useState(restored.positions);
@@ -741,7 +760,9 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       setError(`匯入失敗：${err(e)}`);
     }
   }
+  const [driveScreenshot, setDriveScreenshot] = useState<File>();
   async function openDrive() {
+    setDriveScreenshot(undefined);
     setModal("drive");
     setError("");
     if (CLIENT_ID) {
@@ -761,7 +782,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       const token = await authorize();
       await saveCollection(collection);
       await refresh();
-      const result = await uploadCollection(token, collection, setBusy);
+      const result = await uploadCollection(token, collection, setBusy, driveScreenshot);
       setDriveResult(result);
       setNotice("Google Drive 上傳完成。");
     } catch (e) {
@@ -949,7 +970,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               <>
                 {!backendMode && <section className="adventure-welcome" aria-label="生字探索旅程">
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
-                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={() => setStudentFinderOpen(true)}><Play size={20}/>開始學習</a></div>
+                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={() => { setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}><Play size={20}/>開始學習</a></div>
+                  <p>AI 造句練習會產生 AI 評分費用，請依老師通知的開放時段使用。</p>
                   <BirdMascot />
                   <div className="adventure-tools">{studentPageTools}</div>
                 </section>}
@@ -2204,6 +2226,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   建立「生字動畫收藏本」專用資料夾，上傳 JSON、PDF 與逐字
                   PNG。本機收藏會先保留。
                 </p>
+                {!driveResult && <label>附加截圖（選填）
+                  <input type="file" accept="image/png,image/jpeg,image/webp" disabled={!!busy}
+                    onChange={event=>setDriveScreenshot(event.target.files?.[0])}/>
+                </label>}
                 {driveResult ? (
                   <div className="drive-success">
                     <Check size={30} />

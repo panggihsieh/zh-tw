@@ -13,7 +13,7 @@ import CurriculumDatabase from "./CurriculumDatabase";
 import WritingPractice from "./WritingPractice";
 import GameReview from "./GameReview";
 import SentenceCompetition from "./SentenceCompetition";
-import SentencePractice from "./SentencePractice";
+import SentencePractice from "./TimedSentencePractice";
 import CharacterStructureGame from "./CharacterStructureGame";
 import CompetitionPlay from "./CompetitionPlay";
 import type { LessonContext } from "./curriculumLearning";
@@ -31,7 +31,8 @@ const games = [
     icon: PenLine,
   },
 ];
-function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competition' {
+function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competition' | 'strokes' {
+  if(window.location.hash==="#games/strokes")return "strokes";
   return window.location.hash.startsWith('#games/competition') ? 'competition' : window.location.hash === '#games/sentence-practice' ? 'practice' : window.location.hash === '#games/sentence' ? 'sentences' : /^#games\/structure(?:\/|$)/.test(window.location.hash) ? 'structure' : 'hub';
 }
 export default function GameZone() {
@@ -46,7 +47,7 @@ export default function GameZone() {
     [competitionAvailable,setCompetitionAvailable]=useState(false),
     [structureTasks,setStructureTasks]=useState<WritingAssignment[]>([]),
     [assignments,setAssignments]=useState<WritingAssignment[]>([]),
-    [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "practice" | "sentences" | "structure" | "competition">(gameView),
+    [view, setView] = useState<ReturnType<typeof gameView> | "choose" | "writing" | "works">(gameView),
     [course, setCourse] = useState<{
       characters: string[];
       context: LessonContext;
@@ -115,14 +116,19 @@ export default function GameZone() {
         </div>
       </header>
       <main className="game-main">
-        {!ready ? (
+        {view === "strokes" ? (
+          <WritingPractice user={null} characters={["永","字","學"]} lesson="筆順自由練習"
+            onBack={()=>{window.location.hash="games";setView("hub");}}/>
+        ) : view === "structure" ? (
+          <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/>
+        ) : !ready ? (
           <p role="status">確認登入狀態…</p>
         ) : !user ? (
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='practice'?'一字多詞 AI 造句':view==='sentences'?'語詞 AI 造句競賽':view==='structure'?'生字結構遊戲':'遊戲專區'}</h1>
-            <p>{view==='competition'?'登入後輸入老師提供的四碼開課代碼。':view==='practice'?'登入後輸入語詞、選一個字，再用語音完成造句。':view==='sentences'?'登入後參加老師派送的南一高年級限時造句競賽。':view==='structure'?'登入後看生字、選結構，認識部件的位置。':'語詞 AI 造句遊戲、生字結構遊戲，選一個開始練習！'}</p>
+            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='practice'?'一字多詞 AI 造句':view==='sentences'?'語詞 AI 造句競賽':'遊戲專區'}</h1>
+            <p>{view==='practice'?'登入後輸入老師提供的限時開課代碼。':'生字結構可直接練習，課堂活動請先登入。'}</p>
             <button
               className="primary"
               disabled={!cloudConfigured || busy}
@@ -138,8 +144,10 @@ export default function GameZone() {
               改用整頁登入
             </button>
             {!cloudConfigured && <p>尚未設定 Google 登入。</p>}
+            <a className="secondary" href="#games/structure">免登入玩生字結構</a>
+            <a className="secondary" href="#games/strokes">免登入練習筆順</a>
           </section>
-        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "structure" ? <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
+        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
           <WritingPractice
             key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}

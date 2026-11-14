@@ -153,7 +153,7 @@ export function createStructureServer({
       throw new Error("API 未回傳文字結果");
     return content;
   }
-  const sentenceHandler = quizStore && createSentenceHandler({store:quizStore,origins,analyze:async(mode,data)=>{
+  const sentenceHandler = quizStore && createSentenceHandler({store:quizStore,origins,requirePracticeCode:true,analyze:async(mode,data)=>{
     const config=await settings();
     if(config.enabled===false||!config.model||(config.provider!=='ollama'&&!config.apiKey))throw Error('請先在 API 設定啟用文字模型與金鑰。');
     const instruction=mode==='correct'

@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { randomUUID, randomInt } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { writingIdentity } from './writing-api.mjs';
 const bank=JSON.parse(await readFile(new URL('./sentence-bank.json',import.meta.url),'utf8'));
@@ -64,7 +64,7 @@ export function validateTeacherGrade(v) {
   return {targetOk:v.targetOk,idiom:v.idiom,fluency:v.fluency,feedback:v.feedback,elements,total:v.targetOk?v.idiom+Object.values(elements).reduce((a,b)=>a+b,0)+v.fluency:0};
 }
 async function body(req) {let n=0,chunks=[];for await(const c of req){n+=c.length;if(n>30000)fail('請求資料過大。',413);chunks.push(c);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));}
-export function createSentenceHandler({store,origins,authenticate=writingIdentity,analyze,now=()=>Date.now()}) {
+export function createSentenceHandler({store,origins,authenticate=writingIdentity,analyze,now=()=>Date.now(),requirePracticeCode=false}) {
   const grading=new Set();
   async function scan(prefix){let cursor,items=[],pages=0;do{const p=await store.list(prefix,cursor);items.push(...await Promise.all(p.names.map(async name=>(await store.get(name)).value)));cursor=p.nextCursor;if(++pages>30)fail('資料量過大，請分批查詢。');}while(cursor);return items;}
   const eventKey=id=>`sentence-events/${id}.json`;
@@ -72,6 +72,12 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
   const answerKey=(id,uid,qid)=>`sentence-answers/${id}/${uid}/${qid}.json`;
   const access=(event,u)=>u.admin||!event.roster.length||event.roster.includes(u.email.toLowerCase());
   const active=e=>e.status==='running'&&now()<e.endsAt;
+  async function practiceRoom(code,user){
+    if(typeof code!=='string'||!/^[A-Z2-9]{4}$/.test(code))fail('請輸入老師提供的開課代碼。',403);
+    const room=await store.get(`sentence-practice-sessions/${code}.json`).then(record=>record.value,error=>{if(error.status===404)return null;throw error;});
+    if(!room||room.expiresAt<=now()||!room.roster.includes(user.email.toLowerCase()))fail('造句尚未開放、已結束，或帳號不在班級名冊內。',403);
+    return room;
+  }
   const publicEvent=(e,admin)=>admin?e:{id:e.id,title:e.title,lessons:e.lessons,minutes:e.minutes,status:e.status,startsAt:e.startsAt,endsAt:e.endsAt,questions:e.questions.map(q=>({id:q.id,character:q.character,reading:q.reading}))};
   return async(req,res)=>{
     const send=(status,v)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(v));};
@@ -80,8 +86,28 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
     try {
       const url=new URL(req.url,'http://localhost');
       const path=url.pathname.replace('/api/structure/sentence','');
+      if(req.method==='POST'&&path==='/practice/open'){
+        if(!user.admin)fail('僅教師可開放造句。',403);
+        const {minutes,roster}=await body(req);
+        if(!Number.isInteger(minutes)||minutes<1||minutes>120||!Array.isArray(roster)||!roster.length||roster.length>100||roster.some(email=>typeof email!=='string'||email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)))fail('請選擇有學生帳號的班級，並設定 1–120 分鐘。');
+        const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        for(let attempt=0;attempt<12;attempt++){
+          const code=Array.from({length:4},()=>alphabet[randomInt(alphabet.length)]).join('');
+          const expiresAt=now()+minutes*60000;
+          try{
+            await store.create(`sentence-practice-sessions/${code}.json`,{expiresAt,roster:roster.map(email=>email.toLowerCase())});
+            return send(201,{code,expiresAt});
+          }catch(error){if(error.status!==412)throw error;}
+        }
+        fail('暫時無法建立開課代碼。',409);
+      }
+      if(req.method==='POST'&&path==='/practice/access'){
+        const room=await practiceRoom((await body(req)).code,user);
+        return send(200,{expiresAt:room.expiresAt,now:now()});
+      }
       if(path==='/practice/correct'&&req.method==='POST'){
         const v=await body(req);
+        if(requirePracticeCode)await practiceRoom(v.code,user);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入1–8個中文字、選擇其中一個字，並先說一句話。');
         const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript,lessonTitle:typeof v.lessonTitle==='string'?v.lessonTitle.trim().slice(0,100):undefined});
         const suggestion=result?.sentence;
@@ -90,6 +116,7 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       }
       if(path==='/practice/grade'&&req.method==='POST'){
         const v=await body(req);
+        if(requirePracticeCode)await practiceRoom(v.code,user);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
         if(v.lessonTitle!==undefined&&(typeof v.lessonTitle!=='string'||v.lessonTitle.length>100))fail('課文名稱格式不符。');
         const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence,...(v.lessonTitle?.trim()?{lessonTitle:v.lessonTitle.trim()}: {})});
