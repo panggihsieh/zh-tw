@@ -17,6 +17,7 @@ import SentencePractice from "./SentencePractice";
 import CharacterStructureGame from "./CharacterStructureGame";
 import CompetitionPlay from "./CompetitionPlay";
 import type { LessonContext } from "./curriculumLearning";
+import { competitionRequest } from "./competitionApi";
 import { useSiteTheme } from "./siteThemes";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
 import {submitGame,writingAssignments,type WritingAssignment} from './gameApi';
@@ -42,6 +43,7 @@ export default function GameZone() {
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
+    [competitionAvailable,setCompetitionAvailable]=useState(false),
     [structureTasks,setStructureTasks]=useState<WritingAssignment[]>([]),
     [assignments,setAssignments]=useState<WritingAssignment[]>([]),
     [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "practice" | "sentences" | "structure" | "competition">(gameView),
@@ -62,7 +64,9 @@ export default function GameZone() {
       setCourse(null);
       setView(gameView());
       setStructureTasks([]);
+      setCompetitionAvailable(false);
       if(u)void gameRequest("/structure-assignments").then(value=>setStructureTasks(value.items)).catch(()=>{});
+      if(u)void competitionRequest<{available:boolean}>("/available").then(value=>setCompetitionAvailable(value.available)).catch(()=>{});
       if(u)void writingAssignments().then(value=>setAssignments(value.items.filter(item=>!item.submitted))).catch(error=>setMessage(error.message));else setAssignments([]);
     });
   }, []);
@@ -209,26 +213,20 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽（全班）</h2><p>輸入老師提供的四碼代碼，依老師開設的課堂進行即時答題或 AI 語音造句，並查看競賽排名。</p><button className="primary" onClick={()=>{window.location.hash='games/competition';setView('competition');}}>輸入開課代碼 →</button></article>
-                  <article className="game-tile"><div className="game-icon"><Sparkles size={34}/></div><span className="game-pill">自由練習 × AI 等第</span><h2>一字多詞 AI 造句（個人）</h2><p>輸入語詞、選一個字，用即時語音說句子，再做同音語意校正與流暢美感評量。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence-practice';setView('practice');}}>開始自由造句 →</button></article>
-                  <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲（個人）</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件。可自由練習，也可開啟老師提供的課文生字練習連結。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽（全班）</h2><p>輸入老師提供的四碼代碼，依老師開設的課堂進行即時答題或 AI 語音造句，並查看競賽排名。</p><button className="primary" disabled={!competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
-                      <div className="game-icon">
-                        <g.icon size={34} />
-                      </div>
-                      <span className="game-pill">個人作業 × 書寫</span>
-                      <h2>{g.title}</h2>
+                      <div className="game-icon"><g.icon size={34} /></div>
+                      <span className="game-pill">全班派發 × 個人書寫</span>
+                      <h2>{g.title}（全班）</h2>
                       <p>{g.description}</p>
-                      <button
-                        className="primary"
-                        disabled={!assignments.length}
-                        onClick={() => assignments[0]&&startWritingAssignment(assignments[0])}
-                      >
+                      <button className="primary" disabled={!assignments.length} onClick={() => assignments[0]&&startWritingAssignment(assignments[0])}>
                         {assignments.length ? "開始個人作業 →" : "目前沒有待完成作業"}
                       </button>
                     </article>
                   ))}
+                  <article className="game-tile"><div className="game-icon"><Sparkles size={34}/></div><span className="game-pill">自由練習 × AI 等第</span><h2>一字多詞 AI 造句（個人）</h2><p>輸入語詞、選一個字，用即時語音說句子，再做同音語意校正與流暢美感評量。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence-practice';setView('practice');}}>開始自由造句 →</button></article>
+                  <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲（個人）</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件。可自由練習，也可開啟老師提供的課文生字練習連結。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
                 </div>
                 <p className="game-future">
                   老師指派的書寫內容會顯示在個人作業；自行選課文則屬自由練習，不會列入班級作業進度。

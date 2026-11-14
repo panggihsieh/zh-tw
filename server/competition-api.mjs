@@ -45,6 +45,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   let user;try{user=await authenticate(req);}catch{return send(401,{error:'請先登入 Google 帳號'});}
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname.replace('/api/structure/competition','');
+   if(path==='/available'&&req.method==='GET'){const available=(await scan('competition-rooms/')).some(room=>room&&room.archivedAt==null&&room.status==='lobby'&&permitted(room,user));return send(200,{available});}
    if(path==='/rooms'&&req.method==='GET'){if(!user.admin)fail('僅管理者可查看開課紀錄。',403);return send(200,{items:(await scan('competition-rooms/')).filter(room=>room && room.archivedAt == null).sort((a,b)=>b.createdAt-a.createdAt).map(v=>publicRoom(v,true))});}
    if(path==='/rooms'&&req.method==='POST'){
     if(!user.admin)fail('僅管理者可建立競賽。',403);const input=validateRoomInput(await requestBody(req));const used=new Set((await scan('competition-rooms/')).filter(v=>v.status!=='closed').map(v=>v.code));let code='';for(let i=0;i<20&&!code;i++){const candidate=makeRoomCode(random);if(!used.has(candidate))code=candidate;}if(!code)fail('暫時無法產生開課代碼。',409);
