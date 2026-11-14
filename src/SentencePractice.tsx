@@ -352,19 +352,21 @@ export default function SentencePractice({
           </button>
           {grade && (
             <article className="practice-grade" aria-live="polite">
-          {grade.polished && (() => {
-            const { originalParts, polishedParts } = compareSentences(sentence.trim(), grade.polished);
+          {(grade.polished || grade.fullScoreExample || grade.creativeExample) && (() => {
+            const { originalParts, polishedParts } = compareSentences(sentence.trim(), grade.polished || sentence.trim());
             return <section className="practice-comparison">
               <h3>AI 潤稿</h3>
               <p>原句：{originalParts}</p>
-              <p>建議句：{polishedParts}</p>
+              {grade.polished && <p><strong>原句潤稿：</strong>{polishedParts}</p>}
+              {grade.fullScoreExample && <p><strong>滿分規準示例（參考）：</strong>{grade.fullScoreExample}</p>}
+              {grade.creativeExample && <p><strong>AI 創意示例：</strong>{grade.creativeExample}</p>}
               {grade.issueReason && <p>{grade.issueReason}</p>}
             </section>;
           })()}
               <div className="practice-level"><span>AI 建議等第</span><strong>{grade.level}</strong></div>
               <p className="practice-total">總分 {grade.total === null ? "待確認" : `${grade.total}／100`}
-                {grade.total !== null && (() => {
-                  const stars = Math.max(1, Math.ceil(grade.total / 20));
+                {grade.total !== null && grade.total > 0 && (() => {
+                  const stars = [60, 70, 80, 90].filter((threshold) => grade.total! >= threshold).length + 1;
                   return <span className="practice-stars" role="img" aria-label={`五顆星中獲得 ${stars} 顆`}>
                     {"★".repeat(stars)}{"☆".repeat(5 - stars)}
                   </span>;

@@ -48,9 +48,14 @@ export function gradePractice(sentence,character,analysis) {
   const total=analysis.uncertain?null:targetOk?Object.values(scores).reduce((sum,score)=>sum+score,0):0;
   const level=total===null?'待確認':total>=92?'優等':total>=75?'甲等':total>=50?'乙等':'待加強';
   const issue = bounded(analysis.issue, 100) && sentence.includes(analysis.issue) ? analysis.issue : '';
-  const polished = bounded(analysis.polished, 400) && analysis.polished.includes(character) ? analysis.polished.trim() : '';
+  const validExample = (value) => bounded(value, 400) && value.includes(character) ? value.trim() : '';
+  const polished = validExample(analysis.polished);
+  const fullScore = validExample(analysis.fullScoreExample);
+  const creative = validExample(analysis.creativeExample);
+  const fullScoreExample = fullScore === sentence || fullScore === polished ? '' : fullScore;
+  const creativeExample = [sentence, polished, fullScoreExample].includes(creative) ? '' : creative;
   return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback,
-    issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished};
+    issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished, fullScoreExample, creativeExample};
 }
 export function validateTeacherGrade(v) {
   if(!v||typeof v.targetOk!=='boolean'||![0,40].includes(v.idiom)||!Number.isInteger(v.fluency)||v.fluency<0||v.fluency>10||!bounded(v.feedback,1200)||!v.elements||['person','event','time','place','object'].some(k=>![0,10].includes(v.elements[k])))fail('覆核配分不符：成語0/40、人事時地物各0/10、順暢0–10。');

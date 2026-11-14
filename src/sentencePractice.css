@@ -24,5 +24,6 @@
 .practice-score-grid>div { display:grid;gap:6px;padding:14px;background:var(--theme-background,#eef9df);border-radius:12px;text-align:center; }
 .practice-score-grid strong { font-size:24px;color:var(--theme-dark,#075d3e); }
 @media(max-width:620px){.practice-step{grid-template-columns:1fr}.practice-step-number{width:36px;height:36px;font-size:18px}.practice-speech-actions>*{width:100%;margin:0!important}}
+.practice-comparison p { font-size: clamp(1.25rem, 1.1rem + 0.65vw, 1.65rem); line-height: 1.55; overflow-wrap: anywhere; }
 .practice-comparison :is(del, ins) { color: #a21a24; font-weight: 700; }
 .practice-comparison ins { text-decoration: none; }

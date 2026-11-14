@@ -6,6 +6,8 @@ export interface SentenceGrade {targetOk:boolean;readingOk:boolean;idiom:{text:s
 export interface TeacherSentenceGrade {targetOk:boolean;idiom:number;elements:Record<keyof typeof elementLabels,number>;fluency:number;feedback:string;total?:number}
 export interface SentencePracticeGrade {
   polished?: string;
+  fullScoreExample?: string;
+  creativeExample?: string;
   issue?: string;
   issueReason?: string;
 }
