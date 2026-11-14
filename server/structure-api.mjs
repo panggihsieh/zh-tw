@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomBytes } from "node:crypto";
 import { authenticateAdmin } from "./admin-auth.mjs";
+import { isIP } from "node:net";
 import { createQuizHandler } from './quiz-api.mjs';
 import { createSentenceHandler } from './sentence-api.mjs';
 import { createCompetitionHandler } from './competition-api.mjs';
@@ -199,6 +200,59 @@ export function createStructureServer({
     return {...result,aiCheck:{model:config.model,checkedAt:new Date().toISOString(),checks:check.checks,notice:'AI 檢查通過僅代表未發現疑點，仍需教師審定'}};
   }});
   return http.createServer(async (req, res) => {
+    const pathname = (req.url || "").split("?")[0];
+    const candidate = cloud ? req.headers["x-forwarded-for"]?.split(",").at(-1)?.trim() : req.socket.remoteAddress;
+    const ip = candidate && isIP(candidate) ? candidate : null;
+    if (quizStore && pathname.startsWith("/api/structure/")) {
+      const reply = (status, value) => {
+        res.writeHead(status, {"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});
+        res.end(JSON.stringify(value));
+      };
+      const lookup = key => quizStore.get(key).catch(error => {
+        if (error.status === 404) return null;
+        throw error;
+      });
+      try {
+        if (pathname === "/api/structure/security") {
+          if (req.method !== "GET") return reply(405, {error:"不支援此操作"});
+          try { await authenticate(req); } catch { return reply(401, {error:"請以管理者帳號登入"}); }
+          const page = await quizStore.list("security-events/");
+          const items = await Promise.all(page.names.sort().slice(0,50).map(async name => {
+            const { value } = await quizStore.get(name);
+            const block = value.ip && await lookup(`security-blocks/${value.ip}.json`);
+            return {...value, blocked: !!block && block.value.until > Date.now()};
+          }));
+          return reply(200, {items});
+        }
+        if (pathname === "/api/structure/security/block") {
+          if (req.method !== "POST" || !origins.includes(req.headers.origin) || req.headers["x-notebook-request"] !== "structure-settings")
+            return reply(403, {error:"不允許的來源"});
+          try { await authenticate(req); } catch { return reply(401, {error:"請以管理者帳號登入"}); }
+          const target = req.headers["x-security-ip"];
+          if (typeof target !== "string" || !isIP(target) || target === ip) return reply(400,{error:"IP 無效或與管理者目前來源相同"});
+          const key = `security-blocks/${target}.json`;
+          const previous = await lookup(key);
+          const value = {until: req.headers["x-security-action"] === "unblock" ? 0 : Date.now()+900000};
+          if (previous) await quizStore.update(key,value,previous.generation);
+          else await quizStore.create(key,value);
+          return reply(200,{ok:true});
+        }
+        const block = ip && await lookup(`security-blocks/${ip}.json`);
+        if (block && block.value.until > Date.now()) return reply(403,{error:"此來源暫時禁止使用 API"});
+        res.once("finish",()=>{
+          const status=res.statusCode;
+          if (![401,403,429].includes(status)) return;
+          const at=Date.now();
+          const kind=status===401 ? (req.headers.authorization ? "登入憑證驗證失敗" : "未登入存取")
+            : status===429 ? "觸發請求限制" : "存取遭拒";
+          void quizStore.create(`security-events/${9999999999999-at}-${globalThis.crypto.randomUUID()}.json`,{
+            at,ip,status,kind,route:pathname.split("/").slice(0,4).join("/")
+          }).catch(()=>console.error("無法寫入安全事件"));
+        });
+      } catch {
+        return reply(503,{error:"安全紀錄服務暫時無法使用"});
+      }
+    }
     if(req.url?.startsWith('/api/structure/sentence/') && sentenceHandler) return sentenceHandler(req,res);
     if(req.url?.startsWith('/api/structure/competition/') && competitionHandler) return competitionHandler(req,res);
     if(req.url?.startsWith('/api/structure/quiz/') && quizHandler) return quizHandler(req,res);

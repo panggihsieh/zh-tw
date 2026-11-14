@@ -115,13 +115,15 @@ const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions";
+type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+const SecurityLog = lazy(() => import("./SecurityLog"));
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
   "structure-assignment": "生字結構遊戲指派",
   sentences: "一字多詞造句競賽管理",
   competition: "Kahoot 競賽開課管理",
   versions: "提交版本紀錄",
+  security: "安全事件紀錄",
   quiz: "資料庫管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
@@ -905,6 +907,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "tts", label: "TTS 設定後台", icon: Settings2 },
                 { section: "themes", label: "網站樣式資料庫", icon: Palette },
                 { section: "versions", label: "提交版本紀錄", icon: FileText },
+                { section: "security", label: "安全事件紀錄", icon: FileText },
               ] },
             ] as { title: string; items: { section: BackendSection; label: string; icon?: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => {
               const buttons = items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
@@ -2088,6 +2091,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
+                  {backendSection === "security" && <SecurityLog />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
                   {structureSections.some(section => section === backendSection) && (
                     <div className="competition-actions" role="group" aria-label="字形結構分頁">
