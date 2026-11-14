@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { simpleStructure } from './StructureAssignment';
+import { useEffect, useState } from 'react';
 import { RotateCcw, Shapes } from 'lucide-react';
 import './characterStructureGame.css';
 
@@ -27,19 +28,39 @@ function newRound() {
 }
 export default function CharacterStructureGame({ onBack }: { onBack: () => void }) {
   const [round, setRound] = useState(newRound);
+  const assignment = location.hash.split('/')[2];
+  const [loading, setLoading] = useState(Boolean(assignment));
+  const [error, setError] = useState("");
+  useEffect(() => {
+    if (!assignment) return;
+    let active = true;
+    void fetch(import.meta.env.BASE_URL + "structure-review/ids-catalog.json")
+      .then(response => { if (!response.ok) throw Error(); return response.json(); })
+      .then((ids: Record<string,string>) => {
+        const items = [...new Set(decodeURIComponent(assignment))].slice(0,8).flatMap(character => {
+          const parsed = simpleStructure(ids[character]);
+          return parsed ? [{ character, ...parsed, explanation: "部件拆解依字形資料，供練習參考。" }] : [];
+        });
+        if (!items.length) throw Error();
+        if (active) setRound(items);
+      })
+      .catch(() => { if (active) setError("這份練習沒有可用題目。"); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, [assignment]);
   const [answers, setAnswers] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const done = index === round.length;
   const current = round[index];
   const chosen = answers[index];
   const score = answers.filter((answer, i) => answer === round[i].structure).length;
-  function restart() { setRound(newRound()); setAnswers([]); setIndex(0); }
+  function restart() { if (!assignment) setRound(newRound()); setAnswers([]); setIndex(0); }
   return <section className="structure-game">
     <button className="secondary" onClick={onBack}>返回遊戲專區</button>
     <h1><Shapes aria-hidden="true" /> 生字結構遊戲</h1>
     <p>看一看，這個字的部件是怎麼排在一起的？</p>
-    <p>基礎練習：左右、上下與全包圍。每回合8題，練習字卡不限定課別。</p>
-    {done ? <>
+    <p>{assignment ? "老師選定的生字 · 左右、上下與全包圍" : "基礎練習：左右、上下與全包圍。每回合8題。"}</p>
+    {loading ? <p role="status">載入題目中…</p> : error ? <p role="alert">{error}</p> : done ? <>
       <h2>完成了！答對 {score}／{round.length} 題</h2>
       <p>再看看這一回合的字，認識部件的位置。</p>
       <ul>{round.map((q, i) => <li key={q.character}>{q.character}：{q.structure}結構 · {answers[i] === q.structure ? '答對了' : `你選了${answers[i]}`}。{q.explanation}</li>)}</ul>

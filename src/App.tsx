@@ -56,6 +56,7 @@ import { structureProfile } from "./structureProfiles";
 import SpeechTools, { SpeechContext } from "./SpeechTools";
 import TtsSettings from "./TtsSettings";
 import BackendApi from "./StructureAiSettings";
+import StructureAssignment from "./StructureAssignment";
 import BackendStructure from "./StructureHelp";
 import OfficialDictionary, { loadDictionary, lookupEntries } from "./OfficialDictionary";
 import ReadAlong from "./ReadAlong";
@@ -109,9 +110,10 @@ const GameReview = lazy(() => import('./GameReview'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
+type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
 const backendTitles: Record<BackendSection, string> = {
   sentences: "一字多詞造句競賽管理",
+  "structure-assignment": "生字結構遊戲指派",
   competition: "Kahoot 競賽開課管理",
   versions: "提交版本紀錄",
   quiz: "資料庫管理",
@@ -809,6 +811,7 @@ function App() {
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
 
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
+            {backendMode && <button className={backendSection==="structure-assignment"?"nav-item active":"nav-item"} onClick={()=>openBackendSection("structure-assignment")}>生字結構遊戲指派</button>}
             {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>資料庫管理</button>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
             {backendMode && <button className={backendSection==='competition'?'nav-item active':'nav-item'} aria-current={backendSection==='competition'?'page':undefined} onClick={()=>openBackendSection('competition')}>Kahoot 競賽開課</button>}
@@ -2035,6 +2038,7 @@ function App() {
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
+                  {backendSection === "structure-assignment" && <StructureAssignment />}
                   {backendSection === "structure" && <BackendStructure />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
                     const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
