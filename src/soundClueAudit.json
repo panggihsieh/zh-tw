@@ -1,0 +1,7471 @@
+{
+  "丁": {
+    "status": "pending"
+  },
+  "乃": {
+    "status": "pending"
+  },
+  "了": {
+    "status": "pending"
+  },
+  "人": {
+    "status": "pending"
+  },
+  "入": {
+    "status": "pending"
+  },
+  "刀": {
+    "status": "pending"
+  },
+  "力": {
+    "status": "pending"
+  },
+  "又": {
+    "status": "pending"
+  },
+  "丈": {
+    "status": "pending"
+  },
+  "上": {
+    "status": "pending"
+  },
+  "下": {
+    "status": "pending"
+  },
+  "丫": {
+    "status": "pending"
+  },
+  "久": {
+    "status": "pending"
+  },
+  "乞": {
+    "status": "pending"
+  },
+  "也": {
+    "status": "pending"
+  },
+  "亡": {
+    "status": "pending"
+  },
+  "兀": {
+    "status": "pending"
+  },
+  "凡": {
+    "status": "pending"
+  },
+  "刃": {
+    "status": "pending"
+  },
+  "勺": {
+    "status": "pending"
+  },
+  "千": {
+    "status": "pending"
+  },
+  "口": {
+    "status": "pending"
+  },
+  "土": {
+    "status": "pending"
+  },
+  "士": {
+    "status": "pending"
+  },
+  "夕": {
+    "status": "pending"
+  },
+  "大": {
+    "status": "pending"
+  },
+  "女": {
+    "status": "pending"
+  },
+  "子": {
+    "status": "pending"
+  },
+  "寸": {
+    "status": "pending"
+  },
+  "小": {
+    "status": "pending"
+  },
+  "山": {
+    "status": "pending"
+  },
+  "川": {
+    "status": "pending"
+  },
+  "工": {
+    "status": "pending"
+  },
+  "己": {
+    "status": "pending"
+  },
+  "已": {
+    "status": "pending"
+  },
+  "巾": {
+    "status": "pending"
+  },
+  "干": {
+    "status": "pending"
+  },
+  "弓": {
+    "status": "pending"
+  },
+  "才": {
+    "status": "pending"
+  },
+  "不": {
+    "status": "pending"
+  },
+  "丐": {
+    "status": "pending"
+  },
+  "丑": {
+    "status": "pending"
+  },
+  "中": {
+    "status": "pending"
+  },
+  "丹": {
+    "status": "pending"
+  },
+  "之": {
+    "status": "pending"
+  },
+  "予": {
+    "status": "pending"
+  },
+  "互": {
+    "status": "pending"
+  },
+  "井": {
+    "status": "pending"
+  },
+  "亢": {
+    "status": "pending"
+  },
+  "什": {
+    "status": "pending"
+  },
+  "仁": {
+    "status": "pending"
+  },
+  "仆": {
+    "status": "pending"
+  },
+  "仇": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "九"
+  },
+  "今": {
+    "status": "pending"
+  },
+  "介": {
+    "status": "pending"
+  },
+  "仍": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "乃"
+  },
+  "元": {
+    "status": "pending"
+  },
+  "內": {
+    "status": "pending"
+  },
+  "公": {
+    "status": "pending"
+  },
+  "凶": {
+    "status": "pending"
+  },
+  "分": {
+    "status": "pending"
+  },
+  "切": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "七"
+  },
+  "勾": {
+    "status": "pending"
+  },
+  "勿": {
+    "status": "pending"
+  },
+  "化": {
+    "status": "pending"
+  },
+  "匹": {
+    "status": "pending"
+  },
+  "升": {
+    "status": "pending"
+  },
+  "午": {
+    "status": "pending"
+  },
+  "及": {
+    "status": "pending"
+  },
+  "友": {
+    "status": "pending"
+  },
+  "反": {
+    "status": "pending"
+  },
+  "天": {
+    "status": "pending"
+  },
+  "太": {
+    "status": "pending"
+  },
+  "夫": {
+    "status": "pending"
+  },
+  "孔": {
+    "status": "pending"
+  },
+  "少": {
+    "status": "pending"
+  },
+  "尤": {
+    "status": "pending"
+  },
+  "尺": {
+    "status": "pending"
+  },
+  "巴": {
+    "status": "pending"
+  },
+  "幻": {
+    "status": "pending"
+  },
+  "引": {
+    "status": "pending"
+  },
+  "心": {
+    "status": "pending"
+  },
+  "戶": {
+    "status": "pending"
+  },
+  "手": {
+    "status": "pending"
+  },
+  "扎": {
+    "status": "documented",
+    "component": "乙"
+  },
+  "支": {
+    "status": "pending"
+  },
+  "文": {
+    "status": "pending"
+  },
+  "斗": {
+    "status": "pending"
+  },
+  "斤": {
+    "status": "pending"
+  },
+  "方": {
+    "status": "pending"
+  },
+  "日": {
+    "status": "pending"
+  },
+  "曰": {
+    "status": "pending"
+  },
+  "月": {
+    "status": "pending"
+  },
+  "木": {
+    "status": "pending"
+  },
+  "欠": {
+    "status": "pending"
+  },
+  "止": {
+    "status": "pending"
+  },
+  "毋": {
+    "status": "pending"
+  },
+  "比": {
+    "status": "pending"
+  },
+  "毛": {
+    "status": "pending"
+  },
+  "氏": {
+    "status": "pending"
+  },
+  "水": {
+    "status": "pending"
+  },
+  "火": {
+    "status": "pending"
+  },
+  "爪": {
+    "status": "pending"
+  },
+  "父": {
+    "status": "pending"
+  },
+  "片": {
+    "status": "pending"
+  },
+  "牙": {
+    "status": "pending"
+  },
+  "牛": {
+    "status": "pending"
+  },
+  "王": {
+    "status": "pending"
+  },
+  "且": {
+    "status": "pending"
+  },
+  "世": {
+    "status": "pending"
+  },
+  "丘": {
+    "status": "pending"
+  },
+  "主": {
+    "status": "pending"
+  },
+  "乍": {
+    "status": "pending"
+  },
+  "乎": {
+    "status": "pending"
+  },
+  "乏": {
+    "status": "pending"
+  },
+  "仔": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "子"
+  },
+  "他": {
+    "status": "pending"
+  },
+  "仗": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "丈"
+  },
+  "付": {
+    "status": "pending"
+  },
+  "仙": {
+    "status": "pending"
+  },
+  "代": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "弋"
+  },
+  "令": {
+    "status": "pending"
+  },
+  "以": {
+    "status": "pending"
+  },
+  "兄": {
+    "status": "pending"
+  },
+  "充": {
+    "status": "pending"
+  },
+  "冊": {
+    "status": "pending"
+  },
+  "冬": {
+    "status": "pending"
+  },
+  "凸": {
+    "status": "pending"
+  },
+  "凹": {
+    "status": "pending"
+  },
+  "出": {
+    "status": "pending"
+  },
+  "刊": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "干"
+  },
+  "功": {
+    "status": "pending"
+  },
+  "加": {
+    "status": "pending"
+  },
+  "包": {
+    "status": "pending"
+  },
+  "匆": {
+    "status": "pending"
+  },
+  "北": {
+    "status": "pending"
+  },
+  "半": {
+    "status": "pending"
+  },
+  "占": {
+    "status": "pending"
+  },
+  "卡": {
+    "status": "pending"
+  },
+  "卯": {
+    "status": "pending"
+  },
+  "去": {
+    "status": "pending"
+  },
+  "古": {
+    "status": "pending"
+  },
+  "句": {
+    "status": "pending"
+  },
+  "另": {
+    "status": "pending"
+  },
+  "叩": {
+    "status": "documented",
+    "semanticComponent": "卩",
+    "component": "口"
+  },
+  "只": {
+    "status": "pending"
+  },
+  "叫": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "丩"
+  },
+  "召": {
+    "status": "pending"
+  },
+  "叮": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "丁"
+  },
+  "可": {
+    "status": "pending"
+  },
+  "史": {
+    "status": "pending"
+  },
+  "右": {
+    "status": "pending"
+  },
+  "司": {
+    "status": "pending"
+  },
+  "叼": {
+    "status": "pending"
+  },
+  "外": {
+    "status": "pending"
+  },
+  "央": {
+    "status": "pending"
+  },
+  "失": {
+    "status": "documented",
+    "semanticComponent": "手",
+    "component": "乙",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A4%B1",
+    "firstRecordedAt": "2026-11-14T13:43:32.310Z"
+  },
+  "奶": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "乃",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A5%B6",
+    "firstRecordedAt": "2026-11-14T13:43:34.590Z"
+  },
+  "它": {
+    "status": "pending"
+  },
+  "尼": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "匕",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%BC",
+    "firstRecordedAt": "2026-11-14T13:44:02.049Z"
+  },
+  "左": {
+    "status": "pending"
+  },
+  "巧": {
+    "status": "documented",
+    "semanticComponent": "工",
+    "component": "丂",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B7%A7",
+    "firstRecordedAt": "2026-11-14T13:44:09.626Z"
+  },
+  "巨": {
+    "status": "pending"
+  },
+  "市": {
+    "status": "pending"
+  },
+  "布": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "父",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%83",
+    "firstRecordedAt": "2026-11-14T13:44:12.363Z"
+  },
+  "平": {
+    "status": "pending"
+  },
+  "幼": {
+    "status": "pending"
+  },
+  "必": {
+    "status": "pending"
+  },
+  "打": {
+    "status": "documented",
+    "component": "丁"
+  },
+  "扔": {
+    "status": "pending"
+  },
+  "斥": {
+    "status": "pending"
+  },
+  "旦": {
+    "status": "pending"
+  },
+  "未": {
+    "status": "pending"
+  },
+  "末": {
+    "status": "pending"
+  },
+  "本": {
+    "status": "pending"
+  },
+  "正": {
+    "status": "pending"
+  },
+  "母": {
+    "status": "pending"
+  },
+  "民": {
+    "status": "pending"
+  },
+  "永": {
+    "status": "pending"
+  },
+  "汁": {
+    "status": "documented",
+    "component": "十"
+  },
+  "犯": {
+    "status": "documented",
+    "component": "㔾"
+  },
+  "玄": {
+    "status": "pending"
+  },
+  "玉": {
+    "status": "pending"
+  },
+  "瓜": {
+    "status": "pending"
+  },
+  "瓦": {
+    "status": "pending"
+  },
+  "甘": {
+    "status": "pending"
+  },
+  "生": {
+    "status": "pending"
+  },
+  "用": {
+    "status": "pending"
+  },
+  "甩": {
+    "status": "pending"
+  },
+  "田": {
+    "status": "pending"
+  },
+  "由": {
+    "status": "pending"
+  },
+  "甲": {
+    "status": "pending"
+  },
+  "申": {
+    "status": "pending"
+  },
+  "白": {
+    "status": "pending"
+  },
+  "皮": {
+    "status": "pending"
+  },
+  "目": {
+    "status": "pending"
+  },
+  "矛": {
+    "status": "pending"
+  },
+  "石": {
+    "status": "pending"
+  },
+  "示": {
+    "status": "pending"
+  },
+  "禾": {
+    "status": "pending"
+  },
+  "穴": {
+    "status": "pending"
+  },
+  "立": {
+    "status": "pending"
+  },
+  "丞": {
+    "status": "pending"
+  },
+  "丟": {
+    "status": "pending"
+  },
+  "乒": {
+    "status": "pending"
+  },
+  "乓": {
+    "status": "pending"
+  },
+  "交": {
+    "status": "pending"
+  },
+  "亦": {
+    "status": "pending"
+  },
+  "仰": {
+    "status": "pending"
+  },
+  "仲": {
+    "status": "pending"
+  },
+  "件": {
+    "status": "pending"
+  },
+  "任": {
+    "status": "pending"
+  },
+  "份": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "分"
+  },
+  "仿": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "方"
+  },
+  "企": {
+    "status": "pending"
+  },
+  "伍": {
+    "status": "pending"
+  },
+  "伏": {
+    "status": "pending"
+  },
+  "伐": {
+    "status": "pending"
+  },
+  "休": {
+    "status": "pending"
+  },
+  "伙": {
+    "status": "pending"
+  },
+  "先": {
+    "status": "pending"
+  },
+  "光": {
+    "status": "pending"
+  },
+  "全": {
+    "status": "pending"
+  },
+  "共": {
+    "status": "pending"
+  },
+  "再": {
+    "status": "pending"
+  },
+  "冰": {
+    "status": "pending"
+  },
+  "划": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "戈"
+  },
+  "列": {
+    "status": "pending"
+  },
+  "匠": {
+    "status": "pending"
+  },
+  "印": {
+    "status": "pending"
+  },
+  "危": {
+    "status": "pending"
+  },
+  "吁": {
+    "status": "pending"
+  },
+  "吃": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "气"
+  },
+  "各": {
+    "status": "pending"
+  },
+  "合": {
+    "status": "pending"
+  },
+  "吉": {
+    "status": "pending"
+  },
+  "吊": {
+    "status": "pending"
+  },
+  "同": {
+    "status": "pending"
+  },
+  "名": {
+    "status": "pending"
+  },
+  "后": {
+    "status": "pending"
+  },
+  "吐": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "土"
+  },
+  "向": {
+    "status": "pending"
+  },
+  "吔": {
+    "status": "pending"
+  },
+  "回": {
+    "status": "pending"
+  },
+  "因": {
+    "status": "pending"
+  },
+  "在": {
+    "status": "pending"
+  },
+  "地": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "也",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%B0",
+    "firstRecordedAt": "2026-11-14T13:43:17.625Z"
+  },
+  "多": {
+    "status": "pending"
+  },
+  "她": {
+    "status": "pending"
+  },
+  "好": {
+    "status": "pending"
+  },
+  "如": {
+    "status": "pending"
+  },
+  "字": {
+    "status": "pending"
+  },
+  "存": {
+    "status": "documented",
+    "semanticComponent": "子",
+    "component": "才",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AD%98",
+    "firstRecordedAt": "2026-11-14T13:43:44.080Z"
+  },
+  "宇": {
+    "status": "pending"
+  },
+  "守": {
+    "status": "pending"
+  },
+  "安": {
+    "status": "pending"
+  },
+  "寺": {
+    "status": "pending"
+  },
+  "尖": {
+    "status": "pending"
+  },
+  "屹": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "乞",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%B9",
+    "firstRecordedAt": "2026-11-14T13:44:03.792Z"
+  },
+  "帆": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "凡",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%86",
+    "firstRecordedAt": "2026-11-14T13:44:11.660Z"
+  },
+  "年": {
+    "status": "pending"
+  },
+  "式": {
+    "status": "documented",
+    "semanticComponent": "工",
+    "component": "弋",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BC%8F",
+    "firstRecordedAt": "2026-11-14T13:44:21.397Z"
+  },
+  "忙": {
+    "status": "documented",
+    "component": "亡"
+  },
+  "戎": {
+    "status": "pending"
+  },
+  "成": {
+    "status": "pending"
+  },
+  "托": {
+    "status": "documented",
+    "component": "乇"
+  },
+  "扛": {
+    "status": "pending"
+  },
+  "收": {
+    "status": "documented",
+    "component": "丩"
+  },
+  "旨": {
+    "status": "pending"
+  },
+  "早": {
+    "status": "pending"
+  },
+  "曲": {
+    "status": "pending"
+  },
+  "曳": {
+    "status": "documented",
+    "component": "𠂆"
+  },
+  "有": {
+    "status": "pending"
+  },
+  "朵": {
+    "status": "pending"
+  },
+  "朽": {
+    "status": "pending"
+  },
+  "次": {
+    "status": "pending"
+  },
+  "此": {
+    "status": "pending"
+  },
+  "死": {
+    "status": "pending"
+  },
+  "汐": {
+    "status": "pending"
+  },
+  "汗": {
+    "status": "documented",
+    "component": "干"
+  },
+  "汙": {
+    "status": "documented",
+    "component": "于"
+  },
+  "江": {
+    "status": "pending"
+  },
+  "池": {
+    "status": "pending"
+  },
+  "灰": {
+    "status": "pending"
+  },
+  "百": {
+    "status": "pending"
+  },
+  "竹": {
+    "status": "pending"
+  },
+  "米": {
+    "status": "pending"
+  },
+  "串": {
+    "status": "pending"
+  },
+  "伯": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "白"
+  },
+  "估": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "古"
+  },
+  "伴": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "半"
+  },
+  "伸": {
+    "status": "pending"
+  },
+  "似": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "㠯"
+  },
+  "但": {
+    "status": "pending"
+  },
+  "佇": {
+    "status": "pending"
+  },
+  "位": {
+    "status": "pending"
+  },
+  "低": {
+    "status": "pending"
+  },
+  "住": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "主"
+  },
+  "佑": {
+    "status": "pending"
+  },
+  "何": {
+    "status": "pending"
+  },
+  "佛": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "弗"
+  },
+  "作": {
+    "status": "pending"
+  },
+  "你": {
+    "status": "pending"
+  },
+  "克": {
+    "status": "pending"
+  },
+  "免": {
+    "status": "pending"
+  },
+  "兵": {
+    "status": "pending"
+  },
+  "冷": {
+    "status": "documented",
+    "semanticComponent": "仌",
+    "component": "令"
+  },
+  "初": {
+    "status": "pending"
+  },
+  "判": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "半"
+  },
+  "別": {
+    "status": "pending"
+  },
+  "利": {
+    "status": "pending"
+  },
+  "刪": {
+    "status": "pending"
+  },
+  "助": {
+    "status": "pending"
+  },
+  "努": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "奴"
+  },
+  "即": {
+    "status": "pending"
+  },
+  "卵": {
+    "status": "pending"
+  },
+  "君": {
+    "status": "pending"
+  },
+  "吞": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "天"
+  },
+  "吟": {
+    "status": "pending"
+  },
+  "否": {
+    "status": "pending"
+  },
+  "吧": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "巴"
+  },
+  "含": {
+    "status": "pending"
+  },
+  "吱": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "支"
+  },
+  "吳": {
+    "status": "pending"
+  },
+  "吵": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "少"
+  },
+  "吶": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "內"
+  },
+  "吸": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "及"
+  },
+  "吹": {
+    "status": "pending"
+  },
+  "吻": {
+    "status": "pending"
+  },
+  "吼": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "孔"
+  },
+  "吾": {
+    "status": "pending"
+  },
+  "呀": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "牙"
+  },
+  "呆": {
+    "status": "pending"
+  },
+  "呈": {
+    "status": "pending"
+  },
+  "告": {
+    "status": "pending"
+  },
+  "呎": {
+    "status": "pending"
+  },
+  "囪": {
+    "status": "pending"
+  },
+  "困": {
+    "status": "pending"
+  },
+  "圾": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "及",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%BE",
+    "firstRecordedAt": "2026-11-14T13:43:17.689Z"
+  },
+  "址": {
+    "status": "pending"
+  },
+  "均": {
+    "status": "pending"
+  },
+  "坎": {
+    "status": "pending"
+  },
+  "坐": {
+    "status": "pending"
+  },
+  "坑": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "亢",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9D%91",
+    "firstRecordedAt": "2026-11-14T13:43:18.188Z"
+  },
+  "壯": {
+    "status": "pending"
+  },
+  "夾": {
+    "status": "pending"
+  },
+  "妒": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "戶",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A6%92",
+    "firstRecordedAt": "2026-11-14T13:43:35.203Z"
+  },
+  "妖": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "芺",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A6%96",
+    "firstRecordedAt": "2026-11-14T13:43:35.921Z"
+  },
+  "妙": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "少",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A6%99",
+    "firstRecordedAt": "2026-11-14T13:43:35.651Z"
+  },
+  "妝": {
+    "status": "pending"
+  },
+  "妞": {
+    "status": "pending"
+  },
+  "妥": {
+    "status": "pending"
+  },
+  "妨": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "方",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A6%A8",
+    "firstRecordedAt": "2026-11-14T13:43:36.887Z"
+  },
+  "孜": {
+    "status": "documented",
+    "semanticComponent": "攴",
+    "component": "子",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AD%9C",
+    "firstRecordedAt": "2026-11-14T13:43:44.429Z"
+  },
+  "孝": {
+    "status": "pending"
+  },
+  "完": {
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "元",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AE%8C",
+    "firstRecordedAt": "2026-11-14T13:43:48.041Z"
+  },
+  "尬": {
+    "status": "documented",
+    "semanticComponent": "尢",
+    "component": "介",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%AC",
+    "firstRecordedAt": "2026-11-14T13:44:00.939Z"
+  },
+  "尾": {
+    "status": "pending"
+  },
+  "尿": {
+    "status": "pending"
+  },
+  "局": {
+    "status": "pending"
+  },
+  "屁": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "比",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%81",
+    "firstRecordedAt": "2026-11-14T13:44:02.594Z"
+  },
+  "岌": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "及",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B2%8C",
+    "firstRecordedAt": "2026-11-14T13:44:05.084Z"
+  },
+  "岔": {
+    "status": "pending"
+  },
+  "巫": {
+    "status": "pending"
+  },
+  "希": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "爻",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%8C",
+    "firstRecordedAt": "2026-11-14T13:44:12.225Z"
+  },
+  "庇": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "比",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%87",
+    "firstRecordedAt": "2026-11-14T13:44:15.686Z"
+  },
+  "床": {
+    "status": "pending"
+  },
+  "序": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "予",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%8F",
+    "firstRecordedAt": "2026-11-14T13:44:15.998Z"
+  },
+  "廷": {
+    "status": "pending"
+  },
+  "弄": {
+    "status": "pending"
+  },
+  "弟": {
+    "status": "pending"
+  },
+  "形": {
+    "status": "pending"
+  },
+  "彷": {
+    "status": "pending"
+  },
+  "役": {
+    "status": "pending"
+  },
+  "忌": {
+    "status": "pending"
+  },
+  "忍": {
+    "status": "pending"
+  },
+  "忐": {
+    "status": "pending"
+  },
+  "忑": {
+    "status": "pending"
+  },
+  "志": {
+    "status": "pending"
+  },
+  "忘": {
+    "status": "pending"
+  },
+  "快": {
+    "status": "documented",
+    "component": "夬"
+  },
+  "我": {
+    "status": "pending"
+  },
+  "扭": {
+    "status": "documented",
+    "component": "丑"
+  },
+  "扮": {
+    "status": "documented",
+    "component": "分"
+  },
+  "扯": {
+    "status": "documented",
+    "component": "止"
+  },
+  "扶": {
+    "status": "pending"
+  },
+  "批": {
+    "status": "documented",
+    "component": "比"
+  },
+  "找": {
+    "status": "documented",
+    "component": "戈"
+  },
+  "技": {
+    "status": "documented",
+    "component": "支"
+  },
+  "抄": {
+    "status": "documented",
+    "component": "少"
+  },
+  "抉": {
+    "status": "documented",
+    "component": "夬"
+  },
+  "把": {
+    "status": "documented",
+    "component": "巴"
+  },
+  "抑": {
+    "status": "pending"
+  },
+  "抒": {
+    "status": "documented",
+    "component": "予"
+  },
+  "抓": {
+    "status": "documented",
+    "component": "爪"
+  },
+  "投": {
+    "status": "pending"
+  },
+  "抖": {
+    "status": "documented",
+    "component": "斗"
+  },
+  "抗": {
+    "status": "documented",
+    "component": "亢"
+  },
+  "折": {
+    "status": "pending"
+  },
+  "改": {
+    "status": "pending"
+  },
+  "攻": {
+    "status": "pending"
+  },
+  "旱": {
+    "status": "documented",
+    "component": "干"
+  },
+  "更": {
+    "status": "pending"
+  },
+  "杆": {
+    "status": "documented",
+    "component": "干"
+  },
+  "杉": {
+    "status": "pending"
+  },
+  "李": {
+    "status": "pending"
+  },
+  "杏": {
+    "status": "pending"
+  },
+  "材": {
+    "status": "documented",
+    "component": "才"
+  },
+  "村": {
+    "status": "documented",
+    "component": "寸"
+  },
+  "杖": {
+    "status": "documented",
+    "component": "丈"
+  },
+  "杜": {
+    "status": "pending"
+  },
+  "束": {
+    "status": "pending"
+  },
+  "步": {
+    "status": "pending"
+  },
+  "每": {
+    "status": "pending"
+  },
+  "求": {
+    "status": "pending"
+  },
+  "汰": {
+    "status": "pending"
+  },
+  "汲": {
+    "status": "pending"
+  },
+  "決": {
+    "status": "pending"
+  },
+  "汽": {
+    "status": "documented",
+    "component": "气"
+  },
+  "沉": {
+    "status": "pending"
+  },
+  "沒": {
+    "status": "pending"
+  },
+  "沖": {
+    "status": "pending"
+  },
+  "沙": {
+    "status": "pending"
+  },
+  "沛": {
+    "status": "documented",
+    "component": "巿"
+  },
+  "灶": {
+    "status": "pending"
+  },
+  "災": {
+    "status": "pending"
+  },
+  "牠": {
+    "status": "pending"
+  },
+  "牢": {
+    "status": "pending"
+  },
+  "狂": {
+    "status": "pending"
+  },
+  "男": {
+    "status": "pending"
+  },
+  "甸": {
+    "status": "pending"
+  },
+  "盯": {
+    "status": "documented",
+    "component": "丁"
+  },
+  "矣": {
+    "status": "pending"
+  },
+  "禿": {
+    "status": "pending"
+  },
+  "秀": {
+    "status": "pending"
+  },
+  "私": {
+    "status": "pending"
+  },
+  "究": {
+    "status": "documented",
+    "component": "九"
+  },
+  "系": {
+    "status": "pending"
+  },
+  "巡": {
+    "status": "pending"
+  },
+  "並": {
+    "status": "pending"
+  },
+  "乖": {
+    "status": "pending"
+  },
+  "乳": {
+    "status": "pending"
+  },
+  "事": {
+    "status": "pending"
+  },
+  "些": {
+    "status": "pending"
+  },
+  "亞": {
+    "status": "pending"
+  },
+  "享": {
+    "status": "pending"
+  },
+  "京": {
+    "status": "pending"
+  },
+  "佩": {
+    "status": "pending"
+  },
+  "佳": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "圭"
+  },
+  "使": {
+    "status": "pending"
+  },
+  "侃": {
+    "status": "pending"
+  },
+  "來": {
+    "status": "pending"
+  },
+  "例": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "列"
+  },
+  "侍": {
+    "status": "pending"
+  },
+  "供": {
+    "status": "pending"
+  },
+  "依": {
+    "status": "pending"
+  },
+  "兒": {
+    "status": "pending"
+  },
+  "兔": {
+    "status": "pending"
+  },
+  "兩": {
+    "status": "pending"
+  },
+  "其": {
+    "status": "pending"
+  },
+  "具": {
+    "status": "pending"
+  },
+  "典": {
+    "status": "pending"
+  },
+  "冽": {
+    "status": "pending"
+  },
+  "到": {
+    "status": "documented",
+    "semanticComponent": "至",
+    "component": "刀"
+  },
+  "制": {
+    "status": "pending"
+  },
+  "刷": {
+    "status": "pending"
+  },
+  "券": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "龹"
+  },
+  "刺": {
+    "status": "pending"
+  },
+  "刻": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "亥"
+  },
+  "卓": {
+    "status": "pending"
+  },
+  "協": {
+    "status": "pending"
+  },
+  "卷": {
+    "status": "documented",
+    "semanticComponent": "卩",
+    "component": "龹"
+  },
+  "叔": {
+    "status": "pending"
+  },
+  "取": {
+    "status": "pending"
+  },
+  "受": {
+    "status": "pending"
+  },
+  "呢": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "尼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%91%A2",
+    "firstRecordedAt": "2026-11-14T13:42:52.032Z"
+  },
+  "周": {
+    "status": "pending"
+  },
+  "呱": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "瓜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%91%B1",
+    "firstRecordedAt": "2026-11-14T13:42:52.801Z"
+  },
+  "味": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "未",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%91%B3",
+    "firstRecordedAt": "2026-11-14T13:42:52.693Z"
+  },
+  "呵": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "可"
+  },
+  "呷": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "甲",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%91%B7",
+    "firstRecordedAt": "2026-11-14T13:42:52.841Z"
+  },
+  "呻": {
+    "status": "pending"
+  },
+  "呼": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "乎",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%91%BC",
+    "firstRecordedAt": "2026-11-14T13:42:53.024Z"
+  },
+  "命": {
+    "status": "pending"
+  },
+  "咀": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "且",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%80",
+    "firstRecordedAt": "2026-11-14T13:42:53.361Z"
+  },
+  "咂": {
+    "status": "pending"
+  },
+  "和": {
+    "status": "pending"
+  },
+  "咐": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "付",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%90",
+    "firstRecordedAt": "2026-11-14T13:42:54.087Z"
+  },
+  "咒": {
+    "status": "pending"
+  },
+  "咖": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "加",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%96",
+    "firstRecordedAt": "2026-11-14T13:42:54.798Z"
+  },
+  "咚": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "冬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%9A",
+    "firstRecordedAt": "2026-11-14T13:42:54.794Z"
+  },
+  "固": {
+    "status": "pending"
+  },
+  "坡": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "皮",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9D%A1",
+    "firstRecordedAt": "2026-11-14T13:43:19.517Z"
+  },
+  "坦": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "旦",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9D%A6",
+    "firstRecordedAt": "2026-11-14T13:43:18.510Z"
+  },
+  "坪": {
+    "status": "pending"
+  },
+  "坷": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "可",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9D%B7",
+    "firstRecordedAt": "2026-11-14T13:43:19.847Z"
+  },
+  "垂": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "𠂹",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9E%82",
+    "firstRecordedAt": "2026-11-14T13:43:19.831Z"
+  },
+  "垃": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "立",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9E%83",
+    "firstRecordedAt": "2026-11-14T13:43:20.063Z"
+  },
+  "夜": {
+    "status": "pending"
+  },
+  "奄": {
+    "status": "pending"
+  },
+  "奇": {
+    "status": "documented",
+    "semanticComponent": "大",
+    "component": "可",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A5%87",
+    "firstRecordedAt": "2026-11-14T13:43:32.391Z"
+  },
+  "奈": {
+    "status": "documented",
+    "semanticComponent": "示",
+    "component": "大",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A5%88",
+    "firstRecordedAt": "2026-11-14T13:43:32.155Z"
+  },
+  "奉": {
+    "status": "pending"
+  },
+  "奔": {
+    "status": "pending"
+  },
+  "妳": {
+    "status": "pending"
+  },
+  "妹": {
+    "status": "pending"
+  },
+  "妻": {
+    "status": "pending"
+  },
+  "姆": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "母",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A7%86",
+    "firstRecordedAt": "2026-11-14T13:43:37.488Z"
+  },
+  "始": {
+    "status": "pending"
+  },
+  "姍": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "冊",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A7%8D",
+    "firstRecordedAt": "2026-11-14T13:43:37.525Z"
+  },
+  "姐": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "且",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A7%90",
+    "firstRecordedAt": "2026-11-14T13:43:37.449Z"
+  },
+  "姑": {
+    "status": "pending"
+  },
+  "姓": {
+    "status": "pending"
+  },
+  "委": {
+    "status": "pending"
+  },
+  "季": {
+    "status": "pending"
+  },
+  "孤": {
+    "status": "pending"
+  },
+  "官": {
+    "status": "pending"
+  },
+  "宙": {
+    "status": "pending"
+  },
+  "定": {
+    "status": "pending"
+  },
+  "宛": {
+    "status": "pending"
+  },
+  "宜": {
+    "status": "pending"
+  },
+  "尚": {
+    "status": "pending"
+  },
+  "居": {
+    "status": "pending"
+  },
+  "屆": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "凷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%86",
+    "firstRecordedAt": "2026-11-14T13:44:02.572Z"
+  },
+  "屈": {
+    "status": "pending"
+  },
+  "岩": {
+    "status": "pending"
+  },
+  "岬": {
+    "status": "pending"
+  },
+  "岸": {
+    "status": "pending"
+  },
+  "幸": {
+    "status": "pending"
+  },
+  "底": {
+    "status": "pending"
+  },
+  "店": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "占",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%97",
+    "firstRecordedAt": "2026-11-14T13:44:16.429Z"
+  },
+  "府": {
+    "status": "pending"
+  },
+  "延": {
+    "status": "pending"
+  },
+  "弦": {
+    "status": "pending"
+  },
+  "弧": {
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "瓜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BC%A7",
+    "firstRecordedAt": "2026-11-14T13:44:24.421Z"
+  },
+  "彼": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "皮",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%BC",
+    "firstRecordedAt": "2026-11-14T13:44:26.219Z"
+  },
+  "彿": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "弗",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%BF",
+    "firstRecordedAt": "2026-11-14T13:44:26.704Z"
+  },
+  "往": {
+    "status": "pending"
+  },
+  "征": {
+    "status": "pending"
+  },
+  "忠": {
+    "status": "pending"
+  },
+  "念": {
+    "status": "pending"
+  },
+  "忽": {
+    "status": "pending"
+  },
+  "怕": {
+    "status": "documented",
+    "component": "白"
+  },
+  "怖": {
+    "status": "documented",
+    "component": "布"
+  },
+  "性": {
+    "status": "pending"
+  },
+  "怪": {
+    "status": "documented",
+    "component": "圣"
+  },
+  "怯": {
+    "status": "pending"
+  },
+  "或": {
+    "status": "pending"
+  },
+  "房": {
+    "status": "documented",
+    "component": "方"
+  },
+  "所": {
+    "status": "pending"
+  },
+  "承": {
+    "status": "pending"
+  },
+  "披": {
+    "status": "documented",
+    "component": "皮"
+  },
+  "抬": {
+    "status": "documented",
+    "component": "台"
+  },
+  "抱": {
+    "status": "documented",
+    "component": "包"
+  },
+  "抵": {
+    "status": "documented",
+    "component": "氐"
+  },
+  "抹": {
+    "status": "documented",
+    "component": "末"
+  },
+  "押": {
+    "status": "documented",
+    "component": "甲"
+  },
+  "抽": {
+    "status": "documented",
+    "component": "由"
+  },
+  "拂": {
+    "status": "pending"
+  },
+  "拆": {
+    "status": "documented",
+    "component": "斥"
+  },
+  "拇": {
+    "status": "documented",
+    "component": "母"
+  },
+  "拈": {
+    "status": "documented",
+    "component": "占"
+  },
+  "拉": {
+    "status": "documented",
+    "component": "立"
+  },
+  "拋": {
+    "status": "documented",
+    "component": "𡯄"
+  },
+  "拌": {
+    "status": "documented",
+    "component": "半"
+  },
+  "拍": {
+    "status": "pending"
+  },
+  "拒": {
+    "status": "documented",
+    "component": "巨"
+  },
+  "拓": {
+    "status": "pending"
+  },
+  "拔": {
+    "status": "pending"
+  },
+  "拖": {
+    "status": "documented",
+    "component": "㐌"
+  },
+  "拘": {
+    "status": "pending"
+  },
+  "拙": {
+    "status": "documented",
+    "component": "出"
+  },
+  "拚": {
+    "status": "pending"
+  },
+  "招": {
+    "status": "pending"
+  },
+  "放": {
+    "status": "pending"
+  },
+  "斧": {
+    "status": "documented",
+    "component": "父"
+  },
+  "於": {
+    "status": "pending"
+  },
+  "旺": {
+    "status": "pending"
+  },
+  "昂": {
+    "status": "documented",
+    "component": "卬"
+  },
+  "昆": {
+    "status": "pending"
+  },
+  "明": {
+    "status": "pending"
+  },
+  "昏": {
+    "status": "pending"
+  },
+  "易": {
+    "status": "pending"
+  },
+  "朋": {
+    "status": "pending"
+  },
+  "服": {
+    "status": "pending"
+  },
+  "杯": {
+    "status": "documented",
+    "component": "不"
+  },
+  "東": {
+    "status": "pending"
+  },
+  "杷": {
+    "status": "pending"
+  },
+  "松": {
+    "status": "pending"
+  },
+  "板": {
+    "status": "documented",
+    "component": "反"
+  },
+  "枇": {
+    "status": "pending"
+  },
+  "枉": {
+    "status": "pending"
+  },
+  "枕": {
+    "status": "documented",
+    "component": "冘"
+  },
+  "林": {
+    "status": "pending"
+  },
+  "枚": {
+    "status": "pending"
+  },
+  "果": {
+    "status": "pending"
+  },
+  "枝": {
+    "status": "documented",
+    "component": "支"
+  },
+  "欣": {
+    "status": "pending"
+  },
+  "武": {
+    "status": "pending"
+  },
+  "歧": {
+    "status": "documented",
+    "component": "支"
+  },
+  "氛": {
+    "status": "documented",
+    "component": "分"
+  },
+  "沫": {
+    "status": "documented",
+    "component": "末"
+  },
+  "沮": {
+    "status": "pending"
+  },
+  "河": {
+    "status": "pending"
+  },
+  "沸": {
+    "status": "documented",
+    "component": "弗"
+  },
+  "油": {
+    "status": "pending"
+  },
+  "治": {
+    "status": "documented",
+    "component": "台"
+  },
+  "沼": {
+    "status": "documented",
+    "component": "召"
+  },
+  "沾": {
+    "status": "documented",
+    "component": "占"
+  },
+  "沿": {
+    "status": "documented",
+    "component": "㕣"
+  },
+  "況": {
+    "status": "pending"
+  },
+  "泊": {
+    "status": "pending"
+  },
+  "法": {
+    "status": "pending"
+  },
+  "泛": {
+    "status": "documented",
+    "component": "乏"
+  },
+  "泡": {
+    "status": "documented",
+    "component": "包"
+  },
+  "波": {
+    "status": "pending"
+  },
+  "泣": {
+    "status": "documented",
+    "component": "立"
+  },
+  "泥": {
+    "status": "documented",
+    "component": "尼"
+  },
+  "注": {
+    "status": "pending"
+  },
+  "泳": {
+    "status": "pending"
+  },
+  "炎": {
+    "status": "pending"
+  },
+  "炒": {
+    "status": "documented",
+    "component": "少"
+  },
+  "炙": {
+    "status": "pending"
+  },
+  "爬": {
+    "status": "documented",
+    "component": "巴"
+  },
+  "爭": {
+    "status": "pending"
+  },
+  "爸": {
+    "status": "documented",
+    "component": "巴"
+  },
+  "版": {
+    "status": "documented",
+    "component": "反"
+  },
+  "牧": {
+    "status": "pending"
+  },
+  "物": {
+    "status": "pending"
+  },
+  "狀": {
+    "status": "documented",
+    "component": "爿"
+  },
+  "狐": {
+    "status": "pending"
+  },
+  "狗": {
+    "status": "pending"
+  },
+  "玩": {
+    "status": "documented",
+    "component": "元"
+  },
+  "的": {
+    "status": "pending"
+  },
+  "盲": {
+    "status": "documented",
+    "component": "亡"
+  },
+  "直": {
+    "status": "pending"
+  },
+  "知": {
+    "status": "pending"
+  },
+  "社": {
+    "status": "pending"
+  },
+  "秉": {
+    "status": "pending"
+  },
+  "空": {
+    "status": "documented",
+    "component": "工"
+  },
+  "糾": {
+    "status": "pending"
+  },
+  "亭": {
+    "status": "pending"
+  },
+  "亮": {
+    "status": "pending"
+  },
+  "侯": {
+    "status": "pending"
+  },
+  "侷": {
+    "status": "pending"
+  },
+  "便": {
+    "status": "pending"
+  },
+  "係": {
+    "status": "pending"
+  },
+  "促": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "足"
+  },
+  "俐": {
+    "status": "pending"
+  },
+  "俑": {
+    "status": "pending"
+  },
+  "俗": {
+    "status": "pending"
+  },
+  "保": {
+    "status": "pending"
+  },
+  "俠": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "夾"
+  },
+  "信": {
+    "status": "pending"
+  },
+  "冒": {
+    "status": "pending"
+  },
+  "冠": {
+    "status": "pending"
+  },
+  "則": {
+    "status": "pending"
+  },
+  "削": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "肖"
+  },
+  "剌": {
+    "status": "pending"
+  },
+  "前": {
+    "status": "pending"
+  },
+  "剎": {
+    "status": "pending"
+  },
+  "勁": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "巠"
+  },
+  "勃": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "孛"
+  },
+  "勇": {
+    "status": "pending"
+  },
+  "勉": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "免"
+  },
+  "南": {
+    "status": "pending"
+  },
+  "卻": {
+    "status": "documented",
+    "semanticComponent": "卩",
+    "component": "𧮫"
+  },
+  "厚": {
+    "status": "pending"
+  },
+  "咦": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "夷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%A6",
+    "firstRecordedAt": "2026-11-14T13:42:54.790Z"
+  },
+  "咧": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "列",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%A7",
+    "firstRecordedAt": "2026-11-14T13:42:55.555Z"
+  },
+  "咪": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "米",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%AA",
+    "firstRecordedAt": "2026-11-14T13:42:55.556Z"
+  },
+  "咬": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "交",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%AC",
+    "firstRecordedAt": "2026-11-14T13:42:55.769Z"
+  },
+  "咳": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "亥",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%92%B3",
+    "firstRecordedAt": "2026-11-14T13:42:56.611Z"
+  },
+  "哀": {
+    "status": "pending"
+  },
+  "品": {
+    "status": "pending"
+  },
+  "哄": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "共",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%93%84",
+    "firstRecordedAt": "2026-11-14T13:42:56.762Z"
+  },
+  "哇": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "圭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%93%87",
+    "firstRecordedAt": "2026-11-14T13:42:56.697Z"
+  },
+  "哈": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "合",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%93%88",
+    "firstRecordedAt": "2026-11-14T13:42:57.044Z"
+  },
+  "哏": {
+    "status": "pending"
+  },
+  "型": {
+    "status": "pending"
+  },
+  "垠": {
+    "status": "pending"
+  },
+  "垢": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "后",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9E%A2",
+    "firstRecordedAt": "2026-11-14T13:43:20.933Z"
+  },
+  "垮": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "夸",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9E%AE",
+    "firstRecordedAt": "2026-11-14T13:43:20.228Z"
+  },
+  "城": {
+    "status": "pending"
+  },
+  "奏": {
+    "status": "pending"
+  },
+  "契": {
+    "status": "pending"
+  },
+  "姨": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "夷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A7%A8",
+    "firstRecordedAt": "2026-11-14T13:43:38.782Z"
+  },
+  "姿": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "次",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A7%BF",
+    "firstRecordedAt": "2026-11-14T13:43:39.409Z"
+  },
+  "威": {
+    "status": "pending"
+  },
+  "娃": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "圭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A8%83",
+    "firstRecordedAt": "2026-11-14T13:43:39.444Z"
+  },
+  "孩": {
+    "status": "documented",
+    "semanticComponent": "子",
+    "component": "亥",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AD%A9",
+    "firstRecordedAt": "2026-11-14T13:43:44.971Z"
+  },
+  "客": {
+    "status": "pending"
+  },
+  "宣": {
+    "status": "pending"
+  },
+  "室": {
+    "status": "pending"
+  },
+  "封": {
+    "status": "pending"
+  },
+  "屋": {
+    "status": "pending"
+  },
+  "屏": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "并",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%8F",
+    "firstRecordedAt": "2026-11-14T13:44:03.831Z"
+  },
+  "巷": {
+    "status": "pending"
+  },
+  "帝": {
+    "status": "pending"
+  },
+  "帥": {
+    "status": "pending"
+  },
+  "幽": {
+    "status": "pending"
+  },
+  "度": {
+    "status": "pending"
+  },
+  "建": {
+    "status": "pending"
+  },
+  "待": {
+    "status": "pending"
+  },
+  "很": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "艮",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BE%88",
+    "firstRecordedAt": "2026-11-14T13:44:27.636Z"
+  },
+  "徉": {
+    "status": "pending"
+  },
+  "徊": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "回",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BE%8A",
+    "firstRecordedAt": "2026-11-14T13:44:27.610Z"
+  },
+  "律": {
+    "status": "pending"
+  },
+  "後": {
+    "status": "pending"
+  },
+  "怎": {
+    "status": "documented",
+    "component": "乍"
+  },
+  "怒": {
+    "status": "documented",
+    "component": "奴"
+  },
+  "思": {
+    "status": "pending"
+  },
+  "急": {
+    "status": "documented",
+    "component": "及"
+  },
+  "怨": {
+    "status": "documented",
+    "component": "夗"
+  },
+  "恆": {
+    "status": "pending"
+  },
+  "恍": {
+    "status": "documented",
+    "component": "光"
+  },
+  "恢": {
+    "status": "documented",
+    "component": "灰"
+  },
+  "恨": {
+    "status": "documented",
+    "component": "艮"
+  },
+  "恬": {
+    "status": "pending"
+  },
+  "恰": {
+    "status": "documented",
+    "component": "合"
+  },
+  "扁": {
+    "status": "pending"
+  },
+  "拜": {
+    "status": "pending"
+  },
+  "括": {
+    "status": "pending"
+  },
+  "拭": {
+    "status": "documented",
+    "component": "式"
+  },
+  "拮": {
+    "status": "pending"
+  },
+  "拯": {
+    "status": "pending"
+  },
+  "拱": {
+    "status": "documented",
+    "component": "共"
+  },
+  "拴": {
+    "status": "documented",
+    "component": "全"
+  },
+  "拼": {
+    "status": "documented",
+    "component": "并"
+  },
+  "拾": {
+    "status": "documented",
+    "component": "合"
+  },
+  "持": {
+    "status": "pending"
+  },
+  "指": {
+    "status": "pending"
+  },
+  "按": {
+    "status": "documented",
+    "component": "安"
+  },
+  "挑": {
+    "status": "documented",
+    "component": "兆"
+  },
+  "挖": {
+    "status": "documented",
+    "component": "穵"
+  },
+  "政": {
+    "status": "pending"
+  },
+  "故": {
+    "status": "pending"
+  },
+  "施": {
+    "status": "documented",
+    "component": "也"
+  },
+  "既": {
+    "status": "pending"
+  },
+  "星": {
+    "status": "pending"
+  },
+  "映": {
+    "status": "documented",
+    "component": "央"
+  },
+  "春": {
+    "status": "pending"
+  },
+  "昨": {
+    "status": "documented",
+    "component": "乍"
+  },
+  "昭": {
+    "status": "pending"
+  },
+  "是": {
+    "status": "pending"
+  },
+  "枯": {
+    "status": "documented",
+    "component": "古"
+  },
+  "枴": {
+    "status": "pending"
+  },
+  "架": {
+    "status": "documented",
+    "component": "加"
+  },
+  "柄": {
+    "status": "documented",
+    "component": "丙"
+  },
+  "某": {
+    "status": "pending"
+  },
+  "染": {
+    "status": "documented",
+    "component": "杂"
+  },
+  "柔": {
+    "status": "documented",
+    "component": "矛"
+  },
+  "柢": {
+    "status": "pending"
+  },
+  "查": {
+    "status": "pending"
+  },
+  "柱": {
+    "status": "documented",
+    "component": "主"
+  },
+  "柳": {
+    "status": "documented",
+    "component": "卯"
+  },
+  "柵": {
+    "status": "pending"
+  },
+  "柿": {
+    "status": "documented",
+    "component": "市"
+  },
+  "歪": {
+    "status": "pending"
+  },
+  "段": {
+    "status": "pending"
+  },
+  "毒": {
+    "status": "pending"
+  },
+  "泉": {
+    "status": "pending"
+  },
+  "洋": {
+    "status": "documented",
+    "component": "羊"
+  },
+  "洗": {
+    "status": "pending"
+  },
+  "洞": {
+    "status": "documented",
+    "component": "同"
+  },
+  "津": {
+    "status": "pending"
+  },
+  "洪": {
+    "status": "documented",
+    "component": "共"
+  },
+  "洲": {
+    "status": "documented",
+    "component": "州"
+  },
+  "洶": {
+    "status": "documented",
+    "component": "匈"
+  },
+  "活": {
+    "status": "pending"
+  },
+  "洽": {
+    "status": "documented",
+    "component": "合"
+  },
+  "派": {
+    "status": "pending"
+  },
+  "流": {
+    "status": "pending"
+  },
+  "炫": {
+    "status": "documented",
+    "component": "玄"
+  },
+  "炭": {
+    "status": "pending"
+  },
+  "炮": {
+    "status": "documented",
+    "component": "包"
+  },
+  "炸": {
+    "status": "documented",
+    "component": "乍"
+  },
+  "為": {
+    "status": "pending"
+  },
+  "牲": {
+    "status": "pending"
+  },
+  "狠": {
+    "status": "documented",
+    "component": "艮"
+  },
+  "狩": {
+    "status": "pending"
+  },
+  "玻": {
+    "status": "documented",
+    "component": "皮"
+  },
+  "珊": {
+    "status": "pending"
+  },
+  "珍": {
+    "status": "documented",
+    "component": "㐱"
+  },
+  "甚": {
+    "status": "pending"
+  },
+  "界": {
+    "status": "pending"
+  },
+  "畏": {
+    "status": "pending"
+  },
+  "疤": {
+    "status": "documented",
+    "component": "巴"
+  },
+  "疫": {
+    "status": "pending"
+  },
+  "皆": {
+    "status": "pending"
+  },
+  "皇": {
+    "status": "pending"
+  },
+  "盃": {
+    "status": "pending"
+  },
+  "盆": {
+    "status": "pending"
+  },
+  "盈": {
+    "status": "pending"
+  },
+  "相": {
+    "status": "pending"
+  },
+  "盼": {
+    "status": "documented",
+    "component": "分"
+  },
+  "盾": {
+    "status": "pending"
+  },
+  "省": {
+    "status": "pending"
+  },
+  "眉": {
+    "status": "pending"
+  },
+  "看": {
+    "status": "pending"
+  },
+  "砂": {
+    "status": "pending"
+  },
+  "砌": {
+    "status": "documented",
+    "component": "切"
+  },
+  "砍": {
+    "status": "documented",
+    "component": "欠"
+  },
+  "研": {
+    "status": "documented",
+    "component": "幵"
+  },
+  "祈": {
+    "status": "pending"
+  },
+  "秋": {
+    "status": "pending"
+  },
+  "科": {
+    "status": "pending"
+  },
+  "秒": {
+    "status": "documented",
+    "component": "少"
+  },
+  "穿": {
+    "status": "pending"
+  },
+  "突": {
+    "status": "pending"
+  },
+  "籽": {
+    "status": "pending"
+  },
+  "紀": {
+    "status": "pending"
+  },
+  "約": {
+    "status": "documented",
+    "component": "勺"
+  },
+  "紅": {
+    "status": "documented",
+    "component": "工"
+  },
+  "乘": {
+    "status": "pending"
+  },
+  "修": {
+    "status": "documented",
+    "semanticComponent": "彡",
+    "component": "攸"
+  },
+  "俯": {
+    "status": "pending"
+  },
+  "俱": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "具"
+  },
+  "倉": {
+    "status": "pending"
+  },
+  "個": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "固"
+  },
+  "倍": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "咅"
+  },
+  "們": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "門"
+  },
+  "倒": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "到"
+  },
+  "倖": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "幸"
+  },
+  "倘": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "尚"
+  },
+  "候": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "矦"
+  },
+  "倚": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "奇"
+  },
+  "借": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "昔"
+  },
+  "倦": {
+    "status": "pending"
+  },
+  "倨": {
+    "status": "pending"
+  },
+  "倫": {
+    "status": "pending"
+  },
+  "值": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "直"
+  },
+  "兼": {
+    "status": "pending"
+  },
+  "冤": {
+    "status": "pending"
+  },
+  "冥": {
+    "status": "pending"
+  },
+  "准": {
+    "status": "pending"
+  },
+  "凋": {
+    "status": "documented",
+    "semanticComponent": "仌",
+    "component": "周"
+  },
+  "凌": {
+    "status": "pending"
+  },
+  "凍": {
+    "status": "documented",
+    "semanticComponent": "仌",
+    "component": "東"
+  },
+  "剔": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "易"
+  },
+  "剖": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "咅"
+  },
+  "剛": {
+    "status": "pending"
+  },
+  "剝": {
+    "status": "pending"
+  },
+  "原": {
+    "status": "pending"
+  },
+  "員": {
+    "status": "pending"
+  },
+  "哥": {
+    "status": "pending"
+  },
+  "哨": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "肖",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%93%A8",
+    "firstRecordedAt": "2026-11-14T13:42:57.377Z"
+  },
+  "哩": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "里",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%93%A9",
+    "firstRecordedAt": "2026-11-14T13:42:57.402Z"
+  },
+  "哪": {
+    "status": "pending"
+  },
+  "哭": {
+    "status": "pending"
+  },
+  "哲": {
+    "status": "pending"
+  },
+  "唉": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "矣",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%94%89",
+    "firstRecordedAt": "2026-11-14T13:42:59.204Z"
+  },
+  "唐": {
+    "status": "pending"
+  },
+  "圃": {
+    "status": "pending"
+  },
+  "埃": {
+    "status": "pending"
+  },
+  "埋": {
+    "status": "pending"
+  },
+  "埔": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "甫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9F%94",
+    "firstRecordedAt": "2026-11-14T13:43:21.572Z"
+  },
+  "夏": {
+    "status": "pending"
+  },
+  "套": {
+    "status": "pending"
+  },
+  "娑": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "沙",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A8%91",
+    "firstRecordedAt": "2026-11-14T13:43:39.002Z"
+  },
+  "娓": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "尾",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A8%93",
+    "firstRecordedAt": "2026-11-14T13:43:39.358Z"
+  },
+  "娘": {
+    "status": "pending"
+  },
+  "娛": {
+    "status": "pending"
+  },
+  "娥": {
+    "status": "pending"
+  },
+  "孫": {
+    "status": "pending"
+  },
+  "宮": {
+    "status": "pending"
+  },
+  "害": {
+    "status": "pending"
+  },
+  "宴": {
+    "status": "pending"
+  },
+  "家": {
+    "status": "pending"
+  },
+  "容": {
+    "status": "pending"
+  },
+  "射": {
+    "status": "pending"
+  },
+  "屑": {
+    "status": "pending"
+  },
+  "展": {
+    "status": "pending"
+  },
+  "峭": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "肖",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B3%AD",
+    "firstRecordedAt": "2026-11-14T13:44:05.416Z"
+  },
+  "峰": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "夆",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B3%B0",
+    "firstRecordedAt": "2026-11-14T13:44:05.752Z"
+  },
+  "島": {
+    "status": "pending"
+  },
+  "峽": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "夾",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B3%BD",
+    "firstRecordedAt": "2026-11-14T13:44:05.676Z"
+  },
+  "差": {
+    "status": "pending"
+  },
+  "師": {
+    "status": "pending"
+  },
+  "席": {
+    "status": "pending"
+  },
+  "座": {
+    "status": "pending"
+  },
+  "庫": {
+    "status": "pending"
+  },
+  "庭": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "廷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%AD",
+    "firstRecordedAt": "2026-11-14T13:44:17.624Z"
+  },
+  "弱": {
+    "status": "pending"
+  },
+  "徐": {
+    "status": "pending"
+  },
+  "徑": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "巠",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BE%91",
+    "firstRecordedAt": "2026-11-14T13:44:29.871Z"
+  },
+  "徒": {
+    "status": "pending"
+  },
+  "恐": {
+    "status": "pending"
+  },
+  "恣": {
+    "status": "pending"
+  },
+  "恥": {
+    "status": "documented",
+    "component": "耳"
+  },
+  "恩": {
+    "status": "pending"
+  },
+  "恭": {
+    "status": "pending"
+  },
+  "息": {
+    "status": "pending"
+  },
+  "悄": {
+    "status": "documented",
+    "component": "肖"
+  },
+  "悅": {
+    "status": "documented",
+    "component": "兌"
+  },
+  "悔": {
+    "status": "documented",
+    "component": "每"
+  },
+  "悟": {
+    "status": "pending"
+  },
+  "扇": {
+    "status": "documented",
+    "component": "羽"
+  },
+  "拳": {
+    "status": "documented",
+    "component": "龹"
+  },
+  "拿": {
+    "status": "documented",
+    "component": "合"
+  },
+  "挨": {
+    "status": "documented",
+    "component": "矣"
+  },
+  "挫": {
+    "status": "documented",
+    "component": "坐"
+  },
+  "振": {
+    "status": "pending"
+  },
+  "挺": {
+    "status": "documented",
+    "component": "廷"
+  },
+  "捉": {
+    "status": "documented",
+    "component": "足"
+  },
+  "捍": {
+    "status": "documented",
+    "component": "旱"
+  },
+  "捏": {
+    "status": "documented",
+    "component": "圼"
+  },
+  "捐": {
+    "status": "documented",
+    "component": "肙"
+  },
+  "捕": {
+    "status": "documented",
+    "component": "甫"
+  },
+  "效": {
+    "status": "pending"
+  },
+  "料": {
+    "status": "pending"
+  },
+  "旁": {
+    "status": "pending"
+  },
+  "旅": {
+    "status": "pending"
+  },
+  "時": {
+    "status": "pending"
+  },
+  "晃": {
+    "status": "pending"
+  },
+  "晉": {
+    "status": "pending"
+  },
+  "晒": {
+    "status": "pending"
+  },
+  "書": {
+    "status": "pending"
+  },
+  "朗": {
+    "status": "documented",
+    "component": "良"
+  },
+  "柴": {
+    "status": "documented",
+    "component": "此"
+  },
+  "栗": {
+    "status": "pending"
+  },
+  "校": {
+    "status": "documented",
+    "component": "交"
+  },
+  "栩": {
+    "status": "pending"
+  },
+  "株": {
+    "status": "pending"
+  },
+  "核": {
+    "status": "documented",
+    "component": "亥"
+  },
+  "根": {
+    "status": "documented",
+    "component": "艮"
+  },
+  "格": {
+    "status": "pending"
+  },
+  "栽": {
+    "status": "pending"
+  },
+  "桂": {
+    "status": "documented",
+    "component": "圭"
+  },
+  "桃": {
+    "status": "documented",
+    "component": "兆"
+  },
+  "框": {
+    "status": "documented",
+    "component": "匡"
+  },
+  "案": {
+    "status": "documented",
+    "component": "安"
+  },
+  "桌": {
+    "status": "documented",
+    "component": "卓"
+  },
+  "桐": {
+    "status": "pending"
+  },
+  "桑": {
+    "status": "pending"
+  },
+  "殊": {
+    "status": "pending"
+  },
+  "殷": {
+    "status": "pending"
+  },
+  "氣": {
+    "status": "pending"
+  },
+  "氧": {
+    "status": "documented",
+    "component": "羊"
+  },
+  "泰": {
+    "status": "pending"
+  },
+  "浩": {
+    "status": "documented",
+    "component": "告"
+  },
+  "浪": {
+    "status": "documented",
+    "component": "良"
+  },
+  "浮": {
+    "status": "pending"
+  },
+  "浴": {
+    "status": "pending"
+  },
+  "海": {
+    "status": "pending"
+  },
+  "浸": {
+    "status": "pending"
+  },
+  "浹": {
+    "status": "pending"
+  },
+  "消": {
+    "status": "documented",
+    "component": "肖"
+  },
+  "涉": {
+    "status": "pending"
+  },
+  "涕": {
+    "status": "pending"
+  },
+  "烈": {
+    "status": "documented",
+    "component": "列"
+  },
+  "烏": {
+    "status": "pending"
+  },
+  "烘": {
+    "status": "documented",
+    "component": "共"
+  },
+  "烙": {
+    "status": "documented",
+    "component": "各"
+  },
+  "烤": {
+    "status": "documented",
+    "component": "考"
+  },
+  "特": {
+    "status": "documented",
+    "component": "寺"
+  },
+  "狸": {
+    "status": "pending"
+  },
+  "狹": {
+    "status": "documented",
+    "component": "夾"
+  },
+  "狼": {
+    "status": "documented",
+    "component": "良"
+  },
+  "狽": {
+    "status": "pending"
+  },
+  "珠": {
+    "status": "documented",
+    "component": "朱"
+  },
+  "班": {
+    "status": "pending"
+  },
+  "琉": {
+    "status": "pending"
+  },
+  "畔": {
+    "status": "documented",
+    "component": "半"
+  },
+  "留": {
+    "status": "pending"
+  },
+  "畝": {
+    "status": "pending"
+  },
+  "疲": {
+    "status": "documented",
+    "component": "皮"
+  },
+  "疼": {
+    "status": "documented",
+    "component": "冬"
+  },
+  "疾": {
+    "status": "pending"
+  },
+  "病": {
+    "status": "documented",
+    "component": "丙"
+  },
+  "症": {
+    "status": "documented",
+    "component": "正"
+  },
+  "益": {
+    "status": "pending"
+  },
+  "盎": {
+    "status": "pending"
+  },
+  "真": {
+    "status": "pending"
+  },
+  "眠": {
+    "status": "pending"
+  },
+  "眨": {
+    "status": "documented",
+    "component": "乏"
+  },
+  "眩": {
+    "status": "documented",
+    "component": "玄"
+  },
+  "矩": {
+    "status": "pending"
+  },
+  "砥": {
+    "status": "pending"
+  },
+  "砰": {
+    "status": "documented",
+    "component": "平"
+  },
+  "破": {
+    "status": "documented",
+    "component": "皮"
+  },
+  "祕": {
+    "status": "pending"
+  },
+  "祖": {
+    "status": "pending"
+  },
+  "祝": {
+    "status": "pending"
+  },
+  "神": {
+    "status": "pending"
+  },
+  "秘": {
+    "status": "documented",
+    "component": "必"
+  },
+  "租": {
+    "status": "documented",
+    "component": "且"
+  },
+  "秤": {
+    "status": "documented",
+    "component": "平"
+  },
+  "秦": {
+    "status": "pending"
+  },
+  "秩": {
+    "status": "documented",
+    "component": "失"
+  },
+  "窄": {
+    "status": "documented",
+    "component": "乍"
+  },
+  "站": {
+    "status": "documented",
+    "component": "占"
+  },
+  "笆": {
+    "status": "pending"
+  },
+  "笑": {
+    "status": "pending"
+  },
+  "粄": {
+    "status": "pending"
+  },
+  "粉": {
+    "status": "documented",
+    "component": "分"
+  },
+  "紋": {
+    "status": "documented",
+    "component": "文"
+  },
+  "納": {
+    "status": "documented",
+    "component": "內"
+  },
+  "紐": {
+    "status": "documented",
+    "component": "丑"
+  },
+  "純": {
+    "status": "pending"
+  },
+  "紗": {
+    "status": "pending"
+  },
+  "紙": {
+    "status": "documented",
+    "component": "氏"
+  },
+  "級": {
+    "status": "documented",
+    "component": "及"
+  },
+  "紛": {
+    "status": "documented",
+    "component": "分"
+  },
+  "素": {
+    "status": "pending"
+  },
+  "紡": {
+    "status": "documented",
+    "component": "方"
+  },
+  "索": {
+    "status": "pending"
+  },
+  "乾": {
+    "status": "pending"
+  },
+  "假": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "叚"
+  },
+  "偉": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "韋"
+  },
+  "偏": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "扁"
+  },
+  "偕": {
+    "status": "pending"
+  },
+  "做": {
+    "status": "pending"
+  },
+  "停": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "停"
+  },
+  "健": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "建"
+  },
+  "側": {
+    "status": "pending"
+  },
+  "偶": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "禺"
+  },
+  "偷": {
+    "status": "pending"
+  },
+  "凰": {
+    "status": "pending"
+  },
+  "剪": {
+    "status": "pending"
+  },
+  "副": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "畐"
+  },
+  "勒": {
+    "status": "pending"
+  },
+  "動": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "重"
+  },
+  "務": {
+    "status": "pending"
+  },
+  "匙": {
+    "status": "pending"
+  },
+  "區": {
+    "status": "pending"
+  },
+  "參": {
+    "status": "pending"
+  },
+  "售": {
+    "status": "pending"
+  },
+  "唯": {
+    "status": "pending"
+  },
+  "唱": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "昌",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%94%B1",
+    "firstRecordedAt": "2026-11-14T13:42:58.733Z"
+  },
+  "唷": {
+    "status": "pending"
+  },
+  "唾": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "垂",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%94%BE",
+    "firstRecordedAt": "2026-11-14T13:43:00.162Z"
+  },
+  "啄": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "豖",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%84",
+    "firstRecordedAt": "2026-11-14T13:42:59.514Z"
+  },
+  "商": {
+    "status": "pending"
+  },
+  "啊": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "阿",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%8A",
+    "firstRecordedAt": "2026-11-14T13:43:00.742Z"
+  },
+  "問": {
+    "status": "pending"
+  },
+  "啜": {
+    "status": "pending"
+  },
+  "啞": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "亞",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%9E",
+    "firstRecordedAt": "2026-11-14T13:43:01.832Z"
+  },
+  "啡": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "非",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%A1",
+    "firstRecordedAt": "2026-11-14T13:43:01.430Z"
+  },
+  "啦": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "拉",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%A6",
+    "firstRecordedAt": "2026-11-14T13:43:01.271Z"
+  },
+  "啪": {
+    "status": "pending"
+  },
+  "圈": {
+    "status": "documented",
+    "semanticComponent": "囗",
+    "component": "卷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%88",
+    "firstRecordedAt": "2026-11-14T13:43:13.389Z"
+  },
+  "國": {
+    "status": "pending"
+  },
+  "域": {
+    "status": "pending"
+  },
+  "埡": {
+    "status": "pending"
+  },
+  "執": {
+    "status": "pending"
+  },
+  "培": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "咅",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9F%B9",
+    "firstRecordedAt": "2026-11-14T13:43:22.310Z"
+  },
+  "基": {
+    "status": "pending"
+  },
+  "堂": {
+    "status": "pending"
+  },
+  "堅": {
+    "status": "pending"
+  },
+  "堆": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "隹",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A0%86",
+    "firstRecordedAt": "2026-11-14T13:43:22.781Z"
+  },
+  "夠": {
+    "status": "pending"
+  },
+  "娶": {
+    "status": "pending"
+  },
+  "婆": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "波",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A9%86",
+    "firstRecordedAt": "2026-11-14T13:43:40.139Z"
+  },
+  "婉": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "宛",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A9%89",
+    "firstRecordedAt": "2026-11-14T13:43:40.108Z"
+  },
+  "婚": {
+    "status": "pending"
+  },
+  "婦": {
+    "status": "pending"
+  },
+  "婪": {
+    "status": "pending"
+  },
+  "宿": {
+    "status": "pending"
+  },
+  "寂": {
+    "status": "pending"
+  },
+  "寄": {
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "奇",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AF%84",
+    "firstRecordedAt": "2026-11-14T13:43:53.754Z"
+  },
+  "密": {
+    "status": "pending"
+  },
+  "將": {
+    "status": "pending"
+  },
+  "專": {
+    "status": "pending"
+  },
+  "崇": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "宗",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B4%87",
+    "firstRecordedAt": "2026-11-14T13:44:06.368Z"
+  },
+  "崎": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "奇",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B4%8E",
+    "firstRecordedAt": "2026-11-14T13:44:06.700Z"
+  },
+  "崖": {
+    "status": "pending"
+  },
+  "崗": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "岡",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B4%97",
+    "firstRecordedAt": "2026-11-14T13:44:06.979Z"
+  },
+  "巢": {
+    "status": "pending"
+  },
+  "帳": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "長",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%B3",
+    "firstRecordedAt": "2026-11-14T13:44:12.226Z"
+  },
+  "帶": {
+    "status": "pending"
+  },
+  "常": {
+    "status": "pending"
+  },
+  "庶": {
+    "status": "pending"
+  },
+  "康": {
+    "status": "pending"
+  },
+  "張": {
+    "status": "pending"
+  },
+  "強": {
+    "status": "pending"
+  },
+  "彩": {
+    "status": "documented",
+    "semanticComponent": "彡",
+    "component": "采",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%A9",
+    "firstRecordedAt": "2026-11-14T13:44:24.875Z"
+  },
+  "得": {
+    "status": "pending"
+  },
+  "徘": {
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "非",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BE%98",
+    "firstRecordedAt": "2026-11-14T13:44:30.365Z"
+  },
+  "徜": {
+    "status": "pending"
+  },
+  "從": {
+    "status": "pending"
+  },
+  "悉": {
+    "status": "pending"
+  },
+  "悠": {
+    "status": "documented",
+    "component": "攸"
+  },
+  "患": {
+    "status": "documented",
+    "component": "串"
+  },
+  "您": {
+    "status": "documented",
+    "component": "你"
+  },
+  "情": {
+    "status": "documented",
+    "component": "青"
+  },
+  "惋": {
+    "status": "documented",
+    "component": "宛"
+  },
+  "惕": {
+    "status": "pending"
+  },
+  "惘": {
+    "status": "documented",
+    "component": "罔"
+  },
+  "惜": {
+    "status": "documented",
+    "component": "昔"
+  },
+  "惦": {
+    "status": "documented",
+    "component": "店"
+  },
+  "捧": {
+    "status": "documented",
+    "component": "奉"
+  },
+  "捨": {
+    "status": "documented",
+    "component": "舍"
+  },
+  "据": {
+    "status": "pending"
+  },
+  "捲": {
+    "status": "documented",
+    "component": "卷"
+  },
+  "捷": {
+    "status": "pending"
+  },
+  "掀": {
+    "status": "documented",
+    "component": "欣"
+  },
+  "掃": {
+    "status": "pending"
+  },
+  "授": {
+    "status": "documented",
+    "component": "受"
+  },
+  "掉": {
+    "status": "documented",
+    "component": "卓"
+  },
+  "掏": {
+    "status": "documented",
+    "component": "匋"
+  },
+  "排": {
+    "status": "documented",
+    "component": "非"
+  },
+  "掘": {
+    "status": "documented",
+    "component": "屈"
+  },
+  "掙": {
+    "status": "documented",
+    "component": "爭"
+  },
+  "掛": {
+    "status": "pending"
+  },
+  "掠": {
+    "status": "documented",
+    "component": "京"
+  },
+  "採": {
+    "status": "pending"
+  },
+  "探": {
+    "status": "documented",
+    "component": "罙"
+  },
+  "接": {
+    "status": "documented",
+    "component": "妾"
+  },
+  "控": {
+    "status": "documented",
+    "component": "空"
+  },
+  "推": {
+    "status": "documented",
+    "component": "隹"
+  },
+  "掩": {
+    "status": "documented",
+    "component": "奄"
+  },
+  "措": {
+    "status": "documented",
+    "component": "昔"
+  },
+  "啟": {
+    "status": "pending"
+  },
+  "敏": {
+    "status": "pending"
+  },
+  "救": {
+    "status": "pending"
+  },
+  "敗": {
+    "status": "pending"
+  },
+  "敘": {
+    "status": "documented",
+    "component": "余"
+  },
+  "教": {
+    "status": "pending"
+  },
+  "斜": {
+    "status": "documented",
+    "component": "余"
+  },
+  "旋": {
+    "status": "pending"
+  },
+  "族": {
+    "status": "pending"
+  },
+  "晚": {
+    "status": "documented",
+    "component": "免"
+  },
+  "晨": {
+    "status": "pending"
+  },
+  "曹": {
+    "status": "pending"
+  },
+  "望": {
+    "status": "pending"
+  },
+  "桶": {
+    "status": "documented",
+    "component": "甬"
+  },
+  "桿": {
+    "status": "pending"
+  },
+  "梁": {
+    "status": "pending"
+  },
+  "梅": {
+    "status": "documented",
+    "component": "每"
+  },
+  "條": {
+    "status": "pending"
+  },
+  "梢": {
+    "status": "documented",
+    "component": "肖"
+  },
+  "梧": {
+    "status": "documented",
+    "component": "吾"
+  },
+  "梨": {
+    "status": "pending"
+  },
+  "梭": {
+    "status": "documented",
+    "component": "夋"
+  },
+  "梯": {
+    "status": "documented",
+    "component": "弟"
+  },
+  "械": {
+    "status": "pending"
+  },
+  "梳": {
+    "status": "pending"
+  },
+  "欲": {
+    "status": "pending"
+  },
+  "殺": {
+    "status": "pending"
+  },
+  "毫": {
+    "status": "pending"
+  },
+  "涯": {
+    "status": "pending"
+  },
+  "液": {
+    "status": "pending"
+  },
+  "涵": {
+    "status": "documented",
+    "component": "圅"
+  },
+  "涼": {
+    "status": "documented",
+    "component": "京"
+  },
+  "淋": {
+    "status": "documented",
+    "component": "林"
+  },
+  "淌": {
+    "status": "documented",
+    "component": "尚"
+  },
+  "淒": {
+    "status": "documented",
+    "component": "妻"
+  },
+  "淘": {
+    "status": "documented",
+    "component": "匋"
+  },
+  "淚": {
+    "status": "documented",
+    "component": "戾"
+  },
+  "淡": {
+    "status": "documented",
+    "component": "炎"
+  },
+  "淨": {
+    "status": "documented",
+    "component": "爭"
+  },
+  "深": {
+    "status": "pending"
+  },
+  "淵": {
+    "status": "pending"
+  },
+  "混": {
+    "status": "documented",
+    "component": "昆"
+  },
+  "淹": {
+    "status": "documented",
+    "component": "奄"
+  },
+  "淺": {
+    "status": "pending"
+  },
+  "添": {
+    "status": "documented",
+    "component": "忝"
+  },
+  "清": {
+    "status": "pending"
+  },
+  "烹": {
+    "status": "pending"
+  },
+  "焉": {
+    "status": "pending"
+  },
+  "爽": {
+    "status": "pending"
+  },
+  "牽": {
+    "status": "pending"
+  },
+  "猛": {
+    "status": "documented",
+    "component": "孟"
+  },
+  "猜": {
+    "status": "documented",
+    "component": "青"
+  },
+  "率": {
+    "status": "pending"
+  },
+  "現": {
+    "status": "documented",
+    "component": "見"
+  },
+  "球": {
+    "status": "documented",
+    "component": "求"
+  },
+  "琅": {
+    "status": "pending"
+  },
+  "理": {
+    "status": "documented",
+    "component": "里"
+  },
+  "瓶": {
+    "status": "documented",
+    "component": "并"
+  },
+  "甜": {
+    "status": "pending"
+  },
+  "產": {
+    "status": "pending"
+  },
+  "畢": {
+    "status": "pending"
+  },
+  "略": {
+    "status": "documented",
+    "component": "各"
+  },
+  "異": {
+    "status": "pending"
+  },
+  "痕": {
+    "status": "documented",
+    "component": "艮"
+  },
+  "皎": {
+    "status": "documented",
+    "component": "交"
+  },
+  "盒": {
+    "status": "documented",
+    "component": "合"
+  },
+  "盔": {
+    "status": "pending"
+  },
+  "盛": {
+    "status": "pending"
+  },
+  "眶": {
+    "status": "documented",
+    "component": "匡"
+  },
+  "眸": {
+    "status": "documented",
+    "component": "牟"
+  },
+  "眺": {
+    "status": "documented",
+    "component": "兆"
+  },
+  "眼": {
+    "status": "documented",
+    "component": "艮"
+  },
+  "眾": {
+    "status": "pending"
+  },
+  "祥": {
+    "status": "pending"
+  },
+  "票": {
+    "status": "pending"
+  },
+  "移": {
+    "status": "documented",
+    "component": "多"
+  },
+  "笛": {
+    "status": "documented",
+    "component": "笛"
+  },
+  "符": {
+    "status": "pending"
+  },
+  "笨": {
+    "status": "documented",
+    "component": "本"
+  },
+  "第": {
+    "status": "pending"
+  },
+  "粒": {
+    "status": "documented",
+    "component": "立"
+  },
+  "粗": {
+    "status": "pending"
+  },
+  "紮": {
+    "status": "documented",
+    "component": "札"
+  },
+  "累": {
+    "status": "pending"
+  },
+  "細": {
+    "status": "documented",
+    "component": "囟"
+  },
+  "紳": {
+    "status": "documented",
+    "component": "申"
+  },
+  "紹": {
+    "status": "pending"
+  },
+  "終": {
+    "status": "pending"
+  },
+  "組": {
+    "status": "pending"
+  },
+  "絆": {
+    "status": "pending"
+  },
+  "竟": {
+    "status": "pending"
+  },
+  "章": {
+    "status": "pending"
+  },
+  "傅": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "尃"
+  },
+  "傍": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "旁"
+  },
+  "傑": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "桀"
+  },
+  "傘": {
+    "status": "pending"
+  },
+  "備": {
+    "status": "pending"
+  },
+  "傢": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "家"
+  },
+  "最": {
+    "status": "pending"
+  },
+  "凱": {
+    "status": "documented",
+    "semanticComponent": "几",
+    "component": "豈"
+  },
+  "剩": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "乘"
+  },
+  "割": {
+    "status": "pending"
+  },
+  "創": {
+    "status": "pending"
+  },
+  "勝": {
+    "status": "pending"
+  },
+  "勞": {
+    "status": "pending"
+  },
+  "博": {
+    "status": "pending"
+  },
+  "啼": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "帝",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%BC",
+    "firstRecordedAt": "2026-11-14T13:43:02.114Z"
+  },
+  "啾": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "秋",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%95%BE",
+    "firstRecordedAt": "2026-11-14T13:43:02.511Z"
+  },
+  "喂": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "畏",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%82",
+    "firstRecordedAt": "2026-11-14T13:43:03.029Z"
+  },
+  "善": {
+    "status": "pending"
+  },
+  "喇": {
+    "status": "pending"
+  },
+  "喉": {
+    "status": "pending"
+  },
+  "喊": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "咸",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%8A",
+    "firstRecordedAt": "2026-11-14T13:43:03.389Z"
+  },
+  "喘": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "耑",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%98",
+    "firstRecordedAt": "2026-11-14T13:43:03.714Z"
+  },
+  "喚": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "奐",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%9A",
+    "firstRecordedAt": "2026-11-14T13:43:04.055Z"
+  },
+  "喜": {
+    "status": "pending"
+  },
+  "喝": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "曷",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%9D",
+    "firstRecordedAt": "2026-11-14T13:43:04.961Z"
+  },
+  "喧": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "宣",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%A7",
+    "firstRecordedAt": "2026-11-14T13:43:04.098Z"
+  },
+  "喪": {
+    "status": "pending"
+  },
+  "單": {
+    "status": "pending"
+  },
+  "喳": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "查",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%B3",
+    "firstRecordedAt": "2026-11-14T13:43:05.425Z"
+  },
+  "喵": {
+    "status": "pending"
+  },
+  "喻": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "俞",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%BB",
+    "firstRecordedAt": "2026-11-14T13:43:05.403Z"
+  },
+  "圍": {
+    "status": "pending"
+  },
+  "堡": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "保",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A0%A1",
+    "firstRecordedAt": "2026-11-14T13:43:23.173Z"
+  },
+  "堤": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "是",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A0%A4",
+    "firstRecordedAt": "2026-11-14T13:43:23.192Z"
+  },
+  "堪": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "甚",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A0%AA",
+    "firstRecordedAt": "2026-11-14T13:43:23.993Z"
+  },
+  "報": {
+    "status": "pending"
+  },
+  "場": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "昜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A0%B4",
+    "firstRecordedAt": "2026-11-14T13:43:23.994Z"
+  },
+  "奠": {
+    "status": "pending"
+  },
+  "媒": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "某",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AA%92",
+    "firstRecordedAt": "2026-11-14T13:43:41.016Z"
+  },
+  "媚": {
+    "status": "pending"
+  },
+  "富": {
+    "status": "pending"
+  },
+  "寒": {
+    "status": "pending"
+  },
+  "寓": {
+    "status": "pending"
+  },
+  "尊": {
+    "status": "pending"
+  },
+  "尋": {
+    "status": "pending"
+  },
+  "就": {
+    "status": "pending"
+  },
+  "帽": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "冒",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%BD",
+    "firstRecordedAt": "2026-11-14T13:44:13.261Z"
+  },
+  "幅": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "畐",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%85",
+    "firstRecordedAt": "2026-11-14T13:44:13.528Z"
+  },
+  "幾": {
+    "status": "pending"
+  },
+  "廁": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "則",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BB%81",
+    "firstRecordedAt": "2026-11-14T13:44:18.604Z"
+  },
+  "廂": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "相",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BB%82",
+    "firstRecordedAt": "2026-11-14T13:44:18.111Z"
+  },
+  "廊": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "郎",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BB%8A",
+    "firstRecordedAt": "2026-11-14T13:44:18.032Z"
+  },
+  "復": {
+    "status": "pending"
+  },
+  "循": {
+    "status": "documented",
+    "component": "盾"
+  },
+  "悲": {
+    "status": "documented",
+    "component": "非"
+  },
+  "悶": {
+    "status": "documented",
+    "component": "門"
+  },
+  "惑": {
+    "status": "pending"
+  },
+  "惠": {
+    "status": "pending"
+  },
+  "惡": {
+    "status": "documented",
+    "component": "亞"
+  },
+  "惱": {
+    "status": "pending"
+  },
+  "愉": {
+    "status": "documented",
+    "component": "俞"
+  },
+  "愕": {
+    "status": "pending"
+  },
+  "愜": {
+    "status": "pending"
+  },
+  "愣": {
+    "status": "pending"
+  },
+  "慨": {
+    "status": "documented",
+    "component": "既"
+  },
+  "扉": {
+    "status": "pending"
+  },
+  "掌": {
+    "status": "documented",
+    "component": "尚"
+  },
+  "揄": {
+    "status": "pending"
+  },
+  "揉": {
+    "status": "documented",
+    "component": "柔"
+  },
+  "描": {
+    "status": "documented",
+    "component": "苗"
+  },
+  "提": {
+    "status": "documented",
+    "component": "是"
+  },
+  "插": {
+    "status": "pending"
+  },
+  "揚": {
+    "status": "pending"
+  },
+  "換": {
+    "status": "documented",
+    "component": "奐"
+  },
+  "握": {
+    "status": "documented",
+    "component": "屋"
+  },
+  "揭": {
+    "status": "documented",
+    "component": "曷"
+  },
+  "揮": {
+    "status": "documented",
+    "component": "軍"
+  },
+  "援": {
+    "status": "pending"
+  },
+  "揶": {
+    "status": "pending"
+  },
+  "摒": {
+    "status": "documented",
+    "component": "屏"
+  },
+  "敢": {
+    "status": "pending"
+  },
+  "散": {
+    "status": "pending"
+  },
+  "敦": {
+    "status": "pending"
+  },
+  "斑": {
+    "status": "pending"
+  },
+  "斯": {
+    "status": "pending"
+  },
+  "普": {
+    "status": "pending"
+  },
+  "景": {
+    "status": "documented",
+    "component": "京"
+  },
+  "晰": {
+    "status": "documented",
+    "component": "析"
+  },
+  "晴": {
+    "status": "pending"
+  },
+  "晶": {
+    "status": "pending"
+  },
+  "智": {
+    "status": "pending"
+  },
+  "晾": {
+    "status": "pending"
+  },
+  "暑": {
+    "status": "documented",
+    "component": "者"
+  },
+  "曾": {
+    "status": "pending"
+  },
+  "替": {
+    "status": "pending"
+  },
+  "朝": {
+    "status": "pending"
+  },
+  "期": {
+    "status": "pending"
+  },
+  "棄": {
+    "status": "pending"
+  },
+  "棉": {
+    "status": "pending"
+  },
+  "棋": {
+    "status": "pending"
+  },
+  "棍": {
+    "status": "documented",
+    "component": "昆"
+  },
+  "棒": {
+    "status": "documented",
+    "component": "奉"
+  },
+  "棘": {
+    "status": "pending"
+  },
+  "棚": {
+    "status": "documented",
+    "component": "朋"
+  },
+  "棟": {
+    "status": "documented",
+    "component": "東"
+  },
+  "棧": {
+    "status": "documented",
+    "component": "戔"
+  },
+  "森": {
+    "status": "pending"
+  },
+  "棲": {
+    "status": "pending"
+  },
+  "棵": {
+    "status": "documented",
+    "component": "果"
+  },
+  "椅": {
+    "status": "documented",
+    "component": "奇"
+  },
+  "植": {
+    "status": "pending"
+  },
+  "椏": {
+    "status": "documented",
+    "component": "亞"
+  },
+  "椒": {
+    "status": "documented",
+    "component": "叔"
+  },
+  "欺": {
+    "status": "documented",
+    "component": "其"
+  },
+  "款": {
+    "status": "pending"
+  },
+  "殖": {
+    "status": "documented",
+    "component": "直"
+  },
+  "殘": {
+    "status": "documented",
+    "component": "戔"
+  },
+  "殼": {
+    "status": "pending"
+  },
+  "毯": {
+    "status": "documented",
+    "component": "炎"
+  },
+  "減": {
+    "status": "pending"
+  },
+  "渠": {
+    "status": "pending"
+  },
+  "渡": {
+    "status": "documented",
+    "component": "度"
+  },
+  "測": {
+    "status": "pending"
+  },
+  "港": {
+    "status": "documented",
+    "component": "䢽"
+  },
+  "渲": {
+    "status": "documented",
+    "component": "宣"
+  },
+  "渴": {
+    "status": "pending"
+  },
+  "游": {
+    "status": "documented",
+    "component": "斿"
+  },
+  "渺": {
+    "status": "documented",
+    "component": "眇"
+  },
+  "渾": {
+    "status": "documented",
+    "component": "軍"
+  },
+  "湃": {
+    "status": "documented",
+    "component": "拜"
+  },
+  "湊": {
+    "status": "pending"
+  },
+  "湍": {
+    "status": "pending"
+  },
+  "湖": {
+    "status": "documented",
+    "component": "胡"
+  },
+  "湛": {
+    "status": "pending"
+  },
+  "湧": {
+    "status": "documented",
+    "component": "勇"
+  },
+  "湯": {
+    "status": "pending"
+  },
+  "溉": {
+    "status": "pending"
+  },
+  "滋": {
+    "status": "documented",
+    "component": "茲"
+  },
+  "焙": {
+    "status": "documented",
+    "component": "咅"
+  },
+  "焚": {
+    "status": "pending"
+  },
+  "無": {
+    "status": "pending"
+  },
+  "焦": {
+    "status": "pending"
+  },
+  "焰": {
+    "status": "documented",
+    "component": "臽"
+  },
+  "然": {
+    "status": "pending"
+  },
+  "煮": {
+    "status": "pending"
+  },
+  "牌": {
+    "status": "documented",
+    "component": "卑"
+  },
+  "猴": {
+    "status": "documented",
+    "component": "矦"
+  },
+  "猶": {
+    "status": "pending"
+  },
+  "琴": {
+    "status": "pending"
+  },
+  "甦": {
+    "status": "pending"
+  },
+  "番": {
+    "status": "pending"
+  },
+  "畫": {
+    "status": "pending"
+  },
+  "疏": {
+    "status": "pending"
+  },
+  "痘": {
+    "status": "pending"
+  },
+  "痛": {
+    "status": "documented",
+    "component": "甬"
+  },
+  "痠": {
+    "status": "documented",
+    "component": "夋"
+  },
+  "登": {
+    "status": "pending"
+  },
+  "發": {
+    "status": "pending"
+  },
+  "盜": {
+    "status": "pending"
+  },
+  "短": {
+    "status": "documented",
+    "component": "豆"
+  },
+  "硬": {
+    "status": "documented",
+    "component": "更"
+  },
+  "稀": {
+    "status": "documented",
+    "component": "希"
+  },
+  "程": {
+    "status": "documented",
+    "component": "呈"
+  },
+  "稍": {
+    "status": "documented",
+    "component": "肖"
+  },
+  "窗": {
+    "status": "pending"
+  },
+  "窘": {
+    "status": "pending"
+  },
+  "童": {
+    "status": "pending"
+  },
+  "筆": {
+    "status": "pending"
+  },
+  "等": {
+    "status": "pending"
+  },
+  "筋": {
+    "status": "pending"
+  },
+  "筍": {
+    "status": "documented",
+    "component": "旬"
+  },
+  "筏": {
+    "status": "pending"
+  },
+  "筒": {
+    "status": "documented",
+    "component": "同"
+  },
+  "答": {
+    "status": "pending"
+  },
+  "策": {
+    "status": "pending"
+  },
+  "粥": {
+    "status": "pending"
+  },
+  "紫": {
+    "status": "pending"
+  },
+  "結": {
+    "status": "documented",
+    "component": "吉"
+  },
+  "絕": {
+    "status": "pending"
+  },
+  "絡": {
+    "status": "documented",
+    "component": "各"
+  },
+  "絢": {
+    "status": "documented",
+    "component": "旬"
+  },
+  "給": {
+    "status": "documented",
+    "component": "合"
+  },
+  "絨": {
+    "status": "documented",
+    "component": "戎"
+  },
+  "絮": {
+    "status": "documented",
+    "component": "如"
+  },
+  "統": {
+    "status": "documented",
+    "component": "充"
+  },
+  "絲": {
+    "status": "pending"
+  },
+  "亂": {
+    "status": "pending"
+  },
+  "催": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "崔"
+  },
+  "傲": {
+    "status": "pending"
+  },
+  "傳": {
+    "status": "pending"
+  },
+  "傷": {
+    "status": "pending"
+  },
+  "傻": {
+    "status": "pending"
+  },
+  "傾": {
+    "status": "pending"
+  },
+  "僅": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "堇"
+  },
+  "募": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "莫"
+  },
+  "勢": {
+    "status": "pending"
+  },
+  "勤": {
+    "status": "pending"
+  },
+  "匯": {
+    "status": "documented",
+    "semanticComponent": "匚",
+    "component": "淮"
+  },
+  "嗅": {
+    "status": "pending"
+  },
+  "嗎": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "馬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%97%8E",
+    "firstRecordedAt": "2026-11-14T13:43:06.223Z"
+  },
+  "嗓": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "桑",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%97%93",
+    "firstRecordedAt": "2026-11-14T13:43:06.609Z"
+  },
+  "嗚": {
+    "status": "pending"
+  },
+  "嗝": {
+    "status": "pending"
+  },
+  "嗤": {
+    "status": "pending"
+  },
+  "嗯": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "恩",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%97%AF",
+    "firstRecordedAt": "2026-11-14T13:43:07.226Z"
+  },
+  "園": {
+    "status": "documented",
+    "semanticComponent": "囗",
+    "component": "袁",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%92",
+    "firstRecordedAt": "2026-11-14T13:43:13.313Z"
+  },
+  "圓": {
+    "status": "documented",
+    "semanticComponent": "囗",
+    "component": "員",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%93",
+    "firstRecordedAt": "2026-11-14T13:43:13.417Z"
+  },
+  "塊": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "鬼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%8A",
+    "firstRecordedAt": "2026-11-14T13:43:24.041Z"
+  },
+  "塌": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "𦐇",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%8C",
+    "firstRecordedAt": "2026-11-14T13:43:24.258Z"
+  },
+  "塑": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "朔",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%91",
+    "firstRecordedAt": "2026-11-14T13:43:24.712Z"
+  },
+  "塔": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "荅",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%94",
+    "firstRecordedAt": "2026-11-14T13:43:25.128Z"
+  },
+  "塗": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "涂",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%97",
+    "firstRecordedAt": "2026-11-14T13:43:25.805Z"
+  },
+  "塘": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "唐",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%98",
+    "firstRecordedAt": "2026-11-14T13:43:25.452Z"
+  },
+  "塞": {
+    "status": "pending"
+  },
+  "填": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "眞",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A1%AB",
+    "firstRecordedAt": "2026-11-14T13:43:25.808Z"
+  },
+  "壼": {
+    "status": "pending"
+  },
+  "奧": {
+    "status": "pending"
+  },
+  "媲": {
+    "status": "pending"
+  },
+  "媽": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "馬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AA%BD",
+    "firstRecordedAt": "2026-11-14T13:43:41.823Z"
+  },
+  "嫁": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "家",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AB%81",
+    "firstRecordedAt": "2026-11-14T13:43:41.738Z"
+  },
+  "嫂": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "叜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AB%82",
+    "firstRecordedAt": "2026-11-14T13:43:41.883Z"
+  },
+  "嫌": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "兼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AB%8C",
+    "firstRecordedAt": "2026-11-14T13:43:42.139Z"
+  },
+  "幹": {
+    "status": "pending"
+  },
+  "彙": {
+    "status": "pending"
+  },
+  "微": {
+    "status": "pending"
+  },
+  "想": {
+    "status": "documented",
+    "component": "相"
+  },
+  "惹": {
+    "status": "documented",
+    "component": "若"
+  },
+  "愁": {
+    "status": "documented",
+    "component": "秋"
+  },
+  "愈": {
+    "status": "pending"
+  },
+  "意": {
+    "status": "pending"
+  },
+  "愚": {
+    "status": "pending"
+  },
+  "愛": {
+    "status": "pending"
+  },
+  "感": {
+    "status": "pending"
+  },
+  "愧": {
+    "status": "pending"
+  },
+  "慌": {
+    "status": "documented",
+    "component": "荒"
+  },
+  "慎": {
+    "status": "pending"
+  },
+  "搜": {
+    "status": "documented",
+    "component": "叟"
+  },
+  "損": {
+    "status": "documented",
+    "component": "員"
+  },
+  "搏": {
+    "status": "pending"
+  },
+  "搓": {
+    "status": "documented",
+    "component": "差"
+  },
+  "搔": {
+    "status": "pending"
+  },
+  "搖": {
+    "status": "documented",
+    "component": "䍃"
+  },
+  "搗": {
+    "status": "documented",
+    "component": "島"
+  },
+  "搞": {
+    "status": "documented",
+    "component": "高"
+  },
+  "搧": {
+    "status": "pending"
+  },
+  "搬": {
+    "status": "documented",
+    "component": "般"
+  },
+  "搭": {
+    "status": "documented",
+    "component": "荅"
+  },
+  "搶": {
+    "status": "documented",
+    "component": "倉"
+  },
+  "敬": {
+    "status": "pending"
+  },
+  "新": {
+    "status": "pending"
+  },
+  "暇": {
+    "status": "documented",
+    "component": "叚"
+  },
+  "暈": {
+    "status": "pending"
+  },
+  "暉": {
+    "status": "documented",
+    "component": "軍"
+  },
+  "暖": {
+    "status": "documented",
+    "component": "爰"
+  },
+  "暗": {
+    "status": "documented",
+    "component": "音"
+  },
+  "會": {
+    "status": "pending"
+  },
+  "椰": {
+    "status": "documented",
+    "component": "耶"
+  },
+  "楊": {
+    "status": "pending"
+  },
+  "楓": {
+    "status": "documented",
+    "component": "風"
+  },
+  "楚": {
+    "status": "pending"
+  },
+  "業": {
+    "status": "pending"
+  },
+  "極": {
+    "status": "documented",
+    "component": "亟"
+  },
+  "楷": {
+    "status": "pending"
+  },
+  "概": {
+    "status": "documented",
+    "component": "既"
+  },
+  "榔": {
+    "status": "pending"
+  },
+  "歲": {
+    "status": "pending"
+  },
+  "源": {
+    "status": "pending"
+  },
+  "準": {
+    "status": "documented",
+    "component": "隼"
+  },
+  "溜": {
+    "status": "documented",
+    "component": "留"
+  },
+  "溝": {
+    "status": "documented",
+    "component": "冓"
+  },
+  "溪": {
+    "status": "documented",
+    "component": "奚"
+  },
+  "溫": {
+    "status": "documented",
+    "component": "𥁕"
+  },
+  "溶": {
+    "status": "documented",
+    "component": "容"
+  },
+  "溼": {
+    "status": "pending"
+  },
+  "滅": {
+    "status": "documented",
+    "component": "烕"
+  },
+  "滑": {
+    "status": "pending"
+  },
+  "滔": {
+    "status": "documented",
+    "component": "舀"
+  },
+  "煉": {
+    "status": "documented",
+    "component": "柬"
+  },
+  "煎": {
+    "status": "documented",
+    "component": "前"
+  },
+  "煙": {
+    "status": "documented",
+    "component": "垔"
+  },
+  "煞": {
+    "status": "pending"
+  },
+  "煤": {
+    "status": "documented",
+    "component": "某"
+  },
+  "煥": {
+    "status": "documented",
+    "component": "奐"
+  },
+  "煦": {
+    "status": "documented",
+    "component": "昫"
+  },
+  "照": {
+    "status": "documented",
+    "component": "昭"
+  },
+  "煩": {
+    "status": "pending"
+  },
+  "爺": {
+    "status": "documented",
+    "component": "耶"
+  },
+  "猿": {
+    "status": "pending"
+  },
+  "獅": {
+    "status": "documented",
+    "component": "師"
+  },
+  "瑚": {
+    "status": "pending"
+  },
+  "瑞": {
+    "status": "pending"
+  },
+  "當": {
+    "status": "pending"
+  },
+  "痱": {
+    "status": "pending"
+  },
+  "痺": {
+    "status": "pending"
+  },
+  "皙": {
+    "status": "pending"
+  },
+  "盞": {
+    "status": "pending"
+  },
+  "睛": {
+    "status": "documented",
+    "component": "青"
+  },
+  "睜": {
+    "status": "documented",
+    "component": "爭"
+  },
+  "督": {
+    "status": "pending"
+  },
+  "睡": {
+    "status": "documented",
+    "component": "垂"
+  },
+  "睹": {
+    "status": "documented",
+    "component": "者"
+  },
+  "矮": {
+    "status": "documented",
+    "component": "委"
+  },
+  "碌": {
+    "status": "documented",
+    "component": "彔"
+  },
+  "碎": {
+    "status": "documented",
+    "component": "卒"
+  },
+  "碑": {
+    "status": "documented",
+    "component": "卑"
+  },
+  "碗": {
+    "status": "documented",
+    "component": "宛"
+  },
+  "碰": {
+    "status": "documented",
+    "component": "並"
+  },
+  "禁": {
+    "status": "documented",
+    "component": "林"
+  },
+  "禽": {
+    "status": "pending"
+  },
+  "稔": {
+    "status": "documented",
+    "component": "念"
+  },
+  "稚": {
+    "status": "pending"
+  },
+  "稠": {
+    "status": "pending"
+  },
+  "窣": {
+    "status": "pending"
+  },
+  "筷": {
+    "status": "documented",
+    "component": "快"
+  },
+  "節": {
+    "status": "pending"
+  },
+  "絹": {
+    "status": "documented",
+    "component": "肙"
+  },
+  "綁": {
+    "status": "documented",
+    "component": "邦"
+  },
+  "經": {
+    "status": "pending"
+  },
+  "像": {
+    "status": "pending"
+  },
+  "僕": {
+    "status": "pending"
+  },
+  "僮": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "童"
+  },
+  "兢": {
+    "status": "pending"
+  },
+  "劃": {
+    "status": "pending"
+  },
+  "匱": {
+    "status": "pending"
+  },
+  "厭": {
+    "status": "pending"
+  },
+  "嘆": {
+    "status": "pending"
+  },
+  "嘈": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "曹",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%88",
+    "firstRecordedAt": "2026-11-14T13:43:08.021Z"
+  },
+  "嘉": {
+    "status": "pending"
+  },
+  "嘖": {
+    "status": "pending"
+  },
+  "嘗": {
+    "status": "pending"
+  },
+  "嘟": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "都",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%9F",
+    "firstRecordedAt": "2026-11-14T13:43:08.620Z"
+  },
+  "圖": {
+    "status": "pending"
+  },
+  "團": {
+    "status": "documented",
+    "semanticComponent": "囗",
+    "component": "專",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%98",
+    "firstRecordedAt": "2026-11-14T13:43:15.429Z"
+  },
+  "塵": {
+    "status": "pending"
+  },
+  "境": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "竟",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A2%83",
+    "firstRecordedAt": "2026-11-14T13:43:25.849Z"
+  },
+  "墊": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "執",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A2%8A",
+    "firstRecordedAt": "2026-11-14T13:43:26.565Z"
+  },
+  "墓": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "莫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A2%93",
+    "firstRecordedAt": "2026-11-14T13:43:26.144Z"
+  },
+  "壽": {
+    "status": "pending"
+  },
+  "夢": {
+    "status": "pending"
+  },
+  "夥": {
+    "status": "documented",
+    "semanticComponent": "多",
+    "component": "果",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A4%A5",
+    "firstRecordedAt": "2026-11-14T13:43:29.768Z"
+  },
+  "奪": {
+    "status": "pending"
+  },
+  "嫦": {
+    "status": "pending"
+  },
+  "嫩": {
+    "status": "pending"
+  },
+  "孵": {
+    "status": "pending"
+  },
+  "寞": {
+    "status": "pending"
+  },
+  "察": {
+    "status": "pending"
+  },
+  "寡": {
+    "status": "pending"
+  },
+  "實": {
+    "status": "pending"
+  },
+  "寧": {
+    "status": "pending"
+  },
+  "寨": {
+    "status": "pending"
+  },
+  "對": {
+    "status": "pending"
+  },
+  "屢": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "婁",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%A2",
+    "firstRecordedAt": "2026-11-14T13:44:03.746Z"
+  },
+  "嶄": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "斬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B6%84",
+    "firstRecordedAt": "2026-11-14T13:44:07.373Z"
+  },
+  "嶇": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "區",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B6%87",
+    "firstRecordedAt": "2026-11-14T13:44:07.075Z"
+  },
+  "幔": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "曼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%94",
+    "firstRecordedAt": "2026-11-14T13:44:13.537Z"
+  },
+  "幕": {
+    "status": "pending"
+  },
+  "幣": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "敝",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%A3",
+    "firstRecordedAt": "2026-11-14T13:44:14.054Z"
+  },
+  "廓": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "郭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BB%93",
+    "firstRecordedAt": "2026-11-14T13:44:18.483Z"
+  },
+  "彆": {
+    "status": "pending"
+  },
+  "彰": {
+    "status": "pending"
+  },
+  "慈": {
+    "status": "pending"
+  },
+  "態": {
+    "status": "pending"
+  },
+  "慘": {
+    "status": "documented",
+    "component": "參"
+  },
+  "慚": {
+    "status": "pending"
+  },
+  "慢": {
+    "status": "documented",
+    "component": "曼"
+  },
+  "慣": {
+    "status": "documented",
+    "component": "貫"
+  },
+  "慷": {
+    "status": "documented",
+    "component": "康"
+  },
+  "截": {
+    "status": "documented",
+    "component": "雀"
+  },
+  "摔": {
+    "status": "documented",
+    "component": "率"
+  },
+  "摘": {
+    "status": "pending"
+  },
+  "摟": {
+    "status": "documented",
+    "component": "婁"
+  },
+  "摸": {
+    "status": "documented",
+    "component": "莫"
+  },
+  "摺": {
+    "status": "documented",
+    "component": "習"
+  },
+  "撇": {
+    "status": "pending"
+  },
+  "敲": {
+    "status": "documented",
+    "component": "高"
+  },
+  "旗": {
+    "status": "pending"
+  },
+  "暢": {
+    "status": "documented",
+    "component": "昜"
+  },
+  "榮": {
+    "status": "pending"
+  },
+  "構": {
+    "status": "pending"
+  },
+  "槌": {
+    "status": "pending"
+  },
+  "槍": {
+    "status": "documented",
+    "component": "倉"
+  },
+  "歉": {
+    "status": "documented",
+    "component": "兼"
+  },
+  "歌": {
+    "status": "pending"
+  },
+  "滯": {
+    "status": "documented",
+    "component": "帶"
+  },
+  "滲": {
+    "status": "documented",
+    "component": "參"
+  },
+  "滴": {
+    "status": "documented",
+    "component": "啻"
+  },
+  "滾": {
+    "status": "documented",
+    "component": "袞"
+  },
+  "滿": {
+    "status": "documented",
+    "component": "㒼"
+  },
+  "漁": {
+    "status": "pending"
+  },
+  "漂": {
+    "status": "documented",
+    "component": "票"
+  },
+  "漆": {
+    "status": "pending"
+  },
+  "演": {
+    "status": "documented",
+    "component": "寅"
+  },
+  "漠": {
+    "status": "documented",
+    "component": "莫"
+  },
+  "漢": {
+    "status": "pending"
+  },
+  "漣": {
+    "status": "documented",
+    "component": "連"
+  },
+  "漪": {
+    "status": "documented",
+    "component": "猗"
+  },
+  "漫": {
+    "status": "documented",
+    "component": "曼"
+  },
+  "漬": {
+    "status": "documented",
+    "component": "責"
+  },
+  "漲": {
+    "status": "documented",
+    "component": "張"
+  },
+  "漸": {
+    "status": "documented",
+    "component": "斬"
+  },
+  "漾": {
+    "status": "pending"
+  },
+  "熄": {
+    "status": "pending"
+  },
+  "熊": {
+    "status": "documented",
+    "component": "熊"
+  },
+  "熔": {
+    "status": "documented",
+    "component": "容"
+  },
+  "爾": {
+    "status": "pending"
+  },
+  "瑣": {
+    "status": "documented",
+    "component": "𧴪"
+  },
+  "瑤": {
+    "status": "documented",
+    "component": "䍃"
+  },
+  "瑪": {
+    "status": "documented",
+    "component": "馬"
+  },
+  "疑": {
+    "status": "pending"
+  },
+  "瘧": {
+    "status": "pending"
+  },
+  "盡": {
+    "status": "pending"
+  },
+  "監": {
+    "status": "pending"
+  },
+  "睿": {
+    "status": "pending"
+  },
+  "瞄": {
+    "status": "documented",
+    "component": "苗"
+  },
+  "碧": {
+    "status": "pending"
+  },
+  "碩": {
+    "status": "pending"
+  },
+  "碳": {
+    "status": "pending"
+  },
+  "磁": {
+    "status": "documented",
+    "component": "茲"
+  },
+  "禍": {
+    "status": "pending"
+  },
+  "福": {
+    "status": "pending"
+  },
+  "種": {
+    "status": "documented",
+    "component": "重"
+  },
+  "稱": {
+    "status": "pending"
+  },
+  "窩": {
+    "status": "documented",
+    "component": "咼"
+  },
+  "窪": {
+    "status": "documented",
+    "component": "窐"
+  },
+  "竭": {
+    "status": "documented",
+    "component": "曷"
+  },
+  "端": {
+    "status": "documented",
+    "component": "耑"
+  },
+  "箍": {
+    "status": "documented",
+    "component": "㧜"
+  },
+  "箏": {
+    "status": "pending"
+  },
+  "算": {
+    "status": "pending"
+  },
+  "管": {
+    "status": "pending"
+  },
+  "粹": {
+    "status": "documented",
+    "component": "卒"
+  },
+  "粽": {
+    "status": "documented",
+    "component": "宗"
+  },
+  "精": {
+    "status": "pending"
+  },
+  "粿": {
+    "status": "pending"
+  },
+  "綠": {
+    "status": "documented",
+    "component": "彔"
+  },
+  "綢": {
+    "status": "documented",
+    "component": "周"
+  },
+  "維": {
+    "status": "pending"
+  },
+  "網": {
+    "status": "pending"
+  },
+  "綴": {
+    "status": "pending"
+  },
+  "綵": {
+    "status": "pending"
+  },
+  "綺": {
+    "status": "documented",
+    "component": "奇"
+  },
+  "綻": {
+    "status": "documented",
+    "component": "定"
+  },
+  "綿": {
+    "status": "pending"
+  },
+  "緊": {
+    "status": "pending"
+  },
+  "僵": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "畺"
+  },
+  "價": {
+    "status": "pending"
+  },
+  "儀": {
+    "status": "pending"
+  },
+  "億": {
+    "status": "pending"
+  },
+  "儉": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "僉"
+  },
+  "劇": {
+    "status": "pending"
+  },
+  "劈": {
+    "status": "documented",
+    "semanticComponent": "刀",
+    "component": "辟"
+  },
+  "劉": {
+    "status": "pending"
+  },
+  "劍": {
+    "status": "pending"
+  },
+  "厲": {
+    "status": "pending"
+  },
+  "噓": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "虛",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%99%93",
+    "firstRecordedAt": "2026-11-14T13:43:09.484Z"
+  },
+  "嘩": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "華",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%A9",
+    "firstRecordedAt": "2026-11-14T13:43:09.157Z"
+  },
+  "嘯": {
+    "status": "pending"
+  },
+  "嘲": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "朝",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%B2",
+    "firstRecordedAt": "2026-11-14T13:43:08.434Z"
+  },
+  "嘴": {
+    "status": "pending"
+  },
+  "嘶": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "斯",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%B6",
+    "firstRecordedAt": "2026-11-14T13:43:09.371Z"
+  },
+  "嘹": {
+    "status": "pending"
+  },
+  "嘻": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "喜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%98%BB",
+    "firstRecordedAt": "2026-11-14T13:43:09.362Z"
+  },
+  "噗": {
+    "status": "pending"
+  },
+  "噴": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "賁",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%99%B4",
+    "firstRecordedAt": "2026-11-14T13:43:10.091Z"
+  },
+  "增": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "曾",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A2%9E",
+    "firstRecordedAt": "2026-11-14T13:43:26.475Z"
+  },
+  "墩": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "敦",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A2%A9",
+    "firstRecordedAt": "2026-11-14T13:43:26.836Z"
+  },
+  "嬉": {
+    "status": "pending"
+  },
+  "嬌": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "喬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AC%8C",
+    "firstRecordedAt": "2026-11-14T13:43:42.166Z"
+  },
+  "審": {
+    "status": "pending"
+  },
+  "寫": {
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "舄",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AF%AB",
+    "firstRecordedAt": "2026-11-14T13:43:56.442Z"
+  },
+  "寬": {
+    "status": "pending"
+  },
+  "寮": {
+    "status": "pending"
+  },
+  "導": {
+    "status": "documented",
+    "semanticComponent": "寸",
+    "component": "道",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%8E",
+    "firstRecordedAt": "2026-11-14T13:43:59.861Z"
+  },
+  "層": {
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "曾",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%A4",
+    "firstRecordedAt": "2026-11-14T13:44:03.807Z"
+  },
+  "履": {
+    "status": "pending"
+  },
+  "幟": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "戠",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%9F",
+    "firstRecordedAt": "2026-11-14T13:44:13.723Z"
+  },
+  "幢": {
+    "status": "documented",
+    "semanticComponent": "巾",
+    "component": "童",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%A2",
+    "firstRecordedAt": "2026-11-14T13:44:14.017Z"
+  },
+  "廚": {
+    "status": "pending"
+  },
+  "廟": {
+    "status": "pending"
+  },
+  "廠": {
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "敞",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BB%A0",
+    "firstRecordedAt": "2026-11-14T13:44:19.889Z"
+  },
+  "廢": {
+    "status": "pending"
+  },
+  "廣": {
+    "status": "pending"
+  },
+  "彈": {
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "單",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%88",
+    "firstRecordedAt": "2026-11-14T13:44:24.853Z"
+  },
+  "影": {
+    "status": "documented",
+    "semanticComponent": "彡",
+    "component": "景",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%B1",
+    "firstRecordedAt": "2026-11-14T13:44:25.901Z"
+  },
+  "徵": {
+    "status": "pending"
+  },
+  "德": {
+    "status": "pending"
+  },
+  "慕": {
+    "status": "pending"
+  },
+  "慧": {
+    "status": "documented",
+    "component": "彗"
+  },
+  "慮": {
+    "status": "pending"
+  },
+  "慰": {
+    "status": "documented",
+    "component": "尉"
+  },
+  "慶": {
+    "status": "pending"
+  },
+  "憂": {
+    "status": "pending"
+  },
+  "憐": {
+    "status": "documented",
+    "component": "粦"
+  },
+  "憤": {
+    "status": "documented",
+    "component": "賁"
+  },
+  "摩": {
+    "status": "documented",
+    "component": "麻"
+  },
+  "摯": {
+    "status": "pending"
+  },
+  "撈": {
+    "status": "documented",
+    "component": "勞"
+  },
+  "撐": {
+    "status": "documented",
+    "component": "掌"
+  },
+  "撒": {
+    "status": "pending"
+  },
+  "撞": {
+    "status": "documented",
+    "component": "童"
+  },
+  "撤": {
+    "status": "pending"
+  },
+  "撥": {
+    "status": "documented",
+    "component": "發"
+  },
+  "撫": {
+    "status": "pending"
+  },
+  "播": {
+    "status": "pending"
+  },
+  "撰": {
+    "status": "documented",
+    "component": "巽"
+  },
+  "撲": {
+    "status": "documented",
+    "component": "菐"
+  },
+  "敵": {
+    "status": "documented",
+    "component": "啻"
+  },
+  "敷": {
+    "status": "documented",
+    "component": "尃"
+  },
+  "數": {
+    "status": "documented",
+    "component": "婁"
+  },
+  "暫": {
+    "status": "documented",
+    "component": "斬"
+  },
+  "暮": {
+    "status": "pending"
+  },
+  "暴": {
+    "status": "pending"
+  },
+  "槳": {
+    "status": "documented",
+    "component": "將"
+  },
+  "槽": {
+    "status": "pending"
+  },
+  "樁": {
+    "status": "documented",
+    "component": "舂"
+  },
+  "樂": {
+    "status": "pending"
+  },
+  "樓": {
+    "status": "documented",
+    "component": "婁"
+  },
+  "標": {
+    "status": "documented",
+    "component": "票"
+  },
+  "模": {
+    "status": "documented",
+    "component": "莫"
+  },
+  "樣": {
+    "status": "documented",
+    "component": "羕"
+  },
+  "毅": {
+    "status": "pending"
+  },
+  "漿": {
+    "status": "documented",
+    "component": "將"
+  },
+  "潑": {
+    "status": "documented",
+    "component": "發"
+  },
+  "潔": {
+    "status": "documented",
+    "component": "絜"
+  },
+  "潛": {
+    "status": "documented",
+    "component": "朁"
+  },
+  "潤": {
+    "status": "documented",
+    "component": "閏"
+  },
+  "潮": {
+    "status": "pending"
+  },
+  "潺": {
+    "status": "documented",
+    "component": "孱"
+  },
+  "澄": {
+    "status": "documented",
+    "component": "登"
+  },
+  "澆": {
+    "status": "documented",
+    "component": "堯"
+  },
+  "澈": {
+    "status": "pending"
+  },
+  "澎": {
+    "status": "documented",
+    "component": "彭"
+  },
+  "澗": {
+    "status": "documented",
+    "component": "間"
+  },
+  "熟": {
+    "status": "pending"
+  },
+  "熬": {
+    "status": "pending"
+  },
+  "熱": {
+    "status": "documented",
+    "component": "埶"
+  },
+  "獎": {
+    "status": "pending"
+  },
+  "瑩": {
+    "status": "pending"
+  },
+  "璀": {
+    "status": "documented",
+    "component": "崔"
+  },
+  "璃": {
+    "status": "documented",
+    "component": "离"
+  },
+  "瘡": {
+    "status": "documented",
+    "component": "倉"
+  },
+  "瘦": {
+    "status": "documented",
+    "component": "叜"
+  },
+  "皺": {
+    "status": "documented",
+    "component": "芻"
+  },
+  "盤": {
+    "status": "documented",
+    "component": "般"
+  },
+  "瞇": {
+    "status": "pending"
+  },
+  "瞌": {
+    "status": "documented",
+    "component": "盍"
+  },
+  "確": {
+    "status": "documented",
+    "component": "隺"
+  },
+  "碼": {
+    "status": "documented",
+    "component": "馬"
+  },
+  "磊": {
+    "status": "pending"
+  },
+  "稻": {
+    "status": "pending"
+  },
+  "稿": {
+    "status": "documented",
+    "component": "高"
+  },
+  "穀": {
+    "status": "documented",
+    "component": "𣪊"
+  },
+  "窮": {
+    "status": "pending"
+  },
+  "箭": {
+    "status": "pending"
+  },
+  "箱": {
+    "status": "documented",
+    "component": "相"
+  },
+  "範": {
+    "status": "pending"
+  },
+  "篇": {
+    "status": "pending"
+  },
+  "糊": {
+    "status": "documented",
+    "component": "胡"
+  },
+  "緣": {
+    "status": "documented",
+    "component": "彖"
+  },
+  "墨": {
+    "status": "pending"
+  },
+  "儘": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "盡"
+  },
+  "凝": {
+    "status": "pending"
+  },
+  "劑": {
+    "status": "pending"
+  },
+  "器": {
+    "status": "pending"
+  },
+  "噪": {
+    "status": "pending"
+  },
+  "噬": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "筮",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%99%AC",
+    "firstRecordedAt": "2026-11-14T13:43:10.215Z"
+  },
+  "噸": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "頓",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%99%B8",
+    "firstRecordedAt": "2026-11-14T13:43:10.348Z"
+  },
+  "壁": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "辟",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A3%81",
+    "firstRecordedAt": "2026-11-14T13:43:27.292Z"
+  },
+  "壇": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "亶",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A3%87",
+    "firstRecordedAt": "2026-11-14T13:43:27.349Z"
+  },
+  "奮": {
+    "status": "pending"
+  },
+  "學": {
+    "status": "pending"
+  },
+  "憊": {
+    "status": "pending"
+  },
+  "憑": {
+    "status": "documented",
+    "component": "馮"
+  },
+  "憶": {
+    "status": "documented",
+    "component": "意"
+  },
+  "憾": {
+    "status": "pending"
+  },
+  "懈": {
+    "status": "documented",
+    "component": "解"
+  },
+  "懊": {
+    "status": "documented",
+    "component": "奧"
+  },
+  "戰": {
+    "status": "pending"
+  },
+  "撼": {
+    "status": "documented",
+    "component": "感"
+  },
+  "撿": {
+    "status": "pending"
+  },
+  "擁": {
+    "status": "pending"
+  },
+  "擂": {
+    "status": "pending"
+  },
+  "擅": {
+    "status": "documented",
+    "component": "亶"
+  },
+  "擇": {
+    "status": "pending"
+  },
+  "擋": {
+    "status": "documented",
+    "component": "當"
+  },
+  "操": {
+    "status": "documented",
+    "component": "喿"
+  },
+  "擔": {
+    "status": "documented",
+    "component": "詹"
+  },
+  "據": {
+    "status": "pending"
+  },
+  "整": {
+    "status": "pending"
+  },
+  "曆": {
+    "status": "pending"
+  },
+  "曉": {
+    "status": "documented",
+    "component": "堯"
+  },
+  "樸": {
+    "status": "documented",
+    "component": "菐"
+  },
+  "樹": {
+    "status": "pending"
+  },
+  "樽": {
+    "status": "pending"
+  },
+  "橇": {
+    "status": "pending"
+  },
+  "橋": {
+    "status": "documented",
+    "component": "喬"
+  },
+  "橘": {
+    "status": "documented",
+    "component": "矞"
+  },
+  "橙": {
+    "status": "documented",
+    "component": "登"
+  },
+  "機": {
+    "status": "documented",
+    "component": "幾"
+  },
+  "橡": {
+    "status": "documented",
+    "component": "象"
+  },
+  "橫": {
+    "status": "documented",
+    "component": "黃"
+  },
+  "歷": {
+    "status": "pending"
+  },
+  "澡": {
+    "status": "documented",
+    "component": "喿"
+  },
+  "澤": {
+    "status": "documented",
+    "component": "睪"
+  },
+  "激": {
+    "status": "documented",
+    "component": "敫"
+  },
+  "濃": {
+    "status": "documented",
+    "component": "農"
+  },
+  "熾": {
+    "status": "documented",
+    "component": "戠"
+  },
+  "燃": {
+    "status": "pending"
+  },
+  "燈": {
+    "status": "documented",
+    "component": "登"
+  },
+  "燎": {
+    "status": "pending"
+  },
+  "燒": {
+    "status": "documented",
+    "component": "堯"
+  },
+  "燕": {
+    "status": "pending"
+  },
+  "燙": {
+    "status": "pending"
+  },
+  "獨": {
+    "status": "pending"
+  },
+  "璞": {
+    "status": "pending"
+  },
+  "瓢": {
+    "status": "pending"
+  },
+  "瞞": {
+    "status": "documented",
+    "component": "㒼"
+  },
+  "瞥": {
+    "status": "pending"
+  },
+  "磚": {
+    "status": "documented",
+    "component": "專"
+  },
+  "磨": {
+    "status": "pending"
+  },
+  "穆": {
+    "status": "pending"
+  },
+  "積": {
+    "status": "documented",
+    "component": "責"
+  },
+  "穎": {
+    "status": "documented",
+    "component": "頃"
+  },
+  "窸": {
+    "status": "pending"
+  },
+  "窺": {
+    "status": "documented",
+    "component": "規"
+  },
+  "築": {
+    "status": "pending"
+  },
+  "篩": {
+    "status": "pending"
+  },
+  "糕": {
+    "status": "documented",
+    "component": "羔"
+  },
+  "糖": {
+    "status": "documented",
+    "component": "唐"
+  },
+  "償": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "賞"
+  },
+  "優": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "憂"
+  },
+  "儲": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "諸"
+  },
+  "勵": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "萬"
+  },
+  "嚀": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "寧",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9A%80",
+    "firstRecordedAt": "2026-11-14T13:43:10.946Z"
+  },
+  "嚇": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "赫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9A%87",
+    "firstRecordedAt": "2026-11-14T13:43:11.290Z"
+  },
+  "嚎": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "豪",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9A%8E",
+    "firstRecordedAt": "2026-11-14T13:43:10.619Z"
+  },
+  "嚏": {
+    "status": "pending"
+  },
+  "壓": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "厭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A3%93",
+    "firstRecordedAt": "2026-11-14T13:43:27.784Z"
+  },
+  "尷": {
+    "status": "documented",
+    "semanticComponent": "尢",
+    "component": "監",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%B7",
+    "firstRecordedAt": "2026-11-14T13:44:01.690Z"
+  },
+  "嶺": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "領",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B6%BA",
+    "firstRecordedAt": "2026-11-14T13:44:07.397Z"
+  },
+  "嶼": {
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "與",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B6%BC",
+    "firstRecordedAt": "2026-11-14T13:44:07.769Z"
+  },
+  "幫": {
+    "status": "documented",
+    "semanticComponent": "帛",
+    "component": "封",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%AB",
+    "firstRecordedAt": "2026-11-14T13:44:13.935Z"
+  },
+  "彌": {
+    "status": "pending"
+  },
+  "徽": {
+    "status": "documented",
+    "component": "微"
+  },
+  "懂": {
+    "status": "documented",
+    "component": "董"
+  },
+  "懇": {
+    "status": "pending"
+  },
+  "應": {
+    "status": "documented",
+    "component": "𨿳"
+  },
+  "懦": {
+    "status": "documented",
+    "component": "需"
+  },
+  "戲": {
+    "status": "pending"
+  },
+  "戴": {
+    "status": "pending"
+  },
+  "擊": {
+    "status": "documented",
+    "component": "毄"
+  },
+  "擎": {
+    "status": "documented",
+    "component": "敬"
+  },
+  "擠": {
+    "status": "documented",
+    "component": "齊"
+  },
+  "擤": {
+    "status": "pending"
+  },
+  "擦": {
+    "status": "documented",
+    "component": "察"
+  },
+  "擬": {
+    "status": "documented",
+    "component": "疑"
+  },
+  "擱": {
+    "status": "documented",
+    "component": "閣"
+  },
+  "曙": {
+    "status": "documented",
+    "component": "署"
+  },
+  "檔": {
+    "status": "documented",
+    "component": "當"
+  },
+  "檢": {
+    "status": "pending"
+  },
+  "櫛": {
+    "status": "pending"
+  },
+  "澀": {
+    "status": "documented",
+    "component": "歰"
+  },
+  "濘": {
+    "status": "pending"
+  },
+  "濛": {
+    "status": "documented",
+    "component": "蒙"
+  },
+  "濟": {
+    "status": "pending"
+  },
+  "濤": {
+    "status": "documented",
+    "component": "壽"
+  },
+  "濬": {
+    "status": "pending"
+  },
+  "營": {
+    "status": "pending"
+  },
+  "燥": {
+    "status": "documented",
+    "component": "喿"
+  },
+  "燦": {
+    "status": "documented",
+    "component": "粲"
+  },
+  "燭": {
+    "status": "documented",
+    "component": "蜀"
+  },
+  "牆": {
+    "status": "pending"
+  },
+  "獲": {
+    "status": "pending"
+  },
+  "璨": {
+    "status": "documented",
+    "component": "粲"
+  },
+  "環": {
+    "status": "pending"
+  },
+  "療": {
+    "status": "documented",
+    "component": "尞"
+  },
+  "癌": {
+    "status": "documented",
+    "component": "喦"
+  },
+  "盪": {
+    "status": "pending"
+  },
+  "瞧": {
+    "status": "documented",
+    "component": "焦"
+  },
+  "瞪": {
+    "status": "documented",
+    "component": "登"
+  },
+  "瞬": {
+    "status": "documented",
+    "component": "舜"
+  },
+  "瞭": {
+    "status": "documented",
+    "component": "尞"
+  },
+  "瞰": {
+    "status": "documented",
+    "component": "敢"
+  },
+  "矯": {
+    "status": "documented",
+    "component": "喬"
+  },
+  "礁": {
+    "status": "documented",
+    "component": "焦"
+  },
+  "穗": {
+    "status": "pending"
+  },
+  "篷": {
+    "status": "documented",
+    "component": "逢"
+  },
+  "簇": {
+    "status": "documented",
+    "component": "族"
+  },
+  "糞": {
+    "status": "pending"
+  },
+  "糟": {
+    "status": "documented",
+    "component": "曹"
+  },
+  "叢": {
+    "status": "pending"
+  },
+  "嚮": {
+    "status": "pending"
+  },
+  "壘": {
+    "status": "pending"
+  },
+  "嬸": {
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "審",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AC%B8",
+    "firstRecordedAt": "2026-11-14T13:43:42.553Z"
+  },
+  "擴": {
+    "status": "documented",
+    "component": "廣"
+  },
+  "擷": {
+    "status": "pending"
+  },
+  "擺": {
+    "status": "documented",
+    "component": "罷"
+  },
+  "擾": {
+    "status": "pending"
+  },
+  "斷": {
+    "status": "pending"
+  },
+  "檳": {
+    "status": "pending"
+  },
+  "檻": {
+    "status": "documented",
+    "component": "監"
+  },
+  "櫃": {
+    "status": "documented",
+    "component": "匱"
+  },
+  "歸": {
+    "status": "pending"
+  },
+  "濺": {
+    "status": "documented",
+    "component": "賤"
+  },
+  "濾": {
+    "status": "documented",
+    "component": "慮"
+  },
+  "瀉": {
+    "status": "documented",
+    "component": "寫"
+  },
+  "瀏": {
+    "status": "pending"
+  },
+  "瀑": {
+    "status": "documented",
+    "component": "暴"
+  },
+  "獵": {
+    "status": "pending"
+  },
+  "璧": {
+    "status": "pending"
+  },
+  "癒": {
+    "status": "pending"
+  },
+  "瞻": {
+    "status": "pending"
+  },
+  "禮": {
+    "status": "documented",
+    "component": "豊"
+  },
+  "竄": {
+    "status": "pending"
+  },
+  "竅": {
+    "status": "pending"
+  },
+  "簡": {
+    "status": "pending"
+  },
+  "簧": {
+    "status": "pending"
+  },
+  "糧": {
+    "status": "pending"
+  },
+  "勸": {
+    "status": "documented",
+    "semanticComponent": "力",
+    "component": "雚"
+  },
+  "嚥": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "燕",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9A%A5",
+    "firstRecordedAt": "2026-11-14T13:43:11.582Z"
+  },
+  "嚨": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "龍",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9A%A8",
+    "firstRecordedAt": "2026-11-14T13:43:11.282Z"
+  },
+  "壞": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "褱",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A3%9E",
+    "firstRecordedAt": "2026-11-14T13:43:28.498Z"
+  },
+  "寵": {
+    "status": "pending"
+  },
+  "廬": {
+    "status": "pending"
+  },
+  "懵": {
+    "status": "pending"
+  },
+  "懶": {
+    "status": "documented",
+    "component": "賴"
+  },
+  "懷": {
+    "status": "pending"
+  },
+  "攀": {
+    "status": "pending"
+  },
+  "攏": {
+    "status": "documented",
+    "component": "龍"
+  },
+  "曝": {
+    "status": "pending"
+  },
+  "曠": {
+    "status": "documented",
+    "component": "廣"
+  },
+  "瀕": {
+    "status": "pending"
+  },
+  "瀚": {
+    "status": "documented",
+    "component": "瀚"
+  },
+  "爆": {
+    "status": "documented",
+    "component": "暴"
+  },
+  "獸": {
+    "status": "pending"
+  },
+  "瓣": {
+    "status": "documented",
+    "component": "辡"
+  },
+  "疆": {
+    "status": "pending"
+  },
+  "癟": {
+    "status": "pending"
+  },
+  "礙": {
+    "status": "documented",
+    "component": "疑"
+  },
+  "禱": {
+    "status": "documented",
+    "component": "壽"
+  },
+  "穩": {
+    "status": "pending"
+  },
+  "穫": {
+    "status": "pending"
+  },
+  "簷": {
+    "status": "documented",
+    "component": "詹"
+  },
+  "簸": {
+    "status": "documented",
+    "component": "皮"
+  },
+  "簽": {
+    "status": "documented",
+    "component": "僉"
+  },
+  "簾": {
+    "status": "documented",
+    "component": "廉"
+  },
+  "簿": {
+    "status": "documented",
+    "component": "溥"
+  },
+  "嚴": {
+    "status": "pending"
+  },
+  "嚼": {
+    "status": "pending"
+  },
+  "壤": {
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "襄",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A3%A4",
+    "firstRecordedAt": "2026-11-14T13:43:28.085Z"
+  },
+  "寶": {
+    "status": "pending"
+  },
+  "懸": {
+    "status": "documented",
+    "component": "縣"
+  },
+  "攔": {
+    "status": "documented",
+    "component": "闌"
+  },
+  "瀰": {
+    "status": "documented",
+    "component": "彌"
+  },
+  "爐": {
+    "status": "documented",
+    "component": "盧"
+  },
+  "犧": {
+    "status": "pending"
+  },
+  "獻": {
+    "status": "pending"
+  },
+  "癢": {
+    "status": "documented",
+    "component": "養"
+  },
+  "礦": {
+    "status": "documented",
+    "component": "廣"
+  },
+  "礪": {
+    "status": "pending"
+  },
+  "礫": {
+    "status": "documented",
+    "component": "樂"
+  },
+  "競": {
+    "status": "pending"
+  },
+  "籃": {
+    "status": "documented",
+    "component": "監"
+  },
+  "籌": {
+    "status": "documented",
+    "component": "壽"
+  },
+  "籍": {
+    "status": "documented",
+    "component": "耤"
+  },
+  "糯": {
+    "status": "pending"
+  },
+  "屬": {
+    "status": "pending"
+  },
+  "懼": {
+    "status": "pending"
+  },
+  "攜": {
+    "status": "documented",
+    "component": "巂"
+  },
+  "攝": {
+    "status": "documented",
+    "component": "聶"
+  },
+  "欄": {
+    "status": "documented",
+    "component": "闌"
+  },
+  "灌": {
+    "status": "documented",
+    "component": "雚"
+  },
+  "爛": {
+    "status": "pending"
+  },
+  "儼": {
+    "status": "documented",
+    "semanticComponent": "人",
+    "component": "嚴"
+  },
+  "巒": {
+    "status": "pending"
+  },
+  "巔": {
+    "status": "pending"
+  },
+  "彎": {
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "䜌",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BD%8E",
+    "firstRecordedAt": "2026-11-14T13:44:24.843Z"
+  },
+  "懿": {
+    "status": "pending"
+  },
+  "攤": {
+    "status": "documented",
+    "component": "難"
+  },
+  "權": {
+    "status": "documented",
+    "component": "雚"
+  },
+  "歡": {
+    "status": "documented",
+    "component": "雚"
+  },
+  "灑": {
+    "status": "documented",
+    "component": "麗"
+  },
+  "灘": {
+    "status": "documented",
+    "component": "難"
+  },
+  "疊": {
+    "status": "pending"
+  },
+  "竊": {
+    "status": "pending"
+  },
+  "籟": {
+    "status": "documented",
+    "component": "賴"
+  },
+  "籠": {
+    "status": "pending"
+  },
+  "戀": {
+    "status": "documented",
+    "component": "䜌"
+  },
+  "攪": {
+    "status": "documented",
+    "component": "覺"
+  },
+  "籤": {
+    "status": "pending"
+  },
+  "囑": {
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "屬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9B%91",
+    "firstRecordedAt": "2026-11-14T13:43:11.559Z"
+  },
+  "矗": {
+    "status": "pending"
+  },
+  "廳": {
+    "status": "pending"
+  },
+  "灣": {
+    "status": "documented",
+    "component": "彎"
+  },
+  "籬": {
+    "status": "documented",
+    "component": "離"
+  }
+}

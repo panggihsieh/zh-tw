@@ -59,7 +59,7 @@ export default function CharacterStructureAnalysis({
     setSelectedPart(parts.length ? 0 : null);
     setClueKind("shape");
   }, [master.character]);
-  const clues = structureClues(master.character);
+  const clues = structureClues(master.character, master.components);
   const activeClue = clueKind === "shape" ? null : clues?.[clueKind];
   const highlightedParts = activeClue?.componentIndexes || [];
   const profile = structureProfile(master);
@@ -164,6 +164,7 @@ export default function CharacterStructureAnalysis({
                   <span>{clueKind === "sound" ? "聲音線索" : "意義線索"}</span>
                   <h3>{activeClue.title}</h3>
                   <p>{activeClue.explanation}</p>
+                  {activeClue.sources?.map(source => <p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></p>)}
                 </div>
               ) : (
                 <div className="structure-clue-missing" role="tabpanel">

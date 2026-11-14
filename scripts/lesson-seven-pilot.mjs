@@ -78,5 +78,33 @@ db.exec(`
     JOIN lessons l ON l.id = lw.lesson_id JOIN editions e ON e.id = l.edition_id;
 `);
 assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
+const verified = JSON.parse(readFileSync('src/verifiedSoundClues.json', 'utf8'));
+for (const reference of verified.sources) {
+  db.prepare('INSERT OR IGNORE INTO sources VALUES (?, ?, ?)').run(reference.url, reference.title, reference.kind);
+}
+for (const [glyph, entry] of Object.entries(verified.entries)) {
+  db.prepare('INSERT OR IGNORE INTO characters VALUES (?)').run(glyph);
+  db.prepare('INSERT INTO character_structures (glyph, analysis, source_url) VALUES (?, ?, ?)')
+    .run(glyph, entry.explanation, verified.sources[0].url);
+}
+assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
+const audit = JSON.parse(readFileSync('src/soundClueAudit.json','utf8'));
+const curriculum = JSON.parse(readFileSync('public/handwriting-curriculum.json','utf8'));
+db.exec(`CREATE TABLE sound_clue_audit (
+  glyph TEXT PRIMARY KEY REFERENCES characters(glyph), status TEXT NOT NULL CHECK(status IN ('documented','pending','unavailable','unchecked')),
+  component TEXT, source_url TEXT REFERENCES sources(url)
+)`);
+const dictionary = verified.sources[0];
+const glyphs = new Set(curriculum.books.flatMap(book => book.lessons.flatMap(lesson => [...lesson.characters])));
+for (const glyph of glyphs) {
+  if (!/\p{Script=Han}/u.test(glyph)) continue;
+  const row = audit[glyph];
+  const url = new URL(dictionary.url);
+  url.searchParams.set('word',glyph);
+  db.prepare('INSERT OR IGNORE INTO characters VALUES (?)').run(glyph);
+  db.prepare('INSERT OR IGNORE INTO sources VALUES (?, ?, ?)').run(url.href,dictionary.title,dictionary.kind);
+  db.prepare('INSERT INTO sound_clue_audit VALUES (?, ?, ?, ?)').run(glyph,row?.status ?? 'unchecked',row?.component ?? null,url.href);
+}
+assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
 rmSync("src/lessonSeven.sqlite", { force: true });
 db.exec("VACUUM INTO 'src/lessonSeven.sqlite'");

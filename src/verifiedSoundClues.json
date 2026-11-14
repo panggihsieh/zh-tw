@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {"title":"香港中文大學漢語多功能字庫","url":"https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%92%83","kind":"glyph"},
+    {"title":"教育部異體字字典","url":"https://dict.variants.moe.edu.tw/dictView.jsp?ID=27889","kind":"moe"}
+  ],
+  "entries": {
+    "璃": {"component":"离","componentIndexes":[1],"explanation":"右側「离」是聲符，提示讀音。「璃」讀 ㄌㄧˊ，例如「玻璃」。"}
+  }
+}

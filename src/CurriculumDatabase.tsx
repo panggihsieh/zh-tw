@@ -1,3 +1,6 @@
+import { quizRequest } from "./quizApi";
+import { candidateMaster, loadLearningResources } from "./curriculumLearning";
+import { structureClues } from "./structureClues";
 import { useEffect, useState } from "react";
 import type { LessonContext } from "./curriculumLearning";
 import BackendCard from "./BackendCard";
@@ -148,7 +151,40 @@ export default function CurriculumDatabase({
         );
       } catch {}
   }, [current, publisher, grade, term, selected, defaultOnly]);
-  return (
+  const [filled, setFilled] = useState<Record<string, { shape?: string; sound?: string; meaning?: string }>>(() => {
+    try { return JSON.parse(localStorage.getItem("hanzi.shape-sound-meaning.v1") || "{}"); }
+    catch { return {}; }
+  });
+  async function fillClues() {
+    setBusy(true);
+    try {
+      const remote = await quizRequest<{ entries: typeof filled }>("/character-clues", { characters: selected });
+      const next = { ...filled };
+      for (const char of selected) next[char] = { ...filled[char], ...remote.entries[char] };
+      const missing = selected.filter(char => !remote.entries[char]?.shape || !remote.entries[char]?.sound || !remote.entries[char]?.meaning);
+      if (!missing.length) { setFilled(next); setMessage("這批生字的形音義已有資料。"); return; }
+      const resources = await loadLearningResources();
+      let incomplete = 0;
+      for (const char of missing) {
+        const master = candidateMaster(char, resources);
+        const clues = structureClues(char, master.components);
+        const row = {
+          shape: next[char]?.shape || (resources.ids[char] ? master.structure : undefined),
+          sound: next[char]?.sound || clues?.sound?.explanation,
+          meaning: next[char]?.meaning || clues?.meaning?.explanation,
+        };
+        next[char] = row;
+        if (!row.shape || !row.sound || !row.meaning) incomplete++;
+      }
+      const saved = await quizRequest<{ entries: typeof filled }>("/character-clues", {
+        characters: missing,
+        entries: Object.fromEntries(missing.map(char => [char, next[char]])),
+      });
+      setFilled({ ...next, ...saved.entries });
+      setMessage(`已比對 ${missing.length} 字，${incomplete} 字仍有待核對欄位。`);
+    } catch { setMessage("形音義資料載入或儲存失敗，請重試。"); }
+    finally { setBusy(false); }
+  }  return (
     <section className="curriculum-database handwriting-lab">
       {!defaultOnly && <p className="handwriting-notice">
         課本字表不等於審定教材。可預覽六階段，注音與釋義來自教育部字典；結構是候選，白話解說、課文語境及多音字仍待教師確認。115
@@ -297,6 +333,16 @@ export default function CurriculumDatabase({
           >
             {busy ? "正在準備…" : actionLabel || "開始逐字學習"}
           </button>
+          {!student && !defaultOnly && <>
+            <button type="button" className="secondary" disabled={busy || !selected.length} onClick={() => void fillClues()}>形音義自動補齊</button>
+            {selected.some(char => filled[char]) && <table>
+              <thead><tr><th>生字</th><th>形</th><th>音</th><th>義</th></tr></thead>
+              <tbody>{selected.filter(char => filled[char]).map(char => <tr key={char}>
+                <th scope="row">{char}</th><td>{filled[char].shape || "待核對"}</td>
+                <td>{filled[char].sound || "待核對"}</td><td>{filled[char].meaning || "待核對"}</td>
+              </tr>)}</tbody>
+            </table>}
+          </>}
           <p role="status">
             {message || `已選 ${selected.length} 個字 · 可自己勾選或全部選取`}
           </p>

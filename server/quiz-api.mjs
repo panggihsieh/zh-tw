@@ -414,6 +414,34 @@ export function createQuizHandler({
       }
       if (!user.admin)
         return send(403, { error: "僅管理者可組卷與查看全班統計" });
+      if (path === "/character-clues" && req.method === "POST") {
+        const { characters, entries } = await body(req, 64000);
+        if (!Array.isArray(characters) || characters.length > 100 ||
+            characters.some(char => typeof char !== "string" || !/^\p{Script=Han}$/u.test(char)))
+          throw Error("生字清單格式不符");
+        const fields = ["shape", "sound", "meaning"];
+        const rows = await Promise.all([...new Set(characters)].map(async char => {
+          const row = {};
+          for (const field of fields) {
+            const key = `character-clues/${char.codePointAt(0).toString(16)}/${field}.json`;
+            try { row[field] = (await store.get(key)).value.text; }
+            catch (error) {
+              if (error.status !== 404) throw error;
+              const candidate = entries?.[char]?.[field];
+              if (!text(candidate, 500)) continue;
+              try {
+                await store.create(key, { text: candidate.trim() });
+                row[field] = candidate.trim();
+              } catch (conflict) {
+                if (conflict.status !== 412 && conflict.status !== 409) throw conflict;
+                row[field] = (await store.get(key)).value.text;
+              }
+            }
+          }
+          return [char, row];
+        }));
+        return send(200, { entries: Object.fromEntries(rows) });
+      }
       if (path === "/database-query-plan" && req.method === "POST") {
         if (typeof planCurriculumQuery !== "function")
           throw Error("AI 關聯查詢尚未設定");
