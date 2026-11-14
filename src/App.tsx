@@ -357,9 +357,9 @@ function App() {
     }
   }, [restored]);
 
-  const [learningTab, setLearningTab] = useState<"saved" | "quiz">("saved");
+  const [learningTab, setLearningTab] = useState<"saved" | "quiz" | "resources">(restored.page === "resources" ? "resources" : "saved");
   const [showVersions, setShowVersions] = useState(false);
-  const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page);
+  const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page === "resources" ? "library" : restored.page);
   const headerRef = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     const header = headerRef.current;
@@ -881,16 +881,6 @@ function App() {
             >
               <LibraryBig size={20} />
               我的學習本<span className="nav-count">{saved.length}</span>
-            </button>
-            <button
-              className={page === "resources" ? "nav-item active" : "nav-item"}
-              onClick={() => {
-                setPage("resources");
-                setPlaying(false);
-              }}
-            >
-              <BookOpen size={20} />
-              教育部字辭典
             </button>
             <button type="button" className="nav-item student-version-button" onClick={() => setShowVersions(true)}>
               v{SITE_VERSION} · {SITE_VERSION_SHORT_NOTE} · <time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time>
@@ -1777,6 +1767,8 @@ function App() {
                   aria-pressed={learningTab === "saved"} onClick={() => setLearningTab("saved")}>生字收藏本</button>
                 <button type="button" className={learningTab === "quiz" ? "primary" : "secondary"}
                   aria-pressed={learningTab === "quiz"} onClick={() => setLearningTab("quiz")}>國語錯題本</button>
+                <button type="button" className={learningTab === "resources" ? "primary" : "secondary"}
+                  aria-pressed={learningTab === "resources"} onClick={() => setLearningTab("resources")}>教育部字辭典</button>
               </div>
             )}
             {page === "library" && learningTab === "quiz" && !backendMode && (
@@ -1942,7 +1934,7 @@ function App() {
                 </p>
               </>
             )}
-            {page === "resources" && (
+            {page === "library" && learningTab === "resources" && !backendMode && (
               <>
                 <div className="page-heading">
                   <div>
