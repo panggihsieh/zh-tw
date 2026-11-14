@@ -7,6 +7,7 @@ export interface TeacherSentenceGrade {targetOk:boolean;idiom:number;elements:Re
 export interface SentencePracticeGrade {
   polished?: string;
   fullScoreExample?: string;
+  fullScoreExpression?: string;
   creativeExample?: string;
   issue?: string;
   issueReason?: string;

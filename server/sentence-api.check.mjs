@@ -100,3 +100,9 @@ test('自由造句等第遇到指定字錯誤或不確定時不製造高分',()=
  assert.throws(()=>gradePractice(sentence,'灘',{...base,mechanics:11}));
  assert.throws(()=>gradePractice(sentence,'灘',{...base,highlight:'不在原句'}));
 });
+test('滿分示例只回傳實際出現的成語或佳詞',()=>{
+ const sentence='我在美麗的海灘看夕陽。';
+ const base={targetOk:true,meaningOk:true,uncertain:false,correctness:30,completeness:20,fluency:20,detail:20,mechanics:10,highlight:'美麗的海灘',feedback:'句子完整。',fullScoreExample:'夕陽映照著波光粼籼的海灘。',fullScoreExpression:'波光粼籼'};
+ assert.equal(gradePractice(sentence,'灘',base).fullScoreExpression,'波光粼籼');
+ assert.equal(gradePractice(sentence,'灘',{...base,fullScoreExpression:'五光十色'}).fullScoreExpression,'');
+});

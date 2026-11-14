@@ -1,5 +1,5 @@
 export interface CompetitionQuestion {id?:string;type?:'sentence-practice';prompt:string;options?:string[];answer?:number;seconds:number;phrase?:string;character?:string;reading?:string}
-export interface CompetitionRoom {id:string;code:string;title:string;className:string;status:'lobby'|'running'|'closed';questionCount:number;createdAt:number;duration:number;maxParticipants:number;startedAt:number|null;expiresAt:number|null;loginMode:'roster'|'anonymous';gameType:'quiz'|'sentence-practice';testRoom:boolean;roster?:string[];questions?:CompetitionQuestion[]}
+export interface CompetitionRoom {id:string;code:string;title:string;className:string;status:'lobby'|'running'|'closed';questionCount:number;createdAt:number;duration:number;maxParticipants:number;startedAt:number|null;expiresAt:number|null;closedAt:number|null;loginMode:'roster'|'anonymous';gameType:'quiz'|'sentence-practice';testRoom:boolean;roster?:string[];questions?:CompetitionQuestion[]}
 export interface CompetitionParticipant {uid:string;name:string;seat:number|null;avatarKind:'custom'|'default'|'anonymous';avatar:string|null;index:number;correct:number;points:number;finished:boolean;mine?:boolean}
 export interface LeaderboardItem extends CompetitionParticipant {rank:number;answered:number;mine:boolean}
 export async function competitionRequest<T>(path:string,body?:unknown):Promise<T>{

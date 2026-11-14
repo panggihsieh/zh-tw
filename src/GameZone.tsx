@@ -122,7 +122,7 @@ export default function GameZone() {
             </button>
             {!cloudConfigured && <p>尚未設定 Google 登入。</p>}
           </section>
-        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "structure" ? <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
+        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "structure" ? <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
           <WritingPractice
             key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}

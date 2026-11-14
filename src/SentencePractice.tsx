@@ -66,16 +66,24 @@ function compareSentences(original: string, polished: string) {
   return { originalParts, polishedParts };
 }
 
+function highlightExample(text: string, expression?: string) {
+  if (!expression || !text.includes(expression)) return text;
+  const [before, ...after] = text.split(expression);
+  return <>{before}<mark className="practice-example-expression">{expression}</mark>{after.join(expression)}</>;
+}
+
 export default function SentencePractice({
   onBack,
   request = defaultRequest,
   initialCard,
+  lessonTitle,
   correctionOption,
   simulated = false,
 }: {
   onBack: () => void;
   request?: typeof defaultRequest;
   initialCard?: { phrase: string; character: string };
+  lessonTitle?: string;
   simulated?: boolean;
   correctionOption?: ReactNode;
 }) {
@@ -360,7 +368,7 @@ export default function SentencePractice({
             className="primary"
             disabled={busy || listening || !character || !sentence.includes(character) || Array.from(sentence.replace(/[^\p{Script=Han}]/gu, "")).length < 5}
             onClick={() => void run(async () => {
-              const result = await request<{ grade: SentencePracticeGrade }>("/practice/grade", { phrase, character, sentence });
+              const result = await request<{ grade: SentencePracticeGrade }>("/practice/grade", { phrase, character, sentence, lessonTitle });
               setSuggestion("");
               setGrade(result.grade);
               setMessage("評量完成，請查看等第與建議。");
@@ -376,7 +384,7 @@ export default function SentencePractice({
               <h3>AI 潤稿</h3>
               <p>原句：{originalParts}</p>
               {grade.polished && <p><strong>原句潤稿：</strong>{polishedParts}</p>}
-              {grade.fullScoreExample && <p><strong>滿分規準示例（參考）：</strong>{grade.fullScoreExample}</p>}
+              {grade.fullScoreExample && <p><strong>滿分規準示例（參考）：</strong>{highlightExample(grade.fullScoreExample, grade.fullScoreExpression)}</p>}
               {grade.creativeExample && <p><strong>AI 創意示例：</strong>{grade.creativeExample}</p>}
               {grade.issueReason && <p>{grade.issueReason}</p>}
             </section>;

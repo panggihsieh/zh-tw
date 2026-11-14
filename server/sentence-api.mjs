@@ -54,8 +54,9 @@ export function gradePractice(sentence,character,analysis) {
   const creative = validExample(analysis.creativeExample);
   const fullScoreExample = fullScore === sentence || fullScore === polished ? '' : fullScore;
   const creativeExample = [sentence, polished, fullScoreExample].includes(creative) ? '' : creative;
+  const fullScoreExpression = bounded(analysis.fullScoreExpression, 40) && fullScoreExample.includes(analysis.fullScoreExpression) ? analysis.fullScoreExpression.trim() : '';
   return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback,
-    issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished, fullScoreExample, creativeExample};
+    issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished, fullScoreExample, fullScoreExpression, creativeExample};
 }
 export function validateTeacherGrade(v) {
   if(!v||typeof v.targetOk!=='boolean'||![0,40].includes(v.idiom)||!Number.isInteger(v.fluency)||v.fluency<0||v.fluency>10||!bounded(v.feedback,1200)||!v.elements||['person','event','time','place','object'].some(k=>![0,10].includes(v.elements[k])))fail('覆核配分不符：成語0/40、人事時地物各0/10、順暢0–10。');
@@ -90,7 +91,8 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       if(path==='/practice/grade'&&req.method==='POST'){
         const v=await body(req);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
-        const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence});
+        if(v.lessonTitle!==undefined&&(typeof v.lessonTitle!=='string'||v.lessonTitle.length>100))fail('課文名稱格式不符。');
+        const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence,...(v.lessonTitle?.trim()?{lessonTitle:v.lessonTitle.trim()}: {})});
         return send(200,{grade:gradePractice(v.sentence,v.character,analysis)});
       }
       if(path==='/events'&&req.method==='GET')return send(200,{now:now(),items:(await scan('sentence-events/')).filter(e=>access(e,user)&&(user.admin||e.status!=='draft')).sort((a,b)=>b.createdAt-a.createdAt).map(e=>publicEvent(e,user.admin))});
