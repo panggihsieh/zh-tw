@@ -1,3 +1,5 @@
+import ClassRoster, { type QuizClass } from "./ClassRoster";
+import { quizRequest } from "./quizApi";
 import BackendCard from "./BackendCard";
 import { useEffect, useState } from "react";
 import {
@@ -8,6 +10,35 @@ import {
 } from "./userAccess";
 
 export default function UserManagement() {
+  const [tab, setTab] = useState<"teachers" | "students">("teachers");
+  return <section aria-labelledby="user-management-title">
+    <h2 id="user-management-title">使用者管理</h2>
+    <div className="competition-actions" role="group" aria-label="使用者管理分頁">
+      <button className={tab === "teachers" ? "primary" : "secondary"} aria-pressed={tab === "teachers"} onClick={() => setTab("teachers")}>老師</button>
+      <button className={tab === "students" ? "primary" : "secondary"} aria-pressed={tab === "students"} onClick={() => setTab("students")}>班級（學生）</button>
+    </div>
+    {tab === "teachers" ? <TeacherAccounts /> : <StudentClasses />}
+  </section>;
+}
+
+function StudentClasses() {
+  const [classes, setClasses] = useState<QuizClass[] | null>(null);
+  const [error, setError] = useState("");
+  async function load() {
+    setError("");
+    try {
+      setClasses((await quizRequest<{ items: QuizClass[] }>("/classes")).items);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : "無法載入班級名冊。");
+    }
+  }
+  useEffect(() => { void load(); }, []);
+  if (error) return <div><p role="alert">{error}</p><button className="secondary" onClick={() => void load()}>重新載入</button></div>;
+  if (!classes) return <p role="status">正在載入班級名冊…</p>;
+  return <ClassRoster classes={classes} onSaved={record => setClasses(items => [...(items ?? []).filter(item => item.id !== record.id), record])} />;
+}
+
+function TeacherAccounts() {
   const [users, setUsers] = useState<AppUser[]>([]);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -42,7 +73,7 @@ export default function UserManagement() {
       id="user-management"
       aria-labelledby="users-title"
     >
-      <h2 id="users-title">使用者管理</h2>
+      <h2 id="users-title">老師帳號與權限</h2>
       <p>
         固定管理者：{ADMIN_EMAIL}
         。管理生字網站的雲端存取權限；停用後，該帳號無法讀寫雲端收藏，本機收藏仍保留。

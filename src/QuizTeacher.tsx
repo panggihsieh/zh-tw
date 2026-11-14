@@ -9,7 +9,7 @@ import {
 } from "./quizApi";
 import "./quiz.css";
 import PublisherSync from "./PublisherSync";
-import ClassRoster, { type QuizClass } from "./ClassRoster";
+import type { QuizClass } from "./ClassRoster";
 import {reviewPaperId} from './publisherSelection';
 import {readQuizPassage} from './quizPassage';
 interface Book {
@@ -31,7 +31,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
     [mode, setMode] = useState<"original" | "rephrase">("original"),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [tab, setTab] = useState("bank"),
+    [tab, setTab] = useState("sql"),
     [books, setBooks] = useState<Book[]>([]),
     [bookIndex, setBookIndex] = useState(0),
     [lessonIndex, setLessonIndex] = useState(0);
@@ -124,12 +124,11 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
-      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details><summary>出版社教用題卷匯入（進階）</summary><PublisherSync/></details>}
+      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details><summary>三家出版社教材更新與題卷匯入</summary><PublisherSync/></details>}
       {!reviewId && <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
         </button>
-        <button className="secondary" onClick={() => setTab("roster")}>班級學生名冊</button>
         <button
           className="secondary"
           onClick={() => {
@@ -146,8 +145,8 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         >
           重新整理題庫
         </button>
+      <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>
       </div>}
-      {!reviewId && <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>}
       {tab === "sql" && <CurriculumSql />}
       {tab !== "sql" && <p role="status">{message}</p>}
       {tab === "generate" && (
@@ -324,8 +323,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           </button>
         </form>
       )}
-      {tab === "roster" && <ClassRoster classes={classes} onSaved={record => setClasses(items => [...items.filter(item => item.id !== record.id), record])} />}
-      {tab !== "generate" && tab !== "roster" && tab !== "sql" && (
+      {tab !== "generate" && tab !== "sql" && (
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
