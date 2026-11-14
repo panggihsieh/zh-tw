@@ -20,7 +20,6 @@ import {
   Download,
   ExternalLink,
   FileText,
-  Flower2,
   Grid2X2,
   HelpCircle,
   Image,
@@ -1106,24 +1105,20 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                         這個語詞尚未收錄語境教材。可以建立字卡，讀音與字義需再核對；字形不會自動轉換。
                       </p>
                     )}
-                    <button
-                      className="primary start-button"
-                      onClick={start}
-                      disabled={!positions.length}
-                    >
-                      開始逐字學習 <ArrowRight size={18} />
-                    </button>
+                    {(!collection || collection.sourcePhrase !== phrase ||
+                      positions.length !== collection.cards.length ||
+                      positions.some((position, index) => position !== collection.cards[index]?.position)) && (
+                      <button
+                        className="primary start-button"
+                        onClick={start}
+                        disabled={!positions.length}
+                      >
+                        開始逐字學習 <ArrowRight size={18} />
+                      </button>
+                    )}
                     <span className="selection-count">
                       已選 {positions.length} 個字 · 每個字都有自己的學習卡
                     </span>
-                    <div className="tip">
-                      <Flower2 size={21} />
-                      <p>
-                        不用一次全部學會，
-                        <br />
-                        今天多認識一個字就很棒。
-                      </p>
-                    </div>
                   </section>
                   {!collection ? (
                     <section className="welcome-panel">
@@ -1183,7 +1178,13 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                         <div className="classroom-head">
                           <div>
                             <span className="overline">{collection.curriculum ? `${collection.curriculum.publisher} ${collection.curriculum.grade}${collection.curriculum.term} · ${collection.curriculum.title}` : "正在學習的語詞"}</span>
-                            <strong>{collection.sourcePhrase}</strong>
+                            <span className="classroom-character-list" role="list" aria-label="學習字卡">
+                              {collection.cards.map((item, index) => (
+                                <span key={index} role="listitem" aria-current={index === cardIndex ? "true" : undefined}>
+                                  {item.character}
+                                </span>
+                              ))}
+                            </span>
                             <span className="card-counter">
                               第 {cardIndex + 1} / {collection.cards.length}{" "}
                               張字卡
@@ -1200,7 +1201,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                                 setPlaying(false);
                               }}
                             >
-                              <ChevronLeft size={19} />
+                              <ChevronLeft size={28} strokeWidth={3} />
                             </button>
                             <button
                               className="icon-btn"
@@ -1214,7 +1215,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                                 setPlaying(false);
                               }}
                             >
-                              <ChevronRight size={19} />
+                              <ChevronRight size={28} strokeWidth={3} />
                             </button>
                           </div>
                         </div>

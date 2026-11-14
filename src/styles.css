@@ -3868,3 +3868,33 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .top-navigation-layout:not(.backend-shell) .main-wrap {
   padding-top: var(--app-header-height, 160px);
 }
+
+.classroom-character-list {
+  display: inline-flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-inline-end: 8px;
+  vertical-align: middle;
+}
+.classroom-character-list > span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.65em;
+  padding: 2px 4px;
+  border: 1px solid #161616;
+  border-radius: 4px;
+  background: #ececec;
+  color: #161616;
+  font-weight: 700;
+}
+.classroom-character-list > [aria-current] {
+  background: #a9db96;
+}
+.classroom .card-arrows .icon-btn {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #161616;
+  background: #a9db96;
+  color: #161616;
+}
