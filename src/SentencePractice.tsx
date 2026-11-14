@@ -76,13 +76,15 @@ export default function SentencePractice({
   onBack,
   request = defaultRequest,
   initialCard,
+  fixedCharacter = false,
   lessonTitle,
   correctionOption,
   simulated = false,
 }: {
   onBack: () => void;
   request?: typeof defaultRequest;
-  initialCard?: { phrase: string; character: string };
+  fixedCharacter?: boolean;
+  initialCard?: { phrase: string; character: string; sentence?: string };
   lessonTitle?: string;
   simulated?: boolean;
   correctionOption?: ReactNode;
@@ -90,7 +92,7 @@ export default function SentencePractice({
   const [phrase, setPhrase] = useState(initialCard?.phrase ?? "");
   const [character, setCharacter] = useState(initialCard?.character ?? "");
   const [original, setOriginal] = useState("");
-  const [sentence, setSentence] = useState("");
+  const [sentence, setSentence] = useState(initialCard?.sentence ?? "");
   const [suggestion, setSuggestion] = useState("");
   const [fontSize, setFontSize] = useState(20);
   const [grade, setGrade] = useState<SentencePracticeGrade | null>(null);
@@ -222,10 +224,10 @@ export default function SentencePractice({
       <p className="eyebrow">語詞 × 指定字 × 語音造句</p>
       <h1>一字多詞 AI 造句</h1>
       <p className="sentence-notice">
-        輸入一個語詞，挑一個想練習的字，再說出包含這個字的完整句子。
+        {fixedCharacter ? "用選定的字想一個語詞，再說出完整句子。" : "輸入一個語詞，挑一個想練習的字，再說出包含這個字的完整句子。"}
       </p>
 
-      <section className="practice-step" aria-labelledby="practice-phrase-title">
+      {!fixedCharacter && <section className="practice-step" aria-labelledby="practice-phrase-title">
         <span className="practice-step-number">1</span>
         <div>
           <h2 id="practice-phrase-title">輸入語詞並選一個字</h2>
@@ -263,7 +265,7 @@ export default function SentencePractice({
             </fieldset>
           )}
         </div>
-      </section>
+      </section>}
 
       <section className="practice-step" aria-labelledby="practice-speech-title">
         <span className="practice-step-number">2</span>

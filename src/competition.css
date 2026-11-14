@@ -44,3 +44,10 @@
 }
 .competition-real-ai:focus-within { outline: 2px solid currentColor; outline-offset: 3px; }
 .competition-question-import{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 16px}.competition-question-import>span{color:var(--theme-muted,#52645d);font-size:14px}.competition-upload{display:inline-flex!important;align-items:center;gap:8px;cursor:pointer;margin:0!important}.competition-upload input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.competition-upload:focus-within{outline:3px solid var(--theme-primary,#16844d);outline-offset:3px}.competition-import-notice{padding:12px 16px;border-left:4px solid var(--theme-primary,#16844d);background:var(--theme-background,#eef9df);border-radius:10px}
+
+.competition-pilot-data { margin: 12px 0; overflow-x: auto; }
+.competition-pilot-data summary { cursor: pointer; }
+.competition-pilot-data table { width: 100%; text-align: left; margin-top: 10px; }
+.competition-pilot-data th, .competition-pilot-data td { padding: 8px; vertical-align: top; border-bottom: 1px solid #dcd7f5; }
+.competition-pilot-data td:nth-child(3) { white-space: pre-line; }
+.competition-card-preview article > .competition-preview-action { position: static; border: 1px solid #dcd7f5; }
