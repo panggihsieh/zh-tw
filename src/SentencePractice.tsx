@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { Check, Mic, RotateCcw, Sparkles, Square } from "lucide-react";
 import {
   sentenceRequest as defaultRequest,
@@ -70,12 +70,14 @@ export default function SentencePractice({
   onBack,
   request = defaultRequest,
   initialCard,
+  correctionOption,
   simulated = false,
 }: {
   onBack: () => void;
   request?: typeof defaultRequest;
   initialCard?: { phrase: string; character: string };
   simulated?: boolean;
+  correctionOption?: ReactNode;
 }) {
   const [phrase, setPhrase] = useState(initialCard?.phrase ?? "");
   const [character, setCharacter] = useState(initialCard?.character ?? "");
@@ -302,26 +304,29 @@ export default function SentencePractice({
               placeholder={character ? `請說出包含「${character}」的完整句子。` : "請先選擇一個字。"}
             />
           {original && <p className="practice-original">原始語音辨識：{original}</p>}
-          <button
-            className="secondary"
-            disabled={busy || listening || !character || !sentence.trim()}
-            onClick={() => void run(async () => {
-              const result = await request<{ suggestion: string }>("/practice/correct", {
-                phrase,
-                character,
-                transcript: sentence,
-              });
-              if (result.suggestion.trim() === sentence.trim()) {
-                setSuggestion("");
-                setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "AI 沒有提出可確認的修正。請核對辨識文字，必要時清除重說。");
-                return;
-              }
-              setSuggestion(result.suggestion);
-              setMessage("AI 已提出同音語意修正，請確認是否符合原意。");
-            })}
-          >
-            <Sparkles size={18} />AI 同音語意校正
-          </button>
+          <div className="practice-correction-actions">
+            <button
+              className="secondary"
+              disabled={busy || listening || !character || !sentence.trim()}
+              onClick={() => void run(async () => {
+                const result = await request<{ suggestion: string }>("/practice/correct", {
+                  phrase,
+                  character,
+                  transcript: sentence,
+                });
+                if (result.suggestion.trim() === sentence.trim()) {
+                  setSuggestion("");
+                  setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "AI 沒有提出可確認的修正。請核對辨識文字，必要時清除重說。");
+                  return;
+                }
+                setSuggestion(result.suggestion);
+                setMessage("AI 已提出同音語意修正，請確認是否符合原意。");
+              })}
+            >
+              <Sparkles size={18} />AI 同音語意校正
+            </button>
+            {correctionOption}
+          </div>
           {suggestion && (
             <div className="sentence-suggestion">
               <strong>校正建議</strong>
