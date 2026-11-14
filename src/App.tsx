@@ -558,25 +558,25 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     setPlaying(false);
     speech.speak(text, speed === 0.65 ? 0.7 : speed === 1.5 ? 1.1 : 0.85, undefined, 1000);
   }
-  const narrationKey = JSON.stringify([
-    scene,
-    card?.id,
-    voice,
-    simple,
-    wordCount,
-    speed,
-    page,
-    modal,
-    deleteId,
-  ]);
-  const previousNarration = useRef(narrationKey);
+  const character = card?.character;
   useEffect(() => {
-    const changed = previousNarration.current !== narrationKey;
-    previousNarration.current = narrationKey;
-    if (changed && voice && page === "learn" && card && !modal && !deleteId)
-      say(narration, true);
-    return () => speech.stop();
-  }, [scene, card?.id, voice, simple, wordCount, speed, page, modal, deleteId]);
+    if (!voice || page !== "learn" || gamesOpen || studentFinderOpen || !character || modal || deleteId) return;
+    let cancelled = false;
+    void loadDictionary()
+      .then((dictionary) => {
+        const words = lookupEntries(dictionary, character).flatMap((entry) =>
+          Array.from(entry[13].matchAll(/→([^。；\n]+)/g), (match) => match[1].trim()),
+        );
+        if (!cancelled) say([character, ...new Set(words)].join("。"), true);
+      })
+      .catch(() => {
+        if (!cancelled) say(character, true);
+      });
+    return () => {
+      cancelled = true;
+      speech.stop();
+    };
+  }, [card?.id, character, voice, speed, page, gamesOpen, studentFinderOpen, modal, deleteId]);
   useEffect(() => {
     if (restored.speech) speech.restoreSession(restored.speech);
   }, []);
@@ -959,6 +959,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 </div>
                 <div
                   className={`learning-layout ${collection ? "has-session" : ""}`}
+                  style={!backendMode && (!collection || studentFinderOpen) ? { display: "none" } : undefined}
                 >
                   <section className="input-panel">
                     <div className="section-kicker">
@@ -1230,7 +1231,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                               checked={voice}
                               onChange={(e) => setVoice(e.target.checked)}
                             />
-                            切換分鏡時自動朗讀
+                            切換字卡時自動朗讀
                           </label>
                           <label className="tts-rate">
                             朗讀速度
@@ -2115,7 +2116,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             {[
               { label: "顯示注音", checked: showReading, set: setShowReading },
               { label: "顯示重點字幕", checked: captions, set: setCaptions },
-              { label: "切換分鏡時自動朗讀", checked: voice, set: setVoice },
+              { label: "切換字卡時自動朗讀", checked: voice, set: setVoice },
               { label: "減少動態效果", checked: reduced, set: setReduced },
             ].map((item) => (
               <label className="setting-row" key={item.label}>
