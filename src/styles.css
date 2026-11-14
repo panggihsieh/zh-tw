@@ -3787,3 +3787,20 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   color: white;
   border-color: #ffffff55;
 }
+
+.backend-nav-group summary {
+  padding: 5px 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.backend-nav-settings {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+:root[data-site-theme] .backend-nav-group :is(h2, summary) {
+  color: #fff;
+}

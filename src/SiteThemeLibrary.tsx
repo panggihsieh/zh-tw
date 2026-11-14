@@ -1,3 +1,4 @@
+import { BirdMascotIcon, owlImage } from "./BirdMascot";
 import { useEffect, useState } from "react";
 import { Check, Palette, Plus, Star, BookOpen } from "lucide-react";
 import { builtInThemes, colorKeys, themeVariables, watchThemeLibrary, saveSiteTheme, type SiteTheme } from "./siteThemes";
@@ -35,6 +36,16 @@ export default function SiteThemeLibrary({ active }: { active: SiteTheme }) {
     </div>
     <div className="theme-save-actions"><button className="secondary" disabled={busy || !draft.name.trim()} onClick={() => void save(false)}>儲存樣式</button><button className="primary" disabled={busy || !draft.name.trim()} onClick={() => void save(true)}><Check size={18}/>{busy ? "處理中…" : "套用全站"}</button></div>
     <p role="status">{message}</p>
+    <section className="theme-library-grid" aria-label="Logo 與公仔圖">
+      <div className="theme-choice">
+        <strong>首頁 Logo</strong>
+        <BirdMascotIcon />
+      </div>
+      <div className="theme-choice">
+        <strong>首頁公仔圖</strong>
+        <img className="theme-reference" src={owlImage} alt="小貓頭鷹公仔" />
+      </div>
+    </section>
     <details><summary>森林冒險風格參考圖</summary><img className="theme-reference" src={`${import.meta.env.BASE_URL}style-references/forest-adventure.png`} alt="綠色冒險風格參考：森林、圓角卡片、鮮綠按鈕與金色點綴"/></details>
   </section>;
 }

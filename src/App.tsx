@@ -811,7 +811,7 @@ function App() {
           </header>}
           <NavigationContainer ref={backendMode ? undefined : headerRef} id={backendMode ? "backend-navigation" : undefined} className="topbar">
             <div className="header-primary">
-              {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
+              {backendMode && <div className="backend-menu-heading">教師後台</div>}
 
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {backendMode && ([
@@ -836,17 +836,25 @@ function App() {
                 { section: "themes", label: "網站樣式資料庫", icon: Palette },
                 { section: "versions", label: "提交版本紀錄", icon: FileText },
               ] },
-            ] as { title: string; items: { section: BackendSection; label: string; icon?: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => (
-              <div className="backend-nav-group" role="group" aria-label={title} key={title}>
-                <h2>{title}</h2>
-                {items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
-                  <button type="button" key={section} className={active ? "nav-item active" : "nav-item"}
-                    aria-current={active ? "page" : undefined} onClick={() => openBackendSection(section)}>
-                    {Icon && <Icon size={20} />}{label}
-                  </button>
-                ))}
-              </div>
-            ))}
+            ] as { title: string; items: { section: BackendSection; label: string; icon?: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => {
+              const buttons = items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
+                <button type="button" key={section} className={active ? "nav-item active" : "nav-item"}
+                  aria-current={active ? "page" : undefined} onClick={() => openBackendSection(section)}>
+                  {Icon && <Icon size={20} />}{label}
+                </button>
+              ));
+              return title === "全站管理與設定" ? (
+                <details className="backend-nav-group" key={title}>
+                  <summary>{title}</summary>
+                  <div className="backend-nav-settings">{buttons}</div>
+                </details>
+              ) : (
+                <div className="backend-nav-group" role="group" aria-label={title} key={title}>
+                  {title !== "資料庫" && <h2>{title}</h2>}
+                  {buttons}
+                </div>
+              );
+            })}
             {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
