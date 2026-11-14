@@ -45,7 +45,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   let user;try{user=await authenticate(req);}catch{return send(401,{error:'請先登入 Google 帳號'});}
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname.replace('/api/structure/competition','');
-   if(path==='/rooms'&&req.method==='GET'){if(!user.admin)fail('僅管理者可查看開課紀錄。',403);return send(200,{items:(await scan('competition-rooms/')).sort((a,b)=>b.createdAt-a.createdAt).map(v=>publicRoom(v,true))});}
+   if(path==='/rooms'&&req.method==='GET'){if(!user.admin)fail('僅管理者可查看開課紀錄。',403);return send(200,{items:(await scan('competition-rooms/')).filter(room=>room && room.archivedAt == null).sort((a,b)=>b.createdAt-a.createdAt).map(v=>publicRoom(v,true))});}
    if(path==='/rooms'&&req.method==='POST'){
     if(!user.admin)fail('僅管理者可建立競賽。',403);const input=validateRoomInput(await requestBody(req));const used=new Set((await scan('competition-rooms/')).filter(v=>v.status!=='closed').map(v=>v.code));let code='';for(let i=0;i<20&&!code;i++){const candidate=makeRoomCode(random);if(!used.has(candidate))code=candidate;}if(!code)fail('暫時無法產生開課代碼。',409);
     const room={...input,id:randomUUID(),code,status:'lobby',createdAt:now(),createdBy:user.uid};await store.create(roomKey(room.id),room);return send(201,{room:publicRoom(room,true)});
@@ -54,8 +54,14 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    if(codeMatch&&req.method==='GET'){
     const room=(await scan('competition-rooms/')).find(v=>v.code===codeMatch[1].toUpperCase()&&v.status!=='closed');if(!room)fail('開課代碼無效或已結束。',404);if(!permitted(room,user))fail('你不在這個班級名單中。',403);return send(200,{room:publicRoom(room,user.admin)});
    }
-   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate)$/i);if(!match)fail('找不到競賽功能。',404);
+   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive)$/i);if(!match)fail('找不到競賽功能。',404);
    const [,id,action]=match;let record=await store.get(roomKey(id)),room=record.value;if(room.status==='running'&&room.expiresAt&&now()>=room.expiresAt){const expired={...room,status:'closed',closedAt:room.expiresAt};await store.update(roomKey(id),expired,record.generation);record=await store.get(roomKey(id));room=record.value;}
+   if(action==='archive'){
+    if(req.method!=='POST'||!user.admin)fail('僅管理者可移除課堂。',403);
+    if(room.status!=='closed')fail('只能移除已結束的課堂。',409);
+    if(room.archivedAt == null)await store.update(roomKey(id),{...room,archivedAt:now()},record.generation);
+    return send(200,{archived:true});
+   }
    if(!permitted(room,user))fail('你不在這個班級名單中。',403);
    if(['start','close'].includes(action)){
     if(req.method!=='POST'||!user.admin)fail('僅管理者可控制競賽。',403);if(action==='start'&&room.status!=='lobby')fail('這場競賽已經開始或結束。',409);
