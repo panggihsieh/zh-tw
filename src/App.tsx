@@ -814,12 +814,39 @@ function App() {
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
 
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
-            {backendMode && <button className={backendSection==="structure-assignment"?"nav-item active":"nav-item"} onClick={()=>openBackendSection("structure-assignment")}>生字結構遊戲指派</button>}
-            {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>資料庫管理</button>}
-            {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
-            {backendMode && <button className={backendSection==='writingAssignments'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('writingAssignments')}>書寫作業管理</button>}
-            {backendMode && <button className={backendSection==='competition'?'nav-item active':'nav-item'} aria-current={backendSection==='competition'?'page':undefined} onClick={()=>openBackendSection('competition')}>Kahoot 競賽開課</button>}
-            {backendMode && <button className={backendSection==='versions'?'nav-item active':'nav-item'} aria-current={backendSection==='versions'?'page':undefined} onClick={()=>openBackendSection('versions')}><FileText size={20}/>提交版本紀錄</button>}
+            {backendMode && ([
+              { title: "資料庫", items: [
+                { section: "quiz", label: "資料庫管理" },
+                { section: "curriculum", label: "三家出版社生字資料庫", icon: LibraryBig },
+              ] },
+              { title: "字形、筆順與字辭典查詢", items: [
+                { section: "structure", label: "字形結構", icon: Grid2X2, active: structureSections.some(section => section === backendSection) },
+                { section: "handwriting", label: "手寫檢核與筆順", icon: Grid2X2, active: backendSection === "handwriting" || backendSection === "strokeDatabase" },
+              ] },
+              { title: "遊戲派送與競賽", items: [
+                { section: "structure-assignment", label: "生字結構遊戲指派" },
+                { section: "writingAssignments", label: "書寫作業管理" },
+                { section: "competition", label: "Kahoot 競賽開課" },
+                { section: "gameReview", label: "遊戲作品與評分" },
+              ] },
+              { title: "全站管理與設定", items: [
+                { section: "users", label: "使用者管理", icon: Settings2 },
+                { section: "api", label: "API 設定", icon: Settings2 },
+                { section: "tts", label: "TTS 設定後台", icon: Settings2 },
+                { section: "themes", label: "網站樣式資料庫", icon: Palette },
+                { section: "versions", label: "提交版本紀錄", icon: FileText },
+              ] },
+            ] as { title: string; items: { section: BackendSection; label: string; icon?: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => (
+              <div className="backend-nav-group" role="group" aria-label={title} key={title}>
+                <h2>{title}</h2>
+                {items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
+                  <button type="button" key={section} className={active ? "nav-item active" : "nav-item"}
+                    aria-current={active ? "page" : undefined} onClick={() => openBackendSection(section)}>
+                    {Icon && <Icon size={20} />}{label}
+                  </button>
+                ))}
+              </div>
+            ))}
             {!backendMode && (<>
             <button
               className={page === "learn" ? "nav-item active" : "nav-item"}
@@ -850,41 +877,6 @@ function App() {
             >
               <BookOpen size={20} />
               教育部字辭典
-            </button>
-            </>)}
-            {backendMode && (<>            <button
-              className={backendSection === "tts" ? "nav-item active" : "nav-item"}
-              aria-current={backendSection === "tts" ? "page" : undefined}
-              onClick={() => {
-                openBackendSection("tts");
-              }}
-            >
-              <Settings2 size={20} />
-              TTS 設定後台
-            </button>
-            <button aria-current={backendSection === "themes" ? "page" : undefined} className={backendSection === "themes" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("themes")}><Palette size={20}/>網站樣式資料庫</button>
-            <button
-              className={backendSection === "api" ? "nav-item active" : "nav-item"}
-              aria-current={backendSection === "api" ? "page" : undefined}
-              onClick={() => {
-                openBackendSection("api");
-              }}
-            >
-              <Settings2 size={20} />
-              API 設定
-            </button>
-            <button aria-current={backendSection === "users" ? "page" : undefined} className={backendSection === "users" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("users")}>
-              <Settings2 size={20} />使用者管理
-            </button>
-            <button aria-current={structureSections.some(section => section === backendSection) ? "page" : undefined} className={structureSections.some(section => section === backendSection) ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("structure")}>
-              <Grid2X2 size={20} />
-              字形結構
-            </button>
-            <button aria-current={backendSection === "curriculum" ? "page" : undefined} className={backendSection === "curriculum" ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("curriculum")}>
-              <LibraryBig size={20} />三家出版社生字資料庫
-            </button>
-            <button aria-current={(backendSection === "handwriting" || backendSection === "strokeDatabase") ? "page" : undefined} className={(backendSection === "handwriting" || backendSection === "strokeDatabase") ? "nav-item active" : "nav-item"} onClick={() => openBackendSection("handwriting")}>
-              <Grid2X2 size={20} />手寫檢核與筆順
             </button>
             </>)}
           </nav>

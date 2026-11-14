@@ -3763,3 +3763,27 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   .top-navigation-layout:not(.backend-shell) .header-secondary .topbar-actions { display: flex; flex-wrap: wrap; width: 100%; }
   .top-navigation-layout:not(.backend-shell) .header-secondary .topbar-actions > .quiet { flex: 0 0 100%; justify-content: flex-end; }
 }
+
+.backend-nav-group {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.backend-nav-group + .backend-nav-group {
+  border-top: 1px solid currentColor;
+  padding-top: 10px;
+}
+
+.backend-nav-group h2 {
+  margin: 0;
+  padding: 2px 10px;
+  color: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+:root[data-site-theme] .backend-nav-group {
+  color: white;
+  border-color: #ffffff55;
+}
