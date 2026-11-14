@@ -31,7 +31,8 @@ const games = [
     icon: PenLine,
   },
 ];
-function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competition' | 'strokes' {
+function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competition' | 'strokes' | 'assignments' {
+  if (window.location.hash === "#games/assignments") return "assignments";
   if(window.location.hash==="#games/strokes")return "strokes";
   return window.location.hash.startsWith('#games/competition') ? 'competition' : window.location.hash === '#games/sentence-practice' ? 'practice' : window.location.hash === '#games/sentence' ? 'sentences' : /^#games\/structure(?:\/|$)/.test(window.location.hash) ? 'structure' : 'hub';
 }
@@ -123,7 +124,7 @@ export default function GameZone() {
           <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/>
         ) : !ready ? (
           <p role="status">確認登入狀態…</p>
-        ) : !user ? (
+        ) : !user && view !== "hub" && view !== "choose" ? (
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
@@ -147,7 +148,7 @@ export default function GameZone() {
             <a className="secondary" href="#games/structure">免登入玩生字結構</a>
             <a className="secondary" href="#games/strokes">免登入練習筆順</a>
           </section>
-        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
+        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "practice" ? <SentencePractice lessonTitle={course?.context.title} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" && user ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course && user ? (
           <WritingPractice
             key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}
@@ -164,15 +165,15 @@ export default function GameZone() {
                 <h1>遊戲專區</h1>
                 <p>同一課生字，用不同方式練習。</p>
               </div>
-              <button
+              {user && <button
                 className="secondary"
                 onClick={() => setView(view === "works" ? "hub" : "works")}
               >
                 <FolderCheck size={18} />
                 {view === "works" ? "返回遊戲" : "我的作品與評語"}
-              </button>
+              </button>}
             </div>
-            {view === "works" ? (
+            {view === "works" && user ? (
               <GameReview key={user.uid} />
             ) : (
               <>
@@ -221,15 +222,18 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!!user && !competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{!user?'登入後參加 →':competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
                       <div className="game-icon"><g.icon size={34} /></div>
                       <span className="game-pill">全班派發 × 個人書寫</span>
                       <h2>{g.title}（全班）</h2>
                       <p>{g.description}</p>
-                      <button className="primary" disabled={!assignments.length} onClick={() => assignments[0]&&startWritingAssignment(assignments[0])}>
-                        {assignments.length ? "開始個人作業 →" : "目前沒有待完成作業"}
+                      <button className="primary" disabled={!!user && !assignments.length} onClick={() => {
+                        if (!user) { window.location.hash = "games/assignments"; setView("assignments"); }
+                        else if (assignments[0]) startWritingAssignment(assignments[0]);
+                      }}>
+                        {!user ? "登入後查看作業 →" : assignments.length ? "開始個人作業 →" : "目前沒有待完成作業"}
                       </button>
                     </article>
                   ))}
@@ -237,6 +241,7 @@ export default function GameZone() {
                   <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲（個人）</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件。可自由練習，也可開啟老師提供的課文生字練習連結。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
                 </div>
                 <p className="game-future">
+                  <a href="#games/strokes">免登入練習筆順</a>{" · "}
                   老師指派的書寫內容會顯示在個人作業；自行選課文則屬自由練習，不會列入班級作業進度。
                 </p>
               </>
