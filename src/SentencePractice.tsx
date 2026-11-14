@@ -46,12 +46,14 @@ const scoreLabels = {
 export default function SentencePractice({
   onBack,
   request = defaultRequest,
+  initialCard,
 }: {
   onBack: () => void;
   request?: typeof defaultRequest;
+  initialCard?: { phrase: string; character: string };
 }) {
-  const [phrase, setPhrase] = useState("");
-  const [character, setCharacter] = useState("");
+  const [phrase, setPhrase] = useState(initialCard?.phrase ?? "");
+  const [character, setCharacter] = useState(initialCard?.character ?? "");
   const [original, setOriginal] = useState("");
   const [sentence, setSentence] = useState("");
   const [suggestion, setSuggestion] = useState("");
@@ -159,7 +161,7 @@ export default function SentencePractice({
 
   return (
     <section className="sentence-practice sentence-workspace">
-      <button className="secondary" onClick={onBack}>返回遊戲專區</button>
+      <button className="secondary" onClick={onBack}>{initialCard ? "返回開課管理" : "返回遊戲專區"}</button>
       <p className="eyebrow">語詞 × 指定字 × 語音造句</p>
       <h1>一字多詞 AI 造句</h1>
       <p className="sentence-notice">

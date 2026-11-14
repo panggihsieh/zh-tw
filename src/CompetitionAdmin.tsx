@@ -6,6 +6,16 @@ import type {QuizClass} from './ClassRoster';
 import type {SentenceLesson} from './sentenceApi';
 import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type CompetitionQuestion,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
 import './competition.css';
+import SentencePractice from './SentencePractice';
+
+async function previewRequest<T>(path: string, body?: unknown): Promise<T> {
+ const sentence = body as { transcript?: string };
+ if (path === '/practice/correct') return { suggestion: sentence.transcript ?? '' } as T;
+ return { grade: {
+  level: '模擬評量', scores: { correctness: 4, fluency: 3, expression: 3 },
+  feedback: '這是測試回饋，可用來確認送出後的畫面。',
+ } } as T;
+}
 
 const emptyQuestion=():CompetitionQuestion=>({prompt:'',options:['','','',''],answer:0,seconds:30});
 function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'name'>}){
@@ -14,6 +24,7 @@ function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'
  return <img className="competition-avatar" src={`${import.meta.env.BASE_URL}mascot/green-bird.png`} alt="系統預設小畫眉公仔"/>;
 }
 export default function CompetitionAdmin(){
+ const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState('一字多詞 Kahoot 練習'),[questions,setQuestions]=useState<CompetitionQuestion[]>([]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const [lessons,setLessons]=useState<SentenceLesson[]>([]),[lessonIds,setLessonIds]=useState<string[]>([]),[grade,setGrade]=useState(5),[term,setTerm]=useState('上'),[gameType,setGameType]=useState<'sentence-practice'|'quiz'>('sentence-practice'),[loginMode,setLoginMode]=useState<'roster'|'anonymous'>('roster'),[duration,setDuration]=useState(10),[maxParticipants,setMaxParticipants]=useState(30),[testRoom,setTestRoom]=useState(false),[now,setNow]=useState(Date.now());
  async function run(fn:()=>Promise<void>){setBusy(true);setMessage('');try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
@@ -24,6 +35,10 @@ export default function CompetitionAdmin(){
  const selectedClass=classes.find(c=>c.id===classId),students=selectedClass?.students?.filter(s=>s.active&&s.email)||[],roster=students.map(s=>s.email),candidates=useMemo(()=>[...new Map(lessons.filter(l=>lessonIds.includes(l.id)).flatMap(l=>l.characters).map(c=>[c.character,c])).values()],[lessons,lessonIds]);
  function patchQuestion(index:number,patch:Partial<CompetitionQuestion>){setQuestions(rows=>rows.map((row,i)=>i===index?{...row,...patch}:row));}
  function makeCards(){setQuestions(candidates.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已依勾選課文自動產生 ${candidates.length} 張生字字卡，請預覽後開課。`);}
+ if(previewCard) return <section className="competition-admin">
+  <p>學生語音測試 · 模擬評量</p>
+  <SentencePractice initialCard={previewCard} request={previewRequest} onBack={()=>setPreviewCard(null)}/>
+ </section>;
  return <section className="competition-admin">
   <p className="competition-notice">依 Kahoot 開課流程，在同一畫面完成生字來源、課堂設定、公仔等候、倒數排行與結束結果。語音在學生裝置轉文字，只有確認送出時呼叫一次 AI；本場費用上限由題數與參與人數控制。</p>
   <div className="competition-section-heading"><div><span>STEP 1</span><h2>選擇班級與遊戲內容</h2></div></div>
@@ -44,6 +59,11 @@ export default function CompetitionAdmin(){
    {room.status==='lobby'&&<div className="competition-attendees">{items.map(item=><div key={item.uid}><Avatar item={item}/><span>{item.seat?`${item.seat}號 `:''}{item.name}</span></div>)}{!items.length&&<p>尚無學生加入。</p>}</div>}
    {room.status!=='lobby'&&<section className="competition-rank-board"><div className="competition-countdown"><span>課堂倒數</span><strong>{String(Math.floor(remaining/60)).padStart(2,'0')}:{String(remaining%60).padStart(2,'0')}</strong></div><div className="competition-podium">{items.slice(0,5).map(item=><div key={item.uid}><b>{item.rank}</b><Avatar item={item}/><strong>{item.name}</strong><span>{item.points} 分 · {item.answered}/{room.questionCount}</span></div>)}</div>{items.length>5&&<p>其他學生：{items.slice(5).map(item=>`${item.name} ${item.answered}/${room.questionCount}`).join('、')}</p>}</section>}
    <div className="competition-actions"><button className="primary" disabled={busy||room.status!=='lobby'} onClick={()=>void run(async()=>{await competitionRequest(`/rooms/${room.id}/start`,{});await load();})}><Play size={18}/>開始課程並鎖定加入</button>{room.testRoom&&<button className="secondary" disabled={busy||room.status==='closed'} onClick={()=>void run(async()=>{const value=await competitionRequest<{items:LeaderboardItem[]}>(`/rooms/${room.id}/simulate`,{});setPeople(v=>({...v,[room.id]:value.items}));setMessage(room.status==='lobby'?'已加入5位隔離模擬學生。':'模擬學生已完成一輪練習。');})}><Users size={18}/>模擬學生練習</button>}<button className="secondary" disabled={busy||room.status==='closed'} onClick={()=>void run(async()=>{await competitionRequest(`/rooms/${room.id}/close`,{});await load();})}><Square size={18}/>結束並保留排行</button><button className="secondary" disabled={busy} onClick={()=>void run(()=>roomState(room))}><Trophy size={18}/>更新排名</button></div>
+   {room.testRoom && room.gameType==='sentence-practice' && (() => {
+    const card=room.questions?.find(question=>question.character);
+    const character=card?.character;
+    return character && <div className="competition-actions"><button className="secondary" onClick={()=>setPreviewCard({phrase:card?.phrase||character,character})}>開啟學生語音測試</button></div>;
+   })()}
   </article>})}</div><p role="status">{message}</p>
  </section>;
 }
