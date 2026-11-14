@@ -4,6 +4,11 @@ import { RotateCcw, Shapes } from 'lucide-react';
 import './characterStructureGame.css';
 
 const questions = [
+  { character: '街', structure: '左中右', parts: ['彳', '圭', '亍'], explanation: '三個部件由左到右排列。' },
+  { character: '意', structure: '上中下', parts: ['立', '日', '心'], explanation: '三個部件由上到下排列。' },
+  { character: '近', structure: '半包圍', parts: ['辶', '斤'], explanation: '走之從左下包住斤。' },
+  { character: '山', structure: '獨體', parts: ['山'], explanation: '山在本題作為一個整體辨識。' },
+  { character: '森', structure: '品字形', parts: ['木', '木', '木'], explanation: '上方一個木，下方兩個木。' },
   { character: '林', structure: '左右', parts: ['木', '木'], explanation: '兩個「木」左右並排，合成「林」。' },
   { character: '明', structure: '左右', parts: ['日', '月'], explanation: '「日」在左，「月」在右。' },
   { character: '休', structure: '左右', parts: ['亻', '木'], explanation: '左邊是人字旁「亻」，右邊是「木」。' },
@@ -17,14 +22,14 @@ const questions = [
   { character: '因', structure: '全包圍', parts: ['囗', '大'], explanation: '外框「囗」從四周包住裡面的「大」。' },
   { character: '固', structure: '全包圍', parts: ['囗', '古'], explanation: '外框「囗」從四周包住裡面的「古」。' },
 ];
-const choices = ['左右', '上下', '全包圍'];
+const choices = ['左右', '上下', '左中右', '上中下', '全包圍', '半包圍', '獨體', '品字形'];
 function newRound() {
   const items = [...questions];
   for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];
   }
-  return items.slice(0, 8);
+  return items.filter((item, index) => items.findIndex(other => other.structure === item.structure) === index);
 }
 export default function CharacterStructureGame({ onBack }: { onBack: () => void }) {
   const [round, setRound] = useState(newRound);
@@ -59,7 +64,7 @@ export default function CharacterStructureGame({ onBack }: { onBack: () => void 
     <button className="secondary" onClick={onBack}>返回遊戲專區</button>
     <h1><Shapes aria-hidden="true" /> 生字結構遊戲</h1>
     <p>看一看，這個字的部件是怎麼排在一起的？</p>
-    <p>{assignment ? "老師選定的生字 · 左右、上下與全包圍" : "基礎練習：左右、上下與全包圍。每回合8題。"}</p>
+    <p>{assignment ? "老師選定的生字 · 左右、上下與全包圍" : "自由練習每回合涵蓋八大結構。"}</p>
     {loading ? <p role="status">載入題目中…</p> : error ? <p role="alert">{error}</p> : done ? <>
       <h2>完成了！答對 {score}／{round.length} 題</h2>
       <p>再看看這一回合的字，認識部件的位置。</p>
@@ -73,7 +78,7 @@ export default function CharacterStructureGame({ onBack }: { onBack: () => void 
       </fieldset>
       {chosen !== undefined && <div className="structure-game-feedback" role="status">
         <h2>{chosen === current.structure ? '答對了！' : '再認識一次！'}這是{current.structure}結構。</h2>
-        <div className={`structure-game-parts ${current.structure === '上下' ? 'vertical' : ''}`} aria-label="部件拆解">{current.parts.join(current.structure === '左右' ? ' ＋ ' : current.structure === '上下' ? '\n＋\n' : ' 包住 ')}</div>
+        <div className={`structure-game-parts ${current.structure === '上下' ? 'vertical' : ''}`} aria-label="部件拆解">{current.parts.join(current.structure.endsWith('包圍') ? ' 包住 ' : ' ＋ ')}</div>
         <p>{current.explanation}</p><p>這裡說明部件位置；部件大小以完整字形為準。</p>
         <button className="primary" onClick={() => setIndex(index + 1)}>{index === round.length - 1 ? '查看成績' : '下一題'}</button>
       </div>}
