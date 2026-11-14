@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
-import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Mic, Trophy, Sparkles } from "lucide-react";
+import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Trophy, Sparkles } from "lucide-react";
 import {
   cloudConfigured,
   cloudServices,
@@ -198,9 +198,8 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽（全班）</h2><p>輸入老師提供的四碼代碼，依序作答，答對與速度都會換算成競賽分數。</p><button className="primary" onClick={()=>{window.location.hash='games/competition';setView('competition');}}>輸入開課代碼 →</button></article>
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽（全班）</h2><p>輸入老師提供的四碼代碼，依老師開設的課堂進行即時答題或 AI 語音造句，並查看競賽排名。</p><button className="primary" onClick={()=>{window.location.hash='games/competition';setView('competition');}}>輸入開課代碼 →</button></article>
                   <article className="game-tile"><div className="game-icon"><Sparkles size={34}/></div><span className="game-pill">自由練習 × AI 等第</span><h2>一字多詞 AI 造句（個人）</h2><p>輸入語詞、選一個字，用即時語音說句子，再做同音語意校正與流暢美感評量。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence-practice';setView('practice');}}>開始自由造句 →</button></article>
-                  <article className="game-tile"><div className="game-icon"><Mic size={34}/></div><span className="game-pill">四碼開課 × 一字多詞</span><h2>語詞 AI 造句競賽（全班）</h2><p>輸入老師提供的四碼代碼，用指定生字組詞、造句，完成後查看評分與排名。</p><button className="primary" onClick={()=>{window.location.hash='games/competition';setView('competition');}}>進入造句競賽 →</button></article>
                   <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲（個人）</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件。可自由練習，也可開啟老師提供的課文生字練習連結。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
