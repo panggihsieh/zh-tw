@@ -1,3 +1,4 @@
+import ClassroomCostEstimate from "./ClassroomCostEstimate";
 import BackendCard from "./BackendCard";
 import { useEffect, useState } from "react";
 import { apiTestState } from "./apiSettingsState";
@@ -148,6 +149,7 @@ export default function StructureAiSettings() {
       id="ai-api-settings"
       aria-label="AI 字形結構 API 後台"
     >
+      <ClassroomCostEstimate provider={savedConfig?.provider} model={savedConfig?.model} />
       <h2>AI 字形結構 API 後台</h2>
       <p className="ai-setup-guide">
         ① 解鎖設定　→　② 填入模型與金鑰，按 Save 儲存　→　③ 測試連線
