@@ -3,7 +3,7 @@ import {Copy,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Users} from 'lucide-r
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest} from './quizApi';
 import type {QuizClass} from './ClassRoster';
-import type {SentenceLesson} from './sentenceApi';
+import {sentenceRequest,type SentenceLesson} from './sentenceApi';
 import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type CompetitionQuestion,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
 import './competition.css';
 import SentencePractice from './SentencePractice';
@@ -25,6 +25,7 @@ function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'
  return <img className="competition-avatar" src={`${import.meta.env.BASE_URL}mascot/green-bird.png`} alt="系統預設小畫眉公仔"/>;
 }
 export default function CompetitionAdmin(){
+ const [useRealAi,setUseRealAi]=useState(false);
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState('一字多詞 Kahoot 練習'),[questions,setQuestions]=useState<CompetitionQuestion[]>([]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const [lessons,setLessons]=useState<SentenceLesson[]>([]),[lessonIds,setLessonIds]=useState<string[]>([]),[grade,setGrade]=useState(5),[term,setTerm]=useState('上'),[gameType,setGameType]=useState<'sentence-practice'|'quiz'>('sentence-practice'),[loginMode,setLoginMode]=useState<'roster'|'anonymous'>('roster'),[duration,setDuration]=useState(10),[maxParticipants,setMaxParticipants]=useState(30),[testRoom,setTestRoom]=useState(false),[now,setNow]=useState(Date.now());
@@ -37,8 +38,9 @@ export default function CompetitionAdmin(){
  function patchQuestion(index:number,patch:Partial<CompetitionQuestion>){setQuestions(rows=>rows.map((row,i)=>i===index?{...row,...patch}:row));}
  function makeCards(){setQuestions(candidates.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已依勾選課文自動產生 ${candidates.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
-  <p>學生語音測試 · 模擬評量</p>
-  <SentencePractice initialCard={previewCard} request={previewRequest} onBack={()=>setPreviewCard(null)}/>
+  <p>學生語音測試</p>
+  <label><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/> 使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</label>
+  <SentencePractice initialCard={previewCard} simulated={!useRealAi} request={useRealAi ? sentenceRequest : previewRequest} onBack={()=>{setUseRealAi(false);setPreviewCard(null);}}/>
  </section>;
  return <section className="competition-admin">
   <p className="competition-notice">依 Kahoot 開課流程，在同一畫面完成生字來源、課堂設定、公仔等候、倒數排行與結束結果。語音在學生裝置轉文字，只有確認送出時呼叫一次 AI；本場費用上限由題數與參與人數控制。</p>

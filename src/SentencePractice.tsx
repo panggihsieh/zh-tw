@@ -44,14 +44,38 @@ const scoreLabels = {
   mechanics: "文字與標點",
 } as const;
 
+function compareSentences(original: string, polished: string) {
+  const before = Array.from(original), after = Array.from(polished);
+  const lengths = before.map(() => new Uint16Array(after.length + 1));
+  lengths.push(new Uint16Array(after.length + 1));
+  for (let i = before.length - 1; i >= 0; i--)
+    for (let j = after.length - 1; j >= 0; j--)
+      lengths[i][j] = before[i] === after[j] ? 1 + lengths[i + 1][j + 1] : Math.max(lengths[i + 1][j], lengths[i][j + 1]);
+  const originalParts = [], polishedParts = [];
+  let i = 0, j = 0;
+  while (i < before.length || j < after.length) {
+    if (i < before.length && before[i] === after[j]) {
+      originalParts.push(before[i++]);
+      polishedParts.push(after[j++]);
+    } else if (i < before.length && (j === after.length || lengths[i + 1][j] >= lengths[i][j + 1])) {
+      originalParts.push(<del key={i}>{before[i++]}</del>);
+    } else {
+      polishedParts.push(<ins key={j}>{after[j++]}</ins>);
+    }
+  }
+  return { originalParts, polishedParts };
+}
+
 export default function SentencePractice({
   onBack,
   request = defaultRequest,
   initialCard,
+  simulated = false,
 }: {
   onBack: () => void;
   request?: typeof defaultRequest;
   initialCard?: { phrase: string; character: string };
+  simulated?: boolean;
 }) {
   const [phrase, setPhrase] = useState(initialCard?.phrase ?? "");
   const [character, setCharacter] = useState(initialCard?.character ?? "");
@@ -126,6 +150,7 @@ export default function SentencePractice({
       latestTranscript.current = latest;
       setSentence(sentenceWithPunctuation(latest));
     };
+
     current.onerror = (event) => {
       setMessage(
         event.error === "not-allowed"
@@ -286,6 +311,11 @@ export default function SentencePractice({
                 character,
                 transcript: sentence,
               });
+              if (result.suggestion.trim() === sentence.trim()) {
+                setSuggestion("");
+                setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "AI 沒有提出可確認的修正。請核對辨識文字，必要時清除重說。");
+                return;
+              }
               setSuggestion(result.suggestion);
               setMessage("AI 已提出同音語意修正，請確認是否符合原意。");
             })}
@@ -322,8 +352,24 @@ export default function SentencePractice({
           </button>
           {grade && (
             <article className="practice-grade" aria-live="polite">
+          {grade.polished && (() => {
+            const { originalParts, polishedParts } = compareSentences(sentence.trim(), grade.polished);
+            return <section className="practice-comparison">
+              <h3>AI 潤稿</h3>
+              <p>原句：{originalParts}</p>
+              <p>建議句：{polishedParts}</p>
+              {grade.issueReason && <p>{grade.issueReason}</p>}
+            </section>;
+          })()}
               <div className="practice-level"><span>AI 建議等第</span><strong>{grade.level}</strong></div>
-              <p>總分 {grade.total === null ? "待確認" : `${grade.total}／100`}</p>
+              <p className="practice-total">總分 {grade.total === null ? "待確認" : `${grade.total}／100`}
+                {grade.total !== null && (() => {
+                  const stars = Math.max(1, Math.ceil(grade.total / 20));
+                  return <span className="practice-stars" role="img" aria-label={`五顆星中獲得 ${stars} 顆`}>
+                    {"★".repeat(stars)}{"☆".repeat(5 - stars)}
+                  </span>;
+                })()}
+              </p>
               <div className="practice-score-grid">
                 {Object.entries(scoreLabels).map(([key, label]) => (
                   <div key={key}>
@@ -332,16 +378,6 @@ export default function SentencePractice({
                   </div>
                 ))}
               </div>
-              {grade.polished && <section aria-label="潤稿建議">
-                <h3>{initialCard ? "潤稿示範" : "AI 潤稿建議"}</h3>
-                <p>原句：{grade.issue && sentence.includes(grade.issue) ? <>
-                  {sentence.slice(0, sentence.indexOf(grade.issue))}
-                  <mark>{grade.issue}</mark>
-                  {sentence.slice(sentence.indexOf(grade.issue) + grade.issue.length)}
-                </> : sentence}</p>
-                {grade.issueReason && <p>標示處：{grade.issueReason}</p>}
-                <p>{grade.polished === sentence.trim() ? "建議保留原句。" : <>建議句：{grade.polished}</>}</p>
-              </section>}
               {grade.highlight && <p>句子亮點：「{grade.highlight}」</p>}
               <p>{grade.feedback}</p>
             </article>
