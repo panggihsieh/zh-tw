@@ -57,6 +57,6 @@ export default function KahootPractice() {
       }
     }}>{live ? "切回模擬評量" : "登入 Google 並使用正式 API"}</button>
     {loginError && <p role="alert">{loginError}</p>}
-    <SentencePractice fixedCharacter simulated={!live} request={live ? sentenceRequest : previewRequest} key={`${selected}-${testInput.revision}`} initialCard={{phrase:selected, character:selected, sentence:testInput.sentence}} onBack={()=>{location.hash='';}} />
+    <SentencePractice fixedCharacter lessonTitle={lesson.title} simulated={!live} request={live ? sentenceRequest : previewRequest} key={`${selected}-${testInput.revision}`} initialCard={{phrase:selected, character:selected, sentence:testInput.sentence}} onBack={()=>{location.hash='';}} />
   </main>;
 }

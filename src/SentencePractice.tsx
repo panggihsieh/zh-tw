@@ -327,18 +327,19 @@ export default function SentencePractice({
               className="secondary"
               disabled={busy || listening || Boolean(grade) || !character || !sentence.trim()}
               onClick={() => void run(async () => {
-                const result = await request<{ suggestion: string }>("/practice/correct", {
+                const result = await request<{ suggestion: string; issueReason?: string }>("/practice/correct", {
                   phrase,
                   character,
                   transcript: sentence,
+                  lessonTitle,
                 });
                 if (result.suggestion.trim() === sentence.trim()) {
-                  setSuggestion(simulated ? "" : sentence.trim());
-                  setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "");
+                  setSuggestion(simulated || result.issueReason ? "" : sentence.trim());
+                  setMessage(result.issueReason || (simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : ""));
                   return;
                 }
                 setSuggestion(result.suggestion);
-                setMessage("AI 已提出同音語意修正，請確認是否符合原意。");
+                setMessage(result.issueReason || "AI 已提出同音語意修正，請確認是否符合原意。");
               })}
             >
               <Sparkles size={18} />AI 同音語意校正

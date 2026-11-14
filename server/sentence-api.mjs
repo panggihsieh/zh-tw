@@ -83,10 +83,10 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       if(path==='/practice/correct'&&req.method==='POST'){
         const v=await body(req);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入1–8個中文字、選擇其中一個字，並先說一句話。');
-        const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript});
+        const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript,lessonTitle:typeof v.lessonTitle==='string'?v.lessonTitle.trim().slice(0,100):undefined});
         const suggestion=result?.sentence;
         if(!bounded(suggestion,300)||Array.from(suggestion).length>Array.from(v.transcript).length*1.5+2||Array.from(suggestion).length<Array.from(v.transcript).length*.5)fail('無法確定同音語意修正，請自行修改或再說一次。');
-        return send(200,{original:v.transcript,suggestion,notice:'請確認修正後句子仍是你原本想表達的意思。'});
+        return send(200,{original:v.transcript,suggestion,issueReason:typeof result?.issueReason==="string"?result.issueReason.trim().slice(0,300):"",notice:'請確認修正後句子仍是你原本想表達的意思。'});
       }
       if(path==='/practice/grade'&&req.method==='POST'){
         const v=await body(req);
