@@ -129,7 +129,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
   return (
     <section className="quiz-workspace" aria-label="國語母題與錯題管理">
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
-      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <details id="quiz-publisher-tools"><summary>三家出版社教材更新與題卷匯入</summary><PublisherSync request={quizRequest} updateButtonId="quiz-update-publishers" /></details>}
+      {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <PublisherSync request={quizRequest} initiallyOpen={false} />}
       {!reviewId && <div className="quiz-actions">
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
@@ -150,14 +150,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         >
           重新整理題庫
         </button>
-        {!reviewId && showPublisher && <button className="secondary" onClick={()=>{
-          const details = document.querySelector<HTMLDetailsElement>("#quiz-publisher-tools");
-          const update = document.querySelector<HTMLButtonElement>("#quiz-update-publishers");
-          if (details && update) {
-            details.open = true;
-            if (window.confirm("更新將使用已設定的 AI 模型，可能使用 API 額度。開始更新教材？")) update.click();
-          }
-        }}>一鍵更新教材資料庫</button>}
+
       <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>
       </div>}
       {tab === "sql" && <CurriculumSql />}

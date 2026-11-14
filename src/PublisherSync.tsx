@@ -26,8 +26,8 @@ interface ReferenceSource {
 }
 export default function PublisherSync({
   request = quizRequest,
-  updateButtonId,
-}: { request?: typeof quizRequest; updateButtonId?: string } = {}) {
+  initiallyOpen = true,
+}: { request?: typeof quizRequest; initiallyOpen?: boolean } = {}) {
   const [items, setItems] = useState<Resource[]>([]),
     [reports, setReports] = useState<Discovery[]>([]),
     [references, setReferences] = useState<ReferenceSource[]>([]),
@@ -120,9 +120,9 @@ export default function PublisherSync({
     if (!stop.current) await batch("update");
   }
   return (
-    <details className="publisher-sync" open>
+    <details className="publisher-sync" open={initiallyOpen}>
       <summary>
-        <strong>三家出版社 AI 網路國語教材抓取更新</strong>
+        <strong>三家出版社教材更新與題卷匯入</strong>
       </summary>
       <p>
         按下即時執行：官方入口下載與 AI 盤點 → 已登記教材下載 →
@@ -151,17 +151,16 @@ export default function PublisherSync({
         <button
           className="primary"
           disabled={busy}
-          id={updateButtonId}
           onClick={() => void updateAll()}
         >
-          AI 即時抓取更新三家國語教材
+          一鍵更新三家出版社教材
         </button>
         <button
           className="primary"
           disabled={busy}
           onClick={() => void batch("discover")}
         >
-          即時 AI 盤點三家官方資源
+          只盤點官方資源
         </button>
         <button
           className="secondary"
