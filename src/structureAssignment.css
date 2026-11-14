@@ -1,0 +1,16 @@
+.structure-assignment-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.8rem;
+}
+
+.structure-assignment-filters label {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.structure-assignment-filters select {
+  width: 100%;
+  min-width: 0;
+}
