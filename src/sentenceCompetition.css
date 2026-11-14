@@ -28,3 +28,7 @@
 .sentence-suggestion { background:var(--theme-background,#eef9df);padding:16px;border-radius:14px; }
 .sentence-compose h3 { margin-top:0; }
 @media(max-width:760px) { .sentence-play-grid{grid-template-columns:1fr}.sentence-character{font-size:90px}.sentence-target,.sentence-compose{padding:16px}.sentence-workspace{font-size:17px}.sentence-question-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.sentence-workspace .sentence-compose-actions { gap:8px; }
+.sentence-workspace .sentence-voice-action { inline-size: min(100%, 12em); min-height:48px; margin:0; }
+.sentence-workspace .sentence-reset { margin-inline-start:auto; }
+@media(max-width:560px) { .sentence-workspace .sentence-reset { margin-inline-start:0; } }

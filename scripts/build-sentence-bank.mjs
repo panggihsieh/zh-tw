@@ -19,3 +19,15 @@ const json=JSON.stringify(data);
 await writeFile('server/sentence-bank.json',json);
 await writeFile('public/sentence-bank.json',json);
 console.log(`Sentence bank: ${lessons.length} Nani grade 5/6 lessons`);
+
+ // Use a single-reading homophone when the target has multiple dictionary readings.
+const homophones=new Map();
+for(const [character,rows] of index){
+  if(rows.length===1&&!homophones.has(rows[0].reading))homophones.set(rows[0].reading,character);
+}
+const speechText={};
+for(const {characters} of lessons)for(const {character,readings} of characters)for(const {reading} of readings){
+  const text=readings.length===1?character:homophones.get(reading);
+  if(text)speechText[character+reading]=text;
+}
+await writeFile('src/sentenceSpeechText.json',JSON.stringify(speechText)+'\n');

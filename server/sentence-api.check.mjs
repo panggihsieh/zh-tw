@@ -15,10 +15,14 @@ async function fixture(t,ai=async()=>analysis()){
  const request=async(path,body,user='teacher',origin='https://test')=>{const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/sentence${path}`,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','x-test-user':user,'x-notebook-request':'sentence-game',Origin:origin},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:r.status,...await r.json()};};
  return {store,request,setTime:v=>clock=v};
 }
-test('題庫只包含南一五六年級45課，派送要求教師核對並限制題數讀音',()=>{
+test('題庫只包含南一五六年級45課，派送要求教師核對並驗證題目讀音',()=>{
  assert.equal(bank.lessons.length,45);assert.ok(bank.lessons.every(l=>[5,6].includes(l.grade)));
  assert.equal(validateCompetition(definition()).questions.length,1);
- for(const patch of [{reviewed:false},{minutes:0},{minutes:61},{lessonIds:['fake']},{questions:[{character:'偽',reading:'假的'}]},{roster:['bad']}])assert.throws(()=>validateCompetition({...definition(),...patch}));
+ for(const patch of [{reviewed:false},{minutes:0},{minutes:1.5},{questions:[]},{lessonIds:['fake']},{questions:[{character:'偽',reading:'假的'}]},{roster:['bad']}])assert.throws(()=>validateCompetition({...definition(),...patch}));
+ const questions=lesson.characters.slice(0,9).map(c=>({character:c.character,reading:c.readings[0].reading}));
+ const extended=validateCompetition({...definition(),minutes:61,questions});
+ assert.equal(extended.questions.length,9);
+ assert.equal(extended.minutes,61);
  assert.throws(()=>validateCompetition({...definition(),questions:Array(9).fill(definition().questions[0])}));
 });
 test('配分40+5*10+10=100，不接受不存在的證據或錯字音得高分',()=>{

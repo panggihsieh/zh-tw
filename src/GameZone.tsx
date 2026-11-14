@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
-import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Mic } from "lucide-react";
+import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Mic, Trophy } from "lucide-react";
 import {
   cloudConfigured,
   cloudServices,
@@ -13,6 +13,7 @@ import WritingPractice from "./WritingPractice";
 import GameReview from "./GameReview";
 import SentenceCompetition from "./SentenceCompetition";
 import CharacterStructureGame from "./CharacterStructureGame";
+import CompetitionPlay from "./CompetitionPlay";
 import type { LessonContext } from "./curriculumLearning";
 import { useSiteTheme } from "./siteThemes";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
@@ -26,8 +27,8 @@ const games = [
     icon: PenLine,
   },
 ];
-function gameView(): 'hub' | 'sentences' | 'structure' {
-  return window.location.hash === '#games/sentence' ? 'sentences' : window.location.hash === '#games/structure' ? 'structure' : 'hub';
+function gameView(): 'hub' | 'sentences' | 'structure' | 'competition' {
+  return window.location.hash.startsWith('#games/competition') ? 'competition' : window.location.hash === '#games/sentence' ? 'sentences' : window.location.hash === '#games/structure' ? 'structure' : 'hub';
 }
 export default function GameZone() {
   useSiteTheme();
@@ -38,7 +39,7 @@ export default function GameZone() {
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "sentences" | "structure">(gameView),
+    [view, setView] = useState<"hub" | "choose" | "writing" | "works" | "sentences" | "structure" | "competition">(gameView),
     [course, setCourse] = useState<{
       characters: string[];
       context: LessonContext;
@@ -102,8 +103,8 @@ export default function GameZone() {
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>{view==='sentences'?'語詞 AI 造句遊戲':view==='structure'?'生字結構遊戲':'遊戲專區'}</h1>
-            <p>{view==='sentences'?'登入後參加老師派送的南一高年級限時造句競賽。':view==='structure'?'登入後看生字、選結構，認識部件的位置。':'語詞 AI 造句遊戲、生字結構遊戲，選一個開始練習！'}</p>
+            <h1>{view==='competition'?'課堂即時競賽':view==='sentences'?'語詞 AI 造句遊戲':view==='structure'?'生字結構遊戲':'遊戲專區'}</h1>
+            <p>{view==='competition'?'登入後輸入老師提供的四碼開課代碼。':view==='sentences'?'登入後參加老師派送的南一高年級限時造句競賽。':view==='structure'?'登入後看生字、選結構，認識部件的位置。':'語詞 AI 造句遊戲、生字結構遊戲，選一個開始練習！'}</p>
             <button
               className="primary"
               disabled={!cloudConfigured || busy}
@@ -120,7 +121,7 @@ export default function GameZone() {
             </button>
             {!cloudConfigured && <p>尚未設定 Google 登入。</p>}
           </section>
-        ) : view === "structure" ? <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
+        ) : view === "competition" ? <CompetitionPlay onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "structure" ? <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "sentences" ? <SentenceCompetition key={user.uid} user={user} onBack={()=>{window.location.hash='games';setView('hub');}}/> : view === "writing" && course ? (
           <WritingPractice
             key={`${user.uid}/${JSON.stringify(course)}`}
             user={user}
@@ -185,6 +186,7 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽</h2><p>輸入老師提供的四碼代碼，依序作答，答對與速度都會換算成競賽分數。</p><button className="primary" onClick={()=>{window.location.hash='games/competition';setView('competition');}}>輸入開課代碼 →</button></article>
                   <article className="game-tile"><div className="game-icon"><Mic size={34}/></div><span className="game-pill">南一高年級 × 一字多詞</span><h2>語詞 AI 造句遊戲</h2><p>參加老師派送的限時競賽，看字音、想詞語、說一句話，完成後查看評分與老師評語。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence';setView('sentences');}}>進入造句遊戲 →</button></article>
                   <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件，每回合8題。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
                   {games.map((g) => (

@@ -6,7 +6,7 @@ const validId=v=>typeof v==='string'&&/^[0-9a-f-]{36}$/i.test(v);
 const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
 const bounded=(v,n)=>typeof v==='string'&&v.trim().length>0&&v.length<=n;
 export function validateCompetition(v) {
-  if(!v||!bounded(v.title,100)||!Number.isInteger(v.minutes)||v.minutes<1||v.minutes>60||!Array.isArray(v.lessonIds)||!v.lessonIds.length||v.lessonIds.length>6||!Array.isArray(v.questions)||!v.questions.length||v.questions.length>8||v.reviewed!==true)fail('需選擇1–6課、1–8個字，設定1–60分鐘並確認讀音。');
+  if(!v||!bounded(v.title,100)||!Number.isSafeInteger(v.minutes)||v.minutes<1||!Number.isSafeInteger(Date.now()+v.minutes*60000)||!Array.isArray(v.lessonIds)||!v.lessonIds.length||v.lessonIds.length>6||!Array.isArray(v.questions)||!v.questions.length||v.reviewed!==true)fail('需選擇1–6課及至少1個字，設定有效的整數分鐘（至少1分鐘）並確認讀音。');
   const lessons=v.lessonIds.map(id=>bank.lessons.find(l=>l.id===id));
   if(lessons.some(l=>!l))fail('僅開放南一五、六年級課別。');
   const questions=v.questions.map((q,i)=>{

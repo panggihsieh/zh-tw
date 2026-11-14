@@ -4,6 +4,7 @@
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
     "test:sentence-api": "node --test server/sentence-api.check.mjs",
+    "test:competition-api": "node --test server/competition-api.check.mjs",
     "test:publisher-sync": "node --test server/publisher-sync.check.mjs",
     "test:quiz-api": "node --test server/quiz-api.check.mjs",
     "test:writing-api": "node --test server/writing-api.check.mjs",
@@ -33,6 +34,7 @@
     "jspdf": "^4.2.1",
     "lucide-react": "^1.66.0",
     "pdfjs-dist": "^6.5.438",
+    "qrcode.react": "^4.2.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
