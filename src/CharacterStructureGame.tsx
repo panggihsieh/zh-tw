@@ -1,3 +1,4 @@
+import atlas from "./structureAtlas.json";
 import { simpleStructure } from './StructureAssignment';
 import { useEffect, useState } from 'react';
 import { RotateCcw, Shapes } from 'lucide-react';
@@ -22,7 +23,11 @@ const questions = [
   { character: '因', structure: '全包圍', parts: ['囗', '大'], explanation: '外框「囗」從四周包住裡面的「大」。' },
   { character: '固', structure: '全包圍', parts: ['囗', '古'], explanation: '外框「囗」從四周包住裡面的「古」。' },
 ];
-const choices = ['左右', '上下', '左中右', '上中下', '全包圍', '半包圍', '獨體', '品字形'];
+const choices = atlas.map(({ title, items }) => ({
+  label: title,
+  value: title.replace(/結構$/, ''),
+  image: import.meta.env.BASE_URL + items[0].image.slice(1),
+}));
 function newRound() {
   const items = [...questions];
   for (let i = items.length - 1; i > 0; i--) {
@@ -74,7 +79,15 @@ export default function CharacterStructureGame({ onBack }: { onBack: () => void 
       <p>第 {index + 1}／{round.length} 題 · 目前答對 {score} 題</p>
       <div className="structure-game-character" aria-label={`題目：${current.character}`}>{current.character}</div>
       <fieldset disabled={chosen !== undefined}><legend>選出這個字的結構</legend>
-        <div className="structure-game-choices">{choices.map(choice => <button key={choice} className={chosen === choice ? 'primary' : 'secondary'} onClick={() => setAnswers([...answers, choice])}>{choice}結構</button>)}</div>
+        <div className="structure-game-choices">
+          {choices.map(({ label, value, image }) => (
+            <button type="button" key={value} className={chosen === value ? 'primary' : 'secondary'}
+              onClick={() => setAnswers([...answers, value])}>
+              <img src={image} alt="" width={36} height={36} />
+              {label}
+            </button>
+          ))}
+        </div>
       </fieldset>
       {chosen !== undefined && <div className="structure-game-feedback" role="status">
         <h2>{chosen === current.structure ? '答對了！' : '再認識一次！'}這是{current.structure}結構。</h2>
