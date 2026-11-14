@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, rmSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 const source = 'public/sentence-bank.json';
@@ -9,7 +9,7 @@ const db = new DatabaseSync(':memory:');
 db.exec(`
   PRAGMA foreign_keys = ON;
   CREATE TABLE editions (id TEXT PRIMARY KEY, publisher TEXT, grade INTEGER, term TEXT, year TEXT);
-  CREATE TABLE lessons (id TEXT PRIMARY KEY, edition_id TEXT REFERENCES editions(id), title TEXT, source TEXT);
+  CREATE TABLE lessons (id TEXT PRIMARY KEY, edition_id TEXT REFERENCES editions(id), title TEXT, source TEXT, lesson_number INTEGER NOT NULL, UNIQUE(edition_id, lesson_number));
   CREATE TABLE characters (glyph TEXT PRIMARY KEY);
   CREATE TABLE lesson_characters (
     lesson_id TEXT REFERENCES lessons(id), glyph TEXT REFERENCES characters(glyph),
@@ -18,7 +18,7 @@ db.exec(`
   );
 `);
 db.prepare('INSERT INTO editions VALUES (?, ?, ?, ?, ?)').run('nani-115-5-1', '南一', lesson.grade, lesson.term, lesson.year);
-db.prepare('INSERT INTO lessons VALUES (?, ?, ?, ?)').run(lesson.id, 'nani-115-5-1', lesson.title, source);
+db.prepare('INSERT INTO lessons VALUES (?, ?, ?, ?, ?)').run(lesson.id, 'nani-115-5-1', lesson.title, source, 7);
 for (const [index, row] of lesson.characters.entries()) {
   db.prepare('INSERT INTO characters VALUES (?)').run(row.character);
   const reading = row.readings[0];
@@ -36,3 +36,47 @@ assert.deepEqual(rows.map(row => row.character), lesson.characters.map(row => ro
 assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
 writeFileSync('src/lessonSevenPilot.json', JSON.stringify({ id: lesson.id, title: lesson.title, rows }, null, 2) + '\n');
 console.log(`SQLite 課次關聯與外鍵驗證通過，共 ${rows.length} 字。`);
+
+db.exec(`
+  CREATE TABLE sources (url TEXT PRIMARY KEY, title TEXT NOT NULL, kind TEXT NOT NULL CHECK(kind IN ('publisher','moe','naer','glyph','classical','buddhist')));
+  CREATE TABLE character_structures (id INTEGER PRIMARY KEY, glyph TEXT NOT NULL REFERENCES characters(glyph), analysis TEXT NOT NULL, source_url TEXT NOT NULL REFERENCES sources(url));
+  CREATE TABLE text_versions (id TEXT PRIMARY KEY, lesson_id TEXT NOT NULL REFERENCES lessons(id), revision INTEGER NOT NULL, source_url TEXT NOT NULL REFERENCES sources(url), UNIQUE(lesson_id, revision));
+  CREATE TABLE passages (id INTEGER PRIMARY KEY, text_version_id TEXT NOT NULL REFERENCES text_versions(id), position INTEGER NOT NULL, text TEXT NOT NULL, UNIQUE(text_version_id, position));
+  CREATE TABLE words (id INTEGER PRIMARY KEY, text TEXT NOT NULL UNIQUE, reading TEXT, definition TEXT, source_url TEXT REFERENCES sources(url));
+  CREATE TABLE lesson_words (lesson_id TEXT REFERENCES lessons(id), word_id INTEGER REFERENCES words(id), meaning TEXT, source TEXT REFERENCES sources(url), PRIMARY KEY(lesson_id, word_id));
+  CREATE TABLE word_characters (word_id INTEGER REFERENCES words(id), position INTEGER, glyph TEXT NOT NULL REFERENCES characters(glyph), PRIMARY KEY(word_id, position));
+  CREATE TABLE word_occurrences (passage_id INTEGER REFERENCES passages(id), word_id INTEGER REFERENCES words(id), start_offset INTEGER, end_offset INTEGER NOT NULL CHECK(end_offset > start_offset), PRIMARY KEY(passage_id, word_id, start_offset));
+  CREATE TABLE rhetoric (id INTEGER PRIMARY KEY, passage_id INTEGER NOT NULL REFERENCES passages(id), device TEXT NOT NULL, excerpt TEXT NOT NULL, explanation TEXT NOT NULL, source TEXT REFERENCES sources(url));
+  CREATE TABLE interpretations (id INTEGER PRIMARY KEY, passage_id INTEGER NOT NULL REFERENCES passages(id), explanation TEXT NOT NULL, source TEXT REFERENCES sources(url));
+`);
+assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
+db.exec("INSERT INTO sources SELECT DISTINCT source, '教育部國語辭典條目'  , 'moe' FROM lesson_characters WHERE source <> ''");
+db.exec(`
+  CREATE TABLE character_occurrences (
+    passage_id INTEGER NOT NULL REFERENCES passages(id),
+    glyph TEXT NOT NULL REFERENCES characters(glyph),
+    start_offset INTEGER NOT NULL CHECK(start_offset >= 0),
+    reading TEXT, meaning TEXT, source_url TEXT REFERENCES sources(url),
+    PRIMARY KEY(passage_id, glyph, start_offset)
+  );
+  CREATE TABLE reference_texts (
+    id TEXT PRIMARY KEY, source_url TEXT NOT NULL REFERENCES sources(url),
+    title TEXT NOT NULL, locator TEXT NOT NULL, excerpt TEXT, UNIQUE(source_url, locator)
+  );
+  CREATE TABLE character_references (
+    glyph TEXT NOT NULL REFERENCES characters(glyph),
+    reference_id TEXT NOT NULL REFERENCES reference_texts(id),
+    PRIMARY KEY(glyph, reference_id)
+  );
+  CREATE VIEW character_impact AS
+    SELECT c.glyph, l.id AS lesson_id, l.title, e.publisher, e.year
+    FROM lesson_characters c JOIN lessons l ON l.id = c.lesson_id
+    JOIN editions e ON e.id = l.edition_id;
+  CREATE VIEW word_impact AS
+    SELECT w.text, l.id AS lesson_id, l.title, e.publisher, e.year
+    FROM lesson_words lw JOIN words w ON w.id = lw.word_id
+    JOIN lessons l ON l.id = lw.lesson_id JOIN editions e ON e.id = l.edition_id;
+`);
+assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), []);
+rmSync("src/lessonSeven.sqlite", { force: true });
+db.exec("VACUUM INTO 'src/lessonSeven.sqlite'");

@@ -181,6 +181,7 @@ export function createQuizHandler({
   authenticate = writingIdentity,
   generate,
   analyzeLanding,
+  planCurriculumQuery,
 }) {
   const generating = new Set();
   async function scan(prefix) {
@@ -412,6 +413,32 @@ export function createQuizHandler({
       }
       if (!user.admin)
         return send(403, { error: "僅管理者可組卷與查看全班統計" });
+      if (path === "/database-query-plan" && req.method === "POST") {
+        if (typeof planCurriculumQuery !== "function")
+          throw Error("AI 關聯查詢尚未設定");
+        const v = await body(req, 5000);
+        if (!text(v.question, 500)) throw Error("請輸入 500 字內的查詢問題");
+        const plan = await planCurriculumQuery(v.question.trim());
+        const allowed = new Set(["lesson", "character", "word", "source"]),
+          clean = { entity: plan?.entity };
+        if (!allowed.has(clean.entity)) throw Error("AI 查詢類型不符");
+        for (const key of ["keyword", "publisher", "year", "lessonTitle", "sourceKind", "explanation"])
+          if (plan[key] !== undefined) {
+            if (typeof plan[key] !== "string" || plan[key].length > 160)
+              throw Error(`AI 查詢欄位 ${key} 不符`);
+            clean[key] = plan[key].trim();
+          }
+        if (plan.grade !== undefined) {
+          if (!Number.isInteger(plan.grade) || plan.grade < 1 || plan.grade > 6)
+            throw Error("AI 查詢年級不符");
+          clean.grade = plan.grade;
+        }
+        if (plan.term !== undefined) {
+          if (!["上", "下"].includes(plan.term)) throw Error("AI 查詢學期不符");
+          clean.term = plan.term;
+        }
+        return send(200, clean);
+      }
       if (path.startsWith("/resources")) {
         const r = await resources(
           path,

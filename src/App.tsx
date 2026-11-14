@@ -107,16 +107,14 @@ const QuizStudent = lazy(() => import("./QuizStudent"));
 const QuizTeacher = lazy(() => import("./QuizTeacher"));
 const GameReview = lazy(() => import('./GameReview'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
-const KahootPractice = lazy(() => import("./KahootPractice"));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "kahoot-v2";
+type BackendSection = "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "themes" | "quiz" | "sentences" | "competition" | "versions";
 const backendTitles: Record<BackendSection, string> = {
   sentences: "一字多詞造句競賽管理",
-  "kahoot-v2": "一字多詞 Kahoot Ver.2",
   competition: "Kahoot 競賽開課管理",
   versions: "提交版本紀錄",
-  quiz: "國語母題與錯題管理",
+  quiz: "資料庫管理",
   themes: "網站樣式資料庫",
   gameReview: '遊戲作品與評分',
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
@@ -127,7 +125,6 @@ const backendTitles: Record<BackendSection, string> = {
 export default function ProtectedApp() {
   const [hash,setHash]=useState(window.location.hash);
   useEffect(()=>{const changed=()=>setHash(window.location.hash);window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed)},[]);
-  if (new URLSearchParams(location.search).get("view") !== "backend" && hash === "#kahoot-v2") return <Suspense fallback={<p>載入練習…</p>}><KahootPractice /></Suspense>;
   if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
   if(new URLSearchParams(window.location.search).get('view')!=='backend'&&hash.startsWith('#games')) return <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone/></Suspense>;
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
@@ -812,10 +809,8 @@ function App() {
               {backendMode && <div className="backend-menu-heading">教師後台<span>生字教學管理</span></div>}
 
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
-            {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>國語母題與錯題管理</button>}
+            {backendMode && <button className={backendSection==='quiz'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('quiz')}>資料庫管理</button>}
             {backendMode && <button className={backendSection==='gameReview'?'nav-item active':'nav-item'} onClick={()=>openBackendSection('gameReview')}>遊戲作品與評分</button>}
-            {backendMode && <button className={backendSection==='sentences'?'nav-item active':'nav-item'} aria-current={backendSection==='sentences'?'page':undefined} onClick={()=>openBackendSection('sentences')}>一字多詞造句競賽管理</button>}
-            {backendMode ? <button className={backendSection==="kahoot-v2"?"nav-item active":"nav-item"} onClick={()=>openBackendSection("kahoot-v2")}>一字多詞 Kahoot Ver.2</button> : <a className="nav-item" href="#kahoot-v2">一字多詞 Kahoot Ver.2</a>}
             {backendMode && <button className={backendSection==='competition'?'nav-item active':'nav-item'} aria-current={backendSection==='competition'?'page':undefined} onClick={()=>openBackendSection('competition')}>Kahoot 競賽開課</button>}
             {backendMode && <button className={backendSection==='versions'?'nav-item active':'nav-item'} aria-current={backendSection==='versions'?'page':undefined} onClick={()=>openBackendSection('versions')}><FileText size={20}/>提交版本紀錄</button>}
             {!backendMode && (<>
@@ -2038,7 +2033,6 @@ function App() {
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
-                  {backendSection === "kahoot-v2" && <CompetitionAdmin key="pilot" pilot />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "themes" && <SiteThemeLibrary active={siteTheme} />}
                   {backendSection === "structure" && <BackendStructure />}

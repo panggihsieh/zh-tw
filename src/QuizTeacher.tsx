@@ -1,3 +1,4 @@
+import CurriculumSql from "./CurriculumSql";
 import { useEffect, useState } from "react";
 import {
   QUIZ_CATEGORIES,
@@ -146,7 +147,9 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           重新整理題庫
         </button>
       </div>}
-      <p role="status">{message}</p>
+      {!reviewId && <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>教材資料庫 SQL</button>}
+      {tab === "sql" && <CurriculumSql />}
+      {tab !== "sql" && <p role="status">{message}</p>}
       {tab === "generate" && (
         <form
           onSubmit={(e) => {
@@ -322,7 +325,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         </form>
       )}
       {tab === "roster" && <ClassRoster classes={classes} onSaved={record => setClasses(items => [...items.filter(item => item.id !== record.id), record])} />}
-      {tab !== "generate" && tab !== "roster" && (
+      {tab !== "generate" && tab !== "roster" && tab !== "sql" && (
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
