@@ -492,6 +492,19 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const importRef = useRef<HTMLInputElement>(null);
   const card = collection?.cards[cardIndex];
   const userRole = useUserRole();
+  const driveEmail = userRole.user?.email;
+  const [driveAllowedEmail, setDriveAllowedEmail] = useState<string>();
+  useEffect(() => {
+    let active = true;
+    setDriveAllowedEmail(undefined);
+    if (driveEmail) void import("./quizApi").then(({quizRequest}) =>
+      quizRequest<{allowed:boolean}>("/classes/drive-access")
+    ).then(result => {
+      if (active && result.allowed) setDriveAllowedEmail(driveEmail);
+    }).catch(() => {});
+    return () => { active = false; };
+  }, [driveEmail]);
+  const canUseDrive = userRole.admin || (!!driveEmail && driveAllowedEmail === driveEmail);
   const studentGoogleAccount = !userRole.admin && userRole.user?.providerData.some(
     provider => provider.providerId === "google.com",
   ) ? userRole.user.displayName?.trim() || userRole.user.email : null;
@@ -762,6 +775,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }
   const [driveScreenshot, setDriveScreenshot] = useState<File>();
   async function openDrive() {
+    if (!canUseDrive) return;
     setDriveScreenshot(undefined);
     setModal("drive");
     setError("");
@@ -775,10 +789,15 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     }
   }
   async function sendDrive() {
-    if (!collection) return;
+    if (!collection || !canUseDrive) return;
     setBusy("等待 Google 授權…");
     setError("");
     try {
+      if (!userRole.admin) {
+        const { quizRequest } = await import("./quizApi");
+        if (!(await quizRequest<{allowed:boolean}>("/classes/drive-access")).allowed)
+          throw Error("此帳號目前未列入老師的啟用名冊。");
+      }
       const token = await authorize();
       await saveCollection(collection);
       await refresh();
@@ -971,7 +990,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 {!backendMode && <section className="adventure-welcome" aria-label="生字探索旅程">
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
                   <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={() => { setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}><Play size={20}/>開始學習</a></div>
-                  <p>AI 造句練習會產生 AI 評分費用，請依老師通知的開放時段使用。</p>
+                  <div aria-label="使用方式">
+                    <p>生字動畫教室、生字結構遊戲與筆順自由練習皆免費，免登入即可使用。</p>
+                    <p>個人 AI 造句須輸入老師提供的限時開課代碼。輸錯三次會鎖定 15 分鐘。使用 AI 校正或評分可能產生費用。</p>
+                    <p>「我的學習本」的 Google Drive 上傳僅開放給老師班級名冊中的學生，請使用名冊登記的 Google 帳號登入。</p>
+                  </div>
                   <BirdMascot />
                   <div className="adventure-tools">{studentPageTools}</div>
                 </section>}
@@ -1774,10 +1797,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                         <Download size={17} />
                         下載學習卡／學習本
                       </button>
-                      <button className="quiet" onClick={openDrive}>
+                      {canUseDrive && <button className="quiet" onClick={openDrive}>
                         <CloudUpload size={18} />
                         <span>Google Drive{studentGoogleAccount && <><br /><small dir="auto">{studentGoogleAccount}</small></>}</span>
-                      </button>
+                      </button>}
                     </div>
                   </section>
                 )}

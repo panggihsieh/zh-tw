@@ -53,7 +53,24 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    }
    const codeMatch=path.match(/^\/code\/([A-Z2-9]{4})$/i);
    if(codeMatch&&req.method==='GET'){
-    const room=(await scan('competition-rooms/')).find(v=>v.code===codeMatch[1].toUpperCase()&&v.status!=='closed');if(!room)fail('開課代碼無效或已結束。',404);if(!permitted(room,user))fail('你不在這個班級名單中。',403);return send(200,{room:publicRoom(room,user.admin)});
+    const key=`competition-code-attempts/${encodeURIComponent(user.uid)}.json`;
+    const room=(await scan('competition-rooms/')).find(v=>v.code===codeMatch[1].toUpperCase()&&v.status!=='closed'&&!(v.expiresAt&&v.expiresAt<=now()));
+    for(let attempt=0;attempt<8;attempt++){
+      const record=await store.get(key).catch(error=>{if(error.status===404)return null;throw error;});
+      if(record?.value.lockUntil>now())fail('代碼輸錯三次，請十五分鐘後再試。',429);
+      const count=room?0:(record?.value.lockUntil?0:record?.value.count||0)+1;
+      if(room&&!record?.value.count)break;
+      const lockUntil=count>=3?now()+900000:0;
+      try{
+        if(record)await store.update(key,{count,lockUntil},record.generation);
+        else await store.create(key,{count,lockUntil});
+      }catch(error){if(error.status===412&&attempt<7)continue;throw error;}
+      if(lockUntil)fail('代碼輸錯三次，已鎖定十五分鐘。',429);
+      break;
+    }
+    if(!room)fail('開課代碼無效或已結束。',404);
+    if(!permitted(room,user))fail('你不在這個班級名單中。',403);
+    return send(200,{room:publicRoom(room,user.admin)});
    }
    const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive)$/i);if(!match)fail('找不到競賽功能。',404);
    const [,id,action]=match;let record=await store.get(roomKey(id)),room=record.value;if(room.status==='running'&&room.expiresAt&&now()>=room.expiresAt){const expired={...room,status:'closed',closedAt:room.expiresAt};await store.update(roomKey(id),expired,record.generation);record=await store.get(roomKey(id));room=record.value;}
@@ -97,6 +114,6 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     const updated={...participant,index:nextIndex,correct:participant.correct+(correct?1:0),points:participant.points+points,totalResponseMs:participant.totalResponseMs+elapsed,questionStartedAt:now(),finished,finishedAt:finished?now():undefined};delete updated.gradingIndex;const latest=question.type==='sentence-practice'?await store.get(key):participantRecord;await store.update(key,updated,latest.generation);return send(200,{correct,correctAnswer:question.answer,points,grade,participant:publicParticipant(updated,user),question:finished?null:{...room.questions[nextIndex],answer:undefined}});
    }
    fail('不支援的操作。',404);
-  }catch(error){const status=[400,401,403,404,405,409,413].includes(error.status)?error.status:400;return send(status,{error:error.message||'競賽服務暫時無法使用。'});}
+  }catch(error){const status=[400,401,403,404,405,409,413,429].includes(error.status)?error.status:400;return send(status,{error:error.message||'競賽服務暫時無法使用。'});}
  };
 }

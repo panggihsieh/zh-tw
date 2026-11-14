@@ -124,12 +124,12 @@ export default function GameZone() {
           <CharacterStructureGame onBack={()=>{window.location.hash='games';setView('hub');}}/>
         ) : !ready ? (
           <p role="status">確認登入狀態…</p>
-        ) : !user && view !== "hub" && view !== "choose" ? (
+        ) : !user && view !== "hub" && view !== "choose" && view !== "practice" ? (
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='practice'?'一字多詞 AI 造句':view==='sentences'?'語詞 AI 造句競賽':'遊戲專區'}</h1>
-            <p>{view==='practice'?'登入後輸入老師提供的限時開課代碼。':'生字結構可直接練習，課堂活動請先登入。'}</p>
+            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='sentences'?'語詞 AI 造句競賽':'遊戲專區'}</h1>
+            <p>課堂活動請先登入。</p>
             <button
               className="primary"
               disabled={!cloudConfigured || busy}

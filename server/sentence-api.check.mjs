@@ -15,7 +15,7 @@ async function fixture(t,ai=async()=>analysis(),requirePracticeCode=false){
  const request=async(path,body,user='teacher',origin='https://test')=>{const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/sentence${path}`,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','x-test-user':user,'x-notebook-request':'sentence-game',Origin:origin},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:r.status,...await r.json()};};
  return {store,request,setTime:v=>clock=v};
 }
-test('個人造句代碼僅教師可開放，名冊學生可進入至截止',async t=>{
+test('教師開放限時造句，訪客可用代碼，三次錯碼鎖定十五分鐘',async t=>{
  let calls=0;
  const {request,setTime}=await fixture(t,async()=>{calls++;return {sentence:'今天我去圖書館看書。'};},true);
  const input={phrase:'書',character:'書',transcript:'今天我去圖書館看書。'};
@@ -24,13 +24,21 @@ test('個人造句代碼僅教師可開放，名冊學生可進入至截止',asy
  assert.equal((await request('/practice/open',settings,'student')).status,403);
  const session=await request('/practice/open',settings);
  assert.equal(session.status,201);
- assert.equal((await request('/practice/access',{code:session.code},'other')).status,403);
+ assert.equal((await request('/practice/access',{code:session.code},'')).status,200);
  assert.equal((await request('/practice/access',{code:session.code},'student')).status,200);
  assert.equal((await request('/practice/correct',{...input,code:session.code},'student')).status,200);
  setTime(session.expiresAt);
  assert.equal((await request('/practice/access',{code:session.code},'student')).status,403);
  assert.equal((await request('/practice/correct',{...input,code:session.code},'student')).status,403);
  assert.equal(calls,1);
+ assert.equal((await request('/practice/access',{code:'INVALID'},'')).status,403);
+ assert.equal((await request('/practice/access',{code:'INVALID'},'')).status,403);
+ assert.equal((await request('/practice/access',{code:'INVALID'},'')).status,429);
+ const next=await request('/practice/open',settings);
+ assert.equal((await request('/practice/access',{code:next.code},'')).status,429);
+ setTime(session.expiresAt+900000);
+ const reopened=await request('/practice/open',settings);
+ assert.equal((await request('/practice/access',{code:reopened.code},'')).status,200);
 });
 test('題庫只包含南一五六年級45課，派送要求教師核對並驗證題目讀音',()=>{
  assert.equal(bank.lessons.length,45);assert.ok(bank.lessons.every(l=>[5,6].includes(l.grade)));

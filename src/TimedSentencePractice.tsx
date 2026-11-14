@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SentencePractice from "./SentencePractice";
-import { sentenceRequest } from "./sentenceApi";
+import { publicPracticeRequest as sentenceRequest } from "./sentenceApi";
 
 export default function TimedSentencePractice({ onBack, lessonTitle }: {
   onBack: () => void;

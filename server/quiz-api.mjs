@@ -232,6 +232,14 @@ export function createQuizHandler({
     try {
       const url = new URL(req.url, "http://localhost"),
         path = url.pathname.replace("/api/structure/quiz", "");
+      if(path==='/classes/drive-access'&&req.method==='GET'){
+        const email=user.email?.toLowerCase();
+        const allowed=!!email&&(await scan('quiz-classes/')).some(record=>
+          Array.isArray(record.students)
+            ? record.students.some(student=>student.active!==false&&student.email?.toLowerCase()===email)
+            : record.roster?.some(address=>address.toLowerCase()===email));
+        return send(200,{allowed});
+      }
       if(path==='/classes') {
         if(!user.admin)return send(403,{error:'僅管理者可管理班級'});
         if(req.method==='GET')return send(200,{items:await scan('quiz-classes/')});

@@ -1,4 +1,4 @@
-import { randomUUID, randomInt } from 'node:crypto';
+import { randomUUID, randomInt, createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { writingIdentity } from './writing-api.mjs';
 const bank=JSON.parse(await readFile(new URL('./sentence-bank.json',import.meta.url),'utf8'));
@@ -72,20 +72,41 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
   const answerKey=(id,uid,qid)=>`sentence-answers/${id}/${uid}/${qid}.json`;
   const access=(event,u)=>u.admin||!event.roster.length||event.roster.includes(u.email.toLowerCase());
   const active=e=>e.status==='running'&&now()<e.endsAt;
-  async function practiceRoom(code,user){
-    if(typeof code!=='string'||!/^[A-Z2-9]{4}$/.test(code))fail('請輸入老師提供的開課代碼。',403);
-    const room=await store.get(`sentence-practice-sessions/${code}.json`).then(record=>record.value,error=>{if(error.status===404)return null;throw error;});
-    if(!room||room.expiresAt<=now()||!room.roster.includes(user.email.toLowerCase()))fail('造句尚未開放、已結束，或帳號不在班級名冊內。',403);
-    return room;
+  async function practiceRoom(code,req){
+    const client=req.headers['x-forwarded-for']?.split(',').at(-1)?.trim() || req.socket.remoteAddress;
+    const key=`sentence-practice-attempts/${createHash('sha256').update(client||'unknown').digest('hex')}.json`;
+    const read=name=>store.get(name).catch(error=>{if(error.status===404)return null;throw error;});
+    for(let attempt=0;attempt<8;attempt++){
+      const record=await read(key);
+      const time=now();
+      if(record?.value.lockUntil>time)fail('代碼輸錯三次，請在十五分鐘鎖定期結束後再試。',429);
+      const room=typeof code==='string'&&/^[A-Z2-9]{4}$/.test(code)
+        ? (await read(`sentence-practice-sessions/${code}.json`))?.value : null;
+      if(room&&room.expiresAt<=now())fail('開課代碼已過期。',403);
+      const valid=room&&room.expiresAt>now();
+      if(valid&&!record?.value.count)return room;
+      const count=valid?0:(record?.value.lockUntil?0:record?.value.count||0)+1;
+      const lockUntil=count>=3?time+900000:0;
+      try{
+        if(record)await store.update(key,{count,lockUntil},record.generation);
+        else await store.create(key,{count,lockUntil});
+      }catch(error){if(error.status===412)continue;throw error;}
+      if(lockUntil)fail('代碼輸錯三次，已鎖定十五分鐘。',429);
+      if(!valid)fail('開課代碼無效或已過期。',403);
+      return room;
+    }
+    fail('請稍後再試。',429);
   }
   const publicEvent=(e,admin)=>admin?e:{id:e.id,title:e.title,lessons:e.lessons,minutes:e.minutes,status:e.status,startsAt:e.startsAt,endsAt:e.endsAt,questions:e.questions.map(q=>({id:q.id,character:q.character,reading:q.reading}))};
   return async(req,res)=>{
     const send=(status,v)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(v));};
     if(req.method==='POST'&&(!origins.includes(req.headers.origin)||req.headers['x-notebook-request']!=='sentence-game'))return send(403,{error:'不允許的來源'});
-    let user;try{user=await authenticate(req);}catch{return send(401,{error:'請先登入 Google 帳號'});}
     try {
       const url=new URL(req.url,'http://localhost');
       const path=url.pathname.replace('/api/structure/sentence','');
+      const publicPractice=req.method==='POST'&&['/practice/access','/practice/correct','/practice/grade'].includes(path)&&requirePracticeCode;
+      let user;
+      if(!publicPractice)try{user=await authenticate(req);}catch{return send(401,{error:'請先登入 Google 帳號'});}
       if(req.method==='POST'&&path==='/practice/open'){
         if(!user.admin)fail('僅教師可開放造句。',403);
         const {minutes,roster}=await body(req);
@@ -102,12 +123,12 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
         fail('暫時無法建立開課代碼。',409);
       }
       if(req.method==='POST'&&path==='/practice/access'){
-        const room=await practiceRoom((await body(req)).code,user);
+        const room=await practiceRoom((await body(req)).code,req);
         return send(200,{expiresAt:room.expiresAt,now:now()});
       }
       if(path==='/practice/correct'&&req.method==='POST'){
         const v=await body(req);
-        if(requirePracticeCode)await practiceRoom(v.code,user);
+        if(requirePracticeCode)await practiceRoom(v.code,req);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入1–8個中文字、選擇其中一個字，並先說一句話。');
         const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript,lessonTitle:typeof v.lessonTitle==='string'?v.lessonTitle.trim().slice(0,100):undefined});
         const suggestion=result?.sentence;
@@ -116,7 +137,7 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       }
       if(path==='/practice/grade'&&req.method==='POST'){
         const v=await body(req);
-        if(requirePracticeCode)await practiceRoom(v.code,user);
+        if(requirePracticeCode)await practiceRoom(v.code,req);
         if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
         if(v.lessonTitle!==undefined&&(typeof v.lessonTitle!=='string'||v.lessonTitle.length>100))fail('課文名稱格式不符。');
         const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence,...(v.lessonTitle?.trim()?{lessonTitle:v.lessonTitle.trim()}: {})});

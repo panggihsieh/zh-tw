@@ -20,3 +20,9 @@ export async function sentenceRequest<T>(path:string,body?:unknown):Promise<T> {
  const response=await fetch('/api/structure/sentence'+path,{method:body===undefined?'GET':'POST',headers:{Authorization:`Bearer ${await u.getIdToken()}`,'Content-Type':'application/json','X-Notebook-Request':'sentence-game'},...(body!==undefined?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(140000)});
  const value=await response.json();if(!response.ok)throw Error(value.error||'競賽服務暫時無法使用。');return value;
 }
+export async function publicPracticeRequest<T>(path:string,body:unknown):Promise<T> {
+ const response=await fetch('/api/structure/sentence'+path,{method:'POST',headers:{'Content-Type':'application/json','X-Notebook-Request':'sentence-game'},body:JSON.stringify(body),signal:AbortSignal.timeout(140000)});
+ const value=await response.json();
+ if(!response.ok)throw Error(value.error||'造句服務暫時無法使用。');
+ return value;
+}
