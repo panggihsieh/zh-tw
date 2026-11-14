@@ -910,7 +910,7 @@ function App() {
             </div></div>}
           </NavigationContainer>
           <main id="app-page-content">
-            {!backendMode && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
+            {!backendMode && (page !== "learn" || collection) && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
               <SpeechTools
                 label="朗讀本頁"
                 showVoice={false}
@@ -946,24 +946,10 @@ function App() {
             )}
             {page === "learn" && (
               <>
-                <div className="page-heading">
-                  <div>
-                    <div className="eyebrow">
-                      <Leaf size={15} /> 一個字，一次小小的發現
-                    </div>
-                    <h1>
-                      {collection
-                        ? "把生字，慢慢看懂。"
-                        : "今天，想認識哪個字？"}
-                    </h1>
-                    <p>從一個語詞開始，拆開看、慢慢讀，再收藏成自己的知識。</p>
-                  </div>
-                  <span className="edition">繁體中文 · 一～六年級</span>
-                </div>
                 {!backendMode && !collection && <section className="adventure-welcome" aria-label="生字探索旅程">
-                  <BirdMascot />
-                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
+                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
+                  <BirdMascot />
                 </section>}
                 {collection && <button className="secondary" onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {

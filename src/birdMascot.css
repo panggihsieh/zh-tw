@@ -1,15 +1,39 @@
 .bird-mascot-icon { display: block; width: 32px; height: 32px; flex-shrink: 0; }
 .app-top-nav .nav-item .bird-mascot-icon { width: 2em; height: 2em; }
 .bird-mascot-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.bird-mascot-guide { flex: 0 0 min(400px, 38%); min-width: 0; align-self: stretch; position: relative; }
-.bird-mascot-character { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
-
-@media (max-width: 760px) {
-  .bird-mascot-guide { flex-basis: min(280px, 100%); width: min(280px, 100%); align-self: center; }
-  .bird-mascot-character { position: static; height: auto; }
+.adventure-welcome[aria-label] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(72px, 24%);
+  gap: 10px 20px;
+  padding: clamp(12px, 2vw, 24px);
 }
 
-@media (min-width: 761px) {
-  .adventure-copy { flex: 1 1 0; min-width: 0; }
-  .adventure-welcome .adventure-stops { flex-basis: 100%; }
+.adventure-welcome .adventure-stops {
+  grid-column: 1;
+  display: flex;
+  width: auto;
+  margin: 0;
+  gap: 6px;
+}
+
+.adventure-welcome .adventure-stops span {
+  flex: 0 1 auto;
+  flex-direction: row;
+  gap: 5px;
+  padding: 5px 8px;
+}
+
+.adventure-welcome .adventure-stops svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.adventure-copy { grid-column: 1; min-width: 0; }
+.bird-mascot-guide { grid-column: 2; grid-row: 1 / 3; align-self: start; }
+.bird-mascot-character { display: block; width: 100%; max-height: 180px; height: auto; object-fit: contain; object-position: right top; }
+
+@media (max-width: 600px) {
+  .adventure-welcome .adventure-stops { grid-column: 1 / -1; }
+  .bird-mascot-guide { grid-row: 2; }
 }
