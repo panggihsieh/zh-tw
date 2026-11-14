@@ -40,7 +40,8 @@ type SpeechWindow = Window & {
 const scoreLabels = {
   correctness: "語意正確",
   fluency: "句子流暢",
-  expression: "表達美感",
+  detail: "內容具體合理",
+  mechanics: "文字與標點",
 } as const;
 
 export default function SentencePractice({
@@ -62,6 +63,7 @@ export default function SentencePractice({
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const recognition = useRef<Recognition | null>(null);
+  const sentenceInput = useRef<HTMLTextAreaElement>(null);
   const finalTranscript = useRef("");
   const latestTranscript = useRef("");
   const SpeechRecognition =
@@ -118,8 +120,8 @@ export default function SentencePractice({
     current.onerror = (event) => {
       setMessage(
         event.error === "not-allowed"
-          ? "麥克風未獲允許，可以直接打字。"
-          : "語音辨識暫時中斷，請重試或直接打字。",
+          ? "請允許使用麥克風，再開始說話。"
+          : "語音辨識暫時中斷，請重試。",
       );
     };
     current.onend = () => {
@@ -134,7 +136,7 @@ export default function SentencePractice({
       current.start();
       setListening(true);
     } catch {
-      setMessage("無法啟動語音辨識，可以直接打字。");
+      setMessage("無法啟動語音辨識，請檢查麥克風後重試。");
     }
   }
 
@@ -151,6 +153,8 @@ export default function SentencePractice({
   }
 
   function clearSentence() {
+    latestTranscript.current = "";
+    finalTranscript.current = "";
     recognition.current?.abort();
     setOriginal("");
     setSentence("");
@@ -212,6 +216,7 @@ export default function SentencePractice({
         <span className="practice-step-number">2</span>
         <div>
           <h2 id="practice-speech-title">說出一句話</h2>
+          <p id="practice-voice-hint" className="practice-voice-hint">請用口說造句。說錯了，點「清除重說」。</p>
           <p>{character ? <>句子中要使用「<strong>{character}</strong>」。</> : "請先選擇要練習的字。"}</p>
           <div className="sentence-toolbar practice-speech-actions">
             <button className="primary" disabled={!SpeechRecognition || !character || listening || busy} onClick={startListening}>
@@ -224,22 +229,37 @@ export default function SentencePractice({
               <RotateCcw size={18} />清除重說
             </button>
           </div>
-          {!SpeechRecognition && <p>此瀏覽器沒有語音辨識功能，可以直接在下方打字。</p>}
-          <label>
-            你的句子（最多 300 字）
+          {!SpeechRecognition && <p>請使用支援語音辨識的瀏覽器進行口說練習。</p>}
+          <label htmlFor="practice-sentence">你的句子（最多 300 字）</label>
+          <div className="practice-punctuation" role="group" aria-label="插入標點符號">
+            {["，", "。", "、", "？", "！", "：", "；", "「", "」"].map((symbol) => (
+              <button type="button" className="secondary" key={symbol}
+                aria-label={`插入 ${symbol}`}
+                disabled={busy || listening}
+                onClick={() => {
+                  const input = sentenceInput.current;
+                  if (!input) return;
+                  const { selectionStart, selectionEnd } = input;
+                  if (sentence.length - (selectionEnd - selectionStart) >= 300) return;
+                  input.setRangeText(symbol, selectionStart, selectionEnd, "end");
+                  setSentence(input.value);
+                  setSuggestion("");
+                  setGrade(null);
+                  input.focus();
+                }}>{symbol}</button>
+            ))}
+          </div>
             <textarea
+              id="practice-sentence"
+              ref={sentenceInput}
               rows={5}
               maxLength={300}
               value={sentence}
               disabled={busy}
-              onChange={(event) => {
-                setSentence(event.target.value);
-                setSuggestion("");
-                setGrade(null);
-              }}
+              readOnly
+              aria-describedby="practice-voice-hint"
               placeholder={character ? `請說出包含「${character}」的完整句子。` : "請先選擇一個字。"}
             />
-          </label>
           {original && <p className="practice-original">原始語音辨識：{original}</p>}
           <button
             className="secondary"
@@ -287,14 +307,25 @@ export default function SentencePractice({
           {grade && (
             <article className="practice-grade" aria-live="polite">
               <div className="practice-level"><span>AI 建議等第</span><strong>{grade.level}</strong></div>
+              <p>總分 {grade.total === null ? "待確認" : `${grade.total}／100`}</p>
               <div className="practice-score-grid">
                 {Object.entries(scoreLabels).map(([key, label]) => (
                   <div key={key}>
                     <span>{label}</span>
-                    <strong>{grade.scores[key as keyof typeof grade.scores]}／4</strong>
+                    <strong>{grade.scores[key as keyof typeof grade.scores]}／{key === "correctness" ? 30 : key === "mechanics" ? 10 : 20}</strong>
                   </div>
                 ))}
               </div>
+              {grade.polished && <section aria-label="潤稿建議">
+                <h3>{initialCard ? "潤稿示範" : "AI 潤稿建議"}</h3>
+                <p>原句：{grade.issue && sentence.includes(grade.issue) ? <>
+                  {sentence.slice(0, sentence.indexOf(grade.issue))}
+                  <mark>{grade.issue}</mark>
+                  {sentence.slice(sentence.indexOf(grade.issue) + grade.issue.length)}
+                </> : sentence}</p>
+                {grade.issueReason && <p>標示處：{grade.issueReason}</p>}
+                <p>{grade.polished === sentence.trim() ? "建議保留原句。" : <>建議句：{grade.polished}</>}</p>
+              </section>}
               {grade.highlight && <p>句子亮點：「{grade.highlight}」</p>}
               <p>{grade.feedback}</p>
             </article>

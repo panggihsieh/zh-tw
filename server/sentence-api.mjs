@@ -37,17 +37,20 @@ export function scoreSentence(sentence,question,analysis) {
 export function gradePractice(sentence,character,analysis) {
   if(!analysis||typeof analysis.targetOk!=='boolean'||typeof analysis.meaningOk!=='boolean'||typeof analysis.uncertain!=='boolean'||!bounded(analysis.feedback,1200))fail('AI 等第格式不符，請稍後再試。');
   const scores={};
-  for(const key of ['correctness','fluency','expression']) {
+  for(const [key,max] of Object.entries({correctness:30,completeness:20,fluency:20,detail:20,mechanics:10})) {
     const score=analysis[key];
-    if(!Number.isInteger(score)||score<0||score>4)fail('AI 等第分項格式不符，請稍後再試。');
+    if(!Number.isInteger(score)||score<0||score>max)fail('AI 等第分項格式不符，請稍後再試。');
     scores[key]=score;
   }
   const highlight=analysis.highlight||'';
   if(typeof highlight!=='string'||highlight.length>100||highlight&&!sentence.includes(highlight))fail('AI 評語引用內容不在原句中。');
   const targetOk=sentence.includes(character)&&analysis.targetOk&&analysis.meaningOk;
   const total=analysis.uncertain?null:targetOk?Object.values(scores).reduce((sum,score)=>sum+score,0):0;
-  const level=total===null?'待確認':total>=11?'優等':total>=9?'甲等':total>=6?'乙等':'待加強';
-  return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback};
+  const level=total===null?'待確認':total>=92?'優等':total>=75?'甲等':total>=50?'乙等':'待加強';
+  const issue = bounded(analysis.issue, 100) && sentence.includes(analysis.issue) ? analysis.issue : '';
+  const polished = bounded(analysis.polished, 400) && analysis.polished.includes(character) ? analysis.polished.trim() : '';
+  return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback,
+    issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished};
 }
 export function validateTeacherGrade(v) {
   if(!v||typeof v.targetOk!=='boolean'||![0,40].includes(v.idiom)||!Number.isInteger(v.fluency)||v.fluency<0||v.fluency>10||!bounded(v.feedback,1200)||!v.elements||['person','event','time','place','object'].some(k=>![0,10].includes(v.elements[k])))fail('覆核配分不符：成語0/40、人事時地物各0/10、順暢0–10。');

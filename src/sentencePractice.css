@@ -1,4 +1,10 @@
 .sentence-practice { max-width:980px;margin:0 auto; }
+.practice-voice-hint { color:#a21a24;font-weight:700;animation:practice-voice-hint 1s ease-in-out 2; }
+@keyframes practice-voice-hint { 50% { opacity:.6; } }
+@media(prefers-reduced-motion:reduce){.practice-voice-hint{animation:none}}
+.practice-punctuation { display:flex;flex-wrap:wrap;gap:6px;margin:8px 0; }
+.practice-punctuation button { min-width:44px;min-height:44px;padding:4px;font-size:22px; }
+#practice-sentence { display:block;width:100%;box-sizing:border-box; }
 .practice-step { display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;padding:24px 0;border-bottom:1px solid var(--theme-border,#badb97); }
 .practice-step-number { display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--theme-dark,#075d3e);color:white;font-size:22px;font-weight:800; }
 .practice-step h2 { margin:2px 0 12px; }

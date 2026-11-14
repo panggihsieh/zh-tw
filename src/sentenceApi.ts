@@ -4,8 +4,13 @@ export interface SentenceEvent {id:string;title:string;minutes:number;lessons:st
 export const elementLabels={person:'人',event:'事',time:'時',place:'地',object:'物'};
 export interface SentenceGrade {targetOk:boolean;readingOk:boolean;idiom:{text:string;score:number};elements:Record<keyof typeof elementLabels,{evidence:string;score:number}>;fluency:number;feedback:string;total:number|null;uncertain:boolean}
 export interface TeacherSentenceGrade {targetOk:boolean;idiom:number;elements:Record<keyof typeof elementLabels,number>;fluency:number;feedback:string;total?:number}
+export interface SentencePracticeGrade {
+  polished?: string;
+  issue?: string;
+  issueReason?: string;
+}
 export interface SentenceAnswer {eventId:string;uid:string;name:string;questionId:string;character:string;reading:string;original:string;sentence:string;submittedAt:number;status:string;aiGrade:SentenceGrade|null;teacherGrade?:TeacherSentenceGrade;gradingError?:string}
-export interface SentencePracticeGrade {targetOk:boolean;meaningOk:boolean;uncertain:boolean;scores:{correctness:number;fluency:number;expression:number};total:number|null;level:'優等'|'甲等'|'乙等'|'待加強'|'待確認';highlight:string;feedback:string}
+export interface SentencePracticeGrade {targetOk:boolean;meaningOk:boolean;uncertain:boolean;scores:{correctness:number;completeness:number;fluency:number;detail:number;mechanics:number};total:number|null;level:'優等'|'甲等'|'乙等'|'待加強'|'待確認';highlight:string;feedback:string}
 export async function sentenceRequest<T>(path:string,body?:unknown):Promise<T> {
  const {cloudServices}=await import('./cloudSync');const u=cloudServices().auth.currentUser;
  if(!u)throw Error('請先登入 Google 帳號。');

@@ -78,25 +78,25 @@ test('語音校正保留原文、限制次數，不能在截止後呼叫',async 
  const f=await fixture(t,async()=>({sentence:'爸爸在銀行上班。'}));const id=(await f.request('/events',definition())).event.id;await f.request(`/events/${id}/start`,{});await f.request(`/events/${id}/join`,{},'student');const payload={questionId:'0',transcript:'爸爸在銀航上班。'};
  const c=await f.request(`/events/${id}/correct`,payload,'student');assert.equal(c.original,payload.transcript);assert.equal(c.suggestion,'爸爸在銀行上班。');await f.request(`/events/${id}/correct`,payload,'student');assert.equal((await f.request(`/events/${id}/correct`,payload,'student')).status,429);f.setTime(160001);assert.equal((await f.request(`/events/${id}/correct`,payload,'student')).status,409);
 });
-test('自由造句保留原始辨識、校正同音字並回傳三項等第',async t=>{
+test('自由造句保留原始辨識、校正同音字並回傳五項等第',async t=>{
  const f=await fixture(t,async(mode)=>mode==='practice-correct'
   ? {sentence:'我在美麗的海灘看夕陽。'}
-  : {targetOk:true,meaningOk:true,uncertain:false,correctness:4,fluency:3,expression:4,highlight:'美麗的海灘',feedback:'用詞具體，句子很有畫面。'});
+  : {targetOk:true,meaningOk:true,uncertain:false,correctness:30,completeness:20,fluency:15,detail:20,mechanics:10,highlight:'美麗的海灘',feedback:'用詞具體，句子很有畫面。'});
  const correction=await f.request('/practice/correct',{phrase:'美麗海灘',character:'灘',transcript:'我在美麗的海攤看夕陽。'},'student');
  assert.equal(correction.original,'我在美麗的海攤看夕陽。');
  assert.equal(correction.suggestion,'我在美麗的海灘看夕陽。');
  const graded=await f.request('/practice/grade',{phrase:'美麗海灘',character:'灘',sentence:correction.suggestion},'student');
  assert.equal(graded.grade.level,'優等');
- assert.equal(graded.grade.total,11);
- assert.deepEqual(graded.grade.scores,{correctness:4,fluency:3,expression:4});
+ assert.equal(graded.grade.total,95);
+ assert.deepEqual(graded.grade.scores,{correctness:30,completeness:20,fluency:15,detail:20,mechanics:10});
  assert.equal((await f.request('/practice/grade',{phrase:'美麗海灘',character:'麗',sentence:'今天海灘很好看。'},'student')).status,400);
 });
 test('自由造句等第遇到指定字錯誤或不確定時不製造高分',()=>{
  const sentence='我在美麗的海灘看夕陽。';
- const base={targetOk:true,meaningOk:true,uncertain:false,correctness:4,fluency:4,expression:4,highlight:'美麗的海灘',feedback:'句子完整。'};
+ const base={targetOk:true,meaningOk:true,uncertain:false,correctness:30,completeness:20,fluency:20,detail:20,mechanics:10,highlight:'美麗的海灘',feedback:'句子完整。'};
  assert.equal(gradePractice(sentence,'灘',base).level,'優等');
  assert.equal(gradePractice(sentence,'灘',{...base,meaningOk:false}).level,'待加強');
  assert.equal(gradePractice(sentence,'灘',{...base,uncertain:true}).level,'待確認');
- assert.throws(()=>gradePractice(sentence,'灘',{...base,expression:5}));
+ assert.throws(()=>gradePractice(sentence,'灘',{...base,mechanics:11}));
  assert.throws(()=>gradePractice(sentence,'灘',{...base,highlight:'不在原句'}));
 });
