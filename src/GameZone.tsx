@@ -121,7 +121,7 @@ export default function GameZone() {
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>{view==='competition'?'課堂即時競賽':view==='practice'?'一字多詞 AI 造句':view==='sentences'?'語詞 AI 造句競賽':view==='structure'?'生字結構遊戲':'遊戲專區'}</h1>
+            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='practice'?'一字多詞 AI 造句':view==='sentences'?'語詞 AI 造句競賽':view==='structure'?'生字結構遊戲':'遊戲專區'}</h1>
             <p>{view==='competition'?'登入後輸入老師提供的四碼開課代碼。':view==='practice'?'登入後輸入語詞、選一個字，再用語音完成造句。':view==='sentences'?'登入後參加老師派送的南一高年級限時造句競賽。':view==='structure'?'登入後看生字、選結構，認識部件的位置。':'語詞 AI 造句遊戲、生字結構遊戲，選一個開始練習！'}</p>
             <button
               className="primary"
@@ -213,7 +213,7 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂即時競賽（全班）</h2><p>輸入老師提供的四碼代碼，依老師開設的課堂進行即時答題或 AI 語音造句，並查看競賽排名。</p><button className="primary" disabled={!competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
                       <div className="game-icon"><g.icon size={34} /></div>

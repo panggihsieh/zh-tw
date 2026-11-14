@@ -8,7 +8,7 @@ const text=(value,max)=>typeof value==='string'&&value.trim()&&value.length<=max
 export const makeRoomCode=(random=Math.random)=>Array.from({length:4},()=>alphabet[Math.floor(random()*alphabet.length)]).join('');
 export function validateRoomInput(value){
  if(!value||!text(value.title,100)||!text(value.className,80))fail('請填寫競賽名稱與班級。');
- const loginMode=value.loginMode==='anonymous'?'anonymous':'roster',gameType=value.gameType==='sentence-practice'?'sentence-practice':'quiz';
+ const loginMode=value.loginMode==='anonymous'?'anonymous':'roster',gameType=['sentence-practice','structure'].includes(value.gameType)?value.gameType:'quiz';
  const duration=Number(value.duration??600);if(!Number.isInteger(duration)||duration<60||duration>7200)fail('課堂時間須為 1–120 分鐘。');
  const maxParticipants=Number(value.maxParticipants??100);if(!Number.isInteger(maxParticipants)||maxParticipants<1||maxParticipants>100)fail('參與人數上限須為 1–100 人。');
  const students=(value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));
@@ -23,7 +23,7 @@ export function validateRoomInput(value){
    return {id:String(index+1),type:'sentence-practice',prompt:`先想一個含「${character}」的語詞，再造一個完整句子`,phrase,character,reading:String(q.reading||'').slice(0,40),seconds:q.seconds};
   }
   if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>6||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
-  return {id:String(index+1),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
+  return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
  return {title:value.title.trim(),classId:String(value.classId||''),className:value.className.trim(),loginMode,gameType,duration,maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
 }
