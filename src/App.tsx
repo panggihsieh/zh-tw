@@ -133,8 +133,7 @@ export default function ProtectedApp() {
   const [hash,setHash]=useState(window.location.hash);
   useEffect(()=>{const changed=()=>setHash(window.location.hash);window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed)},[]);
   if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
-  if(new URLSearchParams(window.location.search).get('view')!=='backend'&&hash.startsWith('#games')) return <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone/></Suspense>;
-  if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App />;
+  if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App gamesOpen={/^#games(?:\/|$)/.test(hash)} />;
   return <Suspense fallback={<p role="status">載入教師登入…</p>}><BackendGate><App /></BackendGate></Suspense>;
 }
 function Glyph({
@@ -313,7 +312,7 @@ function Modal({
     </dialog>
   );
 }
-function App() {
+function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const siteTheme = useSiteTheme();
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
   const NavigationContainer = backendMode ? "aside" : "header";
@@ -864,16 +863,17 @@ function App() {
             })}
             {!backendMode && (<>
             <button
-              className={page === "learn" ? "nav-item active" : "nav-item"}
-              onClick={() => setPage("learn")}
+              className={!gamesOpen && page === "learn" ? "nav-item active" : "nav-item"}
+              onClick={() => { if (gamesOpen) window.location.hash = ""; setPage("learn"); }}
             >
               <BirdMascotIcon />
               生字動畫教室
             </button>
-            <a className="nav-item" href="#games"><Grid2X2 size={20}/>遊戲專區</a>
+            <a className={gamesOpen ? "nav-item active" : "nav-item"} aria-current={gamesOpen ? "page" : undefined} href="#games"><Grid2X2 size={20}/>遊戲專區</a>
             <button
-              className={page === "library" ? "nav-item active" : "nav-item"}
+              className={!gamesOpen && page === "library" ? "nav-item active" : "nav-item"}
               onClick={() => {
+                if (gamesOpen) window.location.hash = "";
                 setPage("library");
                 setPlaying(false);
                 void refresh();
@@ -903,7 +903,8 @@ function App() {
               </button>
             </div></div>}
           </NavigationContainer>
-          <main id="app-page-content">
+          {gamesOpen && <Suspense fallback={<p role="status">載入生詞遊戲專區…</p>}><GameZone /></Suspense>}
+          <main id="app-page-content" hidden={gamesOpen}>
             {!backendMode && page === "learn" && collection && <button type="button" aria-controls="curriculum-entry" aria-expanded={studentFinderOpen} className={studentFinderOpen ? "secondary" : "secondary reopen-student-finder"} onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
             {!backendMode && (page !== "learn" || collection) && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
               <SpeechTools
