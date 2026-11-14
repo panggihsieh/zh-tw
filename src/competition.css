@@ -51,3 +51,11 @@
 .competition-pilot-data th, .competition-pilot-data td { padding: 8px; vertical-align: top; border-bottom: 1px solid #dcd7f5; }
 .competition-pilot-data td:nth-child(3) { white-space: pre-line; }
 .competition-card-preview article > .competition-preview-action { position: static; border: 1px solid #dcd7f5; }
+
+.kahoot-practice #practice-sentence { font-family: inherit; font-size: 1.4em; font-weight: 700; line-height: 1.55; }
+.kahoot-practice .practice-grade { font-size: 1.2em; }
+.kahoot-practice .practice-grade .practice-comparison { background: #f1f2f1; border: 1px solid #252525; border-radius: 10px; padding: 16px; font-size: 1.08em; }
+.kahoot-practice .practice-original-line { color: #477450; }
+.kahoot-practice .practice-polished-line { color: #07513a; }
+.kahoot-practice .practice-full-score-line { color: #14548d; }
+.kahoot-practice .practice-creative-line { color: #9a440b; }

@@ -385,10 +385,11 @@ export default function SentencePractice({
             const { originalParts, polishedParts } = compareSentences(sentence.trim(), grade.polished || sentence.trim());
             return <section className="practice-comparison">
               <h3>AI 潤稿</h3>
-              <p>原句：{originalParts}</p>
-              {grade.polished && <p><strong>原句潤稿：</strong>{polishedParts}</p>}
-              {grade.fullScoreExample && <p><strong>滿分規準示例（參考）：</strong>{highlightExample(grade.fullScoreExample, grade.fullScoreExpression)}</p>}
-              {grade.creativeExample && <p><strong>AI 創意示例：</strong>{grade.creativeExample}</p>}
+              <p className="practice-original-line">原句：{originalParts}</p>
+              {grade.polished && <p className="practice-polished-line"><strong>原句潤稿：</strong>{polishedParts}</p>}
+              {grade.fullScoreExample && <p className="practice-full-score-line"><strong>滿分規準示例（參考）：</strong>{highlightExample(grade.fullScoreExample, grade.fullScoreExpression)}</p>}
+              {grade.creativeExample && <p className="practice-creative-line"><strong>AI 創意示例：</strong>{grade.creativeExample}</p>}
+              {fixedCharacter && grade.fullScoreExample && <div className="practice-full-score-line"><strong>滿分規準</strong><ul><li>語意正確（30 分）：指定字用得恰當。</li><li>句意完整（20 分）：讀者能理解想表達的意思。</li><li>句子流暢（20 分）：語序自然，前後連貫。</li><li>內容具體合理（20 分）：用清楚的細節說明情境。</li><li>文字與標點（10 分）：用字和標點正確。</li></ul></div>}
               {grade.issueReason && <p>{grade.issueReason}</p>}
             </section>;
           })()}

@@ -31,6 +31,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  useEffect(()=>{const controller=new AbortController();fetch(`${import.meta.env.BASE_URL}sentence-bank.json`,{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('課文生字庫載入失敗');return r.json();}).then(v=>setLessons(v.lessons)).catch(e=>{if(!controller.signal.aborted)setMessage(e.message)});void run(load);return()=>controller.abort();},[]);
  useEffect(()=>{const timer=window.setInterval(()=>{setNow(Date.now());void load().catch(()=>undefined);},3000);return()=>window.clearInterval(timer);},[]);
  const selectedClass=classes.find(c=>c.id===classId),students=selectedClass?.students?.filter(s=>s.active&&s.email)||[],roster=students.map(s=>s.email),candidates=useMemo(()=>[...new Map(lessons.filter(l=>lessonIds.includes(l.id)).flatMap(l=>l.characters).map(c=>[c.character,c])).values()],[lessons,lessonIds]);
+ const [selectedCharacters,setSelectedCharacters]=useState<string[]>([]);
  const [manualDuration, setManualDuration] = useState(false);
  const estimatedMinutes = Math.max(1, Math.min(120, Math.ceil(questions.reduce((seconds, question) => seconds + question.seconds, 0) / 60)));
  const classroomMinutes = pilot && !manualDuration ? estimatedMinutes : duration;
@@ -54,7 +55,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
   try{if(file.size>1024*1024)throw Error('題庫檔案不可超過 1 MB。');const imported=parseQuestionCsv(await file.text());setQuestions(imported);setImportNotice(`已匯入 ${imported.length} 題，請確認內容後再建立開課大廳。`);}
   catch(error){setImportNotice((error as Error).message);}
  }
- function makeCards(){const rows=pilot?(lessonIds.length===1&&lessonIds[0]===lessonSeven.id?candidates.filter(row=>["際","璃","磁"].includes(row.character)):candidates.slice(0,3)):candidates;setQuestions(rows.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已依勾選課文自動產生 ${rows.length} 張生字字卡，請預覽後開課。`);}
+ function makeCards(){const rows=pilot?(lessonIds.length===1&&lessonIds[0]===lessonSeven.id?candidates.filter(row=>["際","璃","磁"].includes(row.character)):candidates.slice(0,3)):candidates.filter(row=>selectedCharacters.includes(row.character));setQuestions(rows.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已產生 ${rows.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
   <p>學生語音測試</p>
   <SentencePractice fixedCharacter={pilot} lessonTitle={pilot ? lessonSeven.title : undefined} initialCard={previewCard} correctionOption={<label className="secondary competition-real-ai"><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/><span>使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</span></label>} simulated={!useRealAi} request={useRealAi ? sentenceRequest : previewRequest} onBack={()=>{setUseRealAi(false);setPreviewCard(null);}}/>
@@ -71,9 +72,19 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     <table><thead><tr><th>生字</th><th>讀音</th><th>字典釋義</th><th>來源</th></tr></thead>
     <tbody>{lessonSeven.rows.map(row=><tr key={row.character}><td>{row.character}</td><td>{row.reading}</td><td>{row.definition}</td><td>{row.source ? <a href={row.source} target="_blank" rel="noreferrer">字典條目</a> : "待補"}</td></tr>)}</tbody></table>
    </details>}
-      <div className="sentence-toolbar"><label>年級<select value={grade} onChange={e=>{setGrade(Number(e.target.value));setLessonIds([]);setQuestions([]);}}><option value={5}>五年級</option><option value={6}>六年級</option></select></label><label>學期<select value={term} onChange={e=>{setTerm(e.target.value);setLessonIds([]);setQuestions([]);}}><option>上</option><option>下</option></select></label></div>
-   <fieldset className="competition-lesson-picker"><legend>課文（可複選）</legend>{lessons.filter(l=>l.grade===grade&&l.term===term).map(l=><label key={l.id}><input type="checkbox" checked={lessonIds.includes(l.id)} onChange={e=>{setLessonIds(e.target.checked?[...lessonIds,l.id]:lessonIds.filter(id=>id!==l.id));setQuestions([]);}}/>{l.title}<small>{l.characters.length} 字</small></label>)}</fieldset>
-   {!pilot && <button className="secondary" disabled={busy||!candidates.length} onClick={makeCards}><Plus size={18}/>依勾選課文自動生成題目</button>}
+      <div className="sentence-toolbar"><label>年級<select value={grade} onChange={e=>{setGrade(Number(e.target.value));setLessonIds([]);setSelectedCharacters([]);setQuestions([]);}}><option value={5}>五年級</option><option value={6}>六年級</option></select></label><label>學期<select value={term} onChange={e=>{setTerm(e.target.value);setLessonIds([]);setSelectedCharacters([]);setQuestions([]);}}><option>上</option><option>下</option></select></label></div>
+   <fieldset className="competition-lesson-picker"><legend>課文（可複選）</legend>{lessons.filter(l=>l.grade===grade&&l.term===term).map(l=><label key={l.id}><input type="checkbox" checked={lessonIds.includes(l.id)} onChange={e=>{setLessonIds(e.target.checked?[...lessonIds,l.id]:lessonIds.filter(id=>id!==l.id));setSelectedCharacters([]);setQuestions([]);}}/>{l.title}<small>{l.characters.length} 字</small></label>)}</fieldset>
+   {!pilot && candidates.length > 0 && <fieldset className="competition-lesson-picker">
+     <legend>挑選出題生字（可複選）</legend>
+     {candidates.map(({character}) => <label key={character}>
+       <input type="checkbox" checked={selectedCharacters.includes(character)} onChange={event=>{
+         const checked=event.target.checked;
+         setSelectedCharacters(chars=>checked?[...chars,character]:chars.filter(char=>char!==character));
+         setQuestions([]);
+       }}/>{character}
+     </label>)}
+   </fieldset>}
+   {!pilot && <button className="secondary" disabled={busy||!candidates.some(row=>selectedCharacters.includes(row.character))} onClick={makeCards}><Plus size={18}/>依勾選生字生成題目</button>}
    {!!questions.length&&<><p className="competition-budget">本場最多呼叫 AI <strong>{questions.length*maxParticipants}</strong> 次（{questions.length} 題 × {maxParticipants} 人）；模擬學生不呼叫 AI。</p><div className="competition-card-preview">{questions.map((q,index)=><article key={`${q.character}-${index}`}><button type="button" aria-label={`移除${q.character}`} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/></button><strong>{q.character}</strong><span>{q.reading||'讀音待核對'}</span><p>{q.prompt}</p><button type="button" className="secondary competition-preview-action" onClick={()=>setPreviewCard({phrase:q.phrase??q.character??"",character:q.character??""})}>試作「{q.character}」</button></article>)}</div></>}
   </>:<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>輸入選擇題</h2></div><strong>{questions.length} 題</strong></div>
