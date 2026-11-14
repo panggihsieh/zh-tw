@@ -66,6 +66,14 @@ export default function SentencePractice({
   const sentenceInput = useRef<HTMLTextAreaElement>(null);
   const finalTranscript = useRef("");
   const latestTranscript = useRef("");
+  const spokenPunctuation = useRef<{ offset: number; symbol: string }[]>([]);
+  function sentenceWithPunctuation(transcript: string) {
+    let result = transcript;
+    for (const { offset, symbol } of [...spokenPunctuation.current].reverse()) {
+      result = result.slice(0, offset) + symbol + result.slice(offset);
+    }
+    return result.slice(0, 300);
+  }
   const SpeechRecognition =
     (window as SpeechWindow).SpeechRecognition ||
     (window as SpeechWindow).webkitSpeechRecognition;
@@ -97,6 +105,7 @@ export default function SentencePractice({
     recognition.current = current;
     finalTranscript.current = "";
     latestTranscript.current = "";
+    spokenPunctuation.current = [];
     setOriginal("");
     setSentence("");
     setSuggestion("");
@@ -115,7 +124,7 @@ export default function SentencePractice({
       }
       const latest = (finalTranscript.current + interim).slice(0, 300);
       latestTranscript.current = latest;
-      setSentence(latest);
+      setSentence(sentenceWithPunctuation(latest));
     };
     current.onerror = (event) => {
       setMessage(
@@ -127,7 +136,7 @@ export default function SentencePractice({
     current.onend = () => {
       const text = latestTranscript.current.trim();
       setOriginal(text);
-      setSentence(text);
+      setSentence(sentenceWithPunctuation(latestTranscript.current).trim());
       setListening(false);
       recognition.current = null;
       if (text) setMessage("辨識完成，請先核對文字或使用同音語意校正。");
@@ -153,6 +162,7 @@ export default function SentencePractice({
   }
 
   function clearSentence() {
+    spokenPunctuation.current = [];
     latestTranscript.current = "";
     finalTranscript.current = "";
     recognition.current?.abort();
@@ -235,8 +245,14 @@ export default function SentencePractice({
             {["，", "。", "、", "？", "！", "：", "；", "「", "」"].map((symbol) => (
               <button type="button" className="secondary" key={symbol}
                 aria-label={`插入 ${symbol}`}
-                disabled={busy || listening}
+                disabled={busy}
                 onClick={() => {
+                  if (listening) {
+                    if (sentence.length >= 300) return;
+                    spokenPunctuation.current.push({ offset: latestTranscript.current.length, symbol });
+                    setSentence(sentenceWithPunctuation(latestTranscript.current));
+                    return;
+                  }
                   const input = sentenceInput.current;
                   if (!input) return;
                   const { selectionStart, selectionEnd } = input;
