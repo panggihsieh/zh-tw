@@ -2541,24 +2541,31 @@ dialog::backdrop {
   background: #f5f8ef;
   border-bottom: 1px solid #e1e6db;
 }
+.scene-speech .speech-tools .secondary {
+  min-height: 48px;
+  padding: 10px 14px;
+  font-size: 22px;
+}
 .auto-speech,
 .tts-rate {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 18px;
+  font-size: 22px;
   color: #424f39;
 }
 .auto-speech input {
   accent-color: #285d50;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
 }
 .tts-rate {
   margin-left: auto;
 }
 .tts-rate select {
-  min-height: 35px;
+  min-height: 48px;
+  padding-inline: 12px;
+  font-size: 20px;
 }
 .modal-head + .speech-tools {
   margin-bottom: 18px;
@@ -3851,4 +3858,20 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   justify-content: flex-end;
   flex-wrap: wrap;
   margin: 0 0 12px auto;
+}
+
+button.secondary.reopen-student-finder {
+  color: #9f1717;
+  border: 2px solid #161616;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button.secondary.reopen-student-finder {
+    animation: reopen-student-finder-pulse 1s ease-in-out 3;
+  }
+}
+
+@keyframes reopen-student-finder-pulse {
+  50% { box-shadow: 0 0 0 3px #9f171755; }
 }

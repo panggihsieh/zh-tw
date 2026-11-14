@@ -9,6 +9,9 @@ import {
 const load = (data: unknown) =>
   loadPageSession({ getItem: () => JSON.stringify(data) });
 describe("重新整理頁面狀態", () => {
+  it("首次使用預設開啟切換分鏡自動朗讀", () => {
+    expect(defaultPageSession().voice).toBe(true);
+  });
   it("保存後完整還原未收藏學習卡、分鏡與輸入", () => {
     const state = {
       ...defaultPageSession(),

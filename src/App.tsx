@@ -1,3 +1,4 @@
+import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
 import { readVersionRecords } from "./versionRecords";
 import {
   lazy,
@@ -471,6 +472,9 @@ function App() {
   const importRef = useRef<HTMLInputElement>(null);
   const card = collection?.cards[cardIndex];
   const userRole = useUserRole();
+  const studentGoogleAccount = !userRole.admin && userRole.user?.providerData.some(
+    provider => provider.providerId === "google.com",
+  ) ? userRole.user.displayName?.trim() || userRole.user.email : null;
   const structureReview = useStructureReview(card?.master, userRole.admin);
   const reviewedMaster = card && structureReview.confirmed
     ? { ...card.master, structure: confirmedStructureLabel(card.master.structure) }
@@ -951,9 +955,8 @@ function App() {
                   <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
                   <BirdMascot />
                 </section>}
-                {collection && <button className="secondary" onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
+                {collection && <button type="button" aria-expanded={studentFinderOpen} className={studentFinderOpen ? "secondary" : "secondary reopen-student-finder"} onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
-                  const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
                   setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
                   setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
@@ -1746,7 +1749,7 @@ function App() {
                       </button>
                       <button className="quiet" onClick={openDrive}>
                         <CloudUpload size={18} />
-                        Google Drive
+                        <span>Google Drive{studentGoogleAccount && <><br /><small dir="auto">{studentGoogleAccount}</small></>}</span>
                       </button>
                     </div>
                   </section>
@@ -2048,7 +2051,6 @@ function App() {
                   {backendSection === "structure" && <BackendStructure />}
                   {backendSection === "structure-assignment" && <StructureAssignment />}
                   {backendSection === "curriculum" && <CurriculumDatabase onLearn={async (chars,context) => {
-                    const {loadLearningResources,buildCurriculumCollection}=await import("./curriculumLearning");
                     const resources=await loadLearningResources();
                     const value=buildCurriculumCollection(chars,context,resources);
                     setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));

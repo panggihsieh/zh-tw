@@ -44,7 +44,7 @@ export function defaultPageSession(
     speed: 1,
     showReading: true,
     captions: true,
-    voice: false,
+    voice: true,
     reduced,
     simple: false,
     grade: "四年級",
