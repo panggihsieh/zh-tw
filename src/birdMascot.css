@@ -1,20 +1,10 @@
-.bird-mascot-icon { display: block; width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+.bird-mascot-icon { display: block; width: 32px; height: 32px; flex-shrink: 0; }
+.app-top-brand .bird-mascot-icon { width: 128px; height: 128px; }
 .bird-mascot-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.bird-mascot-guide { position: relative; flex: 0 0 160px; text-align: center; align-self: center; }
-.bird-mascot-button { display: block; margin: 0 auto; padding: 0; background: transparent; border-radius: 32px; cursor: pointer; }
-.bird-mascot-character { display: block; width: 160px; height: 176px; object-fit: contain; transform-origin: 50% 85%; animation: bird-mascot-float 2.4s ease-in-out 3; }
-.bird-mascot-character.greeting { animation: bird-mascot-wave .65s ease-in-out 3; }
-.bird-mascot-button:hover .bird-mascot-character { filter: drop-shadow(0 4px 5px #145a2830); }
-.bird-mascot-button:focus-visible { outline: 3px solid var(--theme-primary, #16844d); outline-offset: 4px; }
-.bird-mascot-greeting { display: inline-block; min-height: 26px; padding: 5px 10px; font-size: 13px; font-weight: 700; border-radius: 16px; background: var(--theme-surface,#fffff5); color: var(--theme-dark,#075d3e); border: 1px solid var(--theme-border,#badb97); white-space: nowrap; }
-@keyframes bird-mascot-float { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
-@keyframes bird-mascot-wave { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-10px) rotate(-8deg); } 70% { transform: translateY(-5px) rotate(8deg); } }
-@media(max-width:760px) {
- .bird-mascot-guide { flex-basis: 112px; }
- .bird-mascot-character { width: 112px; height: 124px; }
- .bird-mascot-icon { width: 28px; height: 28px; }
- .bird-mascot-greeting { font-size: 11px; padding: 4px 6px; }
-}
-@media(prefers-reduced-motion:reduce) {
- .bird-mascot-character,.bird-mascot-character.greeting { animation: none; }
+.bird-mascot-guide { flex: 0 0 min(400px, 38%); min-width: 0; align-self: center; }
+.bird-mascot-character { display: block; width: 100%; height: auto; }
+
+@media (max-width: 760px) {
+  .app-top-brand .bird-mascot-icon { width: 96px; height: 96px; }
+  .bird-mascot-guide { flex-basis: min(280px, 100%); width: min(280px, 100%); }
 }
