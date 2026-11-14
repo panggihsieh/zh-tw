@@ -76,7 +76,7 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       const path=url.pathname.replace('/api/structure/sentence','');
       if(path==='/practice/correct'&&req.method==='POST'){
         const v=await body(req);
-        if(!/^[\p{Script=Han}]{2,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入2–8字語詞、選擇其中一個字，並先說一句話。');
+        if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.transcript,300))fail('請輸入1–8個中文字、選擇其中一個字，並先說一句話。');
         const result=await analyze('practice-correct',{phrase:v.phrase,character:v.character,transcript:v.transcript});
         const suggestion=result?.sentence;
         if(!bounded(suggestion,300)||Array.from(suggestion).length>Array.from(v.transcript).length*1.5+2||Array.from(suggestion).length<Array.from(v.transcript).length*.5)fail('無法確定同音語意修正，請自行修改或再說一次。');
@@ -84,7 +84,7 @@ export function createSentenceHandler({store,origins,authenticate=writingIdentit
       }
       if(path==='/practice/grade'&&req.method==='POST'){
         const v=await body(req);
-        if(!/^[\p{Script=Han}]{2,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
+        if(!/^[\p{Script=Han}]{1,8}$/u.test(v.phrase||'')||!/^\p{Script=Han}$/u.test(v.character||'')||!v.phrase.includes(v.character)||!bounded(v.sentence,300)||Array.from(v.sentence.replace(/[^\p{Script=Han}]/gu,'')).length<5||!v.sentence.includes(v.character))fail('句子至少需要5個中文字，並包含所選的字。');
         const analysis=await analyze('practice-grade',{phrase:v.phrase,character:v.character,sentence:v.sentence});
         return send(200,{grade:gradePractice(v.sentence,v.character,analysis)});
       }
