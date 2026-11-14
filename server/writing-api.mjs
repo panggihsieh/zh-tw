@@ -61,7 +61,7 @@ export function validateSubmission(v) {
     v.sourceRevision !== SOURCE_REVISION ||
     !Array.isArray(v.characters) ||
     v.characters.length < 1 ||
-    v.characters.length > 8 ||
+    v.characters.length > 30 ||
     new Set(v.characters).size !== v.characters.length ||
     !v.characters.every(
       (c) => typeof c === "string" && /^\p{Script=Han}$/u.test(c),
@@ -154,10 +154,10 @@ export function validateGrade(v) {
 export function validateAssignment(v) {
   if (!v || typeof v.title !== "string" || !v.title.trim() || v.title.length > 100 ||
       typeof v.classId !== "string" || !v.classId || typeof v.className !== "string" || !v.className.trim() || v.className.length > 80 ||
-      typeof v.lesson !== "string" || !v.lesson.trim() || v.lesson.length > 150 || !Array.isArray(v.characters) || v.characters.length < 1 || v.characters.length > 8 ||
+      typeof v.lesson !== "string" || !v.lesson.trim() || v.lesson.length > 150 || !Array.isArray(v.characters) || v.characters.length < 1 || v.characters.length > 30 ||
       new Set(v.characters).size !== v.characters.length || !v.characters.every(c => typeof c === "string" && /^\p{Script=Han}$/u.test(c)) ||
       !Array.isArray(v.students) || !v.students.length || v.students.length > 100)
-    throw Error("請選擇班級、課文與 1–8 個生字");
+    throw Error("請選擇班級、課文與 1–30 個生字");
   const students = v.students.filter(student => student.active !== false).map(student => ({
     seat: Number(student.seat), name: String(student.name || "").trim(), email: String(student.email || "").trim().toLowerCase(),
     ...(student.avatar ? { avatar: student.avatar } : {}),

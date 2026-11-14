@@ -46,6 +46,7 @@ export default function WritingAssignmentAdmin() {
     [term, setTerm] = useState("上"),
     [lessonId, setLessonId] = useState(""),
     [characters, setCharacters] = useState<string[]>([]),
+    [wholeLesson, setWholeLesson] = useState(true),
     [title, setTitle] = useState("書寫小達人作業"),
     [editingId, setEditingId] = useState("");
   const [selected, setSelected] = useState<Assignment | null>(null),
@@ -136,6 +137,13 @@ export default function WritingAssignmentAdmin() {
       .find((item) => item.title === lessonTitle);
     setLessonId(target?.id || "");
     setCharacters(assignment.characters);
+    setWholeLesson(
+      !!target &&
+        target.characters
+          .split("")
+          .filter((character) => allowed.has(character))
+          .every((character) => assignment.characters.includes(character)),
+    );
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   useEffect(() => {
@@ -248,6 +256,7 @@ export default function WritingAssignmentAdmin() {
               setPublisher(event.target.value);
               setLessonId("");
               setCharacters([]);
+              setWholeLesson(true);
             }}
           >
             {["南一", "康軒", "翰林"].map((value) => (
@@ -263,6 +272,7 @@ export default function WritingAssignmentAdmin() {
               setGrade(Number(event.target.value));
               setLessonId("");
               setCharacters([]);
+              setWholeLesson(true);
             }}
           >
             {[1, 2, 3, 4, 5, 6].map((value) => (
@@ -280,6 +290,7 @@ export default function WritingAssignmentAdmin() {
               setTerm(event.target.value);
               setLessonId("");
               setCharacters([]);
+              setWholeLesson(true);
             }}
           >
             <option>上</option>
@@ -294,11 +305,11 @@ export default function WritingAssignmentAdmin() {
               const id = event.target.value,
                 next = lessons.find((item) => item.id === id);
               setLessonId(id);
+              setWholeLesson(true);
               setCharacters(
                 next
                   ? [...next.characters]
                       .filter((character) => allowed.has(character))
-                      .slice(0, 8)
                   : [],
               );
             }}
@@ -314,7 +325,35 @@ export default function WritingAssignmentAdmin() {
       </div>
       {lesson && (
         <fieldset className="assignment-characters">
-          <legend>指定生字（最多 8 字）</legend>
+          <legend>派發範圍</legend>
+          <div className="assignment-scope" role="radiogroup" aria-label="派發範圍">
+            <label>
+              <input
+                type="radio"
+                name="writing-scope"
+                checked={wholeLesson}
+                onChange={() => {
+                  setWholeLesson(true);
+                  setCharacters(
+                    [...lesson.characters].filter((character) => allowed.has(character)),
+                  );
+                }}
+              />
+              整課生字（{[...lesson.characters].filter((character) => allowed.has(character)).length} 字）
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="writing-scope"
+                checked={!wholeLesson}
+                onChange={() => {
+                  setWholeLesson(false);
+                  setCharacters(characters.slice(0, 8));
+                }}
+              />
+              自選生字（最多 8 字）
+            </label>
+          </div>
           {[...lesson.characters]
             .filter((character) => allowed.has(character))
             .map((character) => (
@@ -323,7 +362,8 @@ export default function WritingAssignmentAdmin() {
                   type="checkbox"
                   checked={characters.includes(character)}
                   disabled={
-                    !characters.includes(character) && characters.length >= 8
+                    wholeLesson ||
+                    (!characters.includes(character) && characters.length >= 8)
                   }
                   onChange={(event) =>
                     setCharacters(

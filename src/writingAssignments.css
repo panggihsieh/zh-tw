@@ -20,6 +20,17 @@
   gap: 10px;
   margin: 16px 0;
 }
+.assignment-scope {
+  flex-basis: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+.assignment-scope label {
+  font-weight: 700;
+  background: #eef9df;
+}
 .assignment-characters label {
   display: flex;
   align-items: center;

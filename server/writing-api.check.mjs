@@ -1,10 +1,11 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
-import {createWritingHandler,validateSubmission,validateGrade,SOURCE_REVISION} from './writing-api.mjs';
+import {createWritingHandler,validateAssignment,validateSubmission,validateGrade,SOURCE_REVISION} from './writing-api.mjs';
 const png=Buffer.alloc(24);Buffer.from('89504e470d0a1a0a','hex').copy(png);png.writeUInt32BE(1000,16);png.writeUInt32BE(570,20);
 const fixture=()=>({id:'12345678-1234-1234-1234-123456789012',lesson:'測試課',characters:['一'],sourceRevision:SOURCE_REVISION,image:'data:image/png;base64,'+png.toString('base64'),works:{一:{character:'一',expected:1,traces:[{stroke:0,correct:true,points:[{x:100,y:500},{x:900,y:500}]}]}}});
 test('submission validation rejects incomplete, oversized and forged records; strips teacher fields',()=>{const v=fixture();assert.equal(validateSubmission({...v,grade:{score:100},uid:'other'}).grade,undefined);assert.throws(()=>validateSubmission({...v,sourceRevision:'other'}));assert.throws(()=>validateSubmission({...v,characters:['一','一']}));assert.throws(()=>validateSubmission({...v,image:'data:image/svg+xml;base64,xxx'}));v.works.一.traces[0].correct=false;assert.throws(()=>validateSubmission(v));v.works.一.traces[0].correct=true;v.works.一.traces[0].points[0].x=Infinity;assert.throws(()=>validateSubmission(v));assert.throws(()=>validateGrade({score:101,comment:''}));assert.throws(()=>validateGrade({score:1.2,comment:''}));assert.throws(()=>validateGrade({score:80,comment:'x'.repeat(1001)}))});
+test('整課書寫作業可包含超過 8 個生字',()=>{const characters='一二三四五六七八九十甲乙丙丁戊己庚辛壬癸子丑寅'.split('');const value=validateAssignment({title:'整課書寫',classId:'class-1',className:'五年一班',lesson:'第一課',characters,students:[{seat:1,name:'小安',email:'student@example.com',active:true}]});assert.equal(value.characters.length,23)});
 test('HTTP submit, retry, ownership, disabled auth, teacher grading, pagination and CSRF',async()=>{
  const entries=new Map();let listPrefix;
  const store={async create(n,v){if(entries.has(n))throw Object.assign(Error(),{status:412});entries.set(n,{value:v,generation:1})},async get(n){if(!entries.has(n))throw Object.assign(Error(),{status:404});return entries.get(n)},async update(n,v,g){assert.equal(g,1);entries.set(n,{value:v,generation:2})},async list(prefix){listPrefix=prefix;return{names:[...entries.keys()].filter(n=>n.startsWith(prefix)),nextCursor:'next-page'}}};
