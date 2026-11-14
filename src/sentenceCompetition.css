@@ -32,3 +32,4 @@
 .sentence-workspace .sentence-voice-action { inline-size: min(100%, 12em); min-height:48px; margin:0; }
 .sentence-workspace .sentence-reset { margin-inline-start:auto; }
 @media(max-width:560px) { .sentence-workspace .sentence-reset { margin-inline-start:0; } }
+@media(max-width:420px) { .sentence-question-grid{grid-template-columns:minmax(0,1fr)}.sentence-workspace button{margin-inline:0}.sentence-toolbar>*,.sentence-compose-actions>*{width:100%}.sentence-workspace .sentence-voice-action{inline-size:100%} }

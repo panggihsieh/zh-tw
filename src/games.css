@@ -366,6 +366,38 @@
     font-size: 13px;
   }
 }
+@media (max-width: 420px) {
+  .game-header,
+  .game-account {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+  .game-account {
+    margin-left: 0;
+  }
+  .game-account span {
+    max-width: 100%;
+  }
+  .game-account button,
+  .game-login button,
+  .game-row > button,
+  .game-tile > button {
+    width: 100%;
+  }
+  .game-catalog {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .game-tile,
+  .game-assignments {
+    padding: 18px;
+  }
+  .game-pill {
+    position: static;
+    display: inline-flex;
+    margin-bottom: 12px;
+  }
+}
 
 /* Follow the same live theme as the main classroom; handwriting ink stays semantic. */
 :root[data-site-theme] .game-zone {

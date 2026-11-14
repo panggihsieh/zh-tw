@@ -3605,6 +3605,19 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   .backend-shell .tts-sources { grid-template-columns: minmax(0, 1fr); }
   .backend-auth-shell .backend-login { padding: 24px; }
 }
+@media (max-width: 420px) {
+  .backend-workspace-bar { grid-template-columns: minmax(0, 1fr); }
+  .backend-menu-toggle { width: 100%; justify-content: center; }
+  .backend-account-actions,
+  .backend-student-link { grid-column: 1; justify-self: stretch; width: 100%; }
+  .backend-account-actions > *,
+  .backend-student-link { justify-content: center; }
+  .backend-shell .topbar { margin: 10px; }
+  .backend-shell .app-top-nav { grid-template-columns: minmax(0, 1fr); }
+  .backend-shell main { padding-inline: 10px; }
+  .backend-shell .page-heading,
+  .backend-panel { padding: 16px; }
+}
 .backend-account-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; flex-shrink: 0; }
 .backend-account-actions .backend-student-link { margin: 0; white-space: nowrap; }
 .backend-account-actions .teacher-session-button { width: auto; margin: 0; min-height: 44px; padding: 8px 14px; order: initial; }

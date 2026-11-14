@@ -83,3 +83,8 @@
  .adventure-stops span { flex: 1; padding: 10px 6px; font-size: 14px; }
  :root[data-site-theme] .student-lookup { padding: 16px; }
 }
+@media(max-width:420px) {
+ .theme-colors { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .adventure-stops { display: grid; grid-template-columns: minmax(0,1fr); }
+ .theme-save-actions button { width: 100%; justify-content: center; }
+}

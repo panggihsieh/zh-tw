@@ -173,6 +173,19 @@
     flex-wrap: wrap;
   }
 }
+@media (max-width: 440px) {
+  .handwriting-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .handwriting-character-form,
+  .handwriting-guided {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .handwriting-character-form button {
+    width: 100%;
+  }
+}
 .curriculum-character-selection{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.curriculum-character-selection label{display:flex;align-items:center;gap:7px;border:1px solid #bfd1e5;border-radius:10px;padding:10px 14px;background:white;cursor:pointer}.curriculum-character-selection input{width:18px;height:18px}.curriculum-character-selection span{font-family:"DFKai-SB",serif;font-size:30px}.curriculum-character-selection label:has(input:checked){background:#e5f0e3;border-color:#285d50}.curriculum-batches{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.curriculum-batches button[aria-pressed="true"]{background:#e5f0e3;border-color:#285d50}.curriculum-preview-return{padding:18px;background:#edf5ff;border:1px solid #cbddef;border-radius:12px;margin:20px 0}.curriculum-preview-return p{font-size:15px}
 :root .curriculum-batches button.secondary[aria-pressed="true"],:root[data-site-theme] .curriculum-batches button.secondary[aria-pressed="true"]{background:#285d50;color:#fff;border:2px solid #1b4338;font-weight:700;box-shadow:0 2px 6px rgba(27,67,56,.35)}
 .curriculum-batches button.secondary[aria-pressed="true"]::before{content:"✓ "}

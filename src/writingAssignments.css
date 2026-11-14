@@ -155,3 +155,20 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+@media (max-width: 420px) {
+  .assignment-status-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .assignment-list article {
+    min-width: min(250px, 88vw);
+  }
+  .assignment-scope,
+  .assignment-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .assignment-scope label,
+  .assignment-actions button {
+    width: 100%;
+  }
+}

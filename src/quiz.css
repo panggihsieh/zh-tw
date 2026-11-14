@@ -143,3 +143,22 @@
     font-size: 26px;
   }
 }
+@media (max-width: 420px) {
+  .quiz-workspace {
+    padding: 10px;
+  }
+  .quiz-actions,
+  .quiz-paper-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .quiz-actions > *,
+  .quiz-paper-list > * {
+    width: 100%;
+    min-width: 0;
+  }
+  .quiz-question,
+  .quiz-stats article {
+    padding-block: 16px;
+  }
+}
