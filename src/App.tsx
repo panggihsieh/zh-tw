@@ -64,7 +64,7 @@ import ReadAlong from "./ReadAlong";
 import CharacterStructureAnalysis from "./CharacterStructureAnalysis";
 import { useSiteTheme } from "./siteThemes";
 import BirdMascot, { BirdMascotIcon } from "./BirdMascot";
-import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
+import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE, SITE_VERSION_SHORT_NOTE } from "./siteVersion";
 import "./siteThemes.css";
 import { useUserRole, useStructureReview, confirmedStructureLabel } from "./structureReview";
 import AssemblyParts from "./AssemblyParts";
@@ -889,7 +889,7 @@ function App() {
               教育部字辭典
             </button>
             <button type="button" className="nav-item student-version-button" onClick={() => setShowVersions(true)}>
-              v{SITE_VERSION}
+              v{SITE_VERSION} · {SITE_VERSION_SHORT_NOTE} · <time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time>
             </button>
             </>)}
           </nav>
@@ -898,17 +898,7 @@ function App() {
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}
             </div>
-            <div className="header-secondary">
-            <div className="topbar-actions">
-              {!backendMode && <SpeechTools
-                label="朗讀本頁"
-                showVoice={false}
-                expanded
-                read={() =>
-                  document.querySelector("main")?.innerText ||
-                  "目前沒有可朗讀的內容。"
-                }
-              />}
+            {backendMode && <div className="header-secondary"><div className="topbar-actions">
               <button
                 className="quiet"
                 aria-label="學習設定"
@@ -917,10 +907,28 @@ function App() {
                 <Settings2 size={17} />
                 <span>學習設定</span>
               </button>
-            </div>
-            </div>
+            </div></div>}
           </NavigationContainer>
           <main id="app-page-content">
+            {!backendMode && <div className="student-page-tools topbar-actions" aria-label="朗讀與學習設定">
+              <SpeechTools
+                label="朗讀本頁"
+                showVoice={false}
+                expanded
+                read={() =>
+                  document.querySelector("main")?.innerText ||
+                  "目前沒有可朗讀的內容。"
+                }
+              />
+              <button
+                className="quiet"
+                aria-label="學習設定"
+                onClick={() => setModal("settings")}
+              >
+                <Settings2 size={17} />
+                <span>學習設定</span>
+              </button>
+            </div>}
             {backendMode && <p className="site-version" aria-label="網站版本資訊">v{SITE_VERSION}｜{SITE_VERSION_NOTE}｜<time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>}
             {error && (
               <div className="alert error" role="alert">
