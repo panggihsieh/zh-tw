@@ -3898,3 +3898,6 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   background: #a9db96;
   color: #161616;
 }
+
+.scene-tabs button b { display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
+.scene-tabs button[aria-selected="true"] b { color: #fff; }

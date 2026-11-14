@@ -27,6 +27,8 @@ import {
   LibraryBig,
   LoaderCircle,
   Play,
+  Pencil,
+  Puzzle,
   Plus,
   RotateCcw,
   Search,
@@ -104,6 +106,7 @@ const StudentCharacterFinder = lazy(() => import("./StudentCharacterFinder"));
 const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
 const SiteThemeLibrary = lazy(() => import("./SiteThemeLibrary"));
+const sceneIcons = [BookOpen, Grid2X2, Puzzle, Pencil, FileText, LibraryBig];
 const GameZone = lazy(() => import('./GameZone'));
 const QuizStudent = lazy(() => import("./QuizStudent"));
 const QuizTeacher = lazy(() => import("./QuizTeacher"));
@@ -1251,7 +1254,9 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                           role="tablist"
                           aria-label="六幕學習"
                         >
-                          {collection.scenes.map((s, i) => (
+                          {collection.scenes.map((s, i) => {
+                            const Icon = sceneIcons[i] ?? BookOpen;
+                            return (
                             <button
                               key={s}
                               role="tab"
@@ -1278,9 +1283,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                                   i + 1
                                 )}
                               </span>
-                              <b>{s}</b>
+                              <b><Icon size={18} aria-hidden="true" />{s}</b>
                             </button>
-                          ))}
+                          );
+                          })}
                         </div>
                         <div
                           id="scene-content"
