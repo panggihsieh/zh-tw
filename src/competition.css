@@ -27,13 +27,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
+  width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
   color: #9b161c;
   font-weight: 700;
   cursor: pointer;
 }
-.competition-real-ai input {
+.competition-admin .competition-real-ai > input[type="checkbox"] {
   flex: none;
   width: 1em;
   height: 1em;

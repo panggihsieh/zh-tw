@@ -316,7 +316,7 @@ export default function SentencePractice({
                 });
                 if (result.suggestion.trim() === sentence.trim()) {
                   setSuggestion("");
-                  setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "AI 沒有提出可確認的修正。請核對辨識文字，必要時清除重說。");
+                  setMessage(simulated ? "目前為模擬模式，請勾選「使用真實 AI」測試校正。" : "校正完成：AI 未建議修改，已保留原句。");
                   return;
                 }
                 setSuggestion(result.suggestion);
@@ -327,10 +327,12 @@ export default function SentencePractice({
             </button>
             {correctionOption}
           </div>
+          <p className="practice-correction-tip">AI 會依句意建議修正同音錯詞，並用紅字標出改動。核對後可採用校正或保留原句。</p>
           {suggestion && (
-            <div className="sentence-suggestion">
+            <div className="sentence-suggestion practice-comparison" aria-live="polite">
               <strong>校正建議</strong>
-              <p>{suggestion}</p>
+              <p>改動對照：{compareSentences(sentence.trim(), suggestion.trim()).polishedParts}</p>
+              <p>完整校正句：{suggestion}</p>
               <button className="primary" onClick={() => { setSentence(suggestion); setSuggestion(""); setGrade(null); }}>
                 <Check size={18} />採用校正
               </button>
