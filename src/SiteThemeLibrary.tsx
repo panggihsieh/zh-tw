@@ -1,3 +1,4 @@
+import CurriculumDatabase from "./CurriculumDatabase";
 import { BirdMascotIcon, owlImage } from "./BirdMascot";
 import { useEffect, useState } from "react";
 import { Check, Palette, Plus, Star, BookOpen } from "lucide-react";
@@ -46,6 +47,7 @@ export default function SiteThemeLibrary({ active }: { active: SiteTheme }) {
         <img className="theme-reference" src={owlImage} alt="小貓頭鷹公仔" />
       </div>
     </section>
+    <details><summary>首頁預設課別</summary><CurriculumDatabase defaultOnly /></details>
     <details><summary>森林冒險風格參考圖</summary><img className="theme-reference" src={`${import.meta.env.BASE_URL}style-references/forest-adventure.png`} alt="綠色冒險風格參考：森林、圓角卡片、鮮綠按鈕與金色點綴"/></details>
   </section>;
 }

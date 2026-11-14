@@ -14,12 +14,13 @@ interface Book {
   lessons: { title: string; characters: string; source: string }[];
 }
 export default function CurriculumDatabase({
-  onLearn, student = false, actionLabel, allowedCharacters,
+  onLearn, student = false, defaultOnly = false, actionLabel, allowedCharacters,
 }: {
   student?: boolean;
+  defaultOnly?: boolean;
   actionLabel?: string;
   allowedCharacters?: Set<string>;
-  onLearn: (chars: string[], context: LessonContext) => Promise<void>;
+  onLearn?: (chars: string[], context: LessonContext) => Promise<void>;
 }) {
   const [draft, setDraft] = useState(() => {
     try {
@@ -80,7 +81,7 @@ export default function CurriculumDatabase({
         return r.json();
       })
       .then(async (data) => {
-        if (student) {
+        if (student || defaultOnly) {
           try {
             const preset = await loadCurriculumDefault();
             const exists = preset && data.books.some((b: Book) =>
@@ -102,6 +103,7 @@ export default function CurriculumDatabase({
       .catch((e) => {
         if (!abort.signal.aborted) setMessage(e.message);
       });
+    if (defaultOnly) return () => abort.abort();
     fetch(`${import.meta.env.BASE_URL}curriculum-test-report.json`, {
       signal: abort.signal,
     })
@@ -111,7 +113,7 @@ export default function CurriculumDatabase({
       })
       .catch(() => {});
     return () => abort.abort();
-  }, []);
+  }, [student, defaultOnly]);
   useEffect(() => {
     if (!current) return;
     setCustom(false);
@@ -133,7 +135,7 @@ export default function CurriculumDatabase({
     setSelected((restored || Array.from(current.characters)).filter((c:string)=>!allowedCharacters||allowedCharacters.has(c)).slice(0,8));
   }, [current, allowedCharacters]);
   useEffect(() => {
-    if (current)
+    if (current && !defaultOnly)
       try {
         sessionStorage.setItem(
           "hanzi-notebook.curriculum-selection.v1",
@@ -146,13 +148,13 @@ export default function CurriculumDatabase({
           }),
         );
       } catch {}
-  }, [current, publisher, grade, term, selected]);
+  }, [current, publisher, grade, term, selected, defaultOnly]);
   return (
     <section className="curriculum-database handwriting-lab">
-      <p className="handwriting-notice">
+      {!defaultOnly && <p className="handwriting-notice">
         課本字表不等於審定教材。可預覽六階段，注音與釋義來自教育部字典；結構是候選，白話解說、課文語境及多音字仍待教師確認。115
         上／114 下兩個年版。
-      </p>
+      </p>}
       <div className="handwriting-filters">
         <label>
           出版社
@@ -208,7 +210,7 @@ export default function CurriculumDatabase({
               setMessage(error instanceof Error ? error.message : "預設課別儲存失敗，請重試。");
             } finally { setSavingDefault(false); }
           }}><Bookmark size={18} />{savingDefault ? "正在儲存…" : "設為學生預設課別"}</button>}
-          <h2>
+          {!defaultOnly && <><h2>
             {publisher} {grade}
             {term} · {current.title}
           </h2>
@@ -309,7 +311,7 @@ export default function CurriculumDatabase({
               setBusy(true);
               setMessage("準備字典與結構候選…");
               try {
-                await onLearn(selected, {
+                await onLearn?.(selected, {
                   publisher,
                   grade,
                   term,
@@ -331,9 +333,10 @@ export default function CurriculumDatabase({
           <p role="status">
             {message || `已選 ${selected.length} 個字 · ${custom ? "自訂選取不限 8 字" : "每批最多 8 字"}`}
           </p>
+          </>}
         </>
       )}
-      {!student && <BackendCard
+      {!student && !defaultOnly && <BackendCard
         title="三家出版社逐字測試結果"
         description="全量程式檢查與教材缺漏分開記錄"
       >

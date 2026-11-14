@@ -1,3 +1,4 @@
+import { readVersionRecords } from "./versionRecords";
 import {
   lazy,
   Suspense,
@@ -355,6 +356,8 @@ function App() {
     }
   }, [restored]);
 
+  const [learningTab, setLearningTab] = useState<"saved" | "quiz">("saved");
+  const [showVersions, setShowVersions] = useState(false);
   const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page);
   const headerRef = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
@@ -864,7 +867,6 @@ function App() {
               生字動畫教室
             </button>
             <a className="nav-item" href="#games"><Grid2X2 size={20}/>遊戲專區</a>
-            <a className="nav-item" href="/?view=quiz">國語錯題本</a>
             <button
               className={page === "library" ? "nav-item active" : "nav-item"}
               onClick={() => {
@@ -874,7 +876,7 @@ function App() {
               }}
             >
               <LibraryBig size={20} />
-              我的生字收藏本<span className="nav-count">{saved.length}</span>
+              我的學習本<span className="nav-count">{saved.length}</span>
             </button>
             <button
               className={page === "resources" ? "nav-item active" : "nav-item"}
@@ -886,6 +888,9 @@ function App() {
               <BookOpen size={20} />
               教育部字辭典
             </button>
+            <button type="button" className="nav-item student-version-button" onClick={() => setShowVersions(true)}>
+              v{SITE_VERSION}
+            </button>
             </>)}
           </nav>
               {!backendMode && <div className="header-user-role">
@@ -894,10 +899,6 @@ function App() {
               </div>}
             </div>
             <div className="header-secondary">
-              {!backendMode && <div className="app-brand-group">
-                <button className="app-top-brand" aria-label="生字動畫收藏本首頁" onClick={() => { setPage("learn"); setPlaying(false); }}><span>生字動畫收藏本</span></button>
-                <p className="site-version" aria-label="網站版本資訊">v{SITE_VERSION}｜<span className="mobile-version-note">{SITE_VERSION_NOTE}｜</span><time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time></p>
-              </div>}
             <div className="topbar-actions">
               {!backendMode && <SpeechTools
                 label="朗讀本頁"
@@ -1773,7 +1774,18 @@ function App() {
                 )}
               </>
             )}
-            {page === "library" && (
+            {page === "library" && !backendMode && (
+              <div className="competition-actions" role="group" aria-label="我的學習本分頁">
+                <button type="button" className={learningTab === "saved" ? "primary" : "secondary"}
+                  aria-pressed={learningTab === "saved"} onClick={() => setLearningTab("saved")}>生字收藏本</button>
+                <button type="button" className={learningTab === "quiz" ? "primary" : "secondary"}
+                  aria-pressed={learningTab === "quiz"} onClick={() => setLearningTab("quiz")}>國語錯題本</button>
+              </div>
+            )}
+            {page === "library" && learningTab === "quiz" && !backendMode && (
+              <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent embedded /></Suspense>
+            )}
+            {page === "library" && (backendMode || learningTab === "saved") && (
               <>
                 <div className="page-heading">
                   <div>
@@ -2082,6 +2094,14 @@ function App() {
             </footer>
           </main>
         </div>
+        {showVersions && <Modal title="版本紀錄" close={() => setShowVersions(false)}>
+          <p className="student-version-summary"><strong>v{SITE_VERSION}</strong> · {SITE_UPDATED_AT}<br />{SITE_VERSION_NOTE}</p>
+          <ul className="student-version-summary">
+            {readVersionRecords(localStorage).filter(record => record.version !== SITE_VERSION).map(record => (
+              <li key={record.id}><strong>v{record.version}</strong> · {record.date}<br />{record.summary}</li>
+            ))}
+          </ul>
+        </Modal>}
         {modal === "settings" && (
           <Modal title="學習偏好" close={() => setModal(null)}>
             <p className="modal-description">讓教室變成適合自己的樣子。</p>

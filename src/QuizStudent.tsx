@@ -8,7 +8,7 @@ import {
   type QuizRow,
 } from "./quizApi";
 import "./quiz.css";
-export default function QuizStudent() {
+export default function QuizStudent({ embedded = false }: { embedded?: boolean } = {}) {
   const [user, setUser] = useState<User | null>(null),
     [ready, setReady] = useState(false),
     [papers, setPapers] = useState<QuizPaper[]>([]),
@@ -99,7 +99,7 @@ export default function QuizStudent() {
   const linked = new URLSearchParams(location.search).get("paper");
   return (
     <main className="quiz-workspace student-quiz">
-      <a href="/">← 返回生字動畫教室</a>
+      {!embedded && <a href="/">← 返回生字動畫教室</a>}
       <h1>我的國語錯題本</h1>
       <p>做錯的題目會留下來，看看解析，再練一次。</p>
       {!ready ? (

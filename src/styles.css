@@ -3837,3 +3837,8 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
     display: none;
   }
 }
+
+.top-navigation-layout:not(.backend-shell) .topbar .app-top-nav .student-version-button,
+.student-version-summary {
+  font-size: 0.85rem;
+}
