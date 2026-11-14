@@ -953,7 +953,7 @@ function App() {
                 </div>
                 {!backendMode && !collection && <section className="adventure-welcome" aria-label="生字探索旅程">
                   <BirdMascot />
-                  <div><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
+                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry"><Play size={20}/>開始學習</a></div>
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
                 </section>}
                 {collection && <button className="secondary" onClick={() => setStudentFinderOpen(!studentFinderOpen)}>{studentFinderOpen ? "收合找字" : "重新念字／選課"}</button>}
