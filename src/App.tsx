@@ -42,6 +42,8 @@ import {
   Shuffle,
   Palette,
   Trees,
+  Trophy,
+  Database,
 } from "lucide-react";
 import type { Card, Collection } from "./model";
 import { validatePhrase } from "./model";
@@ -933,7 +935,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {backendMode && ([
               { title: "資料庫", items: [
-                { section: "quiz", label: "資料庫管理" },
+                { section: "quiz", label: "資料庫管理", icon: Database },
                 { section: "curriculum", label: "三家出版社生字資料庫", icon: LibraryBig },
               ] },
               { title: "字形、筆順與字辭典查詢", items: [
@@ -941,10 +943,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "handwriting", label: "手寫檢核與筆順", icon: Grid2X2, active: backendSection === "handwriting" || backendSection === "strokeDatabase" },
               ] },
               { title: "遊戲派送與競賽", items: [
-                { section: "structure-assignment", label: "生字結構遊戲指派" },
-                { section: "writingAssignments", label: "書寫作業管理" },
-                { section: "competition", label: "Kahoot 競賽開課" },
-                { section: "gameReview", label: "遊戲作業紀錄" },
+                { section: "structure-assignment", label: "生字結構遊戲指派", icon: Puzzle },
+                { section: "writingAssignments", label: "書寫作業管理", icon: Pencil },
+                { section: "competition", label: "Kahoot 競賽開課", icon: Trophy },
+                { section: "gameReview", label: "遊戲作業紀錄", icon: BookOpen },
               ] },
               { title: "全站管理與設定", items: [
                 { section: "users", label: "使用者管理", icon: Settings2 },
@@ -954,11 +956,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "versions", label: "提交版本紀錄", icon: FileText },
                 { section: "security", label: "安全事件紀錄", icon: FileText },
               ] },
-            ] as { title: string; items: { section: BackendSection; label: string; icon?: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => {
+            ] as { title: string; items: { section: BackendSection; label: string; icon: typeof Grid2X2; active?: boolean }[] }[]).map(({ title, items }) => {
               const buttons = items.map(({ section, label, icon: Icon, active = section === backendSection }) => (
                 <button type="button" key={section} className={active ? "nav-item active" : "nav-item"}
                   aria-current={active ? "page" : undefined} onClick={() => openBackendSection(section)}>
-                  {Icon && <Icon size={20} />}{backendLabels[section] || label}
+                  <Icon size={20} aria-hidden="true" />{backendLabels[section] || label}
                 </button>
               ));
               return title === "全站管理與設定" ? (

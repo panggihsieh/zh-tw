@@ -3791,7 +3791,7 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 }
 
 .backend-nav-group + .backend-nav-group {
-  border-top: 1px solid currentColor;
+  border-top: 1px solid white;
   padding-top: 10px;
 }
 
@@ -3805,7 +3805,6 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 
 :root[data-site-theme] .backend-nav-group {
   color: white;
-  border-color: #ffffff55;
 }
 
 .backend-nav-group summary {
