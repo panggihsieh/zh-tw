@@ -319,6 +319,47 @@ function Modal({
 function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const siteTheme = useSiteTheme();
   const backendMode = new URLSearchParams(window.location.search).get("view") === "backend";
+  useEffect(() => {
+    if (!backendMode) return;
+    const idleLimit = 30 * 60_000;
+    let deadline = Date.now() + idleLimit;
+    let timer: number;
+    let loggingOut = false;
+
+    async function checkIdle() {
+      window.clearTimeout(timer);
+      if (loggingOut) return;
+      const remaining = deadline - Date.now();
+      if (remaining > 0) {
+        timer = window.setTimeout(checkIdle, remaining);
+        return;
+      }
+      loggingOut = true;
+      try {
+        const { cloudLogout } = await import("./cloudSync");
+        await cloudLogout();
+        window.location.assign("/");
+      } catch {
+        loggingOut = false;
+        timer = window.setTimeout(checkIdle, 5_000);
+      }
+    }
+
+    function recordActivity() {
+      if (Date.now() < deadline) deadline = Date.now() + idleLimit;
+      else void checkIdle();
+    }
+
+    const events = ["pointerdown", "keydown", "wheel"] as const;
+    for (const event of events) window.addEventListener(event, recordActivity, { passive: true });
+    document.addEventListener("visibilitychange", checkIdle);
+    void checkIdle();
+    return () => {
+      window.clearTimeout(timer);
+      for (const event of events) window.removeEventListener(event, recordActivity);
+      document.removeEventListener("visibilitychange", checkIdle);
+    };
+  }, [backendMode]);
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {

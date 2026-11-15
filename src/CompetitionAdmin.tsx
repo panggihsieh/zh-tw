@@ -1,7 +1,8 @@
 import {useEffect,useMemo,useState} from 'react';
 import {Copy,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
-import {quizRequest} from './quizApi';
+import {quizRequest, type QuizPaper} from './quizApi';
+import { readQuizPassage } from './quizPassage';
 import type {QuizClass} from './ClassRoster';
 import {sentenceRequest,type SentenceLesson} from './sentenceApi';
 import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type CompetitionQuestion,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
@@ -25,6 +26,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const [importNotice,setImportNotice]=useState('');
  const [useRealAi,setUseRealAi]=useState(false);
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
+ const [article, setArticle] = useState("");
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState(pilot?`一字多詞 Kahoot Ver.2｜`:'一字多詞 Kahoot 練習'),[questions,setQuestions]=useState<CompetitionQuestion[]>(()=>pilot?lessonSeven.rows.filter(row=>["際","璃","磁"].includes(row.character)).map(row=>({type:"sentence-practice",prompt:"用「"+row.character+"」組詞，再造句",phrase:row.character,character:row.character,reading:row.reading,seconds:90})):[]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const [lessons,setLessons]=useState<SentenceLesson[]>([]),[structureIds,setStructureIds]=useState<Record<string,string>>({}),[lessonIds,setLessonIds]=useState<string[]>(pilot?[lessonSeven.id]:[]),[grade,setGrade]=useState(5),[term,setTerm]=useState('上'),[gameType,setGameType]=useState<'sentence-practice'|'quiz'|'structure'>('sentence-practice'),[loginMode,setLoginMode]=useState<'roster'|'anonymous'>('roster'),[duration,setDuration]=useState(10),[maxParticipants,setMaxParticipants]=useState(30),[testRoom,setTestRoom]=useState(pilot),[now,setNow]=useState(Date.now());
  async function run(fn:()=>Promise<void>){setBusy(true);setMessage('');try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
@@ -96,6 +98,43 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
    {!!questions.length&&<>{gameType==='sentence-practice'&&<p className="competition-budget">本場最多呼叫 AI <strong>{questions.length*maxParticipants}</strong> 次（{questions.length} 題 × {maxParticipants} 人）；模擬學生不呼叫 AI。</p>}<div className="competition-card-preview">{questions.map((q,index)=><article key={`${q.character}-${index}`}><button type="button" aria-label={`移除${q.character}`} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/></button><strong>{q.character}</strong><span>{q.type==='structure'?q.options?.[q.answer??-1]:q.reading||'讀音待核對'}</span><p>{q.prompt}</p>{q.type==='sentence-practice'&&<button type="button" className="secondary competition-preview-action" onClick={()=>setPreviewCard({phrase:q.phrase??q.character??"",character:q.character??""})}>試作「{q.character}」</button>}</article>)}</div></>}
   </>:<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>輸入選擇題</h2></div><strong>{questions.length} 題</strong></div>
+   <details>
+    <summary>上傳文章・AI 產生 12 題</summary>
+    <p>文章將送至已設定的 AI 模型。涉及數量、比例或時間的題目，選項應寫出明確數字與適用單位，請開課前核對。</p>
+    <label>上傳文章（TXT、MD、文字型 PDF）
+      <input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={event => {
+        const file = event.currentTarget.files?.[0];
+        event.currentTarget.value = "";
+        if (file) void run(async () => setArticle(await readQuizPassage(file)));
+      }} />
+    </label>
+    <label>文章內容<textarea rows={8} maxLength={12000} value={article} disabled={busy} onChange={event => setArticle(event.target.value)} /></label>
+    <button type="button" className="secondary" disabled={busy || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
+      if (questions.some(question => question.prompt.trim()) && !window.confirm("用生成的 12 題取代目前題目？")) return;
+      const drafts = [];
+      for (const category of ["課文理解（閱讀素養）", "文意理解"]) {
+        const paper = await quizRequest<QuizPaper>("/generate", {
+          title: "Kahoot 文章閱讀草稿", className: selectedClass!.name,
+          grade, lesson: "文章閱讀。量化問題的四個選項必須使用明確阿拉伯數字及適用單位，正解須能由文章核對。",
+          passage: article.trim(), questionMode: "original", roster,
+          count: 6, categories: [category], difficulty: "中",
+        });
+        drafts.push(...paper.questions);
+      }
+      if (drafts.length !== 12 || new Set(drafts.map(question => question.stem.replace(/[\s\p{P}]/gu, ""))).size !== 12) {
+        throw Error("AI 未產出 12 道不同題目，請重新產生。");
+      }
+      if (drafts.some(question => /多少|幾(?:個|次|人|年|月|天|小時|分鐘|公尺|元|倍|％|%)/u.test(question.stem) &&
+        !/[0-9０-９]/u.test(question.options[question.answer] ?? ""))) {
+        throw Error("AI 出題含有未給出明確數字答案的量化題，請重新產生。");
+      }
+      setQuestions(drafts.map(question => ({
+        prompt: question.stem, options: question.options, answer: question.answer, seconds: 30,
+      })));
+      setMessage("已帶入 12 題，請核對題目、答案與數字單位，再建立開課大廳。");
+    })}>AI 產生 12 題</button>
+    {!roster.length && <p>請先選擇有學生名冊的班級。</p>}
+   </details>
    <div className="competition-question-import"><button type="button" className="secondary" onClick={downloadQuestionExample}><Download size={18}/>下載題庫範例</button><label className="secondary competition-upload"><Upload size={18}/><span>上傳 CSV 題庫</span><input type="file" accept=".csv,text/csv" onChange={event=>{void importQuestions(event.target.files?.[0]);event.currentTarget.value='';}}/></label><span>下載範例後可用 Excel 編輯，再以相同欄位上傳；一次最多 100 題。</span></div>
    {importNotice&&<p className="competition-import-notice" role="status">{importNotice}</p>}
    <div className="competition-question-list">{questions.map((q,index)=><article className="competition-question-editor" key={index}><div className="competition-question-title"><strong>第 {index+1} 題</strong><button type="button" className="secondary" disabled={questions.length===1} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/>移除</button></div><label>題目<input maxLength={500} value={q.prompt} onChange={e=>patchQuestion(index,{prompt:e.target.value})}/></label><div className="competition-options">{q.options!.map((option,optionIndex)=><label key={optionIndex} className={q.answer===optionIndex?'is-answer':''}><input type="radio" name={`answer-${index}`} checked={q.answer===optionIndex} onChange={()=>patchQuestion(index,{answer:optionIndex})}/><span>{String.fromCharCode(65+optionIndex)}</span><input aria-label={`第 ${index+1} 題選項 ${optionIndex+1}`} value={option} onChange={e=>patchQuestion(index,{options:q.options!.map((v,i)=>i===optionIndex?e.target.value:v)})}/></label>)}</div></article>)}</div><button className="secondary" disabled={questions.length>=100} onClick={()=>setQuestions(rows=>[...rows,emptyQuestion()])}><Plus size={18}/>新增題目</button>
