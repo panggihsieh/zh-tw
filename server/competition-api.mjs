@@ -9,7 +9,8 @@ const text=(value,max)=>typeof value==='string'&&value.trim()&&value.length<=max
 export const makeRoomCode=(random=Math.random)=>Array.from({length:4},()=>alphabet[Math.floor(random()*alphabet.length)]).join('');
 export function validateRoomInput(value){
  if(!value||!text(value.title,100)||!text(value.className,80))fail('請填寫競賽名稱與班級。');
- const loginMode=value.loginMode==='anonymous'?'anonymous':'roster',gameType=['sentence-practice','structure','writing'].includes(value.gameType)?value.gameType:'quiz';
+ if(value.loginMode&&value.loginMode!=='roster')fail('學生統一以開課代碼及名冊姓名免登入加入，不再提供 Google 匿名加入。');
+ const loginMode='roster',gameType=['sentence-practice','structure','writing'].includes(value.gameType)?value.gameType:'quiz';
  const duration=Number(value.duration??600);if(!Number.isInteger(duration)||duration<60||duration>7200)fail('課堂時間須為 1–120 分鐘。');
  const maxParticipants=Number(value.maxParticipants??100);if(!Number.isInteger(maxParticipants)||maxParticipants<1||maxParticipants>100)fail('參與人數上限須為 1–100 人。');
  const students=(value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));

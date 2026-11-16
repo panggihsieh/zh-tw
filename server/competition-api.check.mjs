@@ -81,3 +81,5 @@ test('學生免 Google 登入：代碼選姓名、禁止冒用教師、開始鎖
  assert.equal((await call(`/rooms/${room.id}/answer`,{answer:0},cookie)).status,409);
  assert.equal((await call(`/code/${room.code}`,undefined,cookie)).status,404);
 });
+
+test("新課堂不再接受Google匿名模式",()=>{assert.throws(()=>validateRoomInput({...definition(),loginMode:"anonymous"}),/學生統一/);assert.equal(validateRoomInput({...definition(),loginMode:"roster"}).loginMode,"roster");});
