@@ -60,3 +60,10 @@
 .kahoot-practice .practice-polished-line { color: #07513a; }
 .kahoot-practice .practice-full-score-line { color: #14548d; }
 .kahoot-practice .practice-creative-line { color: #9a440b; }
+
+.competition-character-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.competition-writing-pad { display: block; width: min(100%, 420px); margin: 16px auto; background: #fff; border: 2px solid #badb97; border-radius: 12px; touch-action: none; }
+
+.competition-ranking-capture { padding: 24px; color: #173b2b; background: #fffff5; border: 2px solid #badb97; border-radius: 18px; overflow-wrap: anywhere; }
+.competition-ranking-photo { display: grid; gap: 12px; margin: 16px 0; }
+.competition-ranking-photo img { display: block; width: 100%; max-width: 720px; height: auto; }

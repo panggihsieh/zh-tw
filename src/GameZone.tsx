@@ -124,7 +124,7 @@ export default function GameZone() {
               </button>
             </>
           ) : (
-            <span>登入後選課練習</span>
+            <span>Kahoot 免登入，以課程代碼加入</span>
           )}
         </div>
       </header>
@@ -140,11 +140,11 @@ export default function GameZone() {
           </TimedActivity>
         ) : !ready ? (
           <p role="status">確認登入狀態…</p>
-        ) : !user && view !== "hub" && view !== "choose" && view !== "practice" ? (
+        ) : !user && view !== "hub" && view !== "choose" && view !== "practice" && view !== "competition" ? (
           <section className="game-login">
             <Gamepad2 size={48} />
             <p className="eyebrow">每天一點，生字更熟練</p>
-            <h1>{view==='competition'?'課堂 Kahoot 競賽':view==='sentences'?'語詞 AI 造句競賽':'遊戲專區'}</h1>
+            <h1>{view==='sentences'?'語詞 AI 造句競賽':'遊戲專區'}</h1>
             <p>課堂活動請先登入。</p>
             <button
               className="primary"
@@ -243,7 +243,7 @@ export default function GameZone() {
                   )}
                 </section>
                 <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!!user && !competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{!user?'登入後參加 →':competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
+                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!!user && !competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{!user?'免登入，輸入開課代碼 →':competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
                   {games.map((g) => (
                     <article key={g.id} className="game-tile">
                       <div className="game-icon"><g.icon size={34} /></div>

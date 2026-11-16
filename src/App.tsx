@@ -1,5 +1,5 @@
-import { SchoolIamButton, SchoolIamCallback } from './SchoolIamLogin';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
+import { SchoolIamButton, SchoolIamCallback } from './SchoolIamLogin';
 import { readVersionRecords } from "./versionRecords";
 import {
   lazy,
@@ -109,6 +109,7 @@ const StudentCharacterFinder = lazy(() => import("./StudentCharacterFinder"));
 const CurriculumDatabase = lazy(() => import("./CurriculumDatabase"));
 const HandwritingLab = lazy(() => import("./HandwritingLab"));
 const SiteThemeLibrary = lazy(() => import("./SiteThemeLibrary"));
+const BackendLabelSettings = lazy(() => import("./BackendLabelSettings"));
 const sceneIcons = [BookOpen, Grid2X2, Puzzle, Pencil, FileText, LibraryBig];
 const GameZone = lazy(() => import('./GameZone'));
 const QuizStudent = lazy(() => import("./QuizStudent"));
@@ -2129,21 +2130,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   {backendSection === "security" && <SecurityLog />}
                   {backendSection === "themes" && <>
                     <SiteThemeLibrary active={siteTheme} />
-                    <details className="theme-library">
-                      <summary>修改後台功能名稱</summary>
-                      <p>留空可恢復預設名稱。設定儲存在此瀏覽器。</p>
-                      <div className="backend-label-settings">
-                        {(Object.entries(backendTitles) as [BackendSection, string][]).map(([section, title]) => (
-                          <label key={section}>{title}
-                            <input maxLength={32} placeholder={title} defaultValue={backendLabels[section]} onBlur={event => {
-                              const next = { ...backendLabels, [section]: event.target.value.trim() };
-                              localStorage.setItem("zh-tw.backend-labels", JSON.stringify(next));
-                              setBackendLabels(next);
-                            }} />
-                          </label>
-                        ))}
-                      </div>
-                    </details>
+                    <BackendLabelSettings titles={backendTitles} labels={backendLabels} onSave={next => {
+                      localStorage.setItem("zh-tw.backend-labels", JSON.stringify(next));
+                      setBackendLabels(next);
+                    }}/>
                   </>}
                   {structureSections.some(section => section === backendSection) && (
                     <div className="competition-actions" role="group" aria-label="字形結構分頁">

@@ -22,7 +22,8 @@ export async function writingIdentity(req) {
     p.sub.length > 128 ||
     !p.email ||
     p.email_verified !== true ||
-    p.firebase?.sign_in_provider !== "google.com" ||
+    !(p.firebase?.sign_in_provider === "google.com" ||
+      (p.firebase?.sign_in_provider === "custom" && p.schooliam === "zh-tw-teacher" && p.email === ADMIN_EMAIL)) ||
     p.iat > Date.now() / 1000 ||
     typeof p.auth_time !== "number" ||
     p.auth_time > Date.now() / 1000

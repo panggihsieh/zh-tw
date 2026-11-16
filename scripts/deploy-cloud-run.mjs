@@ -1,6 +1,6 @@
 // Uses Application Default Credentials; never prints credentials or uploads .env/.local.
 import { GoogleAuth } from "google-auth-library";
-import { mkdir, copyFile, readFile, writeFile } from "node:fs/promises";
+import { mkdir, copyFile, readFile, writeFile, cp } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 const project = "voltaic-circuit-511310-a3";
@@ -121,10 +121,13 @@ for (const file of [
   "quiz-api.mjs",
   "sentence-api.mjs",
   "competition-api.mjs",
+  "competition-writing.mjs",
+  "stroke-judge.mjs",
   "sentence-bank.json",
   "publisher-sync.mjs",
 ])
   await copyFile(`server/${file}`, resolve(stage, "server", file));
+await cp("public/game-strokes", resolve(stage, "public/game-strokes"), { recursive: true });
 for (const file of ["package.json", "package-lock.json", "Dockerfile"])
   await copyFile(`deploy/cloud/${file}`, resolve(stage, file));
 const archive = resolve(".local/zh-tw-cloud-source.tgz");
@@ -137,6 +140,7 @@ execFileSync("tar", [
   "package-lock.json",
   "Dockerfile",
   "server",
+  "public",
 ]);
 const tag =
   execFileSync("git", ["rev-parse", "--short", "HEAD"], {

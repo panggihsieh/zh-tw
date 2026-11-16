@@ -3575,6 +3575,10 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .backend-label-settings { display: grid; gap: 12px; margin-top: 20px; }
 .backend-label-settings > label { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); align-items: center; gap: 12px; min-width: 0; overflow-wrap: anywhere; }
 .backend-label-settings input { width: 100%; min-width: 0; box-sizing: border-box; }
+.backend-label-actions { display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0; }
+.backend-label-actions button { display:inline-flex;align-items:center;gap:8px; }
+.backend-label-fields { margin:0;padding:12px;border:1px solid var(--theme-border,#badb97);border-radius:12px;min-width:0; }
+.backend-label-fields:disabled input { opacity:.65;cursor:not-allowed; }
 @media (max-width: 600px) {
   .backend-label-settings > label { grid-template-columns: minmax(0, 1fr); gap: 6px; }
 }

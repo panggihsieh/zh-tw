@@ -1,0 +1,37 @@
+import { useEffect, useRef } from 'react';
+import type { CompetitionRoom } from './competitionApi';
+
+let audio:HTMLAudioElement|null=null;
+const sounded=new Set<string>();
+export function endSoundEnabled(){try{return localStorage.getItem('zh-tw.competition-end-sound')!=='off';}catch{return true;}}
+export function setEndSoundEnabled(value:boolean){try{localStorage.setItem('zh-tw.competition-end-sound',value?'on':'off');}catch{}if(!value)audio?.pause();}
+export async function playCompetitionEndSound(){
+ if(!endSoundEnabled())return;
+ audio??=new Audio(`${import.meta.env.BASE_URL}audio/applause.mp3`);
+ audio.volume=.6;audio.currentTime=0;
+ await audio.play();
+}
+export function observeCompetitionEnd(rooms:CompetitionRoom[],previous:Map<string,string>){
+ for(const room of rooms){
+  if(previous.get(room.id)==='running'&&room.status==='closed'&&!sounded.has(room.id)){
+   sounded.add(room.id);void playCompetitionEndSound().catch(()=>{/* 試聽按鈕可手動播放被瀏覽器阻擋的音效。 */});
+  }
+  previous.set(room.id,room.status);
+ }
+}
+export function useCompetitionEndSound(rooms:CompetitionRoom[]){
+ const previous=useRef(new Map<string,string>());
+ useEffect(()=>{
+  observeCompetitionEnd(rooms,previous.current);
+ },[rooms]);
+ useEffect(()=>{
+  function unlock(){
+   if(!endSoundEnabled())return;
+   audio??=new Audio(`${import.meta.env.BASE_URL}audio/applause.mp3`);
+   if(audio.paused){audio.muted=true;void audio.play().then(()=>{audio!.pause();audio!.currentTime=0;audio!.muted=false;}).catch(()=>{if(audio)audio.muted=false;});}
+  }
+  document.addEventListener('pointerdown',unlock,{once:true});
+  document.addEventListener('keydown',unlock,{once:true});
+  return()=>{document.removeEventListener('pointerdown',unlock);document.removeEventListener('keydown',unlock);};
+ },[]);
+}

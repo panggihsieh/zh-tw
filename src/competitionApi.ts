@@ -1,9 +1,18 @@
-export interface CompetitionQuestion {id?:string;type?:'sentence-practice'|'structure';prompt:string;options?:string[];answer?:number;seconds:number;phrase?:string;character?:string;reading?:string}
-export interface CompetitionRoom {id:string;code:string;title:string;className:string;status:'lobby'|'running'|'closed';questionCount:number;createdAt:number;duration:number;maxParticipants:number;startedAt:number|null;expiresAt:number|null;closedAt:number|null;loginMode:'roster'|'anonymous';gameType:'quiz'|'sentence-practice'|'structure';testRoom:boolean;roster?:string[];questions?:CompetitionQuestion[]}
+export interface CompetitionQuestion {id?:string;type?:'sentence-practice'|'structure'|'writing';prompt:string;options?:string[];answer?:number;seconds:number;phrase?:string;character?:string;reading?:string}
+export interface CompetitionRoom {id:string;code:string;title:string;className:string;status:'lobby'|'running'|'closed';questionCount:number;createdAt:number;duration:number;maxParticipants:number;startedAt:number|null;expiresAt:number|null;closedAt:number|null;loginMode:'roster'|'anonymous';gameType:'quiz'|'sentence-practice'|'structure'|'writing';testRoom:boolean;nameChoices?:{seat:number;name:string}[];roster?:string[];questions?:CompetitionQuestion[]}
 export interface CompetitionParticipant {uid:string;name:string;seat:number|null;avatarKind:'custom'|'default'|'anonymous';avatar:string|null;index:number;correct:number;points:number;finished:boolean;mine?:boolean}
 export interface LeaderboardItem extends CompetitionParticipant {rank:number;answered:number;mine:boolean}
 export async function competitionRequest<T>(path:string,body?:unknown):Promise<T>{
- const {cloudServices}=await import('./cloudSync');const user=cloudServices().auth.currentUser;if(!user)throw Error('請先登入 Google 帳號。');
- const response=await fetch('/api/structure/competition'+path,{method:body===undefined?'GET':'POST',headers:{Authorization:`Bearer ${await user.getIdToken()}`,'Content-Type':'application/json','X-Notebook-Request':'competition-room'},...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(30000)});const value=await response.json();if(!response.ok)throw Error(value.error||'競賽服務暫時無法使用。');return value;
+ const {cloudServices}=await import('./cloudSync');const user=cloudServices().auth.currentUser;
+ const response=await fetch('/api/structure/competition'+path,{method:body===undefined?'GET':'POST',headers:{...(user?{Authorization:`Bearer ${await user.getIdToken()}`} : {}),'Content-Type':'application/json','X-Notebook-Request':'competition-room'},...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(30000)});const value=await response.json();if(!response.ok)throw Error(value.error||'競賽服務暫時無法使用。');return value;
 }
 export function competitionJoinUrl(code:string){const url=new URL('/',window.location.origin);url.hash=`games/competition?code=${code}`;return url.toString();}
+export function competitionCodeFromInput(value:string){
+ const text=value.trim();
+ const parameter=text.match(/[?&]code=([^&#]*)/i);
+ if(parameter){
+  const code=new URLSearchParams(`code=${parameter[1]}`).get('code')?.trim().toUpperCase()||'';
+  return /^[A-Z2-9]{4}$/.test(code)?code:'';
+ }
+ return /^[A-Z2-9\s]*$/i.test(text)?text.toUpperCase().replace(/\s/g,'').slice(0,4):'';
+}
