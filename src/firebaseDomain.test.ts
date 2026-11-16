@@ -34,6 +34,8 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 it.each([
+  ['zh-tw.web.app', 'voltaic-circuit-511310-a3-zh-tw.web.app'],
+  ['zh-tw.firebaseapp.com', 'voltaic-circuit-511310-a3-zh-tw.web.app'],
   [
     "voltaic-circuit-511310-a3-zh-tw.web.app",
     "voltaic-circuit-511310-a3-zh-tw.web.app",

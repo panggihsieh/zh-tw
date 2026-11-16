@@ -5,7 +5,7 @@ import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 const project = "voltaic-circuit-511310-a3";
 const region = "asia-east1";
-const site = `${project}-zh-tw`;
+const site = "zh-tw";
 const service = "zh-tw-structure-api";
 const auth = new GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/cloud-platform"],

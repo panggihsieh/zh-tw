@@ -4,6 +4,9 @@
     "voltaic-circuit-511310-a3": {
       "hosting": {
         "zh-tw": [
+          "zh-tw"
+        ],
+        "zh-tw-legacy": [
           "voltaic-circuit-511310-a3-zh-tw"
         ]
       }

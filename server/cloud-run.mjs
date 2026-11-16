@@ -49,12 +49,13 @@ const configStore = {
 };
 const site = process.env.HOSTING_SITE;
 if (!site || !/^[a-z0-9-]+$/.test(site)) throw new Error("HOSTING_SITE 未設定");
+const origins = [...new Set([site, 'zh-tw', 'voltaic-circuit-511310-a3-zh-tw'])].flatMap(id=>[`https://${id}.web.app`,`https://${id}.firebaseapp.com`]);
 const server = createStructureServer({
   quizStore:createWritingCloudStore(auth,`${project}-zh-tw-writing`),
-  writingHandler:createWritingHandler({store:createWritingCloudStore(auth,`${project}-zh-tw-writing`),origins:[`https://${site}.web.app`,`https://${site}.firebaseapp.com`]}),
+  writingHandler:createWritingHandler({store:createWritingCloudStore(auth,`${project}-zh-tw-writing`),origins}),
   cloud: true,
   configStore,
-  origins: [`https://${site}.web.app`, `https://${site}.firebaseapp.com`],
+  origins,
 });
 server.listen(Number(process.env.PORT || 8080), "0.0.0.0", () =>
   console.log("zh-tw cloud API ready"),
