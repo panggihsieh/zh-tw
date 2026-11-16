@@ -8,6 +8,7 @@ import {
   finishCloudRedirect,
 } from "./cloudSync";
 import { ADMIN_EMAIL, isAdmin } from "./userAccess";
+import { SchoolIamButton } from './SchoolIamLogin';
 
 export default function BackendGate({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -66,6 +67,7 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       <main className="backend-login">
         <h1>教師後台登入</h1>
         <p>請使用管理者 Google 帳號登入：{ADMIN_EMAIL}</p>
+        {ready && cloudConfigured && <SchoolIamButton />}
         {!ready ? (
           <p role="status">確認登入狀態…</p>
         ) : (

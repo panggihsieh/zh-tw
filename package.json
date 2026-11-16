@@ -1,6 +1,6 @@
 {
   "name": "hanzi-animation-notebook",
-  "version": "1.5.76",
+  "version": "1.5.83",
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
     "test:sentence-api": "node --test server/sentence-api.check.mjs",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/panggihsieh/zh-tw#readme",
   "dependencies": {
     "firebase": "^13.1.0",
+    "firebase-admin": "^14.5.1",
     "hanzi-writer": "^3.7.3",
     "idb": "^8.0.4",
     "jose": "^6.2.14",

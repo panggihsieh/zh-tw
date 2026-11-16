@@ -1,3 +1,4 @@
+import { SchoolIamButton, SchoolIamCallback } from './SchoolIamLogin';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
 import { readVersionRecords } from "./versionRecords";
 import {
@@ -138,6 +139,7 @@ const backendTitles: Record<BackendSection, string> = {
 export default function ProtectedApp() {
   const [hash,setHash]=useState(window.location.hash);
   useEffect(()=>{const changed=()=>setHash(window.location.hash);window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed)},[]);
+  if (window.location.pathname === '/auth/schooliam/callback') return <SchoolIamCallback />;
   if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App gamesOpen={/^#games(?:\/|$)/.test(hash)} />;
   return <Suspense fallback={<p role="status">載入教師登入…</p>}><BackendGate><App /></BackendGate></Suspense>;
@@ -1003,6 +1005,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           </nav>
               {!backendMode && <div className="header-user-role">
                 <span role="status">{!userRole.ready ? "確認登入中…" : userRole.admin ? "教師 · 管理者已登入" : userRole.user ? "學生 · 已登入" : "學生 · 未登入"}</span>
+                {!userRole.user && <SchoolIamButton />}
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}
             </div>

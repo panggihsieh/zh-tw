@@ -27,9 +27,13 @@ test("verifies signed Firebase Google admin tokens and rejects forged roles, wro
       .sign(privateKey);
   }
   assert.equal(await verifyAdminToken(await sign(), keys), "admin-uid");
+  assert.equal(await verifyAdminToken(await sign({ firebase: { sign_in_provider: 'custom' }, schooliam: 'zh-tw-teacher' }), keys), 'admin-uid');
   for (const value of [
     { email: "student@gmail.com", role: "admin" },
     { email_verified: false },
+    { firebase: { sign_in_provider: 'custom' } },
+    { firebase: { sign_in_provider: 'custom' }, schooliam: 'zh-tw-student' },
+    { email: 'student@gmail.com', firebase: { sign_in_provider: 'custom' }, schooliam: 'zh-tw-teacher' },
     { firebase: { sign_in_provider: "password" } },
     { aud: "other-project" },
     { iss: "https://attacker.example" },

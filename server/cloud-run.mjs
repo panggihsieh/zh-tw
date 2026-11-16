@@ -1,4 +1,8 @@
 import { GoogleAuth } from "google-auth-library";
+import { initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
+import { createSchoolIamHandler } from './schooliam-handler.mjs';
 import { createStructureServer } from "./structure-api.mjs";
 import {createWritingHandler,createWritingCloudStore} from './writing-api.mjs';
 
@@ -56,6 +60,18 @@ const server = createStructureServer({
   cloud: true,
   configStore,
   origins,
+});
+const iamApp = initializeApp({ projectId: project }, 'schooliam-bridge');
+const iamHandler = createSchoolIamHandler({ auth: getAuth(iamApp), db: getFirestore(iamApp) });
+const originalHandlers = server.listeners('request');
+server.removeAllListeners('request');
+server.on('request', (req, res) => {
+  const path = req.url.split('?')[0];
+  if (['/auth/schooliam/login', '/auth/schooliam/exchange'].includes(path)) {
+    void iamHandler(req, res);
+  } else {
+    for (const handler of originalHandlers) handler.call(server, req, res);
+  }
 });
 server.listen(Number(process.env.PORT || 8080), "0.0.0.0", () =>
   console.log("zh-tw cloud API ready"),

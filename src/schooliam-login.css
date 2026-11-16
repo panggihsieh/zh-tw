@@ -1,0 +1,49 @@
+/* Shared SchoolIAM sign-in button. Keep independent from portal styles. */
+.schooliam-login {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 10px;
+  border: 1px solid #294552;
+  border-radius: 12px;
+  background: #081725;
+  color: #fff;
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.schooliam-login .schooliam-login__mark {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #397b91;
+  border-radius: 10px;
+  background: #103446;
+  color: #5ee7ff;
+  font-size: 24px;
+}
+.schooliam-login .schooliam-login__action {
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 400;
+}
+.schooliam-login:hover {
+  background: #102738;
+  border-color: #5ee7ff;
+  color: #fff;
+  text-decoration: none;
+}
+.schooliam-login:focus-visible {
+  outline: 3px solid #10c9ee;
+  outline-offset: 3px;
+}

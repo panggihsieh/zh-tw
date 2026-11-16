@@ -2,7 +2,10 @@
 function hanziGoogle() {
   return request.auth != null
     && request.auth.token.email_verified == true
-    && request.auth.token.firebase.sign_in_provider == 'google.com';
+    && (request.auth.token.firebase.sign_in_provider == 'google.com'
+      || (request.auth.token.firebase.sign_in_provider == 'custom'
+        && request.auth.token.schooliam == 'zh-tw-teacher'
+        && request.auth.token.email == 'teacher.hsieh@gmail.com'));
 }
 function hanziAdmin() {
   return hanziGoogle() && request.auth.token.email == 'teacher.hsieh@gmail.com';

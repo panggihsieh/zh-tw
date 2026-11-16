@@ -34,9 +34,36 @@
               "value": "public,max-age=31536000,immutable"
             }
           ]
+        },
+        {
+          "source": "/auth/schooliam/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            }
+          ]
         }
       ],
       "rewrites": [
+        {
+          "source": "/auth/schooliam/login",
+          "run": {
+            "serviceId": "zh-tw-structure-api",
+            "region": "asia-east1"
+          }
+        },
+        {
+          "source": "/auth/schooliam/exchange",
+          "run": {
+            "serviceId": "zh-tw-structure-api",
+            "region": "asia-east1"
+          }
+        },
         {
           "source": "/api/structure/**",
           "run": {
@@ -84,9 +111,36 @@
               "value": "public,max-age=31536000,immutable"
             }
           ]
+        },
+        {
+          "source": "/auth/schooliam/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            }
+          ]
         }
       ],
       "rewrites": [
+        {
+          "source": "/auth/schooliam/login",
+          "run": {
+            "serviceId": "zh-tw-structure-api",
+            "region": "asia-east1"
+          }
+        },
+        {
+          "source": "/auth/schooliam/exchange",
+          "run": {
+            "serviceId": "zh-tw-structure-api",
+            "region": "asia-east1"
+          }
+        },
         {
           "source": "/api/structure/**",
           "run": {

@@ -24,7 +24,8 @@ export async function verifyAdminToken(token, keys = googleKeys) {
     payload.iat > Date.now() / 1000 ||
     payload.email !== ADMIN_EMAIL ||
     payload.email_verified !== true ||
-    payload.firebase?.sign_in_provider !== "google.com"
+    !(payload.firebase?.sign_in_provider === "google.com" ||
+      (payload.firebase?.sign_in_provider === "custom" && payload.schooliam === "zh-tw-teacher"))
   ) {
     throw new Error("管理者身分不符");
   }
