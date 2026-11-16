@@ -4,7 +4,7 @@ import { cloudServices } from './cloudSync';
 import './schooliam-login.css';
 
 export function SchoolIamButton() {
-  return <a className="schooliam-login" href="/auth/schooliam/login">
+  return <a className="schooliam-login" title="一種整合性帳號管理功能，以各校為主，由學校管理者控管教師身分與存取權限。" aria-description="一種整合性帳號管理功能，以各校為主，由學校管理者控管教師身分與存取權限。" href="/auth/schooliam/login">
     <span className="schooliam-login__mark" aria-hidden="true">S</span>
     <span>SchoolIAM</span><span className="schooliam-login__action">登入</span>
   </a>;
