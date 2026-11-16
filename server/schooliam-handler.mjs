@@ -61,7 +61,8 @@ export function createSchoolIamHandler({ db, auth, env = process.env }) {
       const access = (await db.collection('hanzi_notebook_access').doc(user.email).get()).data();
       if (access && access.enabled !== true) throw new Error('Teacher disabled');
       return send(200, { token: await auth.createCustomToken(uid, { schooliam: 'zh-tw-teacher' }) });
-    } catch {
+    } catch (error) {
+      console.error('SchoolIAM request failed', { path: url.pathname, code: error?.code ?? 'unknown' });
       return send(403, { error: 'SchoolIAM 教師登入未完成：請確認帳號接入授權，或重新登入。' });
     }
   };
