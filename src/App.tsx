@@ -1,3 +1,4 @@
+import MicrophoneTest from './MicrophoneTest';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
 import { SchoolIamButton, SchoolIamCallback } from './SchoolIamLogin';
 import { readVersionRecords } from "./versionRecords";
@@ -1052,6 +1053,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   <BirdMascot />
                   <div className="adventure-tools">{studentPageTools}</div>
                 </section>}
+                {!backendMode && <MicrophoneTest />}
                 <div id="curriculum-entry">
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
