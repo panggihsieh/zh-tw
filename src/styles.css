@@ -3572,6 +3572,12 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .backend-shell .tts-sources > div, .backend-shell .tts-config, .backend-shell .tts-cloud-note { background: white; border-color: #d7e3ef; border-radius: 18px; }
 .backend-panel { padding: 28px; background: #ffffffed; border: 1px solid #dae6f2; border-radius: 22px; }
 .backend-panel > .structure-ai-settings, .backend-panel > .structure-help, .backend-panel > .user-management { margin: 0; padding: 0; border: 0; }
+.backend-label-settings { display: grid; gap: 12px; margin-top: 20px; }
+.backend-label-settings > label { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); align-items: center; gap: 12px; min-width: 0; overflow-wrap: anywhere; }
+.backend-label-settings input { width: 100%; min-width: 0; box-sizing: border-box; }
+@media (max-width: 600px) {
+  .backend-label-settings > label { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
 .backend-shell[data-backend-section="users"] .user-management > h2,
 .backend-shell[data-backend-section="structure"] #structure-help > h2 { display: none; }
 .backend-shell .page-footer { color: #415b79; flex-wrap: wrap; gap: 16px; }

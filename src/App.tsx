@@ -2129,7 +2129,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     <details className="theme-library">
                       <summary>修改後台功能名稱</summary>
                       <p>留空可恢復預設名稱。設定儲存在此瀏覽器。</p>
-                      <div className="competition-form-grid">
+                      <div className="backend-label-settings">
                         {(Object.entries(backendTitles) as [BackendSection, string][]).map(([section, title]) => (
                           <label key={section}>{title}
                             <input maxLength={32} placeholder={title} defaultValue={backendLabels[section]} onBlur={event => {
