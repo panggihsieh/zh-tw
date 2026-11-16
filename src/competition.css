@@ -67,3 +67,8 @@
 .competition-ranking-capture { padding: 24px; color: #173b2b; background: #fffff5; border: 2px solid #badb97; border-radius: 18px; overflow-wrap: anywhere; }
 .competition-ranking-photo { display: grid; gap: 12px; margin: 16px 0; }
 .competition-ranking-photo img { display: block; width: 100%; max-width: 720px; height: auto; }
+
+.competition-code-entry { margin: 0 auto 24px; padding: 20px; }
+.competition-code-entry h1 { margin: 0 0 12px; font-size: clamp(24px, 5vw, 32px); }
+.competition-code-entry input { box-sizing: border-box; }
+.competition-code-entry .competition-code-help { margin-bottom: 0; font-size: 14px; }

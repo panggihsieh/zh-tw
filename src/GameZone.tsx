@@ -17,6 +17,7 @@ import SentenceCompetition from "./SentenceCompetition";
 import SentencePractice from "./TimedSentencePractice";
 import CharacterStructureGame from "./CharacterStructureGame";
 import CompetitionPlay from "./CompetitionPlay";
+import CompetitionCodeEntry from "./CompetitionCodeEntry";
 import type { LessonContext } from "./curriculumLearning";
 import { competitionRequest } from "./competitionApi";
 import { useSiteTheme } from "./siteThemes";
@@ -103,7 +104,7 @@ export default function GameZone() {
 
   return (
     <div className="game-zone">
-      <header className="game-header">
+      {view!=="hub"&&view!=="competition"&&<header className="game-header">
         <a href="/" className="game-brand">
           <BookOpen />
           生字動畫收藏本
@@ -127,8 +128,9 @@ export default function GameZone() {
             <span>Kahoot 免登入，以課程代碼加入</span>
           )}
         </div>
-      </header>
+      </header>}
       <main className="game-main">
+        {view==="hub"&&<CompetitionCodeEntry onConfirm={code=>{window.location.hash=`games/competition?code=${code}`;setView("competition");}}/>}
         {view === "hub" && expiredNotice && <p role="status">時間到，活動已結束。<button className="secondary" onClick={() => setExpiredNotice(false)}>關閉提示</button></p>}
         {view === "strokes" ? (
           <TimedActivity key="strokes" minutes={5} onBack={returnToHub} onExpire={expireActivity}>
