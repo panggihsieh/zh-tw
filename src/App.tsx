@@ -1006,7 +1006,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             </>)}
           </nav>
               {!backendMode && <div className="header-user-role">
-                <span role="status">{!userRole.ready ? "確認登入中…" : userRole.admin ? "教師 · 管理者已登入" : userRole.user ? "學生 · 已登入" : "學生 · 未登入"}</span>
+                {userRole.admin && <span role="status">教師 · 管理者已登入</span>}
                 {!userRole.user && <SchoolIamButton />}
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}

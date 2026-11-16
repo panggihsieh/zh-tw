@@ -79,7 +79,7 @@
     },
     {
       "target": "zh-tw-legacy",
-      "public": "dist",
+      "public": "deploy/legacy-redirect",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -92,65 +92,15 @@
             {
               "key": "Cache-Control",
               "value": "no-cache"
-            },
-            {
-              "key": "X-Content-Type-Options",
-              "value": "nosniff"
-            },
-            {
-              "key": "Referrer-Policy",
-              "value": "strict-origin-when-cross-origin"
-            }
-          ]
-        },
-        {
-          "source": "/assets/**",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "public,max-age=31536000,immutable"
-            }
-          ]
-        },
-        {
-          "source": "/auth/schooliam/**",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "no-store"
-            },
-            {
-              "key": "Referrer-Policy",
-              "value": "no-referrer"
             }
           ]
         }
       ],
-      "rewrites": [
+      "redirects": [
         {
-          "source": "/auth/schooliam/login",
-          "run": {
-            "serviceId": "zh-tw-structure-api",
-            "region": "asia-east1"
-          }
-        },
-        {
-          "source": "/auth/schooliam/exchange",
-          "run": {
-            "serviceId": "zh-tw-structure-api",
-            "region": "asia-east1"
-          }
-        },
-        {
-          "source": "/api/structure/**",
-          "run": {
-            "serviceId": "zh-tw-structure-api",
-            "region": "asia-east1"
-          }
-        },
-        {
-          "source": "**",
-          "destination": "/index.html"
+          "source": "/:path*",
+          "destination": "https://zh-tw.web.app/:path",
+          "type": 301
         }
       ]
     }

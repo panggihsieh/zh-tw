@@ -2,7 +2,7 @@ import TimedActivity from "./TimedActivity";
 import { gameRequest } from "./gameApi";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
-import { BookOpen, PenLine, Gamepad2, FolderCheck, Shapes, Trophy, Sparkles } from "lucide-react";
+import { BookOpen, Gamepad2, FolderCheck } from "lucide-react";
 import {
   cloudConfigured,
   cloudServices,
@@ -10,7 +10,6 @@ import {
   cloudLogout,
   finishCloudRedirect,
 } from "./cloudSync";
-import CurriculumDatabase from "./CurriculumDatabase";
 import WritingPractice from "./WritingPractice";
 import GameReview from "./GameReview";
 import SentenceCompetition from "./SentenceCompetition";
@@ -19,20 +18,10 @@ import CharacterStructureGame from "./CharacterStructureGame";
 import CompetitionPlay from "./CompetitionPlay";
 import CompetitionCodeEntry from "./CompetitionCodeEntry";
 import type { LessonContext } from "./curriculumLearning";
-import { competitionRequest } from "./competitionApi";
 import { useSiteTheme } from "./siteThemes";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
 import {submitGame,writingAssignments,type WritingAssignment} from './gameApi';
 import "./games.css";
-// New vocabulary games share this course/account entry; only playable games are listed.
-const games = [
-  {
-    id: "writing",
-    title: "書寫小達人",
-    description: "按筆順寫生字，留下自己的字跡，再把作品交給老師。",
-    icon: PenLine,
-  },
-];
 function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competition' | 'strokes' | 'assignments' {
   if (window.location.hash === "#games/assignments") return "assignments";
   if(window.location.hash==="#games/strokes")return "strokes";
@@ -40,14 +29,10 @@ function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competiti
 }
 export default function GameZone() {
   useSiteTheme();
-  const [allowed,setAllowed]=useState<Set<string>|null>(null);
-  const [sourceError,setSourceError]=useState('');
-  useEffect(()=>{const abort=new AbortController();fetch('/game-strokes/catalog.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('筆順目錄載入失敗');return r.json()}).then(v=>setAllowed(new Set(v.characters.map((c:{character:string})=>c.character)))).catch(e=>{if(!abort.signal.aborted)setSourceError(e.message)});return()=>abort.abort()},[]);
   const [user, setUser] = useState<User | null>(null),
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [competitionAvailable,setCompetitionAvailable]=useState(false),
     [structureTasks,setStructureTasks]=useState<WritingAssignment[]>([]),
     [assignments,setAssignments]=useState<WritingAssignment[]>([]),
     [view, setView] = useState<ReturnType<typeof gameView> | "choose" | "writing" | "works">(gameView),
@@ -68,9 +53,7 @@ export default function GameZone() {
       setCourse(null);
       setView(gameView());
       setStructureTasks([]);
-      setCompetitionAvailable(false);
       if(u)void gameRequest("/structure-assignments").then(value=>setStructureTasks(value.items)).catch(()=>{});
-      if(u)void competitionRequest<{available:boolean}>("/available").then(value=>setCompetitionAvailable(value.available)).catch(()=>{});
       if(u)void writingAssignments().then(value=>setAssignments(value.items.filter(item=>!item.submitted))).catch(error=>setMessage(error.message));else setAssignments([]);
     });
   }, []);
@@ -184,9 +167,9 @@ export default function GameZone() {
           <>
             <div className="game-row game-intro">
               <div>
-                <p className="eyebrow">練生字，也玩出好習慣</p>
+                <p className="eyebrow">老師開課 · 全班一起參與</p>
                 <h1>遊戲專區</h1>
-                <p>同一課生字，用不同方式練習。</p>
+                <p>輸入老師提供的開課代碼，依老師安排加入活動。</p>
               </div>
               {user && <button
                 className="secondary"
@@ -208,65 +191,7 @@ export default function GameZone() {
                   </article>)}
                 </section>}
                 {!!assignments.length&&<section className="game-assignments"><div><span className="eyebrow">老師指派 · 個人作業</span><h2>待完成的書寫作業</h2></div>{assignments.map(assignment=><article key={assignment.id}><div><strong>{assignment.title}</strong><p>{assignment.className} · {assignment.lesson}</p><span>{assignment.characters.join('　')}</span></div><button className="primary" onClick={()=>startWritingAssignment(assignment)}>開始書寫 →</button></article>)}</section>}
-                <section className="game-course">
-                  <div className="game-row">
-                    <div>
-                      <span className="eyebrow">個人自由練習</span>
-                      <h2>
-                        {course
-                          ? `${course.context.publisher} ${course.context.grade}${course.context.term} · ${course.context.title}`
-                          : "先選一課，開始今天的練習"}
-                      </h2>
-                      {course && <p>{course.characters.join("　")}</p>}
-                    </div>
-                    <button
-                      className="secondary"
-                      onClick={() =>
-                        setView(view === "choose" ? "hub" : "choose")
-                      }
-                    >
-                      {view === "choose"
-                        ? "收合選課"
-                        : course
-                          ? "更換課文"
-                          : "選擇課文"}
-                    </button>
-                  </div>
-                  {view === "choose" && (
-                      allowed ? <CurriculumDatabase
-                      student
-                      onLearn={async (characters, context) => {
-                        setCourse({ characters, context });
-                        setView("hub");
-                      }}
-                      actionLabel="使用這批生字"
-                        allowedCharacters={allowed}
-                      /> : <p role="status">{sourceError||'載入可練習筆順目錄…'}</p>
-                  )}
-                </section>
-                <div className="game-catalog">
-                  <article className="game-tile"><div className="game-icon"><Trophy size={34}/></div><span className="game-pill">四碼開課 × 即時排名</span><h2>課堂 Kahoot 競賽（全班）</h2><p>輸入老師提供的四碼代碼，參加四選一、生字結構或 AI 語音造句競賽，並查看即時排名。</p><button className="primary" disabled={!!user && !competitionAvailable} onClick={()=>{window.location.hash='games/competition';setView('competition');}}>{!user?'免登入，輸入開課代碼 →':competitionAvailable?'輸入開課代碼 →':'目前沒有開課'}</button></article>
-                  {games.map((g) => (
-                    <article key={g.id} className="game-tile">
-                      <div className="game-icon"><g.icon size={34} /></div>
-                      <span className="game-pill">全班派發 × 個人書寫</span>
-                      <h2>{g.title}（全班）</h2>
-                      <p>{g.description}</p>
-                      <button className="primary" disabled={!!user && !assignments.length} onClick={() => {
-                        if (!user) { window.location.hash = "games/assignments"; setView("assignments"); }
-                        else if (assignments[0]) startWritingAssignment(assignments[0]);
-                      }}>
-                        {!user ? "登入後查看作業 →" : assignments.length ? "開始個人作業 →" : "目前沒有待完成作業"}
-                      </button>
-                    </article>
-                  ))}
-                  <article className="game-tile"><div className="game-icon"><Sparkles size={34}/></div><span className="game-pill">自由練習 × AI 等第</span><h2>一字多詞 AI 造句（個人）</h2><p>輸入語詞、選一個字，用即時語音說句子，再做同音語意校正與流暢美感評量。</p><button className="primary" onClick={()=>{window.location.hash='games/sentence-practice';setView('practice');}}>開始自由造句 →</button></article>
-                  <article className="game-tile"><div className="game-icon"><Shapes size={34}/></div><span className="game-pill">看字 × 認識部件</span><h2>生字結構遊戲（個人）</h2><p>看生字，選出左右、上下或全包圍結構，答題後認識部件。可自由練習，也可開啟老師提供的課文生字練習連結。</p><button className="primary" onClick={()=>{window.location.hash='games/structure';setView('structure');}}>進入結構遊戲 →</button></article>
-                </div>
-                <p className="game-future">
-                  <a href="#games/strokes">免登入練習筆順</a>{" · "}
-                  老師指派的書寫內容會顯示在個人作業；自行選課文則屬自由練習，不會列入班級作業進度。
-                </p>
+
               </>
             )}
           </>

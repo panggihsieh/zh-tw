@@ -15,6 +15,7 @@
 ## 提交與部署
 
 - 修改先在本機完成及驗證，使用者要求提交／部署後才統一提交、推送與部署。
+- 正式前端只部署 `https://zh-tw.web.app/`，使用 Firebase Hosting target `zh-tw`（`--only hosting:zh-tw`）；不得使用 `--only hosting` 同步發布舊站。除非使用者另行要求，不部署 `zh-tw-legacy`。
 - 部署後檢查部署結果與正式網站。
 
 ## Zeabur
