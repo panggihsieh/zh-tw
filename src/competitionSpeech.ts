@@ -27,6 +27,7 @@ export function configureSentenceRecognition(recognition: CompetitionRecognition
   let transcript = "";
   let received = false;
   let stopping = false;
+  let editedText: string | undefined;
   let retry: ReturnType<typeof setTimeout> | undefined;
 
   function dispose() {
@@ -52,7 +53,7 @@ export function configureSentenceRecognition(recognition: CompetitionRecognition
   recognition.onstart = () => callbacks.message('正在聆聽，可以停頓後繼續說。說完請按停止。');
   recognition.onresult = event => {
     const next = Array.from(event.results, result => result[0]?.transcript || '').join('');
-    if (!next.trim()) return;
+    if (editedText !== undefined || !next.trim()) return;
     transcript = next;
     received = true;
     callbacks.text((completed + transcript).slice(0, 300));
@@ -65,7 +66,8 @@ export function configureSentenceRecognition(recognition: CompetitionRecognition
       finish(received ? '辨識完成，請核對文字後送出。' : '尚未收到辨識文字，可以重試或直接輸入句子。');
       return;
     }
-    completed = (completed + transcript).slice(0, 300);
+    completed = editedText ?? (completed + transcript).slice(0, 300);
+    editedText = undefined;
     transcript = "";
     retry = setTimeout(() => {
       retry = undefined;
@@ -79,6 +81,17 @@ export function configureSentenceRecognition(recognition: CompetitionRecognition
 
   return {
     dispose,
+    continueWith(text: string) {
+      if (stopping) return;
+      const alreadyEnding = editedText !== undefined;
+      editedText = text;
+      if (retry !== undefined) {
+        completed = text;
+        editedText = undefined;
+      } else if (!alreadyEnding) {
+        recognition.stop();
+      }
+    },
     stop() {
       stopping = true;
       if (retry !== undefined) recognition.onend?.();

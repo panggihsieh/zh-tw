@@ -49,16 +49,9 @@ export default function CompetitionPlay({onBack,backLabel="返回遊戲專區",r
    const start=input.selectionStart;
    const end=input.selectionEnd;
    if(sentence.length-(end-start)+mark.length>input.maxLength)return;
-   if(listening){
-     speechSession.current?.dispose();
-     recognition.current?.abort();
-     recognition.current=null;
-     speechSession.current=null;
-     setListening(false);
-     setMicActive(false);
-     setMessage('已停止聆聽，請核對文字後送出。');
-   }
-   setSentence(sentence.slice(0,start)+mark+sentence.slice(end));
+   const updatedSentence=sentence.slice(0,start)+mark+sentence.slice(end);
+   if(listening)speechSession.current?.continueWith(updatedSentence);
+   setSentence(updatedSentence);
    requestAnimationFrame(()=>{
      input.focus();
      input.setSelectionRange(start+mark.length,start+mark.length);

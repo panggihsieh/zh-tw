@@ -37,6 +37,21 @@ describe('課堂免登入語音造句',()=>{
   r.onend?.();
   expect(c.end).toHaveBeenCalledOnce();
  });
+ it('插入標點後自動續聽，忽略前一輪遲到的文字',()=>{
+  const {recognition:r,callbacks:c,session}=setup();
+  r.start=vi.fn();
+  r.stop=vi.fn();
+  session.continueWith('我看到海灘，');
+  expect(r.stop).toHaveBeenCalledOnce();
+  r.onresult?.({resultIndex:0,results:[{isFinal:true,0:{transcript:'我看到海灘'}}]});
+  expect(c.text).not.toHaveBeenCalled();
+  r.onend?.();
+  vi.advanceTimersByTime(250);
+  expect(r.start).toHaveBeenCalledOnce();
+  r.onresult?.({resultIndex:0,results:[{isFinal:true,0:{transcript:'有很多螃蟹'}}]});
+  expect(c.text).toHaveBeenLastCalledWith('我看到海灘，有很多螃蟹');
+  expect(c.end).not.toHaveBeenCalled();
+ });
  it('多次結果不重複累加，重試保留原句',()=>{
   const {recognition:r,callbacks:c}=setup('今天');
   const event={resultIndex:0,results:[{isFinal:true,0:{transcript:'我設計卡片。'}}]};
