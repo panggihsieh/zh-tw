@@ -140,9 +140,14 @@ const backendTitles: Record<BackendSection, string> = {
   handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
   lesson: "每課生字結構筆畫查詢", overview: "五上生字拆合總覽", review: "康軒生字結構修正",
 };
+const CompetitionPreviewPage = lazy(() => import("./CompetitionPreviewPage"));
+
 export default function ProtectedApp() {
   const [hash,setHash]=useState(window.location.hash);
   useEffect(()=>{const changed=()=>setHash(window.location.hash);window.addEventListener('hashchange',changed);return()=>window.removeEventListener('hashchange',changed)},[]);
+  if (new URLSearchParams(window.location.search).get("view") === "competition-preview") {
+    return <Suspense fallback={<p role="status">載入學生測試畫面…</p>}><CompetitionPreviewPage /></Suspense>;
+  }
   if (window.location.pathname === '/auth/schooliam/callback') return <SchoolIamCallback />;
   if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App gamesOpen={/^#games(?:\/|$)/.test(hash)} />;
