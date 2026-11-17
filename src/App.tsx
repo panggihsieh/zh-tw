@@ -957,12 +957,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "handwriting", label: "手寫檢核與筆順", icon: Grid2X2, active: backendSection === "handwriting" || backendSection === "strokeDatabase" },
               ] },
               { title: "遊戲派送與競賽", items: [
-                { section: "structure-assignment", label: "生字結構遊戲指派", icon: Puzzle },
-                { section: "writingAssignments", label: "書寫作業管理", icon: Pencil },
                 { section: "competition", label: "Kahoot 競賽開課", icon: Trophy },
+                { section: "gameReview", label: "課堂紀錄", icon: BookOpen },
               ] },
               { title: "全站管理與設定", items: [
-                { section: "gameReview", label: "課堂紀錄", icon: BookOpen },
                 { section: "library", label: "我的學習本（暫未發布）", icon: LibraryBig },
                 { section: "users", label: "使用者管理", icon: Settings2 },
                 { section: "api", label: "API 設定", icon: Settings2 },
