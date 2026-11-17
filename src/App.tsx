@@ -426,6 +426,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     observer.observe(header);
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
+  const [studentLearningStarted, setStudentLearningStarted] = useState(false);
   const [studentFinderOpen, setStudentFinderOpen] = useState(false);
   const [publisherFocusRequest, setPublisherFocusRequest] = useState(0);
   useEffect(() => {
@@ -650,7 +651,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }
   const character = card?.character;
   useEffect(() => {
-    if (!voice || page !== "learn" || gamesOpen || studentFinderOpen || !character || modal || deleteId) return;
+    if (!voice || page !== "learn" || (!backendMode && !studentLearningStarted) || gamesOpen || studentFinderOpen || !character || modal || deleteId) return;
     let cancelled = false;
     void loadDictionary()
       .then((dictionary) => {
@@ -666,7 +667,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       cancelled = true;
       speech.stop();
     };
-  }, [card?.id, character, voice, speed, page, gamesOpen, studentFinderOpen, modal, deleteId]);
+  }, [card?.id, character, voice, speed, page, backendMode, studentLearningStarted, gamesOpen, studentFinderOpen, modal, deleteId]);
   useEffect(() => {
     if (restored.speech) speech.restoreSession(restored.speech);
   }, []);
@@ -767,6 +768,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     setValidation("");
   }
   function openCollection(c: Collection) {
+    setStudentLearningStarted(true);
+    setStudentFinderOpen(false);
     setCollection(structuredClone(c));
     setInput(c.sourcePhrase);
     setPhrase(c.sourcePhrase);
@@ -985,7 +988,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             {!backendMode && (<>
             <button
               className={!gamesOpen && page === "learn" ? "nav-item active" : "nav-item"}
-              onClick={() => { if (gamesOpen) window.location.hash = ""; setPage("learn"); }}
+              onClick={() => { if (gamesOpen) window.location.hash = ""; setStudentLearningStarted(false); setStudentFinderOpen(false); setPlaying(false); speech.stop(); setPage("learn"); window.scrollTo(0, 0); }}
             >
               <BirdMascotIcon />
               生字動畫教室
@@ -1041,9 +1044,9 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             )}
             {page === "learn" && (
               <>
-                {!backendMode && <section className="adventure-welcome" aria-label="生字探索旅程">
+                {!backendMode && !studentLearningStarted && <section className="adventure-welcome" aria-label="生字探索旅程">
                   <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
-                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={() => { setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}><Play size={20}/>開始學習</a></div>
+                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={(event) => { event.preventDefault(); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}><Play size={20}/>開始學習</a></div>
                   <div aria-label="使用方式">
                     <p>生字動畫教室、生字結構遊戲與筆順自由練習皆免費，免登入即可使用。個人結構遊戲與筆順自由練習在瀏覽器執行，不使用付費 AI。</p>
                     <p>個人 AI 造句須輸入老師提供的限時開課代碼。輸錯三次會鎖定 15 分鐘。使用 AI 校正或評分可能產生費用。</p>
@@ -1053,7 +1056,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 </section>}
 
                 <div id="curriculum-entry">
-                {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
+                {(backendMode || studentLearningStarted) && (!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
                   setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
                   setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
@@ -1061,7 +1064,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 </div>
                 <div
                   className={`learning-layout ${collection ? "has-session" : ""}`}
-                  style={!backendMode && (!collection || studentFinderOpen) ? { display: "none" } : undefined}
+                  style={!backendMode && (!studentLearningStarted || !collection || studentFinderOpen) ? { display: "none" } : undefined}
                 >
                   <section className="input-panel">
                     <div className="section-kicker">
@@ -1779,7 +1782,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     )
                   )}
                 </div>
-                {collection && (
+                {(backendMode || (studentLearningStarted && !studentFinderOpen)) && collection && (
                   <section className="session-summary">
                     <div className="summary-title">
                       <span className="eyebrow">這一次的小小收穫</span>
@@ -1843,7 +1846,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     </div>
                   </section>
                 )}
-                {!collection && (
+                {backendMode && !collection && (
                   <div className="bottom-guide">
                     <span>
                       <i>01</i>輸入與選字
