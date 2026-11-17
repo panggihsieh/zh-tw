@@ -14,6 +14,7 @@ type SpeechWindow=Window&{SpeechRecognition?:new()=>Recognition;webkitSpeechReco
 export default function CompetitionPlay({onBack,backLabel="返回遊戲專區",request:competitionRequest=defaultRequest,initialCode:providedCode}:{onBack:()=>void;backLabel?:string;onExpire?:()=>void;request?:typeof defaultRequest;initialCode?:string}){
  const [seat,setSeat]=useState('');
  const initialCode=providedCode??competitionCodeFromInput(window.location.hash);
+ const confirmCode=new URLSearchParams(window.location.hash.split("?")[1]).get("confirm")==="1";
  const [code,setCode]=useState(initialCode),[room,setRoom]=useState<CompetitionRoom|null>(null),[participant,setParticipant]=useState<CompetitionParticipant|null>(null),[question,setQuestion]=useState<CompetitionQuestion|null>(null),[ranking,setRanking]=useState<LeaderboardItem[]>([]),[feedback,setFeedback]=useState<{correct:boolean;points:number;text?:string}|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[sentence,setSentence]=useState(''),[listening,setListening]=useState(false),[micActive,setMicActive]=useState(false),[now,setNow]=useState(Date.now());
  useCompetitionEndSound(room?[room]:[]);
  const recognition=useRef<Recognition|null>(null),speechSession=useRef<ReturnType<typeof configureSentenceRecognition>|null>(null);
@@ -24,7 +25,7 @@ export default function CompetitionPlay({onBack,backLabel="返回遊戲專區",r
  async function join(){if(!room)return;const value=await competitionRequest<{room:CompetitionRoom;participant:CompetitionParticipant;question:CompetitionQuestion|null}>(`/rooms/${room.id}/join`,{seat:Number(seat)});setRoom(value.room);setParticipant(value.participant);setQuestion(value.question);setFeedback(null);}
  async function refresh(){if(!room||!participant)return;const value=await competitionRequest<{room:CompetitionRoom;participant:CompetitionParticipant;question:CompetitionQuestion|null}>(`/rooms/${room.id}/state`,{});setRoom(value.room);setParticipant(value.participant);setQuestion(value.question);if(value.participant.finished||value.room.status==='closed')await loadRanking(value.room);}
  async function loadRanking(target=room){if(!target)return;const value=await competitionRequest<{items:LeaderboardItem[]}>(`/rooms/${target.id}/leaderboard`);setRanking(value.items);}
- useEffect(()=>{if(initialCode)void run(find);return()=>{speechSession.current?.dispose();recognition.current?.abort();};},[]);
+ useEffect(()=>{if(initialCode&&!confirmCode)void run(find);return()=>{speechSession.current?.dispose();recognition.current?.abort();};},[]);
  useEffect(()=>{
    if(!room||!participant)return;
    if(room.status==='closed'){void loadRanking(room).catch(error=>setMessage(error.message));return;}

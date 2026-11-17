@@ -72,3 +72,37 @@
 .competition-code-entry h1 { margin: 0 0 12px; font-size: clamp(24px, 5vw, 32px); }
 .competition-code-entry input { box-sizing: border-box; }
 .competition-code-entry .competition-code-help { margin-bottom: 0; font-size: 14px; }
+.competition-rank-board:fullscreen {
+  margin: 0;
+  border-radius: 0;
+  overflow: auto;
+}
+.competition-exit-fullscreen,
+.competition-rank-board:fullscreen .competition-enter-fullscreen,
+.competition-rank-board:fullscreen .competition-other-ranks {
+  display: none;
+}
+.competition-rank-board:fullscreen .competition-exit-fullscreen {
+  display: inline;
+}
+.competition-podium.competition-centered-podium {
+  --podium-step: clamp(8px, 2vh, 24px);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: auto;
+  gap: clamp(2px, 1vw, 12px);
+}
+.competition-centered-podium > div {
+  grid-row: 1;
+  overflow-wrap: anywhere;
+}
+.competition-centered-podium .competition-avatar {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+.competition-rank-board:fullscreen .competition-countdown strong {
+  font-size: clamp(42px, 8vw, 112px);
+}
+.competition-centered-podium > div:first-child .competition-avatar {
+  width: clamp(92px, 12vw, 144px);
+}
