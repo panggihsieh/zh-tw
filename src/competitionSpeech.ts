@@ -23,30 +23,66 @@ export function sentenceSpeechError(error: string) {
 }
 
 export function configureSentenceRecognition(recognition: CompetitionRecognition, initialText: string, callbacks: { text(value: string): void; message(value: string): void; end(): void }) {
-  let received = false, failed = false;
-  const timeout = setTimeout(() => {
-    failed = true;
-    callbacks.end();
-    recognition.abort();
-    callbacks.message(received ? '已保留辨識文字，請核對後送出。' : '語音服務未在 30 秒內回傳文字。請確認麥克風權限及網路，重試或直接輸入句子。');
-  }, 30000);
-  recognition.lang = 'zh-TW';
-  // One sentence per attempt: finish automatically when the child stops speaking.
-  recognition.continuous = false;
-  recognition.interimResults = true;
-  recognition.onstart = () => callbacks.message('正在聆聽，請說出完整句子；說完稍停，文字會顯示在下方。');
-  recognition.onresult = event => {
-    const transcript = Array.from(event.results, result => result[0]?.transcript || '').join('');
-    if (!transcript.trim()) return;
-    received = true;
-    callbacks.text((initialText + transcript).slice(0, 300));
-    callbacks.message('已辨識語音。說完請稍停，或按停止，再核對文字並送出。');
-  };
-  recognition.onerror = event => { clearTimeout(timeout); if (failed) return; failed = true; callbacks.message(sentenceSpeechError(event.error)); callbacks.end(); };
-  recognition.onend = () => {
+  let completed = initialText;
+  let transcript = "";
+  let received = false;
+  let stopping = false;
+  let retry: ReturnType<typeof setTimeout> | undefined;
+
+  function dispose() {
     clearTimeout(timeout);
+    clearTimeout(retry);
+    recognition.onstart = recognition.onresult = recognition.onerror = recognition.onend = null;
+  }
+
+  function finish(message: string) {
+    dispose();
     callbacks.end();
-    if (!failed) callbacks.message(received ? '辨識完成，請核對文字；同音錯字可直接修改，再確認送出。' : '尚未收到辨識文字。請確認已按允許麥克風，再重試；也可以直接輸入句子。');
+    callbacks.message(message);
+  }
+
+  const timeout = setTimeout(() => {
+    finish(received ? '已保留辨識文字，請核對後送出。' : '語音服務未在 30 秒內回傳文字。請重試或直接輸入句子。');
+    recognition.abort();
+  }, 30000);
+
+  recognition.lang = 'zh-TW';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.onstart = () => callbacks.message('正在聆聽，可以停頓後繼續說。說完請按停止。');
+  recognition.onresult = event => {
+    const next = Array.from(event.results, result => result[0]?.transcript || '').join('');
+    if (!next.trim()) return;
+    transcript = next;
+    received = true;
+    callbacks.text((completed + transcript).slice(0, 300));
   };
-  return () => clearTimeout(timeout);
+  recognition.onerror = event => {
+    if (event.error !== 'no-speech' || stopping) finish(sentenceSpeechError(event.error));
+  };
+  recognition.onend = () => {
+    if (stopping) {
+      finish(received ? '辨識完成，請核對文字後送出。' : '尚未收到辨識文字，可以重試或直接輸入句子。');
+      return;
+    }
+    completed = (completed + transcript).slice(0, 300);
+    transcript = "";
+    retry = setTimeout(() => {
+      retry = undefined;
+      try {
+        recognition.start();
+      } catch {
+        finish('無法重新啟動語音辨識，請重試或直接輸入句子。');
+      }
+    }, 250);
+  };
+
+  return {
+    dispose,
+    stop() {
+      stopping = true;
+      if (retry !== undefined) recognition.onend?.();
+      else recognition.stop();
+    },
+  };
 }

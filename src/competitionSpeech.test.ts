@@ -4,8 +4,8 @@ import {configureSentenceRecognition,type CompetitionRecognition} from './compet
 function setup(initial='') {
  const recognition:CompetitionRecognition={lang:'',continuous:true,interimResults:false,onresult:null,onend:null,onerror:null,start(){},stop(){},abort(){}};
  const callbacks={text:vi.fn(),message:vi.fn(),end:vi.fn()};
- configureSentenceRecognition(recognition,initial,callbacks);
- return {recognition,callbacks};
+ const session=configureSentenceRecognition(recognition,initial,callbacks);
+ return {recognition,callbacks,session};
 }
 describe('課堂免登入語音造句',()=>{
  beforeEach(()=>vi.useFakeTimers());
@@ -18,15 +18,24 @@ describe('課堂免登入語音造句',()=>{
   r.onerror?.({error:'aborted'});r.onend?.();
   expect(c.message).toHaveBeenLastCalledWith(expect.stringContaining('30 秒'));
  });
- it('收到暫存及最終文字立即顯示，說完自動結束',()=>{
-  const {recognition:r,callbacks:c}=setup();
-  expect(r.continuous).toBe(false);expect(r.lang).toBe('zh-TW');
+ it('停頓後重新聆聽，保留前一段文字直到手動停止',()=>{
+  const {recognition:r,callbacks:c,session}=setup();
+  r.start=vi.fn();
+  expect(r.continuous).toBe(true);expect(r.lang).toBe('zh-TW');
   r.onstart?.();expect(c.message).toHaveBeenLastCalledWith(expect.stringContaining('正在聆聽'));
   r.onresult?.({resultIndex:0,results:[{isFinal:false,0:{transcript:'我設計'}}]});
   expect(c.text).toHaveBeenLastCalledWith('我設計');
   r.onresult?.({resultIndex:0,results:[{isFinal:true,0:{transcript:'我設計了一張卡片。'}}]});
   expect(c.text).toHaveBeenLastCalledWith('我設計了一張卡片。');
-  r.onend?.();expect(c.end).toHaveBeenCalled();expect(c.message).toHaveBeenLastCalledWith(expect.stringContaining('辨識完成'));
+  r.onend?.();
+  vi.advanceTimersByTime(250);
+  expect(r.start).toHaveBeenCalledOnce();
+  expect(c.end).not.toHaveBeenCalled();
+  r.onresult?.({resultIndex:0,results:[{isFinal:true,0:{transcript:'我把它送給朋友。'}}]});
+  expect(c.text).toHaveBeenLastCalledWith('我設計了一張卡片。我把它送給朋友。');
+  session.stop();
+  r.onend?.();
+  expect(c.end).toHaveBeenCalledOnce();
  });
  it('多次結果不重複累加，重試保留原句',()=>{
   const {recognition:r,callbacks:c}=setup('今天');
@@ -35,10 +44,10 @@ describe('課堂免登入語音造句',()=>{
   expect(c.text).toHaveBeenLastCalledWith('今天我設計卡片。');
  });
  it('允許麥克風但無文字時顯示重試訊息',()=>{
-  const {recognition:r,callbacks:c}=setup();r.onend?.();
+  const {recognition:r,callbacks:c,session}=setup();session.stop();r.onend?.();
   expect(c.message).toHaveBeenLastCalledWith(expect.stringContaining('尚未收到辨識文字'));expect(c.text).not.toHaveBeenCalled();
  });
- it.each(['network','not-allowed','audio-capture','no-speech'])('顯示具體錯誤且結束事件不覆蓋錯誤：%s',error=>{
+ it.each(['network','not-allowed','audio-capture'])('顯示具體錯誤且結束事件不覆蓋錯誤：%s',error=>{
   const {recognition:r,callbacks:c}=setup();r.onerror?.({error});const message=c.message.mock.lastCall?.[0];r.onend?.();
   expect(c.message.mock.lastCall?.[0]).toBe(message);expect(message).toBeTruthy();expect(c.end).toHaveBeenCalled();
  });
