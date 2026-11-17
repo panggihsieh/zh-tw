@@ -12,6 +12,7 @@ import SentencePractice from './SentencePractice';
 import {parseQuestionCsv,questionCsvExample} from './competitionQuestionCsv';
 
 import {previewRequest} from './kahootPreview';
+import { endSoundEnabled, endSoundVolume, playCompetitionEndSound, setEndSoundEnabled, setEndSoundVolume } from "./competitionEndSound";
 import { openCompetitionPreview } from './competitionPreviewTab';
 import CompetitionFinalRanking from './CompetitionFinalRanking';
 import { useCompetitionEndSound } from './competitionEndSound';
@@ -31,6 +32,8 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
  const [article, setArticle] = useState("");
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState(pilot?`一字多詞 Kahoot Ver.2｜`:'一字多詞 Kahoot 練習'),[questions,setQuestions]=useState<CompetitionQuestion[]>(()=>pilot?lessonSeven.rows.filter(row=>["際","璃","磁"].includes(row.character)).map(row=>({type:"sentence-practice",prompt:"用「"+row.character+"」組詞，再造句",phrase:row.character,character:row.character,reading:row.reading,seconds:90})):[]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
+ const [soundEnabled,setSoundEnabled]=useState(endSoundEnabled);
+ const [soundVolume,setSoundVolume]=useState(endSoundVolume);
  useCompetitionEndSound(rooms);
  const [lessons,setLessons]=useState<SentenceLesson[]>([]),[structureIds,setStructureIds]=useState<Record<string,string>>({}),[lessonIds,setLessonIds]=useState<string[]>(pilot?[lessonSeven.id]:[]),[grade,setGrade]=useState(5),[term,setTerm]=useState('上'),[gameType,setGameType]=useState<'sentence-practice'|'quiz'|'structure'|'writing'>('sentence-practice'),[duration,setDuration]=useState(10),[maxParticipants,setMaxParticipants]=useState(30),[testRoom,setTestRoom]=useState(pilot),[now,setNow]=useState(Date.now());
  async function run(fn:()=>Promise<void>){setBusy(true);setMessage('');try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
@@ -71,6 +74,15 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
   <SentencePractice fixedCharacter={pilot} lessonTitle={pilot ? lessonSeven.title : undefined} initialCard={previewCard} correctionOption={<label className="secondary competition-real-ai"><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/><span>使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</span></label>} simulated={!useRealAi} request={useRealAi ? sentenceRequest : previewRequest} onBack={()=>{setUseRealAi(false);setPreviewCard(null);}}/>
  </section>;
  return <section className="competition-admin">
+  <details>
+   <summary>課堂結束音效</summary>
+   <div className="competition-actions">
+    <label><input type="checkbox" checked={soundEnabled} onChange={event=>{const enabled=event.target.checked;setSoundEnabled(enabled);setEndSoundEnabled(enabled);}}/> 啟用結束音效</label>
+    <label>音效音量 <input type="range" min={0} max={100} value={soundVolume} onChange={event=>{const volume=event.target.valueAsNumber;setSoundVolume(volume);setEndSoundVolume(volume);}}/> {soundVolume}%</label>
+    <button className="secondary" type="button" disabled={!soundEnabled||soundVolume===0} onClick={()=>void playCompetitionEndSound().catch(()=>setMessage('無法播放結束音效，請再試一次。'))}>試聽結束音效</button>
+   </div>
+   <p>開關和音量會儲存在此瀏覽器。</p>
+  </details>
   {!pilot && <button className="secondary" disabled={busy||!roster.length||!Number.isInteger(classroomMinutes)||classroomMinutes<1||classroomMinutes>120}
     onClick={()=>void run(async()=>{
       const {sentenceRequest}=await import("./sentenceApi");
