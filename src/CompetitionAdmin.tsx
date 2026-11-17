@@ -18,7 +18,7 @@ import { useCompetitionEndSound } from './competitionEndSound';
 import {simpleStructure} from './StructureAssignment';
 
 const emptyQuestion=():CompetitionQuestion=>({prompt:'',options:['','','',''],answer:0,seconds:30});
-const structureChoices=['左右','上下','全包圍'];
+const structureChoices=['左右','上下','左中右','上中下','全包圍','半包圍','獨體','品字形'];
 function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'name'>}){
  if(item.avatarKind==='custom'&&item.avatar)return <img className="competition-avatar" src={item.avatar} alt={`${item.name}的公仔`}/>;
  if(item.avatarKind==='anonymous')return <span className="competition-avatar anonymous" aria-label="匿名公仔">?</span>;

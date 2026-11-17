@@ -150,3 +150,4 @@
   min-width: 32px;
   padding: 5px 8px;
 }
+.competition-structure-thumbnail { width: clamp(42px, 7vw, 76px); aspect-ratio: 1; object-fit: contain; background: white; border-radius: 6px; margin-inline-start: auto; }

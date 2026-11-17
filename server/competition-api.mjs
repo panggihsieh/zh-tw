@@ -29,7 +29,7 @@ export function validateRoomInput(value){
    if(!/^[\p{Script=Han}]{1,8}$/u.test(phrase)||!/^\p{Script=Han}$/u.test(character)||!phrase.includes(character)||!Number.isInteger(q.seconds)||q.seconds<30||q.seconds>300)fail(`第 ${index+1} 張生字字卡格式不完整。`);
    return {id:String(index+1),type:'sentence-practice',prompt:`先想一個含「${character}」的語詞，再造一個完整句子`,phrase,character,reading:String(q.reading||'').slice(0,40),seconds:q.seconds};
   }
-  if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>6||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
+  if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>(gameType==='structure'?8:6)||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
   return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
  return {title:value.title.trim(),classId:String(value.classId||''),className:value.className.trim(),loginMode,gameType,duration,maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
