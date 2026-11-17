@@ -106,3 +106,47 @@
 .competition-centered-podium > div:first-child .competition-avatar {
   width: clamp(92px, 12vw, 144px);
 }
+.competition-sentence-stage h1 {
+  margin-block: 12px;
+  font-size: clamp(22px, 3.5vw, 36px);
+}
+.competition-sentence-top {
+  display: grid;
+  grid-template-columns: minmax(72px, 1fr) minmax(0, 3fr);
+  align-items: center;
+  gap: clamp(8px, 3vw, 24px);
+  margin-bottom: 12px;
+}
+.competition-sentence-top .competition-target-character {
+  font-size: clamp(54px, 12vw, 128px);
+  line-height: 1;
+}
+.competition-sentence-reading {
+  margin-block: 0 6px;
+}
+.competition-sentence-reading strong {
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1.2;
+}
+.competition-sentence-voice > p {
+  margin-block: 4px;
+}
+.competition-sentence-voice .microphone-meter {
+  margin-block: 6px 0;
+  padding: 8px;
+}
+.competition-sentence-voice .microphone-meter canvas {
+  height: 40px;
+}
+.competition-sentence-voice .microphone-meter p {
+  margin-block: 4px 0;
+}
+.competition-sentence-answer [aria-label="常用標點"] {
+  gap: 4px;
+  margin-block: 6px 0;
+}
+.competition-sentence-answer [aria-label="常用標點"] > button {
+  width: auto;
+  min-width: 32px;
+  padding: 5px 8px;
+}
