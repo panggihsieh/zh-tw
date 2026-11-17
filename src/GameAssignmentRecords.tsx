@@ -16,10 +16,16 @@ interface RankingPhoto {
   createdAt: number;
 }
 
+function classroomDate(room: CompetitionRoom) {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Taipei" }).format(
+    new Date(room.startedAt ?? room.closedAt ?? room.createdAt),
+  );
+}
+
 function exportRanking(room: CompetitionRoom, items: LeaderboardItem[]) {
   const rows = [
-    ["課堂", "班級", "活動", "名次", "座號", "姓名", "分數", "答對題數", "已答題數", "總題數"],
-    ...items.map(item => [room.title, room.className, gameLabels[room.gameType], item.rank, item.seat, item.name, item.points, item.correct, item.answered, room.questionCount]),
+    ["來源專案", "課堂識別碼", "課堂日期", "測驗名稱", "班級", "活動", "名次", "座號", "姓名", "分數", "答對題數", "已答題數", "總題數"],
+    ...items.map(item => ["zh-tw", room.id, classroomDate(room), room.title, room.className, gameLabels[room.gameType], item.rank, item.seat, item.name, item.points, item.correct, item.answered, room.questionCount]),
   ];
   const csv = rows.map(row => row.map(value => {
     const text = String(value ?? "");
@@ -83,6 +89,7 @@ function CompetitionRecords() {
           {rooms.map(room => <option key={room.id} value={room.id}>{room.className} · {gameLabels[room.gameType]} · {room.title}（{room.code}）</option>)}
         </select>
       </label>}
+      {room && <p>課堂日期 {classroomDate(room)} · 測驗名稱 {room.title}</p>}
       {status && <p role="status">{status}</p>}
       {room && items.length > 0 && <>
         <button type="button" className="secondary" onClick={() => exportRanking(room, items)}>匯出成績 CSV</button>

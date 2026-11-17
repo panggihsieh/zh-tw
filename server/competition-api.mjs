@@ -1,3 +1,4 @@
+import {exportCompetitionClassroom} from './classroom-export.mjs';
 import { randomUUID, randomBytes, createHash } from 'node:crypto';
 import { writingIdentity } from './writing-api.mjs';
 import { gradePractice } from './sentence-api.mjs';
@@ -100,7 +101,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     if(!permitted(room,user))fail('你不在這個班級名單中。',403);
     return send(200,{room:{...publicRoom(room,user.admin),...(user.guest?{nameChoices:(room.students||[]).map(student=>({seat:student.seat,name:student.name}))}:{})}});
    }
-   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive|photos)$/i);if(!match)fail('找不到競賽功能。',404);
+   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive|photos|classroom-export)$/i);if(!match)fail('找不到競賽功能。',404);
    const [,id,action]=match;let record=await store.get(roomKey(id)),room=record.value;if(room.status==='running'&&room.expiresAt&&now()>=room.expiresAt){const expired={...room,status:'closed',closedAt:room.expiresAt};await store.update(roomKey(id),expired,record.generation);record=await store.get(roomKey(id));room=record.value;}
    if(action==='archive'){
     if(req.method!=='POST'||!user.admin)fail('僅管理者可移除課堂。',403);
@@ -109,6 +110,11 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     return send(200,{archived:true});
    }
    if(!permitted(room,user))fail('你不在這個班級名單中。',403);
+   if(action==='classroom-export'){
+    if(req.method!=='POST'||!user.admin)fail('僅管理者可匯出課堂紀錄。',403);
+    const ranking=rankParticipants(await scan(`competition-participants/${id}/`));
+    return send(200,await exportCompetitionClassroom(room,ranking,await requestBody(req)));
+   }
    if(action==='photos'){
     const prefix=`competition-ranking-photos/${id}/`,key=`${prefix}${encodeURIComponent(user.uid)}.json`;
     if(!user.admin){try{await store.get(participantKey(id,user.uid));}catch{fail('請先加入這堂課才能保存排名照片。',403);}}

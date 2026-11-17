@@ -121,6 +121,7 @@ for (const file of [
   "quiz-api.mjs",
   "sentence-api.mjs",
   "competition-api.mjs",
+  "classroom-export.mjs",
   "competition-writing.mjs",
   "stroke-judge.mjs",
   "sentence-bank.json",

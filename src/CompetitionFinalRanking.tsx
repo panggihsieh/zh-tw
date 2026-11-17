@@ -1,19 +1,56 @@
+import CompetitionClassroomExport from './CompetitionClassroomExport';
 import { useEffect, useRef, useState } from 'react';
 import { competitionRequest, type CompetitionRoom, type LeaderboardItem } from './competitionApi';
 import { captureCompetitionRanking } from './competitionRankingPhoto';
 import { endSoundEnabled, playCompetitionEndSound, setEndSoundEnabled } from './competitionEndSound';
 
 interface Photo { id:string; image:string; createdAt:number; title:string }
-export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false}:{room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
+export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false,autoSave=false,allowExport=false}:{autoSave?:boolean;allowExport?:boolean;room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
  const board=useRef<HTMLDivElement>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[photo,setPhoto]=useState<Photo|null>(null),[preview,setPreview]=useState(''),[revision,setRevision]=useState(''),[enabled,setEnabled]=useState(endSoundEnabled);
+ const [photosLoaded,setPhotosLoaded]=useState(false);
+ const rankingRevision=items.length ? JSON.stringify(items.map(item=>[item.uid,item.rank,item.points,item.correct,item.answered])) : '';
  useEffect(()=>{
   let active=true;
-  if(!simulated&&room.status==='closed')void request<{items:Photo[]}>(`/rooms/${room.id}/photos`).then(value=>{if(active)setPhoto(value.items[0]??null);}).catch(error=>{if(active)setMessage(`照片紀錄載入失敗：${error.message}`);});
+  if(!simulated&&room.status==='closed')void request<{items:Photo[]}>(`/rooms/${room.id}/photos`).then(value=>{
+   if(active){setPhoto(value.items[0]??null);setPhotosLoaded(true);}
+  }).catch(error=>{if(active)setMessage(`照片紀錄載入失敗：${error.message}`);});
   return()=>{active=false;};
  },[room.id,room.status,request,simulated]);
+ const automaticSaveFinished=useRef(false);
+ useEffect(()=>{
+  if(!autoSave||simulated||room.status!=='closed'||!photosLoaded||photo||!rankingRevision||automaticSaveFinished.current)return;
+  const node=board.current;
+  if(!node)return;
+  let active=true;
+  let retry:ReturnType<typeof setTimeout>|undefined;
+  async function save(attempt:number){
+   if(!node||!active)return;
+   setBusy(true);
+   try {
+    const image=await captureCompetitionRanking(node);
+    if(!active)return;
+    const value=await request<{photo:Photo}>(`/rooms/${room.id}/photos`,{image,revision:rankingRevision});
+    if(active){
+     automaticSaveFinished.current=true;
+     setPhoto(value.photo);
+     setMessage('排名照片已自動保存到課堂紀錄。');
+     setBusy(false);
+    }
+   } catch(error){
+    if(!active)return;
+    if(attempt<3)retry=setTimeout(()=>void save(attempt+1),3000);
+    else {
+     setMessage(`自動保存失敗：${(error as Error).message}。可手動拍照保存。`);
+     setBusy(false);
+    }
+   }
+  }
+  void save(1);
+  return()=>{active=false;clearTimeout(retry);};
+ },[autoSave,simulated,room.id,room.status,photosLoaded,photo,rankingRevision,request]);
  async function capture(){
   if(!board.current)return;setBusy(true);setMessage('');
-  try{setRevision(JSON.stringify(items.map(v=>[v.uid,v.rank,v.points,v.correct,v.answered])));setPreview(await captureCompetitionRanking(board.current));setMessage('照片已拍好，確認後可上傳保存。');}catch(error){setMessage((error as Error).message);}finally{setBusy(false);}
+  try{setRevision(rankingRevision);setPreview(await captureCompetitionRanking(board.current));setMessage('照片已拍好，確認後可上傳保存。');}catch(error){setMessage((error as Error).message);}finally{setBusy(false);}
  }
  async function upload(){
   setBusy(true);setMessage('');
@@ -35,6 +72,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
   </div>
   {preview&&<div className="competition-ranking-photo"><img src={preview} alt="待上傳的排名照片"/><a href={preview} download={`${room.title}-排名.jpg`}>下載照片</a>{!simulated&&<button type="button" className="primary" disabled={busy} onClick={()=>void upload()}>上傳排名照片</button>}{simulated&&<p>模擬預覽僅供下載，不上傳正式紀錄。</p>}</div>}
   {photo&&<details><summary>查看已上傳排名照片</summary><div className="competition-ranking-photo"><img src={photo.image} alt={`${photo.title}排名照片`}/><a href={photo.image} download={`${photo.title}-排名.jpg`}>下載已保存照片</a><p>拍照保存：{new Date(photo.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})}</p></div></details>}
+  {allowExport&&<CompetitionClassroomExport room={room} items={items} revision={rankingRevision}/>}
   <p role="status">{busy?'處理排名照片中…':message}</p>
  </section>;
 }
