@@ -43,7 +43,7 @@ export function MicrophoneMeter({active}:{active:boolean}) {
  return <div className="microphone-meter"><canvas ref={canvas} width={480} height={80} role="img" aria-label="即時麥克風頻譜，橫軸為低頻到高頻"/><div className="microphone-scale"><span>低頻 0 Hz</span><span>高頻 4,000 Hz</span></div><label>音量 <meter min={0} max={100} value={level}/><span>{level}%</span></label><p role="status">{status}</p></div>;
 }
 
-export default function MicrophoneTest(){
+export default function MicrophoneTest({initiallyOpen=false}:{initiallyOpen?:boolean}){
  const [active,setActive]=useState(false),[message,setMessage]=useState(''),[text,setText]=useState(''),[listening,setListening]=useState(false);
  const recognition=useRef<CompetitionRecognition|null>(null),cancel=useRef<(()=>void)|null>(null);
  function stop(){cancel.current?.();recognition.current?.abort();recognition.current=null;setListening(false);setActive(false);}
@@ -57,5 +57,5 @@ export default function MicrophoneTest(){
   cancel.current=configureSentenceRecognition(r,'',{text:setText,message:setMessage,end:()=>{setListening(false);recognition.current=null;}});
   try{r.start();setListening(true);}catch{cancel.current?.();recognition.current=null;setListening(false);setMessage('無法啟動辨識服務，請重試。');}
  }
- return <details className="microphone-test" onToggle={event=>{if(!event.currentTarget.open)stop();}}><summary><Mic size={18}/>麥克風測試</summary><p>先看頻譜是否跳動，再測試語音轉文字。有收音卻沒有文字時，請檢查瀏覽器語音服務與網路。</p><div className="microphone-actions"><button className="secondary" disabled={active} onClick={()=>{setActive(true);setMessage('');}}><Mic size={16}/>開始收音測試</button><button className="secondary microphone-recognition" disabled={!active||listening} onClick={recognize}>測試語音轉文字</button><button className="secondary" disabled={!active} onClick={stop}><Square size={16}/>停止測試</button></div><MicrophoneMeter active={active}/><p role="status">{message}</p><label className="microphone-transcript">語音轉文字結果<textarea readOnly rows={4} value={text} placeholder={listening?'正在辨識，請說出一句話…':'按下「測試語音轉文字」，辨識出的文字會顯示在這裡。'}/></label><small>頻譜只在本機分析，不錄音、不上傳；語音轉文字使用瀏覽器語音服務。收音測試最多 60 秒，收合即停止。</small></details>;
+ return <details open={initiallyOpen} className="microphone-test" onToggle={event=>{if(!event.currentTarget.open)stop();}}><summary><Mic size={18}/>麥克風測試</summary><p>先看頻譜是否跳動，再測試語音轉文字。有收音卻沒有文字時，請檢查瀏覽器語音服務與網路。</p><div className="microphone-actions"><button className="secondary" disabled={active} onClick={()=>{setActive(true);setMessage('');}}><Mic size={16}/>開始收音測試</button><button className="secondary microphone-recognition" disabled={!active||listening} onClick={recognize}>測試語音轉文字</button><button className="secondary" disabled={!active} onClick={stop}><Square size={16}/>停止測試</button></div><MicrophoneMeter active={active}/><p role="status">{message}</p><label className="microphone-transcript">語音轉文字結果<textarea readOnly rows={4} value={text} placeholder={listening?'正在辨識，請說出一句話…':'按下「測試語音轉文字」，辨識出的文字會顯示在這裡。'}/></label><small>頻譜只在本機分析，不錄音、不上傳；語音轉文字使用瀏覽器語音服務。收音測試最多 60 秒，收合即停止。</small></details>;
 }

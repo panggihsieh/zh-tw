@@ -1,6 +1,6 @@
 import MicrophoneTest from './MicrophoneTest';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
-import { SchoolIamButton, SchoolIamCallback } from './SchoolIamLogin';
+import { SchoolIamCallback } from './SchoolIamLogin';
 import { readVersionRecords } from "./versionRecords";
 import {
   lazy,
@@ -28,6 +28,7 @@ import {
   Leaf,
   LibraryBig,
   LoaderCircle,
+  Mic,
   Play,
   Pencil,
   Puzzle,
@@ -120,10 +121,11 @@ const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+type BackendSection = "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
 const SecurityLog = lazy(() => import("./SecurityLog"));
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
+  library: "我的學習本（暫未對學生發布）",
   "structure-assignment": "生字結構遊戲指派",
   sentences: "一字多詞造句競賽管理",
   competition: "Kahoot 競賽開課管理",
@@ -413,7 +415,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
 
   const [learningTab, setLearningTab] = useState<"saved" | "quiz" | "resources">(restored.page === "resources" ? "resources" : "saved");
   const [showVersions, setShowVersions] = useState(false);
-  const [page, setPage] = useState<Page>(backendMode ? "tts" : restored.page === "tts" ? "learn" : restored.page === "resources" ? "library" : restored.page);
+  const [page, setPage] = useState<Page>(backendMode ? (backendSection === "library" ? "library" : "tts") : "learn");
   const headerRef = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     const header = headerRef.current;
@@ -534,7 +536,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     }
   }
   const [busy, setBusy] = useState("");
-  const [modal, setModal] = useState<"settings" | "export" | "drive" | null>(
+  const [modal, setModal] = useState<"settings" | "export" | "drive" | "microphone" | null>(
     restored.modal,
   );
   const [driveReady, setDriveReady] = useState(false);
@@ -865,7 +867,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }
   const learned = saved.filter((c) => c.reviewState === "learned").length;
   function openBackendSection(section: BackendSection) {
-    setBackendSection(section); setBackendMenuOpen(false); setPage("tts"); setPlaying(false); speech.stop();
+    setBackendSection(section); setBackendMenuOpen(false); setPage(section === "library" ? "library" : "tts"); if (section === "library") void refresh(); setPlaying(false); speech.stop();
     window.scrollTo({ top: 0, behavior: "auto" });
   }
   const visibleSaved = saved.filter(
@@ -953,6 +955,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "gameReview", label: "遊戲作業紀錄", icon: BookOpen },
               ] },
               { title: "全站管理與設定", items: [
+                { section: "library", label: "我的學習本（暫未發布）", icon: LibraryBig },
                 { section: "users", label: "使用者管理", icon: Settings2 },
                 { section: "api", label: "API 設定", icon: Settings2 },
                 { section: "tts", label: "TTS 設定後台", icon: Settings2 },
@@ -988,18 +991,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               生字動畫教室
             </button>
             <a className={gamesOpen ? "nav-item active" : "nav-item"} aria-current={gamesOpen ? "page" : undefined} href="#games"><Grid2X2 size={20}/>遊戲專區</a>
-            <button
-              className={!gamesOpen && page === "library" ? "nav-item active" : "nav-item"}
-              onClick={() => {
-                if (gamesOpen) window.location.hash = "";
-                setPage("library");
-                setPlaying(false);
-                void refresh();
-              }}
-            >
-              <LibraryBig size={20} />
-              我的學習本<span className="nav-count">{saved.length}</span>
-            </button>
+            <button type="button" className="nav-item" onClick={() => setModal("microphone")}><Mic size={20}/>麥克風測試</button>
             <button type="button" className="nav-item student-version-button" onClick={() => setShowVersions(true)}>
               v{SITE_VERSION} · {SITE_VERSION_SHORT_NOTE} · <time dateTime={SITE_UPDATED_AT.replaceAll("/", "-")}>{SITE_UPDATED_AT}</time>
             </button>
@@ -1007,7 +999,6 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           </nav>
               {!backendMode && <div className="header-user-role">
                 {userRole.admin && <span role="status">教師 · 管理者已登入</span>}
-                {!userRole.user && <SchoolIamButton />}
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}
             </div>
@@ -1048,12 +1039,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   <div aria-label="使用方式">
                     <p>生字動畫教室、生字結構遊戲與筆順自由練習皆免費，免登入即可使用。</p>
                     <p>個人 AI 造句須輸入老師提供的限時開課代碼。輸錯三次會鎖定 15 分鐘。使用 AI 校正或評分可能產生費用。</p>
-                    <p>「我的學習本」的 Google Drive 上傳僅開放給老師班級名冊中的學生，請使用名冊登記的 Google 帳號登入。</p>
                   </div>
                   <BirdMascot />
                   <div className="adventure-tools">{studentPageTools}</div>
                 </section>}
-                {!backendMode && <MicrophoneTest />}
+
                 <div id="curriculum-entry">
                 {(!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
@@ -1862,7 +1852,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 )}
               </>
             )}
-            {page === "library" && !backendMode && (
+            {page === "library" && backendMode && (
               <div className="competition-actions" role="group" aria-label="我的學習本分頁">
                 <button type="button" className={learningTab === "saved" ? "primary" : "secondary"}
                   aria-pressed={learningTab === "saved"} onClick={() => setLearningTab("saved")}>生字收藏本</button>
@@ -1872,10 +1862,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   aria-pressed={learningTab === "resources"} onClick={() => setLearningTab("resources")}>教育部字辭典</button>
               </div>
             )}
-            {page === "library" && learningTab === "quiz" && !backendMode && (
+            {page === "library" && learningTab === "quiz" && backendMode && (
               <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent embedded /></Suspense>
             )}
-            {page === "library" && (backendMode || learningTab === "saved") && (
+            {page === "library" && backendMode && learningTab === "saved" && (
               <>
                 <div className="page-heading">
                   <div>
@@ -2035,7 +2025,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 </p>
               </>
             )}
-            {page === "library" && learningTab === "resources" && !backendMode && (
+            {page === "library" && learningTab === "resources" && backendMode && (
               <>
                 <div className="page-heading">
                   <div>
@@ -2198,6 +2188,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             ))}
           </ul>
         </Modal>}
+        {modal === "microphone" && <Modal title="麥克風測試" close={() => setModal(null)}><MicrophoneTest initiallyOpen /></Modal>}
         {modal === "settings" && (
           <Modal title="學習偏好" close={() => setModal(null)}>
             <p className="modal-description">讓教室變成適合自己的樣子。</p>
