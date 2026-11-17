@@ -17,8 +17,13 @@ export async function captureCompetitionRanking(node:HTMLElement){
  await bounded(document.fonts.ready,10000);
  await bounded(Promise.all([...node.querySelectorAll('img')].map(image=>image.decode())),10000);
  const render=await bounded(renderer(),15000),rect=node.getBoundingClientRect();
- const canvas=await bounded(render(node,{backgroundColor:'#fffff5',scale:Math.min(2,2400/Math.max(rect.width,rect.height)),logging:false,imageTimeout:10000}),20000);
- const image=canvas.toDataURL('image/jpeg',.85);
- if(image.length>1200000)throw Error('排名照片過大，請縮小畫面後重試。');
- return image;
+ const maxPixels=1_000_000;
+ const scale=Math.min(2,Math.sqrt(maxPixels/(rect.width*rect.height)),2400/Math.max(rect.width,rect.height));
+ const canvas=await bounded(render(node,{backgroundColor:'#fffff5',scale,logging:false,imageTimeout:10000}),20000);
+ // Match the server's data URL limit, including the Base64 overhead.
+ for(const quality of [.85,.7,.55,.4]){
+  const image=canvas.toDataURL('image/jpeg',quality);
+  if(image.startsWith('data:image/jpeg;base64,')&&image.length<=1_200_000)return image;
+ }
+ throw Error('排名照片無法壓縮到約 900 KB 以下，請重試。');
 }
