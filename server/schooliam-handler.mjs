@@ -2,12 +2,14 @@ import { createHash, randomBytes } from 'node:crypto';
 import { createIamLogin } from './schooliam-login.mjs';
 import { createTokenExchange } from './schooliam-token-exchange.mjs';
 import { resolveSchoolIamTeacher } from './schooliam-policy.mjs';
+import {createRequestGuard} from './request-security.mjs';
 
 const origin = 'https://zh-tw.web.app';
 const hash = value => createHash('sha256').update(value).digest('hex');
 const cookie = req => /(?:^|;\s*)__session=([A-Za-z0-9_-]{43})(?:;|$)/.exec(req.headers.cookie || '')?.[1];
 
-export function createSchoolIamHandler({ db, auth, env = process.env }) {
+export function createSchoolIamHandler({ db, auth, env = process.env, cloud = false }) {
+  const guard = createRequestGuard({cloud});
   const sessions = db.collection('hanzi_schooliam_pending');
   const configured = env.SCHOOLIAM_BROKER_URL && env.SCHOOLIAM_CLIENT_SECRET;
   const login = configured ? createIamLogin({
@@ -17,6 +19,7 @@ export function createSchoolIamHandler({ db, auth, env = process.env }) {
   }) : null;
 
   return async (req, res) => {
+    if (!guard(req, res)) return;
     const url = new URL(req.url, origin);
     const send = (status, body) => {
       res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' });

@@ -1,5 +1,5 @@
 import {exportCompetitionClassroom} from './classroom-export.mjs';
-import { randomUUID, randomBytes, createHash } from 'node:crypto';
+import { randomUUID, randomBytes, randomInt, createHash } from 'node:crypto';
 import { writingIdentity } from './writing-api.mjs';
 import { gradePractice } from './sentence-api.mjs';
 import { writingReferences, judgeCompetitionWriting } from './competition-writing.mjs';
@@ -7,7 +7,7 @@ import { writingReferences, judgeCompetitionWriting } from './competition-writin
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
 const text=(value,max)=>typeof value==='string'&&value.trim()&&value.length<=max;
-export const makeRoomCode=(random=Math.random)=>Array.from({length:4},()=>alphabet[Math.floor(random()*alphabet.length)]).join('');
+export const makeRoomCode=random=>Array.from({length:4},()=>alphabet[random?Math.floor(random()*alphabet.length):randomInt(alphabet.length)]).join('');
 export function validateRoomInput(value){
  if(!value||!text(value.title,100)||!text(value.className,80))fail('請填寫競賽名稱與班級。');
  if(value.loginMode&&value.loginMode!=='roster')fail('學生統一以開課代碼及名冊姓名免登入加入，不再提供 Google 匿名加入。');
@@ -40,7 +40,7 @@ export function rankParticipants(items){
  let rank=0,previous;return sorted.map((item,index)=>{const key=`${item.points}/${item.correct}/${item.totalResponseMs}`;if(key!==previous)rank=index+1;previous=key;return {...item,rank};});
 }
 async function requestBody(req){let size=0,chunks=[];for await(const c of req){size+=c.length;if(size>1500000)fail('請求資料過大。',413);chunks.push(c);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));}
-export function createCompetitionHandler({store,origins,authenticate=writingIdentity,gradeSentence,now=()=>Date.now(),random=Math.random}){
+export function createCompetitionHandler({store,origins,authenticate=writingIdentity,gradeSentence,now=()=>Date.now(),random}){
  const roomKey=id=>`competition-rooms/${id}.json`,participantKey=(id,uid)=>`competition-participants/${id}/${uid}.json`;
  async function scan(prefix){let cursor,items=[],pages=0;do{const page=await store.list(prefix,cursor);items.push(...await Promise.all(page.names.map(async name=>(await store.get(name)).value)));cursor=page.nextCursor;if(++pages>30)fail('資料量過大。');}while(cursor);return items;}
  const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(admin?{roster:room.roster,questions:room.questions}: {})});
@@ -180,6 +180,6 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     const updated={...participant,index:nextIndex,correct:participant.correct+(correct?1:0),points:participant.points+points,totalResponseMs:participant.totalResponseMs+elapsed,questionStartedAt:now(),finished,finishedAt:finished?now():undefined};delete updated.gradingIndex;const latest=question.type==='sentence-practice'?await store.get(key):participantRecord;await store.update(key,updated,latest.generation);return send(200,{correct,correctAnswer:question.answer,points,grade,participant:publicParticipant(updated,user),question:finished?null:{...room.questions[nextIndex],answer:undefined}});
    }
    fail('不支援的操作。',404);
-  }catch(error){const status=[400,401,403,404,405,409,413,429].includes(error.status)?error.status:400;return send(status,{error:error.message||'競賽服務暫時無法使用。'});}
+  }catch(error){const status=error instanceof SyntaxError?400:[400,401,403,404,405,409,413,429].includes(error.status)?error.status:503;return send(status,{error:error instanceof SyntaxError?'請求 JSON 格式不符。':status===503?'競賽服務暫時無法使用，請稍後重試。':error.message});}
  };
 }

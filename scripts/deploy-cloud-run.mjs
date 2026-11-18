@@ -123,6 +123,7 @@ for (const file of [
   "competition-api.mjs",
   "classroom-export.mjs",
   "stroke-speech.mjs",
+  "request-security.mjs",
   "competition-writing.mjs",
   "stroke-judge.mjs",
   "sentence-bank.json",

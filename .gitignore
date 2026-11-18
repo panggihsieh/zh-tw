@@ -9,3 +9,10 @@ playwright-report/
 .firebase/
 __pycache__/
 tmp/pdfs/
+
+# Local credentials must never be included in commits.
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx

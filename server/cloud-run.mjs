@@ -4,6 +4,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
 import { createSchoolIamHandler } from './schooliam-handler.mjs';
 import { createStructureServer } from "./structure-api.mjs";
+import { serviceUnavailable } from './request-security.mjs';
 import {createWritingHandler,createWritingCloudStore} from './writing-api.mjs';
 
 const project = "voltaic-circuit-511310-a3";
@@ -62,15 +63,15 @@ const server = createStructureServer({
   origins,
 });
 const iamApp = initializeApp({ projectId: project }, 'schooliam-bridge');
-const iamHandler = createSchoolIamHandler({ auth: getAuth(iamApp), db: getFirestore(iamApp) });
+const iamHandler = createSchoolIamHandler({ auth: getAuth(iamApp), db: getFirestore(iamApp), cloud: true });
 const originalHandlers = server.listeners('request');
 server.removeAllListeners('request');
 server.on('request', (req, res) => {
   const path = req.url.split('?')[0];
   if (['/auth/schooliam/login', '/auth/schooliam/exchange'].includes(path)) {
-    void iamHandler(req, res);
+    void iamHandler(req, res).catch(() => serviceUnavailable(res));
   } else {
-    for (const handler of originalHandlers) handler.call(server, req, res);
+    for (const handler of originalHandlers) Promise.resolve(handler.call(server, req, res)).catch(() => serviceUnavailable(res));
   }
 });
 server.listen(Number(process.env.PORT || 8080), "0.0.0.0", () =>

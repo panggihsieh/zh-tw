@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { randomBytes } from "node:crypto";
 import { authenticateAdmin } from "./admin-auth.mjs";
 import { isIP } from "node:net";
+import {createRequestGuard, requestIp, serviceUnavailable} from './request-security.mjs';
 import { createQuizHandler } from './quiz-api.mjs';
 import { createSentenceHandler } from './sentence-api.mjs';
 import { createCompetitionHandler } from './competition-api.mjs';
@@ -78,6 +79,7 @@ export function createStructureServer({
   quizAuthenticate,
 } = {}) {
   const unlocks = new Map();
+  const guard = createRequestGuard({cloud});
   async function persist(data) {
     if (configStore) return configStore.save(data);
     await mkdir(dirname(configFile), { recursive: true });
@@ -201,10 +203,10 @@ export function createStructureServer({
     if(!Array.isArray(check.checks)||check.checks.length!==v.count||check.checks.some((c,i)=>c.index!==i||c.ok!==true))throw Error('AI 交叉檢查未通過，本批未入庫：'+(Array.isArray(check.checks)?check.checks.filter(c=>c.ok!==true).map(c=>'第'+(Number(c.index)+1)+'題 '+String(c.reason).slice(0,240)).join('；'):'檢查格式不符'));
     return {...result,aiCheck:{model:config.model,checkedAt:new Date().toISOString(),checks:check.checks,notice:'AI 檢查通過僅代表未發現疑點，仍需教師審定'}};
   }});
-  return http.createServer(async (req, res) => {
+  return http.createServer({maxHeaderSize:16384, headersTimeout:10000, requestTimeout:30000, keepAliveTimeout:5000}, async (req, res) => {
+    if (!guard(req, res)) return;
     const pathname = (req.url || "").split("?")[0];
-    const candidate = cloud ? req.headers["x-forwarded-for"]?.split(",").at(-1)?.trim() : req.socket.remoteAddress;
-    const ip = candidate && isIP(candidate) ? candidate : null;
+    const ip = requestIp(req, cloud);
     if (quizStore && pathname.startsWith("/api/structure/")) {
       const reply = (status, value) => {
         res.writeHead(status, {"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});
@@ -255,11 +257,11 @@ export function createStructureServer({
         return reply(503,{error:"安全紀錄服務暫時無法使用"});
       }
     }
-    if(pathname.startsWith('/api/structure/stroke-speech/') && strokeSpeechHandler) return strokeSpeechHandler(req,res);
-    if(req.url?.startsWith('/api/structure/sentence/') && sentenceHandler) return sentenceHandler(req,res);
-    if(req.url?.startsWith('/api/structure/competition/') && competitionHandler) return competitionHandler(req,res);
-    if(req.url?.startsWith('/api/structure/quiz/') && quizHandler) return quizHandler(req,res);
-    if (req.url?.startsWith('/api/structure/writing/') && writingHandler) return writingHandler(req, res);
+    if(req.url?.startsWith('/api/structure/sentence/') && sentenceHandler) return sentenceHandler(req,res).catch(()=>serviceUnavailable(res));
+    if(pathname.startsWith('/api/structure/stroke-speech/') && strokeSpeechHandler) return strokeSpeechHandler(req,res).catch(()=>serviceUnavailable(res));
+    if(req.url?.startsWith('/api/structure/competition/') && competitionHandler) return competitionHandler(req,res).catch(()=>serviceUnavailable(res));
+    if(req.url?.startsWith('/api/structure/quiz/') && quizHandler) return quizHandler(req,res).catch(()=>serviceUnavailable(res));
+    if (req.url?.startsWith('/api/structure/writing/') && writingHandler) return writingHandler(req, res).catch(()=>serviceUnavailable(res));
     const allowed = origins.includes(req.headers.origin);
     const headers = {
       "Content-Type": "application/json; charset=utf-8",
@@ -320,6 +322,8 @@ export function createStructureServer({
         providers: PROVIDERS,
       });
       if (url.pathname === "/api/structure/unlock" && req.method === "POST") {
+        for (const [key, entry] of unlocks) if (entry.expires <= Date.now()) unlocks.delete(key);
+        if (unlocks.size >= 1024) return send(429, {error:"編輯工作階段過多，請稍後重試。"});
         // Validate decryptability before issuing an editing session.
         await store();
         const unlockToken = randomBytes(32).toString("hex");
