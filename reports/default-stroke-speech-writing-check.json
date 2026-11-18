@@ -1,0 +1,12 @@
+{
+  "scope": "Chromium實際React元件及滑鼠書寫，讀取正式站API和筆順檔，攔截TTS驗證每筆文字，非裝置音色試聽。",
+  "results": [
+    {
+      "character": "椒",
+      "strokeCount": 12,
+      "accepted": 12,
+      "speechCalls": 12,
+      "status": "passed"
+    }
+  ]
+}

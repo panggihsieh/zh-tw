@@ -81,9 +81,8 @@ app.whenReady().then(async()=>{
   for(const character of characters){
    console.log('Checking',character);
    await js(`window.choose(${JSON.stringify(character)});true`);
-   await until(`!!document.querySelector('svg[aria-label="書寫區 ${character}"]') && [...document.querySelectorAll('button')].some(b=>b.textContent==='開啟筆畫語音'&&!b.disabled)`);
-   await js(`[...document.querySelectorAll('button')].find(b=>b.textContent==='開啟筆畫語音').click();true`);
-   await until('window.spoken.length===1');
+   await until(`!!document.querySelector('svg[aria-label="書寫區 ${character}"]') && [...document.querySelectorAll('button')].some(b=>b.textContent==='關閉筆畫語音'&&!b.disabled)`);
+   assert.equal(await js('window.spoken.length'),0,'Loading a character must not speak before writing');
    const strokes=geometry.get(character.codePointAt(0).toString(16))||JSON.parse(await fs.readFile(`public/game-strokes/${character.codePointAt(0).toString(16)}.json`,'utf8'));
    for(let index=0;index<strokes.length;index++){
     const points=strokes[index].track;
@@ -99,7 +98,7 @@ app.whenReady().then(async()=>{
     try{await until(`document.querySelector('.competition-writing>p').textContent.includes('已完成 ${index+1}／')`);}
     catch(error){await fs.writeFile(path.join(folder,'failure.json'),JSON.stringify({character,stroke:index+1,box,input,pointerLog:await js('window.pointerLog'),status:await js('document.body.innerText'),spoken:await js('window.spoken')},null,2));await fs.writeFile(path.join(folder,'failure.png'),(await window.webContents.capturePage()).toPNG());throw error;}
     assert.equal(await js('window.spoken.at(-1)'),fixtures.get(character).strokes[index].mnemonic?.trim()||fixtures.get(character).strokes[index].spoken);
-    assert.equal(await js('window.spoken.length'),index+2);
+    assert.equal(await js('window.spoken.length'),index+1);
    }
    assert.ok(await js(`document.querySelector('[role="status"]').textContent.includes('書寫完成')`));
    results.push({character,strokeCount:strokes.length,accepted:strokes.length,speechCalls:await js('window.spoken.length'),status:'passed'});
