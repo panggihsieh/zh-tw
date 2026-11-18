@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <title>橫折</title>
+  <g transform="translate(10.50, 880.50) scale(1.0000, -1.0000)">
+    <path d="M269 717V643H631V44H710V717Z" fill="#000000"/>
+  </g>
+</svg>

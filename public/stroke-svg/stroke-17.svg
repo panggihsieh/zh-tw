@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <title>豎折折鉤</title>
+  <g transform="translate(8.85, 856.72) scale(0.9409, -0.9409)">
+    <path d="M742 462V463H321V783H243V390H721C717 171 711 81 691 61C681 52 669 50 647 50C621 50 547 51 471 57C489 34 500 2 503 -21C571 -25 641 -26 678 -23C716 -20 741 -12 762 14C791 48 797 147 801 425V462Z" fill="#000000"/>
+  </g>
+</svg>

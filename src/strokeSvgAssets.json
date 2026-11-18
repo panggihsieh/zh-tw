@@ -1,0 +1,168 @@
+[
+  {
+    "id": "stroke-01",
+    "name": "橫",
+    "src": "/stroke-svg/stroke-01.svg"
+  },
+  {
+    "id": "stroke-02",
+    "name": "豎",
+    "src": "/stroke-svg/stroke-02.svg"
+  },
+  {
+    "id": "stroke-03",
+    "name": "撇",
+    "src": "/stroke-svg/stroke-03.svg"
+  },
+  {
+    "id": "stroke-04",
+    "name": "點",
+    "src": "/stroke-svg/stroke-04.svg"
+  },
+  {
+    "id": "stroke-05",
+    "name": "捺",
+    "src": "/stroke-svg/stroke-05.svg"
+  },
+  {
+    "id": "stroke-06",
+    "name": "挑",
+    "src": "/stroke-svg/stroke-06.svg"
+  },
+  {
+    "id": "stroke-07",
+    "name": "豎鉤",
+    "src": "/stroke-svg/stroke-07.svg"
+  },
+  {
+    "id": "stroke-08",
+    "name": "斜鉤",
+    "src": "/stroke-svg/stroke-08.svg"
+  },
+  {
+    "id": "stroke-09",
+    "name": "橫撇",
+    "src": "/stroke-svg/stroke-09.svg"
+  },
+  {
+    "id": "stroke-10",
+    "name": "橫撇彎鉤",
+    "src": "/stroke-svg/stroke-10.svg"
+  },
+  {
+    "id": "stroke-11",
+    "name": "橫折折撇",
+    "src": "/stroke-svg/stroke-11.svg"
+  },
+  {
+    "id": "stroke-12",
+    "name": "豎撇",
+    "src": "/stroke-svg/stroke-12.svg"
+  },
+  {
+    "id": "stroke-13",
+    "name": "豎折",
+    "src": "/stroke-svg/stroke-13.svg"
+  },
+  {
+    "id": "stroke-14",
+    "name": "豎挑",
+    "src": "/stroke-svg/stroke-14.svg"
+  },
+  {
+    "id": "stroke-15",
+    "name": "豎彎",
+    "src": "/stroke-svg/stroke-15.svg"
+  },
+  {
+    "id": "stroke-16",
+    "name": "豎彎鉤",
+    "src": "/stroke-svg/stroke-16.svg"
+  },
+  {
+    "id": "stroke-17",
+    "name": "豎折折鉤",
+    "src": "/stroke-svg/stroke-17.svg"
+  },
+  {
+    "id": "stroke-18",
+    "name": "豎折撇",
+    "src": "/stroke-svg/stroke-18.svg"
+  },
+  {
+    "id": "stroke-19",
+    "name": "撇折",
+    "src": "/stroke-svg/stroke-19.svg"
+  },
+  {
+    "id": "stroke-20",
+    "name": "撇挑",
+    "src": "/stroke-svg/stroke-20.svg",
+    "warning": "原檔與撇折相同，待核對挑出角度；不自動套用。"
+  },
+  {
+    "id": "stroke-21",
+    "name": "撇點",
+    "src": "/stroke-svg/stroke-21.svg"
+  },
+  {
+    "id": "stroke-22",
+    "name": "橫折彎",
+    "src": "/stroke-svg/stroke-22.svg"
+  },
+  {
+    "id": "stroke-23",
+    "name": "橫折彎鉤",
+    "src": "/stroke-svg/stroke-23.svg"
+  },
+  {
+    "id": "stroke-24",
+    "name": "橫折",
+    "src": "/stroke-svg/stroke-24.svg"
+  },
+  {
+    "id": "stroke-25",
+    "name": "橫鉤",
+    "src": "/stroke-svg/stroke-25.svg"
+  },
+  {
+    "id": "stroke-26",
+    "name": "橫折鉤",
+    "src": "/stroke-svg/stroke-26.svg"
+  },
+  {
+    "id": "stroke-27",
+    "name": "橫折提",
+    "src": "/stroke-svg/stroke-27.svg"
+  },
+  {
+    "id": "stroke-28",
+    "name": "橫斜鉤",
+    "src": "/stroke-svg/stroke-28.svg"
+  },
+  {
+    "id": "stroke-29",
+    "name": "橫折折",
+    "src": "/stroke-svg/stroke-29.svg"
+  },
+  {
+    "id": "stroke-30",
+    "name": "豎折折",
+    "src": "/stroke-svg/stroke-30.svg"
+  },
+  {
+    "id": "stroke-31",
+    "name": "橫折折折鉤",
+    "src": "/stroke-svg/stroke-31.svg"
+  },
+  {
+    "id": "stroke-32",
+    "name": "彎鉤",
+    "src": "/stroke-svg/stroke-32.svg"
+  },
+  {
+    "id": "stroke-33",
+    "name": "臥鉤",
+    "src": "/stroke-svg/stroke-33.svg"
+  }
+]

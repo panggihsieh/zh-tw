@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <title>豎撇</title>
+  <g transform="translate(132.27, 840.00) scale(0.9091, -0.9091)">
+    <path d="M508 792V500C508 320 482 139 223 13C242 0 272 -27 286 -44C557 94 586 299 586 499V792Z" fill="#000000"/>
+  </g>
+</svg>
