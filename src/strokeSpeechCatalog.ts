@@ -36,3 +36,8 @@ export const STROKE_CATALOG = [
 export function findStrokePreset(name:string) {
  return STROKE_CATALOG.find(item=>item.name===name || item.name.split('／').includes(name));
 }
+
+export function fillStrokeMnemonic<T extends {name:string;mnemonic?:string;confirmed:boolean}>(row:T):T {
+ const preset=findStrokePreset(row.name);
+ return !row.mnemonic?.trim()&&preset?{...row,mnemonic:preset.spoken,confirmed:false}:row;
+}

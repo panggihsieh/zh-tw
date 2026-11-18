@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {STROKE_CATALOG,findStrokePreset} from './strokeSpeechCatalog';
+import {STROKE_CATALOG,findStrokePreset,fillStrokeMnemonic} from './strokeSpeechCatalog';
 describe('32 種筆畫口訣',()=>{
  it('保留完整分類與各筆畫口訣',()=>{
   expect(STROKE_CATALOG).toHaveLength(32);
@@ -15,4 +15,10 @@ describe('32 種筆畫口訣',()=>{
   expect(findStrokePreset('豎折折')?.spoken).toBe('豎，右折，下折');
   expect(findStrokePreset('自訂')).toBeUndefined();
  });
+});
+
+it('補入口訣需重新確認，保留自訂及無對照項目',()=>{
+ expect(fillStrokeMnemonic({name:'豎折',confirmed:true})).toEqual({name:'豎折',mnemonic:'豎，右折',confirmed:false});
+ const custom={name:'豎折',mnemonic:'自訂口訣',confirmed:true};expect(fillStrokeMnemonic(custom)).toBe(custom);
+ const unknown={name:'長頓點',confirmed:true};expect(fillStrokeMnemonic(unknown)).toBe(unknown);
 });
