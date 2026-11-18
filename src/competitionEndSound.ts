@@ -21,6 +21,13 @@ export async function playCompetitionEndSound(){
  audio.volume=endSoundVolume()/100;audio.currentTime=0;
  await audio.play();
 }
+export async function playClosedCompetitionSound(roomId:string){
+ if(sounded.has(roomId))return;
+ sounded.add(roomId);
+ setEndSoundEnabled(true);
+ try { await playCompetitionEndSound(); }
+ catch(error){sounded.delete(roomId);throw error;}
+}
 export function observeCompetitionEnd(rooms:CompetitionRoom[],previous:Map<string,string>){
  for(const room of rooms){
   if(previous.get(room.id)==='running'&&room.status==='closed'&&!sounded.has(room.id)){
