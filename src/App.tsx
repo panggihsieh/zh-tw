@@ -1,3 +1,4 @@
+import ResourceCredits from "./ResourceCredits";
 import BasicStrokePractice from "./BasicStrokePractice";
 import { StudentAcademyHome, TeacherAcademyHome } from "./AcademyHome";
 import AcademyBanner from "./AcademyBanner";
@@ -2236,7 +2237,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               <span>
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
               </span>
-              <span>生字動畫收藏本 · 本機學習版</span>
+              <span>生字動畫收藏本 · 免登入學生穩定版</span>
+              {!backendMode && <ResourceCredits />}
             </footer>
           </main>
         </div>
