@@ -377,7 +377,6 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
   const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section"));
-  const [studentCollectionsOpen, setStudentCollectionsOpen] = useState(false);
   const [learningEntryScene, setLearningEntryScene] = useState<0 | 1 | 3>(0);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
     try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
@@ -1057,7 +1056,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             <div hidden={backendMode && backendDashboardOpen}>
             {page === "learn" && (
               <>
-                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { setLearningEntryScene(0); void refresh(); setStudentCollectionsOpen(true); }}/>}
+                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}/>}
 
                 <div id="curriculum-entry">
                 {!backendMode && studentLearningStarted && learningEntryScene !== 0 && <div className="personal-practice-entry"><div><strong>{learningEntryScene === 1 ? "拆字探索 · 個人練習" : "筆順練習 · 個人練習"}</strong><p>{studentFinderOpen ? "先選課文，再勾選想練習的生字。" : learningEntryScene === 1 ? "本課生字的字形結構、部件拆解與字義用法，可自由切換練習。" : "使用本課生字，進行個人筆順練習。"}</p></div><div>{!studentFinderOpen && <button className="secondary" onClick={() => { setStudentFinderOpen(true); setPlaying(false); speech.stop(); setPublisherFocusRequest(value => value + 1); }}>重新選課文</button>}<button className="secondary" onClick={() => { setStudentLearningStarted(false); setStudentFinderOpen(false); setLearningEntryScene(0); setPlaying(false); speech.stop(); }}>返回學習字卡</button></div></div>}
@@ -2199,10 +2198,6 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             </footer>
           </main>
         </div>
-        {studentCollectionsOpen && <Modal title="收藏成果" close={() => setStudentCollectionsOpen(false)}>
-          <p>儲存在這台瀏覽器的生字收藏。</p>
-          {!saved.length ? <div className="academy-collections-empty"><Bookmark size={42}/><h3>等待第一份生字收藏</h3><p>完成學習後按「收藏」，就能在這裡再讀一次。</p><button className="primary" onClick={() => { setStudentCollectionsOpen(false); setStudentLearningStarted(true); setStudentFinderOpen(true); }}>開始認識生字</button></div> : <div className="academy-saved-grid">{saved.map(item => <button key={item.id} onClick={() => { setStudentCollectionsOpen(false); openCollection(item); }}><strong>{item.sourcePhrase}</strong><span>{item.cards.length} 張字卡 · {item.reviewState === "learned" ? "我會了" : "再練習"}</span></button>)}</div>}
-        </Modal>}
         {showVersions && <Modal title="版本紀錄" close={() => setShowVersions(false)}>
           <p className="student-version-summary"><strong>v{SITE_VERSION}</strong> · {SITE_UPDATED_AT}<br />{SITE_VERSION_NOTE}</p>
           <ul className="student-version-summary">

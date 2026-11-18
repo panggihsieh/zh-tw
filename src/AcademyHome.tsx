@@ -1,11 +1,11 @@
-import { ArrowRight, Bookmark, Search, Settings2 } from "lucide-react";
+import { ArrowRight, Search, Settings2 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import BirdMascot from "./BirdMascot";
 
 export function AcademyArt({ kind }: { kind: string }) {
   return <span className={`academy-art art-${kind}`} aria-hidden="true" />;
 }
-export function StudentAcademyHome({ onLearn, onPractice, onCollections, tools }: { onLearn: () => void; onPractice: (scene: 1 | 3) => void; onCollections: () => void; tools?: ReactNode }) {
+export function StudentAcademyHome({ onLearn, onPractice, tools }: { onLearn: () => void; onPractice: (scene: 1 | 3) => void; tools?: ReactNode }) {
   return <section className="academy-home" aria-label="生字探索旅程">
     <div className="academy-intro"><div><p className="academy-eyebrow">看動畫 · 學生字 · 收藏每一次發現</p><h1>一起出發，探索生字的世界！</h1><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p></div><BirdMascot /></div>
     <div className="academy-course-entry"><span>從課本出發，找到今天的生字</span><button onClick={onLearn}>選擇出版社與課程 <ArrowRight size={18}/></button></div>
@@ -14,7 +14,6 @@ export function StudentAcademyHome({ onLearn, onPractice, onCollections, tools }
       <button className="academy-card card-structure" onClick={() => onPractice(1)}><h2>拆字探索</h2><AcademyArt kind="puzzle"/><span className="academy-card-caption">字形結構・部件拆解・字義用法</span></button>
       <button className="academy-card card-writing" onClick={() => onPractice(3)}><h2>筆順練習</h2><AcademyArt kind="brush"/><span className="academy-card-caption">課程內的個人筆順練習</span></button>
       <a className="academy-card card-games" href="#games"><h2>遊戲專區</h2><AcademyArt kind="trophy"/><span className="academy-card-caption">加入老師的課堂挑戰</span></a>
-      <button className="academy-card card-collections" onClick={onCollections}><h2>收藏成果</h2><span className="academy-bookmark"><Bookmark strokeWidth={1}/><span>藏</span></span><span className="academy-card-caption">翻開自己的生字收藏</span></button>
     </nav>
     {tools && <details className="academy-home-tools"><summary>朗讀與學習設定</summary>{tools}</details>}
     <p className="academy-home-note">生字動畫、拆字探索與筆順練習，皆在生字動畫教室依課程學習，免登入即可使用。課堂競賽請使用老師提供的開課代碼。</p>
