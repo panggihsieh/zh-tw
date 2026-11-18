@@ -1,3 +1,4 @@
+import { StudentAcademyHome, TeacherAcademyHome } from "./AcademyHome";
 import AcademyBanner from "./AcademyBanner";
 import MicrophoneTest from './MicrophoneTest';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
@@ -45,7 +46,6 @@ import {
   CloudUpload,
   Shuffle,
   Palette,
-  Trees,
   Trophy,
   Database,
 } from "lucide-react";
@@ -71,7 +71,7 @@ import OfficialDictionary, { loadDictionary, lookupEntries } from "./OfficialDic
 import ReadAlong from "./ReadAlong";
 import CharacterStructureAnalysis from "./CharacterStructureAnalysis";
 import { useSiteTheme } from "./siteThemes";
-import BirdMascot, { BirdMascotIcon } from "./BirdMascot";
+import { BirdMascotIcon } from "./BirdMascot";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE, SITE_VERSION_SHORT_NOTE } from "./siteVersion";
 import "./siteThemes.css";
 import { useUserRole, useStructureReview, confirmedStructureLabel } from "./structureReview";
@@ -376,6 +376,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }, [backendMode]);
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
+  const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section"));
+  const [studentCollectionsOpen, setStudentCollectionsOpen] = useState(false);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
     try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
     catch { return {}; }
@@ -876,6 +878,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }
   const learned = saved.filter((c) => c.reviewState === "learned").length;
   function openBackendSection(section: BackendSection) {
+    setBackendDashboardOpen(false);
     setBackendSection(section); setBackendMenuOpen(false); setPage(section === "library" ? "library" : "tts"); if (section === "library") void refresh(); setPlaying(false); speech.stop();
     window.scrollTo({ top: 0, behavior: "auto" });
   }
@@ -933,12 +936,13 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
         resume: () => speech.resume(),
       }}
     >
-      <div data-backend-section={backendMode ? backendSection : undefined} className={backendMode ? `app-shell top-navigation-layout backend-shell${backendMenuOpen ? " backend-menu-open" : ""}` : "app-shell top-navigation-layout"}>
+      <div data-backend-section={backendMode ? backendSection : undefined} className={backendMode ? `app-shell top-navigation-layout backend-shell academy-card-layout${backendMenuOpen ? " backend-menu-open" : ""}` : "app-shell top-navigation-layout"}>
         <div className="main-wrap">
-          <AcademyBanner />
+          <AcademyBanner onVersion={() => setShowVersions(true)} />
           {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
+            <button className="secondary academy-dashboard-return" onClick={() => { setBackendDashboardOpen(true); setBackendMenuOpen(false); speech.stop(); setPlaying(false); window.scrollTo(0, 0); }}>功能字卡</button>
             <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "功能選單"}</button>
-            <div><span>教師工作區</span><strong>{backendLabels[backendSection] || backendTitles[backendSection]}</strong></div>
+            <div><span>教師工作區</span><strong>{backendDashboardOpen ? "教師後台" : backendLabels[backendSection] || backendTitles[backendSection]}</strong></div>
             <div className="backend-account-actions"><span className="backend-account-label">管理者</span>
               <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
               <a className="backend-student-link" href="/">前往學生網站 <ArrowRight size={18} /></a>
@@ -1047,18 +1051,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 {notice}
               </div>
             )}
+            {backendMode && backendDashboardOpen && <TeacherAcademyHome labels={backendLabels} onOpen={id => { if (Object.hasOwn(backendTitles, id)) openBackendSection(id as BackendSection); }}/>}
+            <div hidden={backendMode && backendDashboardOpen}>
             {page === "learn" && (
               <>
-                {!backendMode && !studentLearningStarted && <section className="adventure-welcome" aria-label="生字探索旅程">
-                  <div className="adventure-stops" aria-label="學習路線"><span><BookOpen/>認識生字</span><span><Trees/>拆字探索</span><span><Sparkles/>收藏成果</span></div>
-                  <div className="adventure-copy"><span className="adventure-kicker">看動畫 · 學生字 · 累積你的生字收藏</span><h2>一起出發，探索生字的世界！</h2><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p><a className="adventure-start" href="#curriculum-entry" onClick={(event) => { event.preventDefault(); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}><Play size={20}/>開始學習</a></div>
-                  <div aria-label="使用方式">
-                    <p>生字動畫教室、生字結構遊戲與筆順自由練習皆免費，免登入即可使用。個人結構遊戲與筆順自由練習在瀏覽器執行，不使用付費 AI。</p>
-                    <p>個人 AI 造句須輸入老師提供的限時開課代碼。輸錯三次會鎖定 15 分鐘。使用 AI 校正或評分可能產生費用。</p>
-                  </div>
-                  <BirdMascot />
-                  <div className="adventure-tools">{studentPageTools}</div>
-                </section>}
+                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onLearn={() => { setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { void refresh(); setStudentCollectionsOpen(true); }}/>}
 
                 <div id="curriculum-entry">
                 {(backendMode || studentLearningStarted) && (!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
@@ -2188,6 +2185,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               </>}
               </>
             )}
+            </div>
             <footer className="page-footer">
               <span>
                 <Leaf size={14} /> 每天一點點，字詞都會記得。
@@ -2196,6 +2194,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             </footer>
           </main>
         </div>
+        {studentCollectionsOpen && <Modal title="收藏成果" close={() => setStudentCollectionsOpen(false)}>
+          <p>儲存在這台瀏覽器的生字收藏。</p>
+          {!saved.length ? <div className="academy-collections-empty"><Bookmark size={42}/><h3>等待第一份生字收藏</h3><p>完成學習後按「收藏」，就能在這裡再讀一次。</p><button className="primary" onClick={() => { setStudentCollectionsOpen(false); setStudentLearningStarted(true); setStudentFinderOpen(true); }}>開始認識生字</button></div> : <div className="academy-saved-grid">{saved.map(item => <button key={item.id} onClick={() => { setStudentCollectionsOpen(false); openCollection(item); }}><strong>{item.sourcePhrase}</strong><span>{item.cards.length} 張字卡 · {item.reviewState === "learned" ? "我會了" : "再練習"}</span></button>)}</div>}
+        </Modal>}
         {showVersions && <Modal title="版本紀錄" close={() => setShowVersions(false)}>
           <p className="student-version-summary"><strong>v{SITE_VERSION}</strong> · {SITE_UPDATED_AT}<br />{SITE_VERSION_NOTE}</p>
           <ul className="student-version-summary">
