@@ -1,3 +1,4 @@
+import BasicStrokePractice from "./BasicStrokePractice";
 import { ArrowRight, Search, Settings2 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import BirdMascot from "./BirdMascot";
@@ -8,6 +9,7 @@ export function AcademyArt({ kind }: { kind: string }) {
 export function StudentAcademyHome({ onLearn, onPractice, tools }: { onLearn: () => void; onPractice: (scene: 1 | 3) => void; tools?: ReactNode }) {
   return <section className="academy-home" aria-label="生字探索旅程">
     <div className="academy-intro"><div><p className="academy-eyebrow">看動畫 · 學生字 · 收藏每一次發現</p><h1>一起出發，探索生字的世界！</h1></div><BirdMascot /></div>
+    <BasicStrokePractice />
     <nav className="student-academy-grid" aria-label="學習字卡">
       <button className="academy-card card-learn" onClick={onLearn}><h2>認識生字</h2><AcademyArt kind="book"/><span className="card-calligraphy">學</span><span className="academy-card-action">開始學習 <ArrowRight size={18}/></span></button>
       <button className="academy-card card-structure" onClick={() => onPractice(1)}><h2>拆字探索</h2><AcademyArt kind="puzzle"/><span className="academy-card-caption">字形結構・部件拆解・字義用法</span></button>
