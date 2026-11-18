@@ -7,7 +7,7 @@ describe('教師確認的筆畫語音時機',()=>{
   for(let i=0;i<entry.strokes.length;i++){
    expect(strokeSpeechText(entry,i,'competition','prompt')).toBe('');
    expect(strokeSpeechText(entry,i,'competition','correct')).toBe(entry.strokes[i].spoken);
-   expect(strokeSpeechText(entry,i,'competition','mistake')).toBe('請再試一次。');
+   expect(strokeSpeechText(entry,i,'competition','mistake')).toBe('');
   }
  });
  it('練習會先提示筆畫，寫錯也可重播當前筆畫',()=>{

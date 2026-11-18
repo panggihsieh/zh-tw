@@ -8,6 +8,7 @@ const {spawn}=require('node:child_process');
 const assert=require('node:assert/strict');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const candidateMode=process.argv.includes('--candidates');
+const competitionMode=process.argv.includes('--competition');
 const liveMode=process.argv.includes('--live');
 const customCharacters=process.argv.find(value=>value.startsWith('--characters='))?.slice('--characters='.length);
 const characters=customCharacters?[...customCharacters]:candidateMode?['埡','粄','哏']:['壼','鉅','擤','瞞','臊','跤','寓','蜒','寞','邋','遢','回','年'];
@@ -43,7 +44,7 @@ app.whenReady().then(async()=>{
  Object.defineProperty(window,'speechSynthesis',{value:{cancel(){},getVoices(){return []},speak(value){window.spoken.push(value.text);queueMicrotask(()=>value.onend?.());}}});
  window.SpeechSynthesisUtterance=class {constructor(text){this.text=text}};
  const root=createRoot(document.getElementById('root'));
- window.choose=character=>{window.spoken=[];root.render(React.createElement(CompetitionWriting,{key:character,character,mode:'practice',disabled:false,onSubmit(){}}));};
+ window.choose=character=>{window.spoken=[];root.render(React.createElement(CompetitionWriting,{key:character,character,mode:${competitionMode?"'competition'":"'practice'"},disabled:false,onSubmit(){}}));};
  window.choose('回');
  </script></body></html>`;
  const helper=path.join(folder,'server.mjs');
@@ -81,7 +82,7 @@ app.whenReady().then(async()=>{
   for(const character of characters){
    console.log('Checking',character);
    await js(`window.choose(${JSON.stringify(character)});true`);
-   await until(`!!document.querySelector('svg[aria-label="書寫區 ${character}"]') && [...document.querySelectorAll('button')].some(b=>b.textContent==='關閉筆畫語音'&&!b.disabled)`);
+   await until(`!!document.querySelector('svg[aria-label="書寫區 ${character}"]') && (document.body.innerText.includes('筆畫語音已開啟') || [...document.querySelectorAll('button')].some(b=>b.textContent==='關閉筆畫語音'&&!b.disabled))`);
    assert.equal(await js('window.spoken.length'),0,'Loading a character must not speak before writing');
    const strokes=geometry.get(character.codePointAt(0).toString(16))||JSON.parse(await fs.readFile(`public/game-strokes/${character.codePointAt(0).toString(16)}.json`,'utf8'));
    for(let index=0;index<strokes.length;index++){

@@ -36,7 +36,7 @@ export function strokeSpeechText(entry:StrokeSpeechEntry|null,index:number,mode:
  const row=entry.strokes[index];if(!row)return '';
  const spoken=row.mnemonic?.trim()||row.spoken;
  if(event==='correct')return spoken;
- if(mode==='competition')return event==='mistake'?'請再試一次。':'';
+ if(mode==='competition')return '';
  return event==='mistake'?`請再試一次，這一筆是${spoken}。`:spoken;
 }
 export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'practice'|'competition') {
@@ -49,7 +49,7 @@ export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'pr
   setStatus('正在載入筆畫語音…');
   void Promise.all([strokeSpeechRequest(character,{signal:abort.signal}),fingerprintStrokes(strokes)]).then(([value,fingerprint])=>{
    if(abort.signal.aborted)return;
-   if(value?.confirmed && value.fingerprint===fingerprint && value.strokes.length===strokes.length){setEntry(value);setEnabled(soundPreference.current??mode==='practice');setStatus('教師已確認筆畫語音');}
+   if(value?.confirmed && value.fingerprint===fingerprint && value.strokes.length===strokes.length){setEntry(value);setEnabled(mode==='competition'||(soundPreference.current??true));setStatus('教師已確認筆畫語音');}
    else setStatus('此字尚無對應本版筆順的已確認語音。');
   }).catch(()=>{if(!abort.signal.aborted)setStatus('筆畫語音暫時無法載入，仍可書寫。');});
   return()=>{abort.abort();stopStrokeSpeech();};
@@ -59,7 +59,7 @@ export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'pr
   const text=strokeSpeechText(entry,index,mode,event);if(text && !speakStrokeText(text))setStatus('此瀏覽器不支援語音播放。');
  }
  function toggle(index:number) {
-  if(!entry)return;
+  if(!entry||mode==='competition')return;
   soundPreference.current=!enabled;
   if(enabled){stopStrokeSpeech();setEnabled(false);}else{setEnabled(true);if(mode==='practice'){const text=strokeSpeechText(entry,index,mode,'prompt');if(text)speakStrokeText(text);}}
  }
