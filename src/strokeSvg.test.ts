@@ -5,7 +5,7 @@ it('34 張素材 ID 唯一，使用固定站內路徑',()=>{
  expect(STROKE_SVG_ASSETS.every(asset=>/^\/stroke-svg\/kai\/stroke-\d{2}\.(?:svg|png)$/.test(asset.src))).toBe(true);
 });
 it('同名及別名匹配，歧義筆畫不自動套用',()=>{
- expect(matchedStrokeSvg('橫')?.name).toBe('橫');expect(matchedStrokeSvg('撇橫')?.name).toBe('撇折');
+ expect(matchedStrokeSvg('橫')?.name).toBe('橫');expect(matchedStrokeSvg('撇折')?.name).toBe('撇橫');
  expect(matchedStrokeSvg('豎曲鉤')?.name).toBe('豎彎鉤');
  expect(matchedStrokeSvg('撇挑')?.name).toBe('撇挑');
  expect(matchedStrokeSvg('長頓點')?.id).toBe('stroke-34');
