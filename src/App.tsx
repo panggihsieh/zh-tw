@@ -832,7 +832,9 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       setBusy("");
     }
   }
-  async function importFile(file: File) {
+  async function importFile(file: File, open = false) {
+    setError("");
+    setNotice("");
     try {
       if (file.size > 5 * 1024 * 1024)
         throw new Error("請匯入 5 MB 以下的 JSON 備份。");
@@ -840,7 +842,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       imported.id = crypto.randomUUID();
       await saveCollection(imported);
       await refresh();
-      setNotice("備份已匯入，另存為一份收藏。");
+      if (open) openCollection(imported);
+      setNotice(open ? "已開啟本機生字卡，並另存為一份收藏。" : "備份已匯入，另存為一份收藏。");
     } catch (e) {
       setError(`匯入失敗：${err(e)}`);
     }
@@ -943,6 +946,13 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
       }}
     >
       <div data-backend-section={backendMode ? backendSection : undefined} className={backendMode ? `app-shell top-navigation-layout backend-shell academy-card-layout${backendMenuOpen ? " backend-menu-open" : ""}` : "app-shell top-navigation-layout"}>
+        <input type="file" accept=".json,application/json" hidden ref={importRef}
+          aria-label="選擇本機生字卡 JSON 檔案"
+          onChange={(event) => {
+            const file = event.currentTarget.files?.[0];
+            event.currentTarget.value = "";
+            if (file) void importFile(file, page !== "library");
+          }} />
         <div className="main-wrap">
           {backendMode && <AcademyBanner onVersion={() => setShowVersions(true)} />}
           {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
@@ -1881,6 +1891,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                         <Download size={17} />
                         下載學習卡／學習本
                       </button>
+                      <button className="secondary" type="button" disabled={!!busy}
+                        title="開啟先前下載的 JSON 生字卡或學習本"
+                        onClick={() => importRef.current?.click()}>
+                        <Upload size={17} />開啟本機生字卡
+                      </button>
                       {canUseDrive && <button className="quiet" onClick={openDrive}>
                         <CloudUpload size={18} />
                         <span>Google Drive{studentGoogleAccount && <><br /><small dir="auto">{studentGoogleAccount}</small></>}</span>
@@ -1935,17 +1950,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     <Upload size={17} />
                     匯入 JSON 備份
                   </button>
-                  <input
-                    type="file"
-                    accept=".json,application/json"
-                    hidden
-                    ref={importRef}
-                    onChange={(e) => {
-                      if (e.target.files?.[0])
-                        void importFile(e.target.files[0]);
-                      e.target.value = "";
-                    }}
-                  />
+
                 </div>
                 <Suspense fallback={<p role="status">載入雲端收藏功能…</p>}>
                   <CloudCollections onRefresh={refresh} />
