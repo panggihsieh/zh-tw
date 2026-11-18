@@ -42,7 +42,7 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
             const valid=match[1]==='png'?bytes.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')):bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WEBP';
             if(!valid||bytes.length>65536||bytes.toString('base64')!==match[2])bad('縮圖格式不符。');
           }
-          if(row.svgId!==undefined && (typeof row.svgId!=='string'||! /^(?:builtin|stroke-(?:0[1-9]|[12][0-9]|3[0-4]))$/.test(row.svgId)))bad('筆畫圖片選項不符。');
+          if(row.svgId!==undefined && (typeof row.svgId!=='string'||! /^(?:builtin|stroke-(?:0[1-9]|[12][0-9]|3[0-5]))$/.test(row.svgId)))bad('筆畫圖片選項不符。');
           if(row.pronunciationSource!==undefined&&!['mnemonic','spoken'].includes(row.pronunciationSource))bad('讀音來源不符。');
           if(row.mnemonicRevision!==undefined && (typeof row.mnemonicRevision!=='string'||row.mnemonicRevision.length>50))bad('口訣版本格式不符。');
           if(row.mnemonic!==undefined && (typeof row.mnemonic!=='string'||row.mnemonic.length>30))bad('口訣最多30字。');

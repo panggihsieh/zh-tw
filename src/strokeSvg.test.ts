@@ -1,7 +1,7 @@
 import {it,expect} from 'vitest';
 import {STROKE_SVG_ASSETS,matchedStrokeSvg,selectedStrokeSvg} from './strokeSvg';
-it('34 張素材 ID 唯一，使用固定站內路徑',()=>{
- expect(STROKE_SVG_ASSETS).toHaveLength(34);expect(new Set(STROKE_SVG_ASSETS.map(asset=>asset.id)).size).toBe(34);
+it('35 張素材 ID 唯一，使用固定站內路徑',()=>{
+ expect(STROKE_SVG_ASSETS).toHaveLength(35);expect(new Set(STROKE_SVG_ASSETS.map(asset=>asset.id)).size).toBe(35);
  expect(STROKE_SVG_ASSETS.every(asset=>/^\/stroke-svg\/kai\/stroke-\d{2}\.(?:svg|png)$/.test(asset.src))).toBe(true);
 });
 it('同名及舊稱都能找到對應素材',()=>{

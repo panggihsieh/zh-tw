@@ -61,7 +61,7 @@ test('基本筆畫清單僅限管理員、驗證內容並防止覆寫其他管�
  assert.equal((await save({rows:[rows[0],...rows.slice(0,27)]})).status,400);
  assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,mnemonicRevision:123}:row)})).status,400);
  assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,pronunciationSource:'invalid'}:row)})).status,400);
- for(const svgId of ['../file','https://bad.example','stroke-35',123])assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,svgId}:row)})).status,400);
+ for(const svgId of ['../file','https://bad.example','stroke-36',123])assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,svgId}:row)})).status,400);
  assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,thumbnail:'data:image/png;base64,AAAA'}:row)})).status,400);
  const thumbnail='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aR1sAAAAASUVORK5CYII=';
  rows[0].thumbnail=thumbnail;

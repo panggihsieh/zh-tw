@@ -168,5 +168,10 @@
     "id": "stroke-34",
     "name": "長頓點",
     "src": "/stroke-svg/kai/stroke-34.svg"
+  },
+  {
+    "id": "stroke-35",
+    "name": "豎橫折",
+    "src": "/stroke-svg/kai/stroke-35.png"
   }
 ]
