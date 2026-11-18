@@ -1,3 +1,4 @@
+import BasicStrokePractice from "./BasicStrokePractice";
 import { StudentAcademyHome, TeacherAcademyHome } from "./AcademyHome";
 import AcademyBanner from "./AcademyBanner";
 import MicrophoneTest from './MicrophoneTest';
@@ -1063,6 +1064,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }}/>}
 
                 <div id="curriculum-entry">
+                {!backendMode && studentLearningStarted && learningEntryScene === 3 && <BasicStrokePractice />}
                 {!backendMode && studentLearningStarted && learningEntryScene !== 0 && <div className="personal-practice-entry"><div><strong>{learningEntryScene === 1 ? "拆字探索 · 個人練習" : "筆順練習 · 個人練習"}</strong><p>{studentFinderOpen ? "先選課文，再勾選想練習的生字。" : learningEntryScene === 1 ? "本課生字的字形結構、部件拆解與字義用法，可自由切換練習。" : "使用本課生字，進行個人筆順練習。"}</p></div><div>{!studentFinderOpen && <button className="secondary" onClick={() => { setStudentFinderOpen(true); setPlaying(false); speech.stop(); setPublisherFocusRequest(value => value + 1); }}>重新選課文</button>}<button className="secondary" onClick={() => { setStudentLearningStarted(false); setStudentFinderOpen(false); setLearningEntryScene(0); setPlaying(false); speech.stop(); }}>返回學習字卡</button></div></div>}
                 {(backendMode || studentLearningStarted) && (!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
