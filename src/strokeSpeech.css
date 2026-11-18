@@ -55,3 +55,6 @@
 .basic-stroke-stage .stroke-playback-square{width:min(90vw,75dvh);margin:0}
 .basic-stroke-stage figcaption{font-size:clamp(1rem,4vmin,2rem)}
 .basic-stroke-stage:fullscreen{background:#fffdf3;color:#173a30}
+
+.basic-stroke-stage .stroke-playback-square{position:relative}
+.basic-stroke-sound{position:absolute;inset:12px auto auto 12px;display:inline-flex;align-items:center;gap:6px;min-height:44px;border-radius:999px}
