@@ -379,8 +379,6 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   }, [backendMode]);
   const NavigationContainer = backendMode ? "aside" : "header";
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
-  const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section"));
-  const [learningEntryScene, setLearningEntryScene] = useState<0 | 1 | 3>(0);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
     try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
     catch { return {}; }
@@ -424,9 +422,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     }
   }, [restored]);
 
-  const [learningTab, setLearningTab] = useState<"saved" | "quiz" | "resources">(restored.page === "resources" ? "resources" : "saved");
+  const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section") && restored.backendDashboardOpen);
+  const [learningEntryScene, setLearningEntryScene] = useState<0 | 1 | 3>(restored.learningEntryScene);
+  const [learningTab, setLearningTab] = useState<"saved" | "quiz" | "resources">(restored.learningTab);
   const [showVersions, setShowVersions] = useState(false);
-  const [page, setPage] = useState<Page>(backendMode ? (backendSection === "library" ? "library" : "tts") : "learn");
+  const [page, setPage] = useState<Page>(backendMode ? (backendSection === "library" ? "library" : "tts") : restored.page);
   const headerRef = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     const header = headerRef.current;
@@ -437,8 +437,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     observer.observe(header);
     return () => { observer.disconnect(); document.documentElement.style.removeProperty("--app-header-height"); };
   }, []);
-  const [studentLearningStarted, setStudentLearningStarted] = useState(false);
-  const [studentFinderOpen, setStudentFinderOpen] = useState(false);
+  const [studentLearningStarted, setStudentLearningStarted] = useState(restored.studentLearningStarted);
+  const [studentFinderOpen, setStudentFinderOpen] = useState(restored.studentFinderOpen);
   const [publisherFocusRequest, setPublisherFocusRequest] = useState(0);
   useEffect(() => {
     if (!publisherFocusRequest) return;
@@ -687,6 +687,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     const persist = () => {
       const state: PageSession = {
         version: 1,
+        studentLearningStarted, studentFinderOpen, learningEntryScene, learningTab, backendDashboardOpen,
         page,
         input,
         phrase,
@@ -748,6 +749,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     filter,
     modal,
     speechProgress,
+    studentLearningStarted, studentFinderOpen, learningEntryScene, learningTab, backendDashboardOpen,
     collectionsLoaded,
   ]);
   function choosePhrase(text: string) {

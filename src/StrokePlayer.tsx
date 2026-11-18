@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExternalLink, RotateCcw } from "lucide-react";
 import { MOE_LICENSE_URL, strokeFrameUrl } from "./strokeSource";
 import CompetitionWriting from './CompetitionWriting';
@@ -6,7 +6,13 @@ import StrokePlayback from './StrokePlayback';
 
 export default function StrokePlayer({ character }: { character: string }) {
   const url = strokeFrameUrl(character);
-  const [localTab,setLocalTab]=useState<'playback'|'practice'>('playback');
+  const [localTab,setLocalTab]=useState<'playback'|'practice'>(() => {
+    try { return sessionStorage.getItem('hanzi-notebook.stroke-tab.v1') === 'practice' ? 'practice' : 'playback'; }
+    catch { return 'playback'; }
+  });
+  useEffect(() => {
+    try { sessionStorage.setItem('hanzi-notebook.stroke-tab.v1', localTab); } catch { /* storage may be disabled */ }
+  }, [localTab]);
   const [reload, setReload] = useState(0);
   if (!url)
     return (

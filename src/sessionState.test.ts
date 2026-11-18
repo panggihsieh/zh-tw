@@ -9,6 +9,15 @@ import {
 const load = (data: unknown) =>
   loadPageSession({ getItem: () => JSON.stringify(data) });
 describe("重新整理頁面狀態", () => {
+  it("舊版與不合法的導覽狀態使用安全預設", () => {
+    const state = load({version: 1, studentLearningStarted: "true", studentFinderOpen: 1,
+      learningEntryScene: 5, learningTab: "unknown", backendDashboardOpen: null});
+    expect(state.studentLearningStarted).toBe(false);
+    expect(state.studentFinderOpen).toBe(false);
+    expect(state.learningEntryScene).toBe(0);
+    expect(state.learningTab).toBe("saved");
+    expect(state.backendDashboardOpen).toBe(true);
+  });
   it("首次使用預設開啟切換分鏡自動朗讀", () => {
     expect(defaultPageSession().voice).toBe(true);
   });
@@ -22,6 +31,11 @@ describe("重新整理頁面狀態", () => {
       collection: buildCollection("感謝", [0, 1]),
       cardIndex: 1,
       scene: 5,
+      studentLearningStarted: true,
+      studentFinderOpen: false,
+      learningEntryScene: 3 as const,
+      learningTab: "quiz" as const,
+      backendDashboardOpen: false,
       wordCount: 6,
       revealed: ["謝謝"],
       simple: true,

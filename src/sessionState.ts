@@ -7,6 +7,11 @@ export const SESSION_KEY = "hanzi-notebook.page-state.v1";
 export interface PageSession {
   version: 1;
   page: "learn" | "library" | "resources" | "tts";
+  studentLearningStarted: boolean;
+  studentFinderOpen: boolean;
+  learningEntryScene: 0 | 1 | 3;
+  learningTab: "saved" | "quiz" | "resources";
+  backendDashboardOpen: boolean;
   input: string;
   phrase: string;
   positions: number[];
@@ -35,6 +40,11 @@ export function defaultPageSession(
   return {
     version: 1,
     page: "learn",
+    studentLearningStarted: false,
+    studentFinderOpen: false,
+    learningEntryScene: 0,
+    learningTab: "saved",
+    backendDashboardOpen: true,
     input: initialPhrase,
     phrase: initialPhrase,
     positions: Array.from(initialPhrase).map((_, index) => index),
@@ -70,6 +80,10 @@ export function loadPageSession(
     if (data?.version !== 1) return result;
     if (["learn", "library", "resources", "tts"].includes(data.page))
       result.page = data.page;
+    for (const key of ["studentLearningStarted", "studentFinderOpen", "backendDashboardOpen"] as const)
+      if (typeof data[key] === "boolean") result[key] = data[key];
+    if ([0, 1, 3].includes(data.learningEntryScene)) result.learningEntryScene = data.learningEntryScene;
+    if (["saved", "quiz", "resources"].includes(data.learningTab)) result.learningTab = data.learningTab;
     if (typeof data.input === "string" && data.input.length <= CURRICULUM_LIMIT * 2)
       result.input = data.input;
     if (
