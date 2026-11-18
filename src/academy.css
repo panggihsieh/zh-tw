@@ -224,3 +224,5 @@
 .teacher-academy-home .academy-intro .bird-mascot-guide { flex:0 0 100px; }
 .card-competition h2 > span { display:block; }
 @media(max-width:520px) { .teacher-academy-home .academy-intro .bird-mascot-guide { flex-basis:75px; } }
+.personal-practice-entry { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:16px 20px; margin-bottom:18px; border:2px solid #c6b58d; border-radius:16px; background:#fff9e9; color:#365440; }
+.personal-practice-entry p { margin:6px 0 0; font-size:14px; line-height:1.7; }

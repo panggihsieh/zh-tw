@@ -5,19 +5,19 @@ import BirdMascot from "./BirdMascot";
 export function AcademyArt({ kind }: { kind: string }) {
   return <span className={`academy-art art-${kind}`} aria-hidden="true" />;
 }
-export function StudentAcademyHome({ onLearn, onCollections, tools }: { onLearn: () => void; onCollections: () => void; tools?: ReactNode }) {
+export function StudentAcademyHome({ onLearn, onPractice, onCollections, tools }: { onLearn: () => void; onPractice: (scene: 2 | 3) => void; onCollections: () => void; tools?: ReactNode }) {
   return <section className="academy-home" aria-label="生字探索旅程">
     <div className="academy-intro"><div><p className="academy-eyebrow">看動畫 · 學生字 · 收藏每一次發現</p><h1>一起出發，探索生字的世界！</h1><p>選一課、認識一個字，讓每次發現都成為自己的收藏。</p></div><BirdMascot /></div>
     <div className="academy-course-entry"><span>從課本出發，找到今天的生字</span><button onClick={onLearn}>選擇出版社與課程 <ArrowRight size={18}/></button></div>
     <nav className="student-academy-grid" aria-label="學習字卡">
       <button className="academy-card card-learn" onClick={onLearn}><h2>認識生字</h2><AcademyArt kind="book"/><span className="card-calligraphy">學</span><span className="academy-card-action">開始學習 <ArrowRight size={18}/></span></button>
-      <a className="academy-card card-structure" href="#games/structure"><h2>拆字探索</h2><AcademyArt kind="puzzle"/><span className="academy-card-caption">拆開看看，字裡有祕密</span></a>
-      <a className="academy-card card-writing" href="#games/strokes"><h2>筆順練習</h2><AcademyArt kind="brush"/><span className="academy-card-caption">一筆一畫，慢慢學會</span></a>
+      <button className="academy-card card-structure" onClick={() => onPractice(2)}><h2>拆字探索</h2><AcademyArt kind="puzzle"/><span className="academy-card-caption">課程內的個人拆字練習</span></button>
+      <button className="academy-card card-writing" onClick={() => onPractice(3)}><h2>筆順練習</h2><AcademyArt kind="brush"/><span className="academy-card-caption">課程內的個人筆順練習</span></button>
       <a className="academy-card card-games" href="#games"><h2>遊戲專區</h2><AcademyArt kind="trophy"/><span className="academy-card-caption">加入老師的課堂挑戰</span></a>
       <button className="academy-card card-collections" onClick={onCollections}><h2>收藏成果</h2><span className="academy-bookmark"><Bookmark strokeWidth={1}/><span>藏</span></span><span className="academy-card-caption">翻開自己的生字收藏</span></button>
     </nav>
     {tools && <details className="academy-home-tools"><summary>朗讀與學習設定</summary>{tools}</details>}
-    <p className="academy-home-note">生字動畫、拆字探索與筆順自由練習，免登入即可使用。課堂競賽請使用老師提供的開課代碼。</p>
+    <p className="academy-home-note">生字動畫、拆字探索與筆順練習，皆在生字動畫教室依課程學習，免登入即可使用。課堂競賽請使用老師提供的開課代碼。</p>
   </section>;
 }
 const backendCards = [

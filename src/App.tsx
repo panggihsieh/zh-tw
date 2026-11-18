@@ -378,6 +378,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
   const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section"));
   const [studentCollectionsOpen, setStudentCollectionsOpen] = useState(false);
+  const [learningEntryScene, setLearningEntryScene] = useState<0 | 2 | 3>(0);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
     try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
     catch { return {}; }
@@ -1055,13 +1056,14 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             <div hidden={backendMode && backendDashboardOpen}>
             {page === "learn" && (
               <>
-                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onLearn={() => { setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { void refresh(); setStudentCollectionsOpen(true); }}/>}
+                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); if (collection?.curriculum) { setStudentFinderOpen(false); setScene(targetScene); } else { setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); } }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { void refresh(); setStudentCollectionsOpen(true); }}/>}
 
                 <div id="curriculum-entry">
+                {!backendMode && studentLearningStarted && studentFinderOpen && learningEntryScene !== 0 && <div className="personal-practice-entry" role="status"><div><strong>{learningEntryScene === 2 ? "個人拆字練習" : "個人筆順練習"}</strong><p>先選課程與生字，接著進入生字動畫教室內的{learningEntryScene === 2 ? "拆合動畫" : "筆順播放器"}。</p></div><button className="secondary" onClick={() => { setStudentLearningStarted(false); setStudentFinderOpen(false); setLearningEntryScene(0); }}>返回學習字卡</button></div>}
                 {(backendMode || studentLearningStarted) && (!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
                   setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
-                  setCardIndex(0);setScene(0);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
+                  setCardIndex(0);setScene(backendMode ? 0 : learningEntryScene);setPage("learn");setPlaying(false);setRevealed([]);speech.stop();
                 }}/></Suspense>}
                 </div>
                 <div
