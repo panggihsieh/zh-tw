@@ -45,35 +45,35 @@
       "existingMeaningExplanation": "原字悤用心旁參與表意，表示急忙、急迫。通行匆字已不寫心旁，畫面不能把勿或丶標成心，也不另猜哪一筆代表心情。"
     },
     "另": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "口",
         "力"
       ],
-      "researchNote": null,
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入教育部的字樣與字義，仍未證實今字部件的聲義分工；不靠形近或同音補成已核實字源。",
+      "existingSoundExplanation": "教育部確認另上口、下力，並明記《說文》不錄，字條沒有指定口或力為聲符。不能憑力和另的讀音有部分相近，就把力當成已核實的聲符。",
+      "existingMeaningExplanation": "教育部記另有再、分別等用法，並提醒它與別的左旁、拐的右旁寫法不同。今字口、力如何提示這個字義仍待核對，不把別字的分解骨肉分析移到另，也不編開口出力的字源故事。"
     },
     "吔": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "口",
         "也"
       ],
-      "researchNote": "現行字表將吔列於翰林五上第五課超級英雄，尚未取得該來源頁的可讀字表核對；不得靜默刪字或自行改成其他字。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已依教育部簡編本40996補入輕聲˙ㄧㄝ及感嘆驚訝用法；右也聲符仍無字書明證。現行字表列於翰林五上第五課超級英雄，來源頁本輪仍無法讀取，不靜默刪字或換字。",
+      "existingSoundExplanation": "今字左口、右也，教育部記吔讀輕聲˙ㄧㄝ，用來感嘆或驚訝；字條沒有指定也為聲符。不能用也的第三聲直接替代吔的讀音，也不能只因形近就宣稱造字聲符已獲證。",
+      "existingMeaningExplanation": "教育部將吔解作表達感嘆、驚訝的嘆詞，口旁可幫助聯繫發聲的用法。這是字義與今字形的教學聯繫，尚未證明整個字的古代聲義分工；教材中這個字的來源頁也仍待核對，不自行改成別的字。"
     },
     "壽": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "士乛工",
         "一",
         "吋"
       ],
-      "researchNote": "教育部明記老省及另一古聲符；影像的C17805標籤連到𪇘相關字，不能把圖檔標籤當成已辨識的聲符。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入教育部古今字形及字義說明，仍待核對：教育部明記老省及另一古聲符；影像的C17805標籤連到𪇘相關字，不能把圖檔標籤當成已辨識的聲符。",
+      "existingSoundExplanation": "教育部所錄《說文》記老的省形及一個古聲符。古聲符圖形與今字士、工、口、寸等筆畫的對應尚未可靠核對，這裡不任選一格作聲符來讀壽。",
+      "existingMeaningExplanation": "《說文》解壽為久，古字有老的省形，可聯繫長久、長壽的意思。教育部另說明今字上士、中工、下口寸的寫法，這是書寫規範，不等於這些今字部件各自都是造字義符；老省形的今字範圍仍待核對。"
     },
     "奧": {
       "status": "mapping-review",
@@ -86,24 +86,24 @@
       "existingMeaningExplanation": "《說文》以宀參與構字，古義指室內西南角，後來泛指深處、精深。教育部的楷書字樣說明不等於已證實每個今字部件的古代作用，不能把下方大解作大房子或深奧的義符。"
     },
     "市": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "亠",
         "巾"
       ],
-      "researchNote": "教育部引說文之省聲，字庫另列兮義、之聲；今亠巾與古之兮的對應仍待證，不把巾當布料或亠當已核實的獨立聲符。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入古部件、今字差異及來源說明，仍待核對：教育部引說文之省聲，字庫另列兮義、之聲；今亠巾與古之兮的對應仍待證，不把巾當布料或亠當已核實的獨立聲符。",
+      "existingSoundExplanation": "教育部所錄《說文》記之省聲。今字寫上方點橫、下方巾，不能把亠的今音當成市的讀音，也不能在沒有字形依據時，把完整之字硬圈在其中一格。",
+      "existingMeaningExplanation": "《說文》以買賣所到的地方解釋市，並提到市場圍垣及物相及的構字說法。今字下部雖寫巾，仍須核對古部件如何變成今字；不能因巾是布巾，就另編賣布形成市場的字源。"
     },
     "幻": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "幺",
         "𠃌"
       ],
-      "researchNote": "金文幺與長弧筆的本義不明；字庫指出小篆倒予的分析不確，不據此強補義符。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入來源支持的字形、用法與疑問，保留待核對：金文幺與長弧筆的本義不明；字庫指出小篆倒予的分析不確，不據此強補義符。",
+      "existingSoundExplanation": "字庫記金文從幺及長弧筆，沒有確認哪一部分提示讀音。不能用幺的今音直接讀幻，也不把《說文》的倒予解讀當成已證實的古聲符。",
+      "existingMeaningExplanation": "字庫認為早期字形的本義不明，並指出小篆倒予的分析不確。雖然《說文》及段注曾以反予解釋相互詐惑，這裡只列為傳統說法，不據此編造左幺、右折鉤各自的字義。今天幻想、幻影的用法表示不真實或想像，須配合詞語理解。"
     },
     "床": {
       "status": "mapping-review",
@@ -137,34 +137,34 @@
       "existingMeaningExplanation": "依字庫所述，早期字形描畫兵器的柄，後來才在兩側加八提示讀音；借作必須後，又加木分化為柲。今字看似心與撇交疊，不是心情加一撇，也不能把後起的完整柲字當成今字裡已存在的部件。"
     },
     "敢": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "丅耳",
         "攵"
       ],
-      "researchNote": "教育部明列篆形古聲、今左部形如耳而從隸變；現代耳形不能直接作古聲符的完整文字。筆順網所列又卜聲是在解釋攴部首，不是敢字本身，不能挪用。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入古部件、今字差異及來源說明，仍待核對：教育部明列篆形古聲、今左部形如耳而從隸變；現代耳形不能直接作古聲符的完整文字。筆順網所列又卜聲是在解釋攴部首，不是敢字本身，不能挪用。",
+      "existingSoundExplanation": "教育部所錄《說文》記古聲，並說左半近似耳的寫法來自隸變。今字左格丅耳不是原樣的古，不能把耳的今音當作敢的聲符，右側攵也不能借用攴部首字條的聲符分析。",
+      "existingMeaningExplanation": "《說文》解敢為進取，教育部引段注以爪、殳等古形解釋冒而向前。這是篆形的解讀，不能僅因今字左部像耳，就說敢是聽到聲音後去做；右攵與整體古部件的筆畫對應仍須核對。"
     },
     "斥": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "斤",
         "丶"
       ],
-      "researchNote": null,
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入教育部的字樣與字義，仍未證實今字部件的聲義分工；不靠形近或同音補成已核實字源。",
+      "existingSoundExplanation": "教育部所錄古字從广、屰聲，後世通行改寫為斤加一點的斥。今字的斤與點不是原樣的屰，不能以斤的讀音拼讀斥，也不把任一筆當成已核實的古聲符。",
+      "existingMeaningExplanation": "《說文》古義作卻屋，古字有广部件；教育部另列開拓、排除、責罵等用法。今字雖寫斤加點，仍須核對古今字形關係，不能從斤像斧頭便編造用斧頭砍屋或責罵人的唯一字源。"
     },
     "旁": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "亠丷冖",
         "方"
       ],
-      "researchNote": "字庫明列造字本義不明；古方、凡形不能僅按今字讀音或旁邊義倒推。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已依《說文》方聲標示今字下方方；字庫明列造字本義不明，上部古凡、用等演變仍待核對，不因一項聲符可標示就把整字算完成。",
+      "existingSoundExplanation": "字庫所錄《說文》明記方聲，今字下方仍寫方，可在這一格觀察聲音線索。聲符反映歷史讀音，不是說國語方與旁完全同音；上部的古代構義仍未確定。",
+      "existingMeaningExplanation": "字庫記甲金文有方、凡等古形，但造字本義不明，後來又有合筆、訛變。今天旁邊、廣泛、另外的用法不能倒推成上部每一筆的造字意思，因此不編造上部是屋頂、人在方形旁邊的故事。"
     },
     "智": {
       "status": "mapping-review",
@@ -201,14 +201,14 @@
       "existingMeaningExplanation": "香港中文大學字庫引郭沫若說，將早期字形解作利器刺眼，與古代奴隸的身分標記有關，後來泛指百姓、人民。這是具名的字源解讀；今字已連筆變形，不能直接把現代每筆圈成目或利器，也不把氏部解作氏族的造字義。"
     },
     "煞": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "𭣦",
         "灬"
       ],
-      "researchNote": "字庫僅證殺的俗字及殺死、停止等用法，未交代今上部刍、右攵、下灬各自的聲義作用；同殺不等於證明刍聲或火義。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入來源支持的字形、用法與疑問，保留待核對：字庫僅證殺的俗字及殺死、停止等用法，未交代今上部刍、右攵、下灬各自的聲義作用；同殺不等於證明刍聲或火義。",
+      "existingSoundExplanation": "字庫說煞是殺的異體俗字，但沒有交代今字上部與下方灬各自的聲符作用。不能從同殺就推成刍聲、攵聲，也不把整個殺字當成今字內已存在的獨立部件。",
+      "existingMeaningExplanation": "字庫記煞可表示殺害，也有結束、停止或程度深等用法。今字下方雖有灬形，仍未確認它在這個俗字中如何表意；不能把所有煞字詞義都編成用火殺害或火焰熄滅的故事。"
     },
     "牠": {
       "status": "mapping-review",
@@ -228,35 +228,35 @@
       "existingMeaningExplanation": "字庫說早期字形在口形上加豎筆或圓形，但本義未有定論，口形在構字中的字義作用仍待核對。今天由常表示原因，或作介詞相當於從；歸入田部不表示原義一定是田地，也不能把早期頭盔說當成已證實結論。"
     },
     "癟": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "疒",
         "自侖"
       ],
-      "researchNote": "劉釗2009年專文認為自冊、自侖可能由扁形演變，最早可能作㾫，但明說也可能是與扁無關的獨立字形。今不能把自或侖任一單獨當成已核實聲符，也不把作者假說標成定論。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入劉釗2009專文的右部可能由扁演變及可能為獨立字形的保留意見；不把假說當定論，不單圈自或侖作聲符。疒與古字書用法可作教學聯繫，完整構字仍待核對。",
+      "existingSoundExplanation": "劉釗提出癟右部可能由扁的古形訛變，但同時保留它原是另一個獨立字形的可能。今字右側自侖須合看，不能把自或侖任一單獨當作已核實聲符，也不把可能從扁演變說成定論。",
+      "existingMeaningExplanation": "劉釗核對古字書中的疒旁及枯病、不能飛等舊訓，並討論後來字形變化。左疒可作疾病相關的教學提示，但右部起源仍有疑問；不能把自、侖各自編成乾癟、凹陷的造字原因。"
     },
     "皆": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "比",
         "白"
       ],
-      "researchNote": "字庫列甲骨几聲而初義不明；金文从甘形後來从變比作聲符。未找到足以核對甘形到今白形字義區域的明確說明，不能僅憑今白形編造白色或說話之義。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已依字庫記金文从變比、比表聲，標示今字上方比；甲骨几聲等說分開呈現。今白與古甘的構義仍未核實，不編白色或說話故事，整字仍待核對。",
+      "existingSoundExplanation": "字庫記一類金文上部由从變為比，後來比用作皆的聲符；今字上方仍可辨認比。這是特定字形演變的解讀，與甲骨文另有几聲的分析須分開，不能用比的今音直接拼讀皆。",
+      "existingMeaningExplanation": "字庫說一類金文從从、甘，後來上部改成比；更早字形另有不同解讀，構形初義未定。今天皆表示俱、都，今字下方雖像白，仍不能因此編成人人都說白話、白色或說話的造字故事。"
     },
     "睿": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "𣦵",
         "八",
         "𥃦"
       ],
-      "researchNote": "教育部29939與字庫均列說文叡從𣦼、目、谷省，今睿為古文。來源未逐一解明各部件如何表深明；2019饒宗頤國學院院刊說文準聲首另提出歺聲，須另讀原論文及古今字形，不能僅憑目部首宣稱其餘都是形符。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入教育部古今字形及字義說明，仍待核對：教育部29939與字庫均列說文叡從𣦼、目、谷省，今睿為古文。來源未逐一解明各部件如何表深明；2019饒宗頤國學院院刊說文準聲首另提出歺聲，須另讀原論文及古今字形，不能僅憑目部首宣稱其餘都是形符。",
+      "existingSoundExplanation": "教育部記《說文》本作叡，從𣦼、目、谷省，睿是其古文寫法。這項字條沒有直接完成今字三格的聲符分析；不能任取八、目或上部的今音當成睿的讀音來源。",
+      "existingMeaningExplanation": "《說文》以深明、通解釋叡，今字睿也有明智、聰明的意思。雖然古字記有目及谷的省形，仍須核對它們與今字各筆如何共同構義，不能只因目像眼睛，就把其他部件都宣稱為已核實的聰明義符。"
     },
     "禽": {
       "status": "mapping-review",
@@ -269,24 +269,24 @@
       "existingMeaningExplanation": "《說文》用禸（厹）的獸跡形參與表意，解作走獸總名；後來禽也可泛指獵物、鳥獸，或專指鳥類。教育部說明今字是人下作离，最下方仍為禸；這不是人加離開的故事。古今部件的完整對應仍待核對，不把整個离都當作獸跡。"
     },
     "童": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "立",
         "里"
       ],
-      "researchNote": "古字辛或䇂、目與人形有多種解讀，金文又加東聲、篆文重省聲；今立里不能直接當成上述古形完整部件。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入古部件、今字差異及來源說明，仍待核對：古字辛或䇂、目與人形有多種解讀，金文又加東聲、篆文重省聲；今立里不能直接當成上述古形完整部件。",
+      "existingSoundExplanation": "字庫說部分金文增加東作聲符，《說文》則記重省聲。今字顯示立、里，與古字部件已有合寫及省變，不能把下方里直接讀作童，也不假稱畫面已有完整東或重。",
+      "existingMeaningExplanation": "字庫列出辛或䇂、目及人形的不同分析，明記構形未有定論；古字有與刑罰、奴隸相關的解讀。今義孩童須配合詞語理解，不能說站立在田里就是童，也不能任指立、里是已核實的古義符。"
     },
     "笑": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "竹",
         "夭"
       ],
-      "researchNote": "段注2997保留竹犬說但明說部件義不敢妄言，並批評楊承慶字統為求解改夭形聲。CBETA T54n2128 p0439a03、0805c03另記竹犬聲，p0765c09又有犬為樂器的疑似傳寫文句。三類說明須分開核對，不以風竹故事或有疑字句直接補成唯一核實答案。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入來源支持的字形、用法與疑問，保留待核對：段注2997保留竹犬說但明說部件義不敢妄言，並批評楊承慶字統為求解改夭形聲。CBETA T54n2128 p0439a03、0805c03另記竹犬聲，p0765c09又有犬為樂器的疑似傳寫文句。三類說明須分開核對，不以風竹故事或有疑字句直接補成唯一核實答案。",
+      "existingSoundExplanation": "《說文》徐鉉注記錄竹、犬的舊寫法，段玉裁也討論後來改作夭的說法，但沒有可直接套在今字竹、夭兩格上的一致結論。這裡不把夭的今音或犬的讀音當成已證實的笑字聲符。",
+      "existingMeaningExplanation": "徐鉉注轉述過竹受風彎曲如人笑的說法，同時表示尚不確定；段玉裁對竹、犬的構字義也保留疑問。因此字義可以理解為喜、發笑，但不以竹是樂器或竹子彎曲的故事宣稱已核實造字原因。"
     },
     "粄": {
       "status": "mapping-review",
@@ -319,31 +319,31 @@
       "existingMeaningExplanation": "早期文獻已把「者」用在詞語後面，指符合前述條件的人或情況。古字怎麼構成這個意思，仍待考證。"
     },
     "耍": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "而",
         "女"
       ],
-      "researchNote": "字庫明列而、女的構形初義不明，不能因玩耍或戲弄的現代詞義便斷言女是義符、而是聲符。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入來源支持的字形、用法與疑問，保留待核對：字庫明列而、女的構形初義不明，不能因玩耍或戲弄的現代詞義便斷言女是義符、而是聲符。",
+      "existingSoundExplanation": "字庫確認今字由上方而、下方女構成，但仍記構形初義不明，沒有指定其中哪個部件作聲符。不能只憑今字兩格就說而聲或女聲。",
+      "existingMeaningExplanation": "字庫記耍有玩、戲弄、施展等用法，但而、女在最初構字時的作用仍不明。這些現代用法不能證明女就是玩耍的義符，也不能把帶鬚者戲弄女子當作已核實的唯一字源。"
     },
     "耶": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "耳",
         "阝"
       ],
-      "researchNote": "漢典列邑聲、耳形，但詳細解釋對本義標不詳；不能用語氣詞用法反推耳的古字義作用。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已依漢典邑聲，在右阝位置標聲；左耳的古構義仍不詳，不以句末疑問語氣倒推耳的義符作用。",
+      "existingSoundExplanation": "漢典將耶分析為從耳、邑聲，右側阝是邑的偏旁變形，可在右格觀察這項聲音線索。聲符反映歷史讀音，不是把邑的國語音直接讀成耶；耳的古代構義仍待核對。",
+      "existingMeaningExplanation": "耶可在文言句末表疑問，也有譯音及通爺等用法。字書對最初構義仍保留不詳，不能由疑問語氣便斷言左耳表示聽問題，也不把右阝當成左阝的山坡義。"
     },
     "與": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [],
-      "researchNote": "字庫列舁、牙皆聲，另引段注舁与皆亦聲；今字含共筆及省形，現有IDS還含數字佔位符，不用未核對的舁与格子冒充今字拆分。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補入古部件、今字差異及來源說明，仍待核對：字庫列舁、牙皆聲，另引段注舁与皆亦聲；今字含共筆及省形，現有IDS還含數字佔位符，不用未核對的舁与格子冒充今字拆分。",
+      "existingSoundExplanation": "字庫列金文舁、牙皆為聲符的解讀，另錄段注舁、与皆亦聲的分析。今字含合寫、省形，畫面尚不能可靠拆出這些完整部件；不以未核對的格子冒充已完成的聲符位置。",
+      "existingMeaningExplanation": "字庫列兩人用雙手互相交付牙齒的解讀，另列四手並舉、由舁分化等不同說法。不能把不同時期、不同學者的分析拼成唯一故事；今字的各筆對應仍待核對，與字也可作和、同等用法。"
     },
     "葬": {
       "status": "mapping-review",
@@ -357,24 +357,24 @@
       "existingMeaningExplanation": "有些甲骨文像把人或遺骨放入坑中。《說文解字》則把小篆解作以草木覆蓋死者。「葬」的本義是埋葬，現代字形中央的「死」保留了這層線索。"
     },
     "軟": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "車",
         "欠"
       ],
-      "researchNote": "漢典今字記車、欠聲，教育部另述媆、輭、軟的通行關係；左側車形對柔軟義的作用仍需補證，不自編軟車起源。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已依漢典欠聲標示右欠，並分開教育部所列媆、輭、軟的歷史關係；左車與柔軟義的作用未獲明證，不編軟車故事。",
+      "existingSoundExplanation": "漢典將今字軟分析為從車、欠聲，今字右側仍是欠，可觀察這項聲音線索。教育部另記媆、輭、軟的通行關係，須分開時期理解；不能把欠的今音直接讀成軟。",
+      "existingMeaningExplanation": "教育部列柔而不硬的意思，也記早期媆、輭到軟的用字關係。今字左車如何參與柔軟義，仍需更明確證據，不能編造柔軟車輪或軟坐墊為唯一字源，也不能把媆的女旁當成今軟裡已存在的部件。"
     },
     "迴": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "辶",
         "回"
       ],
-      "researchNote": "已核對CBETA正式XML T54n2128 p0375c13校勘：正文迴、回，另本明列迥、冋；反切熒頴、戶頴及遠義亦與迥相符。該條不能作迴的回聲證據。國教院異形詞手冊另支持辵強化掉轉行動義，尚未明列回聲。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補具名來源及已知部分，整字仍待核對：已核對CBETA正式XML T54n2128 p0375c13校勘：正文迴、回，另本明列迥、冋；反切熒頴、戶頴及遠義亦與迥相符。該條不能作迴的回聲證據。國教院異形詞手冊另支持辵強化掉轉行動義，尚未明列回聲。",
+      "existingSoundExplanation": "教育部記迴讀ㄏㄨㄟˊ，右側寫回，可用同音作讀字聯繫；但該字條未明列回為最初造字的聲符，不能把今音相同當作已核實的古字源。也不能把形近迥字的冋聲分析搬到迴。",
+      "existingMeaningExplanation": "國家教育研究院《異形詞辨析手冊》指出，迴的辵旁強化掉頭、掉轉的行動義；今字左下辶就是辵的偏旁變形。右回本有旋轉等意思，但完整古聲義分工仍待核對，不把迥的遠義混進來。"
     },
     "重": {
       "status": "mapping-review",
@@ -384,14 +384,14 @@
       "existingMeaningExplanation": "依柯昌濟、何琳儀的解讀，古字像人背負囊袋，提示沉重；囊袋形東同時兼任聲符。後來人與東共用中豎等筆畫，部分字形又加土表示站立地面，今字不能把每一筆都按獨立的人、東分格。"
     },
     "量": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "旦",
         "里"
       ],
-      "researchNote": "字庫明列構形初義未有定論：何琳儀昜聲、裘錫圭糧初文，以及說文重省曏省聲為不同分析。今字日一里與古構件共筆，尚無足夠證據標出完整聲義位置，不將日下量物一說冒充定論。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補具名來源及已知部分，整字仍待核對：字庫明列構形初義未有定論：何琳儀昜聲、裘錫圭糧初文，以及說文重省曏省聲為不同分析。今字日一里與古構件共筆，尚無足夠證據標出完整聲義位置，不將日下量物一說冒充定論。",
+      "existingSoundExplanation": "字庫所錄《說文》記重省、曏省聲，早期字形研究另有不同解讀。今字分成旦、里，不是原樣曏或重，不能把日、旦或里的今音當成已核實的量字聲符。",
+      "existingMeaningExplanation": "字庫明記量的構形初義未有定論，列裘錫圭的糧田說及于省吾、劉興隆的日下量度說；《說文》則以稱輕重解釋。這些說法須分別呈現，不把太陽底下量東西的故事宣稱為已證實的唯一字源。"
     },
     "闆": {
       "status": "mapping-review",
@@ -404,18 +404,20 @@
       "existingMeaningExplanation": "字庫引《玉篇》記門中視，即從門中窺看，並說古書未見此用法；外側門可幫助理解這項字書記載，但品在構字中的作用仍待核對。今天常用於老闆，指商舖企業的擁有人或僱主，不能另編門內三口就是老闆的故事。"
     },
     "鬱": {
-      "status": "missing",
+      "status": "mapping-review",
       "components": [
         "木缶木",
         "冖",
         "鬯彡"
       ],
-      "researchNote": "于省吾早期林中踐踏說是疑說，篆文另有林義、𩰪省聲；今缶冖鬯彡與早期大勹形交錯演變，須分開時代核對，不能把所有今部件都倒套同一故事。",
-      "existingSoundExplanation": null,
-      "existingMeaningExplanation": null
+      "researchNote": "教學已補具名來源及已知部分，整字仍待核對：于省吾早期林中踐踏說是疑說，篆文另有林義、𩰪省聲；今缶冖鬯彡與早期大勹形交錯演變，須分開時代核對，不能把所有今部件都倒套同一故事。",
+      "existingSoundExplanation": "字庫所錄《說文》記從林、𩰪省聲，早期甲金文另有林、勹、大的解讀。今字缶、冖、鬯、彡等部件經過增添及訛變，不能將其中一格任指為完整古聲符，也不把不同時期分析拼在一起。",
+      "existingMeaningExplanation": "《說文》以林參與木叢生的構義；字庫另引于省吾的林中人形受踏說，並明列為疑說。今字兩木之間有缶，不能整格都當林，也不能把受踏故事視為已證實的唯一字源；鬱結、茂盛及香酒相關用法須分別理解。"
     }
   },
-  "sourceReportSha256": "46417350f4bed03e433002db1b64710c036efa03b5c27c9786277842add84093",
+  "sourceReportSha256": "2b817cef65aab0abc7487047e1121a4b0458b45d54c0da2e4537f828a59ececa",
   "reportType": "completion-audit-snapshot",
-  "releaseAuthorizedWithUnresolved": true
+  "releaseAuthorizedWithUnresolved": true,
+  "sourcedCount": 2973,
+  "sourcedCountMeaning": "有來源與具體說明的字數；包含待核對，不等於已核實完成。"
 }

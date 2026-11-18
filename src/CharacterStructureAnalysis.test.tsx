@@ -537,3 +537,68 @@ it("attributes 盈's traditional 夃-and-皿 account and retains the unresolved-
   expect(clues?.meaning?.explanation).toContain("從夃的原因未明");
   expect(clues?.meaning?.sources).toHaveLength(2);
 });
+
+it.each([['幻', ['幺', '𠃌'], '倒予', '不確'], ['耍', ['而', '女'], '女聲', '仍不明']])("retains %s's unresolved origin without inventing a component story", (glyph, parts, soundText, meaningText) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(clues?.sound?.explanation).toContain(soundText);
+  expect(clues?.meaning?.explanation).toContain(meaningText);
+});
+
+it.each([['煞', ['𭣦', '灬'], '俗字', '火燒'], ['笑', ['竹', '夭'], '分歧', '確定字源']])("keeps %s's sourced history separate from an unsupported phonetic or semantic assignment", (glyph, parts, soundText, meaningText) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(`${clues?.sound?.title ?? ""}${clues?.sound?.explanation ?? ""}`).toContain(soundText);
+  expect(clues?.meaning?.title).toContain(meaningText);
+});
+
+it.each([['市', ['亠', '巾'], '之省聲'], ['敢', ['丅耳', '攵'], '古聲'], ['童', ['立', '里'], '重省聲'], ['與', [], '舁、牙']])("does not substitute %s's modern cells for unverified ancient components", (glyph, parts, phoneticText) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(clues?.sound?.explanation).toContain(phoneticText);
+  expect(clues?.meaning?.sources?.length).toBeGreaterThan(0);
+});
+
+it.each([['另', ['口', '力'], '沒有指定', '別的左旁'], ['斥', ['斤', '丶'], '屰聲', '斧頭'], ['壽', ['士乛工', '一', '吋'], '不任選', '老的省形'], ['睿', ['𣦵', '八', '𥃦'], '叡', '深明']])("keeps %s's dictionary evidence separate from an unverified modern mapping", (glyph, parts, soundText, meaningText) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(clues?.sound?.explanation).toContain(soundText);
+  expect(clues?.meaning?.explanation).toContain(meaningText);
+});
+
+it.each([['旁', ['亠丷冖', '方'], 1], ['皆', ['比', '白'], 0]])("shows %s's sourced sound clue without inventing an unresolved semantic", (glyph, parts, index) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([index]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(structureClues(glyph as string, [])?.sound?.componentIndexes).toEqual([]);
+});
+it.each([['吔', ['口', '也'], '沒有指定'], ['癟', ['疒', '自侖'], '可能']])("retains %s's documented use without promoting a phonetic hypothesis", (glyph, parts, soundText) => {
+  const clues = structureClues(glyph as string, parts as string[]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(clues?.sound?.explanation).toContain(soundText);
+});
+
+it.each([['耶', ['耳', '阝']], ['軟', ['車', '欠']]])("shows %s's documented modern sound component while its semantic remains unresolved", (glyph, parts) => {
+  const clues = structureClues(glyph, parts);
+  expect(clues?.sound?.componentIndexes).toEqual([1]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(structureClues(glyph, [])?.sound?.componentIndexes).toEqual([]);
+});
+it("uses the NAER-supported movement meaning for 迴 without converting modern homophony into proven ancient phonetics", () => {
+  const clues = structureClues("迴", ["辶", "回"]);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.sound?.explanation).toContain("未明列");
+  expect(clues?.meaning?.componentIndexes).toEqual([0]);
+  expect(clues?.meaning?.sources?.[1].url).toContain("teric.naer.edu.tw");
+});
+it.each([['量', ['旦', '里']], ['鬱', ['木缶木', '冖', '鬯彡']]])("keeps %s's competing historical analyses distinct", (glyph, parts) => {
+  const clues = structureClues(glyph, parts);
+  expect(clues?.sound?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.componentIndexes).toEqual([]);
+  expect(clues?.meaning?.explanation).toContain("于省吾");
+});
