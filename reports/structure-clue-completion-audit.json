@@ -1,0 +1,421 @@
+{
+  "scope": "三大出版社合併去重2973字，逐字有來源及可核對的形音義說明；無法證實者不得算完成。",
+  "complete": false,
+  "documentedCount": 2931,
+  "total": 2973,
+  "remainingCount": 42,
+  "coverageReportMeaning": "documented是來源說明及現有位置映射的覆蓋指標，不是所有古字源已無爭議的宣稱。",
+  "deploymentGate": "使用者已接受保留具名來源與待核對標示，授權先發布已查證內容；待核對字不計完成，原全量查核目標尚未達成。",
+  "remaining": {
+    "乎": {
+      "status": "mapping-review",
+      "components": [],
+      "researchNote": "來源有丂聲、風聲小豎的具名解讀，但現有IDS無法解析；尚未核對今字丂及小豎的實際筆畫位置，不能把整字當成已完成聲義分格。",
+      "existingSoundExplanation": "依一種甲金文解讀，古字形中的「丂」除了像樹枝，也提示古代讀音。",
+      "existingMeaningExplanation": "有一種古文字解讀把上方的小豎看作風吹樹枝發出的聲響。「乎」後來常用作語氣詞。"
+    },
+    "兢": {
+      "status": "mapping-review",
+      "components": [
+        "克",
+        "克"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "《說文》記載篆文以「丯」提示古代讀音。今字已省寫，部件圖以左右近似「克」的形狀呈現。",
+      "existingMeaningExplanation": "《說文》以兩個「兄」提示相爭的古義。今字省寫成左右兩個近似「克」的部件，今天常用「兢兢」表示謹慎。"
+    },
+    "剎": {
+      "status": "mapping-review",
+      "components": [
+        "𣏂",
+        "刂"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "字庫記載「殺」是「剎」的聲符；歷史讀音與現代讀音可能不同。",
+      "existingMeaningExplanation": "右側「刂」是「刀」的變形。《說文》新附記載「剎」有柱子的古義，但沒有確定「刀」如何提示這個意思。"
+    },
+    "匆": {
+      "status": "mapping-review",
+      "components": [
+        "勿",
+        "丶"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "教育部引《說文》以囪兼表聲，原字有囪、心兩部分，後來通行怱、匆等寫法。今字分出的勿、丶不是古聲符的兩個獨立讀音，不能依這兩格直接拼讀。",
+      "existingMeaningExplanation": "原字悤用心旁參與表意，表示急忙、急迫。通行匆字已不寫心旁，畫面不能把勿或丶標成心，也不另猜哪一筆代表心情。"
+    },
+    "另": {
+      "status": "missing",
+      "components": [
+        "口",
+        "力"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "吔": {
+      "status": "missing",
+      "components": [
+        "口",
+        "也"
+      ],
+      "researchNote": "現行字表將吔列於翰林五上第五課超級英雄，尚未取得該來源頁的可讀字表核對；不得靜默刪字或自行改成其他字。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "壽": {
+      "status": "missing",
+      "components": [
+        "士乛工",
+        "一",
+        "吋"
+      ],
+      "researchNote": "教育部明記老省及另一古聲符；影像的C17805標籤連到𪇘相關字，不能把圖檔標籤當成已辨識的聲符。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "奧": {
+      "status": "mapping-review",
+      "components": [
+        "丿冂釆",
+        "大"
+      ],
+      "researchNote": "教育部《異體字字典》A00873錄《說文》从宀、𢍏聲，同時保留徐鉉「非聲，未詳」的異議；不能把有爭議的聲符當成定論。字樣說明只確認今字冂內釆、下大之寫法，尚未證明古宀、𢍏與今字各部件的對應，不把大任指為義符。",
+      "existingSoundExplanation": "教育部所錄《說文》以𢍏表聲，但同時保留徐鉉認為非聲、未詳的異議。今字上半為丿、冂內釆，下半為大；古聲符與這些今字部件的對應仍待核對，不把釆或大任指為已證實聲符。",
+      "existingMeaningExplanation": "《說文》以宀參與構字，古義指室內西南角，後來泛指深處、精深。教育部的楷書字樣說明不等於已證實每個今字部件的古代作用，不能把下方大解作大房子或深奧的義符。"
+    },
+    "市": {
+      "status": "missing",
+      "components": [
+        "亠",
+        "巾"
+      ],
+      "researchNote": "教育部引說文之省聲，字庫另列兮義、之聲；今亠巾與古之兮的對應仍待證，不把巾當布料或亠當已核實的獨立聲符。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "幻": {
+      "status": "missing",
+      "components": [
+        "幺",
+        "𠃌"
+      ],
+      "researchNote": "金文幺與長弧筆的本義不明；字庫指出小篆倒予的分析不確，不據此強補義符。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "床": {
+      "status": "mapping-review",
+      "components": [
+        "广",
+        "木"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "教育部以牀為本字，篆形從木、爿聲；後世通行俗字床。今字外側寫成广，已不能直接圈出完整的爿，不把广的國語讀音當成床的讀音。",
+      "existingMeaningExplanation": "古字牀從木，表示讓人安身坐臥的器具；今字內側仍是木。外側广與古爿的改寫關係，不能僅憑外形當成另一個已核實的聲符。"
+    },
+    "彙": {
+      "status": "mapping-review",
+      "components": [
+        "彑",
+        "冖",
+        "果"
+      ],
+      "researchNote": "教學已補入教育部A01265的㣇構字、𦞅即胃的省聲及刺蝟古義，並與今字彑、冖、果和彙集今義區分。仍未證實古聲義部件的今字逐筆界線，不把果直接當聲符，也不編水果聚集故事。",
+      "existingSoundExplanation": "教育部所錄《說文》記𦞅省聲，並說𦞅即胃。今字下方雖寫成果，還需核對古胃省形與今字筆畫的關係，不能把果的今音或水果義直接當作彙的聲音、意義來源。",
+      "existingMeaningExplanation": "《說文》以㣇參與構字，解作像小豪豬的動物，即刺蝟；後來也有同類、聚集的用法。今字顯示彑、冖、果，不代表這三格都能各自當作獨立古義符，也不把果實聚在一起編作彙集的字源。"
+    },
+    "必": {
+      "status": "mapping-review",
+      "components": [
+        "心",
+        "丿"
+      ],
+      "researchNote": "來源支持兵器柄古形及後加八聲；今IDS心與撇不是古聲義部件，柄與八在今筆畫中的邊界尚待核對，不把後起柲字當今字部件。",
+      "existingSoundExplanation": "甲骨文先以整體字形描畫兵器的柄。部分金文在柄的兩側加上「八」提示讀音，後來全字借來表示必須。",
+      "existingMeaningExplanation": "依字庫所述，早期字形描畫兵器的柄，後來才在兩側加八提示讀音；借作必須後，又加木分化為柲。今字看似心與撇交疊，不是心情加一撇，也不能把後起的完整柲字當成今字裡已存在的部件。"
+    },
+    "敢": {
+      "status": "missing",
+      "components": [
+        "丅耳",
+        "攵"
+      ],
+      "researchNote": "教育部明列篆形古聲、今左部形如耳而從隸變；現代耳形不能直接作古聲符的完整文字。筆順網所列又卜聲是在解釋攴部首，不是敢字本身，不能挪用。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "斥": {
+      "status": "missing",
+      "components": [
+        "斤",
+        "丶"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "旁": {
+      "status": "missing",
+      "components": [
+        "亠丷冖",
+        "方"
+      ],
+      "researchNote": "字庫明列造字本義不明；古方、凡形不能僅按今字讀音或旁邊義倒推。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "智": {
+      "status": "mapping-review",
+      "components": [
+        "知",
+        "日"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "字庫記載「知」是「智」的聲符；歷史讀音與現代讀音可能不同。",
+      "existingMeaningExplanation": "早期字形有一種解讀是大人把知識傳授給孩子，提示智慧。小篆還有「白」等部件，今字下方寫作「日」，它的獨立字義作用仍待核對。"
+    },
+    "曳": {
+      "status": "mapping-review",
+      "components": [],
+      "researchNote": "說文支持申義、𠂆聲；今IDS沒有可解析拆分，且來源未詳申表意作用，不能僅為提高覆蓋率而將完整申、𠂆疊在今字圖中。",
+      "existingSoundExplanation": "《說文解字》以「𠂆」提示讀音，並記載此字從「申」。現代字形的筆畫交疊，分格中的位置尚待核對。",
+      "existingMeaningExplanation": "《說文》列申為形符，原義是牽引、拖曳；來源未詳述申形如何參與這項字義，不把它說成申請，也不自行推定今字哪一筆是手。古申形與聲符𠂆在今字中的交疊位置仍待核對。"
+    },
+    "更": {
+      "status": "mapping-review",
+      "components": [
+        "一",
+        "日乂"
+      ],
+      "researchNote": "早期丙攴解讀與金文二丙相續說須分開，今一與日乂尚不能直接對應兩個古聲義構件。",
+      "existingSoundExplanation": "于省吾將甲骨文的「丙」解作聲符、「攴」解作手持鞭形，認為可能是「鞭」的初文。這是對早期字形的一種解讀。",
+      "existingMeaningExplanation": "于省吾把古字攴解作手持鞭，認為可能是鞭的初文；季旭昇另以兩丙相續解釋繼承義。這些是不同時代字形的解讀，字庫仍指出早期構形初義不明；今字分出的日、乂不直接等於古攴。"
+    },
+    "民": {
+      "status": "mapping-review",
+      "components": [],
+      "researchNote": "教學已補入字庫所引郭沫若的目形、利器形解讀，並與今字氏部及百姓義區分。漢典頁首與內文六書分類不同，故不憑分類標籤把有來源的一說算成已驗證的完整部件映射；今字逐筆對應仍待核對。",
+      "existingSoundExplanation": "字庫所引郭沫若解讀以早期目形及利器形說明構形，沒有指定其中哪一部分作聲符；今字歸入氏部，不代表氏就是民的聲符。",
+      "existingMeaningExplanation": "香港中文大學字庫引郭沫若說，將早期字形解作利器刺眼，與古代奴隸的身分標記有關，後來泛指百姓、人民。這是具名的字源解讀；今字已連筆變形，不能直接把現代每筆圈成目或利器，也不把氏部解作氏族的造字義。"
+    },
+    "煞": {
+      "status": "missing",
+      "components": [
+        "𭣦",
+        "灬"
+      ],
+      "researchNote": "字庫僅證殺的俗字及殺死、停止等用法，未交代今上部刍、右攵、下灬各自的聲義作用；同殺不等於證明刍聲或火義。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "牠": {
+      "status": "mapping-review",
+      "components": [
+        "牛",
+        "也"
+      ],
+      "researchNote": "教育部A02491確認今字牛旁、也及動物第三人稱代詞用法，已補入教學並與㸰的異體音義區分；字樣說明未指定也為聲符，尚不計作完整形音義核實。",
+      "existingSoundExplanation": "教育部確認牠右半寫作也，但這項字樣說明沒有指定也為聲符。現代牠讀ㄊㄚ，不能把也的國語讀音直接當作牠的讀音，也不能把相同右旁當成已證實的字源。",
+      "existingMeaningExplanation": "教育部將牠解作指稱動物的第三人稱代詞，並確認左側寫牛旁，可用來聯繫動物的用法。這是今義與今字形的教學聯繫，不等於已證明古代造字只表示牛；字條另列ㄊㄨㄛˊ為㸰的異體，須與今天的動物代詞分開。"
+    },
+    "由": {
+      "status": "mapping-review",
+      "components": [],
+      "researchNote": "教學已補入字庫明記的本義未定、陳劍丨聲一說及原因／介詞的今義，明確不以田部倒推田地義。口形的表義作用與今字聲符筆畫對應仍未證實，保留待核對。",
+      "existingSoundExplanation": "字庫列陳劍一說：早期由從口、丨聲，丨或為針的初文，依據是古音關係。來源明記此說尚可備考，不能用今天丨的名稱拼讀由，也不能據此宣稱聲符已無爭議。",
+      "existingMeaningExplanation": "字庫說早期字形在口形上加豎筆或圓形，但本義未有定論，口形在構字中的字義作用仍待核對。今天由常表示原因，或作介詞相當於從；歸入田部不表示原義一定是田地，也不能把早期頭盔說當成已證實結論。"
+    },
+    "癟": {
+      "status": "missing",
+      "components": [
+        "疒",
+        "自侖"
+      ],
+      "researchNote": "劉釗2009年專文認為自冊、自侖可能由扁形演變，最早可能作㾫，但明說也可能是與扁無關的獨立字形。今不能把自或侖任一單獨當成已核實聲符，也不把作者假說標成定論。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "皆": {
+      "status": "missing",
+      "components": [
+        "比",
+        "白"
+      ],
+      "researchNote": "字庫列甲骨几聲而初義不明；金文从甘形後來从變比作聲符。未找到足以核對甘形到今白形字義區域的明確說明，不能僅憑今白形編造白色或說話之義。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "睿": {
+      "status": "missing",
+      "components": [
+        "𣦵",
+        "八",
+        "𥃦"
+      ],
+      "researchNote": "教育部29939與字庫均列說文叡從𣦼、目、谷省，今睿為古文。來源未逐一解明各部件如何表深明；2019饒宗頤國學院院刊說文準聲首另提出歺聲，須另讀原論文及古今字形，不能僅憑目部首宣稱其餘都是形符。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "禽": {
+      "status": "mapping-review",
+      "components": [
+        "人",
+        "离"
+      ],
+      "researchNote": "教育部確認說文禸象形、今聲，並說今字人下作离、下半禸；聲符今在今字的逐筆位置仍待證。已補有來源的說明，但不將人形當作完整今聲，不列為聲義位置均核實。",
+      "existingSoundExplanation": "《說文》明列今聲，是古字中的讀音線索。教育部今字寫法為人下作离，已不直接呈現完整的今；尚未確認每筆的演變對應，因此不把上方人形冒充整個今聲，也不能按今的國語讀音直接讀禽。",
+      "existingMeaningExplanation": "《說文》用禸（厹）的獸跡形參與表意，解作走獸總名；後來禽也可泛指獵物、鳥獸，或專指鳥類。教育部說明今字是人下作离，最下方仍為禸；這不是人加離開的故事。古今部件的完整對應仍待核對，不把整個离都當作獸跡。"
+    },
+    "童": {
+      "status": "missing",
+      "components": [
+        "立",
+        "里"
+      ],
+      "researchNote": "古字辛或䇂、目與人形有多種解讀，金文又加東聲、篆文重省聲；今立里不能直接當成上述古形完整部件。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "笑": {
+      "status": "missing",
+      "components": [
+        "竹",
+        "夭"
+      ],
+      "researchNote": "段注2997保留竹犬說但明說部件義不敢妄言，並批評楊承慶字統為求解改夭形聲。CBETA T54n2128 p0439a03、0805c03另記竹犬聲，p0765c09又有犬為樂器的疑似傳寫文句。三類說明須分開核對，不以風竹故事或有疑字句直接補成唯一核實答案。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "粄": {
+      "status": "mapping-review",
+      "components": [
+        "米",
+        "反"
+      ],
+      "researchNote": "教育部明示說文不錄，玉篇及廣韻支持米餅義，未明列反聲。維基詞典鄭張音系表可作後續找原著線索，不能把該轉引或反切的反字當聲符證據。",
+      "existingSoundExplanation": "今字右側是反，但本次核對的教育部字條未明列它作聲符；不能只憑字形相似或同音，就說已證實造字時的聲符。",
+      "existingMeaningExplanation": "教育部引古字書解作屑米製成的餅，左側米形可作理解米食的教學提示。這是已核對的字義聯繫；本字《說文》不錄，尚不把這項聯繫等同已證明的完整造字分析。"
+    },
+    "粿": {
+      "status": "mapping-review",
+      "components": [
+        "米",
+        "果"
+      ],
+      "researchNote": "教育部明示說文不錄，玉篇及廣韻支持米食義；漢典所附說文從禾果聲屬稞字而非粿，不能移植為已核實的粿字源。",
+      "existingSoundExplanation": "今字右側是果，但本次核對的教育部字條未明列它作聲符；不能只憑字形相似或同音，就說已證實造字時的聲符。",
+      "existingMeaningExplanation": "教育部引古字書解作用米製成的食品，左側米形可作理解米食的教學提示。這是已核對的字義聯繫；本字《說文》不錄，尚不把這項聯繫等同已證明的完整造字分析。"
+    },
+    "者": {
+      "status": "mapping-review",
+      "components": [
+        "耂",
+        "日"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "金文可辨認出「木」、數點和「口」，這些部件的構字作用仍不明確。",
+      "existingMeaningExplanation": "早期文獻已把「者」用在詞語後面，指符合前述條件的人或情況。古字怎麼構成這個意思，仍待考證。"
+    },
+    "耍": {
+      "status": "missing",
+      "components": [
+        "而",
+        "女"
+      ],
+      "researchNote": "字庫明列而、女的構形初義不明，不能因玩耍或戲弄的現代詞義便斷言女是義符、而是聲符。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "耶": {
+      "status": "missing",
+      "components": [
+        "耳",
+        "阝"
+      ],
+      "researchNote": "漢典列邑聲、耳形，但詳細解釋對本義標不詳；不能用語氣詞用法反推耳的古字義作用。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "與": {
+      "status": "missing",
+      "components": [],
+      "researchNote": "字庫列舁、牙皆聲，另引段注舁与皆亦聲；今字含共筆及省形，現有IDS還含數字佔位符，不用未核對的舁与格子冒充今字拆分。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "葬": {
+      "status": "mapping-review",
+      "components": [
+        "艹",
+        "死",
+        "廾"
+      ],
+      "researchNote": null,
+      "existingSoundExplanation": "裘錫圭將部分甲骨文中的「爿」解作承載死者的床。香港中文大學字庫也指出這個部件兼有聲符作用，現代楷書的分格中已無可獨立標示的「爿」。",
+      "existingMeaningExplanation": "有些甲骨文像把人或遺骨放入坑中。《說文解字》則把小篆解作以草木覆蓋死者。「葬」的本義是埋葬，現代字形中央的「死」保留了這層線索。"
+    },
+    "軟": {
+      "status": "missing",
+      "components": [
+        "車",
+        "欠"
+      ],
+      "researchNote": "漢典今字記車、欠聲，教育部另述媆、輭、軟的通行關係；左側車形對柔軟義的作用仍需補證，不自編軟車起源。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "迴": {
+      "status": "missing",
+      "components": [
+        "辶",
+        "回"
+      ],
+      "researchNote": "已核對CBETA正式XML T54n2128 p0375c13校勘：正文迴、回，另本明列迥、冋；反切熒頴、戶頴及遠義亦與迥相符。該條不能作迴的回聲證據。國教院異形詞手冊另支持辵強化掉轉行動義，尚未明列回聲。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "重": {
+      "status": "mapping-review",
+      "components": [],
+      "researchNote": "古人與東共用中豎，東亦聲亦意有來源，今IDS為整字；需證實實際交疊筆畫後才能標示，不能把整個東直接加畫進今字。",
+      "existingSoundExplanation": "甲金文的「東」像裝重物的囊袋，也提示讀音。後來人形和囊袋共用部分筆畫，現代字形難以把聲符單獨框出。",
+      "existingMeaningExplanation": "依柯昌濟、何琳儀的解讀，古字像人背負囊袋，提示沉重；囊袋形東同時兼任聲符。後來人與東共用中豎等筆畫，部分字形又加土表示站立地面，今字不能把每一筆都按獨立的人、東分格。"
+    },
+    "量": {
+      "status": "missing",
+      "components": [
+        "旦",
+        "里"
+      ],
+      "researchNote": "字庫明列構形初義未有定論：何琳儀昜聲、裘錫圭糧初文，以及說文重省曏省聲為不同分析。今字日一里與古構件共筆，尚無足夠證據標出完整聲義位置，不將日下量物一說冒充定論。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    },
+    "闆": {
+      "status": "mapping-review",
+      "components": [
+        "門",
+        "品"
+      ],
+      "researchNote": "字庫明列門、品構形，但未指定聲符；《玉篇》門中視義與今老闆義已補入教學，仍不把品解為已核實聲符或編造門內三口的商店故事。",
+      "existingSoundExplanation": "字庫將今字分為外側門、內側品，但未指定哪個部件表聲。不能把品或三個口當作已證實的聲符，也不能把老板的板字分析直接移到闆。",
+      "existingMeaningExplanation": "字庫引《玉篇》記門中視，即從門中窺看，並說古書未見此用法；外側門可幫助理解這項字書記載，但品在構字中的作用仍待核對。今天常用於老闆，指商舖企業的擁有人或僱主，不能另編門內三口就是老闆的故事。"
+    },
+    "鬱": {
+      "status": "missing",
+      "components": [
+        "木缶木",
+        "冖",
+        "鬯彡"
+      ],
+      "researchNote": "于省吾早期林中踐踏說是疑說，篆文另有林義、𩰪省聲；今缶冖鬯彡與早期大勹形交錯演變，須分開時代核對，不能把所有今部件都倒套同一故事。",
+      "existingSoundExplanation": null,
+      "existingMeaningExplanation": null
+    }
+  },
+  "sourceReportSha256": "46417350f4bed03e433002db1b64710c036efa03b5c27c9786277842add84093",
+  "reportType": "completion-audit-snapshot",
+  "releaseAuthorizedWithUnresolved": true
+}

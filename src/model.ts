@@ -7,7 +7,7 @@ export interface CharacterMaster {
   radical: string;
   structure: string;
   components: string[];
-  layout: "vertical" | "horizontal" | "triple" | "whole";
+  layout: "vertical" | "horizontal" | "triple" | "upper-left-enclosure" | "lower-left-enclosure" | "upper-right-enclosure" | "top-enclosure" | "left-enclosure" | "full-enclosure" | "overlap" | "whole";
   verificationStatus: "partial" | "unavailable";
   sources: Source[];
   version: string;

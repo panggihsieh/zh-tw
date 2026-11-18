@@ -88,7 +88,8 @@ export function parseBackup(text: string): Collection {
       !c.master ||
       typeof c.master.structure !== "string" ||
       typeof c.master.radical !== "string" ||
-      !["whole", "vertical", "horizontal", "triple"].includes(
+      !["whole", "vertical", "horizontal", "triple", "upper-left-enclosure", "lower-left-enclosure",
+        "upper-right-enclosure", "top-enclosure", "left-enclosure", "full-enclosure", "overlap"].includes(
         c.master.layout,
       ) ||
       !["partial", "unavailable"].includes(c.master.verificationStatus) ||
