@@ -20,13 +20,14 @@ export async function strokeSpeechRequest(character:string, options:{admin?:bool
 }
 let currentSpeech:SpeechSynthesisUtterance|null=null;
 export function stopStrokeSpeech() {if(currentSpeech && 'speechSynthesis' in window){window.speechSynthesis.cancel();currentSpeech=null;}}
-export function speakStrokeText(text:string,onDone?:()=>void) {
+export function speakStrokeText(text:string,onDone?:(completed:boolean)=>void) {
  if(!('speechSynthesis' in window))return false;
  try {
   window.speechSynthesis.cancel();
   const speech=new SpeechSynthesisUtterance(text);speech.lang='zh-TW';speech.rate=.85;
   const voice=selectVoice(window.speechSynthesis.getVoices(),loadVoicePreference(localStorage));if(voice)speech.voice=voice;
-  currentSpeech=speech;speech.onend=speech.onerror=()=>{if(currentSpeech===speech)currentSpeech=null;onDone?.();};
+  currentSpeech=speech;speech.onend=()=>{if(currentSpeech===speech)currentSpeech=null;onDone?.(true);};
+  speech.onerror=()=>{if(currentSpeech===speech)currentSpeech=null;onDone?.(false);};
   window.speechSynthesis.speak(speech);return true;
  }catch {currentSpeech=null;return false;}
 }
