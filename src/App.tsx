@@ -1442,6 +1442,34 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                               {showReading && (
                                 <span className="reading">{card.reading}</span>
                               )}
+                              {!backendMode && <div className="card-arrows">
+                            <button
+                              className="icon-btn"
+                              disabled={cardIndex === 0}
+                              aria-label="上一個字"
+                              onClick={() => {
+                                setCardIndex(cardIndex - 1);
+                                setScene(backendMode ? 0 : learningEntryScene);
+                                setPlaying(false);
+                              }}
+                            >
+                              <ChevronLeft size={28} strokeWidth={3} />
+                            </button>
+                            <button
+                              className="icon-btn"
+                              disabled={
+                                cardIndex === collection.cards.length - 1
+                              }
+                              aria-label="下一個字"
+                              onClick={() => {
+                                setCardIndex(cardIndex + 1);
+                                setScene(backendMode ? 0 : learningEntryScene);
+                                setPlaying(false);
+                              }}
+                            >
+                              <ChevronRight size={28} strokeWidth={3} />
+                            </button>
+                          </div>}
                             </div>
                           )}
                           {scene === 3 && (

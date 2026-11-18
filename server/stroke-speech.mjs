@@ -21,6 +21,18 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
     try {
       const url = new URL(req.url,'http://localhost');
       const character = url.pathname.slice('/api/structure/stroke-speech/'.length);
+      if (character === 'catalogue-playback') {
+        if (req.method !== 'GET') return send(405,{error:'不支援此操作。'});
+        let saved;
+        try {saved=await store.get('stroke-speech/catalogue.json');}
+        catch(error) {if(error.status!==404 && error.response?.status!==404)throw error;}
+        const rows=saved?.value.rows.map(row=>({
+          name:row.name,symbol:row.symbol,spoken:row.spoken,
+          mnemonic:row.mnemonic,pronunciationSource:row.pronunciationSource,
+          svgId:row.svgId,thumbnail:row.thumbnail,
+        }));
+        return send(200,{rows:rows??null});
+      }
       if (character === 'catalogue') {
         if (!['GET','POST'].includes(req.method)) return send(405,{error:'不支援此操作。'});
         if (req.headers['x-notebook-request']!=='stroke-speech' || (req.method==='POST' && !origins.includes(req.headers.origin))) return send(403,{error:'不允許的來源。'});

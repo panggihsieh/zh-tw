@@ -69,6 +69,14 @@ test('基本筆畫清單僅限管理員、驗證內容並防止覆寫其他管�
  assert.equal((await save({rows})).status,200);
  const saved=(await (await fetch(url,{headers})).json()).item;assert.equal(saved.rows.length,28);assert.equal(saved.rows[0].zhuyin,'ㄏㄥˊ');assert.equal(saved.rows[0].mnemonicRevision,'2026-11-18-final-1');assert.equal(saved.rows[0].mnemonic,'橫');assert.equal(saved.rows[0].pronunciationSource,'mnemonic');assert.equal(saved.rows[0].svgId,'stroke-34');
  assert.equal(saved.rows[0].thumbnail,thumbnail);
+ const playback=await fetch(url+'-playback');
+ assert.equal(playback.status,200);
+ const publicRow=(await playback.json()).rows[0];
+ assert.equal(publicRow.thumbnail,thumbnail);
+ assert.equal(publicRow.pronunciationSource,'mnemonic');
+ assert.equal(publicRow.notes,undefined);
+ assert.equal(publicRow.confirmed,undefined);
+
  assert.equal((await save({rows})).status,409);
  assert.equal((await save({...saved,rows:saved.rows.map((row,index)=>index===0?{...row,confirmed:true}:row)})).status,200);
  assert.equal((await (await fetch(url,{headers})).json()).item.rows[0].confirmed,true);
