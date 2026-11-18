@@ -1,7 +1,7 @@
 import { strokeAuditionText } from "./strokePronunciation";
 import type { CatalogueRow } from "./StrokeCatalogue";
 import { useEffect, useRef, useState } from "react";
-import { Maximize, Pause, Play, Repeat, Square } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Pause, Play, Repeat, Square } from "lucide-react";
 import seed from "./strokeCatalogueSeed.json";
 import { matchedStrokeSvg, selectedStrokeSvg } from "./strokeSvg";
 import { upgradeStrokeMnemonic } from "./strokeSpeechCatalog";
@@ -53,6 +53,13 @@ export default function BasicStrokePractice() {
     advance(start);
   }
 
+  function move(offset: number) {
+    cancel();
+    const target = (index + offset + rows.length) % rows.length;
+    if (paused) setIndex(target);
+    else play(target);
+  }
+
   return <>
     <button type="button" className="secondary basic-stroke-launch" disabled={loading} onClick={async () => {
       const controller = new AbortController();
@@ -88,6 +95,8 @@ export default function BasicStrokePractice() {
           <figcaption><strong>{row.name}</strong> · {reading}</figcaption>
         </figure>
         <div className="stroke-preview-actions">
+          <button type="button" className="secondary" aria-label="上一個筆畫" title="上一個筆畫" onClick={() => move(-1)}><ChevronLeft aria-hidden="true" /></button>
+          <button type="button" className="secondary" aria-label="下一個筆畫" title="下一個筆畫" onClick={() => move(1)}><ChevronRight aria-hidden="true" /></button>
           <button type="button" className="secondary" aria-label="切換全螢幕" title="切換全螢幕" onClick={async () => {
             try {
               if (document.fullscreenElement) await document.exitFullscreen();
