@@ -17,14 +17,14 @@
     },
     "旁": {
       "status": "source-unresolved",
-      "note": "字庫明列造字本義不明；古方、凡形不能僅按今字讀音或旁邊義倒推。",
+      "note": "教學已依《說文》方聲標示今字下方方；字庫明列造字本義不明，上部古凡、用等演變仍待核對，不因一項聲符可標示就把整字算完成。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%97%81",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "幻": {
       "status": "source-unresolved",
-      "note": "金文幺與長弧筆的本義不明；字庫指出小篆倒予的分析不確，不據此強補義符。",
+      "note": "教學已補入來源支持的字形、用法與疑問，保留待核對：金文幺與長弧筆的本義不明；字庫指出小篆倒予的分析不確，不據此強補義符。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B9%BB",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -71,7 +71,7 @@
     },
     "笑": {
       "status": "component-role-unresolved",
-      "note": "段注2997保留竹犬說但明說部件義不敢妄言，並批評楊承慶字統為求解改夭形聲。CBETA T54n2128 p0439a03、0805c03另記竹犬聲，p0765c09又有犬為樂器的疑似傳寫文句。三類說明須分開核對，不以風竹故事或有疑字句直接補成唯一核實答案。",
+      "note": "教學已補入來源支持的字形、用法與疑問，保留待核對：段注2997保留竹犬說但明說部件義不敢妄言，並批評楊承慶字統為求解改夭形聲。CBETA T54n2128 p0439a03、0805c03另記竹犬聲，p0765c09又有犬為樂器的疑似傳寫文句。三類說明須分開核對，不以風竹故事或有疑字句直接補成唯一核實答案。",
       "sourceUrl": "https://www.shuowen.org/view/2997",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -111,42 +111,58 @@
     },
     "壽": {
       "status": "glyph-reading-needed",
-      "note": "教育部明記老省及另一古聲符；影像的C17805標籤連到𪇘相關字，不能把圖檔標籤當成已辨識的聲符。",
+      "note": "教學已補入教育部古今字形及字義說明，仍待核對：教育部明記老省及另一古聲符；影像的C17805標籤連到𪇘相關字，不能把圖檔標籤當成已辨識的聲符。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A00836",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "軟": {
       "status": "competing-accounts",
-      "note": "漢典今字記車、欠聲，教育部另述媆、輭、軟的通行關係；左側車形對柔軟義的作用仍需補證，不自編軟車起源。",
+      "note": "教學已依漢典欠聲標示右欠，並分開教育部所列媆、輭、軟的歷史關係；左車與柔軟義的作用未獲明證，不編軟車故事。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=44335&la=0&powerMode=2",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "耶": {
       "status": "component-role-unresolved",
-      "note": "漢典列邑聲、耳形，但詳細解釋對本義標不詳；不能用語氣詞用法反推耳的古字義作用。",
+      "note": "教學已依漢典邑聲，在右阝位置標聲；左耳的古構義仍不詳，不以句末疑問語氣倒推耳的義符作用。",
       "sourceUrl": "https://zdic.net/hant/%E8%80%B6",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "迴": {
       "status": "digital-text-check-needed",
-      "note": "已核對CBETA正式XML T54n2128 p0375c13校勘：正文迴、回，另本明列迥、冋；反切熒頴、戶頴及遠義亦與迥相符。該條不能作迴的回聲證據。國教院異形詞手冊另支持辵強化掉轉行動義，尚未明列回聲。",
+      "note": "教學已補具名來源及已知部分，整字仍待核對：已核對CBETA正式XML T54n2128 p0375c13校勘：正文迴、回，另本明列迥、冋；反切熒頴、戶頴及遠義亦與迥相符。該條不能作迴的回聲證據。國教院異形詞手冊另支持辵強化掉轉行動義，尚未明列回聲。",
       "sourceUrl": "https://21dzk.l.u-tokyo.ac.jp/SAT/ddb-sat2.php?key=%E6%A8%82&mode=detail&useid=2128_,54,0370",
       "reviewedOn": "2026-11-19",
-      "countsAsVerified": false
+      "countsAsVerified": false,
+      "additionalSources": [
+        {
+          "title": "教育部《異體字字典》迴 A04132",
+          "url": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A04132"
+        },
+        {
+          "title": "國教院《異形詞辨析手冊》第39頁李淑萍：辵強化行動義",
+          "url": "https://teric.naer.edu.tw/wSite/PDFReader?fileName=1737701496821&format=pdf&xmlId=2067323"
+        }
+      ]
     },
     "吔": {
       "status": "curriculum-source-check-needed",
-      "note": "現行字表將吔列於翰林五上第五課超級英雄，尚未取得該來源頁的可讀字表核對；不得靜默刪字或自行改成其他字。",
+      "note": "教學已依教育部簡編本40996補入輕聲˙ㄧㄝ及感嘆驚訝用法；右也聲符仍無字書明證。現行字表列於翰林五上第五課超級英雄，來源頁本輪仍無法讀取，不靜默刪字或換字。",
       "sourceUrl": "https://pedia.cloud.edu.tw/Bookmark/TCollection?TextNameId=0101051150105",
       "reviewedOn": "2026-11-19",
-      "countsAsVerified": false
+      "countsAsVerified": false,
+      "additionalSources": [
+        {
+          "title": "教育部《國語辭典簡編本》（吔）",
+          "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=40996"
+        }
+      ]
     },
     "耍": {
       "status": "source-unresolved",
-      "note": "字庫明列而、女的構形初義不明，不能因玩耍或戲弄的現代詞義便斷言女是義符、而是聲符。",
+      "note": "教學已補入來源支持的字形、用法與疑問，保留待核對：字庫明列而、女的構形初義不明，不能因玩耍或戲弄的現代詞義便斷言女是義符、而是聲符。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%80%8D",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -188,14 +204,14 @@
     },
     "童": {
       "status": "component-role-unresolved",
-      "note": "古字辛或䇂、目與人形有多種解讀，金文又加東聲、篆文重省聲；今立里不能直接當成上述古形完整部件。",
+      "note": "教學已補入古部件、今字差異及來源說明，仍待核對：古字辛或䇂、目與人形有多種解讀，金文又加東聲、篆文重省聲；今立里不能直接當成上述古形完整部件。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%AB%A5",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "與": {
       "status": "component-role-unresolved",
-      "note": "字庫列舁、牙皆聲，另引段注舁与皆亦聲；今字含共筆及省形，現有IDS還含數字佔位符，不用未核對的舁与格子冒充今字拆分。",
+      "note": "教學已補入古部件、今字差異及來源說明，仍待核對：字庫列舁、牙皆聲，另引段注舁与皆亦聲；今字含共筆及省形，現有IDS還含數字佔位符，不用未核對的舁与格子冒充今字拆分。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%88%87",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -209,14 +225,14 @@
     },
     "睿": {
       "status": "component-role-unresolved",
-      "note": "教育部29939與字庫均列說文叡從𣦼、目、谷省，今睿為古文。來源未逐一解明各部件如何表深明；2019饒宗頤國學院院刊說文準聲首另提出歺聲，須另讀原論文及古今字形，不能僅憑目部首宣稱其餘都是形符。",
+      "note": "教學已補入教育部古今字形及字義說明，仍待核對：教育部29939與字庫均列說文叡從𣦼、目、谷省，今睿為古文。來源未逐一解明各部件如何表深明；2019饒宗頤國學院院刊說文準聲首另提出歺聲，須另讀原論文及古今字形，不能僅憑目部首宣稱其餘都是形符。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=29939&q=1",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "癟": {
       "status": "phonetic-source-unresolved",
-      "note": "劉釗2009年專文認為自冊、自侖可能由扁形演變，最早可能作㾫，但明說也可能是與扁無關的獨立字形。今不能把自或侖任一單獨當成已核實聲符，也不把作者假說標成定論。",
+      "note": "教學已補入劉釗2009專文的右部可能由扁演變及可能為獨立字形的保留意見；不把假說當定論，不單圈自或侖作聲符。疒與古字書用法可作教學聯繫，完整構字仍待核對。",
       "sourceUrl": "https://www.fdgwz.org.cn/Web/Show/783",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -237,14 +253,14 @@
     },
     "煞": {
       "status": "component-role-unresolved",
-      "note": "字庫僅證殺的俗字及殺死、停止等用法，未交代今上部刍、右攵、下灬各自的聲義作用；同殺不等於證明刍聲或火義。",
+      "note": "教學已補入來源支持的字形、用法與疑問，保留待核對：字庫僅證殺的俗字及殺死、停止等用法，未交代今上部刍、右攵、下灬各自的聲義作用；同殺不等於證明刍聲或火義。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%85%9E",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "鬱": {
       "status": "component-role-unresolved",
-      "note": "于省吾早期林中踐踏說是疑說，篆文另有林義、𩰪省聲；今缶冖鬯彡與早期大勹形交錯演變，須分開時代核對，不能把所有今部件都倒套同一故事。",
+      "note": "教學已補具名來源及已知部分，整字仍待核對：于省吾早期林中踐踏說是疑說，篆文另有林義、𩰪省聲；今缶冖鬯彡與早期大勹形交錯演變，須分開時代核對，不能把所有今部件都倒套同一故事。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%AC%B1",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -316,28 +332,28 @@
     },
     "敢": {
       "status": "component-role-unresolved",
-      "note": "教育部明列篆形古聲、今左部形如耳而從隸變；現代耳形不能直接作古聲符的完整文字。筆順網所列又卜聲是在解釋攴部首，不是敢字本身，不能挪用。",
+      "note": "教學已補入古部件、今字差異及來源說明，仍待核對：教育部明列篆形古聲、今左部形如耳而從隸變；現代耳形不能直接作古聲符的完整文字。筆順網所列又卜聲是在解釋攴部首，不是敢字本身，不能挪用。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=18784&la=0",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "市": {
       "status": "component-role-unresolved",
-      "note": "教育部引說文之省聲，字庫另列兮義、之聲；今亠巾與古之兮的對應仍待證，不把巾當布料或亠當已核實的獨立聲符。",
+      "note": "教學已補入古部件、今字差異及來源說明，仍待核對：教育部引說文之省聲，字庫另列兮義、之聲；今亠巾與古之兮的對應仍待證，不把巾當布料或亠當已核實的獨立聲符。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=12715&powerMode=2&q=1",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "量": {
       "status": "source-unresolved",
-      "note": "字庫明列構形初義未有定論：何琳儀昜聲、裘錫圭糧初文，以及說文重省曏省聲為不同分析。今字日一里與古構件共筆，尚無足夠證據標出完整聲義位置，不將日下量物一說冒充定論。",
+      "note": "教學已補具名來源及已知部分，整字仍待核對：字庫明列構形初義未有定論：何琳儀昜聲、裘錫圭糧初文，以及說文重省曏省聲為不同分析。今字日一里與古構件共筆，尚無足夠證據標出完整聲義位置，不將日下量物一說冒充定論。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%87%8F",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     },
     "皆": {
       "status": "source-unresolved",
-      "note": "字庫列甲骨几聲而初義不明；金文从甘形後來从變比作聲符。未找到足以核對甘形到今白形字義區域的明確說明，不能僅憑今白形編造白色或說話之義。",
+      "note": "教學已依字庫記金文从變比、比表聲，標示今字上方比；甲骨几聲等說分開呈現。今白與古甘的構義仍未核實，不編白色或說話故事，整字仍待核對。",
       "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%9A%86",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
@@ -353,6 +369,20 @@
       "status": "phonetic-source-unresolved",
       "note": "教育部A02491確認今字牛旁、也及動物第三人稱代詞用法，已補入教學並與㸰的異體音義區分；字樣說明未指定也為聲符，尚不計作完整形音義核實。",
       "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A02491",
+      "reviewedOn": "2026-11-19",
+      "countsAsVerified": false
+    },
+    "另": {
+      "status": "component-role-unresolved",
+      "note": "教學已補入教育部的字樣與字義，仍未證實今字部件的聲義分工；不靠形近或同音補成已核實字源。",
+      "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=5435&la=0",
+      "reviewedOn": "2026-11-19",
+      "countsAsVerified": false
+    },
+    "斥": {
+      "status": "component-role-unresolved",
+      "note": "教學已補入教育部的字樣與字義，仍未證實今字部件的聲義分工；不靠形近或同音補成已核實字源。",
+      "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=19218&la=0",
       "reviewedOn": "2026-11-19",
       "countsAsVerified": false
     }
