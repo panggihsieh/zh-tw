@@ -31,7 +31,7 @@ export async function playClosedCompetitionSound(roomId:string){
 export function observeCompetitionEnd(rooms:CompetitionRoom[],previous:Map<string,string>){
  for(const room of rooms){
   if(previous.get(room.id)==='running'&&room.status==='closed'&&!sounded.has(room.id)){
-   sounded.add(room.id);void playCompetitionEndSound().catch(()=>{/* 試聽按鈕可手動播放被瀏覽器阻擋的音效。 */});
+   sounded.add(room.id);setEndSoundEnabled(true);void playCompetitionEndSound().catch(()=>{/* 試聽按鈕可手動播放被瀏覽器阻擋的音效。 */});
   }
   previous.set(room.id,room.status);
  }

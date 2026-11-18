@@ -8,6 +8,20 @@ interface Photo { id:string; image:string; createdAt:number; title:string }
 export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false,autoSave=false,allowExport=false}:{autoSave?:boolean;allowExport?:boolean;room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
  const board=useRef<HTMLDivElement>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[photo,setPhoto]=useState<Photo|null>(null),[preview,setPreview]=useState(''),[revision,setRevision]=useState(''),[enabled,setEnabled]=useState(endSoundEnabled);
  const [photosLoaded,setPhotosLoaded]=useState(false);
+ const saveDialog=useRef<HTMLDialogElement>(null);
+ const [saveDecision,setSaveDecision]=useState<boolean|null>(null),[saveChoice,setSaveChoice]=useState(true),[saveSeconds,setSaveSeconds]=useState(30);
+ useEffect(()=>{
+  if(!autoSave||saveDecision!==null||simulated||room.status!=='closed'||!items.length)return;
+  const dialog=saveDialog.current;
+  dialog?.showModal();
+  const deadline=Date.now()+30000;
+  const timer=setInterval(()=>{
+   const remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));setSaveSeconds(remaining);
+   if(!remaining){clearInterval(timer);setSaveDecision(false);dialog?.close();setMessage('30 秒未確認，已略過自動保存；仍可手動保存或匯出。');}
+  },250);
+  return()=>{clearInterval(timer);dialog?.close();};
+ },[autoSave,saveDecision,simulated,room.id,room.status,!!items.length]);
+ useEffect(()=>{if(saveDecision!==null)saveDialog.current?.close();},[saveDecision]);
  const rankingRevision=items.length ? JSON.stringify(items.map(item=>[item.uid,item.rank,item.points,item.correct,item.answered])) : '';
  useEffect(()=>{
   let active=true;
@@ -18,7 +32,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
  },[room.id,room.status,request,simulated]);
  const automaticSaveFinished=useRef(false);
  useEffect(()=>{
-  if(!autoSave||simulated||room.status!=='closed'||!photosLoaded||photo||!rankingRevision||automaticSaveFinished.current)return;
+  if(!autoSave||saveDecision!==true||simulated||room.status!=='closed'||!photosLoaded||photo||!rankingRevision||automaticSaveFinished.current)return;
   const node=board.current;
   if(!node)return;
   let active=true;
@@ -47,7 +61,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
   }
   void save(1);
   return()=>{active=false;clearTimeout(retry);};
- },[autoSave,simulated,room.id,room.status,photosLoaded,photo,rankingRevision,request]);
+ },[autoSave,saveDecision,simulated,room.id,room.status,photosLoaded,photo,rankingRevision,request]);
  async function capture(){
   if(!board.current)return;setBusy(true);setMessage('');
   try{setRevision(rankingRevision);setPreview(await captureCompetitionRanking(board.current));setMessage('照片已拍好，確認後可上傳保存。');}catch(error){setMessage((error as Error).message);}finally{setBusy(false);}
@@ -57,6 +71,13 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
   try{const value=await request<{photo:Photo}>(`/rooms/${room.id}/photos`,{image:preview,revision});setPhoto(value.photo);setPreview('');setMessage('排名照片已上傳保存。');}catch(error){setMessage(`尚未上傳：${(error as Error).message}。照片保留，可重試。`);}finally{setBusy(false);}
  }
  return <section className="competition-final-ranking">
+  {autoSave&&!simulated&&room.status==='closed'&&!!items.length&&<dialog ref={saveDialog} aria-labelledby={`save-ranking-${room.id}`} onCancel={()=>{setSaveDecision(false);}}>
+   <h2 id={`save-ranking-${room.id}`}>課堂已結束，是否儲存排名？</h2>
+   <p>{room.title} · {saveSeconds} 秒內確認，逾時放棄自動保存。</p>
+   <label><input type="radio" name={`save-${room.id}`} checked={saveChoice} onChange={()=>setSaveChoice(true)}/>儲存排名並開啟課堂紀錄匯出預覽</label>
+   <label><input type="radio" name={`save-${room.id}`} checked={!saveChoice} onChange={()=>setSaveChoice(false)}/>放棄自動保存</label>
+   <div className="competition-actions"><button type="button" className="primary" autoFocus onClick={()=>{setSaveDecision(saveChoice);if(!saveChoice)setMessage('已略過自動保存。');}}>確認</button><button type="button" className="secondary" onClick={()=>{setSaveDecision(false);setMessage('已略過自動保存。');}}>放棄</button></div>
+  </dialog>}
   <div ref={board} className="competition-ranking-capture">
    <p>🏆 {room.status==='closed'?'最終排名':'目前排名 · 等待課堂結束'}</p><h2>{room.title}</h2>
    <p>{room.className} · {room.questionCount} 題 · {new Date(room.startedAt??room.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})} · 設定 {Math.round(room.duration/60)} 分鐘</p>
@@ -72,7 +93,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
   </div>
   {preview&&<div className="competition-ranking-photo"><img src={preview} alt="待上傳的排名照片"/><a href={preview} download={`${room.title}-排名.jpg`}>下載照片</a>{!simulated&&<button type="button" className="primary" disabled={busy} onClick={()=>void upload()}>上傳排名照片</button>}{simulated&&<p>模擬預覽僅供下載，不上傳正式紀錄。</p>}</div>}
   {photo&&<details><summary>查看已上傳排名照片</summary><div className="competition-ranking-photo"><img src={photo.image} alt={`${photo.title}排名照片`}/><a href={photo.image} download={`${photo.title}-排名.jpg`}>下載已保存照片</a><p>拍照保存：{new Date(photo.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})}</p></div></details>}
-  {allowExport&&<CompetitionClassroomExport room={room} items={items} revision={rankingRevision}/>}
+  {allowExport&&<CompetitionClassroomExport room={room} items={items} revision={rankingRevision} autoOpen={saveDecision===true}/>}
   <p role="status">{busy?'處理排名照片中…':message}</p>
  </section>;
 }

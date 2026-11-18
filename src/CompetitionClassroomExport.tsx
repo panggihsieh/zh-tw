@@ -1,11 +1,12 @@
-import {useRef,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {competitionRequest,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
 import {captureCompetitionRanking} from './competitionRankingPhoto';
 
-export default function CompetitionClassroomExport({room,items,revision}:{room:CompetitionRoom;items:LeaderboardItem[];revision:string}){
+export default function CompetitionClassroomExport({room,items,revision,autoOpen=false}:{room:CompetitionRoom;items:LeaderboardItem[];revision:string;autoOpen?:boolean}){
  const board=useRef<HTMLDivElement>(null);
  const [open,setOpen]=useState(false),[limit,setLimit]=useState(100),[message,setMessage]=useState(''),[busy,setBusy]=useState(false);
  const [preview,setPreview]=useState<{image:string;revision:string;limitKB:number}|null>(null);
+ useEffect(()=>{if(autoOpen)setOpen(true);},[autoOpen]);
  const current=preview?.revision===revision&&preview.limitKB===limit;
  async function prepare(){
   if(!board.current||busy)return;

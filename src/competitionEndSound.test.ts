@@ -47,3 +47,13 @@ it('老師手動結束會啟用音效且不與結束狀態輪詢重複播放',as
  await sound.playClosedCompetitionSound('manual');
  expect(play).toHaveBeenCalledTimes(1);
 });
+
+it('時間到結束同樣啟用音效，重複輪詢不重播',async()=>{
+ const sound=await import('./competitionEndSound'),previous=new Map<string,string>();
+ sound.setEndSoundEnabled(false);
+ sound.observeCompetitionEnd([room('timeout','running')],previous);
+ sound.observeCompetitionEnd([room('timeout','closed')],previous);
+ sound.observeCompetitionEnd([room('timeout','closed')],previous);
+ expect(sound.endSoundEnabled()).toBe(true);
+ expect(play).toHaveBeenCalledTimes(1);
+});
