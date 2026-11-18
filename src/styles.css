@@ -3830,8 +3830,14 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   margin-top: 6px;
 }
 
-:root[data-site-theme] .backend-nav-group :is(h2, summary) {
-  color: #fff;
+.backend-nav-group > :is(h2, summary),
+:root[data-site-theme] .backend-nav-group > :is(h2, summary) {
+  box-sizing: border-box;
+  padding: 6px 10px;
+  background: #fff;
+  color: #075d3e;
+  border: 2px solid #000;
+  border-radius: 4px;
 }
 @media (max-width: 600px) {
   .top-navigation-layout:not(.backend-shell) .app-top-nav {

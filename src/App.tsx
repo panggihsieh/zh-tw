@@ -983,7 +983,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 </details>
               ) : (
                 <div className="backend-nav-group" role="group" aria-label={title} key={title}>
-                  {title !== "資料庫" && <h2>{title}</h2>}
+                  <h2>{title}</h2>
                   {buttons}
                 </div>
               );
