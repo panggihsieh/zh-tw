@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 import { judgeStroke, outlinePath, sample, tracePath, type Point } from './writingGame';
 import {useStrokeSpeech} from './strokeSpeech';
 import './strokeSpeech.css';
 
 interface Stroke { outline:any[]; track:Point[] }
-export default function CompetitionWriting({character,disabled,onSubmit,mode='competition'}:{character:string;disabled:boolean;onSubmit:(traces:Point[][])=>void;mode?:'practice'|'competition'}) {
+export default function CompetitionWriting({character,disabled,onSubmit,mode='competition',extraActions}:{character:string;disabled:boolean;onSubmit:(traces:Point[][])=>void;mode?:'practice'|'competition';extraActions?:ReactNode}) {
  const [strokes,setStrokes]=useState<Stroke[]|null>(null),[traces,setTraces]=useState<Point[][]>([]),[live,setLive]=useState<Point[]>([]),[message,setMessage]=useState(''),[hint,setHint]=useState(false);
  const pen=useRef<{id:number;points:Point[]}|null>(null);
  const voice=useStrokeSpeech(character,strokes,mode);
@@ -45,6 +45,6 @@ export default function CompetitionWriting({character,disabled,onSubmit,mode='co
    <path d={tracePath(live)} stroke="#175d9a" strokeWidth="14" strokeLinecap="round" fill="none"/>
   </svg>
   <p role="status">{message||'使用滑鼠、觸控筆或手指，依筆順完成每一筆。'}</p>
-  <div className="competition-actions"><button type="button" className="secondary" disabled={disabled||!strokes||complete} onClick={()=>setHint(!hint)}>{hint?'收合':'顯示'}下一筆提示</button><button type="button" className="secondary" disabled={disabled||!traces.length} onClick={()=>{setTraces([]);setMessage('已清除，請重新書寫。');if(mode==='practice')voice.say(0,'prompt');}}>重新書寫</button>{mode==='competition'&&<button type="button" className="primary" disabled={disabled||!complete} onClick={()=>onSubmit(traces)}>送出書寫答案</button>}</div>
+  <div className="competition-actions"><button type="button" className="secondary" disabled={disabled||!strokes||complete} onClick={()=>setHint(!hint)}>{hint?'收合':'顯示'}下一筆提示</button><button type="button" className="secondary" disabled={disabled||!traces.length} onClick={()=>{setTraces([]);setMessage('已清除，請重新書寫。');if(mode==='practice')voice.say(0,'prompt');}}>重新書寫</button>{extraActions}{mode==='competition'&&<button type="button" className="primary" disabled={disabled||!complete} onClick={()=>onSubmit(traces)}>送出書寫答案</button>}</div>
  </div>;
 }
