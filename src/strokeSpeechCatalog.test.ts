@@ -10,7 +10,7 @@ describe('32 種筆畫口訣',()=>{
  it('別名套用同一口訣，共用符號仍按名稱分辨',()=>{
   expect(findStrokePreset('提')?.spoken).toBe('挑');
   expect(findStrokePreset('戈鉤')?.spoken).toBe('斜彎，鉤');
-  expect(findStrokePreset('心鉤')?.spoken).toBe('向右下平彎，左鉤');
+  expect(findStrokePreset('心鉤')?.spoken).toBe('右下平彎，左鉤');
   expect(findStrokePreset('豎折撇')?.spoken).toBe('豎，折，撇');
   expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，下折');
   expect(findStrokePreset('自訂')).toBeUndefined();

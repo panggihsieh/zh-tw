@@ -23,14 +23,14 @@ export const STROKE_CATALOG = [
  ['向右轉折','橫折彎鉤','㇈','橫，折，彎，鉤','九、幾、凡'],
  ['向右轉折','橫折折折鉤','㇎','橫，撇，折，下折，左鉤','乃、奶、仍'],
  ['向下與鉤類','橫折','㇕','橫，折','口、日、田'],
- ['向下與鉤類','橫鉤','㇖','橫，向左下鉤','買、字、寶'],
+ ['向下與鉤類','橫鉤','㇖','橫，左下鉤','買、字、寶'],
  ['向下與鉤類','橫折鉤','㇆','橫，折，左鉤','月、刀、力'],
  ['向下與鉤類','橫折提','㇊','橫，折，挑','計、說、話'],
- ['向下與鉤類','橫斜鉤','⺄','橫，向右下斜彎，鉤','風、飛、氣'],
+ ['向下與鉤類','橫斜鉤','⺄','橫，右下斜彎，鉤','風、飛、氣'],
  ['向下與鉤類','橫折折','㇅','橫，折，右折','凹'],
  ['向下與鉤類','豎折折','㇞','豎，折，下折','凸、亞、鼎'],
- ['向下與鉤類','彎鉤','㇁','向下微彎，左鉤','手、狗、家'],
- ['向下與鉤類','臥鉤／心鉤','㇃','向右下平彎，左鉤','心、思、必'],
+ ['向下與鉤類','彎鉤','㇁','下微彎，左鉤','手、狗、家'],
+ ['向下與鉤類','臥鉤／心鉤','㇃','右下平彎，左鉤','心、思、必'],
 ].map(([group,name,symbol,spoken,examples])=>({group,name,symbol,spoken,examples}));
 
 // 依使用者核對圖補充後台既有名稱；不以共用 Unicode 符號推定別名。
@@ -54,7 +54,7 @@ export function fillStrokeMnemonic<T extends {name:string;mnemonic?:string;confi
  return !row.mnemonic?.trim()&&preset?{...row,mnemonic:preset.spoken,confirmed:false}:row;
 }
 
-export const MNEMONIC_REVISION='2026-11-18-final-1';
+export const MNEMONIC_REVISION='2026-11-18-final-2';
 export function upgradeStrokeMnemonic<T extends {name:string;mnemonic?:string;mnemonicRevision?:string;confirmed:boolean}>(row:T):T & {mnemonicRevision?:string} {
  const preset=findStrokePreset(row.name);
  if(!preset||row.mnemonicRevision===MNEMONIC_REVISION)return row;
@@ -62,7 +62,7 @@ export function upgradeStrokeMnemonic<T extends {name:string;mnemonic?:string;mn
 }
 export function strokeMnemonicReason(name:string):string {
  const preset=findStrokePreset(name);if(!preset)return '本項尚無定案口訣，請依實際筆形人工核對。';
- const text=preset.spoken,parts=['依運筆順序分段朗讀；逗號表示停頓。'];
+ const text=preset.spoken,parts=['依運筆順序分段朗讀；逗號表示停頓，方向前省略「向」字。'];
  if(text.includes('折'))parts.push('橫後第一折預設向下，豎或撇後第一折預設向右，省略可推知的方向。');
  if(text.includes('右折')||text.includes('下折'))parts.push('連續轉折保留後續的「右折／下折」，避免方向混淆。');
  if(text.includes('彎'))parts.push('「彎」表示圓轉，與有轉角的「折」分開；保留斜彎、微彎、平彎的差異。');
