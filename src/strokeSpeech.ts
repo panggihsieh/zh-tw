@@ -2,7 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {cloudServices} from './cloudSync';
 import {loadVoicePreference,selectVoice} from './ttsPreferences';
 
-export interface StrokeVoice {name:string;spoken:string;mnemonic?:string}
+export interface StrokeVoice {name:string;spoken:string;mnemonic?:string;zhuyin?:string}
 export interface StrokeSpeechEntry {fingerprint:string;confirmed:boolean;strokes:StrokeVoice[];updatedAt?:string}
 export const STROKE_NAMES=['點','橫','豎','撇','捺','提','橫鉤','豎鉤','斜鉤','臥鉤','彎鉤','橫折','豎折','撇折','撇點','橫撇','橫折鉤','豎彎','豎彎鉤','橫折彎鉤','橫折折撇','橫折折折鉤'];
 export async function fingerprintStrokes(strokes:unknown) {

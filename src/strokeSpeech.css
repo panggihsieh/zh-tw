@@ -17,3 +17,6 @@
 .stroke-speech-admin button.stroke-audition:hover:not(:disabled){background:#f1f1f1;border-color:#000;color:#000}
 .stroke-speech-admin button.stroke-audition:focus-visible{outline:2px solid #000;outline-offset:3px}
 .stroke-speech-admin button.stroke-audition:disabled{opacity:.45}
+
+.stroke-catalogue{margin:20px 0;padding:16px;border:1px solid #c8d9b9;border-radius:16px}.stroke-catalogue summary{cursor:pointer;font-weight:700}.stroke-catalogue-symbol{font-size:2rem}.stroke-catalogue fieldset{border:0;padding:0;min-width:0}.stroke-speech-grid :is(select,textarea){width:100%;min-width:0;box-sizing:border-box}.stroke-catalogue input[type=checkbox]{width:auto}
+.stroke-voice-settings label{display:grid;gap:6px;max-width:100%}.stroke-voice-settings select{width:100%;max-width:520px;min-width:0}
