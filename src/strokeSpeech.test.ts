@@ -11,10 +11,10 @@ describe('教師確認的筆畫語音時機',()=>{
   }
  });
  it('練習會先提示筆畫，寫錯也可重播當前筆畫',()=>{
-  expect(strokeSpeechText(entry,0,'practice','prompt')).toBe('第一筆，橫。');
-  expect(strokeSpeechText(entry,1,'practice','prompt')).toBe('下一筆，豎。');
+  expect(strokeSpeechText(entry,0,'practice','prompt')).toBe('橫');
+  expect(strokeSpeechText(entry,1,'practice','prompt')).toBe('豎');
   expect(strokeSpeechText(entry,2,'practice','mistake')).toBe('請再試一次，這一筆是橫折鉤。');
-  expect(strokeSpeechText(entry,0,'practice','correct')).toBe('');
+  expect(strokeSpeechText(entry,0,'practice','correct')).toBe('橫');
  });
  it('未發布、缺少資料、已完成的筆號不朗讀',()=>{
   expect(strokeSpeechText({...entry,confirmed:false},0,'competition','correct')).toBe('');
@@ -29,7 +29,7 @@ describe('教師確認的筆畫語音時機',()=>{
 
 it('優先朗讀獨立口訣，舊資料與空口訣仍使用朗讀文字',()=>{
  const value={...entry,strokes:[{name:'豎折',spoken:'豎折',mnemonic:'豎，右折'}]};
- expect(strokeSpeechText(value,0,'practice','prompt')).toBe('第一筆，豎，右折。');
+ expect(strokeSpeechText(value,0,'practice','prompt')).toBe('豎，右折');
  expect(strokeSpeechText(value,0,'competition','correct')).toBe('豎，右折');
  expect(strokeSpeechText(value,0,'competition','prompt')).toBe('');
  expect(strokeSpeechText({...value,strokes:[{...value.strokes[0],mnemonic:' '}]},0,'competition','correct')).toBe('豎折');

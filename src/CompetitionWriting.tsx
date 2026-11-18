@@ -28,7 +28,7 @@ export default function CompetitionWriting({character,disabled,onSubmit,mode='co
   if(disabled||!strokes?.[traces.length])return;
   if(strokes&&judgeStroke(points,strokes[traces.length].track.map(p=>({x:p.x/2048*1000,y:p.y/2048*1000})))){
    voice.say(traces.length,'correct');
-   if(mode==='practice'&&traces.length+1<strokes.length)voice.say(traces.length+1,'prompt');
+
    setTraces([...traces,points]);setMessage(traces.length+1===strokes.length?(mode==='practice'?'書寫完成，可重新書寫或換字練習。':'書寫完成，可以送出。'):'這一筆正確，請寫下一筆。');
   }else {setMessage('請依筆順再試一次。');voice.say(traces.length,'mistake');}
  }

@@ -35,8 +35,9 @@ export function strokeSpeechText(entry:StrokeSpeechEntry|null,index:number,mode:
  if(!entry?.confirmed)return '';
  const row=entry.strokes[index];if(!row)return '';
  const spoken=row.mnemonic?.trim()||row.spoken;
- if(mode==='competition')return event==='correct'?spoken:event==='mistake'?'請再試一次。':'';
- return event==='mistake'?`請再試一次，這一筆是${spoken}。`:event==='prompt'?`${index===0?'第一筆':'下一筆'}，${spoken}。`:'';
+ if(event==='correct')return spoken;
+ if(mode==='competition')return event==='mistake'?'請再試一次。':'';
+ return event==='mistake'?`請再試一次，這一筆是${spoken}。`:spoken;
 }
 export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'practice'|'competition') {
  const [entry,setEntry]=useState<StrokeSpeechEntry|null>(null),[enabled,setEnabled]=useState(false),[status,setStatus]=useState('正在載入筆畫語音…');

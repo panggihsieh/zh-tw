@@ -163,7 +163,7 @@ export default function WritingPractice({
     }));
     if (!reference) return;
     const correct = judgeStroke(points, reference);
-    if(correct && accepted+1<strokes.length)strokeVoice.say(accepted+1,'prompt');
+    if(correct)strokeVoice.say(accepted,'correct');
     if(!correct)strokeVoice.say(accepted,'mistake');
     const next = {
       character,
