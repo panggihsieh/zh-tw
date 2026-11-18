@@ -5,8 +5,9 @@ export function matchedStrokeSvg(name:string){
  const target=aliases[name]??name.split('／')[0];
  return STROKE_SVG_ASSETS.find(asset=>asset.name===target&&!asset.warning);
 }
-export function selectedStrokeSvg(row:{name:string;svgId?:string;thumbnail?:string}):typeof STROKE_SVG_ASSETS[number]|undefined{
+export function selectedStrokeSvg(row:{name:string;svgId?:string;thumbnail?:string},thumbnails:Record<string,string>={}):typeof STROKE_SVG_ASSETS[number]|undefined{
  if(row.thumbnail)return {id:'custom',name:'自訂縮圖',src:row.thumbnail};
  if(row.svgId==='builtin')return undefined;
- return row.svgId?STROKE_SVG_ASSETS.find(asset=>asset.id===row.svgId):matchedStrokeSvg(row.name);
+ const asset=row.svgId?STROKE_SVG_ASSETS.find(asset=>asset.id===row.svgId):matchedStrokeSvg(row.name);
+ return asset&&thumbnails[asset.id]?{...asset,src:thumbnails[asset.id]}:asset;
 }
