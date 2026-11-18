@@ -226,3 +226,6 @@
 @media(max-width:520px) { .teacher-academy-home .academy-intro .bird-mascot-guide { flex-basis:75px; } }
 .personal-practice-entry { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:16px 20px; margin-bottom:18px; border:2px solid #c6b58d; border-radius:16px; background:#fff9e9; color:#365440; }
 .personal-practice-entry p { margin:6px 0 0; font-size:14px; line-height:1.7; }
+:root[data-site-theme] .learning-layout.personal-practice { grid-template-columns:minmax(0,1fr); }
+.personal-practice-entry > div:last-child { display:flex; flex-wrap:wrap; gap:10px; }
+.personal-practice .scene-tabs { grid-template-columns:repeat(3,minmax(0,1fr)); }

@@ -378,7 +378,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
   const [backendMenuOpen, setBackendMenuOpen] = useState(false);
   const [backendDashboardOpen, setBackendDashboardOpen] = useState(() => !new URLSearchParams(window.location.search).has("section"));
   const [studentCollectionsOpen, setStudentCollectionsOpen] = useState(false);
-  const [learningEntryScene, setLearningEntryScene] = useState<0 | 2 | 3>(0);
+  const [learningEntryScene, setLearningEntryScene] = useState<0 | 1 | 3>(0);
   const [backendLabels, setBackendLabels] = useState<Partial<Record<BackendSection, string>>>(() => {
     try { return JSON.parse(localStorage.getItem("zh-tw.backend-labels") ?? "{}") ?? {}; }
     catch { return {}; }
@@ -777,6 +777,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     setValidation("");
   }
   function openCollection(c: Collection) {
+    setLearningEntryScene(0);
     setStudentLearningStarted(true);
     setStudentFinderOpen(false);
     setCollection(structuredClone(c));
@@ -1056,10 +1057,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
             <div hidden={backendMode && backendDashboardOpen}>
             {page === "learn" && (
               <>
-                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); if (collection?.curriculum) { setStudentFinderOpen(false); setScene(targetScene); } else { setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); } }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { void refresh(); setStudentCollectionsOpen(true); }}/>}
+                {!backendMode && !studentLearningStarted && <StudentAcademyHome tools={studentPageTools} onPractice={targetScene => { setLearningEntryScene(targetScene); setStudentLearningStarted(true); setPlaying(false); speech.stop(); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onLearn={() => { setLearningEntryScene(0); setStudentLearningStarted(true); setStudentFinderOpen(true); setPublisherFocusRequest(value => value + 1); }} onCollections={() => { setLearningEntryScene(0); void refresh(); setStudentCollectionsOpen(true); }}/>}
 
                 <div id="curriculum-entry">
-                {!backendMode && studentLearningStarted && studentFinderOpen && learningEntryScene !== 0 && <div className="personal-practice-entry" role="status"><div><strong>{learningEntryScene === 2 ? "個人拆字練習" : "個人筆順練習"}</strong><p>先選課程與生字，接著進入生字動畫教室內的{learningEntryScene === 2 ? "拆合動畫" : "筆順播放器"}。</p></div><button className="secondary" onClick={() => { setStudentLearningStarted(false); setStudentFinderOpen(false); setLearningEntryScene(0); }}>返回學習字卡</button></div>}
+                {!backendMode && studentLearningStarted && learningEntryScene !== 0 && <div className="personal-practice-entry"><div><strong>{learningEntryScene === 1 ? "拆字探索 · 個人練習" : "筆順練習 · 個人練習"}</strong><p>{studentFinderOpen ? "先選課文，再勾選想練習的生字。" : learningEntryScene === 1 ? "本課生字的字形結構、部件拆解與字義用法，可自由切換練習。" : "使用本課生字，進行個人筆順練習。"}</p></div><div>{!studentFinderOpen && <button className="secondary" onClick={() => { setStudentFinderOpen(true); setPlaying(false); speech.stop(); setPublisherFocusRequest(value => value + 1); }}>重新選課文</button>}<button className="secondary" onClick={() => { setStudentLearningStarted(false); setStudentFinderOpen(false); setLearningEntryScene(0); setPlaying(false); speech.stop(); }}>返回學習字卡</button></div></div>}
                 {(backendMode || studentLearningStarted) && (!collection || studentFinderOpen) && <Suspense fallback={<p>載入念生字與課本找字…</p>}><StudentCharacterFinder onListen={() => speech.stop()} onLearn={async (chars,context) => {
                   const value=buildCurriculumCollection(chars,context,await loadLearningResources());
                   setStudentFinderOpen(false);setCollection(value);setInput(value.sourcePhrase);setPhrase(value.sourcePhrase);setPositions(chars.map((_,i)=>i));
@@ -1067,10 +1068,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 }}/></Suspense>}
                 </div>
                 <div
-                  className={`learning-layout ${collection ? "has-session" : ""}`}
+                  className={`learning-layout ${collection ? "has-session" : ""}${!backendMode && learningEntryScene !== 0 ? " personal-practice" : ""}`}
                   style={!backendMode && (!studentLearningStarted || !collection || studentFinderOpen) ? { display: "none" } : undefined}
                 >
-                  <section className="input-panel">
+                  <section className="input-panel" style={!backendMode && learningEntryScene !== 0 ? { display: "none" } : undefined}>
                     <div className="section-kicker">
                       01 <span>輸入語詞</span>
                       <button
@@ -1307,7 +1308,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                               aria-label="上一個字"
                               onClick={() => {
                                 setCardIndex(cardIndex - 1);
-                                setScene(0);
+                                setScene(backendMode ? 0 : learningEntryScene);
                                 setPlaying(false);
                               }}
                             >
@@ -1321,7 +1322,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                               aria-label="下一個字"
                               onClick={() => {
                                 setCardIndex(cardIndex + 1);
-                                setScene(0);
+                                setScene(backendMode ? 0 : learningEntryScene);
                                 setPlaying(false);
                               }}
                             >
@@ -1358,9 +1359,11 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                         <div
                           className="scene-tabs"
                           role="tablist"
-                          aria-label="六幕學習"
+                          aria-label={!backendMode && learningEntryScene === 1 ? "拆字探索個人練習" : !backendMode && learningEntryScene === 3 ? "筆順個人練習" : "六幕學習"}
                         >
                           {collection.scenes.map((s, i) => {
+                            if (!backendMode && learningEntryScene === 1 && i !== 1 && i !== 2 && i !== 4) return null;
+                            if (!backendMode && learningEntryScene === 3 && i !== 3) return null;
                             const Icon = sceneIcons[i] ?? BookOpen;
                             return (
                             <button
@@ -1786,7 +1789,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                     )
                   )}
                 </div>
-                {(backendMode || (studentLearningStarted && !studentFinderOpen)) && collection && (
+                {(backendMode || (studentLearningStarted && !studentFinderOpen && learningEntryScene === 0)) && collection && (
                   <section className="session-summary">
                     <div className="summary-title">
                       <span className="eyebrow">這一次的小小收穫</span>
