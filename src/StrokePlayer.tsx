@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { ExternalLink, RotateCcw } from "lucide-react";
 import { MOE_LICENSE_URL, strokeFrameUrl } from "./strokeSource";
 import CompetitionWriting from './CompetitionWriting';
+import StrokePlayback from './StrokePlayback';
 
 export default function StrokePlayer({ character }: { character: string }) {
   const url = strokeFrameUrl(character);
+  const [localTab,setLocalTab]=useState<'playback'|'practice'>('playback');
   const [reload, setReload] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [slow, setSlow] = useState(false);
@@ -57,7 +59,7 @@ export default function StrokePlayer({ character }: { character: string }) {
           onLoad={() => setLoaded(true)}
         />
       </div>
-      <details open><summary>筆畫語音書寫練習</summary><p>使用老師已確認的筆畫語音，開啟後會先說出目前要寫的筆畫。下方書寫練習使用本站筆順資料，與上方教育部播放器分開操作。</p><CompetitionWriting key={character} character={character} mode="practice" disabled={false} onSubmit={()=>{}} /></details>
+      <details open><summary>本站筆順播放與語音練習</summary><p>使用教師已確認的逐筆口訣，與上方教育部播放器分開操作。尚未發布語音的生字仍可觀看動畫及書寫。</p><div role="tablist" aria-label="本站筆順模式" className="stroke-local-tabs"><button type="button" role="tab" id="stroke-tab-playback" aria-controls="stroke-local-panel" aria-selected={localTab==='playback'} onClick={()=>setLocalTab('playback')}>筆順播放</button><button type="button" role="tab" id="stroke-tab-practice" aria-controls="stroke-local-panel" aria-selected={localTab==='practice'} onClick={()=>setLocalTab('practice')}>筆順練習</button></div><div role="tabpanel" id="stroke-local-panel" aria-labelledby={`stroke-tab-${localTab}`}>{localTab==='playback'?<StrokePlayback key={character} character={character}/>:<CompetitionWriting key={character} character={character} mode="practice" disabled={false} onSubmit={()=>{}}/>}</div></details>
       <div className="stroke-links">
         <button className="secondary" onClick={() => setReload((x) => x + 1)}>
           <RotateCcw size={15} />

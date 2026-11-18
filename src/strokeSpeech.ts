@@ -20,13 +20,13 @@ export async function strokeSpeechRequest(character:string, options:{admin?:bool
 }
 let currentSpeech:SpeechSynthesisUtterance|null=null;
 export function stopStrokeSpeech() {if(currentSpeech && 'speechSynthesis' in window){window.speechSynthesis.cancel();currentSpeech=null;}}
-export function speakStrokeText(text:string) {
+export function speakStrokeText(text:string,onDone?:()=>void) {
  if(!('speechSynthesis' in window))return false;
  try {
   window.speechSynthesis.cancel();
   const speech=new SpeechSynthesisUtterance(text);speech.lang='zh-TW';speech.rate=.85;
   const voice=selectVoice(window.speechSynthesis.getVoices(),loadVoicePreference(localStorage));if(voice)speech.voice=voice;
-  currentSpeech=speech;speech.onend=speech.onerror=()=>{if(currentSpeech===speech)currentSpeech=null;};
+  currentSpeech=speech;speech.onend=speech.onerror=()=>{if(currentSpeech===speech)currentSpeech=null;onDone?.();};
   window.speechSynthesis.speak(speech);return true;
  }catch {currentSpeech=null;return false;}
 }
@@ -59,5 +59,10 @@ export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'pr
   if(!entry)return;
   if(enabled){stopStrokeSpeech();setEnabled(false);}else{setEnabled(true);if(mode==='practice'){const text=strokeSpeechText(entry,index,mode,'prompt');if(text)speakStrokeText(text);}}
  }
- return {available:!!entry,enabled,status,say,toggle};
+ function narrate(index:number):Promise<void> {
+  if(!enabled||owner.current!==character)return Promise.resolve();
+  const text=strokeSpeechText(entry,index,'practice','prompt');
+  return new Promise(resolve=>{const timer=setTimeout(resolve,10000);const done=()=>{clearTimeout(timer);resolve();};if(!text||!speakStrokeText(text,done))done();});
+ }
+ return {available:!!entry,enabled,status,say,toggle,narrate};
 }
