@@ -1,0 +1,282 @@
+[
+  {
+    "id": "1",
+    "symbol": "㇐",
+    "name": "橫",
+    "examples": "一二三大子",
+    "spoken": "橫",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ"
+  },
+  {
+    "id": "2",
+    "symbol": "㇑",
+    "name": "豎",
+    "examples": "十上山木",
+    "spoken": "豎",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ"
+  },
+  {
+    "id": "3",
+    "symbol": "㇔",
+    "name": "點",
+    "examples": "六主泡洞笑",
+    "spoken": "點",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄉㄧㄢˇ"
+  },
+  {
+    "id": "4",
+    "symbol": "㇒",
+    "name": "撇",
+    "examples": "人分他四你",
+    "spoken": "撇",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄆㄧㄝˇ"
+  },
+  {
+    "id": "5",
+    "symbol": "㇀",
+    "name": "挑",
+    "examples": "拍招河玩蛙跑",
+    "spoken": "挑",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄊㄧㄠˇ"
+  },
+  {
+    "id": "6",
+    "symbol": "㇏",
+    "name": "捺",
+    "examples": "八大走",
+    "spoken": "捺",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄋㄚˋ"
+  },
+  {
+    "id": "7",
+    "symbol": "㇕",
+    "name": "橫折",
+    "examples": "五右四和",
+    "spoken": "橫折",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄓㄜˊ"
+  },
+  {
+    "id": "8",
+    "symbol": "㇗",
+    "name": "豎折",
+    "examples": "七山出忙母每",
+    "spoken": "豎折",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄓㄜˊ"
+  },
+  {
+    "id": "9",
+    "symbol": "㇇",
+    "name": "橫撇",
+    "examples": "又友多裡",
+    "spoken": "橫撇",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄆㄧㄝˇ"
+  },
+  {
+    "id": "10",
+    "symbol": "㇖",
+    "name": "橫鉤",
+    "examples": "了也你吹家",
+    "spoken": "橫鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄍㄡ"
+  },
+  {
+    "id": "11",
+    "symbol": "㇚",
+    "name": "豎鉤",
+    "examples": "小水到前",
+    "spoken": "豎鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄍㄡ"
+  },
+  {
+    "id": "12",
+    "symbol": "㇙",
+    "name": "豎挑",
+    "examples": "比叫長很",
+    "spoken": "豎挑",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄊㄧㄠˇ"
+  },
+  {
+    "id": "13",
+    "symbol": "㇂",
+    "name": "斜鉤",
+    "examples": "低我找",
+    "spoken": "斜鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄒㄧㄝˊ ㄍㄡ"
+  },
+  {
+    "id": "14",
+    "symbol": "㇃",
+    "name": "臥鉤",
+    "examples": "心怎想",
+    "spoken": "臥鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄨㄛˋ ㄍㄡ"
+  },
+  {
+    "id": "15",
+    "symbol": "㇁",
+    "name": "彎鉤",
+    "examples": "手家陪陽",
+    "spoken": "彎鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄨㄢ ㄍㄡ"
+  },
+  {
+    "id": "16",
+    "symbol": "㇆",
+    "name": "橫折鉤",
+    "examples": "向的門高",
+    "spoken": "橫折鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄓㄜˊ ㄍㄡ"
+  },
+  {
+    "id": "17",
+    "symbol": "㇠",
+    "name": "橫曲鉤",
+    "examples": "乙九吃",
+    "spoken": "橫曲鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄑㄩ ㄍㄡ"
+  },
+  {
+    "id": "18",
+    "symbol": "㇟",
+    "name": "豎曲鉤",
+    "examples": "巴池抱玩花晚",
+    "spoken": "豎曲鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄑㄩ ㄍㄡ"
+  },
+  {
+    "id": "19",
+    "symbol": "㇈",
+    "name": "橫斜鉤",
+    "examples": "訊迅風飛氣",
+    "spoken": "橫斜鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄒㄧㄝˊ ㄍㄡ"
+  },
+  {
+    "id": "20",
+    "symbol": "㇓",
+    "name": "豎撇",
+    "examples": "月火有朋麼",
+    "spoken": "豎撇",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄆㄧㄝˇ"
+  },
+  {
+    "id": "21",
+    "symbol": "󸾬",
+    "name": "撇橫",
+    "examples": "互牙幼韋",
+    "spoken": "撇橫",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄆㄧㄝˇ ㄏㄥˊ"
+  },
+  {
+    "id": "22",
+    "symbol": "㇜",
+    "name": "撇挑",
+    "examples": "公去到流",
+    "spoken": "撇挑",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄆㄧㄝˇ ㄊㄧㄠˇ"
+  },
+  {
+    "id": "23",
+    "symbol": "㇛",
+    "name": "撇頓點",
+    "examples": "好安妹經",
+    "spoken": "撇頓點",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄆㄧㄝˇ ㄉㄨㄣˋ ㄉㄧㄢˇ"
+  },
+  {
+    "id": "24",
+    "symbol": "󸾫",
+    "name": "長頓點",
+    "examples": "小不米美",
+    "spoken": "長頓點",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄔㄤˊ ㄉㄨㄣˋ ㄉㄧㄢˇ"
+  },
+  {
+    "id": "25",
+    "symbol": "㇍",
+    "name": "橫折橫",
+    "examples": "凹朵設",
+    "spoken": "橫折橫",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄓㄜˊ ㄏㄥˊ"
+  },
+  {
+    "id": "26",
+    "symbol": "㇞",
+    "name": "豎橫折",
+    "examples": "吳亞娛誤",
+    "spoken": "豎橫折",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄏㄥˊ ㄓㄜˊ"
+  },
+  {
+    "id": "27",
+    "symbol": "㇉",
+    "name": "豎橫折鉤",
+    "examples": "弟張梯號",
+    "spoken": "豎橫折鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄕㄨˋ ㄏㄥˊ ㄓㄜˊ ㄍㄡ"
+  },
+  {
+    "id": "28",
+    "symbol": "㇡",
+    "name": "橫撇橫折鉤",
+    "examples": "乃奶秀",
+    "spoken": "橫撇橫折鉤",
+    "notes": "",
+    "confirmed": false,
+    "zhuyin": "ㄏㄥˊ ㄆㄧㄝˇ ㄏㄥˊ ㄓㄜˊ ㄍㄡ"
+  }
+]

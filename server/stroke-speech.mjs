@@ -9,7 +9,8 @@ export function validateStrokeSpeech(value, strokes) {
   if (typeof value.confirmed !== 'boolean' || !Array.isArray(value.strokes) || value.strokes.length !== strokes.length) bad('筆畫數量或確認狀態不符。');
   const names = value.strokes.map(row => {
     if (!row || !['name','spoken'].every(key => typeof row[key] === 'string' && (!value.confirmed || row[key].trim().length > 0) && row[key].length <= 30)) bad('發布時每一筆都需要名稱與朗讀文字（最多30字）。');
-    return {name:row.name.trim(), spoken:row.spoken.trim()};
+    if(row.zhuyin!==undefined && (typeof row.zhuyin!=='string'||row.zhuyin.length>120))bad('注音格式不符。');
+    return {name:row.name.trim(), spoken:row.spoken.trim(),...(row.zhuyin!==undefined?{zhuyin:row.zhuyin.trim()}:{})};
   });
   return {fingerprint:value.fingerprint, strokes:names, confirmed:value.confirmed};
 }
@@ -19,6 +20,30 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
     try {
       const url = new URL(req.url,'http://localhost');
       const character = url.pathname.slice('/api/structure/stroke-speech/'.length);
+      if (character === 'catalogue') {
+        if (!['GET','POST'].includes(req.method)) return send(405,{error:'不支援此操作。'});
+        if (req.headers['x-notebook-request']!=='stroke-speech' || (req.method==='POST' && !origins.includes(req.headers.origin))) return send(403,{error:'不允許的來源。'});
+        try {await authenticate(req);} catch {return send(401,{error:'請以管理者帳號登入。'});}
+        const key='stroke-speech/catalogue.json';let previous;
+        try {previous=await store.get(key);} catch(error) {if(error.status!==404 && error.response?.status!==404) throw error;}
+        if(req.method==='GET')return send(200,{item:previous?.value??null});
+        let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>100000)return send(413,{error:'資料過大。'});}
+        const input=JSON.parse(body);
+        if(!Array.isArray(input.rows)||input.rows.length!==28)bad('需保留28種基本筆畫。');
+        const ids=new Set();
+        const rows=input.rows.map(row=>{
+          if(!row || !/^(?:[1-9]|1[0-9]|2[0-8])$/.test(row.id) || ids.has(row.id) || typeof row.confirmed!=='boolean')bad('筆畫項目不符。');
+          ids.add(row.id);
+          if(row.zhuyin!==undefined && (typeof row.zhuyin!=='string'||row.zhuyin.length>120))bad('注音格式不符。');
+          for(const [field,max] of [['symbol',4],['name',30],['spoken',30],['examples',30],['notes',500]])if(typeof row[field]!=='string'||row[field].length>max)bad('筆畫欄位格式不符。');
+          if(!row.name.trim() || (row.confirmed&&!row.spoken.trim()))bad('確認前需填寫名稱與朗讀文字。');
+          return {...(row.zhuyin!==undefined?{zhuyin:row.zhuyin}:{}),...Object.fromEntries(['id','symbol','name','spoken','examples','notes','confirmed'].map(field=>[field,row[field]]))};
+        });
+        if((previous?.value.updatedAt??null)!==(input.updatedAt??null))return send(409,{error:'清單已被其他管理員更新，請重新載入後再修改。'});
+        const value={rows,updatedAt:new Date().toISOString()};
+        if(previous)await store.update(key,value,previous.generation);else await store.create(key,value);
+        return send(200,{item:value});
+      }
       if (!/^[0-9a-f]{4,6}$/.test(character)) return send(400,{error:'請選擇單一生字。'});
       const code = parseInt(character,16);
       if (code > 0x10ffff || !/^\p{Script=Han}$/u.test(String.fromCodePoint(code))) return send(400,{error:'請選擇單一生字。'});
