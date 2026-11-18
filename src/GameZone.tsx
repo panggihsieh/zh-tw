@@ -18,7 +18,6 @@ import CharacterStructureGame from "./CharacterStructureGame";
 import CompetitionPlay from "./CompetitionPlay";
 import CompetitionCodeEntry from "./CompetitionCodeEntry";
 import type { LessonContext } from "./curriculumLearning";
-import { useSiteTheme } from "./siteThemes";
 import { SITE_VERSION, SITE_UPDATED_AT, SITE_VERSION_NOTE } from "./siteVersion";
 import {submitGame,writingAssignments,type WritingAssignment} from './gameApi';
 import "./games.css";
@@ -28,7 +27,6 @@ function gameView(): 'hub' | 'practice' | 'sentences' | 'structure' | 'competiti
   return window.location.hash.startsWith('#games/competition') ? 'competition' : window.location.hash === '#games/sentence-practice' ? 'practice' : window.location.hash === '#games/sentence' ? 'sentences' : /^#games\/structure(?:\/|$)/.test(window.location.hash) ? 'structure' : 'hub';
 }
 export default function GameZone() {
-  useSiteTheme();
   const [user, setUser] = useState<User | null>(null),
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
