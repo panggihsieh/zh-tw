@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
-import {createStrokeSpeechHandler,strokeFingerprint} from './stroke-speech.mjs';
+import {createStrokeSpeechHandler,strokeFingerprint,validateStrokeSpeech} from './stroke-speech.mjs';
 import {createStructureServer} from './structure-api.mjs';
 import {readFile} from 'node:fs/promises';
 
@@ -42,4 +42,12 @@ test('正式 API 派送可讀寫筆畫語音，後端以實際筆順檔核對',a
  const strokes=JSON.parse(await readFile(new URL('../public/game-strokes/4e00.json',import.meta.url),'utf8'));
  const response=await fetch(url,{method:'POST',headers:{Origin:'http://127.0.0.1:5173','Content-Type':'application/json','X-Notebook-Request':'stroke-speech',Authorization:'Bearer admin'},body:JSON.stringify({fingerprint:strokeFingerprint(strokes),confirmed:true,strokes:[{name:'橫',spoken:'橫'}]})});
  assert.equal(response.status,200);assert.equal((await (await fetch(url)).json()).item.strokes[0].name,'橫');
+});
+
+test('獨立口訣可儲存、保留舊格式並驗證型別及長度',()=>{
+ const source=[];const base={fingerprint:strokeFingerprint(source),confirmed:false,strokes:[]};
+ const strokes=[{}];const value={...base,fingerprint:strokeFingerprint(strokes),strokes:[{name:'豎折',spoken:'豎折',mnemonic:' 豎，右折 '}]};
+ assert.equal(validateStrokeSpeech(value,strokes).strokes[0].mnemonic,'豎，右折');
+ for(const mnemonic of [123,'字'.repeat(31)])assert.throws(()=>validateStrokeSpeech({...value,strokes:[{...value.strokes[0],mnemonic}]},strokes));
+ assert.deepEqual(validateStrokeSpeech({...value,strokes:[{name:'豎',spoken:'豎'}]},strokes).strokes,[{name:'豎',spoken:'豎'}]);
 });

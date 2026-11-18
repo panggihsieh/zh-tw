@@ -26,3 +26,11 @@ describe('教師確認的筆畫語音時機',()=>{
   try{expect(speakStrokeText('橫')).toBe(false);}finally{vi.unstubAllGlobals();}
  });
 });
+
+it('優先朗讀獨立口訣，舊資料與空口訣仍使用朗讀文字',()=>{
+ const value={...entry,strokes:[{name:'豎折',spoken:'豎折',mnemonic:'豎，右折'}]};
+ expect(strokeSpeechText(value,0,'practice','prompt')).toBe('第一筆，豎，右折。');
+ expect(strokeSpeechText(value,0,'competition','correct')).toBe('豎，右折');
+ expect(strokeSpeechText(value,0,'competition','prompt')).toBe('');
+ expect(strokeSpeechText({...value,strokes:[{...value.strokes[0],mnemonic:' '}]},0,'competition','correct')).toBe('豎折');
+});

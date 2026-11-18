@@ -9,7 +9,8 @@ export function validateStrokeSpeech(value, strokes) {
   if (typeof value.confirmed !== 'boolean' || !Array.isArray(value.strokes) || value.strokes.length !== strokes.length) bad('筆畫數量或確認狀態不符。');
   const names = value.strokes.map(row => {
     if (!row || !['name','spoken'].every(key => typeof row[key] === 'string' && (!value.confirmed || row[key].trim().length > 0) && row[key].length <= 30)) bad('發布時每一筆都需要名稱與朗讀文字（最多30字）。');
-    return {name:row.name.trim(), spoken:row.spoken.trim()};
+    if (row.mnemonic !== undefined && (typeof row.mnemonic !== 'string' || row.mnemonic.length > 30)) bad('口訣最多30字。');
+    return {name:row.name.trim(), spoken:row.spoken.trim(), ...(row.mnemonic !== undefined ? {mnemonic:row.mnemonic.trim()} : {})};
   });
   return {fingerprint:value.fingerprint, strokes:names, confirmed:value.confirmed};
 }

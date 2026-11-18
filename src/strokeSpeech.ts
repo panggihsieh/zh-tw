@@ -2,7 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {cloudServices} from './cloudSync';
 import {loadVoicePreference,selectVoice} from './ttsPreferences';
 
-export interface StrokeVoice {name:string;spoken:string}
+export interface StrokeVoice {name:string;spoken:string;mnemonic?:string}
 export interface StrokeSpeechEntry {fingerprint:string;confirmed:boolean;strokes:StrokeVoice[];updatedAt?:string}
 export const STROKE_NAMES=['點','橫','豎','撇','捺','提','橫鉤','豎鉤','斜鉤','臥鉤','彎鉤','橫折','豎折','撇折','撇點','橫撇','橫折鉤','豎彎','豎彎鉤','橫折彎鉤','橫折折撇','橫折折折鉤'];
 export async function fingerprintStrokes(strokes:unknown) {
@@ -33,8 +33,9 @@ export function speakStrokeText(text:string) {
 export function strokeSpeechText(entry:StrokeSpeechEntry|null,index:number,mode:'practice'|'competition',event:'prompt'|'correct'|'mistake') {
  if(!entry?.confirmed)return '';
  const row=entry.strokes[index];if(!row)return '';
- if(mode==='competition')return event==='correct'?row.spoken:event==='mistake'?'請再試一次。':'';
- return event==='mistake'?`請再試一次，這一筆是${row.spoken}。`:event==='prompt'?`${index===0?'第一筆':'下一筆'}，${row.spoken}。`:'';
+ const spoken=row.mnemonic?.trim()||row.spoken;
+ if(mode==='competition')return event==='correct'?spoken:event==='mistake'?'請再試一次。':'';
+ return event==='mistake'?`請再試一次，這一筆是${spoken}。`:event==='prompt'?`${index===0?'第一筆':'下一筆'}，${spoken}。`:'';
 }
 export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'practice'|'competition') {
  const [entry,setEntry]=useState<StrokeSpeechEntry|null>(null),[enabled,setEnabled]=useState(false),[status,setStatus]=useState('正在載入筆畫語音…');
