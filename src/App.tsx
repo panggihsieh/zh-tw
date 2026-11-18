@@ -1005,7 +1005,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               onClick={() => { if (gamesOpen) window.location.hash = ""; setStudentLearningStarted(false); setStudentFinderOpen(false); setPlaying(false); speech.stop(); setPage("learn"); window.scrollTo(0, 0); }}
             >
               <BirdMascotIcon />
-              前台首頁
+              學生前台首頁
             </button>
             <a className={gamesOpen ? "nav-item active" : "nav-item"} aria-current={gamesOpen ? "page" : undefined} href="#games"><Grid2X2 size={20}/>遊戲專區</a>
             <button type="button" className="nav-item" onClick={() => setModal("microphone")}><Mic size={20}/>麥克風測試</button>
