@@ -5,7 +5,7 @@ import {Pause,Play,SkipForward,RotateCcw,Grid2X2,Maximize,Minimize} from 'lucide
 interface Stroke {outline:any[];track:Point[]}
 export default function StrokePlayback({character}:{character:string}){
  const [strokes,setStrokes]=useState<Stroke[]|null>(null),[index,setIndex]=useState(0),[playing,setPlaying]=useState(false),[finished,setFinished]=useState(false),[error,setError]=useState('');
- const voice=useStrokeSpeech(character,strokes,'practice');
+ const voice=useStrokeSpeech(character,strokes,'practice',true);
  const [speed,setSpeed]=useState('中'),[grid,setGrid]=useState(true),[fullscreen,setFullscreen]=useState(false),[cycle,setCycle]=useState(0);
  const stage=useRef<HTMLDivElement>(null),remaining=useRef(1600),generation=useRef(0);
  const duration=speed==='快'?800:speed==='慢'?2400:1600;
@@ -25,11 +25,11 @@ export default function StrokePlayback({character}:{character:string}){
  function replay(){generation.current++;pause();remaining.current=duration;setIndex(0);setFinished(false);setCycle(x=>x+1);setPlaying(true);}
  async function toggleFullscreen(){try{if(document.fullscreenElement===stage.current)await document.exitFullscreen();else await stage.current?.requestFullscreen();}catch{setError('瀏覽器目前無法開啟全螢幕。');}}
  return <div className="stroke-playback" ref={stage}><p>「{character}」逐筆播放 · {strokes?`第 ${index+1}／${strokes.length} 筆`:error||'載入筆順中…'}</p>
-  <div className="stroke-speech-controls"><button type="button" className="secondary" disabled={!voice.available} onClick={()=>voice.toggle(index)}>{voice.enabled?'關閉':'開啟'}筆畫語音</button><small>{voice.status}</small></div>
+  <div className="stroke-speech-controls"><small>{voice.available?'筆畫語音已開啟':voice.status}</small></div>
   <svg viewBox="0 0 2048 2048" className="stroke-playback-pad" aria-label={`筆順播放區 ${character}`}>{grid&&<path d="M1024 0V2048M0 1024H2048M0 0L2048 2048M2048 0L0 2048" stroke="#ccd9bd" strokeDasharray="24 24" fill="none"/>}
    {strokes?.map((stroke,i)=><path key={i} d={outlinePath(stroke.outline)} fill={i<index||finished?'#285d45':'#edf1e8'}/>)}
    {!finished&&strokes?.[index]&&<><path d={outlinePath(strokes[index].outline)} fill="#ead6a4"/><path key={`${index}-${cycle}-${speed}`} className="stroke-motion" style={{animationDuration:`${duration}ms`,animationPlayState:playing?'running':'paused'}} pathLength="1" d={tracePath(strokes[index].track)} fill="none" stroke="#175d9a" strokeWidth="25" strokeLinecap="round"/><circle cx={strokes[index].track[0].x} cy={strokes[index].track[0].y} r="24" fill="#b33124"/></>}
-  </svg><p role="status">{finished?'播放完成。':'紅點是起點，藍線示範運筆方向；可先開啟語音，再開始播放。'}</p>
+  </svg><p role="status">{finished?'播放完成。':'紅點是起點，藍線示範運筆方向；播放時同步朗讀筆畫念法。'}</p>
   <div className="stroke-playback-toolbar" aria-label="筆順播放控制">
    <label>速度<select aria-label="筆順播放速度" value={speed} onChange={e=>{generation.current++;pause();setSpeed(e.target.value);remaining.current=e.target.value==='快'?800:e.target.value==='慢'?2400:1600;setCycle(x=>x+1);}}>{['快','中','慢'].map(value=><option key={value}>{value}</option>)}</select></label>
    <button type="button" disabled={!strokes} onClick={()=>{if(playing)pause();else if(finished)replay();else setPlaying(true);}}>{playing?<Pause/>:<Play/>}{playing?'暫停':finished?'重新播放':'播放／繼續'}</button>

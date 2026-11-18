@@ -59,7 +59,7 @@ export default function WritingPractice({
   const character = characters[index],
     work = draft?.works[character],
     accepted = work?.traces.filter((t) => t.correct).length || 0;
-  const strokeVoice = useStrokeSpeech(character,strokes,'practice');
+  const strokeVoice = useStrokeSpeech(character,strokes,'practice',true);
   useEffect(() => {
     active.current = true;
     let current = true;
@@ -164,7 +164,7 @@ export default function WritingPractice({
     if (!reference) return;
     const correct = judgeStroke(points, reference);
     if(correct)strokeVoice.say(accepted,'correct');
-    if(!correct)strokeVoice.say(accepted,'mistake');
+
     const next = {
       character,
       expected: strokes.length,
@@ -199,7 +199,7 @@ export default function WritingPractice({
           返回遊戲專區
         </button>
       </div>
-      <div className="stroke-speech-controls"><button type="button" className="secondary" disabled={!strokeVoice.available||Boolean(work?.complete)} onClick={()=>strokeVoice.toggle(accepted)}>{strokeVoice.enabled?'關閉':'開啟'}筆畫語音</button><small>{strokeVoice.status}</small><button type="button" className="secondary" disabled={!strokeVoice.enabled||Boolean(work?.complete)} onClick={()=>strokeVoice.say(accepted,'prompt')}>重聽目前筆畫</button></div>
+      <div className="stroke-speech-controls"><small>{strokeVoice.available?'筆畫語音已開啟 · 寫對一筆立即朗讀':strokeVoice.status}</small><button type="button" className="secondary" disabled={!strokeVoice.enabled||Boolean(work?.complete)} onClick={()=>strokeVoice.say(accepted,'prompt')}>重聽目前筆畫</button></div>
       <nav className="game-character-nav" aria-label="練習生字">
         {characters.map((c, i) => (
           <button

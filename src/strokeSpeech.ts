@@ -39,7 +39,7 @@ export function strokeSpeechText(entry:StrokeSpeechEntry|null,index:number,mode:
  if(mode==='competition')return '';
  return event==='mistake'?`請再試一次，這一筆是${spoken}。`:spoken;
 }
-export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'practice'|'competition') {
+export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'practice'|'competition',locked=false) {
  const [entry,setEntry]=useState<StrokeSpeechEntry|null>(null),[enabled,setEnabled]=useState(false),[status,setStatus]=useState('正在載入筆畫語音…');
  const owner=useRef(character);owner.current=character;
  const soundPreference=useRef<boolean|null>(null);
@@ -49,17 +49,17 @@ export function useStrokeSpeech(character:string,strokes:unknown[]|null,mode:'pr
   setStatus('正在載入筆畫語音…');
   void Promise.all([strokeSpeechRequest(character,{signal:abort.signal}),fingerprintStrokes(strokes)]).then(([value,fingerprint])=>{
    if(abort.signal.aborted)return;
-   if(value?.confirmed && value.fingerprint===fingerprint && value.strokes.length===strokes.length){setEntry(value);setEnabled(mode==='competition'||(soundPreference.current??true));setStatus('教師已確認筆畫語音');}
+   if(value?.confirmed && value.fingerprint===fingerprint && value.strokes.length===strokes.length){setEntry(value);setEnabled(locked||mode==='competition'||(soundPreference.current??true));setStatus('教師已確認筆畫語音');}
    else setStatus('此字尚無對應本版筆順的已確認語音。');
   }).catch(()=>{if(!abort.signal.aborted)setStatus('筆畫語音暫時無法載入，仍可書寫。');});
   return()=>{abort.abort();stopStrokeSpeech();};
- },[character,strokes,mode]);
+ },[character,strokes,mode,locked]);
  function say(index:number,event:'prompt'|'correct'|'mistake') {
   if(!enabled||owner.current!==character)return;
   const text=strokeSpeechText(entry,index,mode,event);if(text && !speakStrokeText(text))setStatus('此瀏覽器不支援語音播放。');
  }
  function toggle(index:number) {
-  if(!entry||mode==='competition')return;
+  if(!entry||locked||mode==='competition')return;
   soundPreference.current=!enabled;
   if(enabled){stopStrokeSpeech();setEnabled(false);}else{setEnabled(true);if(mode==='practice'){const text=strokeSpeechText(entry,index,mode,'prompt');if(text)speakStrokeText(text);}}
  }

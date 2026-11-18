@@ -7,7 +7,7 @@ interface Stroke { outline:any[]; track:Point[] }
 export default function CompetitionWriting({character,disabled,onSubmit,mode='competition',extraActions}:{character:string;disabled:boolean;onSubmit:(traces:Point[][])=>void;mode?:'practice'|'competition';extraActions?:ReactNode}) {
  const [strokes,setStrokes]=useState<Stroke[]|null>(null),[traces,setTraces]=useState<Point[][]>([]),[live,setLive]=useState<Point[]>([]),[message,setMessage]=useState(''),[hint,setHint]=useState(false);
  const pen=useRef<{id:number;points:Point[]}|null>(null);
- const voice=useStrokeSpeech(character,strokes,mode);
+ const voice=useStrokeSpeech(character,strokes,mode,true);
  useEffect(()=>{
   const controller=new AbortController();
   setStrokes(null);setTraces([]);setLive([]);setHint(false);setMessage('');pen.current=null;
@@ -30,11 +30,11 @@ export default function CompetitionWriting({character,disabled,onSubmit,mode='co
    voice.say(traces.length,'correct');
 
    setTraces([...traces,points]);setMessage(traces.length+1===strokes.length?(mode==='practice'?'書寫完成，可重新書寫或換字練習。':'書寫完成，可以送出。'):'這一筆正確，請寫下一筆。');
-  }else {setMessage('請依筆順再試一次。');voice.say(traces.length,'mistake');}
+  }else {setMessage('請依筆順再試一次。');}
  }
  return <div className="competition-writing">
   <p>請依筆順書寫「{character}」 · 已完成 {traces.length}／{strokes?.length??0} 筆</p>
-  <div className="stroke-speech-controls">{mode==='practice'&&<button type="button" className="secondary" disabled={!voice.available||complete} onClick={()=>voice.toggle(traces.length)}>{voice.enabled?'關閉':'開啟'}筆畫語音</button>}<small>{voice.available&&mode==='competition'?'筆畫語音已開啟 · 寫對一筆立即朗讀':voice.status}</small>{mode==='practice'&&<button type="button" className="secondary" disabled={!voice.enabled||complete} onClick={()=>voice.say(traces.length,'prompt')}>重聽目前筆畫</button>}</div>
+  <div className="stroke-speech-controls"><small>{voice.available?'筆畫語音已開啟 · 寫對一筆立即朗讀':voice.status}</small>{mode==='practice'&&<button type="button" className="secondary" disabled={!voice.enabled||complete} onClick={()=>voice.say(traces.length,'prompt')}>重聽目前筆畫</button>}</div>
   <svg viewBox="0 0 1000 1000" className="competition-writing-pad" aria-label={`書寫區 ${character}`}
    onPointerDown={event=>{if(disabled||!strokes||complete||pen.current||event.button!==0)return;event.preventDefault();event.currentTarget.setPointerCapture(event.pointerId);const points=[point(event)];pen.current={id:event.pointerId,points};setLive(points);}}
    onPointerMove={event=>{if(pen.current?.id!==event.pointerId)return;pen.current.points.push(point(event));if(pen.current.points.length>512)pen.current.points=sample(pen.current.points,256);setLive([...pen.current.points]);}}

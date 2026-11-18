@@ -83,6 +83,7 @@ app.whenReady().then(async()=>{
    console.log('Checking',character);
    await js(`window.choose(${JSON.stringify(character)});true`);
    await until(`!!document.querySelector('svg[aria-label="書寫區 ${character}"]') && (document.body.innerText.includes('筆畫語音已開啟') || [...document.querySelectorAll('button')].some(b=>b.textContent==='關閉筆畫語音'&&!b.disabled))`);
+   assert.equal(await js(`[...document.querySelectorAll('button')].some(b=>/開啟筆畫語音|關閉筆畫語音/.test(b.textContent))`),false,'Students cannot toggle writing speech');
    assert.equal(await js('window.spoken.length'),0,'Loading a character must not speak before writing');
    const strokes=geometry.get(character.codePointAt(0).toString(16))||JSON.parse(await fs.readFile(`public/game-strokes/${character.codePointAt(0).toString(16)}.json`,'utf8'));
    for(let index=0;index<strokes.length;index++){

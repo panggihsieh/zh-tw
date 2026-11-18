@@ -1,7 +1,7 @@
 import { strokeAuditionText } from "./strokePronunciation";
 import type { CatalogueRow } from "./StrokeCatalogue";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Maximize, Pause, Play, Repeat, Square, Volume2, VolumeX } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Pause, Play, Repeat, Square } from "lucide-react";
 import seed from "./strokeCatalogueSeed.json";
 import { matchedStrokeSvg, selectedStrokeSvg } from "./strokeSvg";
 import { upgradeStrokeMnemonic } from "./strokeSpeechCatalog";
@@ -13,7 +13,6 @@ export default function BasicStrokePractice() {
   const timer = useRef<number | undefined>(undefined);
   const generation = useRef(0);
   const [index, setIndex] = useState(0);
-  const [soundOn, setSoundOn] = useState(true);
   const [paused, setPaused] = useState(false);
   const [rows, setRows] = useState<CatalogueRow[]>(() => seed.map(upgradeStrokeMnemonic));
   const [status, setStatus] = useState("");
@@ -38,7 +37,7 @@ export default function BasicStrokePractice() {
     if (generation.current) cancel();
   }, []);
 
-  function play(start: number, playlist = rows, withSound = soundOn) {
+  function play(start: number, playlist = rows) {
     const run = ++generation.current;
     function advance(position: number) {
       if (generation.current !== run) return;
@@ -49,7 +48,7 @@ export default function BasicStrokePractice() {
           timer.current = window.setTimeout(() => advance((position + 1) % playlist.length), 650);
         }
       };
-      if (!withSound || !speakStrokeText(strokeAuditionText(current), next)) next();
+      if (!speakStrokeText(strokeAuditionText(current), next)) next();
     }
     advance(start);
   }
@@ -81,8 +80,7 @@ export default function BasicStrokePractice() {
         setRows(playlist);
         dialog.current?.showModal();
         setPaused(false);
-        setSoundOn(true);
-        play(0, playlist, true);
+        play(0, playlist);
       } catch {
         if (!controller.signal.aborted) setStatus("目前無法載入筆畫播放資料，請稍後重試。");
       } finally {
@@ -93,17 +91,7 @@ export default function BasicStrokePractice() {
     <dialog ref={dialog} className="basic-stroke-dialog" aria-label="基本筆畫循環播放" onClose={() => { cancel(); if (dialog.current?.contains(document.fullscreenElement)) void document.exitFullscreen().catch(() => {}); }}>
       <div className="basic-stroke-stage">
         <figure className="stroke-playback-square">
-          <button type="button" className="secondary basic-stroke-sound" aria-label="筆畫語音" aria-pressed={soundOn} onClick={() => {
-            const enabled = !soundOn;
-            setSoundOn(enabled);
-            if (!paused) {
-              cancel();
-              play(index, rows, enabled);
-            }
-          }}>
-            {soundOn ? <Volume2 size={18} aria-hidden="true" /> : <VolumeX size={18} aria-hidden="true" />}
-            {soundOn ? "聲音開啟" : "聲音關閉"}
-          </button>
+          <span className="basic-stroke-sound">筆畫語音已開啟</span>
           {asset ? <img src={asset.src} alt={row.name} /> : <span>{row.symbol}</span>}
           <figcaption><strong>{row.name}</strong> · {reading}</figcaption>
         </figure>
