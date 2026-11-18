@@ -1,3 +1,4 @@
+import atlas from "./structureAtlas.json";
 import { useEffect, useState } from "react";
 import type { CharacterMaster } from "./model";
 import { structureProfile } from "./structureProfiles";
@@ -63,6 +64,7 @@ export default function CharacterStructureAnalysis({
   const activeClue = clueKind === "shape" ? null : clues?.[clueKind];
   const highlightedParts = activeClue?.componentIndexes || [];
   const profile = structureProfile(master);
+  const thumbnail = profile && atlas.flatMap(group => group.items).find(item => item.title === profile.label);
   const tracks = profile?.weights
     .map((weight) => `minmax(0, ${weight}fr)`)
     .join(" ");
@@ -107,6 +109,12 @@ export default function CharacterStructureAnalysis({
                 onClick={() => setClueKind(kind)}
                 key={kind}
               >
+                {kind === "shape" && thumbnail && (
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <img src={thumbnail.image} alt="" width={24} height={24} />
+                    {thumbnail.title}
+                  </span>
+                )}
                 <b>
                   {kind === "shape" ? "形" : kind === "sound" ? "音" : "義"}
                 </b>

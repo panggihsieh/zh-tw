@@ -139,7 +139,7 @@ const backendTitles: Record<BackendSection, string> = {
   themes: "網站樣式資料庫",
   gameReview: '課堂紀錄',
   writingAssignments: '書寫作業管理',
-  tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構說明",
+  tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構資料庫",
   curriculum: "三家出版社生字資料庫",
   handwriting: "平板手寫檢核測試", strokeDatabase: "筆順資料庫",
   lesson: "每課生字結構筆畫查詢", overview: "五上生字拆合總覽", review: "康軒生字結構修正",
@@ -963,7 +963,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "curriculum", label: "三家出版社生字資料庫", icon: LibraryBig },
               ] },
               { title: "字形、筆順與字辭典查詢", items: [
-                { section: "structure", label: "字形結構", icon: Grid2X2, active: structureSections.some(section => section === backendSection) },
+                { section: "structure", label: "字形結構資料庫", icon: Grid2X2, active: structureSections.some(section => section === backendSection) },
                 { section: "handwriting", label: "手寫檢核與筆順", icon: Grid2X2, active: backendSection === "handwriting" || backendSection === "strokeDatabase" },
               ] },
               { title: "遊戲派送與競賽", items: [

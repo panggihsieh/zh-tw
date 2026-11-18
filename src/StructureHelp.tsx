@@ -1,14 +1,23 @@
+import { useState } from "react";
 import atlas from "./structureAtlas.json";
 
 export default function StructureHelp() {
+  const [query, setQuery] = useState("");
+  const keyword = query.trim();
+  const groups = atlas.map(group => ({
+    ...group,
+    items: group.items.filter(item => [group.title, item.title, item.caption].some(text => text.includes(keyword))),
+  })).filter(group => group.items.length);
+  const total = atlas.reduce((count, group) => count + group.items.length, 0);
+
   return (
     <section
       id="structure-help"
       className="structure-help"
-      aria-label="字形結構說明"
+      aria-label="字形結構資料庫"
     >
-      <h2>字形結構說明</h2>
-      <p>八大主結構與子結構縮圖。正方形內只畫部件位置，名稱與比例標在框外。</p>
+      <h2>字形結構資料庫</h2>
+      <p>{atlas.length} 大類 · {total} 張縮圖</p>
       <div className="structure-help-links">
         <a href="/structure-atlas/" target="_blank" rel="noreferrer">
           開啟完整 SVG 圖例 ↗
@@ -17,8 +26,12 @@ export default function StructureHelp() {
           每課生字結構筆畫查詢
         </a>
       </div>
-      {atlas.map((group) => (
-        <details key={group.title}>
+      <label>搜尋結構名稱或比例
+        <input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="例如：上下、上短下長、35 : 65" />
+      </label>
+      {groups.length === 0 && <p role="status">找不到符合的結構。</p>}
+      {groups.map((group) => (
+        <details key={group.title + Boolean(keyword)} open={keyword ? true : undefined}>
           <summary>
             {group.title}
             <span>{group.items.length} 種圖例</span>

@@ -131,6 +131,16 @@
         "title": "左下包圍",
         "caption": "左側＋下側",
         "image": "/structure-atlas/21.svg"
+      },
+      {
+        "title": "右三包圍",
+        "caption": "左方開口",
+        "image": "/structure-atlas/24.svg"
+      },
+      {
+        "title": "右下包圍",
+        "caption": "右側＋下側",
+        "image": "/structure-atlas/25.svg"
       }
     ]
   },

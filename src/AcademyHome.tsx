@@ -22,7 +22,7 @@ const backendCards = [
   { id: "quiz", title: "資料庫管理", note: "生字・課本・出版社", art: "book", className: "card-database", keywords: "資料庫 生字 題庫 quiz" },
   { id: "competition", title: "Kahoot 競賽開課", note: "建立課程・課堂派送", art: "trophy", className: "card-competition", keywords: "Kahoot 遊戲 競賽 開課" },
   { id: "gameReview", title: "課堂紀錄", note: "回顧學習與課堂成果", art: "clipboard", className: "card-records", keywords: "課堂 成績 紀錄" },
-  { id: "structure", title: "字形結構", note: "部件拆解・教學資源", art: "puzzle", className: "card-radicals", keywords: "字形 結構 拆字 部件" },
+  { id: "structure", title: "字形結構資料庫", note: "部件拆解・教學資源", art: "puzzle", className: "card-radicals", keywords: "字形 結構 拆字 部件" },
   { id: "handwriting", title: "手寫檢核與筆順", note: "寫一寫，核對每一畫", art: "brush", className: "card-handwriting", keywords: "手寫 筆順 筆畫" },
   { id: "tts", title: "語音與朗讀", note: "試聽與設定預設音色", art: "mic", className: "card-voice", keywords: "語音 朗讀 TTS 音色" },
 ];

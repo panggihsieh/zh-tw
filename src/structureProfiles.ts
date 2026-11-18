@@ -10,6 +10,18 @@ const profiles: Record<
     assemblyBoxes?: number[][];
   }
 > = {
+  椒: {
+    layout: "horizontal",
+    parts: ["木", "叔"],
+    weights: [35, 65],
+    label: "左窄右寬",
+  },
+  葵: {
+    layout: "vertical",
+    parts: ["艹", "癸"],
+    weights: [28, 72],
+    label: "上短下長",
+  },
   察: {
     layout: "vertical",
     parts: ["宀", "祭"],
@@ -24,7 +36,7 @@ export function structureProfile(master: CharacterMaster) {
   const profile = profiles[master.character];
   return profile &&
     profile.layout === master.layout &&
-    profile.parts.join("|") === master.components.join("|")
+    profile.parts.join("|") === master.components.map(part => part === "++" ? "艹" : part).join("|")
     ? profile
     : null;
 }
