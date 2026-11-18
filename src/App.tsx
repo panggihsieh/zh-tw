@@ -1,3 +1,4 @@
+import AcademyBanner from "./AcademyBanner";
 import MicrophoneTest from './MicrophoneTest';
 import { loadLearningResources, buildCurriculumCollection } from "./curriculumLearning";
 import { SchoolIamCallback } from './SchoolIamLogin';
@@ -934,6 +935,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
     >
       <div data-backend-section={backendMode ? backendSection : undefined} className={backendMode ? `app-shell top-navigation-layout backend-shell${backendMenuOpen ? " backend-menu-open" : ""}` : "app-shell top-navigation-layout"}>
         <div className="main-wrap">
+          <AcademyBanner />
           {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
             <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "功能選單"}</button>
             <div><span>教師工作區</span><strong>{backendLabels[backendSection] || backendTitles[backendSection]}</strong></div>

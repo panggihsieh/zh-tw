@@ -1,0 +1,69 @@
+/* Academy architecture shared by student and teacher workspaces. */
+:root[data-site-theme] {
+ --theme-primary:#356348; --theme-dark:#163f2c; --theme-accent:#dbb977;
+ --theme-background:#f1e5cd; --theme-surface:#fff8e9; --theme-ink:#243f30; --theme-border:#c5ad80; --theme-radius:14px;
+}
+:root[data-site-theme] body { background:radial-gradient(ellipse at 0 35%,#cad0b052,transparent 40%),repeating-linear-gradient(93deg,#a77f4210 0 1px,transparent 1px 5px),#eee2cb; }
+.academy-banner { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:148px; padding:12px 20px 18px; background:url('/academy-roof.svg') center top / auto 108px repeat-x; border-bottom:7px ridge #a77a42; }
+.academy-plaque { display:flex; align-items:center; justify-content:center; gap:12px; padding:10px 30px; border:5px ridge #d7ad64; border-radius:8px 8px 22px 22px; background:linear-gradient(105deg,#583013,#81502b 50%,#4a270f); color:#fff0c8; box-shadow:0 6px 10px #24190d55,inset 0 0 0 2px #bd914b; font:700 clamp(23px,3vw,36px)/1.5 'Noto Serif TC',serif; letter-spacing:.14em; }
+.academy-plaque .bird-mascot-icon { width:42px; height:48px; }
+.academy-version { margin:8px 0 0; padding:3px 18px; border:1px solid #c5a66b; border-radius:20px; background:#fff5dd; color:#214831; font-size:12px; text-align:center; box-shadow:0 2px 4px #63432128; }
+:root[data-site-theme] .app-shell { max-width:1680px; margin:auto; min-height:100dvh; border-inline:14px ridge #9a643a; box-shadow:0 0 24px #60422340; background:#fff6e3b8; }
+:root[data-site-theme] .top-navigation-layout:not(.backend-shell) .main-wrap { padding-top:0; }
+:root[data-site-theme] .top-navigation-layout:not(.backend-shell) .topbar { position:sticky; inset:auto; top:0; background:linear-gradient(100deg,#214b33,#123b27,#365c3e); border-bottom:5px ridge #bf9558; padding:10px 28px; }
+:root[data-site-theme] main { padding-top:24px; }
+:root[data-site-theme] :is(h1,h2,h3,.backend-menu-heading,.adventure-stops,.nav-item) { font-family:'Noto Serif TC','Microsoft JhengHei',serif; }
+:root[data-site-theme] .adventure-welcome[aria-label] { padding:30px 32px 22px; background:radial-gradient(ellipse at 95% 100%,#c1c8ab70,transparent 42%),linear-gradient(120deg,#fff9e9,#f4e7ca); border:4px double #bda06c; border-radius:18px; box-shadow:0 4px 8px #85612b20; }
+:root[data-site-theme] .adventure-copy h2 { font-size:clamp(26px,3.3vw,46px); letter-spacing:.07em; line-height:1.5; }
+:root[data-site-theme] .adventure-welcome .adventure-stops span { padding:12px 20px; border:3px double #bda06c; box-shadow:0 3px 4px #60451b25; }
+:root[data-site-theme] .adventure-welcome .adventure-stops span:first-child { color:#fff6db; background:linear-gradient(#426a4d,#214832); }
+:root[data-site-theme] .adventure-welcome .adventure-stops svg { color:inherit; }
+:root[data-site-theme] .adventure-welcome .adventure-start { background:linear-gradient(#b95228,#903416); border:3px double #edc17f; border-radius:16px; box-shadow:0 4px 0 #703b20; }
+:root[data-site-theme] :is(.student-lookup,.input-panel,.backend-function-card,.welcome-panel) { border:4px double #c4a879; background:linear-gradient(115deg,#fff9ed,#f6ecd7); box-shadow:0 4px 8px #795a2820; }
+:root[data-site-theme] .curriculum-character-selection label { box-shadow:inset 0 1px #fff,0 2px 0 #b4a17d55; background:linear-gradient(#fffcf3,#f2e6cc); }
+:root[data-site-theme] :is(select,input:not([type=checkbox]):not([type=radio]),textarea) { background:#fffcf3; border-color:#9eaa83; }
+:root[data-site-theme] .page-footer { margin-top:28px; padding:22px; border-top:6px ridge #baac94; background:linear-gradient(#ded5c4,#c8beab); color:#49371f; }
+:root[data-site-theme] .page-footer::before { content:'每天一點點，生字都會記得。'; display:block; padding:9px 24px; border:4px double #b39565; background:#fff0d2; border-radius:12px; font:700 20px 'Noto Serif TC',serif; }
+:root[data-site-theme] .backend-shell { color:#243f30; background:#f4e9d3; --green:#356348; --border:#c5ad80; }
+:root[data-site-theme] .backend-shell .academy-banner { margin-left:-280px; }
+:root[data-site-theme] .backend-shell .topbar { top:174px; bottom:16px; height:calc(100dvh - 190px); border:4px double #b79b6b; border-radius:12px; background:linear-gradient(100deg,#f5e6c9,#fff6e4); }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item { background:linear-gradient(#53795b,#31553b); color:#fff6dc; border:1px solid #b7b58c; border-radius:12px; box-shadow:0 2px 3px #62421e30; }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item.active { background:linear-gradient(#fff9eb,#e9d9b6); color:#163f2c; border:2px solid #9b773d; }
+:root[data-site-theme] .backend-shell :is(.backend-menu-heading,.backend-nav-category-title,.backend-nav-group-title) { color:#214831; }
+:root[data-site-theme] .backend-workspace-bar { background:linear-gradient(100deg,#345f40,#133d28); border-bottom:5px ridge #bd955b; }
+:root[data-site-theme] .backend-shell .page-heading { background:linear-gradient(110deg,#fff9eb,#f1e5c9); border:4px double #b89b68; border-radius:16px; }
+:root[data-site-theme] .backend-shell .page-heading :is(h1,p) { color:#214831; }
+:root[data-site-theme] .backend-shell :is(.tts-default,.tts-config,.tts-cloud-note,.tts-sources > div,.structure-help > details) { background:#fff8e8; border-color:#c5ad80; color:#243f30; }
+:root[data-site-theme] .backend-shell :is(.tts-default strong,.tts-default > span,.tts-sources span,.tts-sources b,.tts-config summary,.structure-help > details > summary) { color:#214831; }
+@media(max-width:1200px) and (min-width:851px) { :root[data-site-theme] .backend-shell .academy-banner { margin-left:-248px; } }
+@media(max-width:850px) {
+ :root[data-site-theme] .app-shell { border-inline-width:5px; }
+ :root[data-site-theme] .backend-shell .academy-banner { margin-left:0; }
+ :root[data-site-theme] .backend-shell .topbar { position:relative; top:auto; bottom:auto; height:auto; max-height:none; }
+ .academy-banner { min-height:132px; }
+}
+@media(max-width:600px) {
+ .academy-plaque { padding:8px 12px; gap:6px; letter-spacing:.03em; }
+ .academy-version { font-size:11px; max-width:100%; }
+ :root[data-site-theme] .top-navigation-layout:not(.backend-shell) .topbar { padding:8px; }
+ :root[data-site-theme] .adventure-welcome[aria-label] { padding:18px 14px; gap:14px; }
+ :root[data-site-theme] .adventure-welcome .adventure-stops span { padding:8px; font-size:14px; flex:1; justify-content:center; }
+ :root[data-site-theme] .page-footer::before { font-size:16px; padding:8px; }
+}
+
+@media(max-width:600px) { :root[data-site-theme] .top-navigation-layout:not(.backend-shell) .topbar { position:relative; top:auto; } }
+/* Mist over old tiles: translucent jade, warm paper and softened timber. */
+.academy-banner { background-image:linear-gradient(#f8f2df9c,#f8f2dfb8),url('/academy-roof.svg'); border-bottom-color:#c6b697; }
+.academy-plaque { background:linear-gradient(105deg,#a18c6ed9,#c0ac89d9,#968367d9); border-color:#d7c7a3; color:#fffbed; box-shadow:0 4px 14px #7d725326,inset 0 0 0 2px #e4d8bb; text-shadow:0 1px 3px #4f482f55; }
+:root[data-site-theme] .top-navigation-layout:not(.backend-shell) .topbar,
+:root[data-site-theme] .backend-workspace-bar { background:linear-gradient(110deg,#cbd9c4d9,#e1e8d7d9,#bdcebbcc); backdrop-filter:blur(14px); border-bottom-color:#c8b994; box-shadow:0 4px 18px #77836d20; color:#284735; }
+:root[data-site-theme] .topbar :is(.app-top-brand,.nav-item,.quiet,.header-user-role),
+:root[data-site-theme] .backend-workspace-bar :is(strong,span,a) { color:#284735; }
+:root[data-site-theme] .topbar .app-top-nav .nav-item { background:#fffaf14d; }
+:root[data-site-theme] .topbar .app-top-nav .nav-item.active { background:#fffaf1d9; border-color:#b1bc9d; }
+:root[data-site-theme] .app-shell { border-inline-color:#baa483; box-shadow:0 0 30px #7e806423; }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item { background:linear-gradient(#d4dfcddd,#bccdb6dd); color:#284735; border-color:#b0bd9e; box-shadow:0 2px 5px #78836720; }
+:root[data-site-theme] .backend-shell .topbar .app-top-nav .nav-item.active { background:#fffaf1; color:#284735; border-color:#b5a47f; }
+:root[data-site-theme] .backend-nav-group > :is(h2,summary) { background:transparent; border:0; border-bottom:1px solid #b5a47f; border-radius:0; color:#36533c; }
+:root[data-site-theme] .page-footer::before { content:none; }
+:root[data-site-theme] .page-footer > span:first-child { padding:9px 24px; border:4px double #c6b591; background:#fff4dfbb; border-radius:12px; font:700 20px 'Noto Serif TC',serif; color:#66583e; }
