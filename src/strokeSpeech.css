@@ -30,3 +30,5 @@
 .stroke-speech-grid label.stroke-source-choice{display:flex;align-items:center;gap:6px;font-size:14px}.stroke-speech-grid .stroke-source-choice input{width:auto;margin:0}
 
 .stroke-speech-grid svg.stroke-inline-symbol{display:inline-block;width:1em;height:1em;aspect-ratio:1;margin:0;vertical-align:middle}
+
+.stroke-expand-controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.stroke-expand-controls button{border-radius:999px;padding:8px 18px}

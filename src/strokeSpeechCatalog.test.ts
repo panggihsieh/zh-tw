@@ -12,7 +12,7 @@ describe('32 種筆畫口訣',()=>{
   expect(findStrokePreset('戈鉤')?.spoken).toBe('斜彎，鉤');
   expect(findStrokePreset('心鉤')?.spoken).toBe('右下平彎，左鉤');
   expect(findStrokePreset('豎折撇')?.spoken).toBe('豎，折，撇');
-  expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，下折');
+  expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，折');
   expect(findStrokePreset('自訂')).toBeUndefined();
  });
 });
@@ -26,8 +26,8 @@ it('補入口訣需重新確認，保留自訂及無對照項目',()=>{
 it('補齊舊名稱並保留連續轉折與鉤向',()=>{
  expect(findStrokePreset('橫曲鉤')?.spoken).toBe('橫，折，彎，鉤');
  expect(findStrokePreset('撇挑')?.spoken).toBe('撇，挑');
- expect(findStrokePreset('豎橫折鉤')?.spoken).toBe('豎，折，下折，左鉤');
- expect(findStrokePreset('橫撇橫折鉤')?.spoken).toBe('橫，撇，折，下折，左鉤');
+ expect(findStrokePreset('豎橫折鉤')?.spoken).toBe('豎，折，折，左鉤');
+ expect(findStrokePreset('橫撇橫折鉤')?.spoken).toBe('橫，撇，折，折，左鉤');
  expect(findStrokePreset('長頓點')).toBeUndefined();
 });
 
@@ -36,7 +36,7 @@ it('轉折省略規則一致，必要的第二折及鉤向保留',()=>{
  expect(findStrokePreset('橫折折撇')?.spoken).toBe('橫，撇，折，撇');
  expect(findStrokePreset('豎折撇')?.spoken).toBe('豎，折，撇');
  expect(findStrokePreset('橫折折')?.spoken).toBe('橫，折，右折');
- expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，下折');
+ expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，折');
  expect(findStrokePreset('橫折鉤')?.spoken).toBe('橫，折，左鉤');
 });
 
