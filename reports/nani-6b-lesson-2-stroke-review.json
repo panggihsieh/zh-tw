@@ -1,0 +1,1112 @@
+{
+  "lesson": "南一六下第二課",
+  "rows": [
+    {
+      "character": "括",
+      "fingerprint": "1e336c819f93df1e15d96dd2dcf5fe6d8fff0fe584322d9c388ef5bad40f1da4",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "糞",
+      "fingerprint": "db297d27bf66e6e134a1ce82d621539184b344a1b2e7d2e71cd0300bb5b30ceb",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "寮",
+      "fingerprint": "15b15d7dcd522131aa8ea37b76bb9fd4017d3b0ce2e2b2cb31dbd021d97e2d4b",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "第2筆和下一筆橫鉤構成覆蓋部件；沿左下方向行筆，按本站宛的同類筆形念撇。"
+    },
+    {
+      "character": "狩",
+      "fingerprint": "6785819885f48ea6bdbd831fc10d466db539526d05044dee720694e402204dd2",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "第5筆和下一筆橫鉤構成覆蓋部件；沿左下方向行筆，按本站宛的同類筆形念撇。"
+    },
+    {
+      "character": "迫",
+      "fingerprint": "90948a15f9d2129f14fafd6587d5b231382852c68f3bc3578ee39843ab4d3ba5",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "豎彎撇",
+          "spoken": "豎彎撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "依實際行筆與同類部件，確認第7、8、9筆為橫撇、豎彎撇、捺。"
+    },
+    {
+      "character": "脅",
+      "fingerprint": "3e75dc576ba86b13ad32a9a5ac6ea29a57faf276bf87d5d218fee9f932929dbd",
+      "strokes": [
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "依行筆軌跡確認第9、10筆依序為點、挑。"
+    },
+    {
+      "character": "窩",
+      "fingerprint": "fbd58536bd91b067e02d072cf525c427e215cb72d081ae4e8a1f6c51609b2c1e",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎彎",
+          "spoken": "豎彎"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "第2筆和下一筆橫鉤構成覆蓋部件；沿左下方向行筆，按本站宛的同類筆形念撇。 依實際行筆與同類部件，確認第5、8、9筆為豎彎、橫、豎。"
+    },
+    {
+      "character": "杉",
+      "fingerprint": "3ffb870c68ebfb2d34fb69c47e57d8148c7eed1ea3e7f9e559e6dd73634b5cfd",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "翼",
+      "fingerprint": "9d59c6fac391c0e35319882561eec4f71edc76d088323b08df1e7d13a8319e21",
+      "strokes": [
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "奄",
+      "fingerprint": "7cead1270881ea35c788ede2740ba6845589dbd49d4b150c90dc457b2c14c693",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎",
+          "spoken": "豎彎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "第8筆對照奄、掩、淹的同一部件，先下後向右彎出，沿末端平勢收筆，採豎彎。"
+    },
+    {
+      "character": "喉",
+      "fingerprint": "355302f53ddc90f2fc4c453ecea96a7e1b9b485c5e37ae32b998fee3c907aab2",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "吟",
+      "fingerprint": "ea076b7d81363e294f740a669441cdbf662259cbfe7e392b0fe141a3e8e476cb",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "第7筆向右後由末端向左下鉤出，念橫鉤。"
+    },
+    {
+      "character": "獵",
+      "fingerprint": "4a5cb725b5c0b6d3fcee31760fd2481b6ed19de2ea4640292059582c5ecf5b65",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇點",
+          "spoken": "撇點"
+        },
+        {
+          "name": "撇點",
+          "spoken": "撇點"
+        },
+        {
+          "name": "撇點",
+          "spoken": "撇點"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎挑",
+          "spoken": "豎挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎挑",
+          "spoken": "豎挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "斜鉤",
+          "spoken": "斜鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "writingJudgeCheck": {
+        "count": 18,
+        "rejected": []
+      },
+      "reviewNote": "依本站18筆描線核對。巤的上方連續三筆撇點，第8筆折下後向左上收鉤。下方兩筆豎挑後各接兩橫，末筆為斜鉤。"
+    },
+    {
+      "character": "殺",
+      "fingerprint": "b7f9ca0c0956f0fa5274ca98a6248e389833ef7b658a16abfbd4a257542dc769",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎彎",
+          "spoken": "豎彎"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫折彎",
+          "spoken": "橫折彎"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "逐筆核對本機描線的方向、折彎與收筆。"
+    },
+    {
+      "character": "遵",
+      "fingerprint": "f5aefb45a36eb05c92ede849d1773597a66f687396c661019fba84f1bb4b6f75",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "豎彎",
+          "spoken": "豎彎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "豎彎撇",
+          "spoken": "豎彎撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "writingJudgeCheck": {
+        "count": 16,
+        "rejected": []
+      },
+      "reviewNote": "第1至12筆和尊逐筆相符，第6、7筆念豎撇、豎彎；走之旁四筆對照逝。"
+    },
+    {
+      "character": "骸",
+      "fingerprint": "c0249709ae36fa5e34a884e5025ec601724ca6281087ee63195a4ca1fc1dc317",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "前10筆逐筆對照骨的描線，第7、8筆念豎撇、橫折鉤。右側第13筆左下後轉右，念撇橫。",
+      "writingJudgeCheck": {
+        "count": 16,
+        "rejected": []
+      }
+    },
+    {
+      "character": "黎",
+      "fingerprint": "10955a1e7c368c4b0ca3c48b70e203e22345f555e45324ca337871a9d1d197c8",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "reviewNote": "逐筆核對本機描線；第7筆下折回鉤，第11筆下行後向左上鉤，第13筆往右上挑。"
+    },
+    {
+      "character": "嚨",
+      "fingerprint": "feddd9d452d2dd9e12df323f44afe405dfa5fdeffa263ab5c218b972850ff9ae",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎橫折",
+          "spoken": "豎橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎曲鉤",
+          "spoken": "豎曲鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true,
+      "writingJudgeCheck": {
+        "count": 19,
+        "rejected": []
+      },
+      "reviewNote": "依本機描線核對口及龍；第11、12筆依方向念點、挑，第14筆下行後轉右再折下，第16筆右彎後上鉤。"
+    }
+  ]
+}

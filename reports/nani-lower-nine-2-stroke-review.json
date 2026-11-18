@@ -1,0 +1,229 @@
+{
+  "rows": [
+    {
+      "character": "紅",
+      "fingerprint": "08ac3df53613cc7faea2558b4a7135a4d549c0d5e79ce83b8440504ee3032bf4",
+      "strokes": [
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "缸",
+      "fingerprint": "03bb948eb3deaea20490118e0459be50f95b8d527ce90fc09d882d8bf64522a7",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎折",
+          "spoken": "豎折"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "春",
+      "fingerprint": "a4c260fe41545abef3bf7750f1ffd50685af16d73103f1d7bf5eef19d9c9d58b",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "為",
+      "fingerprint": "fb0193e767e11a2570c69b61e8e5c78569569f72fee452171dcef08699b7af5e",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "後",
+      "fingerprint": "ac235fb1954fb3a4f660f0f641c02f53798a0e5e282080d57245a13cc4f97633",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    }
+  ]
+}

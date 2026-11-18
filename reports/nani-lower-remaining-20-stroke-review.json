@@ -1,0 +1,235 @@
+{
+  "rows": [
+    {
+      "character": "獲",
+      "fingerprint": "5d9b3c7251fd2e8d32f4ed93cbe1b7151aaf5f6fcbfe7e63c11a5a4e3c0f6a2a",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本站筆順軌跡逐筆核對。"
+    },
+    {
+      "character": "縫",
+      "fingerprint": "08c751ab9f2d56175ce9a24461a763009b715da804803addc822c4ca409000bc",
+      "strokes": [
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "彎",
+          "spoken": "彎"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "標記筆畫需與輪廓比對，確認轉折及收筆。 已以完整輪廓及起筆標記複核：第2筆撇後向右折，維持撇橫；第16筆右下彎後直收，維持彎。"
+    },
+    {
+      "character": "嶼",
+      "fingerprint": "b01b084944c39a75fcf729e4456c23c43a8dd9710854de86205facc30a65710f",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎橫",
+          "spoken": "豎橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "標記筆畫需與輪廓比對，確認轉折及收筆。 已以完整輪廓及起筆標記複核：第2筆短豎下向右折，維持豎橫；第7筆向左下短撇出鋒，修正為撇。"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "rows": [
+    {
+      "character": "落",
+      "fingerprint": "1eef5e2e921b8acf0e4742658591505e7e61b6cef3adbbffb04bac28591e4ed6",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本站描線。"
+    },
+    {
+      "character": "照",
+      "fingerprint": "bbfa8ed3b95c7021838655ea0f6a59320c180ab916c7d2e61ee11dee14fdd36c",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本站描線。"
+    },
+    {
+      "character": "新",
+      "fingerprint": "4184c52355f7b8f8a929ece7fd7a2f755f8552ba347336b3aa08eea20b5132a0",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本站描線。"
+    }
+  ]
+}

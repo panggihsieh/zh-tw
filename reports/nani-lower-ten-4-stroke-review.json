@@ -1,0 +1,249 @@
+{
+  "rows": [
+    {
+      "character": "高",
+      "fingerprint": "064167d43ec976672136fdf40b48b69893b60307736af5d9f22e8e2486ce376c",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "送",
+      "fingerprint": "7bdd379f0aabc9c65d4d643642b8799066281b5e91dfbacfe7e28f6ff6792f6f",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "豎彎撇",
+          "spoken": "豎彎撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "師",
+      "fingerprint": "de7517ff2438618e9df6904d6f03f3e5baa343f900e96353a162200273c8368e",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "埋",
+      "fingerprint": "130c394f8ce5d8294f5f14d89c680f80eb8947f182887d98ce853c5a942dec2c",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    },
+    {
+      "character": "校",
+      "fingerprint": "4f104a66db27dec2c4df19e74f1b8de7a874a35c2b5e913e5324174f233d732c",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "逐筆比對本機描線。"
+    }
+  ]
+}

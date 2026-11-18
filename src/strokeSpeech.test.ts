@@ -1,5 +1,5 @@
 import {describe,it,expect,vi} from 'vitest';
-import {strokeSpeechText,speakStrokeText,type StrokeSpeechEntry} from './strokeSpeech';
+import {strokeSpeechText,speakStrokeText,stopStrokeSpeech,type StrokeSpeechEntry} from './strokeSpeech';
 
 const entry:StrokeSpeechEntry={confirmed:true,fingerprint:'test',strokes:[{name:'橫',spoken:'橫'},{name:'豎',spoken:'豎'},{name:'橫折鉤',spoken:'橫折鉤'}]};
 describe('教師確認的筆畫語音時機',()=>{
@@ -25,6 +25,24 @@ describe('教師確認的筆畫語音時機',()=>{
   vi.stubGlobal('window',{speechSynthesis:{cancel(){throw Error('device failure');}}});
   try{expect(speakStrokeText('橫')).toBe(false);}finally{vi.unstubAllGlobals();}
  });
+});
+
+it('寫對的筆畫以臺灣中文送入裝置語音，不加筆號，關閉後停止播放',()=>{
+ const spoken:any[]=[];
+ const cancel=vi.fn();
+ vi.stubGlobal('window',{speechSynthesis:{cancel,getVoices:()=>[],speak:(value:unknown)=>spoken.push(value)}});
+ vi.stubGlobal('localStorage',{getItem:()=>null});
+ vi.stubGlobal('SpeechSynthesisUtterance',class {text:string;constructor(text:string){this.text=text;}});
+ try {
+  for(let index=0;index<entry.strokes.length;index++){
+   expect(speakStrokeText(strokeSpeechText(entry,index,'practice','correct'))).toBe(true);
+  }
+  expect(spoken.map(value=>value.text)).toEqual(['橫','豎','橫折鉤']);
+  expect(spoken.every(value=>value.lang==='zh-TW')).toBe(true);
+  const before=cancel.mock.calls.length;
+  stopStrokeSpeech();
+  expect(cancel).toHaveBeenCalledTimes(before+1);
+ }finally{vi.unstubAllGlobals();}
 });
 
 it('優先朗讀獨立口訣，舊資料與空口訣仍使用朗讀文字',()=>{

@@ -1,0 +1,139 @@
+{
+  "rows": [
+    {
+      "character": "懂",
+      "strokeCount": 32,
+      "nearDuplicateTracks": [
+        {
+          "strokeNumbers": [
+            1,
+            17
+          ],
+          "maxTrackDistance": 24.515301344262525,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            3,
+            19
+          ],
+          "maxTrackDistance": 25.495097567963924,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            4,
+            20
+          ],
+          "maxTrackDistance": 23.345235059857504,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            5,
+            21
+          ],
+          "maxTrackDistance": 14.317821063276352,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            6,
+            22
+          ],
+          "maxTrackDistance": 25.942243542145697,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            7,
+            23
+          ],
+          "maxTrackDistance": 10.816653826391969,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            12,
+            28
+          ],
+          "maxTrackDistance": 12.206555615733702,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            13,
+            29
+          ],
+          "maxTrackDistance": 14,
+          "identicalOutline": true
+        }
+      ],
+      "status": "needs-outline-review",
+      "note": "軌跡接近僅為異常候選，不能單憑此報告刪除筆畫。"
+    },
+    {
+      "character": "慰",
+      "strokeCount": 18,
+      "nearDuplicateTracks": [
+        {
+          "strokeNumbers": [
+            12,
+            16
+          ],
+          "maxTrackDistance": 19.723082923316017,
+          "identicalOutline": true
+        },
+        {
+          "strokeNumbers": [
+            14,
+            18
+          ],
+          "maxTrackDistance": 14.142135623730951,
+          "identicalOutline": true
+        }
+      ],
+      "status": "needs-outline-review",
+      "note": "軌跡接近僅為異常候選，不能單憑此報告刪除筆畫。"
+    },
+    {
+      "character": "漫",
+      "strokeCount": 15,
+      "nearDuplicateTracks": [],
+      "status": "needs-outline-review",
+      "note": "軌跡接近僅為異常候選，不能單憑此報告刪除筆畫。"
+    },
+    {
+      "character": "製",
+      "strokeCount": 15,
+      "nearDuplicateTracks": [
+        {
+          "strokeNumbers": [
+            13,
+            15
+          ],
+          "maxTrackDistance": 23,
+          "identicalOutline": false
+        }
+      ],
+      "status": "needs-outline-review",
+      "note": "軌跡接近僅為異常候選，不能單憑此報告刪除筆畫。"
+    },
+    {
+      "character": "薄",
+      "strokeCount": 18,
+      "nearDuplicateTracks": [
+        {
+          "strokeNumbers": [
+            14,
+            15
+          ],
+          "maxTrackDistance": 5,
+          "identicalOutline": true
+        }
+      ],
+      "status": "needs-outline-review",
+      "note": "軌跡接近僅為異常候選，不能單憑此報告刪除筆畫。"
+    }
+  ]
+}

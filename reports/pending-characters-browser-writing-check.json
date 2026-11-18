@@ -1,0 +1,96 @@
+{
+  "scope": "Chromium實際React元件、滑鼠事件及書寫判定；語音以本機核對資料及攔截TTS呼叫驗證，不代表正式發布或裝置發音試聽。",
+  "results": [
+    {
+      "character": "壼",
+      "strokeCount": 13,
+      "accepted": 13,
+      "speechCalls": 14,
+      "status": "passed"
+    },
+    {
+      "character": "鉅",
+      "strokeCount": 13,
+      "accepted": 13,
+      "speechCalls": 14,
+      "status": "passed"
+    },
+    {
+      "character": "擤",
+      "strokeCount": 17,
+      "accepted": 17,
+      "speechCalls": 18,
+      "status": "passed"
+    },
+    {
+      "character": "瞞",
+      "strokeCount": 16,
+      "accepted": 16,
+      "speechCalls": 17,
+      "status": "passed"
+    },
+    {
+      "character": "臊",
+      "strokeCount": 17,
+      "accepted": 17,
+      "speechCalls": 18,
+      "status": "passed"
+    },
+    {
+      "character": "跤",
+      "strokeCount": 13,
+      "accepted": 13,
+      "speechCalls": 14,
+      "status": "passed"
+    },
+    {
+      "character": "寓",
+      "strokeCount": 12,
+      "accepted": 12,
+      "speechCalls": 13,
+      "status": "passed"
+    },
+    {
+      "character": "蜒",
+      "strokeCount": 14,
+      "accepted": 14,
+      "speechCalls": 15,
+      "status": "passed"
+    },
+    {
+      "character": "寞",
+      "strokeCount": 14,
+      "accepted": 14,
+      "speechCalls": 15,
+      "status": "passed"
+    },
+    {
+      "character": "邋",
+      "strokeCount": 19,
+      "accepted": 19,
+      "speechCalls": 20,
+      "status": "passed"
+    },
+    {
+      "character": "遢",
+      "strokeCount": 14,
+      "accepted": 14,
+      "speechCalls": 15,
+      "status": "passed"
+    },
+    {
+      "character": "回",
+      "strokeCount": 6,
+      "accepted": 6,
+      "speechCalls": 7,
+      "status": "passed"
+    },
+    {
+      "character": "年",
+      "strokeCount": 6,
+      "accepted": 6,
+      "speechCalls": 7,
+      "status": "passed"
+    }
+  ]
+}

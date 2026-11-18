@@ -40,6 +40,7 @@ export default function StrokePlayer({ character }: { character: string }) {
         </div>
         <span className="pill">教育部標準字體</span>
       </div>
+      <div className="stroke-player-pair">
       <div className="official-player">
         {!loaded && (
           <p className="stroke-loading" role="status">
@@ -59,7 +60,8 @@ export default function StrokePlayer({ character }: { character: string }) {
           onLoad={() => setLoaded(true)}
         />
       </div>
-      <details open><summary>本站筆順播放與語音練習</summary><p>使用教師已確認的逐筆口訣，與上方教育部播放器分開操作。尚未發布語音的生字仍可觀看動畫及書寫。</p><div role="tablist" aria-label="本站筆順模式" className="stroke-local-tabs"><button type="button" role="tab" id="stroke-tab-playback" aria-controls="stroke-local-panel" aria-selected={localTab==='playback'} onClick={()=>setLocalTab('playback')}>筆順播放</button><button type="button" role="tab" id="stroke-tab-practice" aria-controls="stroke-local-panel" aria-selected={localTab==='practice'} onClick={()=>setLocalTab('practice')}>筆順練習</button></div><div role="tabpanel" id="stroke-local-panel" aria-labelledby={`stroke-tab-${localTab}`}>{localTab==='playback'?<StrokePlayback key={character} character={character}/>:<CompetitionWriting key={character} character={character} mode="practice" disabled={false} onSubmit={()=>{}}/>}</div></details>
+      <details className="stroke-local-player" open><summary>本站筆順播放與語音練習</summary><p>使用教師已確認的逐筆口訣，與教育部播放器分開操作。尚未發布語音的生字仍可觀看動畫及書寫。</p><div role="tablist" aria-label="本站筆順模式" className="stroke-local-tabs"><button type="button" role="tab" id="stroke-tab-playback" aria-controls="stroke-local-panel" aria-selected={localTab==='playback'} onClick={()=>setLocalTab('playback')}>筆順播放</button><button type="button" role="tab" id="stroke-tab-practice" aria-controls="stroke-local-panel" aria-selected={localTab==='practice'} onClick={()=>setLocalTab('practice')}>筆順練習</button></div><div role="tabpanel" id="stroke-local-panel" aria-labelledby={`stroke-tab-${localTab}`}>{localTab==='playback'?<StrokePlayback key={character} character={character}/>:<CompetitionWriting key={character} character={character} mode="practice" disabled={false} onSubmit={()=>{}}/>}</div></details>
+      </div>
       <div className="stroke-links">
         <button className="secondary" onClick={() => setReload((x) => x + 1)}>
           <RotateCcw size={15} />

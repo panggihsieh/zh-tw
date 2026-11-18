@@ -1,0 +1,41 @@
+{
+  "scope": "local-source-geometry-comparison",
+  "characters": [
+    {
+      "character": "及",
+      "strokeCount": 4,
+      "componentStrokeNumbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "character": "岌",
+      "strokeCount": 7,
+      "componentStrokeNumbers": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "character": "汲",
+      "strokeCount": 7,
+      "componentStrokeNumbers": [
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "finding": "教育部官方逐筆提示圖確認岌、汲各七筆，第五筆橫折、第六筆橫撇分開。本機七筆輪廓相符，已修正名稱。",
+  "status": "reviewed-local",
+  "sources": [
+    "https://stroke-order.learningweb.moe.edu.tw/words/5C8C.png",
+    "https://stroke-order.learningweb.moe.edu.tw/words/6C72.png"
+  ]
+}

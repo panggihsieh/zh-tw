@@ -1,0 +1,208 @@
+{
+  "rows": [
+    {
+      "character": "埡",
+      "source": "https://github.com/chanind/hanzi-writer-data",
+      "revision": "68d10a4b21150cae5e1ebbd223eed289cf32d90c",
+      "candidateAvailable": true,
+      "strokeCount": 11,
+      "status": "reviewed-local-staged",
+      "candidateFile": ".local/57e1-converted.json",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎橫折",
+          "spoken": "豎橫折"
+        },
+        {
+          "name": "豎橫折",
+          "spoken": "豎橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "reviewNote": "已檢視全部輪廓、起筆與軌跡。此為替代來源，仍須核對臺灣教材筆順版本與書寫判定，尚未放入正式字庫。",
+      "writingJudgeCheck": {
+        "scope": "本機轉換後候選軌跡重採樣，非瀏覽器操作驗收",
+        "rejectedStrokeNumbers": []
+      },
+      "standardReference": "https://www.cns11643.gov.tw/wordView.jsp?ID=144452",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    },
+    {
+      "character": "粄",
+      "source": "https://github.com/chanind/hanzi-writer-data",
+      "revision": "68d10a4b21150cae5e1ebbd223eed289cf32d90c",
+      "candidateAvailable": true,
+      "strokeCount": 10,
+      "status": "reviewed-local-staged",
+      "checkedSource": "https://dict.mini.moe.edu.tw/SearchIndex/word_detail?breadcrumbs=Search_%E7%B2%84_one&dictSearchField=%E7%B2%84&wordID=D0000300",
+      "sourceFinding": "官方頁有筆順播放器，但data-url只有../Public/Upload/Xml/目錄，沒有資料檔名；需進一步確認可取得的筆順資料。",
+      "additionalSourceCheck": "Make Me A Hanzi graphics.txt查無粄。可研究以已核對的米旁及反部件建立明確標示來源的本站教學描線，需完整核對後方可使用。",
+      "candidateFile": ".local/7c84-composed-candidate.json",
+      "derivation": {
+        "kind": "本站教學組合描線，非官方原始粄字筆順檔",
+        "components": [
+          {
+            "character": "粉",
+            "strokeNumbers": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "character": "飯",
+            "strokeNumbers": [
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ],
+        "coordinateTransform": "x*2,(900-y)*2",
+        "license": "Arphic Public License"
+      },
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "reviewNote": "已檢視十筆完整輪廓、軌跡方向及完整組合字形，米旁與反部件配置可辨識。尚待筆順版本核對與瀏覽器互動測試。",
+      "writingJudgeCheck": {
+        "scope": "本機候選軌跡重採樣，非瀏覽器操作",
+        "rejectedStrokeNumbers": []
+      },
+      "standardReference": "https://www.cns11643.gov.tw/wordView.jsp?ID=143723",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    },
+    {
+      "character": "哏",
+      "source": "https://github.com/chanind/hanzi-writer-data",
+      "revision": "68d10a4b21150cae5e1ebbd223eed289cf32d90c",
+      "candidateAvailable": true,
+      "strokeCount": 9,
+      "status": "reviewed-local-staged",
+      "candidateFile": ".local/54cf-converted.json",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎挑",
+          "spoken": "豎挑"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "reviewNote": "已檢視全部輪廓、起筆與軌跡。此為替代來源，仍須核對臺灣教材筆順版本與書寫判定，尚未放入正式字庫。",
+      "writingJudgeCheck": {
+        "scope": "本機轉換後候選軌跡重採樣，非瀏覽器操作驗收",
+        "rejectedStrokeNumbers": []
+      },
+      "standardReference": "https://www.cns11643.gov.tw/wordView.jsp?ID=141632&la=0",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    }
+  ]
+}

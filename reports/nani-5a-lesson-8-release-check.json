@@ -1,0 +1,147 @@
+{
+  "lessonId": "0102051150108",
+  "checks": [
+    {
+      "character": "鄉",
+      "status": "needs-second-review",
+      "strokeCount": 12,
+      "reviewStrokeNumbers": [
+        8,
+        10,
+        11
+      ],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "撲",
+      "status": "reviewed-local",
+      "strokeCount": 15,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "螺",
+      "status": "reviewed-local",
+      "strokeCount": 17,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "鮭",
+      "status": "needs-second-review",
+      "strokeCount": 17,
+      "reviewStrokeNumbers": [
+        8
+      ],
+      "productionStrokeMatch": false
+    },
+    {
+      "character": "葵",
+      "status": "reviewed-local",
+      "strokeCount": 13,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "稠",
+      "status": "reviewed-local",
+      "strokeCount": 13,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "旋",
+      "status": "needs-second-review",
+      "strokeCount": 11,
+      "reviewStrokeNumbers": [
+        3,
+        7
+      ],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "律",
+      "status": "reviewed-local",
+      "strokeCount": 9,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "麥",
+      "status": "needs-second-review",
+      "strokeCount": 11,
+      "reviewStrokeNumbers": [
+        11
+      ],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "噓",
+      "status": "needs-second-review",
+      "strokeCount": 15,
+      "reviewStrokeNumbers": [
+        9,
+        12,
+        13,
+        14
+      ],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "硬",
+      "status": "reviewed-local",
+      "strokeCount": 12,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "扁",
+      "status": "reviewed-local",
+      "strokeCount": 9,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "抗",
+      "status": "reviewed-local",
+      "strokeCount": 7,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "筋",
+      "status": "reviewed-local",
+      "strokeCount": 12,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "椒",
+      "status": "reviewed-local",
+      "strokeCount": 12,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "蒜",
+      "status": "reviewed-local",
+      "strokeCount": 14,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "漢",
+      "status": "published",
+      "strokeCount": 14,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    },
+    {
+      "character": "蓋",
+      "status": "reviewed-local",
+      "strokeCount": 14,
+      "reviewStrokeNumbers": [],
+      "productionStrokeMatch": true
+    }
+  ]
+}

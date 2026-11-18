@@ -1,0 +1,131 @@
+{
+  "target": "zh-tw",
+  "rows": [
+    {
+      "character": "杆",
+      "path": "public/game-strokes/6746.json",
+      "expectedFingerprint": "19ec4a0b950d0051b06688cadd9a7ca946484d504bf84a90fb3873d64add7ed2",
+      "strokeCount": 7,
+      "reviewReport": "reports/nani-5a-lesson-7-stroke-review.json"
+    },
+    {
+      "character": "鮭",
+      "path": "public/game-strokes/9bad.json",
+      "expectedFingerprint": "d3c19b61d43947b2bf1972f0bc7fa5bf6dc40d151623c303ab78d3ccd1bb4bb1",
+      "strokeCount": 17,
+      "reviewReport": "reports/nani-5a-lesson-8-stroke-review.json"
+    },
+    {
+      "character": "癟",
+      "path": "public/game-strokes/765f.json",
+      "expectedFingerprint": "99800aac4715b066b9544a2a2a3cef72f28f19bc390e274a9e297035ea66ca4c",
+      "strokeCount": 19,
+      "reviewReport": "reports/nani-5b-lesson-8-stroke-review.json"
+    },
+    {
+      "character": "謐",
+      "path": "public/game-strokes/8b10.json",
+      "expectedFingerprint": "29f293422e4c46b191fea736ce498930e93bac8a07beb60bbd211105c9de5fa4",
+      "strokeCount": 17,
+      "reviewReport": "reports/nani-5b-lesson-9-stroke-review.json"
+    },
+    {
+      "character": "鉅",
+      "path": "public/game-strokes/9245.json",
+      "expectedFingerprint": "68beda94578d708b7099913123a2c748c4fcfa23035af853706f48dc56f79a3a",
+      "strokeCount": 13,
+      "reviewReport": "reports/nani-6a-lesson-10-stroke-review.json"
+    },
+    {
+      "character": "擤",
+      "path": "public/game-strokes/64e4.json",
+      "expectedFingerprint": "231a0792aa09ec80d4dbaad510fdb12413f07f533adadf7141f735e620ed5016",
+      "strokeCount": 17,
+      "reviewReport": "reports/nani-6a-lesson-11-stroke-review.json"
+    },
+    {
+      "character": "据",
+      "path": "public/game-strokes/636e.json",
+      "expectedFingerprint": "12ac697cc2df2ba962bf834ae33ba9f918cc979a903657a31db860f46c02e53b",
+      "strokeCount": 11,
+      "reviewReport": "reports/nani-6a-lesson-12-stroke-review.json"
+    },
+    {
+      "character": "咂",
+      "path": "public/game-strokes/5482.json",
+      "expectedFingerprint": "a2f9e71e20445a99d75feb0a2cb444e60412ffb1ca5063ad5a67f389a9cfd9b5",
+      "strokeCount": 8,
+      "reviewReport": "reports/nani-6a-lesson-2-stroke-review.json"
+    },
+    {
+      "character": "醅",
+      "path": "public/game-strokes/9185.json",
+      "expectedFingerprint": "bdba9ca4cd5a42f22e57c8f08fe7aaf10c26803ec34a84cc25b1c0e3a0fd1ef5",
+      "strokeCount": 15,
+      "reviewReport": "reports/nani-6a-lesson-3-stroke-review.json"
+    },
+    {
+      "character": "勺",
+      "path": "public/game-strokes/52fa.json",
+      "expectedFingerprint": "7be1aa712c2266a886bffebe78710977fce2122899b8d9da1e350eee301ca64f",
+      "strokeCount": 3,
+      "reviewReport": "reports/nani-6a-lesson-4-stroke-review.json"
+    },
+    {
+      "character": "臊",
+      "path": "public/game-strokes/81ca.json",
+      "expectedFingerprint": "39190bc5e53420360b57059d5bf795cabf71573c482204779078b0c8efd23fbf",
+      "strokeCount": 17,
+      "reviewReport": "reports/nani-6b-lesson-1-stroke-review.json"
+    },
+    {
+      "character": "跤",
+      "path": "public/game-strokes/8de4.json",
+      "expectedFingerprint": "c30a273506f64f75f56ee159ab2c537686c365937c2395c69774ce692bd208d4",
+      "strokeCount": 13,
+      "reviewReport": "reports/nani-6b-lesson-1-stroke-review.json"
+    },
+    {
+      "character": "乃",
+      "path": "public/game-strokes/4e43.json",
+      "expectedFingerprint": "9c843aab90989ef28c9ae144b8fa679599da9039c33a952db7e4ba473b96e40e",
+      "strokeCount": 2,
+      "reviewReport": "reports/nani-6b-lesson-3-stroke-review.json"
+    },
+    {
+      "character": "蜒",
+      "path": "public/game-strokes/8712.json",
+      "expectedFingerprint": "4cbb06d43f7456b6d78167ff6324f34ab4c984901e85784ee4a26407fa57f2e0",
+      "strokeCount": 14,
+      "reviewReport": "reports/nani-6b-lesson-4-stroke-review.json"
+    },
+    {
+      "character": "忐",
+      "path": "public/game-strokes/5fd0.json",
+      "expectedFingerprint": "98faa162abae4b7e13db04c21e5d4e7c5c8a13666c3bd273977a6f61872d212e",
+      "strokeCount": 7,
+      "reviewReport": "reports/nani-6b-lesson-6-stroke-review.json"
+    },
+    {
+      "character": "忑",
+      "path": "public/game-strokes/5fd1.json",
+      "expectedFingerprint": "b4c1f8ebecefa2b3acd73d7a0a2a5ced45afa1d20b087c0c01502efdb9451845",
+      "strokeCount": 7,
+      "reviewReport": "reports/nani-6b-lesson-6-stroke-review.json"
+    },
+    {
+      "character": "邋",
+      "path": "public/game-strokes/908b.json",
+      "expectedFingerprint": "e5a80f613ef28448bb3ca29c772314498863a41602aeb1ebcae06dbd73843561",
+      "strokeCount": 19,
+      "reviewReport": "reports/nani-6b-lesson-8-stroke-review.json"
+    },
+    {
+      "character": "遢",
+      "path": "public/game-strokes/9062.json",
+      "expectedFingerprint": "74a568b9def63a3f65b1d08836e6547a23aae24cbf1603054e7f012955e50c8a",
+      "strokeCount": 14,
+      "reviewReport": "reports/nani-6b-lesson-8-stroke-review.json"
+    }
+  ]
+}

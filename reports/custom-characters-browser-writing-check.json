@@ -1,0 +1,12 @@
+{
+  "scope": "Chromium實際React元件、滑鼠事件及書寫判定；語音以本機核對資料及攔截TTS呼叫驗證，不代表正式發布或裝置發音試聽。",
+  "results": [
+    {
+      "character": "挺",
+      "strokeCount": 10,
+      "accepted": 10,
+      "speechCalls": 11,
+      "status": "passed"
+    }
+  ]
+}

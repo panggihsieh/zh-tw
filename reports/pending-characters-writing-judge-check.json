@@ -1,0 +1,70 @@
+{
+  "scope": "對本機筆順軌跡重採樣後送入正式書寫判定，僅驗證軌跡可接受性，不代表瀏覽器操作或語音實測。",
+  "rows": [
+    {
+      "character": "壼",
+      "strokeCount": 13,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "鉅",
+      "strokeCount": 13,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "擤",
+      "strokeCount": 17,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "瞞",
+      "strokeCount": 16,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "臊",
+      "strokeCount": 17,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "跤",
+      "strokeCount": 13,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "寓",
+      "strokeCount": 12,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "蜒",
+      "strokeCount": 14,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "寞",
+      "strokeCount": 14,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "邋",
+      "strokeCount": 19,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "遢",
+      "strokeCount": 14,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "回",
+      "strokeCount": 6,
+      "rejectedStrokeNumbers": []
+    },
+    {
+      "character": "年",
+      "strokeCount": 6,
+      "rejectedStrokeNumbers": []
+    }
+  ]
+}

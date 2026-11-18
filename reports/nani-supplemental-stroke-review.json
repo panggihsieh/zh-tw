@@ -1,0 +1,157 @@
+{
+  "rows": [
+    {
+      "character": "埡",
+      "fingerprint": "1e7b5835e5284a47f34f66f12ceb9dafd47128f17952309814eeaa6564012605",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "挑",
+          "spoken": "挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎橫折",
+          "spoken": "豎橫折"
+        },
+        {
+          "name": "豎橫折",
+          "spoken": "豎橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "source": "https://www.cns11643.gov.tw/wordView.jsp?ID=144452",
+      "reviewNote": "完整輪廓、方向及部件配置已核對；全字庫總筆畫與部件結構相符，Chromium實際元件全筆書寫及逐筆念法呼叫通過。採替代教學描線，非教育部原始動畫。",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    },
+    {
+      "character": "粄",
+      "fingerprint": "26137f19ef8a9ab0517d9d11cbd2c63094eada4f602a944353a5f63909b34de2",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "source": "https://www.cns11643.gov.tw/wordView.jsp?ID=143723",
+      "reviewNote": "完整輪廓、方向及部件配置已核對；全字庫總筆畫與部件結構相符，Chromium實際元件全筆書寫及逐筆念法呼叫通過。採替代教學描線，非教育部原始動畫。",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    },
+    {
+      "character": "哏",
+      "fingerprint": "9ebf42180ef12e3fa5eae762554e5758a022d0270b713622089cacf552d0fd27",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎挑",
+          "spoken": "豎挑"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "source": "https://www.cns11643.gov.tw/wordView.jsp?ID=141632&la=0",
+      "reviewNote": "完整輪廓、方向及部件配置已核對；全字庫總筆畫與部件結構相符，Chromium實際元件全筆書寫及逐筆念法呼叫通過。採替代教學描線，非教育部原始動畫。",
+      "browserWritingCheck": "reports/candidate-characters-browser-writing-check.json"
+    }
+  ]
+}

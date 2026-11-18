@@ -1,0 +1,4593 @@
+{
+  "status": "unverified",
+  "summary": {
+    "referenceStrokes": 157,
+    "crossChecks": 9,
+    "mismatches": [
+      {
+        "character": "仇",
+        "index": 3,
+        "expected": "撇",
+        "proposed": "豎撇"
+      }
+    ],
+    "characters": 193,
+    "candidates": 216
+  },
+  "rows": [
+    {
+      "character": "灘",
+      "fingerprint": "ed01ee2d77a4201a548e117550ba32a7f8c804445be6a0d2f62648e958ce917c",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "硬",
+              "index": 11
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "邁",
+      "fingerprint": "f14a48474170728d4e32325a089a66a0c19dd6b2ad5d3738c7e1a44c67e303c4",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "螺",
+              "index": 8
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "拖",
+      "fingerprint": "873d2a2e37e18dc7a7f19beefd1f04ab7a1d273bed27a745b660e8ada6022a8c",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "擁",
+      "fingerprint": "5d05788757c542fad9fcc9b92a3b3e2659d26fe6ef77246a8867a9f3b23d61ac",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "恩",
+      "fingerprint": "c7b1e64c64b5266ab3f652e6fc5dc96c8f5e164567dc114dad1dd5b82db5f715",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "擦",
+      "fingerprint": "246f79835b3fa3fd1e4b99bbb38419661f80207ab4f9d99e384440f00aacf99f",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "釘",
+      "fingerprint": "ca6cef7800324e62f6e10e88f2cfc2a67ee37cc871f9044cce5515fbd58da5d3",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "按",
+      "fingerprint": "4791534b3a903784d5d4bc2a5ae6a2b301529a0cad1bfc113070fb8b3655fa6c",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "熟",
+      "fingerprint": "1f8606a724f8cd09eed2443a9092f063103f9fcb9e1c46698124b2a356475402",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "掃",
+      "fingerprint": "f6318aef7deabb0c3adbe0b49bd8c1f05bf12a343a3262799bf0d2d631b16cbf",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "率",
+      "fingerprint": "97b304fca86fc59ea550fe020bb8b054a52a3149a0caa248cb26abc8b08b7176",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "撇橫",
+          "references": [
+            {
+              "character": "玄",
+              "index": 3
+            },
+            {
+              "character": "勾",
+              "index": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "拼",
+      "fingerprint": "13ed13b66faba2133d1837985d1ff33def78bedcbd1f4c032c46fbfe86d84f16",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "眉",
+      "fingerprint": "5e08bcc3b930948d0a2d833c8adcd799fca85ff29898d0ec9e4a5764c5911512",
+      "suggestions": [
+        {
+          "index": 1,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "漿",
+      "fingerprint": "e148ca45e881b86f8ede9716815e170020e01414f38ebfd1c6477d704d5cb7f3",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "泉",
+      "fingerprint": "e57f6c5bcfef757d94a6a97b64f849c3d70e6980e58d02fbef0044201c0ce68c",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "呈",
+      "fingerprint": "c54a7e13f327cda4fff6f8f7e1c0d14e43ec59115450d1b7768ed7f00612bfe8",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "崖",
+      "fingerprint": "6b8861be6e38ccfcbaef5500fb8dcef148c4a5239c03b3ac6bf96990e9153ed6",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "坑",
+      "fingerprint": "5887779692a17cf4f7ddae8374bf64ad3355fc3bf68592bdf8220eb2fdd9af65",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "偉",
+      "fingerprint": "20632102cca17b4903f4615b0a4b23ed6d61bf786fa97b5f65cc383f47368b3d",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "臨",
+      "fingerprint": "d417ffcff85789bf3d9ab5291c0ee1a8723c6b599c327014fa55d32380c09586",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蹲",
+      "fingerprint": "c833978a724aa12967239a0833c9538fea8aa73b12cedde2052b87ce5c14d1c9",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "股",
+      "fingerprint": "7a15be5869dcbcfc92df4745010ce2d71d249d78c69ac3e14a377d67877e4278",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "售",
+      "fingerprint": "1b1dd17fa3c20a4113d7617491e9aa0df36c556cc05dc8b175eddfcf16f8ac92",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "薑",
+              "index": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "挖",
+      "fingerprint": "74c71658416ccc5e8d3ce20b6e2fd70b12cbd2ad26c319805bbbbba13e651941",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "賺",
+      "fingerprint": "c51b5b95e3c58bcc9cd49a8b944ccda2fd88da2e7d176b9a37b3003b30927af8",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "擔",
+      "fingerprint": "7b139832a75f4e8abe47d3c0b87e783ceb6e37d993ab4d39ac203ee5f22523ad",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "扭",
+      "fingerprint": "c84e9dc744d8111183b457bb83649306481e996363152bdff897b2d864c43bc0",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "討",
+      "fingerprint": "38937c2bce8b9bf56f9e2c853fd058e099455aa0d2e191cb7873b626b9fb436b",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "乎",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "繫",
+      "fingerprint": "52e27dce36c92acecca3484d60f3e9c0b65a654bc2e51d41ccba3fcda552f9fe",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "磊",
+      "fingerprint": "4fd06ecba63b549e00d109bef739b8a1384a30c5c19e2a2b41cb5a7454d1edbb",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 7
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "炫",
+      "fingerprint": "aec9547222a246c42a3e905b6b7531593010eeda674c14864c9a101381db2ceb",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盈",
+      "fingerprint": "882e5110b01255592381cf1538b6b4b7d56d3a02673296e0d245030bbe8987eb",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "薑",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "逝",
+      "fingerprint": "96f2deff6cb76104b661fe756fbafc8cbdf8830942eae1a40219ff1f707d3fc2",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "悟",
+      "fingerprint": "df377c7b2ccd745ed96904067eb8d77271f9b3a28a7cca029d73d24d9536c3b9",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "描",
+      "fingerprint": "3e69e94a1c1df523a261bf99cf5a171447affce79cfa4bf94fb8b787be05f1c9",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "舟",
+      "fingerprint": "e815cf1efc8b697c7c30add3254a80003ae434d5fe4336e4e56bf79945f2d439",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "稠",
+              "index": 6
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "赦",
+      "fingerprint": "dd95db8a19adc6570a264263d9e520f6bca494cbe6e65a17f46c9253d1b4f793",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "歸",
+      "fingerprint": "c5c7cd38cca544a44904488004deeba0059fc68252784435bf72b6089ac1f662",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "廳",
+      "fingerprint": "37af19c5bbeb5c36dfaef7a9d6be50f39912fc860b38f4bc97bfbb2fd0b6dad5",
+      "suggestions": [
+        {
+          "index": 17,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盞",
+      "fingerprint": "40ab57bd369c824c6bdb4c2ec8d7c57ec0ea446235eb0e9adbdf1bc218f4e8c5",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "閱",
+      "fingerprint": "6c056c00acd9214718f8e195d82b42863e8b7ce370e5f0f713e1e552579e041f",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "溶",
+      "fingerprint": "dac59a4209d71c93b7193887f0591906c7ac0c34693627316c36aa981c5fdbd0",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "券",
+      "fingerprint": "e8aa885818d13d0d6864d73b742ccc6e7604364cbcb7bc410be69ba63772c3b5",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "筋",
+              "index": 11
+            },
+            {
+              "character": "刃",
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "席",
+      "fingerprint": "910c941f9560613addfc8476e17208c0df108e1751e3d5b9fe5a7cc881094794",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "召",
+              "index": 1
+            },
+            {
+              "character": "市",
+              "index": 4
+            },
+            {
+              "character": "扁",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "映",
+      "fingerprint": "11220b88ccd1676631bad84139f89cee3a3f5cc05264c945b4d9e5dc61ab6579",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "扇",
+      "fingerprint": "e310cc538718e7a8e9cc7b75182076a23922a470aa62e1cc34e7abe0b6cb5045",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "扁",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "遭",
+      "fingerprint": "6aad509cb5e6b8595388993e2b77ccc8c1da0cb26fda06b778a19da55a064d89",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盆",
+      "fingerprint": "5344095ba6059c636f746996082dc3788a90064d96155f7aab85f8aa96fa8b75",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 7
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "轟",
+      "fingerprint": "977ae67916b4ac33d42e71ef57a456ea27d1679bc0d86baed75de42b37e61d94",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "鑑",
+      "fingerprint": "446116dd09959e9b63d5482bf4b446341e4505cd84d222bfaec027dd81e9ad6d",
+      "suggestions": [
+        {
+          "index": 20,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "霧",
+      "fingerprint": "21d5d4b3dac455628c414a014c575c1fda850ca68886944e93b126e524409795",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "乎",
+              "index": 5
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "吻",
+      "fingerprint": "3842038e67c1869e3678e0e039af06ce1c7b06aa011d7da556a2fb0373af4c86",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "叮",
+              "index": 2
+            },
+            {
+              "character": "硬",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "芭",
+      "fingerprint": "fa3590cbdbcd2f59fbbdb19fa1139dc02e4330dc293d18e51f382e782abbc7f1",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "餘",
+      "fingerprint": "7677e9930d06ed5624e4a28380b2f69aafd24e649f008efc4fe503bf783fc33a",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "矛",
+              "index": 4
+            },
+            {
+              "character": "椒",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "闆",
+      "fingerprint": "247967e82e179456d4fa95a3fd2d0d3611f0b5d7ada541ab1dab7e3163aff228",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "辨",
+      "fingerprint": "a125b6a6e99432b2b6db1eab8cc22e5a07f8125552c1bff62a4711ffa173273c",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "押",
+      "fingerprint": "21c126604b925ef35460f72ee45f911930fc491cbc5766be88065c00f95b2c6f",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "沾",
+      "fingerprint": "da3bb4597275c874d326474afbd8b5b883d797fe05d6f706206b091a63380c8b",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "俗",
+      "fingerprint": "37153e075b1c31955e316946d814bd951463247684ea97f4d8646735d0ca7d28",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "批",
+      "fingerprint": "9ed2687e46d8d72fb30b78c460fc82fdbc4e4002a88bc4fd2934ebe28336a52a",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "啞",
+      "fingerprint": "e8993656217d39c8e092490da6071d79a5abdac0aa92cb337742930c52de5b3f",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "硬",
+              "index": 4
+            },
+            {
+              "character": "叮",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "增",
+      "fingerprint": "dce069505d0d09bcf68f6c84dc4ffce204668c86978db7b419edbad1a368b356",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "逞",
+      "fingerprint": "db5b6c0a69af2675481f65bf2ccc446927f7950e49b532dd613056e8549d2655",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "舌",
+      "fingerprint": "12414c78320810f9de3b4bfe4b06da043d8c059b4ecd5e574dd8b7d03981521d",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "若",
+      "fingerprint": "1589eb51044e35381f7481012c1522a9c5a5870bf81a214022d052fb382bf34d",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "姨",
+      "fingerprint": "31d472fb11c0218f84bc671d89e4d86a065987958affea4b63414723d7eb8ff1",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "繩",
+      "fingerprint": "64fe6f6459fd10b632564624dbe8ba768534ed760654c63b95806118bead4f0a",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "攔",
+      "fingerprint": "81bf9636c2e402498a581c1b6098acca251b33fd9ddd81917c333eb89150de61",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "馨",
+      "fingerprint": "0967b7a59c89ad7a114eb45d556c5c267933db2d46af150b081954742b778342",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "喻",
+      "fingerprint": "3e5963fe1065d23feb8520a8c4f278d4916a1af0198beb6b98fa9f68873f46ca",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "硬",
+              "index": 4
+            },
+            {
+              "character": "叮",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "缺",
+      "fingerprint": "e8dbb39673304ec3aa1a568db9f992f2391d8939695925246d395be8720aa93c",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "渾",
+      "fingerprint": "9fb24caa9b5a89bd05111f7f925026f005304569bcaf8410acc31eb211e258cc",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "市",
+              "index": 4
+            },
+            {
+              "character": "扁",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "梧",
+      "fingerprint": "3d75a05d5a0bb9ad8f53e46b5e7460ff29dd69f382066615ea288de6b6534f69",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "眠",
+      "fingerprint": "9b476b91dc5bae52113c521ba9eee47f444c8e18e557d91739c16b8584b9e5a0",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "何",
+      "fingerprint": "2ccd955d8c484f479a7279eea1424483ea6b005048b86cf6a514081dbea20e16",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "叮",
+              "index": 5
+            },
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "乎",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盒",
+      "fingerprint": "77e8ccec0f85422f6cea7318abff2536f6cae9dfc459b7eacbc4cf88155723a1",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "薑",
+              "index": 7
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "瞌",
+      "fingerprint": "be208ad6baba23091ab9ff849f8cb3312f41e5e2c2d9d2898027230b49322913",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "謐",
+      "fingerprint": "29f293422e4c46b191fea736ce498930e93bac8a07beb60bbd211105c9de5fa4",
+      "suggestions": [
+        {
+          "index": 14,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "搜",
+      "fingerprint": "ef35721d8cdccc65ff57ea77b810589a9a9b1b2bc0ace64d20da35a561d6b367",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "覽",
+      "fingerprint": "9432d1e1fcc314d6c8d4cbde8bac1120ff6dce2346bd5e91825253d680c6a81d",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "磨",
+      "fingerprint": "5d91b8acd430a8c87b1d5e1912f1028747946d806fb64c9579d2cca770617a17",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "扁",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "核",
+      "fingerprint": "952f30085c139f96c37a44392dfae540f64afe7ca9a8849fb76b7a9b87c652df",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "撇橫",
+          "references": [
+            {
+              "character": "勾",
+              "index": 3
+            },
+            {
+              "character": "玄",
+              "index": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "況",
+      "fingerprint": "a0d95fa4a1b3277770ab2207eb7e5b26a8c2bb9540a82dd9b3e02c7cb3b0b1d3",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "廣",
+      "fingerprint": "bf78ab5bcf4531e2354d6219db79a17d8f458609dc4608cc041788b6e3611396",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "掘",
+      "fingerprint": "51fd5cb714ce783441800855ef8e180b47576730b06b97b118334ab31108d5ee",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "單",
+      "fingerprint": "6a44357ac95a38408510d4f3d74e8587d72a8457fd27f8816ff0b3395690a1e5",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盛",
+      "fingerprint": "c7f18a76297309ccffaeca000c9b3425a0d5a763f4531277218f5be0a6f3bbfc",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蘊",
+      "fingerprint": "f71994e0ebd1a1136d51394fec6db7643c7736a57e704be1f255d64b1438b628",
+      "suggestions": [
+        {
+          "index": 17,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "螺",
+              "index": 8
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "劑",
+      "fingerprint": "b9f19c31bace3eed5abf8b9c39297113c6272a43c4808764d4b5ba7a5c1c91e6",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "號",
+      "fingerprint": "5d4a442c1aa1a0e28a771633dd12a0ff30c887dd0d7323f9593c0e22673bff61",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "據",
+      "fingerprint": "425ca758816420d606c7ae3b8e5d4c0ba0e5d4840f3c5bb8910673b00af14595",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "裹",
+      "fingerprint": "7fea024127c0b43ba222784e5cb680426cc4c91a2d721f75b9ef0f548d674f3f",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "爽",
+      "fingerprint": "2799c83ae2c8262444d001dbd08cbfd713178d8f7e2b7e47f7bfce64ed29041b",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "硬",
+              "index": 11
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "垢",
+      "fingerprint": "af36e72d5cf55b5eaa55bf3a4eb98e97ebae0e0d60021b3f5692002190fa158c",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "螺",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "鳳",
+      "fingerprint": "6de242592a4726353dcf4888db37739f0020445bbcfb7ca79674ff8c156d2cc4",
+      "suggestions": [
+        {
+          "index": 1,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "稠",
+              "index": 6
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "曝",
+      "fingerprint": "da52e9066485ac7e0c9a38963b080cf68f4883664975c032520855756823d98e",
+      "suggestions": [
+        {
+          "index": 15,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "暈",
+      "fingerprint": "ec486be5dbd0a018ae721d4b7a3cf77fed4ba7d61299229d48c5270c7d9869a9",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "跡",
+      "fingerprint": "e5f0c74ab66acde46e24a89fecaa38a4fb5368c7fcf69cf803e25b3866427ec5",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "藤",
+      "fingerprint": "134db07bb81ed935ffdec50f344841a56b9b7314c051bc0fac3cac219e023443",
+      "suggestions": [
+        {
+          "index": 15,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蔓",
+      "fingerprint": "dbf3020df7c2ee80841dbbfda96ee1c37435f1faaa6aff54130423452a254b7f",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "掀",
+      "fingerprint": "8a4c0774c8a35e0ba2ad596a906bdda9e3b225a01d274c34fd6095aa94c38455",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "稿",
+      "fingerprint": "1361182f03f388d36c1d6de6eeed6b99e1c2c5d1f018eaf39ddea841eb530a16",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "肩",
+      "fingerprint": "832f10b9109a3100bfcfbbc7e671ccd19199f0c7057c9fc9515f3ed6767b537a",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "稠",
+              "index": 6
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "舍",
+      "fingerprint": "8676c057aba69462f24fe8a430b2b0fba352633835afeb30aa117f8d412df31a",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "兼",
+      "fingerprint": "48549511233f82cdd04345178a8f3f60429fdd54b2237b9e33541eefc9fec8e8",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "吶",
+      "fingerprint": "23946784f50222562cca52c829d62d9935066eedfe11359029ea79e67176b488",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "叮",
+              "index": 2
+            },
+            {
+              "character": "硬",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "握",
+      "fingerprint": "0da84461a3e53309e1df12b451022e7a3755e34d6befdb4a810eb5fc31727960",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "抵",
+      "fingerprint": "5cdbe41239b8781f0e0917d58d25afb338f74c9d082e5809ec00c4e92720a750",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "榮",
+      "fingerprint": "115f28b44cc60618c6d2331a611a327517fcbae6130b43a4bf775eab99dd847e",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "扁",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 6
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "搞",
+      "fingerprint": "e8c065e9e3369bc94df6dfc7b5f7633b60d374a59e09059f75c8be82804c5dde",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "黝",
+      "fingerprint": "3800dd5500d1fdfaada9a58c7db07a2358e13993bc1fa65d8bf6994ff72c1354",
+      "suggestions": [
+        {
+          "index": 16,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "勾",
+              "index": 2
+            },
+            {
+              "character": "稠",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "摟",
+      "fingerprint": "dfd5410cc6355ff46b6367b37bed230b3c1f6f7d49d404e81ddf715205bdf4dc",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "益",
+      "fingerprint": "2f47799f39022fda06c259728892941f9c5b144229669bdccfff5b0b292c5dd1",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "監",
+      "fingerprint": "f1f2d7cf6fb1f0c9aa30ae7a40a810fa21fd1727b03b06f9505440907aa77418",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "史",
+              "index": 2
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "滅",
+      "fingerprint": "6e1aa8c6265ac1a11c321e03801a6adb4508bbff5a4db8fbfa33ca292db6614a",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "援",
+      "fingerprint": "c1d976c2bdf144dd2f133f86bf152fee379aa38fb5bdee3dbecc6e130e2138e6",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "燒",
+      "fingerprint": "20c9b6b93efc0b253fbbd08adf468250d6e23edd3ef6c3c2715aad9691fece6f",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "稠",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "觸",
+      "fingerprint": "3418e017e990b81fc23b0300df61b7f5e6c348b5f089ade072c345d643f24c57",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "勾",
+              "index": 2
+            },
+            {
+              "character": "稠",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "承",
+      "fingerprint": "c744ee25f1785ccc2029867ad9c450a1687c856a9e3decc3e7ffc109060a0e16",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "乎",
+              "index": 5
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "撈",
+      "fingerprint": "bbe0dda7cbc47e89a17423fe1a30257f29bedaa1ebb9c89f14dfe6f9953d1750",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "name": "橫鉤",
+          "references": [
+            {
+              "character": "矛",
+              "index": 3
+            },
+            {
+              "character": "穴",
+              "index": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "劃",
+      "fingerprint": "4b55989eb5b21999a6d546b0ebed8aecd5f6f6c5002ebf58239cf47e7f299d38",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "宇",
+      "fingerprint": "897527c1cd36424aedbe256ac9be5d8cf342a3bc3c5dd1a398f03d7904d6c9ef",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "械",
+      "fingerprint": "9c5e41212a0e37b13dd48d5939cd1fa588c261c0a5c4ef0a148bd62afa6fec9f",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "艙",
+      "fingerprint": "0593c0abff24aa1dbb9f5b75825f6e79ea85838a06ccb5ac219cbf64bf948685",
+      "suggestions": [
+        {
+          "index": 15,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "奪",
+      "fingerprint": "37a3cef2547230b915f1df9a3cc71c8c81d72a1ef20822d3ae8511b435666da6",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "螺",
+              "index": 15
+            },
+            {
+              "character": "椒",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "勞",
+      "fingerprint": "644081e10491ad7fc2b06b369aa9ac20da3c77bb3b4a2f5d4273d31756542bfc",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "扁",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "抉",
+      "fingerprint": "20dbf5e499d11ffeffc8d7c9ebfae146289ad58e688ee97f44ef79ea07726770",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "擇",
+      "fingerprint": "5d44950cf6e8a45c6ef9ec74ab339acdf63e4da42113872644bf3eb236eb8dff",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "抽",
+      "fingerprint": "65235cdac0a3363a5a970961b71f2851a03b527bb6fa0fed1865f6e6df846c19",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "灶",
+      "fingerprint": "35fcf3d458601a57ccf3d8d4f2ee954c6be6d5128ff7921f604faaae6085ff12",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "搔",
+      "fingerprint": "9e4878d81e872c6c7ccfcc861bcf0d9a27e1664d5e1d21cc8b17fa8973d87a82",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "漢",
+              "index": 9
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "衡",
+      "fingerprint": "11f2939f859425b2553607bbf2ca65242bab23f1840703044a25311d3791a63f",
+      "suggestions": [
+        {
+          "index": 16,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "乎",
+              "index": 5
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "焰",
+      "fingerprint": "83459d455dc87ec3cf2a6ce8d41d32acd1c26489a577201217cfd528327628f2",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "跌",
+      "fingerprint": "1e01fe1f766c3d1562dddf3f2f0e10b8909de7619dd36f76ff7fe7cb22b3860f",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "剝",
+      "fingerprint": "4d0aac7d405afed8805fb1dc333dc643a92ea5a0d8dc1ee1da82c70769507d7e",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "乎",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "熾",
+      "fingerprint": "79b21e7b3e2f27a6bf0fafa800d91cd32284bc3cf1105a256838fff8869eb690",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "稠",
+              "index": 6
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "裊",
+      "fingerprint": "178c66c4ce7efda1069c74d4ede946d4e0947bfca2730cac2f50001ab21c4f7b",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "糧",
+      "fingerprint": "e33f541f385ea0b72d8c18b594ebb9262c1c7c7f0b5e78d54590048ce05a7aa2",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "否",
+      "fingerprint": "82b0a1860c71c69cecef6a99d6adaef079ef7f317c88d0b970c3622e28fc163a",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "螺",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "鞏",
+      "fingerprint": "93b3e6cd023f66bcb3570d9ffe03bd8120bd2449ddd7154732aa1e4e0f72d7cd",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "扁",
+              "index": 3
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "亦",
+      "fingerprint": "49853a462459682f9f069425dff729c3d5d0e4b11bd4a57a2397ab532974dbc6",
+      "suggestions": [
+        {
+          "index": 3,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "叮",
+              "index": 5
+            },
+            {
+              "character": "乎",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "猶",
+      "fingerprint": "ecc22616ae195e3bdfef92056192308675959d56f6d76cddcd54cec6b40e8f62",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "俐",
+      "fingerprint": "2a4d4f19848464054b652883d9df108f34b48d0b79faf55b470ccf7ff493a0d7",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "莫",
+      "fingerprint": "3e515361a86c267184a17d2446359ee4c25c68bc665c0dbd10f6d808b6e5e44a",
+      "suggestions": [
+        {
+          "index": 6,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "螺",
+              "index": 8
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "痘",
+      "fingerprint": "636b3fd16dd2915cd8937bb30db70873f5522250ebf3a0168cd1bae70459965f",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "擤",
+      "fingerprint": "231a0792aa09ec80d4dbaad510fdb12413f07f533adadf7141f735e620ed5016",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "杷",
+      "fingerprint": "abe4baadc89cbf6496dd5a9ef979eb1c9a77106590f2e6facb1750eb72301c03",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "拮",
+      "fingerprint": "61aee5bb0abf6e11ecd422b861ef581ceaa1ecea3d8a597f86daeb4a7b8e2b04",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "据",
+      "fingerprint": "12ac697cc2df2ba962bf834ae33ba9f918cc979a903657a31db860f46c02e53b",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "抄",
+      "fingerprint": "62ebbfe83c90d8f58d2d99d2fbc94b362d4fae2d37abab88ad0bed61db80cc62",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "吁",
+      "fingerprint": "55b87cf5706270aa462801896ca3c7760f967851c6d7b493ec5c5045daf9eed9",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "硬",
+              "index": 4
+            },
+            {
+              "character": "叮",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "叮",
+              "index": 5
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "撫",
+      "fingerprint": "2a71d0363a3be6aa093be10c9ada49f4f91745d14c8ec3d021b8882294a8f10a",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "娛",
+      "fingerprint": "8e15cbf7d7a6543f21d6412b1df136d2a947a616975325c89ead51203917b815",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "括",
+      "fingerprint": "1e336c819f93df1e15d96dd2dcf5fe6d8fff0fe584322d9c388ef5bad40f1da4",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "糞",
+      "fingerprint": "db297d27bf66e6e134a1ce82d621539184b344a1b2e7d2e71cd0300bb5b30ceb",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "狩",
+      "fingerprint": "6785819885f48ea6bdbd831fc10d466db539526d05044dee720694e402204dd2",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "椒",
+              "index": 8
+            },
+            {
+              "character": "矛",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "殺",
+      "fingerprint": "b7f9ca0c0956f0fa5274ca98a6248e389833ef7b658a16abfbd4a257542dc769",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "骸",
+      "fingerprint": "c0249709ae36fa5e34a884e5025ec601724ca6281087ee63195a4ca1fc1dc317",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "稠",
+              "index": 6
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "窩",
+      "fingerprint": "fbd58536bd91b067e02d072cf525c427e215cb72d081ae4e8a1f6c51609b2c1e",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "黎",
+      "fingerprint": "10955a1e7c368c4b0ca3c48b70e203e22345f555e45324ca337871a9d1d197c8",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "喉",
+      "fingerprint": "355302f53ddc90f2fc4c453ecea96a7e1b9b485c5e37ae32b998fee3c907aab2",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "叮",
+              "index": 2
+            },
+            {
+              "character": "硬",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "軼",
+      "fingerprint": "e13ad3cf91fd6b2946b11c30fbbf70c80f00fda22669ca7310035ba428d3304e",
+      "suggestions": [
+        {
+          "index": 11,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "例",
+      "fingerprint": "f7417b19f263dd7a4d855043b2f375c2f98e841e29c5f71fbe5876ed7bd5b38f",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "叮",
+              "index": 5
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "撲",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "捷",
+      "fingerprint": "f7cfbd2406e13f4b55e6ff55f53cc1dfe98ab8be06aa7133c69c8f24b9043e01",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蜿",
+      "fingerprint": "5414032908eff93f75d9b8b69e5a9d61c36f0f4478454202ad21ae14b2962cc2",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "荊",
+      "fingerprint": "6e97e41f35ff512b9b1f1e9e2674b5641e321cc6e17651d32c97f6261f92c600",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "楷",
+      "fingerprint": "387c92d51d281c43d580a673a4ffd61f54e2f80113baff9bb087e3881352fdec",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "豎彎鉤",
+          "references": [
+            {
+              "character": "犯",
+              "index": 5
+            },
+            {
+              "character": "兀",
+              "index": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "鞭",
+      "fingerprint": "029036bc903e27e1a7a5ac9917383128f2da3db30836cb862e83c2763c3f6a6d",
+      "suggestions": [
+        {
+          "index": 17,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蒼",
+      "fingerprint": "676fcd453aec9ade94e61aa6dcc51f14aa3402c1f4a6ca602baaf6fb24ce6683",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "薑",
+              "index": 7
+            },
+            {
+              "character": "薑",
+              "index": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "倚",
+      "fingerprint": "250b934677933f519524921f07db664abcb7d00ac9b7990e3315a89525f5c7b0",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "矛",
+              "index": 4
+            },
+            {
+              "character": "椒",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "搶",
+      "fingerprint": "949bbf6d7a4739140e85d906ac7cdef15137a2ea626394b1f8061514aca2d31d",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            },
+            {
+              "character": "叮",
+              "index": 5
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "湍",
+      "fingerprint": "615cfe0a127c8c45bb2d23a17d521338d0809730a072cfd0c9e93502bec16b80",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "召",
+              "index": 1
+            },
+            {
+              "character": "市",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "猛",
+      "fingerprint": "ca846ae8a78491c2e64da9a2e0de67f3d6069e117ea4bf415e530e5f6b528456",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "司",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "竊",
+      "fingerprint": "a3eb327a2bb2b76146813d360a8615fa4f7d0e234f732d4065ddb38a6b6c8aff",
+      "suggestions": [
+        {
+          "index": 20,
+          "name": "橫折鉤",
+          "references": [
+            {
+              "character": "召",
+              "index": 1
+            },
+            {
+              "character": "扁",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "恨",
+      "fingerprint": "e8f0c0d4e4e7773fa6aaa8cb511915d31d9e25aaf72439d737c9cfdffafa4070",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "叮",
+              "index": 2
+            },
+            {
+              "character": "硬",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "汰",
+      "fingerprint": "d56d404667eec5689dc7c2b95765a6637d67b596b3a1fc9bbbf9b265a2907010",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "扁",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "扉",
+      "fingerprint": "e276097ba4f623220dea95cd8ede5bac0d809b7897c8b2e2381701c0d603ae62",
+      "suggestions": [
+        {
+          "index": 5,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "狹",
+      "fingerprint": "40d0c23671389457e78072ad8c7d341510ee27f8a1daad59a25ab6700a556cb6",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "寞",
+      "fingerprint": "3bff45ccbe2f349f5ea7497eaf3c50cf15284ee5604cf1ff2aa6666c72753275",
+      "suggestions": [
+        {
+          "index": 10,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "潑",
+      "fingerprint": "9d367a307939bd3eb9d94545de3c971425fe529e426696b785ad8f1b3a30cf42",
+      "suggestions": [
+        {
+          "index": 12,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "矩",
+      "fingerprint": "2f8d43b9a4023467d004bf35c05ac87446834962a5adb39cb2b082c8e680f4ff",
+      "suggestions": [
+        {
+          "index": 8,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "司",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "稠",
+              "index": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "蝸",
+      "fingerprint": "16f49d4bc8ff58cf4156e64434f72deb8d210d2a63af832699ea4e6569ea0229",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "薑",
+              "index": 13
+            },
+            {
+              "character": "螺",
+              "index": 8
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "咀",
+      "fingerprint": "4ab1ab19cd333efa9f81787f5d7a0b1035f1eefc9873c75fa9b8adcb0e9bee63",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "硬",
+              "index": 4
+            },
+            {
+              "character": "叮",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "殷",
+      "fingerprint": "12dfad315b379aec43562ef73f0eaf730aa6dd2942525083224ee7b89d779f44",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "斥",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "德",
+      "fingerprint": "23c248b1a99eeabfe3a4a9d2ce39267576454e35dc6487c895b4bf7dad28d96e",
+      "suggestions": [
+        {
+          "index": 7,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "薑",
+              "index": 7
+            },
+            {
+              "character": "央",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "伏",
+      "fingerprint": "b944f1aa4b4d8e2d66b2ce162b631c21afaa9394bc2785a69e244eff626cda37",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "斥",
+              "index": 2
+            },
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "爪",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "拘",
+      "fingerprint": "0e6ef8fee7ad74aea082e796689f9460df8878876df1450dc5c44ece157dd1fd",
+      "suggestions": [
+        {
+          "index": 2,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "撲",
+              "index": 2
+            },
+            {
+              "character": "抗",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "摯",
+      "fingerprint": "c627d6555e321283643a90307a1a41e79ea56ba6066aae86bc836629c0c42a6d",
+      "suggestions": [
+        {
+          "index": 9,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "抗",
+              "index": 6
+            },
+            {
+              "character": "扁",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "厭",
+      "fingerprint": "91896b6d338802c07acee867e8d1d46e0d5a6c218dfea15eabe7c853a4ebea54",
+      "suggestions": [
+        {
+          "index": 4,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "硬",
+              "index": 4
+            },
+            {
+              "character": "叮",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "name": "豎撇",
+          "references": [
+            {
+              "character": "筋",
+              "index": 7
+            },
+            {
+              "character": "稠",
+              "index": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "盪",
+      "fingerprint": "314568d1d3c4687e7f3ad9916d2b31bfd3030cfa51d71643aef031c980d8faea",
+      "suggestions": [
+        {
+          "index": 14,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "蓋",
+              "index": 11
+            },
+            {
+              "character": "史",
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "囑",
+      "fingerprint": "9dad788eb8f81ff91930e5c08772b77d42186fb90fe194ce158f3af0fc8c86d2",
+      "suggestions": [
+        {
+          "index": 13,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "扁",
+              "index": 3
+            },
+            {
+              "character": "蓋",
+              "index": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "檻",
+      "fingerprint": "63e7bd2e377871adbb5991f212a7f68f7f81a0208bac5c0de6ec443596b25324",
+      "suggestions": [
+        {
+          "index": 15,
+          "name": "橫折",
+          "references": [
+            {
+              "character": "央",
+              "index": 2
+            },
+            {
+              "character": "召",
+              "index": 4
+            },
+            {
+              "character": "律",
+              "index": 4
+            },
+            {
+              "character": "薑",
+              "index": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "綺",
+      "fingerprint": "61f3578935843642e151fa384f1a21572433317964170115cc3fc14af57ad9cc",
+      "suggestions": [
+        {
+          "index": 14,
+          "name": "豎鉤",
+          "references": [
+            {
+              "character": "螺",
+              "index": 15
+            },
+            {
+              "character": "矛",
+              "index": 4
+            },
+            {
+              "character": "椒",
+              "index": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

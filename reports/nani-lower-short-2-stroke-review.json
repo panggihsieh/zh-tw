@@ -1,0 +1,921 @@
+{
+  "rows": [
+    {
+      "character": "日",
+      "fingerprint": "9982ae42caca88d82e0e7bdffd002296ba51dd292a18c4d88d68d736ccc4e5b7",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "月",
+      "fingerprint": "5a508150abffa0d3491b7e3f1d528a40e981ef344399bd224413b057328ae74a",
+      "strokes": [
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "木",
+      "fingerprint": "3e09eb24be8080218287402e4d9072247d29ac8f9c4222c7960a13534ac82628",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "水",
+      "fingerprint": "1da8c03a547535b82aa4bdef91a4308975104e5ed7444ec36e38ce94a705bd88",
+      "strokes": [
+        {
+          "name": "豎鉤",
+          "spoken": "豎鉤"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "手",
+      "fingerprint": "5d5c6c661e167858227514531c40882585ee43b1f187449d974fec850a15feb9",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線與教育部異體字字典字樣說明核對。",
+      "source": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A01495"
+    },
+    {
+      "character": "友",
+      "fingerprint": "ffd52fc691eec06cacfd28b09ff7acfb92035bd6f082df914b4cb38db6461d1d",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "什",
+      "fingerprint": "0ffcb544d45f9fcdb2e306ed195989466e1509aae76707690eaa96e0700f6ae7",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "巴",
+      "fingerprint": "2c75dec408618eb9bfa5dc19e8cfdc3dfab90ad19046c65b49d65cf9bcff2048",
+      "strokes": [
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "天",
+      "fingerprint": "9c3e07a38ed08c9fd5953c9558d5ffe38bc3c40d69ef5330ed8003a54f440abc",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "不",
+      "fingerprint": "790bae2ba88b0a1a927a73aa52c3d03f2ca41407b315355a0171d581241f596b",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "太",
+      "fingerprint": "7b1fc5c9f006b84a52343d98f22d24299e553574241e4ceda72990f3f4c07f46",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "心",
+      "fingerprint": "8a4f911e1b5c93bd05b440fc186d93d0cdd4cba5f5e74013fc60b5afecbc4e1d",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "臥鉤",
+          "spoken": "臥鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "中",
+      "fingerprint": "0def0b9dff6cfabf32688fbc6a983864ed1c2eb6223d9fa0040e30a3d7d87c6a",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "片",
+      "fingerprint": "fc000278e3d28251fcfcd07d2c7aed41c20d41de079594ed8f7cce45f767882e",
+      "strokes": [
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "方",
+      "fingerprint": "3adb36d4a47ccbb4bef8d6b293b549235eb5cc2c5988cf558612ca1ecc2d1ee6",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "井",
+      "fingerprint": "07d89f1f3bf03f28b0d2697a69a9c3b23605943f8d81c8485f5ea764a92aa45d",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "止",
+      "fingerprint": "547a025f1c06b55892c7a7df431ef9aa977e0c5f977b4b2d2571510f4ee03a99",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "分",
+      "fingerprint": "c3a43a39f9981d1cd738764db85b1bcf975ab8514314b757a8dbc10ca1ac70f0",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "及",
+      "fingerprint": "9f16accaf7c295a762e7e5ddd40d994ba0145410f0c6de01dd109afa74ec1722",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫撇",
+          "spoken": "橫撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線與教育部異體字字典字樣說明核對。",
+      "source": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A00471"
+    },
+    {
+      "character": "王",
+      "fingerprint": "a3dbc2a08e5b317054fc398b282971eef5794a2438f6e58a2ab91bcbf8dab835",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "午",
+      "fingerprint": "ee1e231c7d2a6731dd17b336d837c8a3542dc5404e56db61062af5505e86a848",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "少",
+      "fingerprint": "70e4f2f7fb1d5412cc9c8609a6fa089f9c9e39330be12bbbc1ba9d6af66a47b0",
+      "strokes": [
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "夫",
+      "fingerprint": "a0da43b4deb68e8902cdbb4c2b0386610440e94ea20e2ee9b813f91a829b2e7a",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "今",
+      "fingerprint": "b40c2d44516ae67b2f927827af16c240dfa546a052edb8079307293ca057d882",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "升",
+      "fingerprint": "08e962bc8b6e2072bf1861e7f7e4db5b251f1bc6a86a98844e6cecf2b59ce676",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "牛",
+      "fingerprint": "c914e1ef61e4a4c1f745269c80ce5098e1d5322401936e96e4551bfcc5796667",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "火",
+      "fingerprint": "9cb9d7e62fc49842545b1c1ad1ee4d6e6fed3ac9b00901a443d5c74c498a3ffc",
+      "strokes": [
+        {
+          "name": "點",
+          "spoken": "點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "毛",
+      "fingerprint": "e15812f95a0b455d90988788d9d2b2ba6f7ba37e9fb34b878388628714173b7e",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "公",
+      "fingerprint": "55d5cbdf2efde732d24b4789752113120b3c1ee01572775b0320d36e6a115b37",
+      "strokes": [
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "捺",
+          "spoken": "捺"
+        },
+        {
+          "name": "撇橫",
+          "spoken": "撇橫"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "比",
+      "fingerprint": "fd0307391337422999ba2814ae3150f66adc48dfe6734736ca5c309fd2d5b46d",
+      "strokes": [
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎挑",
+          "spoken": "豎挑"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "也",
+      "fingerprint": "faac7e6459b268a6234dd5029914c86485dd1baf765ca35caa5be087a3343952",
+      "strokes": [
+        {
+          "name": "橫折鉤",
+          "spoken": "橫折鉤"
+        },
+        {
+          "name": "豎",
+          "spoken": "豎"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "子",
+      "fingerprint": "e4a323126634607504c0acf62329b90fb597b53c6ee0b6fa2bbec32d5ba88484",
+      "strokes": [
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "了",
+      "fingerprint": "7daf2155e6a45bdb88346ff72e3aaa4389c3c8334d50e175e6747c42ab96e111",
+      "strokes": [
+        {
+          "name": "橫鉤",
+          "spoken": "橫鉤"
+        },
+        {
+          "name": "彎鉤",
+          "spoken": "彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "己",
+      "fingerprint": "2524f973c2764d504de4e50778530e9edaa75b1461dcaf51313ca938445f9325",
+      "strokes": [
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "已",
+      "fingerprint": "b74a4c70291068e65742c57d547e12e29a126e68c367e5f1e7d6593f51184f38",
+      "strokes": [
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎彎鉤",
+          "spoken": "豎彎鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "女",
+      "fingerprint": "626ae1eed287735230eab5bdc7eca3d4a0625515cc6bf04eb1ff7a7922fe3297",
+      "strokes": [
+        {
+          "name": "撇點",
+          "spoken": "撇點"
+        },
+        {
+          "name": "撇",
+          "spoken": "撇"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "凡",
+      "fingerprint": "853b173286fc9b609debbeddec96f6649ab2beb36374fd78f2ef1530aee7edc4",
+      "strokes": [
+        {
+          "name": "豎撇",
+          "spoken": "豎撇"
+        },
+        {
+          "name": "橫折彎鉤",
+          "spoken": "橫折彎鉤"
+        },
+        {
+          "name": "點",
+          "spoken": "點"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線逐筆核對。"
+    },
+    {
+      "character": "弓",
+      "fingerprint": "e9c0eaba7eecc0f5d715928aa17417185fc953141b15cbd7716ebd167fd59f52",
+      "strokes": [
+        {
+          "name": "橫折",
+          "spoken": "橫折"
+        },
+        {
+          "name": "橫",
+          "spoken": "橫"
+        },
+        {
+          "name": "豎橫折鉤",
+          "spoken": "豎橫折鉤"
+        }
+      ],
+      "status": "reviewed-local",
+      "reviewStrokeNumbers": [],
+      "reviewNote": "依本機描線與教育部異體字字典字樣說明核對。",
+      "source": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A01245"
+    }
+  ]
+}
