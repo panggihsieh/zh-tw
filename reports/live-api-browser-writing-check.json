@@ -1,0 +1,47 @@
+{
+  "scope": "Chromium實際React元件及滑鼠書寫，讀取正式站API和筆順檔，攔截TTS驗證每筆文字，非裝置音色試聽。",
+  "results": [
+    {
+      "character": "回",
+      "strokeCount": 6,
+      "accepted": 6,
+      "speechCalls": 7,
+      "status": "passed"
+    },
+    {
+      "character": "年",
+      "strokeCount": 6,
+      "accepted": 6,
+      "speechCalls": 7,
+      "status": "passed"
+    },
+    {
+      "character": "挺",
+      "strokeCount": 10,
+      "accepted": 10,
+      "speechCalls": 11,
+      "status": "passed"
+    },
+    {
+      "character": "埡",
+      "strokeCount": 11,
+      "accepted": 11,
+      "speechCalls": 12,
+      "status": "passed"
+    },
+    {
+      "character": "粄",
+      "strokeCount": 10,
+      "accepted": 10,
+      "speechCalls": 11,
+      "status": "passed"
+    },
+    {
+      "character": "哏",
+      "strokeCount": 9,
+      "accepted": 9,
+      "speechCalls": 10,
+      "status": "passed"
+    }
+  ]
+}

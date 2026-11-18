@@ -23,6 +23,15 @@ const live=new Map(await Promise.all(published.map(async c=>{
  if(item?.confirmed)validateStrokeSpeech(item,strokes);
  return [c,Boolean(item?.confirmed&&item.fingerprint===strokeFingerprint(strokes))];
 })));
+const verificationPath=new URL('reports/stroke-speech-production-verification.json',repo);
+if(fs.existsSync(verificationPath)){
+ const verification=JSON.parse(fs.readFileSync(verificationPath,'utf8'));
+ if(verification.site==='https://zh-tw.web.app')for(const row of verification.results??[]){
+  if(row.status!=='passed'||!row.fingerprint)continue;
+  const strokes=read('public/game-strokes/'+row.character.codePointAt(0).toString(16)+'.json');
+  if(strokeFingerprint(strokes)===row.fingerprint)live.set(row.character,true);
+ }
+}
 const batches=groups.map(group=>{
  const rows=group.rows.filter(r=>r.firstBatch).map(r=>{
   const id=r.character.codePointAt(0).toString(16);

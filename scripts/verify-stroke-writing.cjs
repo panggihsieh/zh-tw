@@ -8,6 +8,7 @@ const {spawn}=require('node:child_process');
 const assert=require('node:assert/strict');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const candidateMode=process.argv.includes('--candidates');
+const liveMode=process.argv.includes('--live');
 const customCharacters=process.argv.find(value=>value.startsWith('--characters='))?.slice('--characters='.length);
 const characters=customCharacters?[...customCharacters]:candidateMode?['埡','粄','哏']:['壼','鉅','擤','瞞','臊','跤','寓','蜒','寞','邋','遢','回','年'];
 const root=process.cwd(), folder=path.join(root,'.local','writing-browser-check');
@@ -54,6 +55,7 @@ app.whenReady().then(async()=>{
  const server=await createServer({configFile:false,root:${JSON.stringify(root)},cacheDir:${JSON.stringify(path.join(folder,'vite-cache'))},optimizeDeps:{noDiscovery:true,include:['react','react-dom/client','firebase/app','firebase/auth']},plugins:[react(),{
   name:'local-stroke-fixtures',configureServer(server){server.middlewares.use(async(req,res,next)=>{
    if(req.url==='/writing-check'){res.setHeader('Content-Type','text/html');res.end(await server.transformIndexHtml('/writing-check',harness));return;}
+   if(${liveMode}&&(req.url.startsWith('/game-strokes/')||req.url.startsWith('/api/structure/stroke-speech/'))){try{const upstream=await fetch('https://zh-tw.web.app'+req.url,{signal:AbortSignal.timeout(20000)});res.statusCode=upstream.status;res.setHeader('Content-Type','application/json');res.end(await upstream.text());}catch(error){res.statusCode=502;res.end(JSON.stringify({error:error.message}));}return;}
    if(req.url.startsWith('/game-strokes/')){const code=req.url.slice('/game-strokes/'.length).replace('.json','');if(geometry.has(code)){res.setHeader('Content-Type','application/json');res.end(JSON.stringify(geometry.get(code)));return;}}
    const match=req.url.match(new RegExp('^/api/structure/stroke-speech/([0-9a-f]+)$'));
    if(match){const row=fixtures.get(String.fromCodePoint(parseInt(match[1],16)));res.setHeader('Content-Type','application/json');res.end(JSON.stringify({item:row?{fingerprint:row.fingerprint,confirmed:true,strokes:row.strokes}:null}));return;}
@@ -102,7 +104,7 @@ app.whenReady().then(async()=>{
    assert.ok(await js(`document.querySelector('[role="status"]').textContent.includes('書寫完成')`));
    results.push({character,strokeCount:strokes.length,accepted:strokes.length,speechCalls:await js('window.spoken.length'),status:'passed'});
   }
-  await fs.writeFile(customCharacters?'reports/custom-characters-browser-writing-check.json':candidateMode?'reports/candidate-characters-browser-writing-check.json':'reports/pending-characters-browser-writing-check.json',JSON.stringify({scope:'Chromium實際React元件、滑鼠事件及書寫判定；語音以本機核對資料及攔截TTS呼叫驗證，不代表正式發布或裝置發音試聽。',results},null,2)+'\n');
+  await fs.writeFile(liveMode?'reports/live-api-browser-writing-check.json':customCharacters?'reports/custom-characters-browser-writing-check.json':candidateMode?'reports/candidate-characters-browser-writing-check.json':'reports/pending-characters-browser-writing-check.json',JSON.stringify({scope:liveMode?'Chromium實際React元件及滑鼠書寫，讀取正式站API和筆順檔，攔截TTS驗證每筆文字，非裝置音色試聽。':'Chromium實際React元件、滑鼠事件及書寫判定；語音以本機核對資料及攔截TTS呼叫驗證，不代表正式發布或裝置發音試聽。',results},null,2)+'\n');
   console.log(JSON.stringify({passed:results.length,results}));
  }finally{window.destroy();child.kill();app.quit();}
 }).catch(error=>{console.error(error);app.exit(1)});
