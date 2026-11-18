@@ -60,7 +60,15 @@
     "status": "pending"
   },
   "千": {
-    "status": "pending"
+    "status": "documented",
+    "component": "人",
+    "displayedSound": "丿",
+    "semanticComponent": "一",
+    "displayedSemantic": [
+      "十"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫引張秉權說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%8D%83"
   },
   "口": {
     "status": "pending"
@@ -150,7 +158,10 @@
     "status": "pending"
   },
   "仁": {
-    "status": "pending"
+    "status": "documented",
+    "component": "人",
+    "semanticComponent": "二",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E4%BB%81"
   },
   "仆": {
     "status": "pending"
@@ -184,7 +195,10 @@
     "status": "pending"
   },
   "分": {
-    "status": "pending"
+    "status": "documented",
+    "component": "八",
+    "semanticComponent": "刀",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%88%86"
   },
   "切": {
     "status": "documented",
@@ -222,7 +236,11 @@
     "status": "pending"
   },
   "太": {
-    "status": "pending"
+    "status": "documented",
+    "component": "大",
+    "semanticComponent": "大",
+    "sourceTitle": "香港中文大學漢語多功能字庫引于省吾說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A4%AA"
   },
   "夫": {
     "status": "pending"
@@ -349,7 +367,10 @@
     "status": "pending"
   },
   "乎": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丂",
+    "semanticComponent": "小豎",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E4%B9%8E"
   },
   "乏": {
     "status": "pending"
@@ -360,7 +381,11 @@
     "component": "子"
   },
   "他": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "也",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L68"
   },
   "仗": {
     "status": "documented",
@@ -420,7 +445,11 @@
     "status": "pending"
   },
   "匆": {
-    "status": "pending"
+    "status": "documented",
+    "component": "囪",
+    "semanticComponent": "心",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=4472"
   },
   "北": {
     "status": "pending"
@@ -471,7 +500,12 @@
     "component": "丁"
   },
   "可": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丂",
+    "displayedSound": "丁",
+    "semanticComponent": "口",
+    "sourceTitle": "香港中文大學漢語多功能字庫引《說文解字》",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%8F%AF"
   },
   "史": {
     "status": "pending"
@@ -483,10 +517,17 @@
     "status": "pending"
   },
   "叼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "刁",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L885"
   },
   "外": {
-    "status": "pending"
+    "status": "documented",
+    "component": "月",
+    "semanticComponent": "卜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A4%96"
   },
   "央": {
     "status": "pending"
@@ -545,7 +586,10 @@
     "status": "pending"
   },
   "必": {
-    "status": "pending"
+    "status": "documented",
+    "component": "八",
+    "semanticComponent": "柲",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BF%85"
   },
   "打": {
     "status": "documented",
@@ -573,7 +617,12 @@
     "status": "pending"
   },
   "正": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丁",
+    "displayedSound": "一",
+    "semanticComponent": "止",
+    "sourceTitle": "香港中文大學漢語多功能字庫引徐在國、劉釗說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%AD%A3"
   },
   "母": {
     "status": "pending"
@@ -717,7 +766,11 @@
     "status": "pending"
   },
   "伙": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "火",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2202"
   },
   "先": {
     "status": "pending"
@@ -814,7 +867,11 @@
     "status": "pending"
   },
   "她": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "也",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L69"
   },
   "好": {
     "status": "pending"
@@ -823,7 +880,11 @@
     "status": "pending"
   },
   "字": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "子",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L660"
   },
   "存": {
     "status": "documented",
@@ -912,10 +973,9 @@
   },
   "曳": {
     "status": "documented",
-    "semanticComponent": "申",
     "component": "𠂆",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%9B%B3",
-    "firstRecordedAt": "2026-11-14T13:45:57.337Z"
+    "semanticComponent": "申",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%9B%B3"
   },
   "有": {
     "status": "pending"
@@ -936,7 +996,11 @@
     "status": "pending"
   },
   "汐": {
-    "status": "pending"
+    "status": "documented",
+    "component": "夕",
+    "semanticComponent": "水",
+    "sourceTitle": "漢典形聲解讀",
+    "sourceUrl": "https://zdic.net/hant/%E6%B1%90"
   },
   "汗": {
     "status": "documented",
@@ -956,13 +1020,20 @@
     "status": "pending"
   },
   "池": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "也",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3171"
   },
   "灰": {
     "status": "pending"
   },
   "百": {
-    "status": "pending"
+    "status": "documented",
+    "component": "白",
+    "semanticComponent": "一",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%99%BE"
   },
   "竹": {
     "status": "pending"
@@ -983,7 +1054,11 @@
     "status": "pending"
   },
   "考": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "耂",
+    "component": "丂",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L969"
   },
   "而": {
     "status": "pending"
@@ -1071,7 +1146,11 @@
     "status": "pending"
   },
   "佇": {
-    "status": "pending"
+    "status": "documented",
+    "component": "宁",
+    "semanticComponent": "亻",
+    "sourceTitle": "教育部《異體字字典》佇（人、宁）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=1028&q=1"
   },
   "位": {
     "status": "pending"
@@ -1085,7 +1164,11 @@
     "component": "主"
   },
   "佑": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "右",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4655"
   },
   "何": {
     "status": "pending"
@@ -1096,10 +1179,18 @@
     "component": "弗"
   },
   "作": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "乍",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L259"
   },
   "你": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "尔",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L46"
   },
   "克": {
     "status": "pending"
@@ -1147,7 +1238,10 @@
     "status": "pending"
   },
   "君": {
-    "status": "pending"
+    "status": "documented",
+    "component": "尹",
+    "semanticComponent": "口",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%90%9B"
   },
   "吞": {
     "status": "documented",
@@ -1220,13 +1314,20 @@
     "status": "pending"
   },
   "呎": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "尺",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L941"
   },
   "囪": {
     "status": "pending"
   },
   "困": {
-    "status": "pending"
+    "status": "documented",
+    "component": "囗",
+    "semanticComponent": "木",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9B%B0"
   },
   "圾": {
     "status": "documented",
@@ -1285,7 +1386,11 @@
     "status": "pending"
   },
   "妞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "丑",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8297"
   },
   "妥": {
     "status": "pending"
@@ -1387,7 +1492,11 @@
     "status": "pending"
   },
   "彷": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "方",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2707"
   },
   "役": {
     "status": "pending"
@@ -1405,7 +1514,11 @@
     "status": "pending"
   },
   "志": {
-    "status": "pending"
+    "status": "documented",
+    "component": "之",
+    "displayedSound": "士",
+    "semanticComponent": "心",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BF%97"
   },
   "忘": {
     "status": "pending"
@@ -1524,7 +1637,11 @@
     "status": "pending"
   },
   "改": {
-    "status": "pending"
+    "status": "documented",
+    "component": "巳",
+    "displayedSound": "己",
+    "semanticComponent": "攴",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%94%B9"
   },
   "攻": {
     "status": "pending"
@@ -1537,7 +1654,10 @@
     "firstRecordedAt": "2026-11-14T13:45:39.745Z"
   },
   "更": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丙",
+    "semanticComponent": "攴",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%9B%B4"
   },
   "杆": {
     "status": "documented",
@@ -1547,7 +1667,11 @@
     "firstRecordedAt": "2026-11-14T13:46:03.007Z"
   },
   "杉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "彡",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3456"
   },
   "李": {
     "status": "pending"
@@ -1592,13 +1716,21 @@
     "status": "pending"
   },
   "汰": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "太",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3854"
   },
   "汲": {
     "status": "pending"
   },
   "決": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "夬",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L600"
   },
   "汽": {
     "status": "documented",
@@ -1608,13 +1740,27 @@
     "firstRecordedAt": "2026-11-14T13:46:34.811Z"
   },
   "沉": {
-    "status": "pending"
+    "status": "documented",
+    "component": "冘",
+    "displayedSound": "冗",
+    "semanticComponent": "水",
+    "sourceTitle": "教育部《異體字字典》沉",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=23388"
   },
   "沒": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠬸",
+    "semanticComponent": "水",
+    "displayedSound": "𠬛",
+    "sourceTitle": "教育部異體字字典引段注本（𠬸聲、今作𠬛）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=23430&la=0"
   },
   "沖": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "中",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2629"
   },
   "沙": {
     "status": "pending"
@@ -1760,17 +1906,26 @@
     "firstRecordedAt": "2026-11-14T13:50:41.221Z"
   },
   "那": {
-    "status": "pending"
+    "status": "documented",
+    "component": "冄",
+    "semanticComponent": "邑",
+    "displayedSound": "刀二",
+    "sourceTitle": "教育部異體字字典引說文與楷書字樣說明",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A04204"
   },
   "里": {
     "status": "pending"
   },
   "阱": {
-    "status": "pending"
+    "status": "documented",
+    "component": "井",
+    "semanticComponent": "阜",
+    "sourceTitle": "香港中文大學漢語多功能字庫引說文",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%98%B1"
   },
   "防": {
     "status": "documented",
-    "semanticComponent": "土",
+    "semanticComponent": "𨸏",
     "component": "方",
     "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%98%B2",
     "firstRecordedAt": "2026-11-14T13:51:17.728Z"
@@ -1788,7 +1943,11 @@
     "status": "pending"
   },
   "些": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "二",
+    "component": "此",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L148"
   },
   "亞": {
     "status": "pending"
@@ -1837,7 +1996,10 @@
     "status": "pending"
   },
   "兩": {
-    "status": "pending"
+    "status": "documented",
+    "component": "㒳",
+    "semanticComponent": "巾𠓜",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%85%A9"
   },
   "其": {
     "status": "pending"
@@ -1849,7 +2011,11 @@
     "status": "pending"
   },
   "冽": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "冫",
+    "component": "列",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6113"
   },
   "到": {
     "status": "documented",
@@ -1893,7 +2059,10 @@
     "status": "pending"
   },
   "受": {
-    "status": "pending"
+    "status": "documented",
+    "component": "舟",
+    "semanticComponent": "𠬪",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%8F%97"
   },
   "呢": {
     "status": "documented",
@@ -1952,7 +2121,11 @@
     "firstRecordedAt": "2026-11-14T13:42:53.361Z"
   },
   "咂": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "匝",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L971"
   },
   "和": {
     "status": "pending"
@@ -2023,7 +2196,14 @@
     "firstRecordedAt": "2026-11-14T13:43:20.063Z"
   },
   "夜": {
-    "status": "pending"
+    "status": "documented",
+    "component": "夕",
+    "displayedSound": "亻夂丶",
+    "semanticComponent": "夕",
+    "displayedSemantic": [
+      "亻夂丶"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A4%9C"
   },
   "奄": {
     "status": "pending"
@@ -2043,13 +2223,20 @@
     "firstRecordedAt": "2026-11-14T13:43:32.155Z"
   },
   "奉": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丰",
+    "semanticComponent": "二丨",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=9339&la=0"
   },
   "奔": {
     "status": "pending"
   },
   "妳": {
-    "status": "pending"
+    "status": "documented",
+    "component": "尔",
+    "semanticComponent": "女",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A6%B3"
   },
   "妹": {
     "status": "pending"
@@ -2103,7 +2290,11 @@
     "status": "pending"
   },
   "定": {
-    "status": "pending"
+    "status": "documented",
+    "component": "正",
+    "displayedSound": "𤴓",
+    "semanticComponent": "宀",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AE%9A"
   },
   "宛": {
     "status": "pending"
@@ -2115,7 +2306,11 @@
     "status": "pending"
   },
   "居": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "古",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1897"
   },
   "屆": {
     "status": "documented",
@@ -2131,7 +2326,11 @@
     "status": "pending"
   },
   "岬": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "山",
+    "component": "甲",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6651"
   },
   "岸": {
     "status": "pending"
@@ -2156,7 +2355,11 @@
     "status": "pending"
   },
   "弦": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "玄",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2211"
   },
   "弧": {
     "status": "documented",
@@ -2222,7 +2425,12 @@
     "status": "pending"
   },
   "或": {
-    "status": "pending"
+    "status": "documented",
+    "component": "員",
+    "displayedSound": "口一",
+    "semanticComponent": "戈",
+    "sourceTitle": "香港中文大學漢語多功能字庫引謝明文等說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%88%96"
   },
   "房": {
     "status": "documented",
@@ -2332,7 +2540,11 @@
     "firstRecordedAt": "2026-11-14T13:45:06.102Z"
   },
   "拍": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "白",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2709"
   },
   "拒": {
     "status": "documented",
@@ -2368,7 +2580,11 @@
     "status": "pending"
   },
   "招": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "召",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1527"
   },
   "放": {
     "status": "pending"
@@ -2384,7 +2600,11 @@
     "status": "pending"
   },
   "旺": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "王",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4202"
   },
   "昂": {
     "status": "documented",
@@ -2538,10 +2758,18 @@
     "status": "pending"
   },
   "泊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "白",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4222"
   },
   "法": {
-    "status": "pending"
+    "status": "documented",
+    "component": "去",
+    "semanticComponent": "水",
+    "sourceTitle": "香港中文大學漢語多功能字庫（灋字條）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%81%8B"
   },
   "泛": {
     "status": "documented",
@@ -2644,7 +2872,11 @@
     "firstRecordedAt": "2026-11-14T13:47:26.898Z"
   },
   "的": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "白",
+    "component": "勺",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L36"
   },
   "盲": {
     "status": "documented",
@@ -2657,7 +2889,11 @@
     "status": "pending"
   },
   "知": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫引徐鍇、段玉裁說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%9F%A5",
+    "component": "矢",
+    "semanticComponent": "口"
   },
   "社": {
     "status": "pending"
@@ -2673,7 +2909,11 @@
     "firstRecordedAt": "2026-11-14T13:48:32.876Z"
   },
   "糾": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "丩",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L569"
   },
   "者": {
     "status": "pending"
@@ -2682,7 +2922,11 @@
     "status": "pending"
   },
   "肢": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺼",
+    "component": "支",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5995"
   },
   "肩": {
     "status": "pending"
@@ -2704,7 +2948,16 @@
     "status": "pending"
   },
   "舍": {
-    "status": "pending"
+    "status": "documented",
+    "component": "余",
+    "semanticComponent": "余、口",
+    "displayedSemantic": [
+      "人",
+      "干",
+      "口"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫（金文余亦聲說）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%88%8D"
   },
   "芝": {
     "status": "documented",
@@ -2734,10 +2987,18 @@
     "firstRecordedAt": "2026-11-14T13:49:28.146Z"
   },
   "芯": {
-    "status": "pending"
+    "status": "documented",
+    "component": "心",
+    "semanticComponent": "艸",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=68277&powerMode=2"
   },
   "花": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "化",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1069"
   },
   "芳": {
     "status": "documented",
@@ -2775,7 +3036,15 @@
     "status": "pending"
   },
   "金": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%87%91",
+    "component": "今",
+    "displayedSound": "人",
+    "semanticComponent": "王與金屬餅形",
+    "displayedSemantic": [
+      "王丷"
+    ]
   },
   "長": {
     "status": "pending"
@@ -2794,7 +3063,11 @@
     "status": "pending"
   },
   "陀": {
-    "status": "pending"
+    "status": "documented",
+    "component": "它",
+    "semanticComponent": "阜",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%99%80"
   },
   "附": {
     "status": "pending"
@@ -2803,7 +3076,10 @@
     "status": "pending"
   },
   "青": {
-    "status": "pending"
+    "status": "documented",
+    "component": "井",
+    "semanticComponent": "生",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%9D%92"
   },
   "非": {
     "status": "pending"
@@ -2812,13 +3088,20 @@
     "status": "pending"
   },
   "亮": {
-    "status": "pending"
+    "status": "documented",
+    "component": "京",
+    "semanticComponent": "儿",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E4%BA%AE"
   },
   "侯": {
     "status": "pending"
   },
   "侷": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "局",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8063"
   },
   "便": {
     "status": "pending"
@@ -2832,7 +3115,11 @@
     "component": "足"
   },
   "俐": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "利",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4587"
   },
   "俑": {
     "status": "pending"
@@ -2855,7 +3142,10 @@
     "status": "pending"
   },
   "冠": {
-    "status": "pending"
+    "status": "documented",
+    "component": "元",
+    "semanticComponent": "冖",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%86%A0"
   },
   "則": {
     "status": "pending"
@@ -2866,13 +3156,21 @@
     "component": "肖"
   },
   "剌": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "刂",
+    "component": "束",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L641"
   },
   "前": {
     "status": "pending"
   },
   "剎": {
-    "status": "pending"
+    "status": "documented",
+    "component": "殺",
+    "semanticComponent": "刀",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=3657&q=1"
   },
   "勁": {
     "status": "documented",
@@ -2966,7 +3264,11 @@
     "firstRecordedAt": "2026-11-14T13:42:57.044Z"
   },
   "哏": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "艮",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1023"
   },
   "型": {
     "status": "pending"
@@ -3035,7 +3337,10 @@
     "status": "pending"
   },
   "室": {
-    "status": "pending"
+    "status": "documented",
+    "component": "至",
+    "semanticComponent": "宀",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AE%A4"
   },
   "封": {
     "status": "pending"
@@ -3051,7 +3356,13 @@
     "firstRecordedAt": "2026-11-14T13:44:03.831Z"
   },
   "巷": {
-    "status": "pending"
+    "status": "documented",
+    "component": "共",
+    "semanticComponent": "邑",
+    "displayedSemantic": [
+      "巳"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B7%B7"
   },
   "帝": {
     "status": "pending"
@@ -3060,10 +3371,21 @@
     "status": "pending"
   },
   "幽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𢆶",
+    "semanticComponent": "山",
+    "sourceTitle": "教育部異體字字典引說文（山中𢆶解讀）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=13116&la=0&powerMode=2"
   },
   "度": {
-    "status": "pending"
+    "status": "documented",
+    "component": "石",
+    "semanticComponent": "手",
+    "displayedSemantic": [
+      "又"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫引何琳儀、季旭昇及段玉裁",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%A6"
   },
   "建": {
     "status": "pending"
@@ -3079,7 +3401,11 @@
     "firstRecordedAt": "2026-11-14T13:44:27.636Z"
   },
   "徉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "羊",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7195"
   },
   "徊": {
     "status": "documented",
@@ -3179,7 +3505,11 @@
     "status": "pending"
   },
   "拯": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丞",
+    "semanticComponent": "手",
+    "sourceTitle": "教育部異體字字典（段注本說文釋形）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=17162&la=0"
   },
   "拱": {
     "status": "documented",
@@ -3263,7 +3593,11 @@
     "firstRecordedAt": "2026-11-14T13:45:44.651Z"
   },
   "春": {
-    "status": "pending"
+    "status": "documented",
+    "component": "屯",
+    "displayedSound": "𡗗",
+    "semanticComponent": "日",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%98%A5"
   },
   "昨": {
     "status": "documented",
@@ -3286,7 +3620,11 @@
     "firstRecordedAt": "2026-11-14T13:46:08.120Z"
   },
   "枴": {
-    "status": "pending"
+    "status": "documented",
+    "component": "叧",
+    "semanticComponent": "木",
+    "sourceTitle": "慧琳《一切經音義》（T54，710頁下欄23–24行，枴行）",
+    "sourceUrl": "https://github.com/cbeta-org/xml-p5/blob/dbdea41071e1e260ad84b72faefd4587333cf76d/T/T54/T54n2128.xml"
   },
   "架": {
     "status": "documented",
@@ -3323,7 +3661,11 @@
     "status": "pending"
   },
   "查": {
-    "status": "pending"
+    "status": "documented",
+    "component": "且",
+    "displayedSound": "旦",
+    "semanticComponent": "木",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%9F%A5"
   },
   "柱": {
     "status": "documented",
@@ -3416,7 +3758,11 @@
     "status": "pending"
   },
   "流": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "㐬",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L3875"
   },
   "炫": {
     "status": "documented",
@@ -3426,7 +3772,10 @@
     "firstRecordedAt": "2026-11-14T13:47:06.946Z"
   },
   "炭": {
-    "status": "pending"
+    "status": "documented",
+    "component": "岸",
+    "semanticComponent": "火",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%82%AD"
   },
   "炮": {
     "status": "documented",
@@ -3479,7 +3828,11 @@
     "status": "pending"
   },
   "界": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "田",
+    "component": "介",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L989"
   },
   "畏": {
     "status": "pending"
@@ -3498,10 +3851,20 @@
     "status": "pending"
   },
   "皇": {
-    "status": "pending"
+    "status": "documented",
+    "component": "王",
+    "semanticComponent": "冠飾",
+    "displayedSemantic": [
+      "白"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%9A%87"
   },
   "盃": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "皿",
+    "component": "不",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4892"
   },
   "盆": {
     "status": "pending"
@@ -3532,7 +3895,12 @@
     "status": "pending"
   },
   "砂": {
-    "status": "pending"
+    "status": "documented",
+    "component": "沙",
+    "displayedSound": "少",
+    "semanticComponent": "石",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%A0%82"
   },
   "砌": {
     "status": "documented",
@@ -3578,7 +3946,11 @@
     "status": "pending"
   },
   "籽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "子",
+    "semanticComponent": "米",
+    "sourceTitle": "漢典字形分析",
+    "sourceUrl": "https://zdic.net/hant/%E7%B1%BD"
   },
   "紀": {
     "status": "pending"
@@ -3629,13 +4001,21 @@
     "status": "pending"
   },
   "胞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺼",
+    "component": "包",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3685"
   },
   "胡": {
     "status": "pending"
   },
   "致": {
-    "status": "pending"
+    "status": "documented",
+    "component": "至",
+    "semanticComponent": "夊",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%87%B4"
   },
   "苔": {
     "status": "documented",
@@ -3785,10 +4165,18 @@
     "firstRecordedAt": "2026-11-14T13:51:00.989Z"
   },
   "重": {
-    "status": "pending"
+    "status": "documented",
+    "component": "東",
+    "semanticComponent": "人",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%87%8D"
   },
   "陋": {
-    "status": "pending"
+    "status": "documented",
+    "component": "㔷",
+    "displayedSound": "𫠥",
+    "semanticComponent": "阜",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%99%8B"
   },
   "陌": {
     "status": "documented",
@@ -3843,7 +4231,11 @@
     "component": "攸"
   },
   "俯": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "府",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7539"
   },
   "俱": {
     "status": "documented",
@@ -3919,10 +4311,17 @@
     "status": "pending"
   },
   "冥": {
-    "status": "pending"
+    "status": "documented",
+    "component": "冖",
+    "semanticComponent": "昗",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%86%A5"
   },
   "准": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "冫",
+    "component": "隹",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L564"
   },
   "凋": {
     "status": "documented",
@@ -3930,7 +4329,11 @@
     "component": "周"
   },
   "凌": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "冫",
+    "component": "夌",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L569"
   },
   "凍": {
     "status": "documented",
@@ -3951,7 +4354,11 @@
     "status": "pending"
   },
   "剝": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "刂",
+    "component": "彔",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L650"
   },
   "原": {
     "status": "pending"
@@ -3977,7 +4384,11 @@
     "firstRecordedAt": "2026-11-14T13:42:57.402Z"
   },
   "哪": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "那",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L186"
   },
   "哭": {
     "status": "pending"
@@ -4002,7 +4413,11 @@
     "status": "pending"
   },
   "埋": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "里",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3624"
   },
   "埔": {
     "status": "documented",
@@ -4032,7 +4447,11 @@
     "firstRecordedAt": "2026-11-14T13:43:39.358Z"
   },
   "娘": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "良",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2661"
   },
   "娛": {
     "status": "pending"
@@ -4056,16 +4475,29 @@
     "status": "pending"
   },
   "容": {
-    "status": "pending"
+    "status": "documented",
+    "component": "公",
+    "displayedSound": "谷",
+    "semanticComponent": "宀",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AE%B9"
   },
   "射": {
     "status": "pending"
   },
   "屑": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "尸",
+    "component": "肖",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4320"
   },
   "展": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𧝑",
+    "displayedSound": "龷𠄌乀丿",
+    "semanticComponent": "尸",
+    "sourceTitle": "香港中文大學漢語多功能字庫引《說文解字》與張舜徽說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B1%95"
   },
   "峭": {
     "status": "documented",
@@ -4082,7 +4514,12 @@
     "firstRecordedAt": "2026-11-14T13:44:05.752Z"
   },
   "島": {
-    "status": "pending"
+    "status": "documented",
+    "component": "鳥",
+    "semanticComponent": "山",
+    "displayedSound": "鳥省",
+    "sourceTitle": "教育部異體字字典引說文與今字鳥省形說明",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=12319&la=0"
   },
   "峽": {
     "status": "documented",
@@ -4092,16 +4529,31 @@
     "firstRecordedAt": "2026-11-14T13:44:05.676Z"
   },
   "差": {
-    "status": "pending"
+    "status": "documented",
+    "component": "左",
+    "displayedSound": "工",
+    "semanticComponent": "來、手",
+    "displayedSemantic": [
+      "𦍌丿"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B7%AE"
   },
   "師": {
-    "status": "pending"
+    "status": "documented",
+    "component": "帀",
+    "semanticComponent": "𠂤",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B8%AB"
   },
   "席": {
     "status": "pending"
   },
   "座": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "坐",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1528"
   },
   "庫": {
     "status": "pending"
@@ -4271,13 +4723,21 @@
     "status": "pending"
   },
   "晃": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "光",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3898"
   },
   "晉": {
     "status": "pending"
   },
   "晒": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "西",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3582"
   },
   "書": {
     "status": "pending"
@@ -4390,7 +4850,16 @@
     "firstRecordedAt": "2026-11-14T13:46:33.266Z"
   },
   "泰": {
-    "status": "pending"
+    "status": "documented",
+    "component": "大",
+    "semanticComponent": "廾、水",
+    "displayedSound": "𡗗",
+    "displayedSemantic": [
+      "𡗗",
+      "氺"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫（大與廾合寫為𡗗）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%B3%B0"
   },
   "浩": {
     "status": "documented",
@@ -4416,7 +4885,12 @@
     "status": "pending"
   },
   "浸": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𡩠",
+    "semanticComponent": "水",
+    "displayedSound": "𠬶",
+    "sourceTitle": "教育部異體字字典引說文與段玉裁（今字隸省）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=23848&la=0&powerMode=2"
   },
   "浹": {
     "status": "pending"
@@ -4473,7 +4947,11 @@
     "firstRecordedAt": "2026-11-14T13:47:20.637Z"
   },
   "狸": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "犭",
+    "component": "里",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4901"
   },
   "狹": {
     "status": "documented",
@@ -4490,7 +4968,11 @@
     "firstRecordedAt": "2026-11-14T13:47:23.419Z"
   },
   "狽": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "犭",
+    "component": "貝",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4760"
   },
   "珠": {
     "status": "documented",
@@ -4503,7 +4985,11 @@
     "status": "pending"
   },
   "琉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "王",
+    "component": "㐬",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4578"
   },
   "畔": {
     "status": "documented",
@@ -4513,10 +4999,22 @@
     "firstRecordedAt": "2026-11-14T13:47:35.766Z"
   },
   "留": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丣",
+    "semanticComponent": "田",
+    "displayedSound": "𠂎刀",
+    "sourceTitle": "教育部異體字字典（丣聲及今字變易）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=28394"
   },
   "畝": {
-    "status": "pending"
+    "status": "documented",
+    "component": "久",
+    "semanticComponent": "田",
+    "displayedSemantic": [
+      "亩"
+    ],
+    "sourceTitle": "教育部異體字字典引徐鉉",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A02642"
   },
   "疲": {
     "status": "documented",
@@ -4556,10 +5054,28 @@
     "status": "pending"
   },
   "真": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠂈",
+    "semanticComponent": "貝、鼎、丌",
+    "displayedSound": "十",
+    "displayedSemantic": [
+      "具"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫（金文貝、鼎與𠂈聲說）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%9C%9F",
+    "additionalSources": [
+      {
+        "title": "教育部異體字字典（今字上部改十、金文上匕下鼎）",
+        "url": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A02768"
+      }
+    ]
   },
   "眠": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "目",
+    "component": "民",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3275"
   },
   "眨": {
     "status": "documented",
@@ -4576,7 +5092,11 @@
     "firstRecordedAt": "2026-11-14T13:47:54.726Z"
   },
   "矩": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "矢",
+    "component": "巨",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1734"
   },
   "砥": {
     "status": "pending"
@@ -4605,7 +5125,11 @@
     "status": "pending"
   },
   "神": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "礻",
+    "component": "申",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5166"
   },
   "秘": {
     "status": "documented",
@@ -4653,7 +5177,11 @@
     "firstRecordedAt": "2026-11-14T13:48:35.008Z"
   },
   "笆": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺮",
+    "component": "巴",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5335"
   },
   "笑": {
     "status": "pending"
@@ -4693,7 +5221,11 @@
     "status": "pending"
   },
   "紗": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "少",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4891"
   },
   "紙": {
     "status": "documented",
@@ -4765,10 +5297,18 @@
     "firstRecordedAt": "2026-11-14T13:49:08.591Z"
   },
   "耘": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "耒",
+    "component": "云",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4421"
   },
   "耙": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "耒",
+    "component": "巴",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6501"
   },
   "胸": {
     "status": "documented",
@@ -4795,7 +5335,11 @@
     "firstRecordedAt": "2026-11-14T13:49:15.264Z"
   },
   "脆": {
-    "status": "pending"
+    "status": "documented",
+    "component": "危",
+    "semanticComponent": "肉",
+    "sourceTitle": "漢典今字形聲分析（另列古字脃的絕省聲說）",
+    "sourceUrl": "https://zdic.net/hans/%E8%84%86"
   },
   "脈": {
     "status": "pending"
@@ -4807,7 +5351,11 @@
     "status": "pending"
   },
   "航": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "舟",
+    "component": "亢",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2697"
   },
   "般": {
     "status": "pending"
@@ -4823,7 +5371,10 @@
     "status": "pending"
   },
   "茶": {
-    "status": "pending"
+    "status": "documented",
+    "component": "余",
+    "semanticComponent": "艸",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%8C%B6"
   },
   "茸": {
     "status": "pending"
@@ -4836,7 +5387,10 @@
     "firstRecordedAt": "2026-11-14T13:49:31.974Z"
   },
   "荊": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠛬",
+    "semanticComponent": "艸",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/searchShuowen.php?field=1%2C2%2C3%2C4%2C5%2C6%2C7&q=%E8%8D%8A"
   },
   "荒": {
     "status": "pending"
@@ -4845,16 +5399,28 @@
     "status": "pending"
   },
   "蚊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "文",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%9A%8A",
+    "firstRecordedAt": "2026-11-18T14:06:28.794Z"
   },
   "蚌": {
     "status": "pending"
   },
   "蚓": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "引",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7845"
   },
   "蚪": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "斗",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6421"
   },
   "衰": {
     "status": "pending"
@@ -4906,7 +5472,11 @@
     "status": "pending"
   },
   "躬": {
-    "status": "pending"
+    "status": "documented",
+    "component": "弓",
+    "semanticComponent": "身",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%BA%AC"
   },
   "軒": {
     "status": "documented",
@@ -4935,7 +5505,12 @@
     "status": "pending"
   },
   "送": {
-    "status": "pending"
+    "status": "documented",
+    "component": "灷",
+    "displayedSound": "关",
+    "semanticComponent": "辵",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%80%81"
   },
   "逃": {
     "status": "documented",
@@ -4961,7 +5536,14 @@
     "firstRecordedAt": "2026-11-14T13:51:07.184Z"
   },
   "釜": {
-    "status": "pending"
+    "status": "documented",
+    "component": "父",
+    "semanticComponent": "金",
+    "displayedSemantic": [
+      "王丷"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫引說文",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%87%9C"
   },
   "針": {
     "status": "documented",
@@ -5051,12 +5633,23 @@
     "status": "pending"
   },
   "做": {
-    "status": "pending"
+    "status": "documented",
+    "component": "故",
+    "semanticComponent": "人",
+    "sourceTitle": "黃氏〈粵語解密：做〉（人形、故聲的古音分析）",
+    "sourceUrl": "https://www.master-insight.com/article/50156",
+    "additionalSources": [
+      {
+        "title": "香港中文大學漢語多功能字庫（做通作）",
+        "url": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%81%9A"
+      }
+    ]
   },
   "停": {
     "status": "documented",
     "semanticComponent": "人",
-    "component": "停"
+    "component": "亭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/searchShuowen.php?field=1%2C2%2C3%2C4%2C5%2C6%2C7&q=%E4%BA%AD&page=3"
   },
   "健": {
     "status": "documented",
@@ -5072,10 +5665,18 @@
     "component": "禺"
   },
   "偷": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "亻",
+    "component": "俞",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2633"
   },
   "凰": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "几",
+    "component": "皇",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8228"
   },
   "剪": {
     "status": "pending"
@@ -5103,7 +5704,10 @@
     "status": "pending"
   },
   "參": {
-    "status": "pending"
+    "status": "documented",
+    "component": "彡",
+    "semanticComponent": "𠫯",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%8F%83"
   },
   "售": {
     "status": "pending"
@@ -5119,7 +5723,11 @@
     "firstRecordedAt": "2026-11-14T13:42:58.733Z"
   },
   "唷": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "育",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7363"
   },
   "唾": {
     "status": "documented",
@@ -5173,7 +5781,11 @@
     "firstRecordedAt": "2026-11-14T13:43:01.271Z"
   },
   "啪": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "拍",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7603"
   },
   "圈": {
     "status": "documented",
@@ -5183,13 +5795,24 @@
     "firstRecordedAt": "2026-11-14T13:43:13.389Z"
   },
   "國": {
-    "status": "pending"
+    "status": "documented",
+    "component": "或",
+    "semanticComponent": "囗",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%9C%8B"
   },
   "域": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "或",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3119"
   },
   "埡": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "土",
+    "component": "亞",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1423"
   },
   "執": {
     "status": "pending"
@@ -5208,7 +5831,11 @@
     "status": "pending"
   },
   "堅": {
-    "status": "pending"
+    "status": "documented",
+    "component": "臤",
+    "semanticComponent": "土",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "堆": {
     "status": "documented",
@@ -5218,7 +5845,11 @@
     "firstRecordedAt": "2026-11-14T13:43:22.781Z"
   },
   "夠": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "多",
+    "component": "句",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L573"
   },
   "娶": {
     "status": "pending"
@@ -5241,7 +5872,10 @@
     "status": "pending"
   },
   "婦": {
-    "status": "pending"
+    "status": "documented",
+    "component": "帚",
+    "semanticComponent": "女",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%A9%A6"
   },
   "婪": {
     "status": "pending"
@@ -5250,7 +5884,11 @@
     "status": "pending"
   },
   "寂": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "叔",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8041"
   },
   "寄": {
     "status": "documented",
@@ -5263,7 +5901,13 @@
     "status": "pending"
   },
   "將": {
-    "status": "pending"
+    "status": "documented",
+    "component": "爿",
+    "semanticComponent": "肉、寸",
+    "displayedSemantic": [
+      "𠂊冫寸"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%87"
   },
   "專": {
     "status": "pending"
@@ -5309,7 +5953,16 @@
     "status": "pending"
   },
   "庶": {
-    "status": "pending"
+    "status": "documented",
+    "component": "石",
+    "semanticComponent": "火、石",
+    "displayedSemantic": [
+      "广",
+      "廿",
+      "灬"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫引于省吾（石亦聲）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%BA%B6"
   },
   "康": {
     "status": "pending"
@@ -5338,13 +5991,21 @@
     "firstRecordedAt": "2026-11-14T13:44:30.365Z"
   },
   "徜": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "彳",
+    "component": "尚",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7193"
   },
   "從": {
     "status": "pending"
   },
   "悉": {
-    "status": "pending"
+    "status": "documented",
+    "component": "釆",
+    "semanticComponent": "心",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "悠": {
     "status": "documented",
@@ -5440,7 +6101,11 @@
     "firstRecordedAt": "2026-11-14T13:45:13.101Z"
   },
   "掃": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "帚",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1497"
   },
   "授": {
     "status": "documented",
@@ -5485,7 +6150,11 @@
     "firstRecordedAt": "2026-11-14T13:45:16.143Z"
   },
   "掛": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "卦",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7451"
   },
   "掠": {
     "status": "documented",
@@ -5495,7 +6164,11 @@
     "firstRecordedAt": "2026-11-14T13:45:16.175Z"
   },
   "採": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "采",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2943"
   },
   "探": {
     "status": "documented",
@@ -5559,7 +6232,14 @@
     "firstRecordedAt": "2026-11-14T13:45:31.203Z"
   },
   "教": {
-    "status": "pending"
+    "status": "documented",
+    "component": "爻",
+    "displayedSound": "孝",
+    "semanticComponent": "攴",
+    "displayedSemantic": [
+      "攵"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%95%99"
   },
   "斜": {
     "status": "documented",
@@ -5588,7 +6268,11 @@
     "status": "pending"
   },
   "望": {
-    "status": "pending"
+    "status": "documented",
+    "component": "亡",
+    "displayedSound": "亡𠂊⺀",
+    "semanticComponent": "𡈼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%9C%9B"
   },
   "桶": {
     "status": "documented",
@@ -5598,10 +6282,22 @@
     "firstRecordedAt": "2026-11-14T13:46:14.462Z"
   },
   "桿": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "旱",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8320"
   },
   "梁": {
-    "status": "pending"
+    "status": "documented",
+    "component": "刅",
+    "semanticComponent": "木、水",
+    "displayedSemantic": [
+      "氵",
+      "朩"
+    ],
+    "sourceTitle": "教育部異體字字典引說文及刅的字樣說明",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A01932&powerMode=2"
   },
   "梅": {
     "status": "documented",
@@ -5628,7 +6324,11 @@
     "firstRecordedAt": "2026-11-14T13:46:16.049Z"
   },
   "梨": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "利",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L3380"
   },
   "梭": {
     "status": "documented",
@@ -5657,7 +6357,12 @@
     "status": "pending"
   },
   "毫": {
-    "status": "pending"
+    "status": "documented",
+    "component": "高",
+    "semanticComponent": "毛",
+    "displayedSound": "亠口冖",
+    "sourceTitle": "東京大學SAT所收慧琳一切經音義引古今正字（毫氂條）",
+    "sourceUrl": "https://21dzk.l.u-tokyo.ac.jp/SAT/ddb-sat2.php?key=%E6%96%87&mode=detail&useid=2128_,54,0608"
   },
   "涯": {
     "status": "pending"
@@ -5762,7 +6467,11 @@
     "status": "pending"
   },
   "烹": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "灬",
+    "component": "亨",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4277"
   },
   "焉": {
     "status": "pending"
@@ -5771,7 +6480,11 @@
     "status": "pending"
   },
   "牽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "玄",
+    "displayedSound": "亠幺冖",
+    "semanticComponent": "牛",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%89%BD"
   },
   "猛": {
     "status": "documented",
@@ -5825,7 +6538,11 @@
     "status": "pending"
   },
   "產": {
-    "status": "pending"
+    "status": "documented",
+    "component": "彥",
+    "semanticComponent": "生",
+    "sourceTitle": "教育部異體字字典引說文（彥省聲）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=28200&la=0"
   },
   "畢": {
     "status": "pending"
@@ -5862,7 +6579,11 @@
     "firstRecordedAt": "2026-11-14T13:47:49.949Z"
   },
   "盔": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "皿",
+    "component": "灰",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4903"
   },
   "盛": {
     "status": "pending"
@@ -5905,7 +6626,12 @@
     "status": "pending"
   },
   "視": {
-    "status": "pending"
+    "status": "documented",
+    "component": "示",
+    "semanticComponent": "見",
+    "displayedSound": "礻",
+    "sourceTitle": "教育部異體字字典引說文段注本（示聲）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=41146&la=0&powerMode=2"
   },
   "移": {
     "status": "documented",
@@ -5917,8 +6643,8 @@
   "笛": {
     "status": "documented",
     "semanticComponent": "竹",
-    "component": "笛",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%AC%9B",
+    "component": "由",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/searchShuowen.php?field=1%2C2%2C3%2C4%2C5%2C6%2C7&q=%E7%AD%A9",
     "firstRecordedAt": "2026-11-14T13:48:37.123Z"
   },
   "符": {
@@ -5932,7 +6658,12 @@
     "firstRecordedAt": "2026-11-14T13:48:37.452Z"
   },
   "第": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "漢典詳細解釋",
+    "sourceUrl": "https://zdic.net/hant/%E7%AC%AC",
+    "component": "弟",
+    "displayedSound": "𢎨",
+    "semanticComponent": "竹"
   },
   "粒": {
     "status": "documented",
@@ -5981,13 +6712,28 @@
     "status": "pending"
   },
   "缽": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "缶",
+    "component": "本",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6099"
   },
   "羞": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丑",
+    "semanticComponent": "羊",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BE%9E"
   },
   "習": {
-    "status": "pending"
+    "status": "documented",
+    "component": "彗",
+    "displayedSound": "羽",
+    "semanticComponent": "日",
+    "displayedSemantic": [
+      "白"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BF%92"
   },
   "聆": {
     "status": "pending"
@@ -6031,10 +6777,18 @@
     "firstRecordedAt": "2026-11-14T13:49:32.025Z"
   },
   "莊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "壯",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1788"
   },
   "莓": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "每",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5233"
   },
   "莖": {
     "status": "documented",
@@ -6047,19 +6801,40 @@
     "status": "pending"
   },
   "處": {
-    "status": "pending"
+    "status": "documented",
+    "component": "虍",
+    "semanticComponent": "処",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%99%95"
   },
   "蚯": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "丘",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6716"
   },
   "蚵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "可",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6720"
   },
   "蛇": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "它",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L463"
   },
   "蛋": {
-    "status": "pending"
+    "status": "documented",
+    "component": "延",
+    "semanticComponent": "虫",
+    "displayedSound": "疋",
+    "sourceTitle": "香港中文大學漢語多功能字庫（蛋古作蜑、延省聲）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%9B%8B"
   },
   "術": {
     "status": "documented",
@@ -6083,7 +6858,11 @@
     "firstRecordedAt": "2026-11-14T13:49:53.927Z"
   },
   "袖": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "衤",
+    "component": "由",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3824"
   },
   "袪": {
     "status": "pending"
@@ -6092,7 +6871,11 @@
     "status": "pending"
   },
   "規": {
-    "status": "pending"
+    "status": "documented",
+    "component": "夫",
+    "semanticComponent": "見",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "覓": {
     "status": "pending"
@@ -6144,7 +6927,11 @@
     "status": "pending"
   },
   "貫": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "貝",
+    "component": "毌",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7406"
   },
   "責": {
     "status": "pending"
@@ -6153,7 +6940,11 @@
     "status": "pending"
   },
   "趾": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "止",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7560"
   },
   "軟": {
     "status": "pending"
@@ -6169,7 +6960,11 @@
     "status": "pending"
   },
   "途": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "辶",
+    "component": "余",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7852"
   },
   "逗": {
     "status": "documented",
@@ -6179,7 +6974,14 @@
     "firstRecordedAt": "2026-11-14T13:50:45.826Z"
   },
   "這": {
-    "status": "pending"
+    "status": "documented",
+    "component": "言",
+    "semanticComponent": "辵",
+    "displayedSemantic": [
+      "辶"
+    ],
+    "sourceTitle": "季旭昇〈《上博二・昔者君老》簡文探究及其與《尚書・顧命》的相關問題〉第260頁",
+    "sourceUrl": "https://www.litphil.sinica.edu.tw/bulletin/24/24-253-292.pdf#page=8"
   },
   "通": {
     "status": "pending"
@@ -6250,7 +7052,11 @@
     "status": "pending"
   },
   "陳": {
-    "status": "pending"
+    "status": "documented",
+    "component": "申",
+    "semanticComponent": "𨸏",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A04423"
   },
   "陵": {
     "status": "pending"
@@ -6259,16 +7065,27 @@
     "status": "pending"
   },
   "陷": {
-    "status": "pending"
+    "status": "documented",
+    "component": "臽",
+    "semanticComponent": "𨸏",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%99%B7"
   },
   "陸": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "阝",
+    "component": "坴",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2043"
   },
   "雀": {
     "status": "pending"
   },
   "雪": {
-    "status": "pending"
+    "status": "documented",
+    "component": "彗",
+    "semanticComponent": "雨",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=49281"
   },
   "竟": {
     "status": "pending"
@@ -6296,7 +7113,14 @@
     "status": "pending"
   },
   "麥": {
-    "status": "pending"
+    "status": "documented",
+    "component": "來",
+    "semanticComponent": "夊",
+    "displayedSemantic": [
+      "夕"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫引葉玉森說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%BA%A5"
   },
   "麻": {
     "status": "pending"
@@ -6344,7 +7168,11 @@
     "status": "pending"
   },
   "創": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "刂",
+    "component": "倉",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L661"
   },
   "勝": {
     "status": "pending"
@@ -6353,7 +7181,11 @@
     "status": "pending"
   },
   "博": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "十",
+    "component": "尃",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1602"
   },
   "啼": {
     "status": "documented",
@@ -6377,13 +7209,24 @@
     "firstRecordedAt": "2026-11-14T13:43:03.029Z"
   },
   "善": {
-    "status": "pending"
+    "status": "documented",
+    "component": "誩",
+    "semanticComponent": "𦍌䒑",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%84"
   },
   "喇": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "剌",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7545"
   },
   "喉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "侯",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8065"
   },
   "喊": {
     "status": "documented",
@@ -6424,7 +7267,14 @@
     "firstRecordedAt": "2026-11-14T13:43:04.098Z"
   },
   "喪": {
-    "status": "pending"
+    "status": "documented",
+    "component": "亡",
+    "displayedSound": "𠄌乀丿",
+    "semanticComponent": "哭",
+    "displayedSemantic": [
+      "土吅"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%96%AA"
   },
   "單": {
     "status": "pending"
@@ -6437,7 +7287,11 @@
     "firstRecordedAt": "2026-11-14T13:43:05.425Z"
   },
   "喵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "苗",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6087"
   },
   "喻": {
     "status": "documented",
@@ -6577,7 +7431,11 @@
     "status": "pending"
   },
   "惠": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%83%A0",
+    "component": "叀",
+    "semanticComponent": "心"
   },
   "惡": {
     "status": "documented",
@@ -6587,7 +7445,11 @@
     "firstRecordedAt": "2026-11-14T13:44:45.356Z"
   },
   "惱": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𡿺",
+    "semanticComponent": "忄",
+    "sourceTitle": "教育部《異體字字典》惱（據異體聲符與今字音義）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=15374"
   },
   "愉": {
     "status": "documented",
@@ -6597,13 +7459,25 @@
     "firstRecordedAt": "2026-11-14T13:44:47.341Z"
   },
   "愕": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "咢",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2473"
   },
   "愜": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "匧",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2476"
   },
   "愣": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𬙙",
+    "semanticComponent": "忄",
+    "sourceTitle": "教育部《異體字字典》愣、楞（今字音義）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=15315"
   },
   "慨": {
     "status": "documented",
@@ -6647,7 +7521,11 @@
     "firstRecordedAt": "2026-11-14T13:45:18.487Z"
   },
   "插": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "臿",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1873"
   },
   "揚": {
     "status": "pending"
@@ -6684,7 +7562,11 @@
     "status": "pending"
   },
   "揶": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "耶",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7713"
   },
   "摒": {
     "status": "documented",
@@ -6697,7 +7579,17 @@
     "status": "pending"
   },
   "散": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𢽳",
+    "semanticComponent": "肉",
+    "sourceTitle": "教育部異體字字典引說文及今字字樣（篆形分析）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=18815&la=0",
+    "additionalSources": [
+      {
+        "title": "香港中文大學漢語多功能字庫（另列甲金文解讀）",
+        "url": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%95%A3"
+      }
+    ]
   },
   "敦": {
     "status": "pending"
@@ -6726,16 +7618,27 @@
     "firstRecordedAt": "2026-11-14T13:45:51.369Z"
   },
   "晴": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "青",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2273"
   },
   "晶": {
     "status": "pending"
   },
   "智": {
-    "status": "pending"
+    "status": "documented",
+    "component": "知",
+    "semanticComponent": "白",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%99%BA"
   },
   "晾": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "京",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4807"
   },
   "暑": {
     "status": "documented",
@@ -6748,7 +7651,15 @@
     "status": "pending"
   },
   "替": {
-    "status": "pending"
+    "status": "documented",
+    "component": "白",
+    "displayedSound": "日",
+    "semanticComponent": "竝",
+    "displayedSemantic": [
+      "㚘"
+    ],
+    "sourceTitle": "教育部《異體字字典》引《說文解字》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=20336"
   },
   "朝": {
     "status": "pending"
@@ -6763,7 +7674,11 @@
     "status": "pending"
   },
   "棋": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "其",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3510"
   },
   "棍": {
     "status": "documented",
@@ -6807,7 +7722,11 @@
     "status": "pending"
   },
   "棲": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "妻",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5223"
   },
   "棵": {
     "status": "documented",
@@ -6865,7 +7784,18 @@
     "firstRecordedAt": "2026-11-14T13:46:29.312Z"
   },
   "殼": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠕓",
+    "semanticComponent": "殳",
+    "displayedSound": "士冖一几",
+    "sourceTitle": "教育部異體字字典引說文段注本及楷書字樣",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=22942&la=0",
+    "additionalSources": [
+      {
+        "title": "香港中文大學漢語多功能字庫（另採𣪊省聲說）",
+        "url": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%AE%BC"
+      }
+    ]
   },
   "毯": {
     "status": "documented",
@@ -6878,7 +7808,11 @@
     "status": "pending"
   },
   "渠": {
-    "status": "pending"
+    "status": "documented",
+    "component": "榘",
+    "semanticComponent": "水",
+    "sourceTitle": "教育部異體字字典引說文（榘省聲）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=24339&q=1"
   },
   "渡": {
     "status": "documented",
@@ -6962,7 +7896,11 @@
     "status": "pending"
   },
   "溉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "既",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8092"
   },
   "滋": {
     "status": "documented",
@@ -6998,7 +7936,11 @@
     "status": "pending"
   },
   "煮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "灬",
+    "component": "者",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4314"
   },
   "牌": {
     "status": "documented",
@@ -7018,22 +7960,42 @@
     "status": "pending"
   },
   "琴": {
-    "status": "pending"
+    "status": "documented",
+    "component": "金",
+    "displayedSound": "今",
+    "semanticComponent": "瑟",
+    "displayedSemantic": [
+      "玨"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%90%B4"
   },
   "甦": {
     "status": "pending"
   },
   "番": {
-    "status": "pending"
+    "status": "documented",
+    "component": "釆",
+    "semanticComponent": "田",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%95%AA"
   },
   "畫": {
     "status": "pending"
   },
   "疏": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "component": "疋",
+    "displayedSound": "𤴔",
+    "semanticComponent": "㐬",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%96%8F"
   },
   "痘": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "疒",
+    "component": "豆",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5775"
   },
   "痛": {
     "status": "documented",
@@ -7094,7 +8056,11 @@
     "firstRecordedAt": "2026-11-14T13:48:28.211Z"
   },
   "窗": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "穴",
+    "component": "囪",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5290"
   },
   "窘": {
     "status": "pending"
@@ -7119,7 +8085,11 @@
     "firstRecordedAt": "2026-11-14T13:48:39.396Z"
   },
   "筏": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺮",
+    "component": "伐",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5370"
   },
   "筒": {
     "status": "documented",
@@ -7129,13 +8099,21 @@
     "firstRecordedAt": "2026-11-14T13:48:38.559Z"
   },
   "答": {
-    "status": "pending"
+    "status": "documented",
+    "component": "合",
+    "semanticComponent": "竹",
+    "sourceTitle": "漢典字形分析",
+    "sourceUrl": "https://zdic.net/hant/%E7%AD%94"
   },
   "策": {
     "status": "pending"
   },
   "粥": {
-    "status": "pending"
+    "status": "documented",
+    "component": "䰜",
+    "semanticComponent": "米",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%B2%A5"
   },
   "紫": {
     "status": "pending"
@@ -7217,7 +8195,11 @@
     "firstRecordedAt": "2026-11-14T13:49:16.556Z"
   },
   "腕": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺼",
+    "component": "宛",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4873"
   },
   "舒": {
     "status": "pending"
@@ -7290,13 +8272,16 @@
   },
   "虛": {
     "status": "documented",
-    "semanticComponent": "丘",
     "component": "虍",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%99%9B",
-    "firstRecordedAt": "2026-11-14T13:49:44.239Z"
+    "semanticComponent": "丘",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%99%9B"
   },
   "蛙": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "圭",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5125"
   },
   "蛛": {
     "status": "pending"
@@ -7424,7 +8409,11 @@
     "firstRecordedAt": "2026-11-14T13:50:30.149Z"
   },
   "跆": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "台",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7565"
   },
   "跌": {
     "status": "documented",
@@ -7441,7 +8430,11 @@
     "firstRecordedAt": "2026-11-14T13:50:31.489Z"
   },
   "跚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "冊",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7573"
   },
   "距": {
     "status": "pending"
@@ -7468,13 +8461,21 @@
     "firstRecordedAt": "2026-11-14T13:50:48.601Z"
   },
   "進": {
-    "status": "pending"
+    "status": "documented",
+    "component": "隹",
+    "semanticComponent": "辵",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%80%B2"
   },
   "逸": {
     "status": "pending"
   },
   "郵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "阝",
+    "component": "垂",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7981"
   },
   "鄉": {
     "status": "pending"
@@ -7549,7 +8550,11 @@
     "status": "pending"
   },
   "雲": {
-    "status": "pending"
+    "status": "documented",
+    "component": "云",
+    "semanticComponent": "雨",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=-49297&powerMode=2",
+    "sourceTitle": "教育部《異體字字典》"
   },
   "韌": {
     "status": "documented",
@@ -7566,7 +8571,11 @@
     "firstRecordedAt": "2026-11-14T13:51:32.424Z"
   },
   "順": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "頁",
+    "component": "川",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8774"
   },
   "須": {
     "status": "pending"
@@ -7578,13 +8587,20 @@
     "status": "pending"
   },
   "飲": {
-    "status": "pending"
+    "status": "documented",
+    "component": "欠",
+    "semanticComponent": "食",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%A3%B2"
   },
   "黃": {
     "status": "pending"
   },
   "黍": {
-    "status": "pending"
+    "status": "documented",
+    "component": "雨",
+    "semanticComponent": "禾",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%BB%8D"
   },
   "黑": {
     "status": "pending"
@@ -7607,7 +8623,11 @@
     "status": "pending"
   },
   "傻": {
-    "status": "pending"
+    "status": "documented",
+    "component": "夋",
+    "semanticComponent": "亻",
+    "sourceTitle": "章太炎《新方言》",
+    "sourceUrl": "https://ctext.org/wiki.pl?chapter=3062868&if=gb"
   },
   "傾": {
     "status": "pending"
@@ -7634,7 +8654,10 @@
     "component": "淮"
   },
   "嗅": {
-    "status": "pending"
+    "status": "documented",
+    "component": "臭",
+    "semanticComponent": "臭",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%97%85"
   },
   "嗎": {
     "status": "documented",
@@ -7651,13 +8674,25 @@
     "firstRecordedAt": "2026-11-14T13:43:06.609Z"
   },
   "嗚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "烏",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4947"
   },
   "嗝": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "鬲",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1174"
   },
   "嗤": {
-    "status": "pending"
+    "status": "documented",
+    "component": "蚩",
+    "semanticComponent": "口",
+    "sourceTitle": "教育部《異體字字典》嗤",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=6740&q=1"
   },
   "嗯": {
     "status": "documented",
@@ -7770,7 +8805,14 @@
     "firstRecordedAt": "2026-11-14T13:43:42.139Z"
   },
   "幹": {
-    "status": "pending"
+    "status": "documented",
+    "component": "倝",
+    "semanticComponent": "木",
+    "displayedSemantic": [
+      "干"
+    ],
+    "sourceTitle": "教育部異體字字典（榦的俗字、倝聲）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=13066&la=0"
   },
   "彙": {
     "status": "pending"
@@ -7800,22 +8842,42 @@
     "firstRecordedAt": "2026-11-14T13:44:46.256Z"
   },
   "愈": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "俞",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2468"
   },
   "意": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "音",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2472"
   },
   "愚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "禺",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2474"
   },
   "愛": {
     "status": "pending"
   },
   "感": {
-    "status": "pending"
+    "status": "documented",
+    "component": "咸",
+    "semanticComponent": "心",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "愧": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "鬼",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3396"
   },
   "慌": {
     "status": "documented",
@@ -7825,7 +8887,11 @@
     "firstRecordedAt": "2026-11-14T13:44:49.689Z"
   },
   "慎": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "真",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3388"
   },
   "搜": {
     "status": "documented",
@@ -7876,7 +8942,11 @@
     "firstRecordedAt": "2026-11-14T13:45:21.006Z"
   },
   "搧": {
-    "status": "pending"
+    "status": "documented",
+    "component": "扇",
+    "semanticComponent": "手",
+    "sourceTitle": "漢典字形分析",
+    "sourceUrl": "https://zdic.net/hant/%E6%90%A7"
   },
   "搬": {
     "status": "documented",
@@ -7900,10 +8970,16 @@
     "firstRecordedAt": "2026-11-14T13:45:21.796Z"
   },
   "敬": {
-    "status": "pending"
+    "status": "documented",
+    "component": "茍",
+    "semanticComponent": "攴",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%95%AC"
   },
   "新": {
-    "status": "pending"
+    "status": "documented",
+    "component": "辛",
+    "semanticComponent": "斤",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%96%B0"
   },
   "暇": {
     "status": "documented",
@@ -7980,13 +9056,21 @@
     "firstRecordedAt": "2026-11-14T13:46:19.914Z"
   },
   "榔": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "郎",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6561"
   },
   "歲": {
     "status": "pending"
   },
   "源": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "原",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L654"
   },
   "準": {
     "status": "documented",
@@ -8113,7 +9197,11 @@
     "firstRecordedAt": "2026-11-14T13:47:18.552Z"
   },
   "猿": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "犭",
+    "component": "袁",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5167"
   },
   "獅": {
     "status": "documented",
@@ -8126,7 +9214,11 @@
     "status": "pending"
   },
   "瑞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "王",
+    "component": "耑",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8273"
   },
   "當": {
     "status": "pending"
@@ -8135,13 +9227,20 @@
     "status": "pending"
   },
   "痺": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "疒",
+    "component": "卑",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4665"
   },
   "皙": {
     "status": "pending"
   },
   "盞": {
-    "status": "pending"
+    "status": "documented",
+    "component": "戔",
+    "semanticComponent": "皿",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%9B%9E"
   },
   "睛": {
     "status": "documented",
@@ -8203,7 +9302,11 @@
     "firstRecordedAt": "2026-11-14T13:48:11.155Z"
   },
   "碗": {
-    "status": "unavailable"
+    "status": "documented",
+    "semanticComponent": "石",
+    "component": "宛",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%A2%97",
+    "firstRecordedAt": "2026-11-18T13:25:59.739Z"
   },
   "碰": {
     "status": "documented",
@@ -8220,7 +9323,11 @@
     "firstRecordedAt": "2026-11-14T13:48:23.148Z"
   },
   "禽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "今",
+    "semanticComponent": "禸",
+    "sourceTitle": "教育部異體字字典引說文（禽：禸象形、今聲）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A02910&powerMode=2"
   },
   "萬": {
     "status": "pending"
@@ -8233,7 +9340,11 @@
     "firstRecordedAt": "2026-11-14T13:48:28.633Z"
   },
   "稚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "禾",
+    "component": "隹",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3318"
   },
   "稠": {
     "status": "pending"
@@ -8276,22 +9387,41 @@
     "firstRecordedAt": "2026-11-14T13:49:02.057Z"
   },
   "罪": {
-    "status": "pending"
+    "status": "documented",
+    "component": "非",
+    "semanticComponent": "网",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BD%AA"
   },
   "置": {
-    "status": "pending"
+    "status": "documented",
+    "component": "直",
+    "semanticComponent": "网",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BD%AE"
   },
   "署": {
     "status": "pending"
   },
   "群": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "羊",
+    "component": "君",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5873"
   },
   "羨": {
     "status": "pending"
   },
   "義": {
-    "status": "pending"
+    "status": "documented",
+    "component": "我",
+    "semanticComponent": "羊",
+    "displayedSemantic": [
+      "𦍌"
+    ],
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BE%A9"
   },
   "聖": {
     "status": "pending"
@@ -8317,7 +9447,11 @@
     "firstRecordedAt": "2026-11-14T13:49:17.178Z"
   },
   "腰": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺼",
+    "component": "要",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L89"
   },
   "腳": {
     "status": "documented",
@@ -8395,13 +9529,21 @@
     "firstRecordedAt": "2026-11-14T13:49:36.162Z"
   },
   "號": {
-    "status": "pending"
+    "status": "documented",
+    "component": "号",
+    "semanticComponent": "虎",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "蛹": {
     "status": "pending"
   },
   "蛻": {
-    "status": "pending"
+    "status": "documented",
+    "component": "兌",
+    "semanticComponent": "虫",
+    "sourceTitle": "教育部異體字字典（段注本說文釋形）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=39790&powerMode=2"
   },
   "蜂": {
     "status": "documented",
@@ -8418,13 +9560,22 @@
     "firstRecordedAt": "2026-11-14T13:49:46.889Z"
   },
   "裊": {
-    "status": "pending"
+    "status": "documented",
+    "component": "鳥",
+    "semanticComponent": "衣",
+    "displayedSound": "鳥省",
+    "sourceTitle": "香港中文大學漢語多功能字庫（鳥聲省）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%A3%8A"
   },
   "裕": {
     "status": "pending"
   },
   "裙": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "衤",
+    "component": "君",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1574"
   },
   "補": {
     "status": "documented",
@@ -8441,7 +9592,11 @@
     "firstRecordedAt": "2026-11-14T13:49:55.363Z"
   },
   "裡": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "衤",
+    "component": "里",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L189"
   },
   "解": {
     "status": "pending"
@@ -8471,7 +9626,11 @@
     "firstRecordedAt": "2026-11-14T13:50:06.762Z"
   },
   "詫": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "言",
+    "component": "宅",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7565"
   },
   "詮": {
     "status": "documented",
@@ -8502,7 +9661,11 @@
     "firstRecordedAt": "2026-11-14T13:50:07.813Z"
   },
   "詼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "言",
+    "component": "灰",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6559"
   },
   "誇": {
     "status": "pending"
@@ -8511,7 +9674,11 @@
     "status": "pending"
   },
   "賅": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "貝",
+    "component": "亥",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7424"
   },
   "資": {
     "status": "documented",
@@ -8531,10 +9698,18 @@
     "firstRecordedAt": "2026-11-14T13:50:32.237Z"
   },
   "跡": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "亦",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7578"
   },
   "跤": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "交",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7580"
   },
   "跨": {
     "status": "documented",
@@ -8551,7 +9726,11 @@
     "firstRecordedAt": "2026-11-14T13:50:32.587Z"
   },
   "路": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "各",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7585"
   },
   "跳": {
     "status": "documented",
@@ -8561,7 +9740,11 @@
     "firstRecordedAt": "2026-11-14T13:50:33.011Z"
   },
   "跺": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "朵",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7592"
   },
   "躲": {
     "status": "documented",
@@ -8571,7 +9754,11 @@
     "firstRecordedAt": "2026-11-14T13:50:35.966Z"
   },
   "較": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "車",
+    "component": "交",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2248"
   },
   "載": {
     "status": "pending"
@@ -8611,7 +9798,11 @@
     "firstRecordedAt": "2026-11-14T13:50:51.017Z"
   },
   "遍": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "辶",
+    "component": "扁",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7885"
   },
   "過": {
     "status": "documented",
@@ -8624,7 +9815,11 @@
     "status": "pending"
   },
   "道": {
-    "status": "pending"
+    "status": "documented",
+    "component": "首",
+    "semanticComponent": "辵",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%81%93"
   },
   "達": {
     "status": "pending"
@@ -8679,7 +9874,11 @@
     "status": "pending"
   },
   "電": {
-    "status": "pending"
+    "status": "documented",
+    "component": "申",
+    "semanticComponent": "雨",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%9B%BB"
   },
   "預": {
     "status": "documented",
@@ -8717,7 +9916,11 @@
     "firstRecordedAt": "2026-11-14T13:51:38.876Z"
   },
   "飾": {
-    "status": "pending"
+    "status": "documented",
+    "component": "食",
+    "semanticComponent": "𠂉巾",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=50938"
   },
   "馱": {
     "status": "pending"
@@ -8746,7 +9949,11 @@
     "component": "童"
   },
   "兢": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丯",
+    "semanticComponent": "兄",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=2670"
   },
   "劃": {
     "status": "pending"
@@ -8834,19 +10041,38 @@
     "status": "pending"
   },
   "嫦": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "常",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7011"
   },
   "嫩": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "敕",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7512"
   },
   "孵": {
-    "status": "pending"
+    "status": "documented",
+    "component": "孚",
+    "semanticComponent": "卵",
+    "sourceTitle": "教育部《異體字字典》孵（今字音義）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=10528"
   },
   "寞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "莫",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3416"
   },
   "察": {
-    "status": "pending"
+    "status": "documented",
+    "component": "祭",
+    "semanticComponent": "宀",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AF%9F"
   },
   "寡": {
     "status": "pending"
@@ -8858,10 +10084,24 @@
     "status": "pending"
   },
   "寨": {
-    "status": "pending"
+    "status": "documented",
+    "component": "塞",
+    "displayedSound": "𡨄",
+    "semanticComponent": "木",
+    "displayedSemantic": [
+      "朩"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%AF%A8"
   },
   "對": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丵、土",
+    "displayedSound": "业𦍌",
+    "semanticComponent": "又",
+    "displayedSemantic": [
+      "寸"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E5%B0%8D"
   },
   "屢": {
     "status": "documented",
@@ -8909,7 +10149,11 @@
     "firstRecordedAt": "2026-11-14T13:44:18.483Z"
   },
   "彆": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "敝",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2226"
   },
   "彰": {
     "status": "pending"
@@ -8918,7 +10162,11 @@
     "status": "pending"
   },
   "態": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "能",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2491"
   },
   "慘": {
     "status": "documented",
@@ -8928,7 +10176,11 @@
     "firstRecordedAt": "2026-11-14T13:44:50.088Z"
   },
   "慚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "斬",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7516"
   },
   "慢": {
     "status": "documented",
@@ -8990,7 +10242,11 @@
     "firstRecordedAt": "2026-11-14T13:45:23.073Z"
   },
   "撇": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "敝",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5101"
   },
   "敲": {
     "status": "documented",
@@ -9212,13 +10468,21 @@
     "firstRecordedAt": "2026-11-14T13:47:57.135Z"
   },
   "碧": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫引梁東漢說",
+    "component": "珀",
+    "semanticComponent": "石",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%A2%A7"
   },
   "碩": {
     "status": "unavailable"
   },
   "碳": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "石",
+    "component": "炭",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7541"
   },
   "磁": {
     "status": "documented",
@@ -9325,13 +10589,25 @@
     "status": "pending"
   },
   "網": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "罔",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L434"
   },
   "綴": {
-    "status": "pending"
+    "status": "documented",
+    "component": "叕",
+    "semanticComponent": "糸",
+    "sourceTitle": "教育部異體字字典（說文釋形）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=33511&q=1"
   },
   "綵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "采",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5604"
   },
   "綺": {
     "status": "documented",
@@ -9351,7 +10627,11 @@
     "status": "pending"
   },
   "緊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糸",
+    "component": "臤",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5613"
   },
   "緒": {
     "status": "documented",
@@ -9361,7 +10641,11 @@
     "firstRecordedAt": "2026-11-14T13:48:55.773Z"
   },
   "罰": {
-    "status": "pending"
+    "status": "documented",
+    "component": "詈",
+    "semanticComponent": "刀",
+    "sourceTitle": "香港中文大學漢語多功能字庫引張世超等（詈亦聲）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%BD%B0"
   },
   "翠": {
     "status": "documented",
@@ -9409,13 +10693,26 @@
     "firstRecordedAt": "2026-11-14T13:49:18.521Z"
   },
   "臺": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%87%BA",
+    "component": "之",
+    "displayedSound": "吉",
+    "semanticComponent": "室",
+    "displayedSemantic": [
+      "冖",
+      "至"
+    ]
   },
   "與": {
     "status": "pending"
   },
   "舔": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "舌",
+    "component": "忝",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6194"
   },
   "舞": {
     "status": "pending"
@@ -9443,10 +10740,18 @@
     "status": "pending"
   },
   "蓋": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "盍",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1001"
   },
   "蓓": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "倍",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6539"
   },
   "蜒": {
     "status": "documented",
@@ -9456,7 +10761,11 @@
     "firstRecordedAt": "2026-11-14T13:49:47.104Z"
   },
   "蜘": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "知",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4867"
   },
   "蜜": {
     "status": "documented",
@@ -9480,10 +10789,20 @@
     "firstRecordedAt": "2026-11-14T13:49:48.509Z"
   },
   "蝕": {
-    "status": "pending"
+    "status": "documented",
+    "component": "食",
+    "displayedSound": "飠",
+    "semanticComponent": "虫",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%9D%95"
   },
   "裳": {
-    "status": "pending"
+    "status": "documented",
+    "component": "尚",
+    "displayedSound": "𫩠",
+    "semanticComponent": "衣",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%A3%B3"
   },
   "裹": {
     "status": "documented",
@@ -9547,13 +10866,27 @@
     "status": "pending"
   },
   "說": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "言",
+    "component": "兌",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L106"
   },
   "豪": {
-    "status": "pending"
+    "status": "documented",
+    "component": "高",
+    "displayedSound": "亠口冖",
+    "semanticComponent": "豕",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%B1%AA"
   },
   "貌": {
-    "status": "pending"
+    "status": "documented",
+    "component": "豹",
+    "displayedSound": "豸",
+    "semanticComponent": "皃",
+    "sourceTitle": "教育部異體字字典（大徐本籀文解讀）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=42845&powerMode=2"
   },
   "賓": {
     "status": "pending"
@@ -9579,7 +10912,12 @@
     "firstRecordedAt": "2026-11-14T13:50:37.803Z"
   },
   "辣": {
-    "status": "pending"
+    "status": "documented",
+    "component": "剌",
+    "displayedSound": "束",
+    "semanticComponent": "辛",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%BE%A3"
   },
   "遙": {
     "status": "documented",
@@ -9589,7 +10927,11 @@
     "firstRecordedAt": "2026-11-14T13:50:51.685Z"
   },
   "遛": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "辶",
+    "component": "留",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7897"
   },
   "遜": {
     "status": "documented",
@@ -9609,7 +10951,11 @@
     "status": "pending"
   },
   "遢": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𦐇",
+    "semanticComponent": "辵",
+    "sourceTitle": "漢典形聲解讀",
+    "sourceUrl": "https://zdic.net/hant/%E9%81%A2"
   },
   "遣": {
     "status": "pending"
@@ -9652,7 +10998,10 @@
     "firstRecordedAt": "2026-11-14T13:51:16.081Z"
   },
   "隙": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𡮂",
+    "semanticComponent": "𨸏",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%9A%99"
   },
   "際": {
     "status": "documented",
@@ -9717,16 +11066,27 @@
     "firstRecordedAt": "2026-11-14T13:51:47.792Z"
   },
   "鳳": {
-    "status": "pending"
+    "status": "documented",
+    "component": "凡",
+    "semanticComponent": "鳥",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=52519&q=1"
   },
   "鳴": {
     "status": "pending"
   },
   "麼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "幺",
+    "component": "麻",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L241"
   },
   "鼻": {
-    "status": "pending"
+    "status": "documented",
+    "component": "畀",
+    "semanticComponent": "自",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%BC%BB"
   },
   "齊": {
     "status": "pending"
@@ -9759,10 +11119,18 @@
     "component": "辟"
   },
   "劉": {
-    "status": "pending"
+    "status": "documented",
+    "component": "丣",
+    "semanticComponent": "金",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=3992&la=0"
   },
   "劍": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "刂",
+    "component": "僉",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L673"
   },
   "厲": {
     "status": "pending"
@@ -9792,7 +11160,11 @@
     "firstRecordedAt": "2026-11-14T13:43:08.434Z"
   },
   "嘴": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "觜",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1446"
   },
   "嘶": {
     "status": "documented",
@@ -9802,7 +11174,11 @@
     "firstRecordedAt": "2026-11-14T13:43:09.371Z"
   },
   "嘹": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "尞",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1228"
   },
   "嘻": {
     "status": "documented",
@@ -9812,7 +11188,11 @@
     "firstRecordedAt": "2026-11-14T13:43:09.362Z"
   },
   "噗": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "菐",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1239"
   },
   "噴": {
     "status": "documented",
@@ -9836,7 +11216,11 @@
     "firstRecordedAt": "2026-11-14T13:43:26.836Z"
   },
   "嬉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "女",
+    "component": "喜",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5243"
   },
   "嬌": {
     "status": "documented",
@@ -9859,7 +11243,11 @@
     "status": "pending"
   },
   "寮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "宀",
+    "component": "尞",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1839"
   },
   "導": {
     "status": "documented",
@@ -9926,13 +11314,27 @@
     "firstRecordedAt": "2026-11-14T13:44:25.901Z"
   },
   "徵": {
-    "status": "pending"
+    "status": "documented",
+    "component": "微",
+    "semanticComponent": "𡈼",
+    "sourceTitle": "慧琳《一切經音義》（T54，325頁上欄21行、341頁下欄11行：微省聲）",
+    "sourceUrl": "https://github.com/cbeta-org/xml-p5/blob/dbdea41071e1e260ad84b72faefd4587333cf76d/T/T54/T54n2128.xml",
+    "additionalSources": [
+      {
+        "title": "教育部異體字字典（徵：今字中下不作王）",
+        "url": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=14649"
+      }
+    ]
   },
   "德": {
     "status": "pending"
   },
   "慕": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "莫",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2496"
   },
   "慧": {
     "status": "documented",
@@ -9991,12 +11393,17 @@
   "撐": {
     "status": "documented",
     "semanticComponent": "手",
-    "component": "掌",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%92%90",
-    "firstRecordedAt": "2026-11-14T13:45:23.410Z"
+    "component": "牚",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=17944&la=0",
+    "firstRecordedAt": "2026-11-14T13:45:23.410Z",
+    "sourceTitle": "教育部《異體字字典》"
   },
   "撒": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "散",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1874"
   },
   "撞": {
     "status": "documented",
@@ -10006,7 +11413,11 @@
     "firstRecordedAt": "2026-11-14T13:45:24.135Z"
   },
   "撤": {
-    "status": "pending"
+    "status": "documented",
+    "component": "徹",
+    "semanticComponent": "手",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%92%A4"
   },
   "撥": {
     "status": "documented",
@@ -10064,7 +11475,11 @@
     "firstRecordedAt": "2026-11-14T13:45:53.730Z"
   },
   "暮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "莫",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L3151"
   },
   "暴": {
     "status": "pending"
@@ -10156,7 +11571,11 @@
     "firstRecordedAt": "2026-11-14T13:46:59.123Z"
   },
   "潮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "朝",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8006"
   },
   "潺": {
     "status": "documented",
@@ -10180,7 +11599,11 @@
     "firstRecordedAt": "2026-11-14T13:47:00.108Z"
   },
   "澈": {
-    "status": "pending"
+    "status": "documented",
+    "component": "徹",
+    "semanticComponent": "水",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%BE%88"
   },
   "澎": {
     "status": "documented",
@@ -10197,7 +11620,11 @@
     "firstRecordedAt": "2026-11-14T13:47:01.369Z"
   },
   "熟": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "灬",
+    "component": "孰",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4328"
   },
   "熬": {
     "status": "pending"
@@ -10210,7 +11637,11 @@
     "firstRecordedAt": "2026-11-14T13:47:15.143Z"
   },
   "獎": {
-    "status": "pending"
+    "status": "documented",
+    "component": "將",
+    "semanticComponent": "犬",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js"
   },
   "瑩": {
     "status": "pending"
@@ -10258,7 +11689,11 @@
     "firstRecordedAt": "2026-11-14T13:47:52.322Z"
   },
   "瞇": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "目",
+    "component": "迷",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7567"
   },
   "瞌": {
     "status": "documented",
@@ -10302,7 +11737,11 @@
     "firstRecordedAt": "2026-11-14T13:48:30.399Z"
   },
   "窮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "穴",
+    "component": "躬",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5304"
   },
   "箭": {
     "status": "pending"
@@ -10315,7 +11754,11 @@
     "firstRecordedAt": "2026-11-14T13:48:39.737Z"
   },
   "範": {
-    "status": "pending"
+    "status": "documented",
+    "component": "笵",
+    "semanticComponent": "車",
+    "sourceTitle": "香港中文大學漢語多功能字庫引說文（笵省聲）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%AF%84"
   },
   "篇": {
     "status": "pending"
@@ -10328,7 +11771,11 @@
     "firstRecordedAt": "2026-11-14T13:48:44.725Z"
   },
   "線": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "泉",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2390"
   },
   "緣": {
     "status": "documented",
@@ -10389,7 +11836,14 @@
     "firstRecordedAt": "2026-11-14T13:49:06.410Z"
   },
   "膚": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%86%9A",
+    "component": "虍",
+    "semanticComponent": "肉",
+    "displayedSemantic": [
+      "胃"
+    ]
   },
   "膛": {
     "status": "documented",
@@ -10464,10 +11918,18 @@
     "status": "pending"
   },
   "蝌": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "科",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7958"
   },
   "蝟": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "胃",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6794"
   },
   "蝦": {
     "status": "documented",
@@ -10498,7 +11960,15 @@
     "firstRecordedAt": "2026-11-14T13:49:49.051Z"
   },
   "衛": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%A1%9B",
+    "component": "韋",
+    "semanticComponent": "行",
+    "displayedSemantic": [
+      "彳",
+      "亍"
+    ]
   },
   "衝": {
     "status": "documented",
@@ -10604,7 +12074,11 @@
     "status": "pending"
   },
   "質": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "貝",
+    "component": "斦",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7441"
   },
   "赭": {
     "status": "pending"
@@ -10655,7 +12129,11 @@
     "firstRecordedAt": "2026-11-14T13:50:33.899Z"
   },
   "踮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "店",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7612"
   },
   "躺": {
     "status": "documented",
@@ -10693,7 +12171,11 @@
     "firstRecordedAt": "2026-11-14T13:50:38.737Z"
   },
   "遨": {
-    "status": "pending"
+    "status": "documented",
+    "component": "敖",
+    "semanticComponent": "辵",
+    "sourceTitle": "臺北市教育資源網（形聲字教學）",
+    "sourceUrl": "https://tmrc.tiec.tp.edu.tw/html/rsr20081105093736a6g/13.htm"
   },
   "適": {
     "status": "documented",
@@ -10740,7 +12222,11 @@
     "status": "pending"
   },
   "醉": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "酉",
+    "component": "卒",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3025"
   },
   "醋": {
     "status": "documented",
@@ -10764,7 +12250,11 @@
     "firstRecordedAt": "2026-11-14T13:51:09.236Z"
   },
   "鋁": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "釒",
+    "component": "呂",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8147"
   },
   "鋒": {
     "status": "documented",
@@ -10821,7 +12311,11 @@
     "firstRecordedAt": "2026-11-14T13:51:30.460Z"
   },
   "颳": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠯑",
+    "semanticComponent": "風",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=50711"
   },
   "養": {
     "status": "documented",
@@ -10831,7 +12325,11 @@
     "firstRecordedAt": "2026-11-14T13:51:40.976Z"
   },
   "餒": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "飠",
+    "component": "妥",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8908"
   },
   "餓": {
     "status": "documented",
@@ -10858,7 +12356,11 @@
     "status": "pending"
   },
   "駛": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "馬",
+    "component": "史",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3079"
   },
   "駝": {
     "status": "documented",
@@ -10874,7 +12376,10 @@
     "status": "pending"
   },
   "魅": {
-    "status": "pending"
+    "status": "documented",
+    "component": "未",
+    "semanticComponent": "鬼",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/searchShuowen.php?field=1%2C2%2C3%2C4%2C5%2C6%2C7&page=491&q=%E8%81%B2"
   },
   "魯": {
     "status": "pending"
@@ -10887,13 +12392,19 @@
     "firstRecordedAt": "2026-11-14T13:51:50.984Z"
   },
   "黎": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𥝢",
+    "semanticComponent": "人氺",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%BB%8E"
   },
   "墨": {
     "status": "pending"
   },
   "齒": {
-    "status": "pending"
+    "status": "documented",
+    "component": "止",
+    "semanticComponent": "𠚕",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%BD%92"
   },
   "儘": {
     "status": "documented",
@@ -10901,7 +12412,11 @@
     "component": "盡"
   },
   "凝": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "冫",
+    "component": "疑",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7946"
   },
   "劑": {
     "status": "pending"
@@ -10910,7 +12425,11 @@
     "status": "pending"
   },
   "噪": {
-    "status": "pending"
+    "status": "documented",
+    "component": "喿",
+    "semanticComponent": "口",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=-55388"
   },
   "噬": {
     "status": "documented",
@@ -10947,7 +12466,11 @@
     "status": "pending"
   },
   "憊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "心",
+    "component": "備",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2517"
   },
   "憑": {
     "status": "documented",
@@ -10964,7 +12487,11 @@
     "firstRecordedAt": "2026-11-14T13:44:53.831Z"
   },
   "憾": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "感",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L2719"
   },
   "懈": {
     "status": "documented",
@@ -10994,10 +12521,18 @@
     "status": "pending"
   },
   "擁": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "雍",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2920"
   },
   "擂": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "雷",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8211"
   },
   "擅": {
     "status": "documented",
@@ -11034,7 +12569,13 @@
     "status": "pending"
   },
   "整": {
-    "status": "pending"
+    "status": "documented",
+    "component": "正",
+    "semanticComponent": "束、攴",
+    "displayedSemantic": [
+      "敕"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%95%B4"
   },
   "曆": {
     "status": "pending"
@@ -11057,10 +12598,18 @@
     "status": "pending"
   },
   "樽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "尊",
+    "semanticComponent": "木",
+    "sourceTitle": "漢典《樽》字形分析",
+    "sourceUrl": "https://zdic.net/hant/%E6%A8%BD"
   },
   "橇": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "毳",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L3531"
   },
   "橋": {
     "status": "documented",
@@ -11143,7 +12692,11 @@
     "firstRecordedAt": "2026-11-14T13:47:14.602Z"
   },
   "燃": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "火",
+    "component": "然",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L621"
   },
   "燈": {
     "status": "documented",
@@ -11166,16 +12719,28 @@
     "status": "pending"
   },
   "燙": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "火",
+    "component": "湯",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4346"
   },
   "獨": {
     "status": "pending"
   },
   "璞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "王",
+    "component": "菐",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4628"
   },
   "瓢": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "瓜",
+    "component": "票",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4645"
   },
   "瞞": {
     "status": "documented",
@@ -11195,7 +12760,11 @@
     "firstRecordedAt": "2026-11-14T13:48:16.476Z"
   },
   "磨": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "石",
+    "component": "麻",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5129"
   },
   "穆": {
     "status": "pending"
@@ -11215,7 +12784,11 @@
     "firstRecordedAt": "2026-11-14T13:48:30.338Z"
   },
   "窸": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "穴",
+    "component": "悉",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5307"
   },
   "窺": {
     "status": "documented",
@@ -11228,7 +12801,11 @@
     "status": "pending"
   },
   "篩": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺮",
+    "component": "師",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5437"
   },
   "糕": {
     "status": "documented",
@@ -11303,7 +12880,11 @@
     "firstRecordedAt": "2026-11-14T13:49:39.978Z"
   },
   "蕊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "惢",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6578"
   },
   "蕨": {
     "status": "pending"
@@ -11323,7 +12904,11 @@
     "firstRecordedAt": "2026-11-14T13:49:40.325Z"
   },
   "螃": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "旁",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5171"
   },
   "融": {
     "status": "pending"
@@ -11336,10 +12921,22 @@
     "firstRecordedAt": "2026-11-14T13:49:50.187Z"
   },
   "螢": {
-    "status": "pending"
+    "status": "documented",
+    "component": "熒",
+    "displayedSound": "𤇾",
+    "semanticComponent": "虫",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%9E%A2"
   },
   "衡": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%A1%A1",
+    "component": "行",
+    "semanticComponent": "角、大",
+    "displayedSemantic": [
+      "𩵋"
+    ]
   },
   "褲": {
     "status": "documented",
@@ -11405,7 +13002,11 @@
     "firstRecordedAt": "2026-11-14T13:50:27.037Z"
   },
   "踴": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "勇",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7615"
   },
   "輯": {
     "status": "documented",
@@ -11429,7 +13030,14 @@
     "firstRecordedAt": "2026-11-14T13:50:39.862Z"
   },
   "辨": {
-    "status": "pending"
+    "status": "documented",
+    "component": "辡",
+    "semanticComponent": "刀",
+    "displayedSemantic": [
+      "丿丶"
+    ],
+    "sourceTitle": "教育部異體字字典引說文及字樣說明",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=44791"
   },
   "遲": {
     "status": "pending"
@@ -11442,7 +13050,11 @@
     "firstRecordedAt": "2026-11-14T13:50:54.661Z"
   },
   "選": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "辶",
+    "component": "巽",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7912"
   },
   "遺": {
     "status": "pending"
@@ -11500,10 +13112,17 @@
     "firstRecordedAt": "2026-11-14T13:51:11.574Z"
   },
   "隧": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "阝",
+    "component": "遂",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8628"
   },
   "隨": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𡐦",
+    "semanticComponent": "辵",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%9A%A8"
   },
   "險": {
     "status": "documented",
@@ -11529,7 +13148,11 @@
     "status": "pending"
   },
   "頤": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𦣞",
+    "semanticComponent": "頁",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=50366&q=1"
   },
   "頭": {
     "status": "pending"
@@ -11545,7 +13168,10 @@
     "firstRecordedAt": "2026-11-14T13:51:36.155Z"
   },
   "頹": {
-    "status": "pending"
+    "status": "documented",
+    "component": "貴",
+    "semanticComponent": "禿",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%A0%B9"
   },
   "餐": {
     "status": "documented",
@@ -11579,7 +13205,11 @@
     "firstRecordedAt": "2026-11-14T13:51:46.122Z"
   },
   "鴕": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "鳥",
+    "component": "它",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6425"
   },
   "鴨": {
     "status": "documented",
@@ -11681,7 +13311,11 @@
     "firstRecordedAt": "2026-11-14T13:44:13.935Z"
   },
   "彌": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "弓",
+    "component": "爾",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L3840"
   },
   "徽": {
     "status": "documented",
@@ -11813,10 +13447,22 @@
     "firstRecordedAt": "2026-11-14T13:47:02.188Z"
   },
   "濬": {
-    "status": "pending"
+    "status": "documented",
+    "component": "睿",
+    "semanticComponent": "水",
+    "sourceTitle": "慧琳《一切經音義》引《文字典說》（T2128，第54冊644頁下欄2–3行）",
+    "sourceUrl": "https://21dzk.l.u-tokyo.ac.jp/SAT/ddb-sat2.php?key=%E6%99%BA%E6%84%B7&mode=detail&useid=2128_,54,0647"
   },
   "營": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "component": "熒",
+    "displayedSound": "𤇾",
+    "semanticComponent": "宮",
+    "displayedSemantic": [
+      "吕"
+    ],
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%87%9F"
   },
   "燥": {
     "status": "documented",
@@ -11922,7 +13568,11 @@
     "firstRecordedAt": "2026-11-14T13:48:16.474Z"
   },
   "穗": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "禾",
+    "component": "惠",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5264"
   },
   "篷": {
     "status": "documented",
@@ -11939,7 +13589,11 @@
     "firstRecordedAt": "2026-11-14T13:48:41.935Z"
   },
   "糞": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "米",
+    "component": "異",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5520"
   },
   "糟": {
     "status": "documented",
@@ -11983,7 +13637,11 @@
     "firstRecordedAt": "2026-11-14T13:48:58.845Z"
   },
   "繁": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糸",
+    "component": "敏",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5650"
   },
   "繃": {
     "status": "pending"
@@ -11995,7 +13653,11 @@
     "status": "pending"
   },
   "聯": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "component": "𢇇",
+    "semanticComponent": "耳",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%81%AF"
   },
   "聰": {
     "status": "pending"
@@ -12054,7 +13716,11 @@
     "firstRecordedAt": "2026-11-14T13:49:41.106Z"
   },
   "薑": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "畺",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6609"
   },
   "薪": {
     "status": "pending"
@@ -12074,7 +13740,11 @@
     "firstRecordedAt": "2026-11-14T13:49:44.471Z"
   },
   "螺": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "虫",
+    "component": "累",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6831"
   },
   "蟆": {
     "status": "pending"
@@ -12206,7 +13876,11 @@
     "status": "pending"
   },
   "鎂": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "釒",
+    "component": "美",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8190"
   },
   "闆": {
     "status": "pending"
@@ -12260,7 +13934,11 @@
     "firstRecordedAt": "2026-11-14T13:51:40.934Z"
   },
   "鮭": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "魚",
+    "component": "圭",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5891"
   },
   "鮮": {
     "status": "pending"
@@ -12297,7 +13975,11 @@
     "status": "pending"
   },
   "嚮": {
-    "status": "pending"
+    "status": "documented",
+    "component": "向",
+    "semanticComponent": "向",
+    "sourceTitle": "教育部《異體字字典》嚮（依今字音義提示）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=7152"
   },
   "壘": {
     "status": "pending"
@@ -12327,13 +14009,21 @@
     "firstRecordedAt": "2026-11-14T13:45:28.026Z"
   },
   "擾": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "扌",
+    "component": "憂",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L8316"
   },
   "斷": {
     "status": "pending"
   },
   "檳": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "木",
+    "component": "賓",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5059"
   },
   "檻": {
     "status": "documented",
@@ -12350,7 +14040,12 @@
     "firstRecordedAt": "2026-11-14T13:46:24.361Z"
   },
   "歸": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𠂤",
+    "displayedSound": "𠂤止",
+    "semanticComponent": "帚",
+    "sourceTitle": "香港中文大學漢語多功能字庫",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%AD%B8"
   },
   "濺": {
     "status": "documented",
@@ -12390,7 +14085,11 @@
     "status": "pending"
   },
   "癒": {
-    "status": "pending"
+    "status": "documented",
+    "component": "愈",
+    "semanticComponent": "疒",
+    "sourceTitle": "教育部異體字字典（瘉字異體研訂）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=28899&powerMode=2"
   },
   "瞻": {
     "status": "pending"
@@ -12459,13 +14158,21 @@
     "status": "pending"
   },
   "臍": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "肉",
+    "component": "齊",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6154"
   },
   "舊": {
     "status": "pending"
   },
   "薩": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "隡",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L6616"
   },
   "薰": {
     "status": "documented",
@@ -12516,13 +14223,29 @@
     "status": "pending"
   },
   "豐": {
-    "status": "pending"
+    "status": "documented",
+    "sourceTitle": "香港中文大學漢語多功能字庫引林澐說",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%B1%90",
+    "component": "丰",
+    "displayedSound": "𠁳",
+    "semanticComponent": "壴",
+    "displayedSemantic": [
+      "豆"
+    ]
   },
   "蹟": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "責",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7635"
   },
   "蹣": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "㒼",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7637"
   },
   "蹤": {
     "status": "documented",
@@ -12560,7 +14283,11 @@
     "firstRecordedAt": "2026-11-14T13:51:05.337Z"
   },
   "醬": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "酉",
+    "component": "將",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8064"
   },
   "釐": {
     "status": "pending"
@@ -12573,10 +14300,18 @@
     "firstRecordedAt": "2026-11-14T13:51:12.237Z"
   },
   "鎚": {
-    "status": "pending"
+    "status": "documented",
+    "component": "追",
+    "semanticComponent": "金",
+    "sourceTitle": "教育部異體字字典（鎚字異體研訂）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=74105"
   },
   "鎮": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "釒",
+    "component": "真",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8202"
   },
   "闔": {
     "status": "pending"
@@ -12618,10 +14353,18 @@
     "firstRecordedAt": "2026-11-14T13:51:35.878Z"
   },
   "額": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "頁",
+    "component": "客",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8797"
   },
   "顏": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "頁",
+    "component": "彥",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8799"
   },
   "騎": {
     "status": "pending"
@@ -12634,7 +14377,11 @@
     "firstRecordedAt": "2026-11-14T13:51:46.039Z"
   },
   "魏": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "鬼",
+    "component": "委",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9152"
   },
   "鯉": {
     "status": "documented",
@@ -12644,10 +14391,18 @@
     "firstRecordedAt": "2026-11-14T13:51:49.371Z"
   },
   "鯊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "魚",
+    "component": "沙",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9171"
   },
   "鵑": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "鳥",
+    "component": "肙",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9323"
   },
   "鵝": {
     "status": "documented",
@@ -12692,7 +14447,11 @@
     "status": "pending"
   },
   "懵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "忄",
+    "component": "瞢",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2552"
   },
   "懶": {
     "status": "documented",
@@ -12705,7 +14464,11 @@
     "status": "pending"
   },
   "攀": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "手",
+    "component": "樊",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L2953"
   },
   "攏": {
     "status": "documented",
@@ -12715,7 +14478,11 @@
     "firstRecordedAt": "2026-11-14T13:45:28.877Z"
   },
   "曝": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "日",
+    "component": "暴",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1751"
   },
   "曠": {
     "status": "documented",
@@ -12725,14 +14492,19 @@
     "firstRecordedAt": "2026-11-14T13:45:56.470Z"
   },
   "瀕": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "氵",
+    "component": "頻",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L4615"
   },
   "瀚": {
     "status": "documented",
-    "semanticComponent": "水",
-    "component": "瀚",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%80%9A",
-    "firstRecordedAt": "2026-11-14T13:47:03.463Z"
+    "semanticComponent": "氵",
+    "component": "翰",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L4194",
+    "firstRecordedAt": "2026-11-14T13:47:03.463Z",
+    "sourceTitle": "Make Me a Hanzi 字源資料"
   },
   "爆": {
     "status": "documented",
@@ -12752,7 +14524,11 @@
     "firstRecordedAt": "2026-11-14T13:47:31.328Z"
   },
   "疆": {
-    "status": "pending"
+    "status": "documented",
+    "component": "彊",
+    "semanticComponent": "土",
+    "sourceTitle": "香港中文大學漢語多功能字庫（金文土、彊聲）",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%96%86"
   },
   "癟": {
     "status": "pending"
@@ -12772,7 +14548,11 @@
     "firstRecordedAt": "2026-11-14T13:48:24.808Z"
   },
   "穩": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "禾",
+    "component": "㥯",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5267"
   },
   "穫": {
     "status": "pending"
@@ -12915,7 +14695,11 @@
     "firstRecordedAt": "2026-11-14T13:50:27.584Z"
   },
   "贊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "貝",
+    "component": "兟",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7451"
   },
   "蹲": {
     "status": "documented",
@@ -12925,10 +14709,18 @@
     "firstRecordedAt": "2026-11-14T13:50:34.549Z"
   },
   "蹺": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "堯",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7649"
   },
   "蹼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "足",
+    "component": "菐",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7650"
   },
   "轎": {
     "status": "documented",
@@ -12941,7 +14733,11 @@
     "status": "pending"
   },
   "邊": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "辶",
+    "component": "臱",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L7924"
   },
   "邋": {
     "status": "pending"
@@ -12954,10 +14750,18 @@
     "firstRecordedAt": "2026-11-14T13:51:12.933Z"
   },
   "鏗": {
-    "status": "pending"
+    "status": "documented",
+    "component": "堅",
+    "semanticComponent": "金",
+    "sourceTitle": "漢典字形分析（繁簡對應）",
+    "sourceUrl": "https://zdic.net/hans/%E9%93%BF"
   },
   "鏘": {
-    "status": "pending"
+    "status": "documented",
+    "component": "將",
+    "semanticComponent": "金",
+    "sourceTitle": "漢典字形分析（繁簡對應）",
+    "sourceUrl": "https://zdic.net/hans/%E9%94%B5"
   },
   "鏟": {
     "status": "documented",
@@ -12977,7 +14781,10 @@
     "status": "pending"
   },
   "難": {
-    "status": "pending"
+    "status": "documented",
+    "component": "堇",
+    "semanticComponent": "隹",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E9%9B%A3"
   },
   "霧": {
     "status": "documented",
@@ -13001,7 +14808,11 @@
     "firstRecordedAt": "2026-11-14T13:51:36.452Z"
   },
   "顛": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "頁",
+    "component": "真",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8804"
   },
   "類": {
     "status": "documented",
@@ -13011,7 +14822,11 @@
     "firstRecordedAt": "2026-11-14T13:51:36.749Z"
   },
   "饈": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "飠",
+    "component": "羞",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L8925"
   },
   "騙": {
     "status": "documented",
@@ -13035,7 +14850,11 @@
     "firstRecordedAt": "2026-11-14T13:51:49.657Z"
   },
   "鵡": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "鳥",
+    "component": "武",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9329"
   },
   "鵰": {
     "status": "pending"
@@ -13047,7 +14866,11 @@
     "status": "pending"
   },
   "嚼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "口",
+    "component": "爵",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L1280"
   },
   "壤": {
     "status": "documented",
@@ -13057,7 +14880,10 @@
     "firstRecordedAt": "2026-11-14T13:43:28.085Z"
   },
   "寶": {
-    "status": "pending"
+    "status": "documented",
+    "component": "缶",
+    "semanticComponent": "貝",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/oraclePiece.php?piece=%E7%8E%89"
   },
   "懸": {
     "status": "documented",
@@ -13136,16 +14962,24 @@
   },
   "籍": {
     "status": "documented",
-    "semanticComponent": "艸",
+    "semanticComponent": "竹",
     "component": "耤",
-    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%B1%8D",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/searchShuowen.php?field=1%2C2%2C3%2C4%2C5%2C6%2C7&q=%E8%80%A4",
     "firstRecordedAt": "2026-11-14T13:48:43.067Z"
   },
   "糯": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "米",
+    "component": "需",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7059"
   },
   "繼": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "糹",
+    "component": "㡭",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L5668"
   },
   "繽": {
     "status": "documented",
@@ -13172,7 +15006,11 @@
     "firstRecordedAt": "2026-11-14T13:49:42.758Z"
   },
   "藻": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "艹",
+    "component": "澡",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L5309"
   },
   "蘆": {
     "status": "documented",
@@ -13218,7 +15056,10 @@
     "status": "pending"
   },
   "贏": {
-    "status": "pending"
+    "status": "documented",
+    "component": "𣎆",
+    "semanticComponent": "貝",
+    "sourceUrl": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E8%B4%8F"
   },
   "躁": {
     "status": "documented",
@@ -13286,7 +15127,11 @@
     "firstRecordedAt": "2026-11-14T13:51:44.414Z"
   },
   "鰓": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "魚",
+    "component": "思",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L6897"
   },
   "鹹": {
     "status": "documented",
@@ -13296,7 +15141,11 @@
     "firstRecordedAt": "2026-11-14T13:51:52.356Z"
   },
   "麵": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "麥",
+    "component": "面",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L503"
   },
   "齡": {
     "status": "documented",
@@ -13340,7 +15189,11 @@
     "firstRecordedAt": "2026-11-14T13:47:04.301Z"
   },
   "爛": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "火",
+    "component": "闌",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7477"
   },
   "續": {
     "status": "pending"
@@ -13381,7 +15234,11 @@
     "firstRecordedAt": "2026-11-14T13:49:51.279Z"
   },
   "襬": {
-    "status": "pending"
+    "status": "documented",
+    "component": "罷",
+    "semanticComponent": "衣",
+    "sourceTitle": "漢典形聲解讀",
+    "sourceUrl": "https://zdic.net/hant/%E8%A5%AC"
   },
   "覽": {
     "status": "pending"
@@ -13427,7 +15284,11 @@
     "firstRecordedAt": "2026-11-14T13:51:28.966Z"
   },
   "霸": {
-    "status": "pending"
+    "status": "documented",
+    "component": "䨣",
+    "semanticComponent": "月",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=49523&powerMode=2"
   },
   "顧": {
     "status": "pending"
@@ -13450,7 +15311,11 @@
     "firstRecordedAt": "2026-11-14T13:51:48.446Z"
   },
   "鰭": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "魚",
+    "component": "耆",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L7633"
   },
   "鶴": {
     "status": "documented",
@@ -13475,7 +15340,11 @@
     "status": "pending"
   },
   "巔": {
-    "status": "pending"
+    "status": "documented",
+    "component": "顛",
+    "semanticComponent": "山",
+    "sourceTitle": "《國防大學通識教育學報》第十期（巔、顛）",
+    "sourceUrl": "https://www.mnd.gov.tw/File/34587"
   },
   "彎": {
     "status": "documented",
@@ -13526,7 +15395,22 @@
     "status": "pending"
   },
   "竊": {
-    "status": "pending"
+    "status": "documented",
+    "component": "禼",
+    "semanticComponent": "穴、米",
+    "displayedSound": "⺊𠔿禸",
+    "displayedSemantic": [
+      "穴",
+      "釆"
+    ],
+    "sourceTitle": "教育部異體字字典（禼省形、米形變易）",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=32044&la=0",
+    "additionalSources": [
+      {
+        "title": "香港中文大學漢語多功能字庫（禼聲及廿聲的篆形記載）",
+        "url": "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E7%AB%8A"
+      }
+    ]
   },
   "籟": {
     "status": "documented",
@@ -13539,10 +15423,18 @@
     "status": "pending"
   },
   "聽": {
-    "status": "pending"
+    "status": "documented",
+    "component": "壬",
+    "semanticComponent": "耳",
+    "sourceTitle": "說文解字耳部（壬聲的篆形分析）",
+    "sourceUrl": "https://ctext.org/shuo-wen-jie-zi/er-bu2/zh"
   },
   "臟": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "⺼",
+    "component": "藏",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L1781"
   },
   "襯": {
     "status": "documented",
@@ -13589,10 +15481,18 @@
     "firstRecordedAt": "2026-11-14T13:51:46.156Z"
   },
   "鬚": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "髟",
+    "component": "須",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9125"
   },
   "鷗": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "鳥",
+    "component": "區",
+    "sourceTitle": "Make Me a Hanzi 字源資料",
+    "sourceUrl": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt#L9357"
   },
   "戀": {
     "status": "documented",
@@ -13699,7 +15599,11 @@
     "firstRecordedAt": "2026-11-14T13:51:05.086Z"
   },
   "靈": {
-    "status": "pending"
+    "status": "documented",
+    "component": "霝",
+    "semanticComponent": "巫",
+    "sourceTitle": "教育部《異體字字典》",
+    "sourceUrl": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=49604&q=1"
   },
   "驟": {
     "status": "documented",
@@ -13723,7 +15627,11 @@
     "firstRecordedAt": "2026-11-14T13:51:53.082Z"
   },
   "廳": {
-    "status": "pending"
+    "status": "documented",
+    "semanticComponent": "广",
+    "component": "聽",
+    "sourceTitle": "Dong Chinese 字源資料",
+    "sourceUrl": "https://github.com/peterolson/chinese-lexicon/blob/de64ca4c5d3fef6694a1270f943726c5f622bb03/etymology/index.js#L355"
   },
   "灣": {
     "status": "documented",

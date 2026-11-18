@@ -14,6 +14,13 @@ const POSITION_LABELS: Record<CharacterMaster["layout"], string[]> = {
   vertical: ["上方", "下方"],
   horizontal: ["左側", "右側"],
   triple: ["左側", "中間", "右側"],
+  "upper-left-enclosure": ["左上外側", "右下內側"],
+  "lower-left-enclosure": ["左下外側", "右上內側"],
+  "upper-right-enclosure": ["右上外側", "左下內側"],
+  "top-enclosure": ["上方外側", "下方內側"],
+  "left-enclosure": ["左方外側", "右方內側"],
+  "full-enclosure": ["外框", "內側"],
+  overlap: ["交疊部件一", "交疊部件二"],
   whole: ["整體"],
 };
 
@@ -24,7 +31,23 @@ function matchesRadical(part: string, radical: string) {
 export function analyzeStructure(
   master: CharacterMaster,
 ): StructurePartAnalysis[] {
-  const labels = POSITION_LABELS[master.layout];
+  const labels = master.layout === "triple" && ["徽", "徵"].includes(master.character)
+    ? ["左側", "中上", "中下", "右側"]
+    : master.layout === "triple" && master.character === "贏"
+    ? ["上方", "左下", "下方中央", "右下"]
+    : master.layout === "triple" && ["雖", "類", "雜", "穀", "穎", "劉", "聽", "疆", "散"].includes(master.character)
+    ? ["左上", "左下", "右側"]
+    : master.layout === "triple" && ["聖", "準", "染", "鹽", "渠", "梁"].includes(master.character)
+    ? ["左上", "右上", "下方"]
+    : master.layout === "triple" && ["窪", "茫", "蕩", "藹", "簸", "岸", "崖", "發", "霸", "炭", "產", "罰", "範", "竊"].includes(master.character)
+    ? ["上方", ...(["炭", "產"].includes(master.character) ? ["左下外側", "右下內側"] : ["左下", "右下"])]
+    : master.layout === "triple" && ["度", "庶"].includes(master.character)
+    ? ["左上外側", "內側上方", "內側下方"]
+    : master.layout === "triple" && ["修", "務", "勝", "從", "條", "賴", "騰", "臨", "強", "延", "隆", "隨", "幹", "度", "庶"].includes(master.character)
+    ? ["左側", "右上", "右下"]
+    : master.layout === "vertical" && master.components.length === 3
+    ? ["上方", "中間", "下方"]
+    : POSITION_LABELS[master.layout];
   return master.components.map((name, index) => ({
     name,
     position: labels[index] || `第 ${index + 1} 部分`,
@@ -72,7 +95,9 @@ export default function CharacterStructureAnalysis({
     ? master.layout === "vertical"
       ? { gridTemplateRows: tracks }
       : { gridTemplateColumns: tracks }
-    : undefined;
+    : master.layout === "vertical" && parts.length
+      ? { gridTemplateRows: `repeat(${parts.length}, minmax(0, 1fr))` }
+      : undefined;
 
   return (
     <section
@@ -89,7 +114,7 @@ export default function CharacterStructureAnalysis({
         <span className="structure-radical">部首：{master.radical}</span>
       </div>
 
-      {master.verificationStatus === "unavailable" ? (
+      {master.verificationStatus === "unavailable" && !clues ? (
         <div className="structure-analysis-empty" role="status">
           目前沒有已核對的結構資料，請由老師配合教育部字典確認。
         </div>
@@ -131,7 +156,7 @@ export default function CharacterStructureAnalysis({
           <div className="structure-analysis-overview">
             <figure className="structure-part-map">
               <div
-                className={`structure-part-grid structure-${master.layout}`}
+                className={`structure-part-grid structure-${master.layout}${master.layout === "triple" && ["徽", "徵"].includes(master.character) ? " structure-middle-stacked" : ""}${master.layout === "triple" && master.character === "贏" ? " structure-top-over-three" : ""}${master.layout === "triple" && ["雖", "類", "雜", "穀", "穎", "劉", "聽", "疆", "散"].includes(master.character) ? " structure-left-stacked" : ""}${master.layout === "triple" && ["聖", "準", "染", "鹽", "渠", "梁"].includes(master.character) ? " structure-bottom-spanning" : ""}${master.layout === "triple" && ["窪", "茫", "蕩", "藹", "簸", "岸", "崖", "發", "霸", "炭", "產", "罰", "範", "竊"].includes(master.character) ? " structure-top-spanning" : ""}${master.layout === "triple" && ["修", "務", "勝", "從", "條", "賴", "騰", "臨", "強", "延", "隆", "隨", "幹", "度", "庶"].includes(master.character) ? " structure-right-stacked" : ""}`}
                 style={gridStyle}
                 role="img"
                 aria-label={`${master.character}的${master.structure}：${parts.map((part) => `${part.position}${part.name}`).join("、")}`}

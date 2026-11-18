@@ -3947,3 +3947,47 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
   width: 16px;
   height: 16px;
 }
+
+.structure-part-grid.structure-upper-left-enclosure,
+.structure-part-grid.structure-lower-left-enclosure {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+}
+.structure-upper-left-enclosure > :first-child { grid-area: 1 / 1; }
+.structure-upper-left-enclosure > :last-child { grid-area: 2 / 2; }
+.structure-lower-left-enclosure > :first-child { grid-area: 2 / 1; }
+.structure-lower-left-enclosure > :last-child { grid-area: 1 / 2; }
+
+.structure-part-grid.structure-upper-right-enclosure {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+}
+.structure-upper-right-enclosure > :first-child { grid-area: 1 / 2; }
+.structure-upper-right-enclosure > :last-child { grid-area: 2 / 1; }
+.structure-part-grid.structure-top-enclosure { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.structure-part-grid.structure-left-enclosure { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.structure-part-grid.structure-full-enclosure { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.structure-part-grid.structure-overlap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.structure-part-grid.structure-right-stacked {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+}
+.structure-right-stacked > :first-child { grid-area: 1 / 1 / 3 / 2; }
+.structure-part-grid.structure-left-stacked,
+.structure-part-grid.structure-top-spanning,
+.structure-part-grid.structure-bottom-spanning {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+}
+.structure-top-spanning > :first-child { grid-area: 1 / 1 / 2 / 3; }
+.structure-bottom-spanning > :last-child { grid-area: 2 / 1 / 3 / 3; }
+.structure-left-stacked > :last-child { grid-area: 1 / 2 / 3 / 3; }
+
+.structure-part-grid.structure-top-over-three {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr));
+}
+.structure-top-over-three > :first-child { grid-column: 1 / -1; }
+
+.structure-part-grid.structure-middle-stacked {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr));
+}
+.structure-middle-stacked > :first-child { grid-area: 1 / 1 / 3 / 2; }
+.structure-middle-stacked > :nth-child(3) { grid-area: 2 / 2 / 3 / 3; }
+.structure-middle-stacked > :last-child { grid-area: 1 / 3 / 3 / 4; }
