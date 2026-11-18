@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, RotateCcw } from "lucide-react";
 import { MOE_LICENSE_URL, strokeFrameUrl } from "./strokeSource";
+import CompetitionWriting from './CompetitionWriting';
 
 export default function StrokePlayer({ character }: { character: string }) {
   const url = strokeFrameUrl(character);
@@ -56,6 +57,7 @@ export default function StrokePlayer({ character }: { character: string }) {
           onLoad={() => setLoaded(true)}
         />
       </div>
+      <details open><summary>筆畫語音書寫練習</summary><p>使用老師已確認的筆畫語音，開啟後會先說出目前要寫的筆畫。下方書寫練習使用本站筆順資料，與上方教育部播放器分開操作。</p><CompetitionWriting key={character} character={character} mode="practice" disabled={false} onSubmit={()=>{}} /></details>
       <div className="stroke-links">
         <button className="secondary" onClick={() => setReload((x) => x + 1)}>
           <RotateCcw size={15} />

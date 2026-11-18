@@ -1,3 +1,4 @@
+import {createStrokeSpeechHandler} from './stroke-speech.mjs';
 import http from "node:http";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -170,6 +171,7 @@ export function createStructureServer({
     const result=await invoke(config,instruction+revision+'資料：'+JSON.stringify(data),undefined,2200);
     return JSON.parse(result.replace(/<think>[\s\S]*?<\/think>/g,'').trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));
   }});
+  const strokeSpeechHandler = quizStore && createStrokeSpeechHandler({store:quizStore,origins,authenticate});
   const competitionHandler = quizStore && createCompetitionHandler({store:quizStore,origins,authenticate:quizAuthenticate,gradeSentence:async data=>{
     const config=await settings();
     if(config.enabled===false||!config.model||(config.provider!=='ollama'&&!config.apiKey))throw Error('請先在 API 設定啟用文字模型與金鑰。');
@@ -253,6 +255,7 @@ export function createStructureServer({
         return reply(503,{error:"安全紀錄服務暫時無法使用"});
       }
     }
+    if(pathname.startsWith('/api/structure/stroke-speech/') && strokeSpeechHandler) return strokeSpeechHandler(req,res);
     if(req.url?.startsWith('/api/structure/sentence/') && sentenceHandler) return sentenceHandler(req,res);
     if(req.url?.startsWith('/api/structure/competition/') && competitionHandler) return competitionHandler(req,res);
     if(req.url?.startsWith('/api/structure/quiz/') && quizHandler) return quizHandler(req,res);

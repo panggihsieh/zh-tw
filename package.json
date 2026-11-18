@@ -1,6 +1,6 @@
 {
   "name": "hanzi-animation-notebook",
-  "version": "1.5.122",
+  "version": "1.5.123",
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
     "test:sentence-api": "node --test server/sentence-api.check.mjs",
@@ -13,7 +13,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build && node scripts/check-hosting-callback.mjs",
     "test": "vitest run",
-    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
+    "test:stroke-speech": "node --test server/stroke-speech.check.mjs && vitest run src/strokeSpeech.test.ts"
   },
   "repository": {
     "type": "git",

@@ -122,7 +122,8 @@ const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+type BackendSection = "strokeSpeech" | "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+const StrokeSpeechAdmin = lazy(() => import('./StrokeSpeechAdmin'));
 const SecurityLog = lazy(() => import("./SecurityLog"));
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
@@ -132,6 +133,7 @@ const backendTitles: Record<BackendSection, string> = {
   competition: "Kahoot 競賽開課管理",
   versions: "提交版本紀錄",
   security: "安全事件紀錄",
+  strokeSpeech: "筆畫語音",
   quiz: "資料庫管理",
   themes: "網站樣式資料庫",
   gameReview: '課堂紀錄',
@@ -972,6 +974,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                 { section: "users", label: "使用者管理", icon: Settings2 },
                 { section: "api", label: "API 設定", icon: Settings2 },
                 { section: "tts", label: "TTS 設定後台", icon: Settings2 },
+                { section: "strokeSpeech", label: "筆畫語音", icon: Volume2 },
                 { section: "themes", label: "網站樣式資料庫", icon: Palette },
                 { section: "versions", label: "提交版本紀錄", icon: FileText },
                 { section: "security", label: "安全事件紀錄", icon: FileText },
@@ -2137,6 +2140,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "security" && <SecurityLog />}
+                  {backendSection === "strokeSpeech" && <StrokeSpeechAdmin />}
                   {backendSection === "themes" && <>
                     <SiteThemeLibrary active={siteTheme} />
                     <BackendLabelSettings titles={backendTitles} labels={backendLabels} onSave={next => {
