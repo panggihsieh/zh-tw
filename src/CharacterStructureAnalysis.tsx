@@ -136,7 +136,7 @@ export default function CharacterStructureAnalysis({
               >
                 {kind === "shape" && thumbnail && (
                   <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <img src={thumbnail.image} alt="" width={24} height={24} />
+                    <img src={thumbnail.image} alt={`${thumbnail.title}結構縮圖`} width={36} height={36} />
                     {thumbnail.title}
                   </span>
                 )}

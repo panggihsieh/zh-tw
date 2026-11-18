@@ -13,3 +13,9 @@ it("does not apply the profile to another layout or decomposition", () => {
   ).toBeNull();
   expect(structureProfile(CHARACTERS.觀)).toBeNull();
 });
+
+it("shows 稠 as left-narrow right-wide only for 禾 plus 周", () => {
+  const master = { ...CHARACTERS.椒, character: "稠", layout: "horizontal" as const, components: ["禾", "周"] };
+  expect(structureProfile(master)).toMatchObject({label: "左窄右寬", weights: [35, 65]});
+  expect(structureProfile({...master, components: ["禾", "其他"]})).toBeNull();
+});

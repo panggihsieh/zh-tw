@@ -10,6 +10,12 @@ const profiles: Record<
     assemblyBoxes?: number[][];
   }
 > = {
+  稠: {
+    layout: "horizontal",
+    parts: ["禾", "周"],
+    weights: [35, 65],
+    label: "左窄右寬",
+  },
   椒: {
     layout: "horizontal",
     parts: ["木", "叔"],
