@@ -63,6 +63,8 @@ export function upgradeStrokeMnemonic<T extends {name:string;mnemonic?:string;mn
 }
 export function strokeMnemonicReason(name:string):string {
  const preset=findStrokePreset(name);if(!preset)return '本項尚無定案口訣，請依實際筆形人工核對。';
+ if(preset.name==='豎鉤')return '先寫豎畫，往下寫到底，再朝左上短短鉤出，所以念「豎，左鉤」。和豎挑一起看：同樣先往下，左上短短鉤，右上斜斜挑。';
+ if(preset.name==='豎挑／豎提')return '先寫豎畫，往下寫到底，再轉向右上斜斜挑出，筆尖逐漸抬起，所以念「豎，挑」。和豎鉤一起看：同樣先往下，左上短短鉤，右上斜斜挑。';
  const text=preset.spoken,parts=['依運筆順序分段朗讀；逗號表示停頓，方向前省略「向」字。'];
  if(text.includes('折'))parts.push('橫後第一折預設向下，豎或撇後第一折預設向右，省略可推知的方向。');
  if(text.includes('右折')||text.includes('折'))parts.push('連續轉折時，向下統一念「折」，只有轉向右方時保留「右折」。');
