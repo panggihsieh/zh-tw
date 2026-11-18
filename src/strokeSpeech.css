@@ -46,3 +46,5 @@
 .stroke-playback-preview:fullscreen{box-sizing:border-box;margin:0;background:#fffdf3;color:#173a30;align-content:center}
 .stroke-playback-preview:fullscreen .stroke-playback-square{width:min(88vw,75dvh)}
 .stroke-playback-preview:fullscreen figcaption{font-size:clamp(1rem,4vmin,2rem)}
+
+.stroke-expand-controls button,.stroke-preview-actions button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px}

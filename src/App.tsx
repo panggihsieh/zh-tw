@@ -943,8 +943,8 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
         <div className="main-wrap">
           {backendMode && <AcademyBanner onVersion={() => setShowVersions(true)} />}
           {backendMode && <header className="backend-workspace-bar" ref={headerRef}>
-            <button className="secondary academy-dashboard-return" onClick={() => { setBackendDashboardOpen(true); setBackendMenuOpen(false); speech.stop(); setPlaying(false); window.scrollTo(0, 0); }}>功能字卡</button>
-            <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "功能選單"}</button>
+            <button className="secondary academy-dashboard-return" onClick={() => { setBackendDashboardOpen(true); setBackendMenuOpen(false); speech.stop(); setPlaying(false); window.scrollTo(0, 0); }}>後台首頁</button>
+            <button className="backend-menu-toggle secondary" aria-expanded={backendMenuOpen} aria-controls="backend-navigation" onClick={() => setBackendMenuOpen(!backendMenuOpen)}>{backendMenuOpen ? "收合選單" : "分類－全部選單"}</button>
             <div><span>教師工作區</span><strong>{backendDashboardOpen ? "教師後台" : backendLabels[backendSection] || backendTitles[backendSection]}</strong></div>
             <div className="backend-account-actions"><span className="backend-account-label">管理者</span>
               <button className="teacher-session-button" onClick={async () => { speech.stop(); setPlaying(false); const { cloudLogout } = await import("./cloudSync"); await cloudLogout(); window.location.assign("/"); }}>登出</button>
