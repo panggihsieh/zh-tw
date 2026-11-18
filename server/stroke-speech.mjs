@@ -35,11 +35,12 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
         const rows=input.rows.map(row=>{
           if(!row || !/^(?:[1-9]|1[0-9]|2[0-8])$/.test(row.id) || ids.has(row.id) || typeof row.confirmed!=='boolean')bad('筆畫項目不符。');
           ids.add(row.id);
+          if(row.mnemonicRevision!==undefined && (typeof row.mnemonicRevision!=='string'||row.mnemonicRevision.length>50))bad('口訣版本格式不符。');
           if(row.mnemonic!==undefined && (typeof row.mnemonic!=='string'||row.mnemonic.length>30))bad('口訣最多30字。');
           if(row.zhuyin!==undefined && (typeof row.zhuyin!=='string'||row.zhuyin.length>120))bad('注音格式不符。');
           for(const [field,max] of [['symbol',4],['name',30],['spoken',30],['examples',30],['notes',500]])if(typeof row[field]!=='string'||row[field].length>max)bad('筆畫欄位格式不符。');
           if(!row.name.trim() || (row.confirmed&&!row.spoken.trim()))bad('確認前需填寫名稱與朗讀文字。');
-          return {...(row.mnemonic!==undefined?{mnemonic:row.mnemonic.trim()}:{}),...(row.zhuyin!==undefined?{zhuyin:row.zhuyin}:{}),...Object.fromEntries(['id','symbol','name','spoken','examples','notes','confirmed'].map(field=>[field,row[field]]))};
+          return {...(row.mnemonicRevision!==undefined?{mnemonicRevision:row.mnemonicRevision}:{}),...(row.mnemonic!==undefined?{mnemonic:row.mnemonic.trim()}:{}),...(row.zhuyin!==undefined?{zhuyin:row.zhuyin}:{}),...Object.fromEntries(['id','symbol','name','spoken','examples','notes','confirmed'].map(field=>[field,row[field]]))};
         });
         if((previous?.value.updatedAt??null)!==(input.updatedAt??null))return send(409,{error:'清單已被其他管理員更新，請重新載入後再修改。'});
         const value={rows,updatedAt:new Date().toISOString()};

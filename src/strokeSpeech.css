@@ -24,3 +24,5 @@
 .stroke-local-tabs{display:flex;gap:8px;margin:16px 0}.stroke-local-tabs [aria-selected="true"]{background:#285d45;color:#fff}
 .stroke-motion{stroke-dasharray:1;animation:stroke-trace 1.4s linear both}@keyframes stroke-trace{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.stroke-motion{animation:none}}
+
+.stroke-mnemonic-preview{font-weight:700;color:#244f3a}.stroke-mnemonic-tip,.stroke-card-editor{margin:12px 0}.stroke-mnemonic-tip summary,.stroke-card-editor summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}.stroke-mnemonic-tip p{font-size:14px;line-height:1.6}.stroke-card-editor[open]{border-top:1px solid #d5dfcc;padding-top:10px}

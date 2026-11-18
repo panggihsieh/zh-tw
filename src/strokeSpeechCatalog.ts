@@ -53,3 +53,21 @@ export function fillStrokeMnemonic<T extends {name:string;mnemonic?:string;confi
  const preset=findStrokePreset(row.name);
  return !row.mnemonic?.trim()&&preset?{...row,mnemonic:preset.spoken,confirmed:false}:row;
 }
+
+export const MNEMONIC_REVISION='2026-11-18-final-1';
+export function upgradeStrokeMnemonic<T extends {name:string;mnemonic?:string;mnemonicRevision?:string;confirmed:boolean}>(row:T):T & {mnemonicRevision?:string} {
+ const preset=findStrokePreset(row.name);
+ if(!preset||row.mnemonicRevision===MNEMONIC_REVISION)return row;
+ return {...row,mnemonic:preset.spoken,mnemonicRevision:MNEMONIC_REVISION,confirmed:row.mnemonic===preset.spoken?row.confirmed:false};
+}
+export function strokeMnemonicReason(name:string):string {
+ const preset=findStrokePreset(name);if(!preset)return '本項尚無定案口訣，請依實際筆形人工核對。';
+ const text=preset.spoken,parts=['依運筆順序分段朗讀；逗號表示停頓。'];
+ if(text.includes('折'))parts.push('橫後第一折預設向下，豎或撇後第一折預設向右，省略可推知的方向。');
+ if(text.includes('右折')||text.includes('下折'))parts.push('連續轉折保留後續的「右折／下折」，避免方向混淆。');
+ if(text.includes('彎'))parts.push('「彎」表示圓轉，與有轉角的「折」分開；保留斜彎、微彎、平彎的差異。');
+ if(text.includes('挑'))parts.push('「挑」表示向右上斜出，與向右平折區分。');
+ if(text.includes('左鉤'))parts.push('保留「左鉤」以明確指出收筆鉤向。');
+ if(!text.includes('，'))parts.push('單一動作直接念筆畫名稱，不加方向贅詞。');
+ return parts.join(' ');
+}

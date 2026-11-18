@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {STROKE_CATALOG,findStrokePreset,fillStrokeMnemonic} from './strokeSpeechCatalog';
+import {MNEMONIC_REVISION,upgradeStrokeMnemonic,strokeMnemonicReason,STROKE_CATALOG,findStrokePreset,fillStrokeMnemonic} from './strokeSpeechCatalog';
 describe('32 種筆畫口訣',()=>{
  it('保留完整分類與各筆畫口訣',()=>{
   expect(STROKE_CATALOG).toHaveLength(32);
@@ -38,4 +38,12 @@ it('轉折省略規則一致，必要的第二折及鉤向保留',()=>{
  expect(findStrokePreset('橫折折')?.spoken).toBe('橫，折，右折');
  expect(findStrokePreset('豎折折')?.spoken).toBe('豎，折，下折');
  expect(findStrokePreset('橫折鉤')?.spoken).toBe('橫，折，左鉤');
+});
+
+it('新版一次覆寫舊口訣，重設核對；同版後續自訂不覆蓋',()=>{
+ const value=upgradeStrokeMnemonic({name:'豎折',mnemonic:'豎，右折',confirmed:true});
+ expect(value.mnemonic).toBe('豎，折');expect(value.confirmed).toBe(false);expect(value.mnemonicRevision).toBe(MNEMONIC_REVISION);
+ const custom={...value,mnemonic:'之後自訂',confirmed:true};expect(upgradeStrokeMnemonic(custom)).toBe(custom);
+ const unknown={name:'長頓點',mnemonic:'自訂',confirmed:true};expect(upgradeStrokeMnemonic(unknown)).toBe(unknown);
+ expect(strokeMnemonicReason('豎折折鉤')).toContain('連續轉折');
 });
