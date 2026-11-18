@@ -163,5 +163,10 @@
     "id": "stroke-33",
     "name": "臥鉤",
     "src": "/stroke-svg/kai/stroke-33.svg"
+  },
+  {
+    "id": "stroke-34",
+    "name": "長頓點",
+    "src": "/stroke-svg/kai/stroke-34.svg"
   }
 ]

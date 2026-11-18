@@ -35,7 +35,7 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
         const rows=input.rows.map(row=>{
           if(!row || !/^(?:[1-9]|1[0-9]|2[0-8])$/.test(row.id) || ids.has(row.id) || typeof row.confirmed!=='boolean')bad('筆畫項目不符。');
           ids.add(row.id);
-          if(row.svgId!==undefined && (typeof row.svgId!=='string'||! /^(?:builtin|stroke-(?:0[1-9]|[12][0-9]|3[0-3]))$/.test(row.svgId)))bad('筆畫圖片選項不符。');
+          if(row.svgId!==undefined && (typeof row.svgId!=='string'||! /^(?:builtin|stroke-(?:0[1-9]|[12][0-9]|3[0-4]))$/.test(row.svgId)))bad('筆畫圖片選項不符。');
           if(row.pronunciationSource!==undefined&&!['mnemonic','spoken'].includes(row.pronunciationSource))bad('讀音來源不符。');
           if(row.mnemonicRevision!==undefined && (typeof row.mnemonicRevision!=='string'||row.mnemonicRevision.length>50))bad('口訣版本格式不符。');
           if(row.mnemonic!==undefined && (typeof row.mnemonic!=='string'||row.mnemonic.length>30))bad('口訣最多30字。');
