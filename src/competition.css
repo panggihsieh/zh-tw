@@ -151,3 +151,25 @@
   padding: 5px 8px;
 }
 .competition-structure-thumbnail { width: clamp(42px, 7vw, 76px); aspect-ratio: 1; object-fit: contain; background: white; border-radius: 6px; margin-inline-start: auto; }
+
+.competition-score-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+.competition-score-charts li {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+.competition-score-pie {
+  width: 64px;
+  aspect-ratio: 1;
+  border: 1px solid #64806b;
+  border-radius: 50%;
+}
+
+.competition-original-sentence { color: #164b9b; }
+.competition-polished-sentence ins { color: #a51919; font-weight: 700; text-decoration: underline; }

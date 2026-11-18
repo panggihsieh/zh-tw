@@ -44,7 +44,7 @@ const scoreLabels = {
   mechanics: "文字與標點",
 } as const;
 
-function compareSentences(original: string, polished: string) {
+export function compareSentences(original: string, polished: string) {
   const before = Array.from(original), after = Array.from(polished);
   const lengths = before.map(() => new Uint16Array(after.length + 1));
   lengths.push(new Uint16Array(after.length + 1));
