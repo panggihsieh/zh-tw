@@ -28,13 +28,20 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
         const key='stroke-speech/catalogue.json';let previous;
         try {previous=await store.get(key);} catch(error) {if(error.status!==404 && error.response?.status!==404) throw error;}
         if(req.method==='GET')return send(200,{item:previous?.value??null});
-        let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>100000)return send(413,{error:'資料過大。'});}
+        let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>2600000)return send(413,{error:'資料過大。'});}
         const input=JSON.parse(body);
         if(!Array.isArray(input.rows)||input.rows.length!==28)bad('需保留28種基本筆畫。');
         const ids=new Set();
         const rows=input.rows.map(row=>{
           if(!row || !/^(?:[1-9]|1[0-9]|2[0-8])$/.test(row.id) || ids.has(row.id) || typeof row.confirmed!=='boolean')bad('筆畫項目不符。');
           ids.add(row.id);
+          if(row.thumbnail!==undefined){
+            const match=typeof row.thumbnail==='string'&&row.thumbnail.length<=87410&&/^data:image\/(png|webp);base64,([A-Za-z0-9+/]+={0,2})$/.exec(row.thumbnail);
+            if(!match)bad('縮圖須為 64 KB 以下的 PNG 或 WebP。');
+            const bytes=Buffer.from(match[2],'base64');
+            const valid=match[1]==='png'?bytes.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')):bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WEBP';
+            if(!valid||bytes.length>65536||bytes.toString('base64')!==match[2])bad('縮圖格式不符。');
+          }
           if(row.svgId!==undefined && (typeof row.svgId!=='string'||! /^(?:builtin|stroke-(?:0[1-9]|[12][0-9]|3[0-4]))$/.test(row.svgId)))bad('筆畫圖片選項不符。');
           if(row.pronunciationSource!==undefined&&!['mnemonic','spoken'].includes(row.pronunciationSource))bad('讀音來源不符。');
           if(row.mnemonicRevision!==undefined && (typeof row.mnemonicRevision!=='string'||row.mnemonicRevision.length>50))bad('口訣版本格式不符。');
@@ -42,7 +49,7 @@ export function createStrokeSpeechHandler({store, origins, authenticate=authenti
           if(row.zhuyin!==undefined && (typeof row.zhuyin!=='string'||row.zhuyin.length>120))bad('注音格式不符。');
           for(const [field,max] of [['symbol',4],['name',30],['spoken',30],['examples',30],['notes',500]])if(typeof row[field]!=='string'||row[field].length>max)bad('筆畫欄位格式不符。');
           if(!row.name.trim() || (row.confirmed&&!row.spoken.trim()))bad('確認前需填寫名稱與朗讀文字。');
-          return {...(row.svgId!==undefined?{svgId:row.svgId}:{}),...(row.pronunciationSource!==undefined?{pronunciationSource:row.pronunciationSource}:{}),...(row.mnemonicRevision!==undefined?{mnemonicRevision:row.mnemonicRevision}:{}),...(row.mnemonic!==undefined?{mnemonic:row.mnemonic.trim()}:{}),...(row.zhuyin!==undefined?{zhuyin:row.zhuyin}:{}),...Object.fromEntries(['id','symbol','name','spoken','examples','notes','confirmed'].map(field=>[field,row[field]]))};
+          return {...(row.thumbnail!==undefined?{thumbnail:row.thumbnail}:{}),...(row.svgId!==undefined?{svgId:row.svgId}:{}),...(row.pronunciationSource!==undefined?{pronunciationSource:row.pronunciationSource}:{}),...(row.mnemonicRevision!==undefined?{mnemonicRevision:row.mnemonicRevision}:{}),...(row.mnemonic!==undefined?{mnemonic:row.mnemonic.trim()}:{}),...(row.zhuyin!==undefined?{zhuyin:row.zhuyin}:{}),...Object.fromEntries(['id','symbol','name','spoken','examples','notes','confirmed'].map(field=>[field,row[field]]))};
         });
         if((previous?.value.updatedAt??null)!==(input.updatedAt??null))return send(409,{error:'清單已被其他管理員更新，請重新載入後再修改。'});
         const value={rows,updatedAt:new Date().toISOString()};

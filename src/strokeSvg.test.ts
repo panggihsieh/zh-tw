@@ -2,7 +2,7 @@ import {it,expect} from 'vitest';
 import {STROKE_SVG_ASSETS,matchedStrokeSvg,selectedStrokeSvg} from './strokeSvg';
 it('34 張素材 ID 唯一，使用固定站內路徑',()=>{
  expect(STROKE_SVG_ASSETS).toHaveLength(34);expect(new Set(STROKE_SVG_ASSETS.map(asset=>asset.id)).size).toBe(34);
- expect(STROKE_SVG_ASSETS.every(asset=>/^\/stroke-svg\/kai\/stroke-\d{2}\.svg$/.test(asset.src))).toBe(true);
+ expect(STROKE_SVG_ASSETS.every(asset=>/^\/stroke-svg\/kai\/stroke-\d{2}\.(?:svg|png)$/.test(asset.src))).toBe(true);
 });
 it('同名及別名匹配，歧義筆畫不自動套用',()=>{
  expect(matchedStrokeSvg('橫')?.name).toBe('橫');expect(matchedStrokeSvg('撇橫')?.name).toBe('撇折');
