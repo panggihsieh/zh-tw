@@ -60,9 +60,10 @@ test('基本筆畫清單僅限管理員、驗證內容並防止覆寫其他管�
  assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,confirmed:true,spoken:''}:row)})).status,400);
  assert.equal((await save({rows:[rows[0],...rows.slice(0,27)]})).status,400);
  assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,mnemonicRevision:123}:row)})).status,400);
- rows[0].mnemonic='橫';rows[0].mnemonicRevision='2026-11-18-final-1';
+ assert.equal((await save({rows:rows.map((row,index)=>index===0?{...row,pronunciationSource:'invalid'}:row)})).status,400);
+ rows[0].pronunciationSource='mnemonic';rows[0].mnemonic='橫';rows[0].mnemonicRevision='2026-11-18-final-1';
  assert.equal((await save({rows})).status,200);
- const saved=(await (await fetch(url,{headers})).json()).item;assert.equal(saved.rows.length,28);assert.equal(saved.rows[0].zhuyin,'ㄏㄥˊ');assert.equal(saved.rows[0].mnemonicRevision,'2026-11-18-final-1');assert.equal(saved.rows[0].mnemonic,'橫');
+ const saved=(await (await fetch(url,{headers})).json()).item;assert.equal(saved.rows.length,28);assert.equal(saved.rows[0].zhuyin,'ㄏㄥˊ');assert.equal(saved.rows[0].mnemonicRevision,'2026-11-18-final-1');assert.equal(saved.rows[0].mnemonic,'橫');assert.equal(saved.rows[0].pronunciationSource,'mnemonic');
  assert.equal((await save({rows})).status,409);
  assert.equal((await save({...saved,rows:saved.rows.map((row,index)=>index===0?{...row,confirmed:true}:row)})).status,200);
  assert.equal((await (await fetch(url,{headers})).json()).item.rows[0].confirmed,true);

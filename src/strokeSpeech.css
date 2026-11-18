@@ -26,3 +26,5 @@
 @media(prefers-reduced-motion:reduce){.stroke-motion{animation:none}}
 
 .stroke-mnemonic-preview{font-weight:700;color:#244f3a}.stroke-mnemonic-tip,.stroke-card-editor{margin:12px 0}.stroke-mnemonic-tip summary,.stroke-card-editor summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}.stroke-mnemonic-tip p{font-size:14px;line-height:1.6}.stroke-card-editor[open]{border-top:1px solid #d5dfcc;padding-top:10px}
+
+.stroke-speech-grid label.stroke-source-choice{display:flex;align-items:center;gap:6px;font-size:14px}.stroke-speech-grid .stroke-source-choice input{width:auto;margin:0}
