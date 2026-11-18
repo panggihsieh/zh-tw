@@ -12,5 +12,5 @@ export function strokeTextToZhuyin(text:string):string|null {
  return output.join(' ').replace(/ ， /g,'，').replace(/ ，$/,'，');
 }
 export function strokeAuditionText(row:{zhuyin?:string;mnemonic?:string;spoken:string;pronunciationSource?:PronunciationSource}){
- return row.zhuyin?.trim()||(row.pronunciationSource==='spoken'?row.spoken:row.mnemonic?.trim()||row.spoken);
+ return row.pronunciationSource==='spoken'?row.spoken.trim():row.mnemonic?.trim()||row.spoken.trim();
 }
