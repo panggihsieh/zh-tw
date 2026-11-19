@@ -3999,3 +3999,8 @@ html{scroll-padding-top:calc(var(--app-header-height,160px) + 16px)}
 .resource-credits ul { padding-left: 1.4em; margin: 10px 0; }
 .resource-credits li { margin-bottom: 8px; overflow-wrap: anywhere; }
 .resource-credits a { color: var(--green-dark, #285d46); text-decoration: underline; }
+
+.backend-login-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: 100%; }
+.backend-login-actions > :is(a, button) { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-width: 0; height: 72px; margin: 0; padding: 10px 16px; border-radius: 14px; }
+.backend-login-actions > p { grid-column: 1 / -1; }
+@media (max-width: 600px) { .backend-login-actions { grid-template-columns: 1fr; } }

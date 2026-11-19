@@ -35,22 +35,22 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       setReady(true);
     }
   }, []);
-  async function login(redirect = false) {
+  async function login() {
     setBusy(true);
     setError("");
     try {
       if (user) await cloudLogout();
-      await cloudLogin(redirect);
+      await cloudLogin();
     } catch (e) {
       const code = (e as { code?: string }).code;
       setError(
         code === "auth/unauthorized-domain"
           ? "Firebase 尚未允許此網站登入，若剛更新設定請重新整理後重試。"
           : code === "auth/popup-blocked"
-            ? "瀏覽器阻擋登入視窗，請使用下方整頁登入。"
+            ? "瀏覽器阻擋登入視窗，請允許此網站開啟彈出視窗後重試。"
             : code === "permission-denied"
               ? "Google 登入成功，但使用者權限尚未生效，請稍後重試。"
-              : "Google 登入未完成，請重試或改用整頁登入。",
+              : "Google 登入未完成，請重試。",
       );
     } finally {
       setBusy(false);
@@ -67,6 +67,7 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       <main className="backend-login">
         <h1>教師後台登入</h1>
         <p>請使用管理者 Google 帳號登入：{ADMIN_EMAIL}</p>
+        <div className="backend-login-actions">
         {ready && cloudConfigured && <SchoolIamButton />}
         {!ready ? (
           <p role="status">確認登入狀態…</p>
@@ -90,16 +91,14 @@ export default function BackendGate({ children }: { children: ReactNode }) {
             )}
           </>
         )}
+        </div>
         {ready && cloudConfigured && (
           <>
             {busy && (
               <p role="status">
-                正在等待 Google 登入視窗。若未出現帳號選擇畫面，請改用整頁登入。
+                正在等待 Google 登入視窗，請在彈出視窗選取帳號。
               </p>
             )}
-            <button className="secondary" onClick={() => void login(true)}>
-              改用整頁 Google 登入
-            </button>
           </>
         )}
         {error && <p role="alert">{error}</p>}
