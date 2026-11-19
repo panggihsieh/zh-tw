@@ -10,6 +10,8 @@ const root = resolve(import.meta.dirname, '..');
 const moduleRoot = resolve(destination, 'classroom-learning-stats');
 const files = [
   'server/classroom-export.mjs',
+  'server/classroom-learning/classroom-export.mjs',
+  'server/classroom-learning/learning-record.mjs',
   'src/CompetitionClassroomExport.tsx',
   'src/competitionRankingPhoto.ts',
   'public/html2canvas.min.js',

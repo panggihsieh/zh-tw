@@ -1,4 +1,21 @@
+import {exportClassroomRecord} from './classroom-learning/classroom-export.mjs';
 export async function exportCompetitionClassroom(room, ranking, input, fetcher=fetch, env=process.env) {
+ if(env.CLASSROOM_LEARNING_TOKEN){
+  const bindings=JSON.parse(env.CLASSROOM_LEARNING_STUDENTS||'{}')[room.classId]||[];
+  const students={};
+  for(const row of ranking){
+   const binding=bindings.find(value=>value.seat===row.seat&&value.name===row.name);
+   const roster=room.students?.find(value=>value.seat===row.seat&&value.name===row.name);
+   if(binding&&roster&&binding.email===roster.email)students[row.uid]=binding.studentId;
+  }
+  return exportClassroomRecord({...room,questionCount:room.questions.length},ranking,input,{
+   token:env.CLASSROOM_LEARNING_TOKEN,sourceProject:'zh-tw',schoolId:env.CLASSROOM_EXPORT_SCHOOL,
+   classes:JSON.parse(env.CLASSROOM_EXPORT_CLASSES||'{}'),students,subject:'國語',
+   kind:room.gameType==='quiz'?'kahoot':room.gameType||'kahoot',
+   skills:[room.gameType==='writing'?'hanzi-strokes':room.gameType==='structure'?'hanzi-structure':room.gameType==='sentence-practice'?'sentence-writing':'language-quiz'],
+   maxScore:room.gameType==='sentence-practice'?null:room.questions.length*1000,
+  },fetcher);
+ }
  const error=(status,message)=>Object.assign(new Error(message),{status});
  if(room.status!=='closed'||room.testRoom||!ranking.length||ranking.some(row=>row.gradingIndex!=null)){
   throw error(409,'請等正式課堂結束且評分完成後再匯出。');

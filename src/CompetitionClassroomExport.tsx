@@ -39,7 +39,7 @@ export default function CompetitionClassroomExport({room,items,revision,autoOpen
      </div>)}
     </div>
    </div>
-   <ol>{items.map(item=><li key={item.uid}>第 {item.rank} 名 · {item.name} · {item.points} 分 · 已答 {item.answered} 題</li>)}</ol>
+   <ol>{items.map(item=><li key={item.uid}>第 {item.rank} 名 · {item.name} · {item.points} 分 · 答對 {item.correct}／已答 {item.answered} 題</li>)}</ol>
    <div className="competition-actions">
     <label>JPEG 容量上限 <select value={limit} disabled={busy} onChange={event=>{setLimit(Number(event.target.value));setPreview(null);}}>
      {[100,50,20].map(value=><option key={value} value={value}>{value} KB</option>)}

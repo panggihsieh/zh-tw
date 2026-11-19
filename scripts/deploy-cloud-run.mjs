@@ -131,6 +131,7 @@ for (const file of [
   "publisher-sync.mjs",
 ])
   await copyFile(`server/${file}`, resolve(stage, "server", file));
+await cp("server/classroom-learning", resolve(stage, "server/classroom-learning"), { recursive: true });
 await cp("public/game-strokes", resolve(stage, "public/game-strokes"), { recursive: true });
 for (const file of ["package.json", "package-lock.json", "Dockerfile"])
   await copyFile(`deploy/cloud/${file}`, resolve(stage, file));
