@@ -38,6 +38,7 @@ jobs:
         run: |
           if git show-ref --verify --quiet refs/remotes/origin/sync/zh-tw-classroom-learning; then
             git switch --track origin/sync/zh-tw-classroom-learning
+            git merge --no-edit origin/main
           else
             git switch -c sync/zh-tw-classroom-learning
           fi
