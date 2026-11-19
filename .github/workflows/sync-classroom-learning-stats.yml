@@ -57,7 +57,8 @@ jobs:
       - name: Push review branch
         working-directory: shared
         run: |
-          if git diff --quiet; then exit 0; fi
-          git add classroom-learning-stats/reference/zh-tw classroom-learning-stats/source.json
-          git commit -m "sync: update classroom learning source from zh-tw"
+          if ! git diff --quiet; then
+            git add classroom-learning-stats/reference/zh-tw classroom-learning-stats/source.json
+            git commit -m "sync: update classroom learning source from zh-tw"
+          fi
           git push origin HEAD:sync/zh-tw-classroom-learning
