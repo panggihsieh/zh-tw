@@ -1,0 +1,60 @@
+name: Sync classroom learning statistics module
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - server/classroom-export.mjs
+      - src/CompetitionClassroomExport.tsx
+      - src/competitionRankingPhoto.ts
+      - public/html2canvas.min.js
+      - scripts/sync-classroom-learning-module.mjs
+      - .github/workflows/sync-classroom-learning-stats.yml
+permissions:
+  contents: read
+concurrency:
+  group: classroom-learning-stats-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out zh-tw source
+        uses: actions/checkout@v4
+        with:
+          path: source
+      - name: Verify authoritative classroom export
+        working-directory: source
+        run: node --test server/classroom-export.test.mjs
+      - name: Check out scoped shared-modules destination
+        uses: actions/checkout@v4
+        with:
+          repository: panggihsieh/shared-modules
+          ssh-key: ${{ secrets.SHARED_MODULES_DEPLOY_KEY }}
+          path: shared
+          fetch-depth: 0
+      - name: Select synchronization branch
+        working-directory: shared
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/sync/zh-tw-classroom-learning; then
+            git switch --track origin/sync/zh-tw-classroom-learning
+          else
+            git switch -c sync/zh-tw-classroom-learning
+          fi
+      - name: Update allowlisted source references
+        run: node source/scripts/sync-classroom-learning-module.mjs
+        env:
+          SHARED_MODULES_DIR: ${{ github.workspace }}/shared
+          SOURCE_COMMIT: ${{ github.sha }}
+      - name: Verify shared module
+        working-directory: shared
+        run: node --test classroom-learning-stats/*.test.mjs
+      - name: Push review branch
+        working-directory: shared
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "zh-tw module sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add classroom-learning-stats/reference/zh-tw classroom-learning-stats/source.json
+          git commit -m "sync: update classroom learning source from zh-tw"
+          git push origin HEAD:sync/zh-tw-classroom-learning
