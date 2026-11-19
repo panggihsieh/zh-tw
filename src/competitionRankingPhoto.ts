@@ -14,6 +14,8 @@ function renderer():Promise<Renderer>{
  });
 }
 export async function captureCompetitionRanking(node:HTMLElement,maxBytes=900_000){
+ await new Promise<void>((resolve,reject)=>{const deadline=Date.now()+35000;const check=()=>{if(!node.querySelector('[data-avatar-pending="true"]'))resolve();else if(Date.now()>deadline)reject(Error('公仔原圖載入逾時，請重試。'));else setTimeout(check,100);};check();});
+ if(node.querySelector('[data-avatar-error="true"]'))throw Error('公仔原圖載入失敗，請先重試再匯出。');
  await bounded(document.fonts.ready,10000);
  await bounded(Promise.all([...node.querySelectorAll('img')].map(image=>image.decode())),10000);
  const render=await bounded(renderer(),15000),rect=node.getBoundingClientRect();

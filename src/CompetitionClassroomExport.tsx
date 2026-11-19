@@ -1,3 +1,4 @@
+import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import {useEffect,useRef,useState} from 'react';
 import {competitionRequest,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
 import {captureCompetitionRanking} from './competitionRankingPhoto';
@@ -33,7 +34,7 @@ export default function CompetitionClassroomExport({room,items,revision,autoOpen
     <p>{room.className}</p>
     <div className="competition-podium competition-centered-podium">
      {items.slice(0,7).map((item,index)=><div key={item.uid} style={{gridColumn:[4,3,5,2,6,1,7][index],paddingBottom:24*(6-index)}}>
-      {item.avatarKind==='anonymous'?<span className="competition-avatar anonymous">?</span>:<img className="competition-avatar" src={item.avatarKind==='custom'&&item.avatar?item.avatar:import.meta.env.BASE_URL+'mascot/green-bird.png'} alt={item.name+'的公仔'}/>}
+      {item.avatarKind==='anonymous'?<span className="competition-avatar anonymous">?</span>:<OriginalCompetitionAvatar src={item.avatarKind==='custom'&&item.avatar?item.avatar:import.meta.env.BASE_URL+'mascot/green-bird.png'} alt={item.name+'的公仔'}/>}
       <b>{item.rank}</b><strong>{item.name}</strong><span>{item.points} 分</span>
      </div>)}
     </div>

@@ -1,3 +1,4 @@
+import {competitionRequest} from './competitionApi';
 import { useState } from "react";
 import { quizRequest } from "./quizApi";
 
@@ -136,8 +137,10 @@ export default function ClassRoster({ classes, onSaved }: {
                       bitmap.close();
                       const avatar = canvas.toDataURL("image/jpeg", .72);
                       if (avatar.length > 12000) throw Error("圖片縮圖過大");
+                      const original=await new Promise<string>((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(Error('無法讀取原圖'));reader.readAsDataURL(file);});
+                      await competitionRequest('/avatar-originals',{thumbnail:avatar,original});
                       change({ avatar });
-                      setMessage("公仔已更換，請儲存名冊。");
+                      setMessage("公仔原圖已保留，請儲存名冊。");
                     } catch {
                       setMessage("無法讀取這張圖片，請選擇另一張。");
                     } finally {

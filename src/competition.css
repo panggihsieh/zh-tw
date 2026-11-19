@@ -206,3 +206,17 @@
 .competition-rank-board:fullscreen{width:100%;height:100dvh;min-height:0;padding:clamp(12px,2vw,30px)}
 .competition-rank-board:fullscreen .competition-countdown strong{font-size:clamp(36px,9cqh,100px)}
 @media(max-height:500px){.competition-rank-toolbar{flex-direction:row;justify-content:space-between}.competition-rank-toolbar .competition-countdown{margin:0}.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 150px - 6 * var(--podium-step))}}
+
+.competition-rank-board .competition-centered-podium>div{--ranking-name-size:clamp(12px,2cqw,24px)}
+.competition-rank-board .competition-centered-podium .competition-rank-name{font-size:var(--ranking-name-size)}
+.competition-rank-board .competition-centered-podium .competition-rank-score{font-size:calc(var(--ranking-name-size) * 2);line-height:1.1;white-space:nowrap;color:#ffe59a;font-variant-numeric:tabular-nums}
+.competition-rank-toolbar{min-height:clamp(84px,20cqh,140px);justify-content:center}
+.competition-rank-toolbar>button{position:absolute;right:0;top:0}
+.competition-rank-toolbar .competition-countdown-ring{position:relative;width:clamp(84px,20cqh,140px);aspect-ratio:1;margin:0;flex:none}
+.competition-countdown-ring>svg{display:block;width:100%;height:100%}
+.competition-countdown-ring>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.competition-countdown-ring span{font-size:clamp(10px,1.6cqh,14px)}
+.competition-rank-board .competition-countdown-ring strong,.competition-rank-board:fullscreen .competition-countdown-ring strong{font-size:clamp(23px,4.8cqh,38px);line-height:1}
+.competition-countdown-ring small{font-size:clamp(11px,1.8cqh,16px);font-variant-numeric:tabular-nums}
+.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 270px - 6 * var(--podium-step))}
+@media(max-height:500px){.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 220px - 6 * var(--podium-step))}}

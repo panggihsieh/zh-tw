@@ -39,7 +39,7 @@ export function rankParticipants(items){
  const sorted=[...items].sort((a,b)=>b.points-a.points||b.correct-a.correct||a.totalResponseMs-b.totalResponseMs||a.joinedAt-b.joinedAt);
  let rank=0,previous;return sorted.map((item,index)=>{const key=`${item.points}/${item.correct}/${item.totalResponseMs}`;if(key!==previous)rank=index+1;previous=key;return {...item,rank};});
 }
-async function requestBody(req){let size=0,chunks=[];for await(const c of req){size+=c.length;if(size>1500000)fail('請求資料過大。',413);chunks.push(c);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));}
+async function requestBody(req,limit=1500000){let size=0,chunks=[];for await(const c of req){size+=c.length;if(size>limit)fail('請求資料過大。',413);chunks.push(c);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));}
 export function createCompetitionHandler({store,origins,authenticate=writingIdentity,gradeSentence,now=()=>Date.now(),random}){
  const roomKey=id=>`competition-rooms/${id}.json`,participantKey=(id,uid)=>`competition-participants/${id}/${uid}.json`;
  async function scan(prefix){let cursor,items=[],pages=0;do{const page=await store.list(prefix,cursor);items.push(...await Promise.all(page.names.map(async name=>(await store.get(name)).value)));cursor=page.nextCursor;if(++pages>30)fail('資料量過大。');}while(cursor);return items;}
@@ -59,6 +59,20 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   }
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname.replace('/api/structure/competition','');
+   const avatarMatch=path.match(/^\/avatar-originals\/([a-f0-9]{64})$/);
+   if(avatarMatch&&req.method==='GET'){
+    if(!user.admin)fail('僅管理者可讀取公仔原圖。',403);
+    const original=await store.get(`competition-avatar-originals/${avatarMatch[1]}.json`).catch(error=>{if(error.status===404)return null;throw error;});
+    return send(200,{avatar:original?.value.avatar||null});
+   }
+   if(path==='/avatar-originals'&&req.method==='POST'){
+    if(!user.admin)fail('僅管理者可儲存公仔原圖。',403);
+    const {thumbnail,original}=await requestBody(req,7100000);
+    if(typeof thumbnail!=='string'||thumbnail.length>12000||!/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(thumbnail)||typeof original!=='string'||original.length>6800000||!/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(original))fail('公仔圖片格式不符。');
+    const id=createHash('sha256').update(thumbnail).digest('hex'),key=`competition-avatar-originals/${id}.json`;
+    try{await store.create(key,{avatar:original});}catch(error){if(error.status!==412)throw error;}
+    return send(200,{saved:true});
+   }
    if(path==='/available'&&req.method==='GET'){if(user.guest)return send(200,{available:false});const available=(await scan('competition-rooms/')).some(room=>room&&room.archivedAt==null&&room.status==='lobby'&&permitted(room,user));return send(200,{available});}
    if(path==='/rooms'&&req.method==='GET'){if(!user.admin)fail('僅管理者可查看開課紀錄。',403);return send(200,{items:(await scan('competition-rooms/')).filter(room=>room && room.archivedAt == null).sort((a,b)=>b.createdAt-a.createdAt).map(v=>publicRoom(v,true))});}
    if(path==='/rooms'&&req.method==='POST'){
