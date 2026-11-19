@@ -103,3 +103,9 @@ test('造句逐題保存、結束後教師逐字分析，學生與進行中不�
  const board=await f.request(path+'/leaderboard',undefined,'student');
  assert.equal('sentenceAnswers' in board.items[0],false);
 });
+
+test('課堂保存課文標題並驗證格式',()=>{
+ assert.deepEqual(validateRoomInput({...definition(),lessonTitles:[' 第八課：家鄉味 ','第八課：家鄉味']}).lessonTitles,['第八課：家鄉味']);
+ assert.throws(()=>validateRoomInput({...definition(),lessonTitles:'錯誤格式'}));
+ assert.throws(()=>validateRoomInput({...definition(),lessonTitles:['x'.repeat(161)]}));
+});

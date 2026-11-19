@@ -3,7 +3,7 @@ import { version } from "../package.json";
 export const SITE_VERSION = version;
 export const SITE_UPDATED_AT = "2026/11/19";
 /** 本版修改內容，顯示於版本編號旁。 */
-export const SITE_VERSION_NOTE = "已結束競賽課堂支援展開與收合，歷史紀錄預設收合";
-export const SITE_VERSION_SHORT_NOTE = "已結束課堂展開收合";
+export const SITE_VERSION_NOTE = "動態排名頂部顯示課堂內容，公仔依可用空間放大並保留完整外觀";
+export const SITE_VERSION_SHORT_NOTE = "排名課堂資訊與公仔放大";
 
 

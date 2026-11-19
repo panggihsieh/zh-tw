@@ -13,6 +13,7 @@ export function validateRoomInput(value){
  if(!value||!text(value.title,100)||!text(value.className,80))fail('請填寫競賽名稱與班級。');
  if(value.loginMode&&value.loginMode!=='roster')fail('學生統一以開課代碼及名冊姓名免登入加入，不再提供 Google 匿名加入。');
  const loginMode='roster',gameType=['sentence-practice','structure','writing'].includes(value.gameType)?value.gameType:'quiz';
+ const lessonTitles=value.lessonTitles??[];if(!Array.isArray(lessonTitles)||lessonTitles.length>100||lessonTitles.some(v=>!text(v,160)))fail('課文標題格式不符。');
  const duration=Number(value.duration??600);if(!Number.isInteger(duration)||duration<60||duration>7200)fail('課堂時間須為 1–120 分鐘。');
  const maxParticipants=Number(value.maxParticipants??100);if(!Number.isInteger(maxParticipants)||maxParticipants<1||maxParticipants>100)fail('參與人數上限須為 1–100 人。');
  const students=(value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));
@@ -33,7 +34,7 @@ export function validateRoomInput(value){
   if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>(gameType==='structure'?8:6)||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
   return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
- return {title:value.title.trim(),classId:String(value.classId||''),className:value.className.trim(),loginMode,gameType,duration,maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
+ return {lessonTitles:[...new Set(lessonTitles.map(v=>v.trim()))],title:value.title.trim(),classId:String(value.classId||''),className:value.className.trim(),loginMode,gameType,duration,maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
 }
 export function questionPoints(correct,elapsedMs,seconds){return correct&&elapsedMs<=seconds*1000?800+Math.round(200*Math.max(0,1-elapsedMs/(seconds*1000))):0;}
 export function rankParticipants(items){
@@ -44,7 +45,7 @@ async function requestBody(req,limit=1500000){let size=0,chunks=[];for await(con
 export function createCompetitionHandler({store,origins,authenticate=writingIdentity,gradeSentence,now=()=>Date.now(),random}){
  const roomKey=id=>`competition-rooms/${id}.json`,participantKey=(id,uid)=>`competition-participants/${id}/${uid}.json`;
  async function scan(prefix){let cursor,items=[],pages=0;do{const page=await store.list(prefix,cursor);items.push(...await Promise.all(page.names.map(async name=>(await store.get(name)).value)));cursor=page.nextCursor;if(++pages>30)fail('資料量過大。');}while(cursor);return items;}
- const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(admin?{roster:room.roster,questions:room.questions}: {})});
+ const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,lessonTitles:room.lessonTitles||[],className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(admin?{roster:room.roster,questions:room.questions}: {})});
  const permitted=(room,user)=>user.guest ? user.roomId===room.id : user.admin||room.loginMode==='anonymous'||room.roster.includes(user.email.toLowerCase());
  const publicParticipant=(value,user)=>({uid:value.uid,name:value.name,seat:value.seat||null,avatarKind:value.avatarKind,avatar:value.avatar||null,index:value.index,correct:value.correct,points:value.points,finished:value.finished,mine:value.uid===user.uid});
  return async(req,res)=>{

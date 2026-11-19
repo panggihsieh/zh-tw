@@ -226,3 +226,22 @@
 .competition-completed-room > summary > strong { font-size:18px; }
 .competition-completed-hint { font-size:13px; opacity:.8; }
 .competition-completed-room[open] > summary { margin-bottom:18px; border-bottom:1px solid #d5dec8; padding-bottom:16px; }
+
+/* Let the figures use the space left by the heading, clock and score labels. */
+.competition-rank-board { height:min(90dvh,1000px); gap:8px; }
+.competition-rank-heading { flex:none; text-align:center; overflow-wrap:anywhere; }
+.competition-rank-heading h3 { margin:0; font-size:clamp(18px,3cqw,30px); color:inherit; }
+.competition-rank-heading p { margin:4px 0 0; font-size:clamp(12px,1.7cqw,18px); }
+.competition-rank-board .competition-centered-podium > div { height:100%; display:grid; grid-template-rows:24px minmax(0,1fr) auto auto auto; }
+.competition-rank-board .competition-centered-podium .competition-avatar,
+.competition-rank-board .competition-centered-podium > div:first-child .competition-avatar { width:100%; height:100%; max-height:none; max-width:100%; object-fit:contain; }
+.competition-rank-board .competition-centered-podium b { width:24px; height:24px; }
+.competition-rank-board:fullscreen { height:100dvh; }
+@media(max-height:500px) {
+ .competition-rank-toolbar { min-height:68px; }
+ .competition-rank-toolbar .competition-countdown-ring { width:68px; }
+ .competition-rank-heading h3 { font-size:18px; }
+ .competition-rank-heading p { font-size:12px; }
+ .competition-rank-board .competition-centered-podium > div { --ranking-name-size:12px; gap:2px; }
+}
+.competition-rank-board .competition-centered-podium { grid-template-rows:minmax(0,1fr); }
