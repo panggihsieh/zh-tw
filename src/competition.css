@@ -173,3 +173,19 @@
 
 .competition-original-sentence { color: #164b9b; }
 .competition-polished-sentence ins { color: #a51919; font-weight: 700; text-decoration: underline; }
+
+/* Project a readable room code and scannable QR without clipboard controls. */
+.competition-lobby-toolbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+.competition-lobby-enter,.competition-lobby-exit{align-items:center;gap:8px}
+.competition-lobby-enter{display:inline-flex}.competition-lobby-exit{display:none}
+.competition-room .competition-room-code>strong{font-size:clamp(48px,7vw,88px)}
+.competition-qr svg{display:block;width:min(280px,70vw);height:auto;max-width:100%}
+.competition-qr span{font-size:16px}
+.competition-room:fullscreen{box-sizing:border-box;overflow:auto;width:100%;height:100%;max-width:none;margin:0;padding:clamp(20px,4vw,64px);border:0;border-radius:0;background:#fffdf3;color:#173a30}
+.competition-room:fullscreen .competition-lobby-enter{display:none}
+.competition-room:fullscreen .competition-lobby-exit{display:inline-flex}
+.competition-room:fullscreen .competition-room-main{justify-content:center;align-items:center;gap:clamp(24px,6vw,100px);flex-wrap:wrap}
+.competition-room:fullscreen .competition-room-code>strong{font-size:clamp(64px,12vw,180px)}
+.competition-room:fullscreen .competition-qr svg{width:min(440px,55dvh,75vw)}
+.competition-room:fullscreen .competition-attendees{margin-top:24px}
+.competition-room:fullscreen .competition-actions{justify-content:center}
