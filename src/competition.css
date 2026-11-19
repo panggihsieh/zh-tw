@@ -189,3 +189,20 @@
 .competition-room:fullscreen .competition-qr svg{width:min(440px,55dvh,75vw)}
 .competition-room:fullscreen .competition-attendees{margin-top:24px}
 .competition-room:fullscreen .competition-actions{justify-content:center}
+
+/* Keep the clock above a viewport-sized live podium, including complete custom figures. */
+.competition-rank-board{box-sizing:border-box;container-type:size;display:flex;flex-direction:column;height:min(78dvh,860px);min-height:340px;gap:12px;overflow:hidden}
+.competition-rank-toolbar{position:relative;display:flex;flex-direction:column;align-items:center;flex:none;gap:6px}
+.competition-rank-toolbar>button{align-self:flex-end}
+.competition-rank-toolbar .competition-countdown{margin-top:-8px}
+.competition-rank-toolbar .competition-countdown strong{font-size:clamp(36px,8cqh,84px);line-height:1.05}
+.competition-rank-board .competition-centered-podium{--podium-step:clamp(3px,1.4cqh,14px);flex:1;min-height:0;margin:0;padding-inline:clamp(16px,3cqw,40px);align-items:end;gap:clamp(2px,1cqw,14px)}
+.competition-rank-board .competition-centered-podium>div{min-width:0;max-height:100%;box-sizing:border-box;gap:4px}
+.competition-rank-board .competition-centered-podium .competition-avatar{width:min(140%,calc(100% + 64px));height:auto;max-height:calc(100cqh - 200px - 6 * var(--podium-step));min-height:0;max-width:none;aspect-ratio:auto;object-fit:contain;border-radius:0;background:transparent}
+.competition-rank-board .competition-centered-podium>div:first-child .competition-avatar{width:min(140%,calc(100% + 64px))}
+.competition-rank-board .competition-centered-podium strong{font-size:clamp(12px,2cqw,24px);line-height:1.2}
+.competition-rank-board .competition-centered-podium span{font-size:clamp(10px,1.4cqw,17px);line-height:1.2}
+.competition-rank-board .competition-other-ranks{flex:none;margin:0;max-height:3em;overflow:auto;font-size:12px}
+.competition-rank-board:fullscreen{width:100%;height:100dvh;min-height:0;padding:clamp(12px,2vw,30px)}
+.competition-rank-board:fullscreen .competition-countdown strong{font-size:clamp(36px,9cqh,100px)}
+@media(max-height:500px){.competition-rank-toolbar{flex-direction:row;justify-content:space-between}.competition-rank-toolbar .competition-countdown{margin:0}.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 150px - 6 * var(--podium-step))}}

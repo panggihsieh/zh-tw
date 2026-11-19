@@ -86,9 +86,9 @@ export default function BasicStrokePractice() {
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
-    }}><Repeat size={18} aria-hidden="true" /> 基本筆畫循環播放</button>
+    }}><Repeat size={26} aria-hidden="true" /> 基本筆劃循環播放</button>
     {status && <p role="status">{status}</p>}
-    <dialog ref={dialog} className="basic-stroke-dialog" aria-label="基本筆畫循環播放" onClose={() => { cancel(); if (dialog.current?.contains(document.fullscreenElement)) void document.exitFullscreen().catch(() => {}); }}>
+    <dialog ref={dialog} className="basic-stroke-dialog" aria-label="基本筆劃循環播放" onClose={() => { cancel(); if (dialog.current?.contains(document.fullscreenElement)) void document.exitFullscreen().catch(() => {}); }}>
       <div className="basic-stroke-stage">
         <figure className="stroke-playback-square">
           <span className="basic-stroke-sound">筆畫語音已開啟</span>

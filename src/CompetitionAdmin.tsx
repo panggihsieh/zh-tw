@@ -31,6 +31,10 @@ function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'
  return <img className="competition-avatar" src={`${import.meta.env.BASE_URL}mascot/green-bird.png`} alt="系統預設小畫眉公仔"/>;
 }
 const podiumColumns = [4, 3, 5, 2, 6, 1, 7];
+function podiumLayout(count:number){
+ const columns=Math.max(1,count%2?count:count+1),center=Math.ceil(columns/2);
+ return {columns,positions:Array.from({length:count},(_,index)=>center+(index%2?-(index+1)/2:index/2))};
+}
 
 export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const [selectedRooms,setSelectedRooms]=useState<string[]>([]);
@@ -178,13 +182,13 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     </button>
     <button className="secondary" disabled={busy||!removableIds.length} onClick={()=>void run(removeSelectedRooms)}><Trash2 size={18}/>移除選取課堂（{removableIds.length}）</button>
   </div>
-  <div className="competition-room-list">{rooms.map(room=>{const url=competitionJoinUrl(room.code),items=people[room.id]||[],deadline=room.status==='closed'?(room.closedAt??room.expiresAt??now):now,remaining=room.expiresAt?Math.max(0,Math.ceil((room.expiresAt-deadline)/1000)):room.duration;return <article className="competition-room" key={room.id}>{room.status==='lobby'&&<div className="competition-lobby-toolbar"><button type="button" className="secondary" onClick={async event=>{
+  <div className="competition-room-list">{rooms.map(room=>{const url=competitionJoinUrl(room.code),items=people[room.id]||[],deadline=room.status==='closed'?(room.closedAt??room.expiresAt??now):now,remaining=room.expiresAt?Math.max(0,Math.ceil((room.expiresAt-deadline)/1000)):room.duration,podium=podiumLayout(Math.min(items.length,podiumColumns.length));return <article className="competition-room" key={room.id}>{room.status==='lobby'&&<div className="competition-lobby-toolbar"><button type="button" className="secondary" onClick={async event=>{
  const panel=event.currentTarget.closest('article');
  try{if(document.fullscreenElement===panel)await document.exitFullscreen();else if(panel?.requestFullscreen)await panel.requestFullscreen();else setMessage('此瀏覽器不支援全螢幕。');}catch{setMessage('無法切換全螢幕。');}
 }}><span className="competition-lobby-enter"><Maximize size={18}/>全螢幕</span><span className="competition-lobby-exit"><Minimize size={18}/>離開全螢幕</span></button></div>}<div className="competition-room-main"><div><span className={`competition-status ${room.status}`}>{room.status==='lobby'?'等待加入':room.status==='running'?'競賽中':'已結束'}</span>{room.testRoom&&<span className="competition-test-badge">獨立測試</span>}<h3>{room.title}</h3>{room.status==='closed'&&<label><input type="checkbox" aria-label={`選取課堂：${room.title}`} checked={selectedRooms.includes(room.id)} disabled={busy} onChange={event=>{const checked=event.target.checked;setSelectedRooms(ids=>checked?[...ids,room.id]:ids.filter(id=>id!==room.id));}}/> 選取移除</label>}<p>{room.className} · {room.questionCount} 題 · {room.gameType==='sentence-practice'?'一字多詞 AI 造句':room.gameType==='structure'?'生字結構遊戲':room.gameType==='writing'?'書寫生字遊戲':'自訂 Kahoot 四選一遊戲'}</p><div className="competition-room-code"><span>開課代碼</span><strong>{room.code}</strong></div></div>{room.status==='lobby'&&<div className="competition-qr"><QRCodeSVG value={url} size={280} marginSize={4}/><span>{items.length} 位學生已加入</span></div>}</div>
    {room.status==='lobby'&&<div className="competition-attendees">{items.map(item=><div key={item.uid}><Avatar item={item}/><span>{item.seat?`${item.seat}號 `:''}{item.name}</span></div>)}{!items.length&&<p>尚無學生加入。</p>}</div>}
    {room.status==='closed'&&<CompetitionFinalRanking room={room} items={items} allowExport autoSave={!room.testRoom&&observedOpenRooms.current.has(room.id)}/>}
-   {room.status==='running'&&<section className="competition-rank-board">
+   {room.status==='running'&&<section className="competition-rank-board"><div className="competition-rank-toolbar">
     <button type="button" className="secondary" onClick={async event=>{
      const board=event.currentTarget.closest('section');
      try {
@@ -194,8 +198,8 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
      } catch {setMessage('無法切換全螢幕。');}
     }}><span className="competition-enter-fullscreen">排行全螢幕</span><span className="competition-exit-fullscreen">離開全螢幕</span></button>
     <div className="competition-countdown"><span>課堂倒數</span><strong>{String(Math.floor(remaining/60)).padStart(2,'0')}:{String(remaining%60).padStart(2,'0')}</strong></div>
-    <div className="competition-podium competition-centered-podium">
-     {items.slice(0,podiumColumns.length).map((item,index)=><div key={item.uid} style={{gridColumn:podiumColumns[index],paddingBottom:`calc(${6-index} * var(--podium-step))`}}><b>{item.rank}</b><Avatar item={item}/><strong>{item.name}</strong><span>{item.points} 分 · {item.answered}/{room.questionCount}</span></div>)}
+    </div><div className="competition-podium competition-centered-podium" style={{gridTemplateColumns:Array.from({length:podium.columns},(_,index)=>index===Math.floor(podium.columns/2)?'1.3fr':'1fr').join(' ')}}>
+     {items.slice(0,podiumColumns.length).map((item,index)=><div key={item.uid} style={{gridColumn:podium.positions[index],paddingBottom:`calc(${Math.min(items.length,7)-1-index} * var(--podium-step))`}}><b>{item.rank}</b><Avatar item={item}/><strong>{item.name}</strong><span>{item.points} 分 · {item.answered}/{room.questionCount}</span></div>)}
     </div>
     {items.length>podiumColumns.length&&<p className="competition-other-ranks">其他學生：{items.slice(podiumColumns.length).map(item=>`${item.name} ${item.answered}/${room.questionCount}`).join('、')}</p>}
    </section>}
