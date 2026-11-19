@@ -81,7 +81,10 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   let user;
   try { user=await authenticate(req); } catch {
    if(req.headers.authorization)return send(401,{error:'教師登入憑證無效'});
-   const token=/(?:^|;\s*)competition_guest=([A-Za-z0-9_-]{43})(?:;|$)/.exec(req.headers.cookie||'')?.[1];
+   const cookies=req.headers.cookie||'';
+   const currentToken=/(?:^|;\s*)__session=([A-Za-z0-9_-]{43})(?:;|$)/.exec(cookies)?.[1];
+   const token=currentToken||/(?:^|;\s*)competition_guest=([A-Za-z0-9_-]{43})(?:;|$)/.exec(cookies)?.[1];
+   if(token&&!currentToken)res.setHeader('Set-Cookie',`__session=${token}; Path=/api/structure/competition; HttpOnly; Secure; SameSite=Strict; Max-Age=7200`);
    const uid=token?'guest-'+createHash('sha256').update(token).digest('hex'):null;
    const session=uid?await store.get(`competition-guests/${uid}.json`).catch(()=>null):null;
    user={uid:uid||'pending',email:'',admin:false,guest:true,roomId:session?.value.expiresAt>now()?session.value.roomId:null};
@@ -113,7 +116,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     if(user.guest && user.uid==='pending') {
      const token=randomBytes(32).toString('base64url');
      user.uid='guest-'+createHash('sha256').update(token).digest('hex');
-     res.setHeader('Set-Cookie',`competition_guest=${token}; Path=/api/structure/competition; HttpOnly; Secure; SameSite=Strict; Max-Age=7200`);
+     res.setHeader('Set-Cookie',`__session=${token}; Path=/api/structure/competition; HttpOnly; Secure; SameSite=Strict; Max-Age=7200`);
     }
     const key=`competition-code-attempts/${encodeURIComponent(user.uid)}.json`;
     const room=(await scan('competition-rooms/')).find(v=>v.code===codeMatch[1].toUpperCase()&&v.status!=='closed'&&!(v.expiresAt&&v.expiresAt<=now())&&!(v.status==='lobby'&&now()>=v.createdAt+7200000));

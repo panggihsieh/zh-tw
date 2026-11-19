@@ -117,19 +117,20 @@ test('匿名代碼加入：搶選互斥、重送、容量、排名公仔與開�
   return {uid:'teacher',email:'teacher@example.com',admin:true};
  }}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
  const call=async(path,body,cookie='',teacher=false)=>{
-  const response=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room',...(cookie?{Cookie:cookie}:{}),...(teacher?{'x-test-user':'teacher'}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+  const response=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room',...(cookie?{Cookie:body===undefined?cookie.split(';').filter(v=>v.trim().startsWith('__session=')).join(';'):cookie}:{}),...(teacher?{'x-test-user':'teacher'}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
   return {status:response.status,cookie:response.headers.get('set-cookie')?.split(';')[0],...await response.json()};
  };
 
  const created=await call('/rooms',{...definition(),loginMode:'anonymous',className:'',roster:[],maxParticipants:2,testRoom:true},'',true);
  assert.equal(created.status,201);const room=created.room,path=`/rooms/${room.id}`;
  const a=await call(`/code/${room.code}`),b=await call(`/code/${room.code}`),c=await call(`/code/${room.code}`);
- assert.equal(a.room.anonymousBirds.length,30);assert.equal(a.room.nameChoices,undefined);
+ assert.match(a.cookie,/^__session=/,'Hosting must forward the anonymous classroom cookie');assert.equal(a.room.anonymousBirds.length,30);assert.equal(a.room.nameChoices,undefined);
  assert.equal((await call(path+'/start',{},a.cookie)).status,403);
  assert.equal((await call(path+'/join',{name:'測試',birdId:'../evil'},a.cookie)).status,400);
  const results=await Promise.all([call(path+'/join',{name:'隔離甲',birdId:'bird-01'},a.cookie),call(path+'/join',{name:'隔離乙',birdId:'bird-01'},b.cookie)]);
  assert.deepEqual(results.map(v=>v.status).sort(),[200,409]);
  const winner=results[0].status===200?a:b,loser=winner===a?b:a;
+ const migrated=await call(path+'/join',{name:'舊 Cookie 恢復',birdId:'bird-01'},winner.cookie.replace('__session=','competition_guest='));assert.equal(migrated.status,200);assert.match(migrated.cookie,/^__session=/);
  const again=await call(path+'/join',{name:'不可改名',birdId:'bird-01'},winner.cookie);
  assert.equal(again.status,200);assert.notEqual(again.participant.name,'不可改名');assert.equal(again.participant.avatar,'/bird-avatars/bird-01.png');
  assert.equal((await call(path+'/join',{name:'換鳥',birdId:'bird-02'},winner.cookie)).status,409);

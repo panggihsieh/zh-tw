@@ -30,3 +30,7 @@
 - `npm test`：前端及既有功能回歸。
 - `npm run build`：TypeScript 與正式建置。
 
+
+### Firebase Hosting 匿名 Cookie
+
+匿名課堂使用 `__session` Cookie，Path 僅限 `/api/structure/competition`，保留 HttpOnly、Secure、SameSite=Strict。Firebase Hosting 只轉送此名稱的 Cookie，避免 GET 排名與重新進入課堂遺失身分；SchoolIAM 的同名 Cookie 仍限 `/auth/schooliam`，兩者路徑分離。舊 `competition_guest` 在原 Cookie 可送達的請求中安全轉換，沿用原 UID、公仔與成績，不重建參賽者。
