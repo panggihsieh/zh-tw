@@ -1,5 +1,5 @@
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
-import {useEffect,useMemo,useRef,useState} from 'react';
+import {useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
 import {Maximize,Minimize,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest, type QuizPaper} from './quizApi';
@@ -26,6 +26,13 @@ const gameTitles = {
   quiz: "自訂 Kahoot 四選一遊戲",
 };
 const structureChoices=['左右','上下','左中右','上中下','全包圍','半包圍','獨體','品字形'];
+function CompetitionRoomPanel({room,initiallyOpen,children}:{room:CompetitionRoom;initiallyOpen:boolean;children:ReactNode}){
+ if(room.status!=='closed')return <article className="competition-room">{children}</article>;
+ return <details className="competition-room competition-completed-room" open={initiallyOpen||undefined}>
+  <summary><span className="competition-status closed">已結束</span><strong>{room.title}</strong><span>{room.className} · {room.questionCount} 題</span><span className="competition-completed-hint">展開／收合課堂結果</span></summary>
+  {children}
+ </details>;
+}
 function Avatar({item}:{item:Pick<CompetitionParticipant,'avatar'|'avatarKind'|'name'>}){
  if(item.avatarKind==='custom'&&item.avatar)return <OriginalCompetitionAvatar src={item.avatar} alt={`${item.name}的公仔`}/>;
  if(item.avatarKind==='anonymous')return <span className="competition-avatar anonymous" aria-label="匿名公仔">?</span>;
@@ -183,7 +190,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     </button>
     <button className="secondary" disabled={busy||!removableIds.length} onClick={()=>void run(removeSelectedRooms)}><Trash2 size={18}/>移除選取課堂（{removableIds.length}）</button>
   </div>
-  <div className="competition-room-list">{rooms.map(room=>{const url=competitionJoinUrl(room.code),items=people[room.id]||[],deadline=room.status==='closed'?(room.closedAt??room.expiresAt??now):now,remaining=room.expiresAt?Math.max(0,Math.ceil((room.expiresAt-deadline)/1000)):room.duration,podium=podiumLayout(Math.min(items.length,podiumColumns.length)),remainingPercent=Math.min(100,Math.max(0,Math.ceil(remaining/Math.max(1,room.duration)*100)));return <article className="competition-room" key={room.id}>{room.status==='lobby'&&<div className="competition-lobby-toolbar"><button type="button" className="secondary" onClick={async event=>{
+  <div className="competition-room-list">{rooms.map(room=>{const url=competitionJoinUrl(room.code),items=people[room.id]||[],deadline=room.status==='closed'?(room.closedAt??room.expiresAt??now):now,remaining=room.expiresAt?Math.max(0,Math.ceil((room.expiresAt-deadline)/1000)):room.duration,podium=podiumLayout(Math.min(items.length,podiumColumns.length)),remainingPercent=Math.min(100,Math.max(0,Math.ceil(remaining/Math.max(1,room.duration)*100)));return <CompetitionRoomPanel room={room} initiallyOpen={observedOpenRooms.current.has(room.id)} key={room.id}>{room.status==='lobby'&&<div className="competition-lobby-toolbar"><button type="button" className="secondary" onClick={async event=>{
  const panel=event.currentTarget.closest('article');
  try{if(document.fullscreenElement===panel)await document.exitFullscreen();else if(panel?.requestFullscreen)await panel.requestFullscreen();else setMessage('此瀏覽器不支援全螢幕。');}catch{setMessage('無法切換全螢幕。');}
 }}><span className="competition-lobby-enter"><Maximize size={18}/>全螢幕</span><span className="competition-lobby-exit"><Minimize size={18}/>離開全螢幕</span></button></div>}<div className="competition-room-main"><div><span className={`competition-status ${room.status}`}>{room.status==='lobby'?'等待加入':room.status==='running'?'競賽中':'已結束'}</span>{room.testRoom&&<span className="competition-test-badge">獨立測試</span>}<h3>{room.title}</h3>{room.status==='closed'&&<label><input type="checkbox" aria-label={`選取課堂：${room.title}`} checked={selectedRooms.includes(room.id)} disabled={busy} onChange={event=>{const checked=event.target.checked;setSelectedRooms(ids=>checked?[...ids,room.id]:ids.filter(id=>id!==room.id));}}/> 選取移除</label>}<p>{room.className} · {room.questionCount} 題 · {room.gameType==='sentence-practice'?'一字多詞 AI 造句':room.gameType==='structure'?'生字結構遊戲':room.gameType==='writing'?'書寫生字遊戲':'自訂 Kahoot 四選一遊戲'}</p>{room.status==='lobby'&&<div className="competition-room-code"><span>開課代碼</span><strong>{room.code}</strong></div>}</div>{room.status==='lobby'&&<div className="competition-qr"><QRCodeSVG value={url} size={280} marginSize={4}/><span>{items.length} 位學生已加入</span></div>}</div>
@@ -210,6 +217,6 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     const character=card?.character;
     return character && <div className="competition-actions"><button className="secondary competition-preview-action" onClick={()=>setPreviewCard({phrase:card?.phrase||character,character})}>開啟學生語音測試</button></div>;
    })()}
-  </article>})}</div><p role="status">{message}</p>
+  </CompetitionRoomPanel>})}</div><p role="status">{message}</p>
  </section>;
 }

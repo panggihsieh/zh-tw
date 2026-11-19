@@ -220,3 +220,9 @@
 .competition-countdown-ring small{font-size:clamp(11px,1.8cqh,16px);font-variant-numeric:tabular-nums}
 .competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 310px - 6 * var(--podium-step))}
 @media(max-height:500px){.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 220px - 6 * var(--podium-step))}}
+
+.competition-completed-room > summary { cursor:pointer; padding:8px 0; }
+.competition-completed-room > summary > * { margin-inline-end:12px; }
+.competition-completed-room > summary > strong { font-size:18px; }
+.competition-completed-hint { font-size:13px; opacity:.8; }
+.competition-completed-room[open] > summary { margin-bottom:18px; border-bottom:1px solid #d5dec8; padding-bottom:16px; }
