@@ -1,14 +1,18 @@
+import CompetitionSentenceReview from './CompetitionSentenceReview';
+import {Square,Music2} from 'lucide-react';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import CompetitionClassroomExport from './CompetitionClassroomExport';
 import { useEffect, useRef, useState } from 'react';
 import { competitionRequest, type CompetitionRoom, type LeaderboardItem } from './competitionApi';
 import { captureCompetitionRanking } from './competitionRankingPhoto';
-import { endSoundEnabled, playCompetitionEndSound, setEndSoundEnabled } from './competitionEndSound';
+import { endSoundEnabled, playCompetitionEndSound, setEndSoundEnabled, stopCompetitionEndSound, useEndSoundStatus, endSoundVolume, setEndSoundVolume } from './competitionEndSound';
 
 interface Photo { id:string; image:string; createdAt:number; title:string }
 export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false,autoSave=false,allowExport=false}:{autoSave?:boolean;allowExport?:boolean;room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
  const board=useRef<HTMLDivElement>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[photo,setPhoto]=useState<Photo|null>(null),[preview,setPreview]=useState(''),[revision,setRevision]=useState(''),[enabled,setEnabled]=useState(endSoundEnabled);
  const [photosLoaded,setPhotosLoaded]=useState(false);
+ const soundStatus=useEndSoundStatus(),[volume,setVolume]=useState(endSoundVolume);
+ const stopMusic=<button type="button" className="secondary" onClick={stopCompetitionEndSound}><Square size={18} aria-hidden="true"/>停止播放音樂</button>;
  const saveDialog=useRef<HTMLDialogElement>(null);
  const [saveDecision,setSaveDecision]=useState<boolean|null>(null),[saveChoice,setSaveChoice]=useState(true),[saveSeconds,setSaveSeconds]=useState(30);
  useEffect(()=>{
@@ -74,11 +78,16 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
  return <section className="competition-final-ranking">
   {autoSave&&!simulated&&room.status==='closed'&&!!items.length&&<dialog ref={saveDialog} aria-labelledby={`save-ranking-${room.id}`} onCancel={()=>{setSaveDecision(false);}}>
    <h2 id={`save-ranking-${room.id}`}>課堂已結束，是否儲存排名？</h2>
-   <p>{room.title} · {saveSeconds} 秒內確認，逾時放棄自動保存。</p>
+   <p>{room.title} · {saveSeconds} 秒內確認，逾時放棄自動保存。</p><div className="competition-actions">{stopMusic}</div>
    <label><input type="radio" name={`save-${room.id}`} checked={saveChoice} onChange={()=>setSaveChoice(true)}/>儲存排名並開啟課堂紀錄匯出預覽</label>
    <label><input type="radio" name={`save-${room.id}`} checked={!saveChoice} onChange={()=>setSaveChoice(false)}/>放棄自動保存</label>
    <div className="competition-actions"><button type="button" className="primary" autoFocus onClick={()=>{setSaveDecision(saveChoice);if(!saveChoice)setMessage('已略過自動保存。');}}>確認</button><button type="button" className="secondary" onClick={()=>{setSaveDecision(false);setMessage('已略過自動保存。');}}>放棄</button></div>
   </dialog>}
+  <div className="competition-actions" aria-label="結束音樂控制">
+   <button type="button" className="secondary" onClick={()=>{setEnabled(true);setEndSoundEnabled(true);void playCompetitionEndSound().catch(()=>setMessage('音樂未能播放，請確認瀏覽器聲音權限後再按播放。'));}}><Music2 size={18} aria-hidden="true"/>播放結束音樂</button>{stopMusic}
+   <label>音樂音量<input type="range" min="0" max="100" value={volume} onChange={event=>{const value=Number(event.target.value);setVolume(value);setEndSoundVolume(value);}}/>{volume}%</label>
+   <span role="status">{soundStatus==='blocked'?'自動播放未成功，請按「播放結束音樂」。':soundStatus==='playing'?'結束音樂播放中':soundStatus==='silent'?'音樂音量為 0，請調高音量後播放。':soundStatus==='stopped'?'音樂已停止':''}</span>
+  </div>
   <div ref={board} className="competition-ranking-capture">
    <p>🏆 {room.status==='closed'?'最終排名':'目前排名 · 等待課堂結束'}</p><h2>{room.title}</h2>
    <p>{room.className} · {room.questionCount} 題 · {new Date(room.startedAt??room.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})} · 設定 {Math.round(room.duration/60)} 分鐘</p>
@@ -87,6 +96,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
    <ol className="competition-leaderboard">{items.map(item=><li key={item.uid} className={item.mine?'is-me':''}><b>{item.rank}</b><span>{item.name}<small>{item.correct} 題達標 · 已答 {item.answered}/{room.questionCount}</small></span><strong>{item.points} 分</strong></li>)}</ol>
    {!items.length&&<p>尚無排名紀錄。</p>}
   </div>
+  {allowExport&&!simulated&&room.status==='closed'&&room.gameType==='sentence-practice'&&<CompetitionSentenceReview roomId={room.id} request={request}/>}
   <div className="competition-actions">
    <label><input type="checkbox" checked={enabled} onChange={event=>{setEnabled(event.target.checked);setEndSoundEnabled(event.target.checked);}}/> 結束鼓掌音效</label>
    <button type="button" className="secondary" disabled={!enabled} onClick={()=>void playCompetitionEndSound().catch(()=>setMessage('瀏覽器未允許音效，請再次按下試聽。'))}>試聽結束音效</button>

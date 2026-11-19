@@ -83,3 +83,23 @@ test('學生免 Google 登入：代碼選姓名、禁止冒用教師、開始鎖
 });
 
 test("新課堂不再接受Google匿名模式",()=>{assert.throws(()=>validateRoomInput({...definition(),loginMode:"anonymous"}),/學生統一/);assert.equal(validateRoomInput({...definition(),loginMode:"roster"}).loginMode,"roster");});
+
+test('造句逐題保存、結束後教師逐字分析，學生與進行中不可讀取',async t=>{
+ const f=await fixture(t);
+ const created=await f.request('/rooms',{...definition(),gameType:'sentence-practice',questions:[{phrase:'灘',character:'灘',seconds:90}]});
+ const id=created.room.id,path=`/rooms/${id}`;
+ await f.request(path+'/join',{},'student');await f.request(path+'/start',{});
+ assert.equal((await f.request(path+'/sentence-review')).status,409);
+ await f.request(path+'/state',{},'student');
+ await f.request(path+'/answer',{sentence:'我在美麗的海灘看夕陽。'},'student');
+ await f.request(path+'/close',{});
+ assert.equal((await f.request(path+'/sentence-review',undefined,'student')).status,403);
+ const report=await f.request(path+'/sentence-review');
+ assert.equal(report.status,200);assert.equal(report.groups[0].character,'灘');
+ assert.equal(report.groups[0].highest[0].sentence,'我在美麗的海灘看夕陽。');
+ assert.equal(report.groups[0].lowest[0].qualityScore,85);
+ assert.match(report.groups[0].highest[0].feedback,/句子完整/);
+ assert.equal(f.aiCalls(),1);
+ const board=await f.request(path+'/leaderboard',undefined,'student');
+ assert.equal('sentenceAnswers' in board.items[0],false);
+});

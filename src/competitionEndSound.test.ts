@@ -57,3 +57,22 @@ it('時間到結束同樣啟用音效，重複輪詢不重播',async()=>{
  expect(sound.endSoundEnabled()).toBe(true);
  expect(play).toHaveBeenCalledTimes(1);
 });
+
+it('預載較晚完成也不會暫停或靜音正式結束歌曲',async()=>{
+ let finish!:()=>void;
+ play.mockImplementationOnce(()=>new Promise<void>(resolve=>{finish=resolve;}));
+ const sound=await import('./competitionEndSound');
+ const primed=sound.primeCompetitionEndSound();
+ await sound.playCompetitionEndSound();
+ finish();await primed;
+ expect(play).toHaveBeenCalledTimes(2);expect(pause).not.toHaveBeenCalled();
+});
+it('停止音樂會暫停並回到開頭，仍可重新播放且不關閉下次結束音樂',async()=>{
+ const player={play,pause,currentTime:0,volume:1,muted:false,onended:null,onerror:null};
+ vi.stubGlobal('Audio',function(){return player;});
+ const sound=await import('./competitionEndSound');
+ await sound.playCompetitionEndSound();player.currentTime=12;
+ sound.stopCompetitionEndSound();
+ expect(pause).toHaveBeenCalledTimes(1);expect(player.currentTime).toBe(0);expect(sound.endSoundEnabled()).toBe(true);
+ await sound.playCompetitionEndSound();expect(play).toHaveBeenCalledTimes(2);
+});

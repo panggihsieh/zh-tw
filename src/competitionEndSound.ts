@@ -1,10 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import type { CompetitionRoom } from './competitionApi';
 
 let audio:HTMLAudioElement|null=null;
 const sounded=new Set<string>();
+let generation=0,priming=false;
+let soundStatus:'idle'|'playing'|'blocked'|'stopped'|'silent'='idle';
+const listeners=new Set<()=>void>();
+function updateStatus(value:typeof soundStatus){soundStatus=value;listeners.forEach(listener=>listener());}
+export function useEndSoundStatus(){return useSyncExternalStore(listener=>{listeners.add(listener);return()=>listeners.delete(listener);},()=>soundStatus,()=>soundStatus);}
+function endAudio(){
+ audio??=new Audio(`${import.meta.env.BASE_URL}audio/pisa-competition-end.mp3`);
+ audio.onended=()=>updateStatus('idle');
+ audio.onerror=()=>updateStatus('blocked');
+ return audio;
+}
+export function stopCompetitionEndSound(){generation++;priming=false;if(audio){audio.pause();audio.currentTime=0;audio.muted=false;}updateStatus('stopped');}
+export async function primeCompetitionEndSound(){
+ if(!endSoundEnabled()||priming||soundStatus==='playing')return;
+ const player=endAudio(),run=++generation;priming=true;player.muted=false;player.volume=0;
+ try{await player.play();}catch{/* Retry at the next user gesture. */}
+ finally{if(run===generation){player.pause();player.currentTime=0;player.volume=endSoundVolume()/100;priming=false;}}
+}
 export function endSoundEnabled(){try{return localStorage.getItem('zh-tw.competition-end-sound')!=='off';}catch{return true;}}
-export function setEndSoundEnabled(value:boolean){try{localStorage.setItem('zh-tw.competition-end-sound',value?'on':'off');}catch{}if(!value)audio?.pause();}
+export function setEndSoundEnabled(value:boolean){try{localStorage.setItem('zh-tw.competition-end-sound',value?'on':'off');}catch{}if(!value)stopCompetitionEndSound();}
 export function endSoundVolume(){
  try {
   const value=Number(localStorage.getItem('zh-tw.competition-end-volume') ?? 60);
@@ -17,9 +35,11 @@ export function setEndSoundVolume(value:number){
 }
 export async function playCompetitionEndSound(){
  if(!endSoundEnabled())return;
- audio??=new Audio(`${import.meta.env.BASE_URL}audio/pisa-competition-end.mp3`);
- audio.volume=endSoundVolume()/100;audio.currentTime=0;
- await audio.play();
+ const player=endAudio(),run=++generation;priming=false;player.muted=false;
+ player.volume=endSoundVolume()/100;player.currentTime=0;
+ if(player.volume===0){updateStatus('silent');return;}
+ try{await player.play();if(run===generation)updateStatus('playing');}
+ catch(error){if(run===generation){updateStatus('blocked');throw error;}}
 }
 export async function playClosedCompetitionSound(roomId:string){
  if(sounded.has(roomId))return;
@@ -43,12 +63,11 @@ export function useCompetitionEndSound(rooms:CompetitionRoom[]){
  },[rooms]);
  useEffect(()=>{
   function unlock(){
-   if(!endSoundEnabled())return;
-   audio??=new Audio(`${import.meta.env.BASE_URL}audio/pisa-competition-end.mp3`);
-   if(audio.paused){audio.muted=true;void audio.play().then(()=>{audio!.pause();audio!.currentTime=0;audio!.muted=false;}).catch(()=>{if(audio)audio.muted=false;});}
+   if(soundStatus==='blocked'){void playCompetitionEndSound().catch(()=>{});return;}
+   void primeCompetitionEndSound();
   }
-  document.addEventListener('pointerdown',unlock,{once:true});
-  document.addEventListener('keydown',unlock,{once:true});
+  document.addEventListener('pointerdown',unlock);
+  document.addEventListener('keydown',unlock);
   return()=>{document.removeEventListener('pointerdown',unlock);document.removeEventListener('keydown',unlock);};
  },[]);
 }
