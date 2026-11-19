@@ -259,7 +259,7 @@ export function createQuizHandler({
               seats.add(seat);
               if (email) emails.add(email);
               if (avatar !== undefined && (typeof avatar !== 'string' || avatar.length > 12000 ||
-                  !/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(avatar)))
+                  !/^data:image\/(?:jpeg;base64,\/9j\/|png;base64,iVBORw0KGgo|webp;base64,UklGR)[A-Za-z0-9+/]+={0,2}$/.test(avatar)))
                 throw Error('公仔須為有效的 JPEG 縮圖');
               return {seat, name:name.trim(), email, active, ...(avatar ? {avatar} : {})};
             }).sort((a,b)=>a.seat-b.seat);

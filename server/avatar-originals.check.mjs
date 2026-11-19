@@ -17,6 +17,9 @@ test('私人原圖只准管理員讀寫，縮圖雜湊綁定且拒絕任意圖�
  assert.equal(writes,1);assert.equal((await (await fetch(base+'/'+id,{headers})).json()).avatar,original);
  assert.equal((await fetch(base+'/'+id)).status,403);
  assert.equal((await fetch(base,{method:'POST',headers,body:JSON.stringify({thumbnail,original:'https://bad.example/a.png'})})).status,400);
- assert.equal(writes,1);
+ for(const transparent of ['data:image/png;base64,iVBORw0KGgoAAA==','data:image/webp;base64,UklGRgAA']){
+  assert.equal((await fetch(base,{method:'POST',headers,body:JSON.stringify({thumbnail:transparent,original})})).status,200);
+ }
+ assert.equal(writes,3);
  assert.equal((await (await fetch(base+'/'+'a'.repeat(64),{headers})).json()).avatar,null);
 });

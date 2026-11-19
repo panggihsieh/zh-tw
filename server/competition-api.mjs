@@ -17,7 +17,7 @@ export function validateRoomInput(value){
  const duration=Number(value.duration??600);if(!Number.isInteger(duration)||duration<60||duration>7200)fail('課堂時間須為 1–120 分鐘。');
  const maxParticipants=Number(value.maxParticipants??100);if(!Number.isInteger(maxParticipants)||maxParticipants<1||maxParticipants>100)fail('參與人數上限須為 1–100 人。');
  const students=(value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));
- if(students.length>100||students.some(v=>!Number.isInteger(v.seat)||v.seat<1||v.seat>999||!text(v.name,80)||!text(v.email,254)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)||v.avatar&&(!/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(v.avatar)||v.avatar.length>12000)))fail('班級學生資料或公仔格式不符。');
+ if(students.length>100||students.some(v=>!Number.isInteger(v.seat)||v.seat<1||v.seat>999||!text(v.name,80)||!text(v.email,254)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)||v.avatar&&(!/^data:image\/(?:jpeg;base64,\/9j\/|png;base64,iVBORw0KGgo|webp;base64,UklGR)[A-Za-z0-9+/]+={0,2}$/.test(v.avatar)||v.avatar.length>12000)))fail('班級學生資料或公仔格式不符。');
  const roster=value.roster||students.map(v=>v.email);
  if(loginMode==='roster'&&(!Array.isArray(roster)||!roster.length||roster.length>100||roster.some(v=>!text(v,254)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))))fail('名冊模式需有 1–100 個有效 Email。');
  if(!Array.isArray(value.questions)||!value.questions.length||value.questions.length>100)fail('請輸入 1–100 題。');
@@ -70,7 +70,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    if(path==='/avatar-originals'&&req.method==='POST'){
     if(!user.admin)fail('僅管理者可儲存公仔原圖。',403);
     const {thumbnail,original}=await requestBody(req,7100000);
-    if(typeof thumbnail!=='string'||thumbnail.length>12000||!/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(thumbnail)||typeof original!=='string'||original.length>6800000||!/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(original))fail('公仔圖片格式不符。');
+    if(typeof thumbnail!=='string'||thumbnail.length>12000||!/^data:image\/(?:jpeg;base64,\/9j\/|png;base64,iVBORw0KGgo|webp;base64,UklGR)[A-Za-z0-9+/]+={0,2}$/.test(thumbnail)||typeof original!=='string'||original.length>6800000||!/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(original))fail('公仔圖片格式不符。');
     const id=createHash('sha256').update(thumbnail).digest('hex'),key=`competition-avatar-originals/${id}.json`;
     try{await store.create(key,{avatar:original});}catch(error){if(error.status!==412)throw error;}
     return send(200,{saved:true});
