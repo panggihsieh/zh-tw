@@ -218,5 +218,5 @@
 .competition-countdown-ring span{font-size:clamp(10px,1.6cqh,14px)}
 .competition-rank-board .competition-countdown-ring strong,.competition-rank-board:fullscreen .competition-countdown-ring strong{font-size:clamp(23px,4.8cqh,38px);line-height:1}
 .competition-countdown-ring small{font-size:clamp(11px,1.8cqh,16px);font-variant-numeric:tabular-nums}
-.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 270px - 6 * var(--podium-step))}
+.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 310px - 6 * var(--podium-step))}
 @media(max-height:500px){.competition-rank-board .competition-centered-podium .competition-avatar{max-height:calc(100cqh - 220px - 6 * var(--podium-step))}}
