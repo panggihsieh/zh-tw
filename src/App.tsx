@@ -1489,6 +1489,10 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                             <StrokePlayer
                               key={card.id}
                               character={card.character}
+                              previousDisabled={cardIndex === 0}
+                              nextDisabled={cardIndex === collection.cards.length - 1}
+                              onPrevious={() => { setCardIndex(cardIndex - 1); setPlaying(false); }}
+                              onNext={() => { setCardIndex(cardIndex + 1); setPlaying(false); }}
                             />
                           )}
                           <div

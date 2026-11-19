@@ -1,9 +1,10 @@
+import type {ReactNode} from 'react';
 import {useEffect,useRef,useState} from 'react';
 import {outlinePath,tracePath,type Point} from './writingGame';
 import {stopStrokeSpeech,useStrokeSpeech} from './strokeSpeech';
 import {Pause,Play,SkipForward,RotateCcw,Grid2X2,Maximize,Minimize} from 'lucide-react';
 interface Stroke {outline:any[];track:Point[]}
-export default function StrokePlayback({character}:{character:string}){
+export default function StrokePlayback({character,extraActions}:{character:string;extraActions?:ReactNode}){
  const [strokes,setStrokes]=useState<Stroke[]|null>(null),[index,setIndex]=useState(0),[playing,setPlaying]=useState(false),[finished,setFinished]=useState(false),[error,setError]=useState('');
  const voice=useStrokeSpeech(character,strokes,'practice',true);
  const [speed,setSpeed]=useState('中'),[grid,setGrid]=useState(true),[fullscreen,setFullscreen]=useState(false),[cycle,setCycle]=useState(0);
@@ -37,6 +38,7 @@ export default function StrokePlayback({character}:{character:string}){
    <button type="button" disabled={!strokes} onClick={replay}><RotateCcw/>重播</button>
    <button type="button" aria-pressed={grid} onClick={()=>setGrid(x=>!x)}><Grid2X2/>格線</button>
    <button type="button" onClick={()=>void toggleFullscreen()}>{fullscreen?<Minimize/>:<Maximize/>}{fullscreen?'離開全螢幕':'全螢幕'}</button>
+   {extraActions}
   </div>{error&&strokes&&<p role="alert">{error}</p>}
  </div>;
 }

@@ -70,7 +70,7 @@
 .basic-stroke-stage:fullscreen{background:#fffdf3;color:#173a30}
 
 .basic-stroke-stage .stroke-playback-square{position:relative}
-.basic-stroke-sound{position:absolute;inset:12px auto auto 12px;display:inline-flex;align-items:center;gap:6px;min-height:44px;border-radius:999px}
+.basic-stroke-sound{display:block;position:static;max-width:100%;margin:0;text-align:center;line-height:1.5}
 
 .stroke-player-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
 .stroke-player-pair>.official-player,.stroke-player-pair>.stroke-local-player{min-width:0;margin:0}

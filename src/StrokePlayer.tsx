@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { ExternalLink, RotateCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, RotateCcw } from "lucide-react";
 import { MOE_LICENSE_URL, strokeFrameUrl } from "./strokeSource";
 import CompetitionWriting from './CompetitionWriting';
 import StrokePlayback from './StrokePlayback';
 
-export default function StrokePlayer({ character }: { character: string }) {
+export default function StrokePlayer({ character,previousDisabled,nextDisabled,onPrevious,onNext }: { character: string;previousDisabled?:boolean;nextDisabled?:boolean;onPrevious?:()=>void;onNext?:()=>void }) {
   const url = strokeFrameUrl(character);
   const [localTab,setLocalTab]=useState<'playback'|'practice'>(() => {
     try { return sessionStorage.getItem('hanzi-notebook.stroke-tab.v1') === 'practice' ? 'practice' : 'playback'; }
@@ -29,6 +29,7 @@ export default function StrokePlayer({ character }: { character: string }) {
         </a>
       </div>
     );
+  const navigation=<>{onPrevious&&<button type="button" disabled={previousDisabled} onClick={onPrevious}><ChevronLeft aria-hidden="true"/>上一字</button>}{onNext&&<button type="button" disabled={nextDisabled} onClick={onNext}><ChevronRight aria-hidden="true"/>下一字</button>}</>;
   const officialActions = <><button type="button" className="secondary" onClick={() => setReload(x => x + 1)}><RotateCcw size={15}/>重新載入</button><a className="secondary" href={url} target="_blank" rel="noreferrer">另開官方播放器<ExternalLink size={15}/></a></>;
   return (
     <div className="stroke-lesson">
@@ -46,7 +47,7 @@ export default function StrokePlayer({ character }: { character: string }) {
           <button type="button" role="tab" id="stroke-tab-practice" aria-controls="stroke-local-panel" aria-selected={localTab==='practice'} onClick={()=>setLocalTab('practice')}>筆順練習</button>
         </div>
         <div role="tabpanel" id="stroke-local-panel" aria-labelledby={`stroke-tab-${localTab}`}>
-          {localTab==='playback'?<><StrokePlayback key={`${character}-${reload}`} character={character}/><div className="competition-actions">{officialActions}</div></>:<CompetitionWriting key={`${character}-${reload}`} character={character} mode="practice" disabled={false} onSubmit={()=>{}} extraActions={officialActions}/>}
+          {localTab==='playback'?<><StrokePlayback key={`${character}-${reload}`} character={character} extraActions={navigation}/><div className="competition-actions">{officialActions}</div></>:<CompetitionWriting key={`${character}-${reload}`} character={character} mode="practice" disabled={false} onSubmit={()=>{}} extraActions={<>{navigation}{officialActions}</>}/>}
         </div>
       </details>
       <p className="stroke-attribution">

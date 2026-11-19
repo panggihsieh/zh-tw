@@ -1,7 +1,7 @@
 import { strokeAuditionText } from "./strokePronunciation";
 import type { CatalogueRow } from "./StrokeCatalogue";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Maximize, Pause, Play, Repeat, Square } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Pause, Play, Repeat, LogOut } from "lucide-react";
 import seed from "./strokeCatalogueSeed.json";
 import { matchedStrokeSvg, selectedStrokeSvg } from "./strokeSvg";
 import { upgradeStrokeMnemonic } from "./strokeSpeechCatalog";
@@ -90,26 +90,26 @@ export default function BasicStrokePractice() {
     {status && <p role="status">{status}</p>}
     <dialog ref={dialog} className="basic-stroke-dialog" aria-label="基本筆劃循環播放" onClose={() => { cancel(); if (dialog.current?.contains(document.fullscreenElement)) void document.exitFullscreen().catch(() => {}); }}>
       <div className="basic-stroke-stage">
+        <span className="basic-stroke-sound">筆畫語音已開啟</span>
         <figure className="stroke-playback-square">
-          <span className="basic-stroke-sound">筆畫語音已開啟</span>
           {asset ? <img src={asset.src} alt={row.name} /> : <span>{row.symbol}</span>}
           <figcaption><strong>{row.name}</strong> · {reading}</figcaption>
         </figure>
         <div className="stroke-preview-actions">
-          <button type="button" className="secondary" aria-label="上一個筆畫" title="上一個筆畫" onClick={() => move(-1)}><ChevronLeft aria-hidden="true" /></button>
-          <button type="button" className="secondary" aria-label="下一個筆畫" title="下一個筆畫" onClick={() => move(1)}><ChevronRight aria-hidden="true" /></button>
+          <button type="button" className="secondary" aria-label="上一個筆畫" title="上一個筆畫" onClick={() => move(-1)}><ChevronLeft aria-hidden="true" />上一個</button>
+          <button type="button" className="secondary" aria-label="下一個筆畫" title="下一個筆畫" onClick={() => move(1)}><ChevronRight aria-hidden="true" />下一個</button>
           <button type="button" className="secondary" aria-label="切換全螢幕" title="切換全螢幕" onClick={async () => {
             try {
               if (document.fullscreenElement) await document.exitFullscreen();
               else await dialog.current?.querySelector(".basic-stroke-stage")?.requestFullscreen();
             } catch { /* The dialog already fills the viewport. */ }
-          }}><Maximize aria-hidden="true" /></button>
+          }}><Maximize aria-hidden="true" />全螢幕</button>
           <button type="button" className="secondary" aria-label={paused ? "繼續試聽" : "暫停試聽"} title={paused ? "繼續試聽" : "暫停試聽"} onClick={() => {
             if (paused) play(index);
             else cancel();
             setPaused(!paused);
-          }}>{paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}</button>
-          <button type="button" className="secondary" aria-label="停止並關閉" title="停止並關閉" onClick={() => dialog.current?.close()}><Square aria-hidden="true" /></button>
+          }}>{paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}{paused ? "繼續" : "暫停"}</button>
+          <button type="button" className="secondary" aria-label="離開筆畫播放" title="離開筆畫播放" onClick={() => dialog.current?.close()}><LogOut aria-hidden="true" />離開</button>
         </div>
       </div>
     </dialog>
