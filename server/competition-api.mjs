@@ -1,3 +1,4 @@
+import birdCatalog from './competition-birds.json' with {type:'json'};
 import {exportCompetitionClassroom} from './classroom-export.mjs';
 import { randomUUID, randomBytes, randomInt, createHash } from 'node:crypto';
 import { writingIdentity } from './writing-api.mjs';
@@ -10,15 +11,15 @@ const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});}
 const text=(value,max)=>typeof value==='string'&&value.trim()&&value.length<=max;
 export const makeRoomCode=random=>Array.from({length:4},()=>alphabet[random?Math.floor(random()*alphabet.length):randomInt(alphabet.length)]).join('');
 export function validateRoomInput(value){
- if(!value||!text(value.title,100)||!text(value.className,80))fail('請填寫競賽名稱與班級。');
- if(value.loginMode&&value.loginMode!=='roster')fail('學生統一以開課代碼及名冊姓名免登入加入，不再提供 Google 匿名加入。');
- const loginMode='roster',gameType=['sentence-practice','structure','writing'].includes(value.gameType)?value.gameType:'quiz';
+ if(!value||!text(value.title,100)||(value.loginMode!=='anonymous'&&!text(value.className,80)))fail('請填寫競賽名稱與班級。');
+ if(value.loginMode&&!['roster','anonymous'].includes(value.loginMode))fail('請選擇名冊或匿名參加。');
+ const loginMode=value.loginMode||'roster',gameType=['sentence-practice','structure','writing'].includes(value.gameType)?value.gameType:'quiz';
  const lessonTitles=value.lessonTitles??[];if(!Array.isArray(lessonTitles)||lessonTitles.length>100||lessonTitles.some(v=>!text(v,160)))fail('課文標題格式不符。');
  const duration=Number(value.duration??600);if(!Number.isInteger(duration)||duration<60||duration>7200)fail('課堂時間須為 1–120 分鐘。');
  const maxParticipants=Number(value.maxParticipants??100);if(!Number.isInteger(maxParticipants)||maxParticipants<1||maxParticipants>100)fail('參與人數上限須為 1–100 人。');
- const students=(value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));
+ const students=(loginMode==='anonymous'?[]:value.students||[]).filter(v=>v?.active!==false).map(v=>({seat:Number(v.seat),name:String(v.name||'').trim(),email:String(v.email||'').trim().toLowerCase(),...(v.avatar?{avatar:v.avatar}:{})}));
  if(students.length>100||students.some(v=>!Number.isInteger(v.seat)||v.seat<1||v.seat>999||!text(v.name,80)||!text(v.email,254)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)||v.avatar&&(!/^data:image\/(?:jpeg;base64,\/9j\/|png;base64,iVBORw0KGgo|webp;base64,UklGR)[A-Za-z0-9+/]+={0,2}$/.test(v.avatar)||v.avatar.length>12000)))fail('班級學生資料或公仔格式不符。');
- const roster=value.roster||students.map(v=>v.email);
+ const roster=loginMode==='anonymous'?[]:value.roster||students.map(v=>v.email);
  if(loginMode==='roster'&&(!Array.isArray(roster)||!roster.length||roster.length>100||roster.some(v=>!text(v,254)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))))fail('名冊模式需有 1–100 個有效 Email。');
  if(!Array.isArray(value.questions)||!value.questions.length||value.questions.length>100)fail('請輸入 1–100 題。');
  const questions=value.questions.map((q,index)=>{
@@ -34,7 +35,7 @@ export function validateRoomInput(value){
   if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>(gameType==='structure'?8:6)||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
   return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
- return {lessonTitles:[...new Set(lessonTitles.map(v=>v.trim()))],title:value.title.trim(),classId:String(value.classId||''),className:value.className.trim(),loginMode,gameType,duration,maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
+ return {lessonTitles:[...new Set(lessonTitles.map(v=>v.trim()))],title:value.title.trim(),classId:loginMode==='anonymous'?'':String(value.classId||''),className:loginMode==='anonymous'?'匿名參加':value.className.trim(),loginMode,gameType,duration,maxParticipants:loginMode==='anonymous'?Math.min(maxParticipants,30):maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
 }
 export function questionPoints(correct,elapsedMs,seconds){return correct&&elapsedMs<=seconds*1000?800+Math.round(200*Math.max(0,1-elapsedMs/(seconds*1000))):0;}
 export function rankParticipants(items){
@@ -45,9 +46,35 @@ async function requestBody(req,limit=1500000){let size=0,chunks=[];for await(con
 export function createCompetitionHandler({store,origins,authenticate=writingIdentity,gradeSentence,now=()=>Date.now(),random}){
  const roomKey=id=>`competition-rooms/${id}.json`,participantKey=(id,uid)=>`competition-participants/${id}/${uid}.json`;
  async function scan(prefix){let cursor,items=[],pages=0;do{const page=await store.list(prefix,cursor);items.push(...await Promise.all(page.names.map(async name=>(await store.get(name)).value)));cursor=page.nextCursor;if(++pages>30)fail('資料量過大。');}while(cursor);return items;}
+ async function joinAnonymous(id,user,body){
+  if(!text(body.name,40)||!birdCatalog.some(bird=>bird.id===body.birdId))fail('請輸入40字內的暱稱並選擇小鳥公仔。');
+  let claimed;
+  for(let attempt=0;attempt<30;attempt++){
+   const record=await store.get(roomKey(id)),room=record.value;
+   if(room.loginMode!=='anonymous')fail('這堂課使用班級名冊。',409);
+   const claims=room.anonymousParticipants||{};
+   if(claims[user.uid]){
+    if(claims[user.uid].birdId!==body.birdId)fail('你已選定其他公仔，請使用原公仔重新加入。',409);
+    claimed=claims[user.uid];break;
+   }
+   if(room.status!=='lobby'||now()>=room.createdAt+7200000)fail('課堂開始後或加入期限已過，無法加入。',409);
+   if(Object.keys(claims).length>=room.maxParticipants)fail('這堂課已達參與人數上限。',409);
+   if(Object.values(claims).some(value=>value.birdId===body.birdId))fail('這隻小鳥已有人選取，請改選其他公仔。',409);
+   claimed={birdId:body.birdId,name:body.name.trim(),joinedAt:now()};
+   try{await store.update(roomKey(id),{...room,anonymousParticipants:{...claims,[user.uid]:claimed}},record.generation);break;}
+   catch(error){if(error.status!==412)throw error;claimed=null;}
+  }
+  if(!claimed)fail('同時加入人數較多，請再試一次。',409);
+  const key=participantKey(id,user.uid);
+  const room=(await store.get(roomKey(id))).value;
+  const participant={roomId:id,uid:user.uid,name:claimed.name,seat:null,avatarKind:'anonymous',birdId:claimed.birdId,
+   avatar:'/bird-avatars/'+claimed.birdId+'.png',joinedAt:claimed.joinedAt,index:0,correct:0,points:0,totalResponseMs:0,questionStartedAt:null,finished:false,testRoom:room.testRoom===true};
+  try{await store.create(key,participant);}catch(error){if(error.status!==412)throw error;}
+  return (await store.get(key)).value;
+ }
  const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,lessonTitles:room.lessonTitles||[],className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(admin?{roster:room.roster,questions:room.questions}: {})});
  const permitted=(room,user)=>user.guest ? user.roomId===room.id : user.admin||room.loginMode==='anonymous'||room.roster.includes(user.email.toLowerCase());
- const publicParticipant=(value,user)=>({uid:value.uid,name:value.name,seat:value.seat||null,avatarKind:value.avatarKind,avatar:value.avatar||null,index:value.index,correct:value.correct,points:value.points,finished:value.finished,mine:value.uid===user.uid});
+ const publicParticipant=(value,user)=>({uid:value.uid,name:value.name,seat:value.seat||null,avatarKind:value.avatarKind,avatar:value.avatar||null,birdId:value.birdId||null,index:value.index,correct:value.correct,points:value.points,finished:value.finished,mine:value.uid===user.uid});
  return async(req,res)=>{
   const send=(status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
   if(req.method==='POST'&&(!origins.includes(req.headers.origin)||req.headers['x-notebook-request']!=='competition-room'))return send(403,{error:'不允許的來源'});
@@ -115,7 +142,9 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
      user.roomId=room.id;
     }
     if(!permitted(room,user))fail('你不在這個班級名單中。',403);
-    return send(200,{room:{...publicRoom(room,user.admin),...(user.guest?{nameChoices:(room.students||[]).map(student=>({seat:student.seat,name:student.name}))}:{})}});
+    const anonymous=room.loginMode==='anonymous';
+    const own=anonymous?await store.get(participantKey(room.id,user.uid)).catch(error=>{if(error.status===404)return null;throw error;}):null;
+    return send(200,{room:{...publicRoom(room,user.admin),...(anonymous?{anonymousBirds:birdCatalog.map(bird=>{const owner=Object.entries(room.anonymousParticipants||{}).find(([,claim])=>claim.birdId===bird.id)?.[0];return {...bird,occupied:!!owner,mine:owner===user.uid};})}:user.guest?{nameChoices:(room.students||[]).map(student=>({seat:student.seat,name:student.name}))}:{})},...(own?{participant:publicParticipant(own.value,user)}:{})});
    }
    const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive|photos|classroom-export|sentence-review)$/i);if(!match)fail('找不到競賽功能。',404);
    const [,id,action]=match;let record=await store.get(roomKey(id)),room=record.value;if(room.status==='running'&&room.expiresAt&&now()>=room.expiresAt){const expired={...room,status:'closed',closedAt:room.expiresAt};await store.update(roomKey(id),expired,record.generation);record=await store.get(roomKey(id));room=record.value;}
@@ -179,6 +208,10 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    if(req.method!=='POST')fail('不支援的操作。',405);
    const key=participantKey(id,user.uid);
    if(action==='join'){
+    if(room.loginMode==='anonymous'){
+     const participant=await joinAnonymous(id,user,await requestBody(req));
+     return send(200,{room:publicRoom((await store.get(roomKey(id))).value,false),participant:publicParticipant(participant,user),question:null});
+    }
     if(room.status!=='lobby')fail('課堂開始後已鎖定加入。',409);const existing=await scan(`competition-participants/${id}/`);if(!existing.some(v=>v.uid===user.uid)&&existing.length>=(room.maxParticipants||100))fail('這堂課已達參與人數上限。',409);let student=(room.students||[]).find(v=>v.email===user.email.toLowerCase());
     if(user.guest){
      if(now()>=room.createdAt+7200000)fail('課堂加入時間已結束。',409);

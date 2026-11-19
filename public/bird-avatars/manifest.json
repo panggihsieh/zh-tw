@@ -1,0 +1,308 @@
+{
+  "source": "https://github.com/panggihsieh/birdsound",
+  "source_commit": "eb2107b943d5d6af8ac1903be21d06032583cf76",
+  "generator": "built-in image_gen",
+  "prompt": "One adorable rounded 3D matte vinyl bird collectible figurine for an anonymous classroom avatar. Full body centered square transparent alpha canvas. Friendly glossy eyes, tiny feet, clean simplified layered feathers, soft studio light. Three-quarter front view. Entire bird fits with margins, legible at 64px. No text, logo, clothes, scenery, floor or cast shadow. Each variant follows the source species plumage. Variant 29 spreads both wings; variant 30 waves one wing.",
+  "birds": [
+    {
+      "id": "bird-01",
+      "name": "五色鳥",
+      "file": "bird-01.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9bf67ec9e5ea7730000da179c03790a77cf6cf773bff1a5ceffedffec9f32e81"
+    },
+    {
+      "id": "bird-02",
+      "name": "領角鴞",
+      "file": "bird-02.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "589241f361ff34c0fdda1de49de31f44706b9f9ad26490662b4faf95d1defddc"
+    },
+    {
+      "id": "bird-03",
+      "name": "斯氏繡眼",
+      "file": "bird-03.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "10762af25605bb63f565e3e44ab0cfd5d7d3f2b999bff6f5cbc2edb92335a627"
+    },
+    {
+      "id": "bird-04",
+      "name": "黑枕藍鶲",
+      "file": "bird-04.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "335929bb9c47746fc0e29a188a1f06fb133e02dd8bc605d59fcbe50624ec57f6"
+    },
+    {
+      "id": "bird-05",
+      "name": "麻雀",
+      "file": "bird-05.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9951bd5663aa1c70764709ac3b1fe32d29e2483f25b91dfd2c706947534a18fc"
+    },
+    {
+      "id": "bird-06",
+      "name": "白頭翁",
+      "file": "bird-06.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "97f34225501d1d08d94a910ecfa40b9a0a83b10704f9a862f86bdbc7cdc8202d"
+    },
+    {
+      "id": "bird-07",
+      "name": "大冠鷲",
+      "file": "bird-07.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5a0fe1d70d5ca1b3d24018d99fd8474faf7dc3d5a02c6af1fdf9e5bf1e97049a"
+    },
+    {
+      "id": "bird-08",
+      "name": "白尾八哥",
+      "file": "bird-08.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b98fafff0ef8fb8743a29304bbb2e78b8ea6228fd4fbc90d0bbce02e33b255ab"
+    },
+    {
+      "id": "bird-09",
+      "name": "小啄木",
+      "file": "bird-09.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "661edfdbaf57420b51f7c3101b4d8ffc93029ef2cd9ad5c236ac61e190674d5e"
+    },
+    {
+      "id": "bird-10",
+      "name": "紅尾伯勞",
+      "file": "bird-10.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cd30365d28c6b57edc8c9054b784697df175f1f757d3aba2cfa149a7bec6aa99"
+    },
+    {
+      "id": "bird-11",
+      "name": "樹鵲",
+      "file": "bird-11.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f4f8dc8c104fde2a8c69b6af28c96d557dee21518de277589cc3e8613b305227"
+    },
+    {
+      "id": "bird-12",
+      "name": "白環鸚嘴鵯",
+      "file": "bird-12.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "70b3e64abcaa847b856e08cb01dac93cdc74822deefb167370f17c7f51fd295c"
+    },
+    {
+      "id": "bird-13",
+      "name": "臺灣夜鷹",
+      "file": "bird-13.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "16e70bbf5df9f5fa0efbffba3e3ae9b41ab2cd1aa3ee7e4c23db64fab6de9727"
+    },
+    {
+      "id": "bird-14",
+      "name": "臺灣竹雞",
+      "file": "bird-14.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b1fe40f871168df75f4215c6802fb2510538181466f0fb28c89e95682945da80"
+    },
+    {
+      "id": "bird-15",
+      "name": "黃嘴角鴞",
+      "file": "bird-15.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "25380b2f5a97850561ce262b606cfc19ef46194d6b8a5050e1c7d56a73831b35"
+    },
+    {
+      "id": "bird-16",
+      "name": "珠頸斑鳩",
+      "file": "bird-16.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2ad24a9b45bd79bb40be7cff9954ff84f3822882c7c9fbf4ba1373739aa53639"
+    },
+    {
+      "id": "bird-17",
+      "name": "大卷尾",
+      "file": "bird-17.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2084287b7517acfc0f403f998fc98ea329973009e0a822c443b84971e29823e2"
+    },
+    {
+      "id": "bird-18",
+      "name": "小彎嘴",
+      "file": "bird-18.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5a73e59b978829c006fd3dc0b143ceb78e72149c833e8577d954d5d639aa71ab"
+    },
+    {
+      "id": "bird-19",
+      "name": "冠羽畫眉",
+      "file": "bird-19.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2c28c1415140b86424328b850f8b24667a1319036a47d7ccb6e6b1c4c7ec98e0"
+    },
+    {
+      "id": "bird-20",
+      "name": "白耳畫眉",
+      "file": "bird-20.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "bccd3a4992bddaf18d99f1e940e85cd8d8fe13e63b99c53bb990036a5418ee17"
+    },
+    {
+      "id": "bird-21",
+      "name": "栗背林鴝",
+      "file": "bird-21.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "aee737cff29632afa095c1c807c1e6701baafeaf89ee7ad98dd10d112201b312"
+    },
+    {
+      "id": "bird-22",
+      "name": "火冠戴菊",
+      "file": "bird-22.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "04c7c2e6efab50a62fe08d213a4107ea85bd5dec65cad0c16f0375a940c84986"
+    },
+    {
+      "id": "bird-23",
+      "name": "紅嘴黑鵯",
+      "file": "bird-23.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "eb7b79ec6704ca766d8b2878133ce62926e552fea3d6a401db522fe68982612d"
+    },
+    {
+      "id": "bird-24",
+      "name": "繡眼畫眉",
+      "file": "bird-24.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a8ac12f0624b78477833fa637f3d5cdfade221040ccea46c1c89bb4e4b9eccda"
+    },
+    {
+      "id": "bird-25",
+      "name": "藍腹鷴",
+      "file": "bird-25.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "e4f319692700287b71d07a9b7a3d65901a2d3532a5fb305a61c53f71ac0df38e"
+    },
+    {
+      "id": "bird-26",
+      "name": "帝雉",
+      "file": "bird-26.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f9be4e8fdeeafbb0a2570d0075ab302fbcde4cb67b577709d70165d1353d40ea"
+    },
+    {
+      "id": "bird-27",
+      "name": "青背山雀",
+      "file": "bird-27.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "0259f36bf15c020b577c875b988730cabf60a760cab4b13d7a61aa7e9d3c6689"
+    },
+    {
+      "id": "bird-28",
+      "name": "煤山雀",
+      "file": "bird-28.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "e57304c0caf81070e70b8c48e887d32d20227d3b48ccb26c7eb17fa94a0ab9a6"
+    },
+    {
+      "id": "bird-29",
+      "name": "五色鳥・展翅",
+      "file": "bird-29.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4097efdd1bb6d8bbf581296bc67ad10513256c9fa26f2cd9a82850fae7fdd01f"
+    },
+    {
+      "id": "bird-30",
+      "name": "斯氏繡眼・招手",
+      "file": "bird-30.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "55ee431644fd192d269281b51aa05f427ae87e95c1483f77f6010a7bf2ec270e"
+    }
+  ]
+}

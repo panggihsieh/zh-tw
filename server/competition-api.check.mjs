@@ -82,7 +82,7 @@ test('學生免 Google 登入：代碼選姓名、禁止冒用教師、開始鎖
  assert.equal((await call(`/code/${room.code}`,undefined,cookie)).status,404);
 });
 
-test("新課堂不再接受Google匿名模式",()=>{assert.throws(()=>validateRoomInput({...definition(),loginMode:"anonymous"}),/學生統一/);assert.equal(validateRoomInput({...definition(),loginMode:"roster"}).loginMode,"roster");});
+test("匿名課堂不需名冊，最多30隻小鳥",()=>{const room=validateRoomInput({...definition(),loginMode:"anonymous",className:"",roster:[],maxParticipants:100});assert.equal(room.maxParticipants,30);assert.deepEqual(room.roster,[]);assert.equal(room.className,"匿名參加");assert.throws(()=>validateRoomInput({...definition(),loginMode:"google"}));});
 
 test('造句逐題保存、結束後教師逐字分析，學生與進行中不可讀取',async t=>{
  const f=await fixture(t);
@@ -108,4 +108,37 @@ test('課堂保存課文標題並驗證格式',()=>{
  assert.deepEqual(validateRoomInput({...definition(),lessonTitles:[' 第八課：家鄉味 ','第八課：家鄉味']}).lessonTitles,['第八課：家鄉味']);
  assert.throws(()=>validateRoomInput({...definition(),lessonTitles:'錯誤格式'}));
  assert.throws(()=>validateRoomInput({...definition(),lessonTitles:['x'.repeat(161)]}));
+});
+
+test('匿名代碼加入：搶選互斥、重送、容量、排名公仔與開始鎖定',async t=>{
+ const store=memoryStore();let clock=100000;
+ const server=http.createServer(createCompetitionHandler({store,origins:['https://test'],now:()=>clock,random:()=>0,authenticate:async req=>{
+  if(req.headers['x-test-user']!=='teacher')throw Error('unauthorized');
+  return {uid:'teacher',email:'teacher@example.com',admin:true};
+ }}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());
+ const call=async(path,body,cookie='',teacher=false)=>{
+  const response=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room',...(cookie?{Cookie:cookie}:{}),...(teacher?{'x-test-user':'teacher'}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+  return {status:response.status,cookie:response.headers.get('set-cookie')?.split(';')[0],...await response.json()};
+ };
+
+ const created=await call('/rooms',{...definition(),loginMode:'anonymous',className:'',roster:[],maxParticipants:2,testRoom:true},'',true);
+ assert.equal(created.status,201);const room=created.room,path=`/rooms/${room.id}`;
+ const a=await call(`/code/${room.code}`),b=await call(`/code/${room.code}`),c=await call(`/code/${room.code}`);
+ assert.equal(a.room.anonymousBirds.length,30);assert.equal(a.room.nameChoices,undefined);
+ assert.equal((await call(path+'/start',{},a.cookie)).status,403);
+ assert.equal((await call(path+'/join',{name:'測試',birdId:'../evil'},a.cookie)).status,400);
+ const results=await Promise.all([call(path+'/join',{name:'隔離甲',birdId:'bird-01'},a.cookie),call(path+'/join',{name:'隔離乙',birdId:'bird-01'},b.cookie)]);
+ assert.deepEqual(results.map(v=>v.status).sort(),[200,409]);
+ const winner=results[0].status===200?a:b,loser=winner===a?b:a;
+ const again=await call(path+'/join',{name:'不可改名',birdId:'bird-01'},winner.cookie);
+ assert.equal(again.status,200);assert.notEqual(again.participant.name,'不可改名');assert.equal(again.participant.avatar,'/bird-avatars/bird-01.png');
+ assert.equal((await call(path+'/join',{name:'換鳥',birdId:'bird-02'},winner.cookie)).status,409);
+ const choices=await call(`/code/${room.code}`,undefined,loser.cookie);assert.equal(choices.room.anonymousBirds[0].occupied,true);assert.equal(choices.room.anonymousBirds[0].mine,false);
+ assert.equal((await call(`/code/${room.code}`,undefined,winner.cookie)).participant.birdId,'bird-01');
+ assert.equal((await call(path+'/join',{name:'隔離丙',birdId:'bird-02'},loser.cookie)).status,200);
+ assert.equal((await call(path+'/join',{name:'隔離丁',birdId:'bird-03'},c.cookie)).status,409);
+ await call(path+'/start',{},'',true);
+ assert.equal((await call(path+'/join',{name:'隔離丁',birdId:'bird-03'},c.cookie)).status,409);
+ const board=await call(path+'/leaderboard',undefined,winner.cookie);assert.equal(board.items.length,2);assert.deepEqual(board.items.map(v=>v.birdId).sort(),['bird-01','bird-02']);assert.equal(board.room.testRoom,true);
+ clock+=7200001;assert.equal((await call(`/code/${room.code}`,undefined,winner.cookie)).status,404);
 });

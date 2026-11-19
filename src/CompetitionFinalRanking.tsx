@@ -92,7 +92,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
    <p>🏆 {room.status==='closed'?'最終排名':'目前排名 · 等待課堂結束'}</p><h2>{room.title}</h2>
    <p>{room.className} · {room.questionCount} 題 · {new Date(room.startedAt??room.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})} · 設定 {Math.round(room.duration/60)} 分鐘</p>
    {room.testRoom&&<p>獨立測試課堂</p>}{simulated&&<p>模擬預覽</p>}
-   <div className="competition-podium">{items.slice(0,5).map(item=><div key={item.uid}><b>第 {item.rank} 名</b>{item.avatarKind==='anonymous'?<span className="competition-avatar anonymous">?</span>:<OriginalCompetitionAvatar src={item.avatarKind==='custom'&&item.avatar?item.avatar:`${import.meta.env.BASE_URL}mascot/green-bird.png`} alt={`${item.name}的公仔`}/>}<strong>{item.name}</strong><span>{item.points} 分</span></div>)}</div>
+   <div className="competition-podium">{items.slice(0,5).map(item=><div key={item.uid}><b>第 {item.rank} 名</b>{item.avatarKind==='anonymous'&&!item.avatar?<span className="competition-avatar anonymous">?</span>:<OriginalCompetitionAvatar src={(item.avatarKind==='custom'||item.avatarKind==='anonymous')&&item.avatar?item.avatar:`${import.meta.env.BASE_URL}mascot/green-bird.png`} alt={`${item.name}的公仔`}/>}<strong>{item.name}</strong><span>{item.points} 分</span></div>)}</div>
    <ol className="competition-leaderboard">{items.map(item=><li key={item.uid} className={item.mine?'is-me':''}><b>{item.rank}</b><span>{item.name}<small>{item.correct} 題達標 · 已答 {item.answered}/{room.questionCount}</small></span><strong>{item.points} 分</strong></li>)}</ol>
    {!items.length&&<p>尚無排名紀錄。</p>}
   </div>
