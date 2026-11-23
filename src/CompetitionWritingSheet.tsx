@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Copy, Download } from 'lucide-react';
+import { Camera, Download } from 'lucide-react';
 import { renderWritingSheet, type WritingSheetEntry, type WritingSheetInfo } from './competitionWritingSheet';
 
 /** 作業完成後以整張 A4 橫式填滿螢幕顯示，學生可截圖、複製或下載。 */
 export default function CompetitionWritingSheet({entries,info}:{entries:WritingSheetEntry[];info:WritingSheetInfo}){
  const [url,setUrl]=useState(''),[message,setMessage]=useState('正在產生字跡圖片…');
- const sheet=useRef<HTMLImageElement>(null),shown=useRef(false),blob=useRef<Promise<Blob>|null>(null);
+ const sheet=useRef<HTMLDivElement>(null),shown=useRef(false),blob=useRef<Promise<Blob>|null>(null);
  const revision=JSON.stringify([entries.map(entry=>[entry.number,entry.traces.length]),info]);
  useEffect(()=>{
   let active=true,objectUrl='';
@@ -27,9 +27,14 @@ export default function CompetitionWritingSheet({entries,info}:{entries:WritingS
   window.setTimeout(()=>sheet.current?.scrollIntoView({block:'center'}),600);}
  return <section className="competition-writing-sheet" aria-label="我的字跡作品">
   <h2>我的字跡作品</h2>
-  <p>可直接截圖整張 A4 橫式畫面，或使用下方按鈕複製、下載。</p>
-  {url?<img ref={sheet} src={url} onLoad={reveal} alt={`${info.name}的字跡作品，共 ${entries.length} 字`}/>:<div className="competition-writing-sheet-placeholder" aria-hidden="true"/>}
-  <div className="competition-actions"><button type="button" className="primary" disabled={!url} onClick={()=>void copy()}><Copy size={18}/>複製圖片到剪貼簿</button>{url?<a className="secondary" href={url} download={filename}><Download size={18}/>下載 PNG</a>:null}</div>
-  <p role="status">{message}</p>
+  <p>可直接截圖整張 A4 橫式畫面，或按右上角的拍照（複製）、下載。</p>
+  <div className="competition-writing-sheet-frame" ref={sheet}>
+   <div className="competition-writing-sheet-toolbar">
+    <p role="status">{message}</p>
+    <button type="button" className="primary" disabled={!url} onClick={()=>void copy()} title="把整張 A4 字跡複製到剪貼簿"><Camera size={18}/>拍照（複製）</button>
+    {url?<a className="secondary" href={url} download={filename} title="下載 A4 橫式 PNG"><Download size={18}/>下載</a>:<button type="button" className="secondary" disabled><Download size={18}/>下載</button>}
+   </div>
+   {url?<img src={url} onLoad={reveal} alt={`${info.name}的字跡作品，共 ${entries.length} 字`}/>:<div className="competition-writing-sheet-placeholder" aria-hidden="true"/>}
+  </div>
  </section>;
 }
