@@ -16,7 +16,10 @@ import {previewRequest} from './kahootPreview';
 import { endSoundEnabled, endSoundVolume, playClosedCompetitionSound, playCompetitionEndSound, setEndSoundEnabled, setEndSoundVolume, primeCompetitionEndSound } from "./competitionEndSound";
 import CompetitionFinalRanking from './CompetitionFinalRanking';
 import { useCompetitionEndSound } from './competitionEndSound';
-import {simpleStructure} from './StructureAssignment';
+import { structureQuestion, teachingStructure, type StructureQuestion, type Stroke } from './structureSubtype';
+/** 結構題推算細分比例用的筆順資料（同一次出題共用快取）。 */
+const strokeCache=new Map<string,Promise<Stroke[]|null>>();
+function loadGameStrokes(character:string){if(!strokeCache.has(character))strokeCache.set(character,fetch(`/game-strokes/${character.codePointAt(0)!.toString(16)}.json`).then(response=>response.ok?response.json():null).catch(()=>null));return strokeCache.get(character)!;}
 
 const emptyQuestion=():CompetitionQuestion=>({prompt:'',options:['','','',''],answer:0,seconds:30});
 const gameTitles = {
@@ -25,7 +28,6 @@ const gameTitles = {
   writing: "書寫生字遊戲",
   quiz: "自訂 Kahoot 四選一遊戲",
 };
-const structureChoices=['左右','上下','左中右','上中下','全包圍','半包圍','獨體','品字形'];
 function CompetitionRoomPanel({room,initiallyOpen,children}:{room:CompetitionRoom;initiallyOpen:boolean;children:ReactNode}){
  if(room.status!=='closed')return <article className="competition-room">{children}</article>;
  return <details className="competition-room competition-completed-room" open={initiallyOpen||undefined}>
@@ -64,7 +66,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const anonymous=classId==='__anonymous__';
  const selectedClass=classes.find(c=>c.id===classId),students=selectedClass?.students?.filter(s=>s.active&&s.email)||[],roster=students.map(s=>s.email),candidates=useMemo(()=>[...new Map(lessons.filter(l=>lessonIds.includes(l.id)).flatMap(l=>l.characters).map(c=>[c.character,c])).values()],[lessons,lessonIds]);
  const [characterSelection,setSelectedCharacters]=useState<string[] | null>(null);
- const availableCharacters=candidates.filter(({character})=>gameType!=='structure'||simpleStructure(structureIds[character]));
+ const availableCharacters=candidates.filter(({character})=>gameType!=='structure'||teachingStructure(character,structureIds));
  const selectedCharacters=availableCharacters.map(row=>row.character).filter(character=>characterSelection===null||characterSelection.includes(character));
  const [manualDuration, setManualDuration] = useState(false);
  const estimatedMinutes = Math.max(1, Math.min(120, Math.ceil(questions.reduce((seconds, question) => seconds + question.seconds, 0) / 60)));
@@ -89,7 +91,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
   try{if(file.size>1024*1024)throw Error('題庫檔案不可超過 1 MB。');const imported=parseQuestionCsv(await file.text());setQuestions(imported);setImportNotice(`已匯入 ${imported.length} 題，請確認內容後再建立開課大廳。`);}
   catch(error){setImportNotice((error as Error).message);}
  }
- function makeCards(){const rows=pilot?(lessonIds.length===1&&lessonIds[0]===lessonSeven.id?candidates.filter(row=>["際","璃","磁"].includes(row.character)):candidates.slice(0,3)):candidates.filter(row=>selectedCharacters.includes(row.character));if(gameType==='writing'){setQuestions(rows.map(c=>({type:'writing',character:c.character,prompt:`依筆順書寫「${c.character}」`,seconds:120})));setMessage(`已產生 ${rows.length} 題書寫題，請確認後開課。`);return;}if(gameType==='structure'){const cards=rows.flatMap(c=>{const parsed=simpleStructure(structureIds[c.character]);if(!parsed)return[];return[{type:'structure' as const,character:c.character,prompt:`「${c.character}」是哪一種字形結構？`,options:structureChoices,answer:structureChoices.indexOf(parsed.structure),seconds:20}]});setQuestions(cards);setMessage(`已產生 ${cards.length} 題生字結構題，請確認後開課。`);return;}setQuestions(rows.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已產生 ${rows.length} 張生字字卡，請預覽後開課。`);}
+ function makeCards(){const rows=pilot?(lessonIds.length===1&&lessonIds[0]===lessonSeven.id?candidates.filter(row=>["際","璃","磁"].includes(row.character)):candidates.slice(0,3)):candidates.filter(row=>selectedCharacters.includes(row.character));if(gameType==='writing'){setQuestions(rows.map(c=>({type:'writing',character:c.character,prompt:`依筆順書寫「${c.character}」`,seconds:120})));setMessage(`已產生 ${rows.length} 題書寫題，請確認後開課。`);return;}if(gameType==='structure'){void run(async()=>{const cards=(await Promise.all(rows.map(c=>structureQuestion(c.character,structureIds,loadGameStrokes)))).filter((card):card is StructureQuestion=>card!==null);const detailed=cards.filter(card=>card.options.length===4).length;setQuestions(cards);setMessage(`已產生 ${cards.length} 題生字結構題（${detailed} 題細分結構四選一、${cards.length-detailed} 題八大類），請確認後開課。`);});return;}setQuestions(rows.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已產生 ${rows.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
   <p>學生語音測試</p>
   <SentencePractice fixedCharacter={pilot} lessonTitle={pilot ? lessonSeven.title : undefined} initialCard={previewCard} correctionOption={<label className="secondary competition-real-ai"><input type="checkbox" checked={useRealAi} onChange={event=>setUseRealAi(event.target.checked)}/><span>使用真實 AI 校正與評量（按下校正或評量時使用 API 額度）</span></label>} simulated={!useRealAi} request={useRealAi ? sentenceRequest : previewRequest} onBack={()=>{setUseRealAi(false);setPreviewCard(null);}}/>

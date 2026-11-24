@@ -1,5 +1,5 @@
 import { tracePath, type Point } from './writingGame';
-import structureAtlas from './structureAtlas.json';
+import { structureImage } from './structureSubtype';
 
 /** 書寫生字：學生字跡。 */
 export interface WritingSheetEntry { kind?:'writing'; number:number; character:string; traces:Point[][] }
@@ -73,8 +73,8 @@ export function drawWritingSheet(context:CanvasRenderingContext2D,entries:Writin
  });
 }
 
-/** 結構縮圖：與作答按鈕相同的結構圖（structureAtlas 各結構第一張）。 */
-export function structureThumbnail(structure:string){return (structureAtlas as {title:string;items:{image:string}[]}[]).find(group=>group.title===`${structure}結構`)?.items[0]?.image??'';}
+/** 結構縮圖：與作答按鈕相同（大類或 25 種細分）。 */
+export const structureThumbnail=structureImage;
 export type StructureImages=Map<string,CanvasImageSource>;
 export async function loadStructureImages(entries:StructureSheetEntry[]):Promise<StructureImages>{
  const images:StructureImages=new Map();
