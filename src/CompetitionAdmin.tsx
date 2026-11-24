@@ -1,5 +1,5 @@
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
-import {useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
+import {useEffect,useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {Maximize,Minimize,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest, type QuizPaper} from './quizApi';
@@ -207,7 +207,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
      } catch {setMessage('無法切換全螢幕。');}
     }}><span className="competition-enter-fullscreen">排行全螢幕</span><span className="competition-exit-fullscreen">離開全螢幕</span></button>
     <div className="competition-countdown competition-countdown-ring" role="progressbar" aria-label="課堂剩餘時間百分比" aria-valuemin={0} aria-valuemax={100} aria-valuenow={remainingPercent} aria-valuetext={`剩餘 ${remainingPercent}%，${Math.floor(remaining/60)} 分 ${remaining%60} 秒`}><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="#ffffff33" strokeWidth="8"/><circle cx="60" cy="60" r="52" fill="none" stroke="#ffd76a" strokeWidth="8" pathLength="100" strokeDasharray={`${remainingPercent} 100`} transform="rotate(-90 60 60)"/></svg><div><span>剩餘時間</span><strong>{remainingPercent}%</strong><small>{String(Math.floor(remaining/60)).padStart(2,'0')}:{String(remaining%60).padStart(2,'0')}</small></div></div>
-    </div><div className="competition-podium competition-centered-podium" style={{gridTemplateColumns:Array.from({length:podium.columns},(_,index)=>index===Math.floor(podium.columns/2)?'1.3fr':'1fr').join(' ')}}>
+    </div><div className="competition-podium competition-centered-podium" style={{gridTemplateColumns:Array.from({length:podium.columns},(_,index)=>index===Math.floor(podium.columns/2)?'1.3fr':'1fr').join(' '),'--podium-columns':podium.columns} as CSSProperties}>
      {items.slice(0,podiumColumns.length).map((item,index)=><div key={item.uid} style={{gridColumn:podium.positions[index],paddingBottom:`calc(${Math.min(items.length,7)-1-index} * var(--podium-step))`}}><b>{item.rank}</b><Avatar item={item}/><strong className="competition-rank-name">{item.name}</strong><strong className="competition-rank-score">{item.points} 分</strong><span>{item.answered}/{room.questionCount} 題</span></div>)}
     </div>
     {items.length>podiumColumns.length&&<p className="competition-other-ranks">其他學生：{items.slice(podiumColumns.length).map(item=>`${item.name} ${item.answered}/${room.questionCount}`).join('、')}</p>}

@@ -253,3 +253,9 @@
 .competition-writing-sheet-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:52px;padding-bottom:8px}.competition-writing-sheet-toolbar p{flex:1;margin:0;text-align:left;font-size:14px}.competition-writing-sheet-toolbar a.secondary{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
 .competition-writing-sheet-frame img,.competition-writing-sheet-placeholder{display:block;width:100%;aspect-ratio:2339/1654;border:1px solid #ddd;background:#fff}
 @media(max-width:600px){.competition-writing-sheet-toolbar{flex-wrap:wrap}.competition-writing-sheet-toolbar p{flex-basis:100%}}
+/* 動態排行：分數、姓名與題數依單欄寬度縮放，七名並排時也不會與相鄰名次重疊。 */
+.competition-rank-board .competition-centered-podium{--podium-cell:calc((100cqw - 2 * clamp(16px,3cqw,40px) - (var(--podium-columns,7) - 1) * clamp(2px,1cqw,14px)) / (var(--podium-columns,7) + .3))}
+.competition-rank-board .competition-centered-podium>div{min-width:0;text-align:center}
+.competition-rank-board .competition-centered-podium .competition-rank-name{max-width:100%;font-size:min(var(--ranking-name-size),calc(var(--podium-cell) / 3.4));overflow-wrap:anywhere}
+.competition-rank-board .competition-centered-podium .competition-rank-score{max-width:100%;font-size:min(calc(var(--ranking-name-size) * 2),calc(var(--podium-cell) / 5))}
+.competition-rank-board .competition-centered-podium>div>span{max-width:100%;font-size:min(clamp(10px,1.4cqw,17px),calc(var(--podium-cell) / 5));white-space:nowrap}
