@@ -8,7 +8,6 @@ import {competitionCodeFromInput,competitionStudentRequest as defaultRequest,typ
 import './competition.css';
 import CompetitionCodeEntry from './CompetitionCodeEntry';
 import CompetitionFinalRanking from './CompetitionFinalRanking';
-import { useCompetitionEndSound } from './competitionEndSound';
 import CompetitionWriting from './CompetitionWriting';
 import type { Point } from './writingGame';
 import CompetitionWritingSheet from './CompetitionWritingSheet';
@@ -52,7 +51,7 @@ export default function CompetitionPlay({onBack,backLabel="返回遊戲專區",r
  const initialCode=providedCode??competitionCodeFromInput(window.location.hash);
  const confirmCode=new URLSearchParams(window.location.hash.split("?")[1]).get("confirm")==="1";
  const [code,setCode]=useState(initialCode),[room,setRoom]=useState<CompetitionRoom|null>(null),[participant,setParticipant]=useState<CompetitionParticipant|null>(null),[question,setQuestion]=useState<CompetitionQuestion|null>(null),[ranking,setRanking]=useState<LeaderboardItem[]>([]),[feedback,setFeedback]=useState<{correct:boolean;points:number;text?:string}|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[sentence,setSentence]=useState(''),[listening,setListening]=useState(false),[micActive,setMicActive]=useState(false),[now,setNow]=useState(Date.now());
- useCompetitionEndSound(room?[room]:[]);
+ // 課堂結束音樂只在老師端播放；學生裝置不自動播放，也不顯示播放控制。
  const recognition=useRef<Recognition|null>(null),speechSession=useRef<ReturnType<typeof configureSentenceRecognition>|null>(null);
  const sentenceInput=useRef<HTMLTextAreaElement>(null);
  const SpeechRecognition=(window as SpeechWindow).SpeechRecognition||(window as SpeechWindow).webkitSpeechRecognition;

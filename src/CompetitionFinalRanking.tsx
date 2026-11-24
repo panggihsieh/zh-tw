@@ -8,7 +8,8 @@ import { captureCompetitionRanking } from './competitionRankingPhoto';
 import { endSoundEnabled, playCompetitionEndSound, setEndSoundEnabled, stopCompetitionEndSound, useEndSoundStatus, endSoundVolume, setEndSoundVolume } from './competitionEndSound';
 
 interface Photo { id:string; image:string; createdAt:number; title:string }
-export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false,autoSave=false,allowExport=false}:{autoSave?:boolean;allowExport?:boolean;room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
+/** soundControls：只有老師後台可播放／試聽結束音樂；學生端不顯示聲音控制。 */
+export default function CompetitionFinalRanking({room,items,request=competitionRequest,simulated=false,autoSave=false,allowExport=false,soundControls=false}:{autoSave?:boolean;allowExport?:boolean;soundControls?:boolean;room:CompetitionRoom;items:LeaderboardItem[];request?:typeof competitionRequest;simulated?:boolean}){
  const board=useRef<HTMLDivElement>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[photo,setPhoto]=useState<Photo|null>(null),[preview,setPreview]=useState(''),[revision,setRevision]=useState(''),[enabled,setEnabled]=useState(endSoundEnabled);
  const [photosLoaded,setPhotosLoaded]=useState(false);
  const soundStatus=useEndSoundStatus(),[volume,setVolume]=useState(endSoundVolume);
@@ -83,11 +84,11 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
    <label><input type="radio" name={`save-${room.id}`} checked={!saveChoice} onChange={()=>setSaveChoice(false)}/>放棄自動保存</label>
    <div className="competition-actions"><button type="button" className="primary" autoFocus onClick={()=>{setSaveDecision(saveChoice);if(!saveChoice)setMessage('已略過自動保存。');}}>確認</button><button type="button" className="secondary" onClick={()=>{setSaveDecision(false);setMessage('已略過自動保存。');}}>放棄</button></div>
   </dialog>}
-  <div className="competition-actions" aria-label="結束音樂控制">
+  {soundControls&&<div className="competition-actions" aria-label="結束音樂控制">
    <button type="button" className="secondary" onClick={()=>{setEnabled(true);setEndSoundEnabled(true);void playCompetitionEndSound().catch(()=>setMessage('音樂未能播放，請確認瀏覽器聲音權限後再按播放。'));}}><Music2 size={18} aria-hidden="true"/>播放結束音樂</button>{stopMusic}
    <label>音樂音量<input type="range" min="0" max="100" value={volume} onChange={event=>{const value=Number(event.target.value);setVolume(value);setEndSoundVolume(value);}}/>{volume}%</label>
    <span role="status">{soundStatus==='blocked'?'自動播放未成功，請按「播放結束音樂」。':soundStatus==='playing'?'結束音樂播放中':soundStatus==='silent'?'音樂音量為 0，請調高音量後播放。':soundStatus==='stopped'?'音樂已停止':''}</span>
-  </div>
+  </div>}
   <div ref={board} className="competition-ranking-capture">
    <p>🏆 {room.status==='closed'?'最終排名':'目前排名 · 等待課堂結束'}</p><h2>{room.title}</h2>
    <p>{room.className} · {room.questionCount} 題 · {new Date(room.startedAt??room.createdAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})} · 設定 {Math.round(room.duration/60)} 分鐘</p>
@@ -98,8 +99,8 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
   </div>
   {allowExport&&!simulated&&room.status==='closed'&&room.gameType==='sentence-practice'&&<CompetitionSentenceReview roomId={room.id} request={request}/>}
   <div className="competition-actions">
-   <label><input type="checkbox" checked={enabled} onChange={event=>{setEnabled(event.target.checked);setEndSoundEnabled(event.target.checked);}}/> 結束鼓掌音效</label>
-   <button type="button" className="secondary" disabled={!enabled} onClick={()=>void playCompetitionEndSound().catch(()=>setMessage('瀏覽器未允許音效，請再次按下試聽。'))}>試聽結束音效</button>
+   {soundControls&&<><label><input type="checkbox" checked={enabled} onChange={event=>{setEnabled(event.target.checked);setEndSoundEnabled(event.target.checked);}}/> 結束鼓掌音效</label>
+   <button type="button" className="secondary" disabled={!enabled} onClick={()=>void playCompetitionEndSound().catch(()=>setMessage('瀏覽器未允許音效，請再次按下試聽。'))}>試聽結束音效</button></>}
    <button type="button" className="secondary" disabled={busy||room.status!=='closed'||!items.length} onClick={()=>void capture()}>拍照保存排名</button>
   </div>
   {preview&&<div className="competition-ranking-photo"><img src={preview} alt="待上傳的排名照片"/><a href={preview} download={`${room.title}-排名.jpg`}>下載照片</a>{!simulated&&<button type="button" className="primary" disabled={busy} onClick={()=>void upload()}>上傳排名照片</button>}{simulated&&<p>模擬預覽僅供下載，不上傳正式紀錄。</p>}</div>}
