@@ -104,9 +104,10 @@ export function drawStructureSheet(context:CanvasRenderingContext2D,entries:Stru
  const correct=entries.filter(entry=>entry.correct).length;
  drawHeader(context,info,workSheetLabels.structure.suffix,`共 ${entries.length} 字，答對 ${correct} 字`);
  // 縮圖區高度隨格子大小調整，兩次計算讓字格與縮圖都放進同一張 A4。
+ // 縮圖為格寬 0.63（原 0.42 的 1.5 倍），答錯時學生所選縮圖為主縮圖一半，兩張仍在同一欄內。
  let layout=writingSheetLayout(entries.length,LABEL);
- layout=writingSheetLayout(entries.length,Math.round(layout.cell*.56));
- const {cell,cells}=layout,thumb=Math.round(cell*.42),small=Math.round(thumb*.72);
+ for(let pass=0;pass<3;pass++)layout=writingSheetLayout(entries.length,Math.round(layout.cell*.76));
+ const {cell,cells}=layout,thumb=Math.round(cell*.63),small=Math.round(thumb*.5);
  entries.forEach((entry,index)=>{
   const {x,y}=cells[index];
   context.save();context.translate(x,y);drawGrid(context,cell);
@@ -117,10 +118,10 @@ export function drawStructureSheet(context:CanvasRenderingContext2D,entries:Stru
   context.fillStyle='#4b5b55';context.textAlign='left';context.font=`${Math.max(16,Math.round(cell*.09))}px ${SANS}`;context.fillText(`${entry.number}`,10,8);
   context.restore();
   const top=y+cell+Math.round(cell*.07);
-  const total=entry.correct?thumb:thumb+small+Math.round(cell*.06);
+  const total=entry.correct?thumb:thumb+small+Math.round(cell*.04);
   const left=x+(cell-total)/2;
   drawThumbnail(context,images,entry.answer,left,top,thumb,'#147747');
-  if(!entry.correct)drawThumbnail(context,images,entry.choice,left+thumb+Math.round(cell*.06),top+thumb-small,small,'#c0392b',true);
+  if(!entry.correct)drawThumbnail(context,images,entry.choice,left+thumb+Math.round(cell*.04),top+thumb-small,small,'#c0392b',true);
   context.textBaseline='alphabetic';context.textAlign='left';
  });
 }
