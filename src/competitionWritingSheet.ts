@@ -1,4 +1,5 @@
 import { tracePath, type Point } from './writingGame';
+import structureAtlas from './structureAtlas.json';
 
 /** 書寫生字：學生字跡。 */
 export interface WritingSheetEntry { kind?:'writing'; number:number; character:string; traces:Point[][] }
@@ -72,11 +73,40 @@ export function drawWritingSheet(context:CanvasRenderingContext2D,entries:Writin
  });
 }
 
-const STRUCTURE_LABEL=96;
-export function drawStructureSheet(context:CanvasRenderingContext2D,entries:StructureSheetEntry[],info:WritingSheetInfo){
+/** 結構縮圖：與作答按鈕相同的結構圖（structureAtlas 各結構第一張）。 */
+export function structureThumbnail(structure:string){return (structureAtlas as {title:string;items:{image:string}[]}[]).find(group=>group.title===`${structure}結構`)?.items[0]?.image??'';}
+export type StructureImages=Map<string,CanvasImageSource>;
+export async function loadStructureImages(entries:StructureSheetEntry[]):Promise<StructureImages>{
+ const images:StructureImages=new Map();
+ const sources=[...new Set(entries.flatMap(entry=>[entry.answer,entry.choice]).map(structureThumbnail).filter(Boolean))];
+ await Promise.all(sources.map(async source=>{
+  try{
+   // SVG 只有 viewBox；補上寬高，Firefox 與 Safari 才能畫進 canvas。
+   const text=(await (await fetch(source)).text()).replace('<svg ','<svg width="400" height="400" ');
+   const url=URL.createObjectURL(new Blob([text],{type:'image/svg+xml'}));
+   try{const image=new Image();image.src=url;await image.decode();images.set(source,image);}finally{URL.revokeObjectURL(url);}
+  }catch{/* 載入失敗時改以結構名稱代替縮圖 */}
+ }));
+ return images;
+}
+
+function drawThumbnail(context:CanvasRenderingContext2D,images:StructureImages,structure:string,x:number,y:number,size:number,color:string,crossed=false){
+ const image=images.get(structureThumbnail(structure));
+ context.fillStyle='#ffffff';context.fillRect(x,y,size,size);
+ if(image)context.drawImage(image,x,y,size,size);
+ else{context.fillStyle='#163d36';context.textAlign='center';context.textBaseline='middle';fitText(context,structure||'—',x+size/2,y+size/2,size-6,Math.round(size*.28),'bold');}
+ context.strokeStyle=color;context.lineWidth=Math.max(3,size*.035);context.strokeRect(x,y,size,size);
+ if(crossed){context.save();context.globalAlpha=.75;context.beginPath();context.moveTo(x+size*.12,y+size*.12);context.lineTo(x+size*.88,y+size*.88);context.moveTo(x+size*.88,y+size*.12);context.lineTo(x+size*.12,y+size*.88);context.lineWidth=Math.max(2,size*.035);context.stroke();context.restore();}
+}
+
+/** 字體結構：字下方只放結構縮圖，不用文字；答錯時旁邊加上學生所選結構（紅框打叉）。 */
+export function drawStructureSheet(context:CanvasRenderingContext2D,entries:StructureSheetEntry[],info:WritingSheetInfo,images:StructureImages=new Map()){
  const correct=entries.filter(entry=>entry.correct).length;
  drawHeader(context,info,workSheetLabels.structure.suffix,`共 ${entries.length} 字，答對 ${correct} 字`);
- const {cell,cells}=writingSheetLayout(entries.length,STRUCTURE_LABEL);
+ // 縮圖區高度隨格子大小調整，兩次計算讓字格與縮圖都放進同一張 A4。
+ let layout=writingSheetLayout(entries.length,LABEL);
+ layout=writingSheetLayout(entries.length,Math.round(layout.cell*.56));
+ const {cell,cells}=layout,thumb=Math.round(cell*.42),small=Math.round(thumb*.72);
  entries.forEach((entry,index)=>{
   const {x,y}=cells[index];
   context.save();context.translate(x,y);drawGrid(context,cell);
@@ -84,12 +114,14 @@ export function drawStructureSheet(context:CanvasRenderingContext2D,entries:Stru
   context.font=`${Math.round(cell*.74)}px ${KAI}`;context.fillText(entry.character,cell/2,cell*.53);
   context.fillStyle=entry.correct?'#147747':'#c0392b';context.font=`bold ${Math.max(20,Math.round(cell*.13))}px ${SANS}`;
   context.textAlign='right';context.textBaseline='top';context.fillText(entry.correct?'✓':'✗',cell-10,8);
+  context.fillStyle='#4b5b55';context.textAlign='left';context.font=`${Math.max(16,Math.round(cell*.09))}px ${SANS}`;context.fillText(`${entry.number}`,10,8);
   context.restore();
-  const size=Math.max(20,Math.min(36,Math.round(cell*.11)));
-  context.textAlign='center';context.textBaseline='alphabetic';context.fillStyle='#163d36';
-  fitText(context,`${entry.number}. ${entry.answer}結構`,x+cell/2,y+cell+size*1.25,cell,size,'bold');
-  if(!entry.correct){context.fillStyle='#c0392b';fitText(context,`你選：${entry.choice||'未作答'}`,x+cell/2,y+cell+size*2.45,cell,Math.round(size*.82));}
-  context.textAlign='left';
+  const top=y+cell+Math.round(cell*.07);
+  const total=entry.correct?thumb:thumb+small+Math.round(cell*.06);
+  const left=x+(cell-total)/2;
+  drawThumbnail(context,images,entry.answer,left,top,thumb,'#147747');
+  if(!entry.correct)drawThumbnail(context,images,entry.choice,left+thumb+Math.round(cell*.06),top+thumb-small,small,'#c0392b',true);
+  context.textBaseline='alphabetic';context.textAlign='left';
  });
 }
 
@@ -137,9 +169,9 @@ export function drawSentenceSheet(context:CanvasRenderingContext2D,entries:Sente
  context.textAlign='left';context.textBaseline='alphabetic';
 }
 
-export function drawWorkSheet(context:CanvasRenderingContext2D,entries:WorkSheetEntry[],info:WritingSheetInfo){
+export function drawWorkSheet(context:CanvasRenderingContext2D,entries:WorkSheetEntry[],info:WritingSheetInfo,images?:StructureImages){
  const kind=workSheetKind(entries);
- if(kind==='structure')drawStructureSheet(context,entries as StructureSheetEntry[],info);
+ if(kind==='structure')drawStructureSheet(context,entries as StructureSheetEntry[],info,images);
  else if(kind==='sentence')drawSentenceSheet(context,entries as SentenceSheetEntry[],info);
  else drawWritingSheet(context,entries as WritingSheetEntry[],info);
 }
@@ -148,7 +180,8 @@ export async function renderWritingSheet(entries:WorkSheetEntry[],info:WritingSh
  await document.fonts?.ready;
  const canvas=document.createElement('canvas');canvas.width=SHEET_WIDTH;canvas.height=SHEET_HEIGHT;
  const context=canvas.getContext('2d');if(!context)throw Error('無法建立作品圖片。');
- drawWorkSheet(context,entries,info);
+ const images=workSheetKind(entries)==='structure'?await loadStructureImages(entries as StructureSheetEntry[]):undefined;
+ drawWorkSheet(context,entries,info,images);
  return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('無法建立作品圖片。')),'image/png'));
 }
 
