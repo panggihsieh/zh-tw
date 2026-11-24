@@ -31,6 +31,6 @@ describe('本機模擬學生服務',()=>{
   const simulation=createCompetitionSimulation({...room,gameType:'sentence-practice',questions:[{type:'sentence-practice',character:'林',prompt:'造句',seconds:90}]});
   await simulation.request('/rooms/room1/join',{});simulation.start();
   const answer=await simulation.request<{grade:{level:string;feedback:string}}>('/rooms/room1/answer',{sentence:'森林裡有許多樹木。'});
-  expect(answer.grade).toEqual({level:'模擬評量',feedback:'這是測試回饋，未呼叫 AI。'});
+  expect(answer.grade).toMatchObject({level:'待確認',total:null,feedback:'模擬預覽未呼叫 AI，分數待確認。'});
  });
 });

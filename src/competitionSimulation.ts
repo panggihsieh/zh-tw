@@ -46,7 +46,7 @@ export function createCompetitionSimulation(source: CompetitionRoom, now = () =>
     const correct = question.type === 'writing' ? writingCorrect : question.type === 'sentence-practice' ? Boolean(value.sentence?.includes(question.character ?? '') && value.sentence.length >= 5) : value.answer === question.answer;
     participant.index++; participant.correct += Number(correct); participant.points += correct ? 1000 : 0;
     participant.finished = participant.index >= questions.length;
-    result = { ...state(), correct, points: correct ? 1000 : 0, ...(question.type === 'sentence-practice' ? { grade: { level: '模擬評量', feedback: '這是測試回饋，未呼叫 AI。' } } : {}) };
+    result = { ...state(), correct, correctAnswer: question.answer, points: correct ? 1000 : 0, ...(question.type === 'sentence-practice' ? { grade: { level: '待確認', total: null, scores: { correctness: 0, completeness: 0, fluency: 0, detail: 0, mechanics: 0 }, targetOk: true, meaningOk: true, uncertain: true, highlight: '', feedback: '模擬預覽未呼叫 AI，分數待確認。' } } : {}) };
    } else throw Error('不支援的模擬學生操作。');
    return structuredClone(result) as T;
   },

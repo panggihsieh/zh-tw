@@ -19,3 +19,17 @@ describe('competition writing sheet layout', () => {
     }
   });
 });
+
+import { workSheetKind, wrapText } from './competitionWritingSheet';
+describe('competition work sheet helpers', () => {
+  it('detects the game kind, treating older saved entries as handwriting', () => {
+    expect(workSheetKind([{ number: 1, character: '春', traces: [] }])).toBe('writing');
+    expect(workSheetKind([{ kind: 'structure', number: 1, character: '明', answer: '左右', choice: '左右', correct: true }])).toBe('structure');
+    expect(workSheetKind([{ kind: 'sentence', number: 1, character: '花', sentence: '花開了。', score: 90 }])).toBe('sentence');
+  });
+  it('wraps Chinese sentences character by character within the width', () => {
+    const lines = wrapText(text => [...text].length * 10, '春天來了花園裡開滿美麗的花朵', 50);
+    expect(lines).toEqual(['春天來了花', '園裡開滿美', '麗的花朵']);
+    expect(wrapText(text => text.length, '', 10)).toEqual(['']);
+  });
+});
