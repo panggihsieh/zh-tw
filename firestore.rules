@@ -1,0 +1,131 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+function validHanziTheme() {
+  let t = request.resource.data;
+  let c = t.colors;
+  return t.keys().hasAll(['id','name','colors','radius'])
+    && t.keys().hasOnly(['id','name','colors','radius'])
+    && t.id is string && t.id.matches('^[a-z0-9-]{1,60}$')
+    && t.name is string && t.name.size() > 0 && t.name.size() <= 40
+    && t.radius is int && t.radius >= 8 && t.radius <= 32
+    && c is map
+    && c.keys().hasAll(['primary','dark','accent','background','surface','ink','border'])
+    && c.keys().hasOnly(['primary','dark','accent','background','surface','ink','border'])
+    && c.primary.matches('^#[0-9a-fA-F]{6}$') && c.dark.matches('^#[0-9a-fA-F]{6}$')
+    && c.accent.matches('^#[0-9a-fA-F]{6}$') && c.background.matches('^#[0-9a-fA-F]{6}$')
+    && c.surface.matches('^#[0-9a-fA-F]{6}$') && c.ink.matches('^#[0-9a-fA-F]{6}$')
+    && c.border.matches('^#[0-9a-fA-F]{6}$');
+}
+match /hanzi_notebook_themes/{themeId} {
+  allow read: if true;
+  allow create, update: if hanziAdmin() && validHanziTheme() && request.resource.data.id == themeId;
+  allow delete: if false;
+}
+match /hanzi_notebook_settings/websiteTheme {
+  allow get: if true;
+  allow create, update: if hanziAdmin() && validHanziTheme();
+  allow delete: if false;
+}
+
+match /hanzi_notebook_structure_reviews/{character} {
+  allow get: if true;
+  allow create, update: if hanziAdmin()
+    && request.resource.data.keys().hasAll(['character', 'fingerprint', 'confirmed', 'confirmedAt', 'confirmedBy'])
+    && request.resource.data.keys().hasOnly(['character', 'fingerprint', 'confirmed', 'confirmedAt', 'confirmedBy'])
+    && request.resource.data.character == character
+    && character.size() >= 1 && character.size() <= 2
+    && request.resource.data.fingerprint is string
+    && request.resource.data.fingerprint.size() <= 4000
+    && request.resource.data.confirmed == true
+    && request.resource.data.confirmedAt == request.time
+    && request.resource.data.confirmedBy == request.auth.uid;
+  allow delete: if false;
+}
+
+// 管理者修正的生字結構（結構遊戲出題優先採用）；刪除即恢復自動判斷。
+match /hanzi_notebook_structure_overrides/{character} {
+  allow read: if true;
+  allow create, update: if hanziAdmin()
+    && request.resource.data.keys().hasAll(['character', 'structure', 'subtype', 'exclude', 'updatedAt', 'updatedBy'])
+    && request.resource.data.keys().hasOnly(['character', 'structure', 'subtype', 'exclude', 'updatedAt', 'updatedBy'])
+    && request.resource.data.character == character
+    && character.size() >= 1 && character.size() <= 2
+    && request.resource.data.structure in ['左右', '上下', '左中右', '上中下', '全包圍', '半包圍', '獨體', '品字形']
+    && request.resource.data.subtype is string
+    && request.resource.data.subtype.size() <= 12
+    && request.resource.data.exclude is bool
+    && request.resource.data.updatedAt == request.time
+    && request.resource.data.updatedBy == request.auth.uid;
+  allow delete: if hanziAdmin();
+}
+
+match /hanzi_notebook_settings/curriculum {
+  allow get: if true;
+  allow create, update: if hanziAdmin()
+    && request.resource.data.keys().hasAll(['publisher', 'grade', 'term', 'lesson'])
+    && request.resource.data.keys().hasOnly(['publisher', 'grade', 'term', 'lesson'])
+    && request.resource.data.publisher in ['南一', '康軒', '翰林']
+    && request.resource.data.grade is int
+    && request.resource.data.grade >= 1 && request.resource.data.grade <= 6
+    && request.resource.data.term in ['上', '下']
+    && request.resource.data.lesson is string
+    && request.resource.data.lesson.size() > 0 && request.resource.data.lesson.size() <= 200;
+  allow delete: if false;
+}
+
+// 合併至既有 match /databases/{database}/documents；不可取代原專案規則。
+function hanziGoogle() {
+  return request.auth != null
+    && request.auth.token.email_verified == true
+    && (request.auth.token.firebase.sign_in_provider == 'google.com'
+      || (request.auth.token.firebase.sign_in_provider == 'custom'
+        && request.auth.token.schooliam == 'zh-tw-teacher'
+        && request.auth.token.email == 'teacher.hsieh@gmail.com'));
+}
+function hanziAdmin() {
+  return hanziGoogle() && request.auth.token.email == 'teacher.hsieh@gmail.com';
+}
+function hanziEnabled() {
+  let accessPath = /databases/$(database)/documents/hanzi_notebook_access/$(request.auth.token.email);
+  return !exists(accessPath) || get(accessPath).data.enabled == true;
+}
+match /hanzi_notebook_access/{email} {
+  function validAccess() {
+    return request.resource.data.keys().hasAll(['email', 'displayName', 'enabled'])
+      && request.resource.data.keys().hasOnly(['email', 'displayName', 'enabled'])
+      && request.resource.data.email == email
+      && request.resource.data.displayName is string
+      && request.resource.data.displayName.size() <= 80
+      && request.resource.data.enabled is bool;
+  }
+  allow get: if hanziAdmin() || (hanziGoogle() && request.auth.token.email == email);
+  allow list: if hanziAdmin();
+  allow create: if validAccess()
+    && (email != 'teacher.hsieh@gmail.com' || request.resource.data.enabled == true)
+    && (hanziAdmin() ||
+    (hanziGoogle() && request.auth.token.email == email && request.resource.data.enabled == true));
+  allow update: if hanziAdmin() && validAccess()
+    && (email != 'teacher.hsieh@gmail.com' || request.resource.data.enabled == true);
+  allow delete: if false;
+}
+match /hanzi_notebook_users/{uid}/collections/{collectionId} {
+  function isOwner() {
+    return hanziGoogle() && request.auth.uid == uid && hanziEnabled();
+  }
+  allow read: if isOwner();
+  allow create, update: if isOwner()
+    && request.resource.data.keys().hasAll(['schemaVersion', 'updatedAt', 'payload'])
+    && request.resource.data.keys().hasOnly(['schemaVersion', 'updatedAt', 'payload'])
+    && request.resource.data.schemaVersion == 1
+    && request.resource.data.updatedAt is string
+    && request.resource.data.updatedAt.size() <= 40
+    && request.resource.data.payload is string
+    && request.resource.data.payload.size() <= 700000;
+  allow delete: if false;
+}
+
+// Existing teaching datasets remain server-only.
+match /{document=**} { allow read, write: if false; }
+}
+}

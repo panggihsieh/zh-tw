@@ -93,6 +93,9 @@ const SIMILAR: Partial<Record<string, string[]>> = {
   上下: ['上短下長', '上下等長', '上長下短', '三部分近等長'],
   左中右: ['三部分近等寬', '中寬兩側窄', '左部較寬', '右部較寬'],
   全包圍: ['四面包圍', '上三包圍', '左三包圍', '下三包圍'],
+  上中下: ['三部分近等長', '中長上下短', '上部較長', '下部較長'],
+  獨體: ['整體一區', '左右等寬', '上下等長', '四面包圍'],
+  品字形: ['上一、下二', '上下等長', '三部分近等長', '左右等寬'],
 };
 const HALF_TYPES = ['上三包圍', '下三包圍', '左三包圍', '右三包圍', '左上包圍', '右上包圍', '左下包圍', '右下包圍'];
 /** 半包圍：正確方向＋三個其他半包圍方向（依字固定挑選）。 */
@@ -118,14 +121,29 @@ export type StructureQuestion = { type: 'structure'; character: string; prompt: 
  * 產生結構題：能可靠推算細分結構時出四個相似的細分選項，否則出八大類題；
  * 拆解資料無法判斷結構時回傳 null（不出題）。
  */
-export async function structureQuestion(character: string, catalog: Catalog, loadStrokes: (character: string) => Promise<Stroke[] | null>): Promise<StructureQuestion | null> {
+/** 管理者修正：subtype 空字串＝只出八大類題；exclude＝不出題。 */
+export type StructureCorrection = { structure: string; subtype: string; exclude: boolean };
+
+/** 依指定結構出題（管理者修正或自動判斷共用）。 */
+function buildQuestion(character: string, structure: string, subtype: string | null): StructureQuestion {
+  const base = { type: 'structure' as const, character, prompt: `「${character}」是哪一種字形結構？`, seconds: 20 };
+  if (subtype && structure === '半包圍') {
+    const options = shuffled(halfOptions(subtype, character), character + '#');
+    return { ...base, options, answer: options.indexOf(subtype) };
+  }
+  const similar = subtype ? SIMILAR[structure] : undefined;
+  if (similar?.includes(subtype!)) {
+    const options = shuffled(similar, character);
+    return { ...base, options, answer: options.indexOf(subtype!) };
+  }
+  return { ...base, options: STRUCTURE_CHOICES, answer: STRUCTURE_CHOICES.indexOf(structure) };
+}
+
+export async function structureQuestion(character: string, catalog: Catalog, loadStrokes: (character: string) => Promise<Stroke[] | null>, correction?: StructureCorrection): Promise<StructureQuestion | null> {
+  if (correction) return correction.exclude || !STRUCTURE_CHOICES.includes(correction.structure) ? null : buildQuestion(character, correction.structure, correction.subtype || null);
   const teaching = teachingStructure(character, catalog);
   if (!teaching) return null;
-  const base = { type: 'structure' as const, character, prompt: `「${character}」是哪一種字形結構？`, seconds: 20 };
-  if (teaching.subtype) {
-    const options = shuffled(halfOptions(teaching.subtype, character), character + '#');
-    return { ...base, options, answer: options.indexOf(teaching.subtype) };
-  }
+  if (teaching.subtype) return buildQuestion(character, teaching.structure, teaching.subtype);
   let subtype: string | null = teaching.structure === '全包圍' ? '四面包圍' : null;
   if (!subtype) {
     const strokes = await loadStrokes(character);
@@ -135,9 +153,5 @@ export async function structureQuestion(character: string, catalog: Catalog, loa
       if (shares) subtype = subtypeFromShares(teaching.structure, shares);
     }
   }
-  if (subtype) {
-    const options = shuffled(SIMILAR[teaching.structure]!, character);
-    return { ...base, options, answer: options.indexOf(subtype) };
-  }
-  return { ...base, options: STRUCTURE_CHOICES, answer: STRUCTURE_CHOICES.indexOf(teaching.structure) };
+  return buildQuestion(character, teaching.structure, subtype);
 }

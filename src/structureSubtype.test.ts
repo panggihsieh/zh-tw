@@ -40,4 +40,15 @@ describe('structure subtypes from stroke order', () => {
     expect(question?.options.sort()).toEqual(['三部分近等長', '上下等長', '上短下長', '上長下短'].sort());
     expect(subtypeFromShares('左右', [.43, .57])).toBeNull();
   });
+  it('uses the administrator correction first', async () => {
+    const corrected = await structureQuestion('椒', catalog, load, { structure: '左右', subtype: '左窄右寬', exclude: false });
+    expect(corrected?.options[corrected.answer]).toBe('左窄右寬');
+    expect(corrected?.options).toHaveLength(4);
+    const bigOnly = await structureQuestion('孝', catalog, load, { structure: '上下', subtype: '', exclude: false });
+    expect(bigOnly?.options).toHaveLength(8);
+    expect(bigOnly?.options[bigOnly.answer]).toBe('上下');
+    expect(await structureQuestion('乃', catalog, load, { structure: '獨體', subtype: '', exclude: true })).toBeNull();
+    const single = await structureQuestion('人', catalog, load, { structure: '獨體', subtype: '整體一區', exclude: false });
+    expect(single?.options[single.answer]).toBe('整體一區');
+  });
 });

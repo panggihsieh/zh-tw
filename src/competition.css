@@ -269,3 +269,7 @@
 .competition-rank-board .competition-centered-podium b{background:#ffd76a;color:#302267}
 .competition-rank-board .competition-countdown-ring circle:first-child{stroke:rgba(14,116,184,.18)}
 .competition-rank-board .competition-countdown-ring circle:last-child{stroke:#f59e0b}
+/* 管理者修正生字結構 */
+.structure-override-editor{display:grid;gap:8px;margin-top:10px;padding:10px;border:1px dashed #b9c6ad;border-radius:12px;background:#fbfdf8;text-align:left}.structure-override-editor label{display:grid;gap:4px;font-size:14px}.structure-override-editor select{width:100%}.structure-override-editor img{width:64px;height:64px;justify-self:center;background:#fff;border-radius:6px}.structure-override-editor .structure-override-exclude{display:flex;align-items:center;gap:6px}.structure-override-editor .structure-override-exclude input{width:auto}.structure-override-editor .competition-actions{margin-top:4px}
+.structure-override-badge{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:99px;background:#fff1bd;color:#795c00;font-size:12px;font-weight:800}
+.structure-override-list{margin:12px 0;padding:12px 16px;border:1px solid #dcd7f5;border-radius:14px;background:#fff}.structure-override-list summary{cursor:pointer;font-weight:800}.structure-override-list ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}.structure-override-list li{display:flex;flex-wrap:wrap;align-items:center;gap:10px}.structure-override-list li strong{font-size:24px}.structure-override-list li .structure-override-editor{flex-basis:100%}
