@@ -259,3 +259,13 @@
 .competition-rank-board .competition-centered-podium .competition-rank-name{max-width:100%;font-size:min(var(--ranking-name-size),calc(var(--podium-cell) / 3.4));overflow-wrap:anywhere}
 .competition-rank-board .competition-centered-podium .competition-rank-score{max-width:100%;font-size:min(calc(var(--ranking-name-size) * 2),calc(var(--podium-cell) / 5))}
 .competition-rank-board .competition-centered-podium>div>span{max-width:100%;font-size:min(clamp(10px,1.4cqw,17px),calc(var(--podium-cell) / 5));white-space:nowrap}
+/* 動態排行配色：天空藍淡化透明背景，深藍文字與琥珀色分數維持對比。 */
+.competition-rank-board{background:linear-gradient(160deg,rgba(125,200,240,.38),rgba(186,228,252,.24) 55%,rgba(224,242,254,.32));border:1px solid rgba(56,152,214,.28);box-shadow:0 10px 30px rgba(14,116,184,.10);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#10324f}
+.competition-rank-board:fullscreen{background:linear-gradient(160deg,rgba(125,200,240,.45),rgba(186,228,252,.30) 55%,rgba(224,242,254,.40)),#f4fbff}
+.competition-rank-board::backdrop{background:#f4fbff}
+.competition-rank-board .competition-rank-heading p,.competition-rank-board .competition-centered-podium>div>span,.competition-rank-board .competition-other-ranks{color:#2f5675}
+.competition-rank-board .competition-centered-podium .competition-rank-name{color:#10324f}
+.competition-rank-board .competition-centered-podium .competition-rank-score{color:#b45309}
+.competition-rank-board .competition-centered-podium b{background:#ffd76a;color:#302267}
+.competition-rank-board .competition-countdown-ring circle:first-child{stroke:rgba(14,116,184,.18)}
+.competition-rank-board .competition-countdown-ring circle:last-child{stroke:#f59e0b}
