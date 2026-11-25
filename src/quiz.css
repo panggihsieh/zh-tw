@@ -162,3 +162,5 @@
     padding-block: 16px;
   }
 }
+
+.quiz-category-hint { display: block; font-size: 13px; font-weight: normal; color: #52665d; line-height: 1.5; }

@@ -12,6 +12,10 @@ export const CATEGORIES = [
 const text = (s, max = 1000) =>
   typeof s === "string" && s.trim().length > 0 && s.length <= max;
 const uuid = (s) => typeof s === "string" && /^[0-9a-f-]{36}$/.test(s);
+export function validPunctuationOption(value) {
+  // 干擾項本來就可能含錯誤標點；只檢查完整句的文字量，不要求錯誤選項引號正確。
+  return typeof value === 'string' && (value.match(/\p{Script=Han}/gu) || []).length >= 6;
+}
 export function validateQuiz(v) {
   if (
     !v ||
@@ -528,6 +532,9 @@ export function createQuizHandler({
           )
             throw Error("請填寫班級學生 Google 帳號清單");
           const output = await generate(v);
+          if (output.questions?.some(q => q.category === '標點符號' &&
+              (!Array.isArray(q.options) || !q.options.every(validPunctuationOption))))
+            throw Error('標點題選項須為完整句子；本批未入庫，請調整後重新出題');
           const quiz = validateQuiz({
             ...v,
             questions: output.questions.map((q) => ({

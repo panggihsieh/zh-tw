@@ -119,6 +119,7 @@ for (const file of [
   "cloud-run.mjs",
   "writing-api.mjs",
   "quiz-api.mjs",
+  "quiz-pedagogy.mjs",
   "sentence-api.mjs",
   "competition-api.mjs",
   "competition-birds.json",

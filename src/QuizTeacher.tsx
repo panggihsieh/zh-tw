@@ -2,6 +2,8 @@ import CurriculumSql from "./CurriculumSql";
 import { useEffect, useState } from "react";
 import {
   QUIZ_CATEGORIES,
+  SIX_QUIZ_CATEGORIES,
+  QUIZ_CATEGORY_HINTS,
   quizRequest,
   type QuizPaper,
   type QuizQuestion,
@@ -32,14 +34,14 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
     [mode, setMode] = useState<"original" | "rephrase">("original"),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [tab, setTab] = useState("sql"),
+    [tab, setTab] = useState("generate"),
     [books, setBooks] = useState<Book[]>([]),
     [bookIndex, setBookIndex] = useState(0),
     [lessonIndex, setLessonIndex] = useState(0);
   const [bankIds, setBankIds] = useState<string[]>([]);
   const [rosterText, setRosterText] = useState("");
-  const [questionRows, setQuestionRows] = useState(() => QUIZ_CATEGORIES.slice(0, 4).map(category => ({
-    category, difficulty: "中", count: 2,
+  const [questionRows, setQuestionRows] = useState(() => SIX_QUIZ_CATEGORIES.map(category => ({
+    category, difficulty: "中", count: 1,
   })));
   const questionPlan = questionRows.filter(row => row.count > 0);
   const questionCount = questionPlan.reduce((total, row) => total + row.count, 0);
@@ -136,12 +138,12 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
         </button>
         <button
           className="secondary"
+          disabled={busy}
           onClick={() => {
-            setPaper(null);
             setTab("generate");
           }}
         >
-          上傳課文・AI 四類出題
+          南一高年級・六類出題
         </button>
         <button
           className="secondary"
@@ -157,6 +159,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
       {tab !== "sql" && <p role="status">{message}</p>}
       {tab === "generate" && (
         <form
+          aria-label="南一高年級六類出題"
           onSubmit={(e) => {
             e.preventDefault();
             void run(async () => {
@@ -168,6 +171,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
                 questionPlan,
                 roster: rosterText.split(/[\s,;，；]+/).filter(Boolean),
               });
+              setCategoryFilter(''); setDifficultyFilter(''); setReviewFilter('');
               setPaper(q);
               setBankIds(q.questions.map((q) => q.id));
               setTab("bank");
@@ -177,8 +181,9 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           }}
         >
           <h2>1. 選課與上傳課文</h2>
+          <p>原創四選一選擇題 · 六類分配 → AI 檢查 → 教師編修審核 → 發布</p>
           <p>
-            限定國小國語，課次清單只有生字表；請貼上可使用的完整課文，作為出題依據。
+            南一五、六年級上下學期均可選課。課次清單只有生字表；請貼上或上傳可使用的完整課文，作為出題依據。
           </p>
           <div className="quiz-grid">
             <label>
@@ -301,7 +306,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
                 const update = (patch: Partial<typeof row>) => setQuestionRows(rows =>
                   rows.map((item, i) => i === index ? { ...item, ...patch } : item));
                 return <tr key={row.category}>
-                  <th scope="row">{row.category}</th>
+                  <th scope="row">{row.category}<small className="quiz-category-hint">{QUIZ_CATEGORY_HINTS[row.category]}</small></th>
                   <td><select aria-label={row.category + "難度"} value={row.difficulty} disabled={!row.count}
                     onChange={e => update({ difficulty: e.target.value })}>
                     <option value="易">低</option><option value="中">中</option><option value="難">高</option>
@@ -315,17 +320,17 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
             </table>
             <p aria-live="polite">合計 {questionCount} 題（限 1–10 題）</p>
           </fieldset>
-          <p>課文理解包含擷取訊息、推論、統整與評鑑反思，參考閱讀素養方向。成語、修辭與改錯須有課文依據；題材不足時會提示，不能憑空補寫。</p>
+          <p>文意理解涵蓋擷取訊息、推論、統整與評鑑反思。成語可由課文生字延伸並註明依據；修辭與標點須有明確語境。素材不足時請將該類題數設為 0。</p>
           <p>
             使用 API
             設定中已儲存的文字模型。按下後會傳送這份課文與設定，執行出題及 AI
-            檢查兩次呼叫，可能計費；失敗不自動重試。
+            檢查兩次呼叫；若發現疑點，最多修正並複查一次（合計最多四次），可能計費。仍未通過則不入庫。
           </p>
           <button
             className="primary"
             disabled={busy || questionCount < 1 || questionCount > 10}
           >
-            {busy ? "AI 處理中…" : "AI 產生母題＋2個同義改寫"}
+            {busy ? "AI 處理中…" : "AI 產生選擇題草稿＋2個同義改寫"}
           </button>
         </form>
       )}
@@ -364,6 +369,10 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           {paper && (
             <>
               <h2>{paper.title}</h2>
+              {paper.aiCheck && <details><summary>AI 檢查紀錄 · {paper.aiCheck.model}{paper.aiCheck.repaired ? ' · 已修正並複查一次' : ''}</summary>
+                <p>{paper.aiCheck.notice}。修改題目後，請重新核對；以下為產生時的紀錄。</p>
+                {paper.aiCheck.checks.map(check=><p key={check.index}>第 {check.index+1} 題：{check.ok?'未發現疑點':'待確認'} · {check.reason}</p>)}
+              </details>}
               {paper.source && (
                 <p>
                   來源：{paper.source.publisher} {paper.source.year}{" "}
@@ -489,7 +498,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
               )}
               {tab === "stats" && (
                 <>
-                  <h3>四類能力表現（最近一次作答）</h3>{QUIZ_CATEGORIES.filter(c=>paper.questions.some(q=>q.category===c)).map(c=>{const rows=stats.filter(r=>paper.questions.find(q=>q.id===r.id)?.category===c);const total=rows.reduce((n,r)=>n+r.total,0),wrong=rows.reduce((n,r)=>n+r.wrong,0);return <p key={c}>{c}：{total?Math.round((total-wrong)/total*100)+'% 答對':'尚無作答'}（{total}次題目作答）</p>;})}
+                  <h3>各類能力表現（最近一次作答）</h3>{QUIZ_CATEGORIES.filter(c=>paper.questions.some(q=>q.category===c)).map(c=>{const rows=stats.filter(r=>paper.questions.find(q=>q.id===r.id)?.category===c);const total=rows.reduce((n,r)=>n+r.total,0),wrong=rows.reduce((n,r)=>n+r.wrong,0);return <p key={c}>{c}：{total?Math.round((total-wrong)/total*100)+'% 答對':'尚無作答'}（{total}次題目作答）</p>;})}
                   <h3>全班錯題集中再測</h3>
                   <p>
                     錯誤率：答錯人數 ÷

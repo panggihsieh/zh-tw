@@ -136,7 +136,7 @@ const backendTitles: Record<BackendSection, string> = {
   versions: "提交版本紀錄",
   security: "安全事件紀錄",
   strokeSpeech: "筆畫語音",
-  quiz: "資料庫管理",
+  quiz: "國語出題與資料庫",
   themes: "網站樣式資料庫",
   gameReview: '課堂紀錄',
   writingAssignments: '書寫作業管理',
@@ -972,7 +972,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           <nav className="app-top-nav" aria-label={backendMode ? "後台功能" : "學生功能"}>
             {backendMode && ([
               { title: "資料庫", items: [
-                { section: "quiz", label: "資料庫管理", icon: Database },
+                { section: "quiz", label: "國語出題與資料庫", icon: Database },
                 { section: "curriculum", label: "三家出版社生字資料庫", icon: LibraryBig },
               ] },
               { title: "字形、筆順與字辭典查詢", items: [
