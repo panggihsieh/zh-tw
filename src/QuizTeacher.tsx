@@ -1,3 +1,4 @@
+import LessonBankBuilder from "./LessonBankBuilder";
 import CurriculumSql from "./CurriculumSql";
 import { useEffect, useState } from "react";
 import {
@@ -34,7 +35,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
     [mode, setMode] = useState<"original" | "rephrase">("original"),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [tab, setTab] = useState("generate"),
+    [tab, setTab] = useState("lessonbank"),
     [books, setBooks] = useState<Book[]>([]),
     [bookIndex, setBookIndex] = useState(0),
     [lessonIndex, setLessonIndex] = useState(0);
@@ -133,6 +134,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
       {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <PublisherSync request={quizRequest} initiallyOpen={false} />}
       {!reviewId && <div className="quiz-actions">
+        <button className="secondary" disabled={busy} onClick={()=>setTab('lessonbank')}>每課55題重編與進度</button>
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
         </button>
@@ -143,7 +145,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
             setTab("generate");
           }}
         >
-          南一高年級・六類出題
+          少量試題（非整課）
         </button>
         <button
           className="secondary"
@@ -155,6 +157,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
 
       <button className="secondary" aria-pressed={tab === "sql"} onClick={() => setTab("sql")}>AI 教材關聯查詢</button>
       </div>}
+      {tab === 'lessonbank' && <LessonBankBuilder request={quizRequest} onOpen={id=>void run(()=>open(id))}/>}
       {tab === "sql" && <CurriculumSql />}
       {tab !== "sql" && <p role="status">{message}</p>}
       {tab === "generate" && (
@@ -334,7 +337,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
           </button>
         </form>
       )}
-      {tab !== "generate" && tab !== "sql" && (
+      {tab !== "generate" && tab !== "sql" && tab !== "lessonbank" && (
         <>
           {!reviewId&&<><h2>母題題庫與已發布試卷</h2>
           {!papers.length && <p>尚無母題，請先用 AI 建立母題。</p>}
@@ -373,6 +376,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
                 <p>{paper.aiCheck.notice}。修改題目後，請重新核對；以下為產生時的紀錄。</p>
                 {paper.aiCheck.checks.map(check=><p key={check.index}>第 {check.index+1} 題：{check.ok?'未發現疑點':'待確認'} · {check.reason}</p>)}
               </details>}
+              {paper.sourceLabel && <p>課文來源：{paper.sourceLabel} · 重編批次待教師審核</p>}
               {paper.source && (
                 <p>
                   來源：{paper.source.publisher} {paper.source.year}{" "}

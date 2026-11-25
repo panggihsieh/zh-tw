@@ -164,3 +164,7 @@
 }
 
 .quiz-category-hint { display: block; font-size: 13px; font-weight: normal; color: #52665d; line-height: 1.5; }
+
+.quiz-bank-progress { overflow-x: auto; margin-block: 18px; }
+.quiz-bank-progress table { min-width: 850px; width: 100%; border-collapse: collapse; font-size: 15px; }
+.quiz-bank-progress :is(th,td) { padding: 8px; border-bottom: 1px solid #bbcdbf; text-align: left; }

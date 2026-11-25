@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "total": 55,
+  "batchSize": 5,
+  "plan": [
+    {
+      "category": "字音字形",
+      "count": 10
+    },
+    {
+      "category": "字詞義及運用",
+      "count": 15
+    },
+    {
+      "category": "文意理解",
+      "count": 15
+    },
+    {
+      "category": "標點符號",
+      "count": 5
+    },
+    {
+      "category": "修辭",
+      "count": 5
+    },
+    {
+      "category": "成語",
+      "count": 5
+    }
+  ],
+  "lessons": [
+    {
+      "key": "nani-115_1-5-1",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第一課：幸福筆記本"
+    },
+    {
+      "key": "nani-115_1-5-2",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第二課：做人做事做長久"
+    },
+    {
+      "key": "nani-115_1-5-3",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第三課：孔雀錯了"
+    },
+    {
+      "key": "nani-115_1-5-4",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第四課：特別的海"
+    },
+    {
+      "key": "nani-115_1-5-5",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第五課：漫遊花東"
+    },
+    {
+      "key": "nani-115_1-5-6",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第六課：護送螃蟹過馬路"
+    },
+    {
+      "key": "nani-115_1-5-7",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第七課：高第的魔法建築"
+    },
+    {
+      "key": "nani-115_1-5-8",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第八課：嘗嘗我的家鄉味"
+    },
+    {
+      "key": "nani-115_1-5-9",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第九課：小小力量將世界照亮"
+    },
+    {
+      "key": "nani-115_1-5-10",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十課：男生說，女生說"
+    },
+    {
+      "key": "nani-115_1-5-11",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十一課：耶誕禮物"
+    },
+    {
+      "key": "nani-115_1-5-12",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十二課：漫遊詩情"
+    },
+    {
+      "key": "nani-114_2-5-1",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第一課：穿越時空的味道"
+    },
+    {
+      "key": "nani-114_2-5-2",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第二課：在黑暗中乘著音樂飛翔"
+    },
+    {
+      "key": "nani-114_2-5-3",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第三課：色香味的陽光"
+    },
+    {
+      "key": "nani-114_2-5-4",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第四課：縣官審石頭"
+    },
+    {
+      "key": "nani-114_2-5-5",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第五課：高明說話術"
+    },
+    {
+      "key": "nani-114_2-5-6",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第六課：讀書報告—佐賀的超級阿嬤"
+    },
+    {
+      "key": "nani-114_2-5-7",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第七課：魔術師爸爸"
+    },
+    {
+      "key": "nani-114_2-5-8",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第八課：八歲，一個人去旅行"
+    },
+    {
+      "key": "nani-114_2-5-9",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第九課：紅鼻子醫生"
+    },
+    {
+      "key": "nani-114_2-5-10",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第十課：沉默的動物園"
+    },
+    {
+      "key": "nani-114_2-5-11",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第十一課：地下護衛軍"
+    },
+    {
+      "key": "nani-114_2-5-12",
+      "publisher": "南一",
+      "grade": 5,
+      "term": "下",
+      "year": "114_2",
+      "title": "第十二課：金字塔之謎"
+    },
+    {
+      "key": "nani-115_1-6-1",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第一課：在天晴了的時候"
+    },
+    {
+      "key": "nani-115_1-6-2",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第二課：珍珠鳥"
+    },
+    {
+      "key": "nani-115_1-6-3",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第三課：客至"
+    },
+    {
+      "key": "nani-115_1-6-4",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第四課：贏得喝采的輸家"
+    },
+    {
+      "key": "nani-115_1-6-5",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第五課：哇！原來如此"
+    },
+    {
+      "key": "nani-115_1-6-6",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第六課：登月先鋒"
+    },
+    {
+      "key": "nani-115_1-6-7",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第七課：明智的抉擇"
+    },
+    {
+      "key": "nani-115_1-6-8",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第八課：飢渴好「火」伴"
+    },
+    {
+      "key": "nani-115_1-6-9",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第九課：火燒連環船"
+    },
+    {
+      "key": "nani-115_1-6-10",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十課：戲術"
+    },
+    {
+      "key": "nani-115_1-6-11",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十一課：紀念照"
+    },
+    {
+      "key": "nani-115_1-6-12",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "上",
+      "year": "115_1",
+      "title": "第十二課：少年筆耕"
+    },
+    {
+      "key": "nani-114_2-6-1",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第一課：風中騎士"
+    },
+    {
+      "key": "nani-114_2-6-2",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第二課：達駭黑熊"
+    },
+    {
+      "key": "nani-114_2-6-3",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第三課：楊氏之子"
+    },
+    {
+      "key": "nani-114_2-6-4",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第四課：談夢想"
+    },
+    {
+      "key": "nani-114_2-6-5",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第五課：蒂烈娜"
+    },
+    {
+      "key": "nani-114_2-6-6",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第六課：不怕"
+    },
+    {
+      "key": "nani-114_2-6-7",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第七課：打開心中的窗"
+    },
+    {
+      "key": "nani-114_2-6-8",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第八課：努力愛春華"
+    },
+    {
+      "key": "nani-114_2-6-9",
+      "publisher": "南一",
+      "grade": 6,
+      "term": "下",
+      "year": "114_2",
+      "title": "第九課：每一個孩子都有一條自己的小路"
+    }
+  ]
+}

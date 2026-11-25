@@ -29,6 +29,7 @@ export interface QuizQuestion {
   readingSkill?: string;
 }
 export interface QuizPaper {
+  sourceLabel?: string;
   aiCheck?: { model: string; checkedAt: string; repaired?: boolean; checks: {index: number; ok: boolean; reason: string}[]; notice: string };
   dueAt?: string;
   shuffleOptions?: boolean;

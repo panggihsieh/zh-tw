@@ -1,3 +1,4 @@
+import {makeLessonBankHandlers} from './quiz-lesson-bank.mjs';
 import { randomUUID, randomInt } from "node:crypto";
 import { makeResourceHandlers } from "./publisher-sync.mjs";
 import { writingIdentity } from "./writing-api.mjs";
@@ -205,6 +206,7 @@ export function createQuizHandler({
     } while (cursor);
     return items;
   }
+  const lessonBanks = makeLessonBankHandlers({store,scan,generate,validateQuiz});
   const resources = makeResourceHandlers({
     store,
     scan,
@@ -426,6 +428,10 @@ export function createQuizHandler({
       }
       if (!user.admin)
         return send(403, { error: "僅管理者可組卷與查看全班統計" });
+      if (path.startsWith('/lesson-banks')) {
+        const result = await lessonBanks(path,req.method,req.method==='POST'?await body(req):null,user);
+        if(result) return send(200,result);
+      }
       if (path === "/character-clues" && req.method === "POST") {
         const { characters, entries } = await body(req, 64000);
         if (!Array.isArray(characters) || characters.length > 100 ||
