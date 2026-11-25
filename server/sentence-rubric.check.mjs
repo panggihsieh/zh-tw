@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { gradeRubric, rubricInstruction, validateRubric, DEFAULT_RUBRIC, normalizeLessonCharacters } from './sentence-rubric.mjs';
+import { gradeRubric, rubricInstruction, validateRubric, DEFAULT_RUBRIC, normalizeLessonCharacters, normalizeLessonWords, parseLessonWords } from './sentence-rubric.mjs';
 
 const rubric = validateRubric([
   { key: 'correctness', points: 20 }, { key: 'person', points: 10 }, { key: 'event', points: 10 }, { key: 'time', points: 10 },
@@ -15,6 +15,9 @@ test('validates teacher rubric totals and custom rules', () => {
   assert.throws(() => validateRubric([{ key: 'correctness', points: 50 }, { key: 'correctness', points: 50 }]), /重複/);
   assert.throws(() => validateRubric([{ key: 'hack', points: 100 }]), /不存在/);
   assert.equal(normalizeLessonCharacters('灘a灘拖'), '灘拖');
+  assert.deepEqual(parseLessonWords('沙灘、海灘，貝殼 夕陽\n夕陽 a 灘'), ['沙灘', '海灘', '貝殼', '夕陽']);
+  assert.deepEqual(normalizeLessonWords(['貝殼', '貝殼', '夕陽']), ['貝殼', '夕陽']);
+  assert.throws(() => normalizeLessonWords(['殼']), /2–8/);
 });
 
 test('instruction only asks AI for the chosen items', () => {
@@ -25,18 +28,20 @@ test('instruction only asks AI for the chosen items', () => {
   assert.doesNotMatch(text, /mechanics/);
 });
 
-test('scores evidence only when AI quotes the sentence, lesson characters by program', () => {
+test('scores evidence only when AI quotes the sentence, lesson words by program', () => {
   const sentence = '星期天早上，小明在海灘撿貝殼，玩得興高采烈，覺得好開心。';
   const grade = gradeRubric(sentence, '灘', rubric, {
     targetOk: true, meaningOk: true, uncertain: false, scores: { correctness: 18, custom: 5 },
     evidence: { person: '小明', event: '撿貝殼', time: '星期天早上', place: '火星', object: '貝殼' },
     idiom: '興高采烈', idiomAppropriate: true, highlight: '興高采烈', feedback: '很棒！', polished: sentence,
-  }, '灘拖殼');
+  }, ['海灘', '貝殼', '晚霞']);
   const by = Object.fromEntries(grade.rubric.map(item => [item.key, item]));
   assert.equal(by.place.score, 0, '引用不在原句中的地點不給分');
   assert.equal(by.person.score, 10);
   assert.equal(by.lesson.score, 10);
-  assert.equal(by.lesson.evidence, '殼');
+  assert.equal(by.lesson.evidence, '貝殼', '含指定字的「海灘」不算，另用到「貝殼」才給分');
+  const onlyTarget = gradeRubric('我在海灘玩。', '灘', rubric, { targetOk: true, meaningOk: true, uncertain: false, scores: { correctness: 18, custom: 5 }, evidence: {}, idiom: '', feedback: '好' }, ['海灘', '貝殼']);
+  assert.equal(onlyTarget.rubric.find(item => item.key === 'lesson').score, 0);
   assert.equal(by.idiom.score, 15);
   assert.equal(grade.total, 18 + 10 + 10 + 10 + 0 + 10 + 10 + 15 + 5);
   assert.equal(grade.level, '甲等');

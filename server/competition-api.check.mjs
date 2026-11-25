@@ -153,9 +153,9 @@ test('老師自選造句評分項目：開課驗證、AI 收到項目、依項�
  const call=async(path,body,user='teacher')=>{const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room','x-test-user':user},body:body===undefined?undefined:JSON.stringify(body)});return {status:r.status,...await r.json()};};
  const base={title:'自選評分',classId:'c',className:'五年一班',loginMode:'roster',gameType:'sentence-practice',students:[{seat:1,name:'甲',email:'student@example.com'}],roster:['student@example.com'],questions:[{phrase:'灘',character:'灘',seconds:90}]};
  assert.equal((await call('/rooms',{...base,rubric:[{key:'correctness',points:60}]})).status,400,'總分不是 100 須拒絕');
- assert.equal((await call('/rooms',{...base,rubric:[{key:'correctness',points:50},{key:'lesson',points:50}]})).status,400,'勾課文生字但沒有課文須拒絕');
+ assert.equal((await call('/rooms',{...base,rubric:[{key:'correctness',points:50},{key:'lesson',points:50}]})).status,400,'勾課文語詞但沒有語詞表須拒絕');
  const rubric=[{key:'correctness',points:40},{key:'person',points:20},{key:'place',points:20},{key:'lesson',points:20}];
- const created=await call('/rooms',{...base,rubric,lessonCharacters:'灘陽'});assert.equal(created.status,201);
+ const created=await call('/rooms',{...base,rubric,lessonWords:['夕陽','海灘']});assert.equal(created.status,201);
  const id=created.room.id;
  const joined=await call(`/rooms/${id}/join`,{},'student');assert.deepEqual(joined.room.rubric.map(v=>v.key),['correctness','person','place','lesson']);
  await call(`/rooms/${id}/start`,{});await call(`/rooms/${id}/state`,{},'student');
@@ -163,5 +163,5 @@ test('老師自選造句評分項目：開課驗證、AI 收到項目、依項�
  assert.equal(answer.status,200);
  assert.deepEqual(received.rubric.map(v=>v.key),['correctness','person','place','lesson']);
  assert.equal(answer.grade.total,25+20+20+20);
- assert.equal(answer.grade.rubric.find(v=>v.key==='lesson').evidence,'陽');
+ assert.equal(answer.grade.rubric.find(v=>v.key==='lesson').evidence,'夕陽');
 });

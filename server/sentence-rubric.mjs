@@ -1,5 +1,5 @@
 // 一字多詞 AI 造句：老師在開課時自選評分項目與配分（伺服器與網頁共用）。
-// 人事時地物、成語須由 AI 逐字引用原句才給分；「用到課文生字」由程式直接比對，不靠 AI。
+// 人事時地物、成語須由 AI 逐字引用原句才給分；「用到課文語詞」由程式比對老師提供的語詞表，不靠 AI。
 
 export const RUBRIC_ITEMS = [
   { key: 'correctness', label: '用詞正確', kind: 'scale', points: 30, hint: '指定字或語詞用法正確、情境恰當' },
@@ -12,7 +12,7 @@ export const RUBRIC_ITEMS = [
   { key: 'time', label: '時', kind: 'evidence', points: 10, hint: '寫出明確的時間' },
   { key: 'place', label: '地', kind: 'evidence', points: 10, hint: '寫出明確的地點' },
   { key: 'object', label: '物', kind: 'evidence', points: 10, hint: '寫出具體的物品或對象' },
-  { key: 'lesson', label: '用到課文生字', kind: 'lesson', points: 10, hint: '除了指定字，至少再用到一個所選課文的生字' },
+  { key: 'lesson', label: '用到課文語詞', kind: 'lesson', points: 10, hint: '除了含指定字的語詞，至少再用到一個本課語詞' },
   { key: 'idiom', label: '至少一個成語', kind: 'idiom', points: 20, hint: '使用真正的成語且用得恰當' },
   { key: 'custom', label: '老師自訂', kind: 'scale', points: 10, hint: '' },
 ];
@@ -41,11 +41,23 @@ export function validateRubric(value) {
   return items;
 }
 
-/** 課堂的課文生字（去重，只留漢字）。 */
+/** 課堂的課文生字（舊版課堂使用，去重，只留漢字）。 */
 export function normalizeLessonCharacters(value) {
   if (value === undefined) return '';
   if (typeof value !== 'string' || value.length > 2000) fail('課文生字格式不符。');
   return [...new Set([...value].filter(char => HAN.test(char)))].join('');
+}
+/** 老師提供的課文語詞：2–8 個漢字的語詞，最多 300 個（去重）。 */
+export function normalizeLessonWords(value) {
+  if (value === undefined) return [];
+  if (!Array.isArray(value) || value.length > 300) fail('課文語詞最多 300 個。');
+  const words = value.map(word => String(word ?? '').trim()).filter(Boolean);
+  if (words.some(word => !/^\p{Script=Han}{2,8}$/u.test(word))) fail('課文語詞須為 2–8 個字的中文語詞。');
+  return [...new Set(words)];
+}
+/** 從文字切出語詞（以頓號、逗號、空白或換行分隔）。 */
+export function parseLessonWords(text) {
+  return [...new Set(String(text ?? '').split(/[、，,;；\s]+/u).map(word => word.trim()).filter(word => /^\p{Script=Han}{2,8}$/u.test(word)))];
 }
 
 /** AI 評分指示：只要求 AI 處理 scale／evidence／idiom 項目，課文生字由程式比對。 */
@@ -72,7 +84,8 @@ export function rubricInstruction(rubric) {
 }
 
 /** 依老師設定計分；AI 引用不在原句中的片段一律不給分。 */
-export function gradeRubric(sentence, character, rubric, analysis, lessonCharacters = '') {
+/** lessonWords：老師提供的課文語詞陣列；舊版課堂傳入課文生字字串。 */
+export function gradeRubric(sentence, character, rubric, analysis, lessonWords = []) {
   if (!analysis || typeof analysis.targetOk !== 'boolean' || typeof analysis.meaningOk !== 'boolean' || typeof analysis.uncertain !== 'boolean' || typeof analysis.feedback !== 'string' || !analysis.feedback.trim() || analysis.feedback.length > 1200) fail('AI 等第格式不符，請稍後再試。');
   const quoted = value => typeof value === 'string' && value.length <= 100 && value && sentence.includes(value) ? value : '';
   const items = rubric.map(item => {
@@ -90,7 +103,9 @@ export function gradeRubric(sentence, character, rubric, analysis, lessonCharact
       const ok = evidence && [...evidence].filter(char => HAN.test(char)).length >= 4 && analysis.idiomAppropriate === true;
       return { ...item, score: ok ? item.points : 0, evidence };
     }
-    const found = [...new Set([...sentence].filter(char => char !== character && HAN.test(char) && lessonCharacters.includes(char)))];
+    const found = typeof lessonWords === 'string'
+      ? [...new Set([...sentence].filter(char => char !== character && HAN.test(char) && lessonWords.includes(char)))]
+      : lessonWords.filter(word => !word.includes(character) && sentence.includes(word));
     return { ...item, score: found.length ? item.points : 0, evidence: found.join('、') };
   });
   const targetOk = sentence.includes(character) && analysis.targetOk && analysis.meaningOk;
