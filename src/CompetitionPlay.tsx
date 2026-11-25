@@ -1,5 +1,7 @@
 import { compareSentences } from "./SentencePractice";
 import type { SentencePracticeGrade } from "./sentenceApi";
+import type { RubricScore } from "../server/sentence-rubric.mjs";
+import SentenceRubricList from "./SentenceRubricList";
 import { structureImage } from "./structureSubtype";
 import {MicrophoneMeter} from './MicrophoneTest';
 import {useEffect,useRef,useState} from 'react';
@@ -23,14 +25,14 @@ const sentenceScoreCriteria = [
   ["mechanics", "文字與標點", 10],
 ] as const;
 
-type SentenceResult = SentencePracticeGrade & { original: string; polished?: string };
+type SentenceResult = SentencePracticeGrade & { original: string; polished?: string; rubric?: RubricScore[] };
 
 function SentenceScoreDetails({ grade }: { grade: SentenceResult }) {
   return <>
       <p>{grade.total === null ? "待確認" : `${grade.total}／100 分`}</p>
       {grade.total !== null && <ul className="competition-score-charts">
-        {sentenceScoreCriteria.map(([key, label, maximum]) => {
-          const score = grade.scores[key];
+        {/* 老師自選評分項目時依該場項目顯示；舊課堂沿用固定五項。 */}
+        {(grade.rubric ? grade.rubric.map(item => [item.key, item.evidence ? `${item.label}（${item.evidence}）` : item.label, item.points, item.score] as const) : sentenceScoreCriteria.map(([key, label, maximum]) => [key, label, maximum, grade.scores[key]] as const)).map(([key, label, maximum, score]) => {
           const percent = Math.round(score / maximum * 100);
           return <li key={key}>
             <span className="competition-score-pie" aria-hidden="true" style={{ background: `conic-gradient(#147747 ${percent}%, #e4ebdc 0)` }} />
@@ -118,7 +120,7 @@ export default function CompetitionPlay({onBack,backLabel="返回遊戲專區",r
  return <section className="competition-play">{room&&<button className="secondary" onClick={onBack}>{backLabel}</button>}
   {!room?<CompetitionCodeEntry initialCode={code} busy={busy} onConfirm={value=>void run(()=>find(value))}/>
   :!participant?<section className="competition-lobby"><span>{room.className}</span><h1>{room.title}</h1><div className="competition-lobby-code">{room.code}</div><p>{room.questionCount} 題 · {room.status==='lobby'?'現在加入等候室':'課堂已鎖定加入'}</p>{room.loginMode==='anonymous'?<><label>你的暱稱<input maxLength={40} value={nickname} disabled={busy} onChange={event=>setNickname(event.target.value)} placeholder="請輸入暱稱"/></label><p>選一隻小鳥加入；灰色表示已被選走，每隻小鳥限一人。</p><div className="competition-bird-grid" aria-label="匿名小鳥公仔">{room.anonymousBirds?.map(bird=><button key={bird.id} type="button" title={bird.name} aria-label={`${bird.name}${bird.occupied?'（已選取）':''}`} disabled={busy||!nickname.trim()||room.status!=='lobby'||bird.occupied&&!bird.mine} onClick={()=>void run(()=>join(bird.id))}><img src={`/bird-avatars/${bird.id}.png`} alt={bird.name}/><span>{bird.name}</span></button>)}</div></>:<>{room.nameChoices&&<label>選取自己的姓名<select value={seat} onChange={event=>setSeat(event.target.value)}><option value="">請選擇姓名</option>{room.nameChoices.map(student=><option key={student.seat} value={student.seat}>{student.seat} 號 · {student.name}</option>)}</select></label>}<button className="primary" disabled={busy||room.status!=='lobby'||!!room.nameChoices&&!seat} onClick={()=>void run(()=>join())}>加入等候室</button></>}</section>
-  :room.status==='lobby'?<section className="competition-lobby"><h1>已加入等候室</h1>{participant.avatarKind==='anonymous'&&participant.avatar&&<img className="competition-selected-bird" src={participant.avatar} alt={`${participant.name}的小鳥公仔`}/>}<p>{participant.name}，老師開始後會自動顯示第一題。</p><button className="secondary" disabled={busy} onClick={()=>void run(refresh)}><RefreshCw size={18}/>更新狀態</button></section>
+  :room.status==='lobby'?<section className="competition-lobby"><h1>已加入等候室</h1>{participant.avatarKind==='anonymous'&&participant.avatar&&<img className="competition-selected-bird" src={participant.avatar} alt={`${participant.name}的小鳥公仔`}/>}<p>{participant.name}，老師開始後會自動顯示第一題。</p>{room.rubric&&<SentenceRubricList rubric={room.rubric} title="本場造句評分規則"/>}<button className="secondary" disabled={busy} onClick={()=>void run(refresh)}><RefreshCw size={18}/>更新狀態</button></section>
   :sentenceGrade ? (
     <section className="competition-stage" aria-label="本題評分細目">
       <h1>本題評分細目</h1>

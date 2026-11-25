@@ -4,6 +4,7 @@ import { randomUUID, randomBytes, randomInt, createHash } from 'node:crypto';
 import { writingIdentity } from './writing-api.mjs';
 import { sentenceReview } from './competition-sentence-review.mjs';
 import { gradePractice } from './sentence-api.mjs';
+import { gradeRubric, normalizeLessonCharacters, validateRubric } from './sentence-rubric.mjs';
 import { writingReferences, judgeCompetitionWriting } from './competition-writing.mjs';
 
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -35,7 +36,11 @@ export function validateRoomInput(value){
   if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>(gameType==='structure'?8:6)||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
   return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
- return {lessonTitles:[...new Set(lessonTitles.map(v=>v.trim()))],title:value.title.trim(),classId:loginMode==='anonymous'?'':String(value.classId||''),className:loginMode==='anonymous'?'匿名參加':value.className.trim(),loginMode,gameType,duration,maxParticipants:loginMode==='anonymous'?Math.min(maxParticipants,30):maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
+ // 一字多詞 AI 造句：老師自選評分項目（未設定則沿用原本固定五項）。
+ const rubric=gameType==='sentence-practice'&&value.rubric!==undefined?validateRubric(value.rubric):undefined;
+ const lessonCharacters=gameType==='sentence-practice'?normalizeLessonCharacters(value.lessonCharacters):'';
+ if(rubric?.some(item=>item.kind==='lesson')&&!lessonCharacters)fail('勾選「用到課文生字」需先選擇課文。');
+ return {...(rubric?{rubric,lessonCharacters}:{}),lessonTitles:[...new Set(lessonTitles.map(v=>v.trim()))],title:value.title.trim(),classId:loginMode==='anonymous'?'':String(value.classId||''),className:loginMode==='anonymous'?'匿名參加':value.className.trim(),loginMode,gameType,duration,maxParticipants:loginMode==='anonymous'?Math.min(maxParticipants,30):maxParticipants,testRoom:value.testRoom===true,students,roster:[...new Set(roster.map(v=>v.toLowerCase()))],questions};
 }
 export function questionPoints(correct,elapsedMs,seconds){return correct&&elapsedMs<=seconds*1000?800+Math.round(200*Math.max(0,1-elapsedMs/(seconds*1000))):0;}
 export function rankParticipants(items){
@@ -72,7 +77,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   try{await store.create(key,participant);}catch(error){if(error.status!==412)throw error;}
   return (await store.get(key)).value;
  }
- const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,lessonTitles:room.lessonTitles||[],className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(admin?{roster:room.roster,questions:room.questions}: {})});
+ const publicRoom=(room,admin=false)=>({id:room.id,code:room.code,title:room.title,lessonTitles:room.lessonTitles||[],className:room.className,status:room.status,questionCount:room.questions.length,createdAt:room.createdAt,duration:room.duration||600,maxParticipants:room.maxParticipants||100,startedAt:room.startedAt||null,expiresAt:room.expiresAt||null,closedAt:room.closedAt||null,loginMode:room.loginMode||'roster',gameType:room.gameType||'quiz',testRoom:room.testRoom===true,...(room.rubric?{rubric:room.rubric}:{}),...(admin?{roster:room.roster,questions:room.questions}: {})});
  const permitted=(room,user)=>user.guest ? user.roomId===room.id : user.admin||room.loginMode==='anonymous'||room.roster.includes(user.email.toLowerCase());
  const publicParticipant=(value,user)=>({uid:value.uid,name:value.name,seat:value.seat||null,avatarKind:value.avatarKind,avatar:value.avatar||null,birdId:value.birdId||null,index:value.index,correct:value.correct,points:value.points,finished:value.finished,mine:value.uid===user.uid});
  return async(req,res)=>{
@@ -232,7 +237,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    if(action==='answer'){
     if(room.status!=='running'||now()>=room.expiresAt||participant.finished||participant.questionStartedAt==null)fail('目前不能作答，課堂可能已到期。',409);const body=await requestBody(req),question=room.questions[participant.index],elapsed=Math.max(0,now()-participant.questionStartedAt);let correct,points,grade;
     if(question.type==='sentence-practice'){
-     if(participant.gradingIndex===participant.index)fail('這題正在評量，請勿重複送出。',409);if(!text(body.sentence,300)||!body.sentence.includes(question.character)||!gradeSentence)fail('請輸入包含指定字的完整句子。');const locked={...participant,gradingIndex:participant.index};await store.update(key,locked,participantRecord.generation);try{grade=gradePractice(body.sentence,question.character,await gradeSentence({phrase:question.phrase,character:question.character,sentence:body.sentence}));}catch(error){const failed=await store.get(key),retry={...failed.value};delete retry.gradingIndex;await store.update(key,retry,failed.generation);throw error;}correct=grade.targetOk&&grade.meaningOk&&grade.total>=50;points=elapsed<=question.seconds*1000?Math.round((room.sentenceScoreScale ?? 10) * grade.total):0;
+     if(participant.gradingIndex===participant.index)fail('這題正在評量，請勿重複送出。',409);if(!text(body.sentence,300)||!body.sentence.includes(question.character)||!gradeSentence)fail('請輸入包含指定字的完整句子。');const locked={...participant,gradingIndex:participant.index};await store.update(key,locked,participantRecord.generation);try{const analysis=await gradeSentence({phrase:question.phrase,character:question.character,sentence:body.sentence,...(room.rubric?{rubric:room.rubric}:{})});grade=room.rubric?gradeRubric(body.sentence,question.character,room.rubric,analysis,room.lessonCharacters||''):gradePractice(body.sentence,question.character,analysis);}catch(error){const failed=await store.get(key),retry={...failed.value};delete retry.gradingIndex;await store.update(key,retry,failed.generation);throw error;}correct=grade.targetOk&&grade.meaningOk&&grade.total>=50;points=elapsed<=question.seconds*1000?Math.round((room.sentenceScoreScale ?? 10) * grade.total):0;
     }else if(question.type==='writing'){correct=await judgeCompetitionWriting(question.character,body.traces)&&elapsed<=question.seconds*1000;points=questionPoints(correct,elapsed,question.seconds);
     }else{if(!Number.isInteger(body.answer)||body.answer<0||body.answer>=question.options.length)fail('答案格式不符。');correct=body.answer===question.answer&&elapsed<=question.seconds*1000;points=questionPoints(correct,elapsed,question.seconds);}
     const nextIndex=participant.index+1,finished=nextIndex>=room.questions.length;

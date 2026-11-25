@@ -128,6 +128,7 @@ for (const file of [
   "request-security.mjs",
   "competition-writing.mjs",
   "stroke-judge.mjs",
+  "sentence-rubric.mjs",
   "sentence-bank.json",
   "publisher-sync.mjs",
 ])

@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react';
 import {competitionRequest} from './competitionApi';
-interface Answer {questionIndex:number;name:string;seat:number|null;sentence:string;points:number;qualityScore:number|null;feedback:string;issueReason:string;scores:Record<string,number>;timedOut:boolean}
+interface Answer {questionIndex:number;name:string;seat:number|null;sentence:string;points:number;qualityScore:number|null;feedback:string;issueReason:string;scores:Record<string,number>;rubric?:{label:string;points:number;score:number;evidence:string}[];timedOut:boolean}
 interface Group {character:string;count:number;pending:Answer[];highest:Answer[];lowest:Answer[];missingHistory:number;unanswered:number}
 const labels:Record<string,string>={correctness:'用字正確',completeness:'句意完整',fluency:'語句通順',detail:'內容細節',mechanics:'標點格式'};
 const maximum:Record<string,number>={correctness:30,completeness:20,fluency:20,detail:20,mechanics:10};
@@ -11,7 +11,7 @@ export default function CompetitionSentenceReview({roomId,request=competitionReq
   <p><strong>{a.seat?`${a.seat} 號 `:''}{a.name}</strong> · 第 {a.questionIndex+1} 題 · 造句 {a.qualityScore??'待確認'}／100 分 · 競賽 {a.points} 分</p>
   <blockquote>{a.sentence}</blockquote>
   <p className="sentence-review-reason">評分原因（當次 AI 評語）：{a.feedback}{a.issueReason&&`；${a.issueReason}`}</p>
-  <p className="sentence-review-reason">{Object.entries(a.scores).map(([key,value])=>`${labels[key]||key} ${value}/${maximum[key]}`).join('、')}</p>
+  <p className="sentence-review-reason">{a.rubric?a.rubric.map(item=>`${item.label} ${item.score}/${item.points}${item.evidence?`（${item.evidence}）`:''}`).join('、'):Object.entries(a.scores).map(([key,value])=>`${labels[key]||key} ${value}/${maximum[key]}`).join('、')}</p>
   {a.timedOut&&<p className="sentence-review-reason">本題逾時，競賽得分為 0；造句品質分仍保留。</p>}
  </li>;}
  return <section className="competition-sentence-review"><h2>逐字造句高低分分析</h2>

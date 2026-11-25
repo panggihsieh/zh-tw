@@ -4,7 +4,7 @@ export function sentenceReview(room, participants) {
   const indexes=room.questions.flatMap((q,i)=>q.character===character?[i]:[]);
   const answers=participants.flatMap(p=>(p.sentenceAnswers||[]).filter(a=>indexes.includes(a.questionIndex)&&a.character===character).map(a=>({
    questionIndex:a.questionIndex,name:p.name,seat:p.seat||null,sentence:a.sentence,points:a.points,
-   qualityScore:a.grade.total,feedback:a.grade.feedback,issueReason:a.grade.issueReason||'',scores:a.grade.scores,
+   qualityScore:a.grade.total,feedback:a.grade.feedback,issueReason:a.grade.issueReason||'',scores:a.grade.scores,...(a.grade.rubric?{rubric:a.grade.rubric.map(({label,points,score,evidence})=>({label,points,score,evidence}))}:{}),
    timedOut:a.timedOut,uncertain:a.grade.uncertain,
   })));
   const scored=answers.filter(a=>Number.isFinite(a.qualityScore)&&!a.uncertain);
