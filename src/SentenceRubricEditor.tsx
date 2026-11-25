@@ -68,7 +68,8 @@ export default function SentenceRubricEditor({ draft, onChange, disabled, locked
     <p className="sentence-rubric-lock-note">{locked ? '已鎖定，開課時使用這組評分項目。要調整請按「解鎖修改」。' : '修改中：調整完成並確認總分 100 後，請按「鎖定」，才能建立開課大廳。'}</p>
     <fieldset disabled={disabled || locked}>
     {GROUPS.map(([title, keys]) => <div key={title} className="sentence-rubric-group">
-      <h4>{title}</h4>
+      {/* 每組顯示已勾選項目的配分小計 */}
+      <h4>{title}<span className="sentence-rubric-subtotal">小計 {keys.reduce((sum, key) => sum + (draft[key]?.enabled ? draft[key].points : 0), 0)} 分</span></h4>
       {keys.map(key => {
         const base = RUBRIC_ITEMS.find(item => item.key === key)!;
         const value = draft[key];
