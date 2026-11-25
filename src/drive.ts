@@ -150,3 +150,31 @@ export async function uploadCollection(
     url: `https://drive.google.com/drive/folders/${project.id}`,
   };
 }
+export async function uploadCompetitionPdf(token: string, name: string, pdf: Blob): Promise<string> {
+  const request = async (url: string, options: RequestInit = {}) => {
+    const response = await fetch(url, { ...options, headers: { ...options.headers, Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(60000) });
+    if (!response.ok) throw Error(`Google Drive 儲存失敗（${response.status}），請確認授權及網路。`);
+    return response.json();
+  };
+  const findFolder = async (name: string, marker: string, parent?: string): Promise<string> => {
+    const query = encodeURIComponent(`trashed = false and mimeType = 'application/vnd.google-apps.folder' and appProperties has { key='app' and value='${marker}' }${parent ? ` and '${parent}' in parents` : ""}`);
+    const found = await request(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id)&pageSize=100`);
+    if (found.files?.[0]?.id) return found.files[0].id;
+    const created = await request("https://www.googleapis.com/drive/v3/files?fields=id", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, mimeType: "application/vnd.google-apps.folder", appProperties: { app: marker }, ...(parent ? { parents: [parent] } : {}) }),
+    });
+    if (!created.id) throw Error("Google 未回傳資料夾 ID。");
+    return created.id;
+  };
+  const root = await findFolder("生字動畫收藏本", "hanzi-notebook-v1");
+  const parent = await findFolder("課堂競賽", "hanzi-competition-v1", root);
+  const boundary = `competition_${crypto.randomUUID()}`;
+  const body = new Blob([
+    `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify({ name, parents: [parent], mimeType: "application/pdf" })}\r\n--${boundary}\r\nContent-Type: application/pdf\r\n\r\n`,
+    pdf, `\r\n--${boundary}--`,
+  ], { type: `multipart/related; boundary=${boundary}` });
+  const result = await request("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id", { method: "POST", body });
+  if (!result.id) throw Error("Google 未回傳檔案 ID。");
+  return `https://drive.google.com/file/d/${encodeURIComponent(result.id)}/view`;
+}

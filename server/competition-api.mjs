@@ -154,7 +154,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     const own=anonymous?await store.get(participantKey(room.id,user.uid)).catch(error=>{if(error.status===404)return null;throw error;}):null;
     return send(200,{room:{...publicRoom(room,user.admin),...(anonymous?{anonymousBirds:birdCatalog.map(bird=>{const owner=Object.entries(room.anonymousParticipants||{}).find(([,claim])=>claim.birdId===bird.id)?.[0];return {...bird,occupied:!!owner,mine:owner===user.uid};})}:user.guest?{nameChoices:(room.students||[]).map(student=>({seat:student.seat,name:student.name}))}:{})},...(own?{participant:publicParticipant(own.value,user)}:{})});
    }
-   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive|photos|classroom-export|sentence-review)$/i);if(!match)fail('找不到競賽功能。',404);
+   const match=path.match(/^\/rooms\/([0-9a-f-]{36})\/(start|close|join|state|answer|leaderboard|lobby|simulate|archive|photos|classroom-export|sentence-review|personal-report)$/i);if(!match)fail('找不到競賽功能。',404);
    const [,id,action]=match;let record=await store.get(roomKey(id)),room=record.value;if(room.status==='running'&&room.expiresAt&&now()>=room.expiresAt){const expired={...room,status:'closed',closedAt:room.expiresAt};await store.update(roomKey(id),expired,record.generation);record=await store.get(roomKey(id));room=record.value;}
    if(action==='archive'){
     if(req.method!=='POST'||!user.admin)fail('僅管理者可移除課堂。',403);
@@ -213,7 +213,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     else fail('已結束的測試課堂不能再模擬。',409);
     const items=rankParticipants(await scan(`competition-participants/${id}/`));return send(200,{room:publicRoom(room,true),items:items.map(v=>({rank:v.rank,...publicParticipant(v,user),answered:v.index}))});
    }
-   if(req.method!=='POST')fail('不支援的操作。',405);
+   if(req.method!=='POST'&&!(action==='personal-report'&&req.method==='GET'))fail('不支援的操作。',405);
    const key=participantKey(id,user.uid);
    if(action==='join'){
     if(room.loginMode==='anonymous'){
@@ -230,6 +230,14 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     const anonymous=!user.guest&&room.loginMode==='anonymous';try{await store.create(key,{roomId:id,uid:user.uid,name:anonymous?'匿名學生':student?.name||user.displayName||user.email,seat:anonymous?null:student?.seat||null,avatarKind:anonymous?'anonymous':student?.avatar?'custom':'default',...(student?.avatar&&!anonymous?{avatar:student.avatar}:{}),joinedAt:now(),index:0,correct:0,points:0,totalResponseMs:0,questionStartedAt:null,finished:false,testRoom:room.testRoom===true});}catch(e){if(e.status!==412)throw e;}const joined=await store.get(key);return send(200,{room:publicRoom(room,false),participant:publicParticipant(joined.value,user),question:null});
    }
    const participantRecord=await store.get(key),participant=participantRecord.value;
+   if(action==='personal-report'&&req.method==='GET'){
+    if(room.status!=='closed'&&!participant.finished)fail('完成競賽後才能匯出個人題目。',409);
+    return send(200,{title:room.title,className:room.className,name:participant.name,points:participant.points,date:room.closedAt??participant.finishedAt??now(),questions:room.questions.map((question,index)=>{
+     const record=(participant.answerHistory||[]).find(item=>item.questionIndex===index);
+     const sentence=(participant.sentenceAnswers||[]).find(item=>item.questionIndex===index);
+     return {prompt:question.prompt,options:question.options||[],answer:question.answer,character:question.character,type:question.type||'quiz',submitted:record?record.response:sentence?.sentence,points:record?.points??sentence?.points??null,answered:index<participant.index};
+    })});
+   }
    if(action==='state'){
     let current=participant;if(room.status==='running'&&!current.finished&&current.questionStartedAt==null){current={...current,questionStartedAt:now()};await store.update(key,current,participantRecord.generation);}
     return send(200,{room:publicRoom(room,false),participant:publicParticipant(current,user),question:room.status==='running'&&!current.finished?{...room.questions[current.index],answer:undefined}:null});
@@ -242,6 +250,7 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
     }else{if(!Number.isInteger(body.answer)||body.answer<0||body.answer>=question.options.length)fail('答案格式不符。');correct=body.answer===question.answer&&elapsed<=question.seconds*1000;points=questionPoints(correct,elapsed,question.seconds);}
     const nextIndex=participant.index+1,finished=nextIndex>=room.questions.length;
     const updated={...participant,index:nextIndex,correct:participant.correct+(correct?1:0),points:participant.points+points,totalResponseMs:participant.totalResponseMs+elapsed,questionStartedAt:now(),finished,finishedAt:finished?now():undefined};if(question.type==='sentence-practice')updated.sentenceAnswers=[...(participant.sentenceAnswers||[]),{questionIndex:participant.index,character:question.character,sentence:body.sentence,grade,points,elapsedMs:elapsed,timedOut:elapsed>question.seconds*1000,submittedAt:now()}];
+   updated.answerHistory=[...(participant.answerHistory||[]),{questionIndex:participant.index,response:question.type==='writing'?'已送出書寫（此 PDF 未包含筆跡）':question.type==='sentence-practice'?body.sentence:body.answer,points}];
    delete updated.gradingIndex;const latest=question.type==='sentence-practice'?await store.get(key):participantRecord;await store.update(key,updated,latest.generation);return send(200,{correct,correctAnswer:question.answer,points,grade,participant:publicParticipant(updated,user),question:finished?null:{...room.questions[nextIndex],answer:undefined}});
    }
    fail('不支援的操作。',404);

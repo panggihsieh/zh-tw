@@ -79,6 +79,7 @@ test('學生免 Google 登入：代碼選姓名、禁止冒用教師、開始鎖
  assert.equal((await call(`/rooms/${room.id}/state`,{},cookie)).status,200);
  clock+=60001;
  assert.equal((await call(`/rooms/${room.id}/answer`,{answer:0},cookie)).status,409);
+ const personal=await call(`/rooms/${room.id}/personal-report`,undefined,cookie);assert.equal(personal.status,200);assert.equal(personal.name,'小明');assert.equal(personal.questions[0].answered,false);
  assert.equal((await call(`/code/${room.code}`,undefined,cookie)).status,404);
 });
 
@@ -164,4 +165,25 @@ test('老師自選造句評分項目：開課驗證、AI 收到項目、依項�
  assert.deepEqual(received.rubric.map(v=>v.key),['correctness','person','place','lesson']);
  assert.equal(answer.grade.total,25+20+20+20);
  assert.equal(answer.grade.rubric.find(v=>v.key==='lesson').evidence,'夕陽');
+});
+
+test('個人匯出僅本人完成後可讀，包含題目、正解、個人答案與零分；其他學生不可取得',async t=>{
+ const {request}=await fixture(t);
+ const {room}=await request('/rooms',definition());
+ await request(`/rooms/${room.id}/join`,{},'student');
+ await request(`/rooms/${room.id}/start`,{});
+ await request(`/rooms/${room.id}/state`,{},'student');
+ assert.equal((await request(`/rooms/${room.id}/personal-report`,undefined,'student')).status,409);
+ await request(`/rooms/${room.id}/answer`,{answer:1},'student');
+ await request(`/rooms/${room.id}/answer`,{answer:0},'student');
+ const report=await request(`/rooms/${room.id}/personal-report`,undefined,'student');
+ assert.equal(report.status,200);assert.equal(report.questions.length,2);
+ assert.equal(report.questions[0].submitted,1);assert.equal(report.questions[0].answer,0);assert.equal(report.questions[0].points,0);
+ assert.equal(report.questions[1].submitted,0);assert.equal(report.points,1000);
+ assert.notEqual((await request(`/rooms/${room.id}/personal-report`,undefined,'other')).status,200);
+ await request(`/rooms/${room.id}/join`,{},'other');
+ await request(`/rooms/${room.id}/close`,{});
+ const other=await request(`/rooms/${room.id}/personal-report`,undefined,'other');
+ // 課堂開始後不得加入；無法讀取別人的紀錄。
+ assert.notEqual(other.status,200);
 });
