@@ -7,6 +7,7 @@ import {importQuizSource,runQuizWorkflow,downloadQuizBank,type LessonBank,type Q
 export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?:typeof quizRequest;onOpen:(id:string)=>void}) {
   const [banks,setBanks]=useState<LessonBank[]>([]),[sources,setSources]=useState<QuizSourceSummary[]>([]),[source,setSource]=useState<QuizSource|null>(null);
   const [lessonKey,setLessonKey]=useState(blueprint.lessons[0].key),[selectedBank,setSelectedBank]=useState(''),[bookFilter,setBookFilter]=useState(''),[step,setStep]=useState(0);
+  const [simple,setSimple]=useState(true),[sourceLoading,setSourceLoading]=useState(false);
   const [fileSourceUrl,setFileSourceUrl]=useState('');
   const [sourceMode,setSourceMode]=useState<'library'|'file'|'link'|'text'>('library'),[link,setLink]=useState(''),[passage,setPassage]=useState(''),[sourceLabel,setSourceLabel]=useState(''),[confirmed,setConfirmed]=useState(false);
   const [categories,setCategories]=useState(blueprint.plan.map(r=>r.category)),[difficulty,setDifficulty]=useState('中'),[titleOverride,setTitleOverride]=useState<string|null>(null),[outputFormat,setOutputFormat]=useState<'cloud'|'cloud-json'>('cloud');
@@ -26,7 +27,21 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
   const selectedTarget=blueprint.plan.filter(r=>categories.includes(r.category)).reduce((n,r)=>n+r.count,0);
   async function refresh(){const [b,s]=await Promise.all([request<{items:LessonBank[]}>('/lesson-banks'),request<{items:QuizSourceSummary[]}>('/quiz-sources')]);setBanks(b.items);setSources(s.items);setLoaded(true);}
   useEffect(()=>{void refresh().catch(e=>setMessage(e.message));return()=>{stop.current=true;};},[]);
-  function changeLesson(key:string){setLessonKey(key);setSelectedBank('');setConfirmed(false);setPassage('');}
+  useEffect(()=>{
+    if(!simple||!loaded||sourceMode!=='library'||source?.lessons.some(l=>l.lessonKey===lessonKey))return;
+    const match=sources.find(s=>s.grade===lesson.grade&&s.term===lesson.term&&s.year===lesson.year&&!s.missing.includes(lesson.title));
+    if(!match)return;
+    let active=true;setSourceLoading(true);setConfirmed(false);
+    request<QuizSource>(`/quiz-sources/${match.id}`).then(doc=>{if(active){setSource(doc);setMessage(doc.lessons.some(l=>l.lessonKey===lessonKey)?'已讀取本課教材，請確認全文後開始出題。':'教材不含本課，請使用進階設定補充來源。');}}).catch(e=>{if(active)setMessage(e.message);}).finally(()=>{if(active)setSourceLoading(false);});
+    return()=>{active=false;};
+  },[simple,loaded,lessonKey,sourceMode,sources]);
+  async function startSimple(){stop.current=false;await action(async()=>{
+    const parameters:QuizWorkflowParameters={lessonKey,sourceId:source!.id,sourceConfirmed:confirmed,difficulty,categories,outputTitle,outputFormat};
+    const bank=await request<LessonBank>('/lesson-banks',parameters);update(bank);setStep(2);setMessage('題庫草稿已建立，AI開始製作…');
+    try{const result=await runQuizWorkflow({bank,categories,all:true,request,shouldStop:()=>stop.current,onProgress:b=>{update(b);setMessage(`已保存 ${b.total}/55 題，待教師審核。`);}});setMessage(result.complete?'本課55題已保存，請逐題審核。':`已保存 ${result.total}/55 題，可接續製作。`);}
+    catch(e){await refresh().catch(()=>{});throw Error(`本批停止：${(e as Error).message}；成功題目已保留，可接續。`);}
+  });}
+  function changeLesson(key:string){setMessage('');setLessonKey(key);setSelectedBank('');setConfirmed(false);setPassage('');}
   function update(bank:LessonBank){setBanks(rows=>[...rows.filter(b=>b.id!==bank.id),bank]);setSelectedBank(bank.id);}
   async function action(fn:()=>Promise<void>){setBusy(true);try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
   function acceptSource(doc:QuizSource){setSource(doc);setConfirmed(false);setSources(rows=>[...rows.filter(s=>s.id!==doc.id),doc]);if(!doc.lessons.some(l=>l.lessonKey===lessonKey))changeLesson(doc.lessons[0].lessonKey);setMessage(`已讀取 ${doc.filename}：${doc.lessonCount} 課。請核對課文預覽；尚未呼叫AI。`);}
@@ -37,8 +52,26 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
   const cards=[{title:'教材來源',detail:sourceMode==='text'?(sourceLabel||'檔案、連結或貼上課文'):(source?.filename||`${sources.length} 份已匯入教材`),icon:FileText},{title:'命題設定',detail:`${categories.length} 類 · ${selectedTarget} 題 · ${difficulty==='易'?'低':difficulty==='難'?'高':'中'}難度`,icon:SlidersHorizontal},{title:'輸出題庫',detail:current?`${current.total}/55 題 · 教師待審`:'雲端題庫 · JSON備份',icon:Database}];
   return <section aria-label="試題製作模組">
     <h2>試題製作工作台</h2><QuizAuthoringTip/><p>南一五、六年級 · 每課55題固定配額 · 原創四選一母題</p>
-    <div className="quiz-workflow-cards" role="group" aria-label="試題製作步驟">{cards.map((card,i)=><button key={card.title} type="button" className="quiz-workflow-card" aria-pressed={step===i} onClick={()=>setStep(i)}><card.icon size={24}/><span><strong>{i+1}. {card.title}</strong><small>{card.detail}</small></span></button>)}</div>
     <p role="status" aria-live="polite">{message}</p>
+    <div className="quiz-actions"><button type="button" className="secondary" disabled={busy||sourceLoading} onClick={()=>{setSimple(!simple);if(!simple){setStep(0);setSourceMode('library');if(lesson.term==='下')changeLesson(blueprint.lessons[0].key);setCategories(blueprint.plan.map(r=>r.category));}}}>{simple?'進階設定／匯入其他教材':'返回簡易出題'}</button></div>
+    {simple?<>
+      <fieldset disabled={busy||sourceLoading}><legend>1. 選擇課文</legend><div className="quiz-grid">
+        <label>教材冊次<select value={`${lesson.grade}${lesson.term}（${lesson.year}）`} onChange={e=>{setStep(0);changeLesson(blueprint.lessons.find(l=>`${l.grade}${l.term}（${l.year}）`===e.target.value)!.key);}}>{books.filter(b=>b.includes('上')).map(b=><option key={b}>{b}</option>)}</select></label>
+        <label>教材課次<select value={lessonKey} onChange={e=>{setStep(0);changeLesson(e.target.value);}}>{blueprint.lessons.filter(l=>l.grade===lesson.grade&&l.term===lesson.term&&l.year===lesson.year).map(l=><option key={l.key} value={l.key}>{l.title}</option>)}</select></label>
+      </div><p>五下、六下待下學期課文與資源確定後再開放製作。</p></fieldset>
+      <section><h3>2. 確認課文來源</h3>{sourceLoading?<p role="status">正在讀取本課教材…</p>:sourceLesson?<>
+        <p>{source?.filename} · {lesson.title}</p><details><summary>查看課文全文</summary><textarea aria-label="課文全文預覽" readOnly rows={8} value={selectedPassage}/></details>
+        <label className="quiz-check"><input type="checkbox" disabled={busy} checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/>已核對本課全文與版本，確認可用於出題</label>
+      </>:<p>本課尚無可用全文，請至「進階設定／匯入其他教材」補充來源。</p>}</section>
+      <section><h3>3. 開始出題</h3><p>題庫名稱：{outputTitle}</p><p>六類共55題，難度沿用目前設定。AI分批製作並保存為教師待審草稿，審核後才能派送。</p>
+        <p>整課最多44次AI呼叫，可能計費；請保持頁面開啟，可在批次間停止。</p>
+        <div className="quiz-actions"><button type="button" className="primary" disabled={busy||sourceLoading||!ready} onClick={()=>void startSimple()}>開始製作新題庫（55題）</button>
+        {current&&<button type="button" className="secondary" disabled={busy||current.complete} onClick={()=>{setStep(2);void generate(true);}}>接續本課題庫（{current.total}/55題）</button>}
+        {busy&&<button type="button" className="secondary" onClick={()=>{stop.current=true;setMessage('本批完成後停止，成功題目會保存。');}}>本批完成後停止</button>}</div>
+        {current&&<><p>本課題庫：{current.title} · {current.total}/55題 · {current.complete?'待教師審核':'可接續'}</p><div className="quiz-paper-list">{current.paperIds.map((id,i)=><button type="button" className="secondary" disabled={busy} key={id} onClick={()=>onOpen(id)}>第{i+1}批 · 檢視與審核</button>)}</div></>}
+      </section>
+    </>:<>
+    <div className="quiz-workflow-cards" role="group" aria-label="試題製作步驟">{cards.map((card,i)=><button key={card.title} type="button" className="quiz-workflow-card" aria-pressed={step===i} onClick={()=>setStep(i)}><card.icon size={24}/><span><strong>{i+1}. {card.title}</strong><small>{card.detail}</small></span></button>)}</div>
     {step===0&&<fieldset disabled={busy}><legend>1. 教材來源</legend>
       <div className="quiz-grid"><label>教材冊次<select value={`${lesson.grade}${lesson.term}（${lesson.year}）`} onChange={e=>changeLesson(blueprint.lessons.find(l=>`${l.grade}${l.term}（${l.year}）`===e.target.value)!.key)}>{books.map(b=><option key={b}>{b}</option>)}</select></label><label>教材課次<select value={lessonKey} onChange={e=>changeLesson(e.target.value)}>{blueprint.lessons.filter(l=>l.grade===lesson.grade&&l.term===lesson.term&&l.year===lesson.year).map(l=><option key={l.key} value={l.key}>{l.title}</option>)}</select></label></div>
       <label>來源輸入方式<select value={sourceMode} onChange={e=>{setSourceMode(e.target.value as typeof sourceMode);setConfirmed(false);}}><option value="library">已匯入教材庫</option><option value="file">上傳檔案</option><option value="link">Google Drive連結</option><option value="text">貼上課文</option></select></label>
@@ -67,10 +100,11 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
       <div className="quiz-paper-list">{current.paperIds.map((id,i)=><button className="secondary" disabled={busy} key={id} onClick={()=>onOpen(id)}>第{i+1}批 · 檢視與審核</button>)}</div>
       <p>題目保存於教師待審題庫，不會直接派送學生。關閉頁面不啟動後續批次。</p>
     </>:<p>尚無本課新版題庫。請先完成教材來源與命題設定。</p>}</section>}
+    </>}
     <details className="quiz-workflow-inventory"><summary>各課配額與缺額 · {loaded?`${actual}/2475 題`:'讀取中'}</summary>
       <p>配額齊備 {blueprint.lessons.filter(l=>latest(l.key)?.complete).length}/45 課；保存數不等於教師已審核。舊題庫與已發布試卷保留。</p>
       <div className="quiz-actions"><label>進度冊次<select value={bookFilter} onChange={e=>setBookFilter(e.target.value)}><option value="">全部四冊</option>{books.map(b=><option key={b}>{b}</option>)}</select></label><button className="secondary" disabled={busy} onClick={()=>void action(refresh)}>重新讀取進度</button></div>
-      <div className="quiz-bank-progress"><table><thead><tr><th>課次</th>{blueprint.plan.map(r=><th key={r.category}>{r.category}</th>)}<th>合計</th><th>狀態</th></tr></thead><tbody>{lessons.map(l=>{const bank=latest(l.key),hasSource=sources.some(s=>s.grade===l.grade&&s.term===l.term&&s.year===l.year&&!s.missing.includes(l.title));return <tr key={l.key}><th scope="row"><button className="secondary" disabled={busy} onClick={()=>{changeLesson(l.key);setStep(bank?2:0);}}>{l.grade}{l.term} {l.title}</button></th>{blueprint.plan.map(row=><td key={row.category}>{loaded?(bank?.rows.find(r=>r.category===row.category)?.actual||0):'—'}/{row.count}</td>)}<td>{loaded?(bank?.total||0):'—'}/55</td><td>{!loaded?'未讀取':bank?.complete?'齊備／待教師審核':bank?'可接續':hasSource?'教材已匯入':'待課文全文'}</td></tr>;})}</tbody></table></div>
+      <div className="quiz-bank-progress"><table><thead><tr><th>課次</th>{blueprint.plan.map(r=><th key={r.category}>{r.category}</th>)}<th>合計</th><th>狀態</th></tr></thead><tbody>{lessons.map(l=>{const bank=latest(l.key),hasSource=sources.some(s=>s.grade===l.grade&&s.term===l.term&&s.year===l.year&&!s.missing.includes(l.title));return <tr key={l.key}><th scope="row"><button className="secondary" disabled={busy||(simple&&l.term==='下')} onClick={()=>{changeLesson(l.key);setStep(bank?2:0);}}>{l.grade}{l.term} {l.title}</button></th>{blueprint.plan.map(row=><td key={row.category}>{loaded?(bank?.rows.find(r=>r.category===row.category)?.actual||0):'—'}/{row.count}</td>)}<td>{loaded?(bank?.total||0):'—'}/55</td><td>{!loaded?'未讀取':bank?.complete?'齊備／待教師審核':bank?'可接續':hasSource?'教材已匯入':'待課文全文'}</td></tr>;})}</tbody></table></div>
     </details>
   </section>;
 }
