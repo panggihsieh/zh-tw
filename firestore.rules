@@ -64,12 +64,15 @@ match /hanzi_notebook_structure_overrides/{character} {
 match /hanzi_notebook_reading_corrections/{key} {
   allow read: if true;
   allow create, update: if hanziGoogle() && hanziEnabled()
-    && request.resource.data.keys().hasOnly(['lessonId','character','reading','updatedAt','updatedBy'])
+    && request.resource.data.keys().hasOnly(['lessonId','character','reading','contextWord','updatedAt','updatedBy'])
     && request.resource.data.lessonId is string
     && request.resource.data.lessonId.matches('^[a-zA-Z0-9-]{1,80}$')
     && request.resource.data.character is string
     && request.resource.data.character.matches('^[一-鿿]$')
     && key == request.resource.data.lessonId + '_' + request.resource.data.character
+    && (!('contextWord' in request.resource.data) || (request.resource.data.contextWord is string
+      && (request.resource.data.contextWord == '' || (request.resource.data.contextWord.matches('^[一-鿿]{2,8}$')
+        && request.resource.data.contextWord.matches('.*' + request.resource.data.character + '.*')))))
     && request.resource.data.reading is string
     && request.resource.data.reading.matches('^[ㄅ-ㄩ]{1,3}[ˊˇˋ˙]?$')
     && request.resource.data.updatedAt == request.time

@@ -3,19 +3,21 @@ import { cloudConfigured, cloudServices } from './cloudSync';
 import type { SentenceLesson } from './sentenceApi';
 
 export const READING_COLLECTION = 'hanzi_notebook_reading_corrections';
-export interface ReadingCorrection { lessonId: string; character: string; reading: string }
+export interface ReadingCorrection { lessonId: string; character: string; reading: string; contextWord?: string }
 export const readingKey = (lessonId: string, character: string) => `${lessonId}_${character}`;
 export function validReadingCorrection(value: ReadingCorrection) {
   return /^[a-zA-Z0-9-]{1,80}$/.test(value.lessonId) && /^\p{Script=Han}$/u.test(value.character)
+    && (value.contextWord === undefined || value.contextWord === "" || (/^\p{Script=Han}{2,8}$/u.test(value.contextWord) && value.contextWord.includes(value.character)))
     && /^[\u3105-\u3129]{1,3}[ˊˇˋ˙]?$/.test(value.reading);
 }
 export function applyReadingCorrections(lessons: SentenceLesson[], corrections: ReadingCorrection[]) {
-  const index = new Map(corrections.filter(validReadingCorrection).map(value => [readingKey(value.lessonId, value.character), value.reading]));
+  const index = new Map(corrections.filter(validReadingCorrection).map(value => [readingKey(value.lessonId, value.character), value]));
   return lessons.map(lesson => ({ ...lesson, characters: lesson.characters.map(character => {
-    const reading = index.get(readingKey(lesson.id, character.character));
-    if (!reading) return character;
+    const correction = index.get(readingKey(lesson.id, character.character));
+    if (!correction) return character;
+    const { reading, contextWord } = correction;
     const match = character.readings.find(row => row.reading === reading);
-    return { ...character, readings: [match || { reading, definition: '教師依課文語境指定讀音，釋義請參考課文。', source: '教師課文讀音修正' }] };
+    return { ...character, ...(contextWord ? { contextWord } : {}), readings: [match || { reading, definition: '教師依課文語境指定讀音，釋義請參考課文。', source: '教師課文讀音修正' }] };
   }) }));
 }
 export async function loadReadingCorrections(): Promise<ReadingCorrection[]> {
@@ -27,7 +29,7 @@ export async function correctedLessons(lessons: SentenceLesson[]) {
   return applyReadingCorrections(lessons, await loadReadingCorrections());
 }
 export async function saveReadingCorrection(value: ReadingCorrection) {
-  if (!validReadingCorrection(value)) throw Error('請輸入一個字的完整注音，例如 ㄐㄧㄝˋ。');
+  if (!validReadingCorrection(value)) throw Error('請填寫完整注音（例如 ㄐㄧㄝˋ）；課文語詞需為包含此字的 2–8 個中文字，或留空。');
   const user = cloudServices().auth.currentUser;
   if (!user) throw Error('請先以教師帳號登入。');
   await setDoc(doc(cloudServices().db, READING_COLLECTION, readingKey(value.lessonId, value.character)), {
