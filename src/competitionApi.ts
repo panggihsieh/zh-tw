@@ -12,11 +12,12 @@ export async function competitionStudentRequest<T>(path:string,body?:unknown):Pr
 }
 export function competitionJoinUrl(code:string){const url=new URL('/',window.location.origin);url.hash=`games/competition?code=${code}`;return url.toString();}
 export function competitionCodeFromInput(value:string){
- const text=value.trim();
+ const text=value.normalize('NFKC').trim();
  const parameter=text.match(/[?&]code=([^&#]*)/i);
  if(parameter){
-  const code=new URLSearchParams(`code=${parameter[1]}`).get('code')?.trim().toUpperCase()||'';
+  const code=new URLSearchParams(`code=${parameter[1]}`).get('code')?.normalize('NFKC').replace(/\s/g,'').toUpperCase()||'';
   return /^[A-Z2-9]{4}$/.test(code)?code:'';
  }
- return /^[A-Z2-9\s]*$/i.test(text)?text.toUpperCase().replace(/\s/g,'').slice(0,4):'';
+ const code=text.toUpperCase().replace(/\s/g,'');
+ return /^[A-Z2-9]{0,4}$/.test(code)?code:'';
 }

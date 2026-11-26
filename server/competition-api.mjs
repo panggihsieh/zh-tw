@@ -114,31 +114,22 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
    if(path==='/rooms'&&req.method==='GET'){if(!user.admin)fail('僅管理者可查看開課紀錄。',403);return send(200,{items:(await scan('competition-rooms/')).filter(room=>room && room.archivedAt == null).sort((a,b)=>b.createdAt-a.createdAt).map(v=>publicRoom(v,true))});}
    if(path==='/rooms'&&req.method==='POST'){
     if(!user.admin)fail('僅管理者可建立競賽。',403);const input=validateRoomInput(await requestBody(req));if(input.gameType==='writing')for(const question of input.questions){try{await writingReferences(question.character);}catch{fail(`「${question.character}」尚無可用筆順資料，請重新選字。`);}}const used=new Set((await scan('competition-rooms/')).filter(v=>v.status!=='closed').map(v=>v.code));let code='';for(let i=0;i<20&&!code;i++){const candidate=makeRoomCode(random);if(!used.has(candidate))code=candidate;}if(!code)fail('暫時無法產生開課代碼。',409);
-    const room={...input,id:randomUUID(),code,status:'lobby',createdAt:now(),createdBy:user.uid,sentenceScoreScale:1};await store.create(roomKey(room.id),room);return send(201,{room:publicRoom(room,true)});
+    const room={...input,id:randomUUID(),code,status:'lobby',createdAt:now(),createdBy:user.uid,sentenceScoreScale:10};await store.create(roomKey(room.id),room);return send(201,{room:publicRoom(room,true)});
    }
-   const codeMatch=path.match(/^\/code\/([A-Z2-9]{4})$/i);
+   const codeMatch=path.match(/^\/code\/([^/]+)$/);
    if(codeMatch&&req.method==='GET'){
+    let code;
+    try { code=decodeURIComponent(codeMatch[1]).normalize('NFKC').replace(/\s/g,'').toUpperCase(); }
+    catch { fail('請輸入老師提供的四碼開課代碼。'); }
+    if(!/^[A-Z2-9]{4}$/.test(code))fail('請輸入老師提供的四碼開課代碼。');
     if(user.guest && user.uid==='pending') {
      const token=randomBytes(32).toString('base64url');
      user.uid='guest-'+createHash('sha256').update(token).digest('hex');
      res.setHeader('Set-Cookie',`__session=${token}; Path=/api/structure/competition; HttpOnly; Secure; SameSite=Strict; Max-Age=7200`);
     }
-    const key=`competition-code-attempts/${encodeURIComponent(user.uid)}.json`;
-    const room=(await scan('competition-rooms/')).find(v=>v.code===codeMatch[1].toUpperCase()&&v.status!=='closed'&&!(v.expiresAt&&v.expiresAt<=now())&&!(v.status==='lobby'&&now()>=v.createdAt+7200000));
-    for(let attempt=0;attempt<8;attempt++){
-      const record=await store.get(key).catch(error=>{if(error.status===404)return null;throw error;});
-      if(record?.value.lockUntil>now())fail('代碼輸錯三次，請十五分鐘後再試。',429);
-      const count=room?0:(record?.value.lockUntil?0:record?.value.count||0)+1;
-      if(room&&!record?.value.count)break;
-      const lockUntil=count>=3?now()+900000:0;
-      try{
-        if(record)await store.update(key,{count,lockUntil},record.generation);
-        else await store.create(key,{count,lockUntil});
-      }catch(error){if(error.status===412&&attempt<7)continue;throw error;}
-      if(lockUntil)fail('代碼輸錯三次，已鎖定十五分鐘。',429);
-      break;
-    }
-    if(!room)fail('開課代碼無效或已結束。',404);
+    // 輸錯只提示重試，不讀取舊版錯碼鎖定紀錄；大量請求仍由 request guard 節流。
+    const room=(await scan('competition-rooms/')).find(v=>v.code===code&&v.status!=='closed'&&!(v.expiresAt&&v.expiresAt<=now())&&!(v.status==='lobby'&&now()>=v.createdAt+7200000));
+    if(!room)fail('找不到這個課程代碼，或課堂已結束。請確認後重新輸入。',404);
     if(user.guest){
      if(room.status!=='lobby'){
       const joined=user.roomId===room.id?await store.get(participantKey(room.id,user.uid)).catch(()=>null):null;

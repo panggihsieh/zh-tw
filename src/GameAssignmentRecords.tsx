@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GameReview from "./GameReview";
+import CompetitionSentenceReview from './CompetitionSentenceReview';
 import { competitionRequest, type CompetitionRoom, type LeaderboardItem } from "./competitionApi";
 
 const gameLabels = {
@@ -90,6 +91,7 @@ function CompetitionRecords() {
         </select>
       </label>}
       {room && <p>課堂日期 {classroomDate(room)} · 測驗名稱 {room.title}</p>}
+      {room?.gameType === 'sentence-practice' && <CompetitionSentenceReview key={room.id} roomId={room.id}/>}
       {status && <p role="status">{status}</p>}
       {room && items.length > 0 && <>
         <button type="button" className="secondary" onClick={() => exportRanking(room, items)}>匯出成績 CSV</button>

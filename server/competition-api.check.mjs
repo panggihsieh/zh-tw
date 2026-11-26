@@ -6,7 +6,7 @@ import {createCompetitionHandler,makeRoomCode,questionPoints,rankParticipants,va
 
 const definition=()=>({title:'五年一班國語挑戰',className:'五年一班',roster:['student@example.com','other@example.com'],questions:[{prompt:'「日積月累」最接近哪個意思？',options:['長期累積','立刻完成','全部忘記','暫時停止'],answer:0,seconds:30},{prompt:'哪一個字的部首是「木」？',options:['林','明'],answer:0,seconds:20}]});
 function memoryStore(){const data=new Map();return {async list(prefix){return {names:[...data.keys()].filter(k=>k.startsWith(prefix))};},async get(key){if(!data.has(key))throw Object.assign(Error('missing'),{status:404});return structuredClone(data.get(key));},async create(key,value){if(data.has(key))throw Object.assign(Error('conflict'),{status:412});data.set(key,{value:structuredClone(value),generation:1});},async update(key,value,generation){if(data.get(key)?.generation!==generation)throw Object.assign(Error('conflict'),{status:412});data.set(key,{value:structuredClone(value),generation:generation+1});}};}
-async function fixture(t){const store=memoryStore();let clock=100000,aiCalls=0;const server=http.createServer(createCompetitionHandler({store,origins:['https://test'],now:()=>clock,random:()=>0,gradeSentence:async()=>{aiCalls++;return {targetOk:true,meaningOk:true,uncertain:false,correctness:30, completeness:20, fluency:15, detail:15, mechanics:5,highlight:'美麗的海灘',feedback:'句子完整，可以再加上感受。'};},authenticate:async req=>{const uid=req.headers['x-test-user'];if(!uid)throw Error('unauthorized');return {uid,email:`${uid}@example.com`,displayName:uid,admin:uid==='teacher'};}}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());const request=async(path,body,user='teacher')=>{const response=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room','x-test-user':user},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:response.status,...await response.json()};};return {request,setTime:value=>clock=value,aiCalls:()=>aiCalls};}
+async function fixture(t){const store=memoryStore();let clock=100000,aiCalls=0;const server=http.createServer(createCompetitionHandler({store,origins:['https://test'],now:()=>clock,random:()=>0,gradeSentence:async()=>{aiCalls++;return {targetOk:true,meaningOk:true,uncertain:false,correctness:30, completeness:20, fluency:15, detail:15, mechanics:5,highlight:'美麗的海灘',feedback:'句子完整，可以再加上感受。',targetWord:'海灘',suggestedWord:'海灘',polished:'我在美麗的海灘看金色夕陽。'};},authenticate:async req=>{const uid=req.headers['x-test-user'];if(!uid)throw Error('unauthorized');return {uid,email:`${uid}@example.com`,displayName:uid,admin:uid==='teacher'};}}));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());const request=async(path,body,user='teacher')=>{const response=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/competition${path}`,{method:body===undefined?'GET':'POST',headers:{Origin:'https://test','Content-Type':'application/json','x-notebook-request':'competition-room','x-test-user':user},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:response.status,...await response.json()};};return {request,store,setTime:value=>clock=value,aiCalls:()=>aiCalls};}
 
 test('四碼排除易混淆字元，題目與班級名單必須完整',()=>{assert.equal(makeRoomCode(()=>0),'AAAA');assert.equal(validateRoomInput(definition()).questions.length,2);for(const patch of [{roster:[]},{roster:['bad']},{questions:[]},{questions:[{prompt:'題目',options:['只有一個'],answer:0,seconds:30}]},{questions:[{prompt:'題目',options:['甲','乙'],answer:2,seconds:30}]},{questions:[{prompt:'題目',options:['甲','乙'],answer:0,seconds:4}]}])assert.throws(()=>validateRoomInput({...definition(),...patch}));});
 test('生字結構題保留競賽類型與正解',()=>{const value=validateRoomInput({...definition(),gameType:'structure',questions:[{type:'structure',character:'林',prompt:'「林」是哪一種字形結構？',options:['左右','上下','全包圍'],answer:0,seconds:20}]});assert.equal(value.gameType,'structure');assert.deepEqual(value.questions[0],{id:'1',type:'structure',character:'林',prompt:'「林」是哪一種字形結構？',options:['左右','上下','全包圍'],answer:0,seconds:20});});
@@ -99,10 +99,39 @@ test('造句逐題保存、結束後教師逐字分析，學生與進行中不�
  assert.equal(report.status,200);assert.equal(report.groups[0].character,'灘');
  assert.equal(report.groups[0].highest[0].sentence,'我在美麗的海灘看夕陽。');
  assert.equal(report.groups[0].lowest[0].qualityScore,85);
+ assert.equal(report.questions[0].rows[0].word,'海灘');assert.equal(report.questions[0].rows[0].polished,'我在美麗的海灘看金色夕陽。');
+ assert.equal(report.questions[0].rows[0].points,850);
+ assert.equal(report.questions[0].rows[0].competitionMaximum,1000);
+ await f.request(path+'/sentence-review');
  assert.match(report.groups[0].highest[0].feedback,/句子完整/);
  assert.equal(f.aiCalls(),1);
  const board=await f.request(path+'/leaderboard',undefined,'student');
  assert.equal('sentenceAnswers' in board.items[0],false);
+});
+
+test('造詞新課堂每題品質分乘十，累積分數與排行榜一致',async t=>{
+ const f=await fixture(t);
+ const created=await f.request('/rooms',{...definition(),gameType:'sentence-practice',sentenceScoreScale:999,questions:[{phrase:'灘',character:'灘',seconds:90},{phrase:'灘',character:'灘',seconds:90}]});
+ const path=`/rooms/${created.room.id}`;
+ await f.request(path+'/join',{},'student');await f.request(path+'/start',{});await f.request(path+'/state',{},'student');
+ for(let index=0;index<2;index++){
+  const answer=await f.request(path+'/answer',{sentence:'我在美麗的海灘看夕陽。',points:99999},'student');
+  assert.equal(answer.grade.total,85);assert.equal(answer.points,850);assert.equal(answer.participant.points,850*(index+1));
+ }
+ const board=await f.request(path+'/leaderboard',undefined,'student');assert.equal(board.items[0].points,1700);
+});
+
+test('乘十分保留舊課堂倍率，逾時仍為零分且品質分不變',async t=>{
+ for(const scenario of [{scale:1,late:false,points:85},{scale:10,late:true,points:0}]){
+  const f=await fixture(t),created=await f.request('/rooms',{...definition(),gameType:'sentence-practice',questions:[{phrase:'灘',character:'灘',seconds:90}]});
+  const key=`competition-rooms/${created.room.id}.json`,record=await f.store.get(key);
+  await f.store.update(key,{...record.value,sentenceScoreScale:scenario.scale},record.generation);
+  const path=`/rooms/${created.room.id}`;
+  await f.request(path+'/join',{},'student');await f.request(path+'/start',{});await f.request(path+'/state',{},'student');
+  if(scenario.late)f.setTime(190001);
+  const answer=await f.request(path+'/answer',{sentence:'我在美麗的海灘看夕陽。'},'student');
+  assert.equal(answer.grade.total,85);assert.equal(answer.points,scenario.points);
+ }
 });
 
 test('課堂保存課文標題並驗證格式',()=>{
@@ -186,4 +215,20 @@ test('個人匯出僅本人完成後可讀，包含題目、正解、個人答�
  const other=await request(`/rooms/${room.id}/personal-report`,undefined,'other');
  // 課堂開始後不得加入；無法讀取別人的紀錄。
  assert.notEqual(other.status,200);
+});
+
+
+test('競賽錯碼可反覆重試、舊鎖定失效，全形大小寫與空格都可加入', async t => {
+ const f=await fixture(t);
+ const created=await f.request('/rooms',definition());
+ await f.store.create('competition-code-attempts/student.json',{count:3,lockUntil:99999999});
+ for(let index=0;index<8;index++)assert.equal((await f.request('/code/ZZZZ',undefined,'student')).status,404);
+ for(const code of ['aaaa','ＡＡＡＡ','ａ Ａ　a ａ']) {
+  const found=await f.request('/code/'+encodeURIComponent(code),undefined,'student');
+  assert.equal(found.status,200);assert.equal(found.room.id,created.room.id);
+ }
+ assert.equal((await f.request('/code/'+encodeURIComponent('ＡＡＡＡ'),undefined,'outsider')).status,403);
+ assert.equal((await f.request('/code/AAAA2',undefined,'student')).status,400);
+ await f.request(`/rooms/${created.room.id}/close`,{});
+ assert.equal((await f.request('/code/aaaa',undefined,'student')).status,404);
 });

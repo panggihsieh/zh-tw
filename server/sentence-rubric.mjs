@@ -78,8 +78,9 @@ export function rubricInstruction(rubric) {
     scores: Object.fromEntries(scale.map(item => [item.key, item.points])),
     ...(evidence.length ? { evidence: Object.fromEntries(evidence.map(item => [item.key, ''])) } : {}),
     ...(idiom ? { idiom: '', idiomAppropriate: false } : {}),
-    highlight: '原句短語', feedback: '回饋', polished: '建議句',
+    highlight: '原句短語', feedback: '回饋', polished: '建議句', targetWord: '原句使用的語詞', suggestedWord: '建議句使用的語詞',
   };
+  lines.push('targetWord逐字引用原句實際使用且包含指定字的2至8字語詞；suggestedWord逐字引用polished中包含指定字的2至8字語詞；無法確定則空字串。');
   return lines.join('') + '只回JSON ' + JSON.stringify(example) + '。';
 }
 
@@ -116,5 +117,7 @@ export function gradeRubric(sentence, character, rubric, analysis, lessonWords =
     targetOk, meaningOk: analysis.meaningOk, uncertain: analysis.uncertain,
     scores: Object.fromEntries(items.map(item => [item.key, item.score])),
     rubric: items, total, level, highlight: quoted(analysis.highlight), feedback: analysis.feedback.trim(), polished,
+    targetWord: typeof analysis.targetWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.targetWord)&&analysis.targetWord.includes(character)&&sentence.includes(analysis.targetWord)?analysis.targetWord:'',
+    suggestedWord: typeof analysis.suggestedWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.suggestedWord)&&analysis.suggestedWord.includes(character)&&polished.includes(analysis.suggestedWord)?analysis.suggestedWord:'',
   };
 }
