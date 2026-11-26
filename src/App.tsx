@@ -155,6 +155,9 @@ export default function ProtectedApp() {
   if (new URLSearchParams(window.location.search).get("view") === "competition-preview") {
     return <Suspense fallback={<p role="status">載入學生測試畫面…</p>}><CompetitionPreviewPage /></Suspense>;
   }
+  if (new URLSearchParams(window.location.search).get("view") === "reading-corrections") {
+    return <Suspense fallback={<p role="status">載入課文修正…</p>}><BackendGate allowTeachers><main className="app-shell"><AcademyBanner /><a href="/">返回首頁</a><ReadingCorrectionAdmin /></main></BackendGate></Suspense>;
+  }
   if (window.location.pathname === '/auth/schooliam/callback') return <SchoolIamCallback />;
   if(new URLSearchParams(window.location.search).get('view')==='quiz') return <Suspense fallback={<p>載入國語錯題本…</p>}><QuizStudent/></Suspense>;
   if (new URLSearchParams(window.location.search).get("view") !== "backend") return <App gamesOpen={/^#games(?:\/|$)/.test(hash)} />;
@@ -1040,6 +1043,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
           </nav>
               {!backendMode && <div className="header-user-role">
                 {userRole.admin && <span role="status">教師 · 管理者已登入</span>}
+                <a className="teacher-session-button" href="/?view=reading-corrections">教師課文讀音／語詞修正</a>
                 <a className="teacher-session-button" href="/?view=backend">{userRole.admin ? "教師後台" : "教師登入（後台）"}</a>
               </div>}
             </div>
