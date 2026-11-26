@@ -7,11 +7,12 @@ import {
   cloudServices,
   finishCloudRedirect,
 } from "./cloudSync";
-import { ADMIN_EMAIL, isAdmin } from "./userAccess";
+import { ADMIN_EMAIL, isAdmin, appUserEnabled } from "./userAccess";
 import { SchoolIamButton } from './SchoolIamLogin';
 
-export default function BackendGate({ children }: { children: ReactNode }) {
+export default function BackendGate({ children, allowTeachers = false }: { children: ReactNode; allowTeachers?: boolean }) {
   const [user, setUser] = useState<User | null>(null);
+  const [teacherAllowed, setTeacherAllowed] = useState(false);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -35,6 +36,14 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       setReady(true);
     }
   }, []);
+  useEffect(() => {
+    let active = true;
+    setTeacherAllowed(false);
+    if (allowTeachers && user?.emailVerified && user.providerData.some(provider => provider.providerId === "google.com")) {
+      void appUserEnabled(user).then(enabled => { if (active) setTeacherAllowed(enabled); }).catch(() => { if (active) setError("無法確認教師權限，請重新登入。"); });
+    }
+    return () => { active = false; };
+  }, [user, allowTeachers]);
   async function login() {
     setBusy(true);
     setError("");
@@ -56,7 +65,7 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       setBusy(false);
     }
   }
-  if (ready && isAdmin(user)) return children;
+  if (ready && (isAdmin(user) || (allowTeachers && teacherAllowed))) return children;
   return (
     <div className="backend-auth-shell">
       <aside className="backend-auth-aside">
@@ -66,7 +75,7 @@ export default function BackendGate({ children }: { children: ReactNode }) {
       </aside>
       <main className="backend-login">
         <h1>教師後台登入</h1>
-        <p>請使用管理者 Google 帳號登入：{ADMIN_EMAIL}</p>
+        <p>{allowTeachers ? "請使用已啟用的教師 Google 帳號登入。" : `請使用管理者 Google 帳號登入：${ADMIN_EMAIL}`}</p>
         <div className="backend-login-actions">
         {ready && cloudConfigured && <SchoolIamButton />}
         {!ready ? (
