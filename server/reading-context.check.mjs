@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readingContext}from './reading-context.mjs';import bank from './sentence-bank.json' with {type:'json'};import blueprint from './quiz-blueprint.json' with {type:'json'};
+test('依相同版本全文產生、證據與候選讀音檢查、快取避免重複AI費用',async()=>{
+ const lesson=bank.lessons.find(l=>blueprint.lessons.some(b=>b.grade===l.grade&&b.term===l.term&&b.year===l.year&&b.title===l.title));const catalog=blueprint.lessons.find(l=>l.grade===lesson.grade&&l.term===lesson.term&&l.year===lesson.year&&l.title===lesson.title);const char=lesson.characters[0];const word=char.character+'光';const passage='這是一段測試課文，'+word+'照亮了大家的生活。';const cache=new Map();let calls=0;
+ const args={scan:async()=>[{filename:'測試原檔',lessons:[{lessonKey:catalog.key,passage}]}],store:{get:async key=>{if(!cache.has(key))throw Object.assign(Error(),{status:404});return{value:cache.get(key)};},create:async(key,value)=>cache.set(key,value)},analyze:async()=>{calls++;return{rows:[{character:char.character,contextWord:word,reading:char.readings[0].reading,evidence:passage,ok:true}]};}};
+ const result=await readingContext({lessonId:lesson.id},args);assert.equal(result.rows[0].status,'ready');assert.equal(result.rows[1].status,'pending');await readingContext({lessonId:lesson.id},args);assert.equal(calls,1);
+ cache.clear();args.analyze=async()=>({rows:[{character:char.character,contextWord:word,reading:'錯誤讀音',evidence:passage,ok:true}]});assert.equal((await readingContext({lessonId:lesson.id},args)).rows[0].status,'pending');
+ cache.clear();args.analyze=async()=>({rows:[{character:char.character,contextWord:word,reading:char.readings[0].reading,evidence:'編造'+word,ok:true}]});assert.equal((await readingContext({lessonId:lesson.id},args)).rows[0].status,'pending');
+ await assert.rejects(readingContext({lessonId:lesson.id},{...args,scan:async()=>[]}),/全文/);
+});

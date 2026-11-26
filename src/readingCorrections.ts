@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, runTransaction } from 'firebase/firestore';
 import { cloudConfigured, cloudServices } from './cloudSync';
 import type { SentenceLesson } from './sentenceApi';
 
@@ -38,4 +38,13 @@ export async function saveReadingCorrection(value: ReadingCorrection) {
 }
 export async function removeReadingCorrection(lessonId: string, character: string) {
   await deleteDoc(doc(cloudServices().db, READING_COLLECTION, readingKey(lessonId, character)));
+}
+
+/** AI僅補缺額；交易中重新讀取，保留老師已存的圈詞與不同讀音。 */
+export async function saveAutomaticReadingCorrection(value: ReadingCorrection) {
+ if(!validReadingCorrection(value))throw Error('AI圈詞格式不符，未儲存。');
+ const {db,auth}=cloudServices();if(!auth.currentUser)throw Error('請先登入教師帳號');
+ const ref=doc(db,READING_COLLECTION,readingKey(value.lessonId,value.character));
+ return runTransaction(db,async transaction=>{const old=await transaction.get(ref);if(old.exists()){const existing=old.data() as ReadingCorrection;if(existing.contextWord||existing.reading!==value.reading)return existing;}
+ transaction.set(ref,{...value,updatedAt:serverTimestamp(),updatedBy:auth.currentUser!.uid});return value;});
 }
