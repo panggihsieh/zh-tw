@@ -1,10 +1,15 @@
 import type { CompetitionParticipant, CompetitionRoom } from './competitionApi';
+import birds from '../server/competition-birds.json';
 import { judgeStroke, type Point } from './writingGame';
 
 /** 可注入學生畫面的本機模擬服務；不呼叫正式 API、不儲存成績。 */
 export function createCompetitionSimulation(source: CompetitionRoom, now = () => Date.now()) {
  const room = structuredClone(source);
  room.status = 'lobby';
+ room.roster = [];
+ room.testRoom = true;
+ room.nameChoices = room.loginMode === 'roster' ? [{ seat: 1, name: '測試學生' }] : undefined;
+ room.anonymousBirds = room.loginMode === 'anonymous' ? birds.map(bird => ({ ...bird, occupied: false, mine: false })) : undefined;
  room.startedAt = null;
  room.expiresAt = null;
  room.closedAt = null;
@@ -25,10 +30,13 @@ export function createCompetitionSimulation(source: CompetitionRoom, now = () =>
   async request<T>(path: string, body?: unknown): Promise<T> {
    if(room.status==='running'&&room.expiresAt!=null&&room.expiresAt<=now()){room.status='closed';room.closedAt=room.expiresAt;}
    let result: unknown;
-   if (path === `/code/${room.code}`) result = { room: publicRoom() };
+   if (path === `/code/${room.code}`) result = { room: publicRoom(), ...(participant ? {participant} : {}) };
    else if (path === `/rooms/${room.id}/join`) {
     if (room.status !== 'lobby') throw Error('測試課堂已鎖定加入。');
-    participant ??= { uid: 'simulation-student', name: '測試學生', seat: 1, avatarKind: 'default', avatar: null, index: 0, correct: 0, points: 0, finished: false, mine: true };
+    const choice = body as {name?:string;birdId?:string} | undefined;
+    const bird = room.anonymousBirds?.find(bird => bird.id === choice?.birdId);
+    if (room.loginMode === 'anonymous' && (!choice?.name?.trim() || !bird)) throw Error('請輸入暱稱並選擇小鳥。');
+    participant ??= { uid: 'simulation-student', name: room.loginMode === 'anonymous' ? choice!.name!.trim() : '測試學生', seat: room.loginMode === 'anonymous' ? null : 1, avatarKind: bird ? 'anonymous' : 'default', avatar: bird ? `/bird-avatars/${bird.id}.png` : null, index: 0, correct: 0, points: 0, finished: false, mine: true };
     result = state();
    } else if (path === `/rooms/${room.id}/state`) result = state();
    else if (path === `/rooms/${room.id}/leaderboard`) result = { items: participant ? [{ ...participant, rank: 1, answered: participant.index }] : [] };

@@ -284,3 +284,5 @@
 
 .competition-context-word { font-size: clamp(20px, 4vw, 28px); overflow-wrap: anywhere; }
 .competition-context-word small { display: block; font-size: 16px; line-height: 1.6; }
+
+.competition-student-simulation:fullscreen { overflow:auto; box-sizing:border-box; width:100%; height:100%; max-width:none; margin:0; padding:clamp(16px,3vw,48px); background:var(--theme-surface,#fffdf3); }

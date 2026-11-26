@@ -3,7 +3,7 @@ import type { CompetitionRoom } from "./competitionApi";
 const previewKey = "competition-student-preview";
 
 export function openCompetitionPreview(room: CompetitionRoom) {
-  sessionStorage.setItem(previewKey, JSON.stringify(room));
+  sessionStorage.setItem(previewKey, JSON.stringify({ ...room, roster: undefined, nameChoices: undefined, anonymousBirds: undefined }));
   try {
     // A new tab with an opener receives a copy of this tab's session storage.
     if (!window.open("?view=competition-preview", "_blank")) {
