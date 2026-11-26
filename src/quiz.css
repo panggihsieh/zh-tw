@@ -168,3 +168,13 @@
 .quiz-bank-progress { overflow-x: auto; margin-block: 18px; }
 .quiz-bank-progress table { min-width: 850px; width: 100%; border-collapse: collapse; font-size: 15px; }
 .quiz-bank-progress :is(th,td) { padding: 8px; border-bottom: 1px solid #bbcdbf; text-align: left; }
+.quiz-workflow-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 20px 0; }
+.quiz-workspace .quiz-workflow-card { display:flex; gap:12px; align-items:center; text-align:left; border:1px solid #a7bdb1; border-radius:10px; padding:16px; background:#f7faf7; color:#173c34; min-width:0; }
+.quiz-workflow-card[aria-pressed="true"] { background:#e2efe8; border-color:#30654c; box-shadow:inset 0 -3px #30654c; }
+.quiz-workflow-card svg { flex:none; }
+.quiz-workflow-card strong,.quiz-workflow-card small { display:block; }
+.quiz-workflow-card small { font-size:13px; line-height:1.5; margin-top:4px; overflow-wrap:anywhere; }
+.quiz-type-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px 18px; }
+.quiz-type-options small { display:block; font-size:14px; color:#52665d; }
+.quiz-workflow-inventory { margin-top:28px; border-top:1px solid #bbcdbf; padding-top:16px; }
+@media(max-width:650px) { .quiz-workflow-cards { grid-template-columns:1fr; gap:8px; } .quiz-workspace .quiz-workflow-card { padding:12px; } .quiz-type-options { grid-template-columns:repeat(2,minmax(0,1fr)); } }

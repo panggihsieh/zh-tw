@@ -10,6 +10,7 @@
     "firebase-admin": "^14.5.1",
     "google-auth-library": "11.3.2",
     "jose": "6.2.14",
-    "pdfjs-dist": "^6.5.438"
+    "pdfjs-dist": "^6.5.438",
+    "word-extractor": "^1.0.4"
   }
 }

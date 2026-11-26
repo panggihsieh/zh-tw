@@ -1,3 +1,4 @@
+import {quizBatchInstruction} from './quiz-pedagogy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validPunctuationOption} from './quiz-api.mjs';
@@ -19,7 +20,7 @@ test('六類配額、交叉檢查及教師審核發布；學生不能出題', as
     quizAuthenticate:async req => ({uid:req.headers['x-test-user'] || 'teacher',email:'test@example.com',admin:req.headers['x-test-user']!=='student'}),
     configStore:{load:async()=>({version:2,selected:'deepseek',profiles:{deepseek:{provider:'deepseek',model:'mock',apiKey:'test-only',enabled:true}}})},
     fetchProvider:async (_url,options) => {
-      calls++; const prompt=JSON.parse(options.body).messages[0].content;
+      calls++; const payload=JSON.parse(options.body);assert.deepEqual(payload.response_format,{type:'json_object'}); const prompt=payload.messages[0].content;
       const review=prompt.startsWith('核對');
       const emitted=structuredClone(questions);if(duplicate&&!prompt.startsWith('修正'))emitted[0].options[3]=emitted[0].options[0];
       const output=review ? {checks:questions.map((_,index)=>({index,ok:!reject,reason:'測試'}))} : {questions:short?emitted.slice(0,5):emitted};
@@ -44,4 +45,10 @@ test('標點選項拒絕符號碎片，但允許完整句中的錯誤標點作�
   for(const value of ['：」、「','冒號','「」']) assert.equal(validPunctuationOption(value),false);
   assert.equal(validPunctuationOption('小安說：「大家一起幫忙。'),true);
   assert.equal(validPunctuationOption('小安說：「大家一起幫忙。」'),true);
+});
+
+test('字音字形兩批採不同考法，避免同一單音字四選項都同音',()=>{
+ assert.match(quizBatchInstruction({categories:['字音字形'],questions:[]}),/選正確注音/);
+ assert.match(quizBatchInstruction({categories:['字音字形'],questions:Array.from({length:5},()=>({category:'字音字形'}))}),/依語境與注音/);
+ assert.equal(quizBatchInstruction({categories:['文意理解']}),'');
 });

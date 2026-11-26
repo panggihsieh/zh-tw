@@ -134,7 +134,7 @@ export default function QuizTeacher({request=quizRequest,showPublisher=true}:{re
       <h1>{reviewId?'母題草稿檢視與查核':'國語母題與錯題複習'}</h1>
       {reviewId ? <p><a href="/?view=backend&section=quiz">返回母題管理</a> · 對照原卷，逐題核對後儲存草稿。</p> : showPublisher && <PublisherSync request={quizRequest} initiallyOpen={false} />}
       {!reviewId && <div className="quiz-actions">
-        <button className="secondary" disabled={busy} onClick={()=>setTab('lessonbank')}>每課55題重編與進度</button>
+        <button className="secondary" disabled={busy} onClick={()=>setTab('lessonbank')}>試題製作工作台</button>
         <button className="secondary" onClick={() => setTab("bank")}>
           母題題庫與組卷
         </button>

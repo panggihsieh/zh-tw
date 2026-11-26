@@ -120,6 +120,7 @@ for (const file of [
   "writing-api.mjs",
   "quiz-api.mjs",
   "quiz-lesson-bank.mjs",
+  "quiz-sources.mjs",
   "quiz-blueprint.json",
   "quiz-pedagogy.mjs",
   "sentence-api.mjs",
