@@ -4,7 +4,7 @@ import { randomUUID, randomBytes, randomInt, createHash } from 'node:crypto';
 import { writingIdentity } from './writing-api.mjs';
 import { sentenceReview } from './competition-sentence-review.mjs';
 import { gradePractice } from './sentence-api.mjs';
-import { gradeRubric, normalizeLessonWords, validateRubric } from './sentence-rubric.mjs';
+import { RUBRIC_ITEMS, parseLessonWords, gradeRubric, normalizeLessonWords, validateRubric } from './sentence-rubric.mjs';
 import { writingReferences, judgeCompetitionWriting } from './competition-writing.mjs';
 
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -96,6 +96,22 @@ export function createCompetitionHandler({store,origins,authenticate=writingIden
   }
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname.replace('/api/structure/competition','');
+   if(path==='/sentence-rubric-settings'&&['GET','POST'].includes(req.method)){
+    if(!user.admin||!user.uid)fail('僅教師可存取自己的評分設定。',403);
+    const key=`competition-teacher-settings/${createHash('sha256').update(user.uid).digest('hex')}.json`;
+    const record=await store.get(key).catch(error=>{if(error.status===404)return null;throw error;});
+    if(req.method==='GET')return send(200,{settings:record?.value.settings||null,revision:record?.generation||null});
+    const input=await requestBody(req),draft=input.draft,lessonWords=input.lessonWords;
+    if(!draft||typeof draft!=='object'||typeof lessonWords!=='string'||lessonWords.length>12000)fail('評分設定格式不符。');
+    const clean={};for(const item of RUBRIC_ITEMS){const v=draft[item.key];if(!v||typeof v.enabled!=='boolean'||!Number.isInteger(v.points)||v.points<1||v.points>100)fail('配分須為1–100的整數。');clean[item.key]={enabled:v.enabled,points:v.points,...(item.key==='custom'?{rule:typeof v.rule==='string'?v.rule.trim():''}:{})};}
+    if(clean.custom.rule.length>80)fail('老師自訂規則最多80字。');
+    const rubric=validateRubric(RUBRIC_ITEMS.filter(item=>clean[item.key].enabled).map(item=>({...item,...clean[item.key]})));
+    if(rubric.some(item=>item.key==='lesson')&&!parseLessonWords(lessonWords).length)fail('請填寫本課語詞。');
+    if(String(input.revision??'')!==String(record?.generation??''))fail('另一裝置已更新設定，請重新載入後再修改。',409);
+    const value={settings:{draft:clean,lessonWords},updatedAt:now()};
+    if(record)await store.update(key,value,record.generation);else await store.create(key,value);
+    const saved=await store.get(key);return send(200,{settings:saved.value.settings,revision:saved.generation});
+   }
    const avatarMatch=path.match(/^\/avatar-originals\/([a-f0-9]{64})$/);
    if(avatarMatch&&req.method==='GET'){
     if(!user.admin)fail('僅管理者可讀取公仔原圖。',403);

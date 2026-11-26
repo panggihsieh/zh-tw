@@ -64,8 +64,9 @@ const GROUPS: [string, string[]][] = [
 ];
 
 /** 內建鎖定：預設鎖住避免誤改；解鎖後才能調整，鎖定時記住這組設定供下次開課使用。 */
-export default function SentenceRubricEditor({ draft, onChange, disabled, locked, onLockedChange, lessonWords, onLessonWordsChange, suggestedWords }: { draft: RubricDraft; onChange: (draft: RubricDraft) => void; disabled?: boolean; locked: boolean; onLockedChange: (locked: boolean) => void; lessonWords: string; onLessonWordsChange: (text: string) => void; suggestedWords: string[] }) {
+export default function SentenceRubricEditor({ draft, onChange, disabled, locked, onLockedChange, lessonWords, onLessonWordsChange, suggestedWords, onSave }: { draft: RubricDraft; onChange: (draft: RubricDraft) => void; disabled?: boolean; locked: boolean; onLockedChange: (locked: boolean) => void; lessonWords: string; onLessonWordsChange: (text: string) => void; suggestedWords: string[]; onSave: () => Promise<void> }) {
   const [saveError, setSaveError] = useState('');
+  const [saving, setSaving] = useState(false);
   const total = rubricFromDraft(draft).reduce((sum, item) => sum + item.points, 0);
   const problem = rubricProblem(draft, lessonWords);
   const wordCount = parseLessonWords(lessonWords).length;
@@ -75,11 +76,11 @@ export default function SentenceRubricEditor({ draft, onChange, disabled, locked
       <h3>造句評分項目（總分須為 100）</h3>
       {locked
         ? <button type="button" className="secondary" disabled={disabled} onClick={() => onLockedChange(false)}><LockOpen size={16} aria-hidden />解鎖修改</button>
-        : <button type="button" className="primary" disabled={disabled || !!problem} title={problem || '鎖定並記住這組設定'} onClick={() => { try { saveRubricSettings(draft, lessonWords); setSaveError(''); onLockedChange(true); } catch { setSaveError('無法記住評分設定，請確認瀏覽器允許儲存資料後再鎖定。'); } }}><Lock size={16} aria-hidden />鎖定並記住</button>}
+        : <button type="button" className="primary" disabled={disabled || saving || !!problem} title={problem || '鎖定並儲存到教師帳號'} onClick={async () => { setSaving(true); try { await onSave(); setSaveError(''); onLockedChange(true); } catch (error) { setSaveError(error instanceof Error ? error.message : '雲端儲存失敗，請重試。'); } finally { setSaving(false); } }}><Lock size={16} aria-hidden />鎖定並記住</button>}
     </header>
     {saveError && <p role="alert">{saveError}</p>}
-    <p className="sentence-rubric-lock-note">{locked ? '已鎖定，開課時使用這組評分項目。同一瀏覽器會記住上次鎖定的配分、自訂規則及語詞表。要調整請按「解鎖修改」。' : '修改中：尚未鎖定的變更不會覆寫上次設定。調整完成並確認總分 100 後，請按「鎖定並記住」，才能建立開課大廳。'}</p>
-    <fieldset disabled={disabled || locked}>
+    <p className="sentence-rubric-lock-note">{locked ? '已鎖定，開課時使用這組評分項目。設定依教師帳號儲存在伺服器，換電腦登入也會帶入上次鎖定的配分、自訂規則及語詞表。要調整請按「解鎖修改」。' : '修改中：尚未鎖定的變更不會覆寫上次設定。調整完成並確認總分 100 後，請按「鎖定並記住」，才能建立開課大廳。'}</p>
+    <fieldset disabled={disabled || saving || locked}>
     {GROUPS.map(([title, keys]) => <div key={title} className="sentence-rubric-group">
       {/* 每組顯示已勾選項目的配分小計 */}
       <h4>{title}<span className="sentence-rubric-subtotal">小計 {keys.reduce((sum, key) => sum + (draft[key]?.enabled ? draft[key].points : 0), 0)} 分</span></h4>
