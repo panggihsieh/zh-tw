@@ -9,13 +9,14 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
   const [lessonKey,setLessonKey]=useState(blueprint.lessons[0].key),[selectedBank,setSelectedBank]=useState(''),[bookFilter,setBookFilter]=useState(''),[step,setStep]=useState(0);
   const [fileSourceUrl,setFileSourceUrl]=useState('');
   const [sourceMode,setSourceMode]=useState<'library'|'file'|'link'|'text'>('library'),[link,setLink]=useState(''),[passage,setPassage]=useState(''),[sourceLabel,setSourceLabel]=useState(''),[confirmed,setConfirmed]=useState(false);
-  const [categories,setCategories]=useState(blueprint.plan.map(r=>r.category)),[difficulty,setDifficulty]=useState('中'),[outputTitle,setOutputTitle]=useState(''),[outputFormat,setOutputFormat]=useState<'cloud'|'cloud-json'>('cloud');
+  const [categories,setCategories]=useState(blueprint.plan.map(r=>r.category)),[difficulty,setDifficulty]=useState('中'),[titleOverride,setTitleOverride]=useState<string|null>(null),[outputFormat,setOutputFormat]=useState<'cloud'|'cloud-json'>('cloud');
   const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[loaded,setLoaded]=useState(false);
   const stop=useRef(false);
   const sorted=[...banks].sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
   const latest=(key:string)=>sorted.find(b=>b.lessonKey===key);
   const current=banks.find(b=>b.id===selectedBank&&b.lessonKey===lessonKey)||latest(lessonKey);
   const lesson=blueprint.lessons.find(l=>l.key===lessonKey)!;
+  const outputTitle=titleOverride??`${lesson.grade}${lesson.term} ${lesson.title}・55題重編`;
   const sourceLesson=source?.lessons.find(l=>l.lessonKey===lessonKey);
   const selectedPassage=sourceMode==='text'?passage:sourceLesson?.passage||'';
   const ready=loaded&&confirmed&&selectedPassage.trim().length>=20&&(sourceMode!=='text'||!!sourceLabel.trim());
@@ -25,7 +26,7 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
   const selectedTarget=blueprint.plan.filter(r=>categories.includes(r.category)).reduce((n,r)=>n+r.count,0);
   async function refresh(){const [b,s]=await Promise.all([request<{items:LessonBank[]}>('/lesson-banks'),request<{items:QuizSourceSummary[]}>('/quiz-sources')]);setBanks(b.items);setSources(s.items);setLoaded(true);}
   useEffect(()=>{void refresh().catch(e=>setMessage(e.message));return()=>{stop.current=true;};},[]);
-  function changeLesson(key:string){setLessonKey(key);setSelectedBank('');setConfirmed(false);setOutputTitle('');setPassage('');}
+  function changeLesson(key:string){setLessonKey(key);setSelectedBank('');setConfirmed(false);setPassage('');}
   function update(bank:LessonBank){setBanks(rows=>[...rows.filter(b=>b.id!==bank.id),bank]);setSelectedBank(bank.id);}
   async function action(fn:()=>Promise<void>){setBusy(true);try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
   function acceptSource(doc:QuizSource){setSource(doc);setConfirmed(false);setSources(rows=>[...rows.filter(s=>s.id!==doc.id),doc]);if(!doc.lessons.some(l=>l.lessonKey===lessonKey))changeLesson(doc.lessons[0].lessonKey);setMessage(`已讀取 ${doc.filename}：${doc.lessonCount} 課。請核對課文預覽；尚未呼叫AI。`);}
@@ -53,7 +54,8 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
     {step===1&&<fieldset disabled={busy}><legend>2. 命題設定</legend><p>{lesson.grade}{lesson.term} {lesson.title}（{lesson.year}）</p><p>固定配額10／15／15／5／5／5。同義題幹不另計；可先選部分類型製作，再接續其他類型。</p>
       <div className="quiz-type-options">{blueprint.plan.map(row=><label key={row.category} className="quiz-check"><input type="checkbox" checked={categories.includes(row.category)} onChange={e=>setCategories(e.target.checked?[...categories,row.category]:categories.filter(c=>c!==row.category))}/><span>{row.category}<small>{row.count} 題</small></span></label>)}</div>
       <div className="quiz-grid"><label>新題庫難度<select value={difficulty} onChange={e=>setDifficulty(e.target.value)}><option value="易">低</option><option value="中">中</option><option value="難">高</option></select></label><label>輸出方式<select value={outputFormat} onChange={e=>setOutputFormat(e.target.value as typeof outputFormat)}><option value="cloud">雲端教師待審題庫</option><option value="cloud-json">雲端待審題庫＋JSON備份</option></select></label></div>
-      <label>新題庫名稱（選填）<input value={outputTitle} maxLength={100} placeholder={`${lesson.grade}${lesson.term} ${lesson.title}・55題重編`} onChange={e=>setOutputTitle(e.target.value)}/></label>
+      <label>新題庫名稱（依課文自動填入）<input value={outputTitle} maxLength={100} placeholder={`${lesson.grade}${lesson.term} ${lesson.title}・55題重編`} onChange={e=>setTitleOverride(e.target.value)}/></label>
+      <small>依所選課次自動命名；手動修改後保留自訂名稱。</small>{titleOverride!==null&&<button type="button" className="secondary" onClick={()=>setTitleOverride(null)}>恢復自動命名</button>}
       <p>本次選取 {categories.length} 類、{selectedTarget} 題。每批5題，正常生成及AI檢查2次呼叫，疑點最多修正複查各1次；整課最多44次呼叫，可能計費。</p>
       <button className="primary" type="button" disabled={!ready||!categories.length} onClick={()=>void create()}>儲存設定並建立題庫草稿</button>{!ready&&<p>請先在「教材來源」核對全文。</p>}
       {current&&<button className="secondary" type="button" onClick={()=>setStep(2)}>接續現有題庫</button>}
