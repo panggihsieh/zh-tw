@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { competitionRequest } from './competitionApi';
 import { scorePercent, suggestionTextParts, type SentenceStatisticQuestion } from './competitionSentenceStatistics';
 import './competitionSentenceStatistics.css';
+import './classroomRecords.css';
 
 interface SummaryAnswer { name: string; seat: number | null; qualityScore: number | null; feedback: string }
 interface Group { character: string; count: number; highest: SummaryAnswer[]; lowest: SummaryAnswer[]; missingHistory: number; unanswered: number }
@@ -20,7 +21,7 @@ export function SentenceStatisticsTable({ question }: { question: SentenceStatis
         const answered = row.status === 'graded' || row.status === 'pending';
         const state = { graded: '已評分', pending: 'AI 評分待確認', unanswered: '未作答', 'missing-history': '舊紀錄未保存回答' }[row.status];
         return <tr key={row.id}><th scope="row">{row.seat ? `${row.seat} 號 ` : ''}{row.name}<small>{state}</small></th>
-          <td>{answered ? <><p className="sentence-stat-answer"><WordText text={row.sentence || ''} word={row.word || question.character}/></p>{!row.word && <small>未確認或未保存完整語詞，僅標示指定字。</small>}</> : '—'}</td>
+          <td>{answered ? <>{row.word && <p><strong>語詞：{row.word}</strong></p>}<p className="sentence-stat-answer"><WordText text={row.sentence || ''} word={row.word || question.character}/></p>{!row.word && <small>未確認或未保存完整語詞，僅標示指定字。</small>}</> : '—'}</td>
           <td>{answered ? <ul className="sentence-stat-items">{row.items?.map(item => <li key={item.key}><strong>{item.label}</strong><small>配分占 {scorePercent(item.points, total)}</small><span>{item.score ?? '—'}／{item.points} 分</span><small>得分率 {item.score == null ? '—' : scorePercent(item.score, item.points)}</small>{item.evidence && <small>依據：{item.evidence}</small>}</li>)}</ul> : '—'}</td>
           <td>{answered ? <><strong>造句品質：{row.status === 'pending' ? '待確認' : `${row.qualityScore ?? '—'}／100`}</strong><p>競賽得分：{row.points ?? '—'}{row.competitionMaximum != null && `／${row.competitionMaximum}`}</p>{row.timedOut && <small>逾時：競賽得分為 0，品質分保留。</small>}{row.targetOk === false && <small>指定字詞使用未通過，整題品質分為 0。</small>}</> : '—'}</td>
           <td>{answered ? <>{row.feedback || '未保存評語'}{row.issueReason && <p className="sentence-stat-red">{row.issueReason}</p>}</> : '—'}</td>
@@ -37,7 +38,7 @@ export default function CompetitionSentenceReview({ roomId, request = competitio
   const [error, setError] = useState(''), [reload, setReload] = useState(0), [selected, setSelected] = useState('all'), [student, setStudent] = useState('');
   useEffect(() => {
     let active = true; setReport(null); setError(''); setSelected('all'); setStudent('');
-    void request<{ groups: Group[]; questions: SentenceStatisticQuestion[] }>(`/rooms/${roomId}/sentence-review`).then(value => { if (active) { setReport(value); setSelected(value.questions?.length ? String(value.questions[0].questionIndex) : 'all'); } }).catch(error => { if (active) setError(error.message); });
+    void request<{ groups: Group[]; questions: SentenceStatisticQuestion[] }>(`/rooms/${roomId}/sentence-review`).then(value => { if (active) { setReport(value); setSelected(value.questions?.[0]?.character ?? 'all'); } }).catch(error => { if (active) setError(error.message); });
     return () => { active = false; };
   }, [roomId, request, reload]);
   return <section className="competition-sentence-review"><h2>生字造詞／造句逐題統計</h2>
@@ -45,8 +46,19 @@ export default function CompetitionSentenceReview({ roomId, request = competitio
     <p>新開造詞競賽每題滿分 1000 分（品質分 × 10）；歷史紀錄保留當次計分。配分占比＝該項滿分／全部配分；得分率＝該項得分／該項滿分。未作答及缺漏紀錄不視為零分。</p>
     {error && <p role="alert">{error}</p>}<button type="button" className="secondary" onClick={() => setReload(value => value + 1)}>重新載入分析</button>
     {!report && !error && <p role="status">正在載入造句紀錄…</p>}
-    {report?.questions && <><div className="sentence-stat-filters"><label>題目<select value={selected} onChange={event => setSelected(event.target.value)}><option value="all">全部題目</option>{report.questions.map(question => <option key={question.questionIndex} value={String(question.questionIndex)}>第 {question.questionIndex + 1} 題「{question.character}」</option>)}</select></label><label>搜尋學生<input value={student} onChange={event => setStudent(event.target.value)} placeholder="姓名或座號"/></label></div>
-      {report.questions.filter(question => selected === 'all' || selected === String(question.questionIndex)).map(question => <SentenceStatisticsTable key={question.questionIndex} question={{ ...question, rows: question.rows.filter(row => !student.trim() || row.name.includes(student.trim()) || String(row.seat ?? '') === student.trim()) }}/>)}</>}
+    {report?.questions && <>
+      <div className="classroom-game-tabs" role="group" aria-label="依生字查看造詞紀錄">
+        <button type="button" className={selected === 'all' ? 'primary' : 'secondary'} aria-pressed={selected === 'all'} onClick={() => setSelected('all')}>全部字詞</button>
+        {[...new Set(report.questions.map(question => question.character))].map(character => <button key={character} type="button" className={selected === character ? 'primary' : 'secondary'} aria-pressed={selected === character} onClick={() => setSelected(character)}>「{character}」</button>)}
+      </div>
+      <div className="sentence-stat-filters"><label>搜尋學生<input value={student} onChange={event => setStudent(event.target.value)} placeholder="姓名或座號"/></label></div>
+      {!report.questions.length && <p role="status">這堂課沒有可供分析的題目。</p>}
+      {report.questions.filter(question => selected === 'all' || selected === question.character).map(question => <section key={question.questionIndex} aria-label={`第 ${question.questionIndex + 1} 題「${question.character}」造詞紀錄`}>
+        <h3>第 {question.questionIndex + 1} 題「{question.character}」{question.reading && ` · ${question.reading}`}</h3>
+        <p>{question.prompt}</p>
+        <SentenceStatisticsTable question={{ ...question, rows: question.rows.filter(row => !student.trim() || row.name.includes(student.trim()) || String(row.seat ?? '') === student.trim()) }}/>
+      </section>)}
+    </>}
     {report && !report.questions && <p role="status">伺服器尚未提供全員逐題資料，請更新後端後重新載入。</p>}
     {report && <details><summary>逐字最高／最低分摘要</summary>{report.groups.map(group => <article key={group.character}><h3>「{group.character}」 · {group.count} 筆回答</h3><p>最高分：{group.highest.map(row => `${row.name} ${row.qualityScore} 分`).join('、') || '尚無已確認評分'}</p><p>最低分：{group.lowest.map(row => `${row.name} ${row.qualityScore} 分`).join('、') || '尚無已確認評分'}</p>{group.missingHistory > 0 && <p>缺少逐題舊紀錄：{group.missingHistory} 筆</p>}<p>未作答：{group.unanswered} 題次</p></article>)}</details>}
   </section>;

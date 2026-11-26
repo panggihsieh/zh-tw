@@ -1,0 +1,8 @@
+.classroom-game-tabs { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
+.classroom-game-tabs button { display:flex; align-items:center; gap:10px; }
+.classroom-game-tabs button span { font-size:.85em; font-weight:normal; }
+.classroom-game-tabs button:focus-visible { outline:3px solid var(--theme-primary, #147747); outline-offset:3px; }
+.classroom-room-picker { display:grid; gap:8px; margin:16px 0; }
+.classroom-room-picker select { width:100%; min-width:0; }
+.game-review .competition-sentence-review { min-width:0; margin:24px 0; }
+@media (max-width:600px) { .classroom-game-tabs button { flex:1 1 44%; justify-content:center; } }

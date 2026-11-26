@@ -1,4 +1,5 @@
 import CompetitionSentenceReview from './CompetitionSentenceReview';
+import './classroomRecords.css';
 import { useEffect, useState } from "react";
 import GameReview from "./GameReview";
 import { competitionRequest, type CompetitionRoom, type LeaderboardItem } from "./competitionApi";
@@ -41,56 +42,71 @@ function exportRanking(room: CompetitionRoom, items: LeaderboardItem[]) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function CompetitionRecords() {
+export function CompetitionRecords({ request = competitionRequest }: { request?: typeof competitionRequest }) {
   const [rooms, setRooms] = useState<CompetitionRoom[]>([]);
-  const [roomId, setRoomId] = useState("");
+  const [selectedRoom, setSelectedRoom] = useState<Partial<Record<CompetitionRoom["gameType"], string>>>({});
+  const [gameType, setGameType] = useState<CompetitionRoom["gameType"]>("structure");
+  const [reload, setReload] = useState(0);
+  const [listStatus, setListStatus] = useState("載入課堂清單…");
+  const filteredRooms = rooms.filter(room => room.gameType === gameType);
+  const roomId = filteredRooms.find(room => room.id === selectedRoom[gameType])?.id ?? filteredRooms[0]?.id ?? "";
   const [items, setItems] = useState<LeaderboardItem[]>([]);
   const [photos, setPhotos] = useState<RankingPhoto[]>([]);
   const [photoStatus, setPhotoStatus] = useState("");
   const room = rooms.find(item => item.id === roomId);
-  const [status, setStatus] = useState("載入遊戲紀錄…");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     let active = true;
-    competitionRequest<{ items: CompetitionRoom[] }>("/rooms").then(({ items }) => {
+    setListStatus("載入課堂清單…");
+    request<{ items: CompetitionRoom[] }>("/rooms").then(({ items }) => {
       if (!active) return;
       const completed = items.filter(room => room.status === "closed");
       setRooms(completed);
-      setRoomId(completed[0]?.id ?? "");
-      setStatus(completed.length ? "" : "目前沒有已結束的競賽。");
-    }).catch(error => { if (active) setStatus(error.message); });
+      setGameType(previous => completed.some(room => room.gameType === previous) ? previous : completed[0]?.gameType ?? previous);
+      setListStatus("");
+    }).catch(error => { if (active) setListStatus(`課堂清單載入失敗：${error.message}`); });
     return () => { active = false; };
-  }, []);
+  }, [request, reload]);
 
   useEffect(() => {
-    if (!roomId) return;
+    if (!roomId) { setItems([]); setPhotos([]); setStatus(""); setPhotoStatus(""); return; }
     let active = true;
     setItems([]);
     setPhotos([]);
     setPhotoStatus("載入排名照片…");
-    competitionRequest<{ items: RankingPhoto[] }>(`/rooms/${roomId}/photos`).then(({ items }) => {
+    request<{ items: RankingPhoto[] }>(`/rooms/${roomId}/photos`).then(({ items }) => {
       if (!active) return;
       setPhotos(items);
       setPhotoStatus(items.length ? "" : "此課堂尚無排名照片。");
     }).catch(error => { if (active) setPhotoStatus(`照片載入失敗：${error.message}`); });
     setStatus("載入學生結果…");
-    competitionRequest<{ items: LeaderboardItem[] }>(`/rooms/${roomId}/leaderboard`).then(({ items }) => {
+    request<{ items: LeaderboardItem[] }>(`/rooms/${roomId}/leaderboard`).then(({ items }) => {
       if (!active) return;
       setItems(items);
       setStatus(items.length ? "" : "這堂課沒有學生紀錄。");
     }).catch(error => { if (active) setStatus(error.message); });
     return () => { active = false; };
-  }, [roomId]);
+  }, [roomId, request]);
 
   return (
     <section className="game-review" aria-label="遊戲紀錄">
       <h2>Kahoot 競賽紀錄</h2>
-      {!!rooms.length && <label>已結束的課堂
-        <select value={roomId} onChange={event => { setItems([]); setPhotos([]); setRoomId(event.target.value); }}>
-          {rooms.map(room => <option key={room.id} value={room.id}>{room.className} · {gameLabels[room.gameType]} · {room.title}（{room.code}）</option>)}
+      <div className="classroom-game-tabs" role="group" aria-label="依遊戲類型查看紀錄">
+        {(['structure', 'writing', 'sentence-practice', 'quiz'] as const).map(type => <button key={type} type="button" aria-pressed={gameType === type} className={gameType === type ? 'primary' : 'secondary'} onClick={() => { if (gameType === type) return; setItems([]); setPhotos([]); setStatus(''); setPhotoStatus(''); setGameType(type); }}>
+          {{structure:'字體結構',writing:'筆順書寫','sentence-practice':'生字造詞',quiz:'四選一競賽'}[type]}<span>{rooms.filter(room => room.gameType === type).length} 堂</span>
+        </button>)}
+      </div>
+      {listStatus && <p role="status">{listStatus}</p>}
+      <button type="button" className="secondary" onClick={() => setReload(value => value + 1)}>重新載入課堂</button>
+      {!listStatus && !filteredRooms.length && <p role="status">此遊戲類型目前沒有已結束的課堂。</p>}
+      {!!filteredRooms.length && <label className="classroom-room-picker">已結束的課堂
+        <select value={roomId} onChange={event => { setItems([]); setPhotos([]); setSelectedRoom(previous => ({ ...previous, [gameType]: event.target.value })); }}>
+          {filteredRooms.map(room => <option key={room.id} value={room.id}>{room.className} · {gameLabels[room.gameType]} · {room.title}（{room.code}）</option>)}
         </select>
       </label>}
       {room && <p>課堂日期 {classroomDate(room)} · 測驗名稱 {room.title}</p>}
+      {room?.gameType === 'sentence-practice' && <CompetitionSentenceReview key={room.id} roomId={room.id} request={request}/>}
       {room && <section aria-label="排名照片">
         <h3>排名成果・照片集中觀看</h3>
         {photoStatus && <p role="status">{photoStatus}</p>}
@@ -109,7 +125,6 @@ function CompetitionRecords() {
           {items.map(item => <li key={item.uid}>第 {item.rank} 名 · {item.name} · {item.points} 分 · 答對 {item.correct} 題 · 已答 {item.answered}/{room.questionCount} 題</li>)}
         </ol>
       </>}
-      {room?.gameType === 'sentence-practice' && <details key={room.id}><summary>查看作答分析</summary><CompetitionSentenceReview roomId={room.id}/></details>}
     </section>
   );
 }
