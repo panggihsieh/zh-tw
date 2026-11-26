@@ -1,5 +1,5 @@
 export interface SentenceQuestion { id:string;character:string;reading:string;definition?:string;source?:string }
-export interface SentenceLesson {id:string;title:string;grade:number;term:string;year:string;characters:{character:string;readings:{reading:string;definition:string;source:string}[]}[]}
+export interface SentenceLesson {id:string;title:string;grade:number;term:string;year:string;characters:{character:string;contextWord?:string;readings:{reading:string;definition:string;source:string}[]}[]}
 export interface SentenceEvent {id:string;title:string;minutes:number;lessons:string[];lessonIds:string[];roster:string[];questions:SentenceQuestion[];status:'published'|'running'|'closed';startsAt?:number;endsAt?:number}
 export const elementLabels={person:'人',event:'事',time:'時',place:'地',object:'物'};
 export interface SentenceGrade {targetOk:boolean;readingOk:boolean;idiom:{text:string;score:number};elements:Record<keyof typeof elementLabels,{evidence:string;score:number}>;fluency:number;feedback:string;total:number|null;uncertain:boolean}

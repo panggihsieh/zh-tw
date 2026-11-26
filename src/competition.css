@@ -281,3 +281,6 @@
 .sentence-rubric-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.sentence-rubric-head h3{margin:0}.sentence-rubric-head button{display:inline-flex;align-items:center;gap:6px}.sentence-rubric-lock-note{margin:6px 0 4px;font-size:14px;color:#5d4ac7}.sentence-rubric-editor>fieldset{margin:0;padding:0;border:0;min-width:0}.sentence-rubric-editor.is-locked .sentence-rubric-row{cursor:not-allowed}.sentence-rubric-editor.is-locked .sentence-rubric-row.is-on{background:#f1f3ee}
 .sentence-rubric-words{display:grid;gap:6px;margin:6px 8px 4px;padding:10px;border:1px dashed #c9c1f0;border-radius:12px;background:#fbfaff}.sentence-rubric-words textarea{width:100%;font-size:16px}.sentence-rubric-words small{color:#555}.sentence-rubric-words .competition-actions{margin-top:0}
 .sentence-rubric-group h4{display:flex;align-items:baseline;gap:12px}.sentence-rubric-subtotal{padding:2px 10px;border-radius:99px;background:#fff1bd;color:#795c00;font-size:14px;font-weight:900}
+
+.competition-context-word { font-size: clamp(20px, 4vw, 28px); overflow-wrap: anywhere; }
+.competition-context-word small { display: block; font-size: 16px; line-height: 1.6; }
