@@ -1,3 +1,4 @@
+import QuizAuthoringTip from "./QuizAuthoringTip";
 import { ArrowRight, Search, Settings2 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import BirdMascot from "./BirdMascot";
@@ -45,6 +46,7 @@ export function TeacherAcademyHome({ onOpen, labels }: { onOpen: (id: string) =>
       {cards.map(card => <button key={card.id} className={`academy-card ${card.className}`} onClick={() => onOpen(card.id)}><h2>{labels[card.id] || (card.id === "competition" ? <><span>Kahoot</span><span>競賽開課</span></> : card.title)}</h2><AcademyArt kind={card.art}/><span className="academy-card-caption">{card.note}</span><ArrowRight className="academy-card-arrow" size={18}/></button>)}
       {!query && <div className="academy-settings-card"><h2><Settings2 size={26}/>全站管理與設定</h2><div>{[["users","帳號權限"],["themes","網站樣式"],["api","API 設定"]].map(([id,title]) => <button key={id} onClick={() => onOpen(id)}>{labels[id] || title}<ArrowRight size={14}/></button>)}</div></div>}
     </div>
+    {cards.some(card => card.id === "quiz") && <QuizAuthoringTip/>}
     <section className="academy-tool-directory" aria-label="所有後台功能"><h2>{query ? "其他搜尋結果" : "更多教學與管理工具"}</h2><div>{tools.map(([id,title]) => <button key={id} onClick={() => onOpen(id)}>{labels[id] || title}<ArrowRight size={15}/></button>)}</div></section>
   </section>;
 }

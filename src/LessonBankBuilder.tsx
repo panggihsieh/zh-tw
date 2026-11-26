@@ -1,3 +1,4 @@
+import QuizAuthoringTip from './QuizAuthoringTip';
 import {useEffect,useRef,useState} from 'react';
 import {FileText,SlidersHorizontal,Database} from 'lucide-react';
 import blueprint from '../server/quiz-blueprint.json';
@@ -34,7 +35,7 @@ export default function LessonBankBuilder({request=quizRequest,onOpen}:{request?
   async function generate(all:boolean){if(!current)return;stop.current=false;await action(async()=>{setMessage('AI正在生成並檢查本批題目…');try{const bank=await runQuizWorkflow({bank:current,categories,all,request,shouldStop:()=>stop.current,onProgress:b=>{update(b);setMessage(`已保存 ${b.total}/55 題；本批通過格式與AI檢查，待教師審核。`);}});if(bank.outputFormat==='cloud-json'&&(bank.complete||bank.selectionComplete))await downloadQuizBank(bank,request);setMessage(bank.complete?'本課55題已保存，待教師審核。':bank.selectionComplete?`所選類型已完成，本課累計 ${bank.total}/55 題。`:`已保存 ${bank.total}/55 題，下次可接續。`);}catch(e){await refresh().catch(()=>{});throw Error(`本批停止：${(e as Error).message}；先前完成批次保留。`);}});}
   const cards=[{title:'教材來源',detail:sourceMode==='text'?(sourceLabel||'檔案、連結或貼上課文'):(source?.filename||`${sources.length} 份已匯入教材`),icon:FileText},{title:'命題設定',detail:`${categories.length} 類 · ${selectedTarget} 題 · ${difficulty==='易'?'低':difficulty==='難'?'高':'中'}難度`,icon:SlidersHorizontal},{title:'輸出題庫',detail:current?`${current.total}/55 題 · 教師待審`:'雲端題庫 · JSON備份',icon:Database}];
   return <section aria-label="試題製作模組">
-    <h2>試題製作工作台</h2><p>南一五、六年級 · 每課55題固定配額 · 原創四選一母題</p>
+    <h2>試題製作工作台</h2><QuizAuthoringTip/><p>南一五、六年級 · 每課55題固定配額 · 原創四選一母題</p>
     <div className="quiz-workflow-cards" role="group" aria-label="試題製作步驟">{cards.map((card,i)=><button key={card.title} type="button" className="quiz-workflow-card" aria-pressed={step===i} onClick={()=>setStep(i)}><card.icon size={24}/><span><strong>{i+1}. {card.title}</strong><small>{card.detail}</small></span></button>)}</div>
     <p role="status" aria-live="polite">{message}</p>
     {step===0&&<fieldset disabled={busy}><legend>1. 教材來源</legend>
