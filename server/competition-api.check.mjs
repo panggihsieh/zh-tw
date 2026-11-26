@@ -247,3 +247,29 @@ test('教師配分由伺服器跨裝置讀回、帳號隔離、拒絕學生及�
  const invalid=structuredClone(draft);invalid.correctness.points=29;assert.equal((await f.request(path,{draft:invalid,lessonWords:'',revision:saved.revision})).status,400);
  assert.deepEqual((await f.request(path)).settings,anotherDevice.settings);
 });
+
+
+test('錯題只供原教師檢討，勾選原題建立新大廳，不改原紀錄與成績',async t=>{
+ const {request,store}=await fixture(t);const {room}=await request('/rooms',definition());
+ await request(`/rooms/${room.id}/join`,{},'student');await request(`/rooms/${room.id}/start`,{});await request(`/rooms/${room.id}/state`,{},'student');
+ assert.equal((await request(`/rooms/${room.id}/mistake-review`)).status,409);
+ await request(`/rooms/${room.id}/answer`,{answer:1},'student');await request(`/rooms/${room.id}/answer`,{answer:0},'student');await request(`/rooms/${room.id}/close`,{});
+ const original=await store.get(`competition-rooms/${room.id}.json`),student=await store.get(`competition-participants/${room.id}/student.json`);
+ assert.equal(student.value.answerHistory[0].correct,false);assert.equal(student.value.answerHistory[0].timedOut,false);
+ assert.equal((await request('/mistake-rooms',undefined,'student')).status,403);
+ assert.deepEqual((await request('/mistake-rooms',undefined,'teacher2')).items,[]);
+ assert.equal((await request(`/rooms/${room.id}/mistake-review`,undefined,'teacher2')).status,403);
+ assert.equal((await request(`/rooms/${room.id}/mistake-review`,undefined,'student')).status,403);
+ const report=await request(`/rooms/${room.id}/mistake-review`);assert.equal(report.status,200);assert.equal(report.questions.length,1);assert.equal(report.questions[0].questionIndex,0);
+ assert.equal(report.questions[0].wrongAnswers[0].response,1);assert.equal(report.questions[0].question.answer,0);
+ for(const questionIndexes of [[],[1],[0,0],[-1],['0']])assert.equal((await request(`/rooms/${room.id}/mistake-practice`,{questionIndexes})).status,400);
+ assert.equal((await request(`/rooms/${room.id}/mistake-practice`,{questionIndexes:[0]},'teacher2')).status,403);
+ const result=await request(`/rooms/${room.id}/mistake-practice`,{questionIndexes:[0],title:'錯題複習測試'});assert.equal(result.status,201);assert.notEqual(result.room.id,room.id);assert.equal(result.room.status,'lobby');assert.equal(result.room.questionCount,1);assert.equal(result.room.questions[0].prompt,definition().questions[0].prompt);
+ assert.deepEqual(result.room.roster,definition().roster);const saved=await store.get(`competition-rooms/${result.room.id}.json`);assert.equal(saved.value.sourceRoomId,room.id);assert.deepEqual(saved.value.sourceQuestionIndexes,[0]);
+ assert.deepEqual(await store.get(`competition-rooms/${room.id}.json`),original);assert.deepEqual(await store.get(`competition-participants/${room.id}/student.json`),student);
+});
+
+test('獨立測試課堂不進入錯題紀錄，也不能建立正式錯題練習',async t=>{
+ const {request}=await fixture(t);const {room}=await request('/rooms',{...definition(),testRoom:true});await request(`/rooms/${room.id}/close`,{});
+ assert.deepEqual((await request('/mistake-rooms')).items,[]);assert.equal((await request(`/rooms/${room.id}/mistake-review`)).status,409);
+});

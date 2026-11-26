@@ -125,7 +125,8 @@ const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin')
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
 const ReadingCorrectionAdmin = lazy(() => import("./ReadingCorrectionAdmin"));
-type BackendSection = "readingCorrections" | "strokeSpeech" | "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+const CompetitionMistakeReview = lazy(() => import("./CompetitionMistakeReview"));
+type BackendSection = "mistakeReview" | "readingCorrections" | "strokeSpeech" | "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
 const StrokeSpeechAdmin = lazy(() => import('./StrokeSpeechAdmin'));
 const SecurityLog = lazy(() => import("./SecurityLog"));
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
@@ -140,6 +141,7 @@ const backendTitles: Record<BackendSection, string> = {
   strokeSpeech: "筆畫語音",
   quiz: "試題製作工作台",
   themes: "網站樣式資料庫",
+  mistakeReview: "錯題複習",
   gameReview: '課堂紀錄',
   writingAssignments: '書寫作業管理',
   tts: "TTS 來源與預設音色", api: "AI API 設定", users: "使用者管理", structure: "字形結構資料庫",
@@ -987,6 +989,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
               { title: "遊戲派送與競賽", items: [
                 { section: "competition", label: "Kahoot 競賽開課", icon: Trophy },
                 { section: "gameReview", label: "課堂紀錄", icon: BookOpen },
+                { section: "mistakeReview", label: "錯題複習", icon: BookOpen },
               ] },
               { title: "全站管理與設定", items: [
                 { section: "library", label: "我的學習本（暫未發布）", icon: LibraryBig },
@@ -2188,6 +2191,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}
                   {backendSection === "competition" && <CompetitionAdmin key="original" />}
+                  {backendSection === "mistakeReview" && <CompetitionMistakeReview onOpenCompetition={()=>openBackendSection("competition")}/> }
                   {backendSection === "versions" && <VersionRecordAdmin />}
                   {backendSection === "security" && <SecurityLog />}
                   {backendSection === "strokeSpeech" && <StrokeSpeechAdmin />}

@@ -6,3 +6,11 @@
 .classroom-room-picker select { width:100%; min-width:0; }
 .game-review .competition-sentence-review { min-width:0; margin:24px 0; }
 @media (max-width:600px) { .classroom-game-tabs button { flex:1 1 44%; justify-content:center; } }
+
+.mistake-question { margin:24px 0; padding:20px 0; border-bottom:1px solid var(--theme-border,#b4c899); }
+.mistake-question label { display:flex; align-items:center; gap:8px; }
+.mistake-table { width:100%; min-width:650px; border-collapse:collapse; text-align:left; }
+.mistake-table caption { padding:12px; text-align:left; font-weight:700; }
+.mistake-table th,.mistake-table td { padding:12px; border:1px solid #dce5d0; vertical-align:top; overflow-wrap:anywhere; white-space:pre-wrap; }
+.mistake-table thead { background:#edf4df; }
+.competition-mistake-review input[type=text],.competition-mistake-review .classroom-room-picker input { width:100%; box-sizing:border-box; min-width:0; }
