@@ -27,6 +27,7 @@ const backendCards = [
   { id: "tts", title: "語音與朗讀", note: "試聽與設定預設音色", art: "mic", className: "card-voice", keywords: "語音 朗讀 TTS 音色" },
 ];
 const extraTools = [
+  ["readingCorrections", "課文生字讀音修正"],
   ["strokeSpeech", "筆畫語音核對與發布"], ["curriculum", "三家出版社生字資料庫"], ["strokeDatabase", "筆順資料庫"],
   ["structure-assignment", "結構作業"], ["writingAssignments", "書寫作業"], ["sentences", "造句競賽"],
   ["lesson", "課文結構編輯"], ["overview", "生字結構總覽"], ["review", "結構核對"],

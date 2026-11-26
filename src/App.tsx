@@ -124,11 +124,13 @@ const WritingAssignmentAdmin = lazy(() => import('./WritingAssignmentAdmin'));
 const SentenceCompetitionAdmin = lazy(() => import('./SentenceCompetitionAdmin'));
 const CompetitionAdmin = lazy(() => import('./CompetitionAdmin'));
 const VersionRecordAdmin = lazy(() => import("./VersionRecordAdmin"));
-type BackendSection = "strokeSpeech" | "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
+const ReadingCorrectionAdmin = lazy(() => import("./ReadingCorrectionAdmin"));
+type BackendSection = "readingCorrections" | "strokeSpeech" | "library" | "structure-assignment" | "tts" | "api" | "users" | "structure" | "lesson" | "overview" | "review" | "handwriting" | "strokeDatabase" | "curriculum" | "gameReview" | "writingAssignments" | "themes" | "quiz" | "sentences" | "competition" | "versions" | "security";
 const StrokeSpeechAdmin = lazy(() => import('./StrokeSpeechAdmin'));
 const SecurityLog = lazy(() => import("./SecurityLog"));
 const structureSections = ["structure", "lesson", "overview", "review"] as const;
 const backendTitles: Record<BackendSection, string> = {
+  readingCorrections: "課文生字讀音修正",
   library: "我的學習本（暫未對學生發布）",
   "structure-assignment": "生字結構遊戲指派",
   sentences: "一字多詞造句競賽管理",
@@ -2177,6 +2179,7 @@ function App({ gamesOpen = false }: { gamesOpen?: boolean }) {
                   {backendSection === "api" && <BackendApi />}
                   {backendSection === 'quiz' && <QuizTeacher/>}
                   {backendSection === 'gameReview' && <GameAssignmentRecords />}
+                  {backendSection === 'readingCorrections' && <ReadingCorrectionAdmin />}
                   {backendSection === 'writingAssignments' && <WritingAssignmentAdmin/>}
                   {backendSection === "users" && <UserManagement />}
                   {backendSection === "sentences" && <SentenceCompetitionAdmin />}

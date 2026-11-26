@@ -1,0 +1,6 @@
+.reading-correction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; margin-top: 20px; }
+.reading-correction-grid article { padding: 18px; border: 1px solid var(--border, #b5c99c); border-radius: 16px; background: var(--surface, #fff); }
+.reading-correction-grid h3 { font-size: 36px; margin: 0 0 12px; }
+.reading-correction-grid label { display: grid; gap: 8px; }
+.reading-correction-grid input { width: 100%; min-width: 0; box-sizing: border-box; }
+.reading-correction-grid button { margin: 4px; }

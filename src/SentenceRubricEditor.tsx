@@ -1,4 +1,5 @@
 import { Lock, LockOpen } from 'lucide-react';
+import { useState } from 'react';
 import { RUBRIC_ITEMS, DEFAULT_RUBRIC, parseLessonWords, type RubricItem } from '../server/sentence-rubric.mjs';
 
 const STORAGE_KEY = 'competition-sentence-rubric';
@@ -14,20 +15,29 @@ export function defaultRubricDraft(): RubricDraft {
 }
 /** 讀回上次鎖定的評分設定（本機瀏覽器）；格式不符或總分不對時用預設值。 */
 export function loadSavedRubricDraft(): RubricDraft {
+  return loadSavedRubricSettings().draft;
+}
+export function loadSavedRubricSettings(): { draft: RubricDraft; lessonWords: string } {
   const base = defaultRubricDraft();
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') as Record<string, { enabled?: unknown; points?: unknown; rule?: unknown }> | null;
-    if (!saved) return base;
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (!raw || typeof raw !== 'object') return { draft: base, lessonWords: '' };
+    // 相容舊版只儲存配分的格式；新版將語詞表與最後鎖定設定一起保存。
+    const saved = raw.version === 2 ? raw.draft : raw;
+    const lessonWords = raw.version === 2 && typeof raw.lessonWords === 'string' ? raw.lessonWords : '';
+    if (!saved || typeof saved !== 'object') return { draft: base, lessonWords: '' };
     for (const item of RUBRIC_ITEMS) {
       const value = saved[item.key];
       if (!value) continue;
       base[item.key] = { enabled: value.enabled === true, points: Number.isInteger(value.points) ? value.points as number : item.points, ...(item.key === 'custom' ? { rule: typeof value.rule === 'string' ? value.rule.slice(0, 80) : '' } : {}) };
     }
-    return rubricProblem(base, '已儲存') ? defaultRubricDraft() : base;
-  } catch { return base; }
+    return rubricProblem(base, lessonWords) ? { draft: defaultRubricDraft(), lessonWords: '' } : { draft: base, lessonWords };
+  } catch { return { draft: defaultRubricDraft(), lessonWords: '' }; }
 }
-function saveRubricDraft(draft: RubricDraft) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(draft)); } catch { /* 無法儲存時只影響下次預設值 */ }
+export function saveRubricSettings(draft: RubricDraft, lessonWords: string) {
+  const problem = rubricProblem(draft, lessonWords);
+  if (problem) throw Error(problem);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 2, draft, lessonWords }));
 }
 export function rubricFromDraft(draft: RubricDraft): RubricItem[] {
   return RUBRIC_ITEMS.filter(item => draft[item.key]?.enabled).map(item => ({
@@ -39,6 +49,7 @@ export function rubricFromDraft(draft: RubricDraft): RubricItem[] {
 export function rubricProblem(draft: RubricDraft, lessonWordsText = ''): string {
   const items = rubricFromDraft(draft);
   if (!items.length) return '請至少勾選一個評分項目。';
+  if (items.some(item => !Number.isInteger(item.points) || item.points < 1 || item.points > 100)) return '各項配分須為 1–100 的整數。';
   const total = items.reduce((sum, item) => sum + item.points, 0);
   if (total !== 100) return `評分項目總分須為 100 分，目前是 ${total} 分。`;
   if (draft.custom.enabled && ((draft.custom.rule ?? '').trim().length < 2 || (draft.custom.rule ?? '').trim().length > 80)) return '老師自訂規則請填 2–80 字。';
@@ -54,6 +65,7 @@ const GROUPS: [string, string[]][] = [
 
 /** 內建鎖定：預設鎖住避免誤改；解鎖後才能調整，鎖定時記住這組設定供下次開課使用。 */
 export default function SentenceRubricEditor({ draft, onChange, disabled, locked, onLockedChange, lessonWords, onLessonWordsChange, suggestedWords }: { draft: RubricDraft; onChange: (draft: RubricDraft) => void; disabled?: boolean; locked: boolean; onLockedChange: (locked: boolean) => void; lessonWords: string; onLessonWordsChange: (text: string) => void; suggestedWords: string[] }) {
+  const [saveError, setSaveError] = useState('');
   const total = rubricFromDraft(draft).reduce((sum, item) => sum + item.points, 0);
   const problem = rubricProblem(draft, lessonWords);
   const wordCount = parseLessonWords(lessonWords).length;
@@ -63,9 +75,10 @@ export default function SentenceRubricEditor({ draft, onChange, disabled, locked
       <h3>造句評分項目（總分須為 100）</h3>
       {locked
         ? <button type="button" className="secondary" disabled={disabled} onClick={() => onLockedChange(false)}><LockOpen size={16} aria-hidden />解鎖修改</button>
-        : <button type="button" className="primary" disabled={disabled || !!problem} title={problem || '鎖定並記住這組設定'} onClick={() => { saveRubricDraft(draft); onLockedChange(true); }}><Lock size={16} aria-hidden />鎖定</button>}
+        : <button type="button" className="primary" disabled={disabled || !!problem} title={problem || '鎖定並記住這組設定'} onClick={() => { try { saveRubricSettings(draft, lessonWords); setSaveError(''); onLockedChange(true); } catch { setSaveError('無法記住評分設定，請確認瀏覽器允許儲存資料後再鎖定。'); } }}><Lock size={16} aria-hidden />鎖定並記住</button>}
     </header>
-    <p className="sentence-rubric-lock-note">{locked ? '已鎖定，開課時使用這組評分項目。要調整請按「解鎖修改」。' : '修改中：調整完成並確認總分 100 後，請按「鎖定」，才能建立開課大廳。'}</p>
+    {saveError && <p role="alert">{saveError}</p>}
+    <p className="sentence-rubric-lock-note">{locked ? '已鎖定，開課時使用這組評分項目。同一瀏覽器會記住上次鎖定的配分、自訂規則及語詞表。要調整請按「解鎖修改」。' : '修改中：尚未鎖定的變更不會覆寫上次設定。調整完成並確認總分 100 後，請按「鎖定並記住」，才能建立開課大廳。'}</p>
     <fieldset disabled={disabled || locked}>
     {GROUPS.map(([title, keys]) => <div key={title} className="sentence-rubric-group">
       {/* 每組顯示已勾選項目的配分小計 */}

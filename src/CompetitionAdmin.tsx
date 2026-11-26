@@ -1,3 +1,4 @@
+import { correctedLessons } from './readingCorrections';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import {useEffect,useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {Maximize,Minimize,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
@@ -19,7 +20,7 @@ import { useCompetitionEndSound } from './competitionEndSound';
 import { structureQuestion, teachingStructure, type StructureQuestion, type Stroke } from './structureSubtype';
 import { loadStructureOverrides, type StructureOverride } from './structureOverrides';
 import StructureOverrideEditor from './StructureOverrideEditor';
-import SentenceRubricEditor, { loadSavedRubricDraft, rubricFromDraft, rubricProblem } from './SentenceRubricEditor';
+import SentenceRubricEditor, { loadSavedRubricSettings, rubricFromDraft, rubricProblem } from './SentenceRubricEditor';
 import SentenceRubricList from './SentenceRubricList';
 import { DEFAULT_RUBRIC, RUBRIC_ITEMS, parseLessonWords } from '../server/sentence-rubric.mjs';
 import { useUserRole } from './structureReview';
@@ -65,7 +66,8 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  useCompetitionEndSound(rooms);
  const [lessons,setLessons]=useState<SentenceLesson[]>([]),[structureIds,setStructureIds]=useState<Record<string,string>>({}),[lessonIds,setLessonIds]=useState<string[]>(pilot?[lessonSeven.id]:[]),[grade,setGrade]=useState(5),[term,setTerm]=useState('上'),[gameType,setGameType]=useState<'sentence-practice'|'quiz'|'structure'|'writing'>('sentence-practice'),[duration,setDuration]=useState(10),[maxParticipants,setMaxParticipants]=useState(30),[testRoom,setTestRoom]=useState(pilot),[now,setNow]=useState(Date.now());
  // 一字多詞造句的評分項目（開課時送出），以及開始課程前的確認視窗。
- const [rubricDraft,setRubricDraft]=useState(loadSavedRubricDraft),[rubricLocked,setRubricLocked]=useState(true),[lessonWordsText,setLessonWordsText]=useState(''),[startConfirm,setStartConfirm]=useState<CompetitionRoom|null>(null);
+ const [savedRubric]=useState(loadSavedRubricSettings);
+ const [rubricDraft,setRubricDraft]=useState(savedRubric.draft),[rubricLocked,setRubricLocked]=useState(true),[lessonWordsText,setLessonWordsText]=useState(savedRubric.lessonWords),[startConfirm,setStartConfirm]=useState<CompetitionRoom|null>(null);
  const startDialog=useRef<HTMLDialogElement>(null);
  useEffect(()=>{if(startConfirm)startDialog.current?.showModal();else startDialog.current?.close();},[startConfirm]);
  function startRoom(room:CompetitionRoom){void primeCompetitionEndSound();void run(async()=>{await competitionRequest(`/rooms/${room.id}/start`,{});await load();});}
@@ -82,7 +84,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  async function run(fn:()=>Promise<void>){setBusy(true);setMessage('');try{await fn();}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
  async function roomState(room:CompetitionRoom){const path=room.status==='lobby'?'lobby':'leaderboard';const value=await competitionRequest<{items:LeaderboardItem[]}>(`/rooms/${room.id}/${path}`);setPeople(v=>({...v,[room.id]:value.items}));}
  async function load(){const [roomData,classData]=await Promise.all([competitionRequest<{items:CompetitionRoom[]}>('/rooms'),quizRequest<{items:QuizClass[]}>('/classes')]);for(const room of roomData.items)if(room.status!=='closed')observedOpenRooms.current.add(room.id);setRooms(roomData.items.map(room => room.title === "一字多詞 Kahoot 練習" ? { ...room, title: gameTitles[room.gameType] } : room));setClasses(classData.items);setClassId(current=>current||classData.items[0]?.id||'');await Promise.all(roomData.items.slice(0,8).map(room=>roomState(room).catch(()=>undefined)));}
- useEffect(()=>{const controller=new AbortController();Promise.all([fetch(`${import.meta.env.BASE_URL}sentence-bank.json`,{signal:controller.signal}),fetch(`${import.meta.env.BASE_URL}structure-review/ids-catalog.json`,{signal:controller.signal})]).then(async([lessonsResponse,structureResponse])=>{if(!lessonsResponse.ok||!structureResponse.ok)throw Error('課文生字庫載入失敗');const [lessonData,structureData]=await Promise.all([lessonsResponse.json(),structureResponse.json()]);setLessons(lessonData.lessons);setStructureIds(structureData);}).catch(e=>{if(!controller.signal.aborted)setMessage(e.message)});void run(load);return()=>controller.abort();},[]);
+ useEffect(()=>{const controller=new AbortController();Promise.all([fetch(`${import.meta.env.BASE_URL}sentence-bank.json`,{signal:controller.signal}),fetch(`${import.meta.env.BASE_URL}structure-review/ids-catalog.json`,{signal:controller.signal})]).then(async([lessonsResponse,structureResponse])=>{if(!lessonsResponse.ok||!structureResponse.ok)throw Error('課文生字庫載入失敗');const [lessonData,structureData]=await Promise.all([lessonsResponse.json(),structureResponse.json()]);setLessons(await correctedLessons(lessonData.lessons));setStructureIds(structureData);}).catch(e=>{if(!controller.signal.aborted)setMessage(e.message)});void run(load);return()=>controller.abort();},[]);
  useEffect(()=>{const timer=window.setInterval(()=>{setNow(Date.now());void load().catch(()=>undefined);},3000);return()=>window.clearInterval(timer);},[]);
  const anonymous=classId==='__anonymous__';
  const selectedClass=classes.find(c=>c.id===classId),students=selectedClass?.students?.filter(s=>s.active&&s.email)||[],roster=students.map(s=>s.email),candidates=useMemo(()=>[...new Map(lessons.filter(l=>lessonIds.includes(l.id)).flatMap(l=>l.characters).map(c=>[c.character,c])).values()],[lessons,lessonIds]);
