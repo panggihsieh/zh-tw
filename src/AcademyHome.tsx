@@ -19,6 +19,7 @@ export function StudentAcademyHome({ onLearn, onPractice, tools }: { onLearn: ()
   </section>;
 }
 const backendCards = [
+  { id: "readingCorrections", title: "課文讀音／圈詞修正", note: "修正多音字・設定學生語詞提示", art: "book", className: "card-reading-corrections", keywords: "課文 生字 注音 讀音 多音字 圈詞 語詞 修改 修正 提示" },
   { id: "quiz", title: "資料庫管理", note: "生字・課本・出版社", art: "book", className: "card-database", keywords: "資料庫 生字 題庫 quiz" },
   { id: "competition", title: "Kahoot 競賽開課", note: "建立課程・課堂派送", art: "trophy", className: "card-competition", keywords: "Kahoot 遊戲 競賽 開課" },
   { id: "gameReview", title: "課堂紀錄", note: "回顧學習與課堂成果", art: "clipboard", className: "card-records", keywords: "課堂 成績 紀錄" },
@@ -27,7 +28,6 @@ const backendCards = [
   { id: "tts", title: "語音與朗讀", note: "試聽與設定預設音色", art: "mic", className: "card-voice", keywords: "語音 朗讀 TTS 音色" },
 ];
 const extraTools = [
-  ["readingCorrections", "課文生字讀音修正"],
   ["strokeSpeech", "筆畫語音核對與發布"], ["curriculum", "三家出版社生字資料庫"], ["strokeDatabase", "筆順資料庫"],
   ["structure-assignment", "結構作業"], ["writingAssignments", "書寫作業"], ["sentences", "造句競賽"],
   ["lesson", "課文結構編輯"], ["overview", "生字結構總覽"], ["review", "結構核對"],
