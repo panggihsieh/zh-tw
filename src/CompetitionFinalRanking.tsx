@@ -97,7 +97,7 @@ export default function CompetitionFinalRanking({room,items,request=competitionR
    <ol className="competition-leaderboard">{items.map(item=><li key={item.uid} className={item.mine?'is-me':''}><b>{item.rank}</b><span>{item.name}<small>{item.correct} 題達標 · 已答 {item.answered}/{room.questionCount}</small></span><strong>{item.points} 分</strong></li>)}</ol>
    {!items.length&&<p>尚無排名紀錄。</p>}
   </div>
-  {allowExport&&!simulated&&room.status==='closed'&&room.gameType==='sentence-practice'&&<CompetitionSentenceReview roomId={room.id} request={request}/>}
+  {allowExport&&!simulated&&room.status==='closed'&&room.gameType==='sentence-practice'&&<details><summary>查看作答分析</summary><CompetitionSentenceReview roomId={room.id} request={request}/></details>}
   <div className="competition-actions">
    {soundControls&&<><label><input type="checkbox" checked={enabled} onChange={event=>{setEnabled(event.target.checked);setEndSoundEnabled(event.target.checked);}}/> 結束鼓掌音效</label>
    <button type="button" className="secondary" disabled={!enabled} onClick={()=>void playCompetitionEndSound().catch(()=>setMessage('瀏覽器未允許音效，請再次按下試聽。'))}>試聽結束音效</button></>}

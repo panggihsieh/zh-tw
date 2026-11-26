@@ -1,3 +1,4 @@
+import CompetitionSentenceReview from './CompetitionSentenceReview';
 import { useEffect, useState } from "react";
 import GameReview from "./GameReview";
 import { competitionRequest, type CompetitionRoom, type LeaderboardItem } from "./competitionApi";
@@ -90,17 +91,10 @@ function CompetitionRecords() {
         </select>
       </label>}
       {room && <p>課堂日期 {classroomDate(room)} · 測驗名稱 {room.title}</p>}
-      {status && <p role="status">{status}</p>}
-      {room && items.length > 0 && <>
-        <button type="button" className="secondary" onClick={() => exportRanking(room, items)}>匯出成績 CSV</button>
-        <ol>
-          {items.map(item => <li key={item.uid}>第 {item.rank} 名 · {item.name} · {item.points} 分 · 答對 {item.correct} 題 · 已答 {item.answered}/{room.questionCount} 題</li>)}
-        </ol>
-      </>}
       {room && <section aria-label="排名照片">
-        <h3>排名照片</h3>
+        <h3>排名成果・照片集中觀看</h3>
         {photoStatus && <p role="status">{photoStatus}</p>}
-        {photos.map(photo => <details key={photo.id}>
+        {photos.map(photo => <details key={photo.id} open={photo === photos[0]}>
           <summary>{new Date(photo.createdAt).toLocaleString("zh-TW", { timeZone: "Asia/Taipei" })} 排名照片</summary>
           <div className="competition-ranking-photo">
             <img src={photo.image} alt={photo.title + "排名照片"} loading="lazy" />
@@ -108,6 +102,14 @@ function CompetitionRecords() {
           </div>
         </details>)}
       </section>}
+      {status && <p role="status">{status}</p>}
+      {room && items.length > 0 && <>
+        <button type="button" className="secondary" onClick={() => exportRanking(room, items)}>匯出成績 CSV</button>
+        <ol>
+          {items.map(item => <li key={item.uid}>第 {item.rank} 名 · {item.name} · {item.points} 分 · 答對 {item.correct} 題 · 已答 {item.answered}/{room.questionCount} 題</li>)}
+        </ol>
+      </>}
+      {room?.gameType === 'sentence-practice' && <details key={room.id}><summary>查看作答分析</summary><CompetitionSentenceReview roomId={room.id}/></details>}
     </section>
   );
 }
