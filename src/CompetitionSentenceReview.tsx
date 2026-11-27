@@ -1,3 +1,4 @@
+import SentenceItemFeedback from './SentenceItemFeedback';
 import { useEffect, useState } from 'react';
 import { competitionRequest } from './competitionApi';
 import { scorePercent, suggestionTextParts, type SentenceStatisticQuestion } from './competitionSentenceStatistics';
@@ -22,7 +23,7 @@ export function SentenceStatisticsTable({ question }: { question: SentenceStatis
         const state = { graded: '已評分', pending: 'AI 評分待確認', unanswered: '未作答', 'missing-history': '舊紀錄未保存回答' }[row.status];
         return <tr key={row.id}><th scope="row">{row.seat ? `${row.seat} 號 ` : ''}{row.name}<small>{state}</small></th>
           <td>{answered ? <>{row.word && <p><strong>語詞：{row.word}</strong></p>}<p className="sentence-stat-answer"><WordText text={row.sentence || ''} word={row.word || question.character}/></p>{!row.word && <small>未確認或未保存完整語詞，僅標示指定字。</small>}</> : '—'}</td>
-          <td>{answered ? <ul className="sentence-stat-items">{row.items?.map(item => <li key={item.key}><strong>{item.label}</strong><small>配分占 {scorePercent(item.points, total)}</small><span>{item.score ?? '—'}／{item.points} 分</span><small>得分率 {item.score == null ? '—' : scorePercent(item.score, item.points)}</small>{item.evidence && <small>依據：{item.evidence}</small>}</li>)}</ul> : '—'}</td>
+          <td>{answered ? <ul className="sentence-stat-items">{row.items?.map(item => <li key={item.key}><strong>{item.label}</strong><small>配分占 {scorePercent(item.points, total)}</small><span>{item.score ?? '—'}／{item.points} 分</span><small>得分率 {item.score == null ? '—' : scorePercent(item.score, item.points)}</small>{item.evidence && <small>依據：{item.evidence}</small>}<SentenceItemFeedback feedback={row.itemFeedback?.[item.key]} fullScore={item.score===item.points}/></li>)}</ul> : '—'}</td>
           <td>{answered ? <><strong>造句品質：{row.status === 'pending' ? '待確認' : `${row.qualityScore ?? '—'}／100`}</strong><p>競賽得分：{row.points ?? '—'}{row.competitionMaximum != null && `／${row.competitionMaximum}`}</p>{row.timedOut && <small>逾時：競賽得分為 0，品質分保留。</small>}{row.targetOk === false && <small>指定字詞使用未通過，整題品質分為 0。</small>}</> : '—'}</td>
           <td>{answered ? <>{row.feedback || '未保存評語'}{row.issueReason && <p className="sentence-stat-red">{row.issueReason}</p>}</> : '—'}</td>
           <td>{answered && row.polished ? <>{row.suggestedWord && <p>建議語詞：<WordText text={row.suggestedWord} word={row.suggestedWord !== row.word ? row.suggestedWord : ''}/></p>}<p className="sentence-stat-answer">{suggestionTextParts(row.sentence || '', row.polished).map((part, index) => <span key={index} className={part.added ? 'sentence-stat-red' : undefined}>{part.text}</span>)}</p>{row.polished === row.sentence && <small>AI 建議保留原句。</small>}</> : answered ? '此筆紀錄未保存 AI 建議句，未重新呼叫 AI。' : '—'}</td>

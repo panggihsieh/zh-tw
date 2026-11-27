@@ -1,3 +1,4 @@
+import SentenceItemFeedback from './SentenceItemFeedback';
 import CompetitionDriveSave from "./CompetitionDriveSave";
 import { compareSentences } from "./SentencePractice";
 import type { SentencePracticeGrade } from "./sentenceApi";
@@ -31,13 +32,13 @@ type SentenceResult = SentencePracticeGrade & { original: string; polished?: str
 function SentenceScoreDetails({ grade }: { grade: SentenceResult }) {
   return <>
       <p>{grade.total === null ? "待確認" : `${grade.total}／100 分`}</p>
-      {grade.total !== null && <ul className="competition-score-charts">
+      {grade.total !== null && <ul className={`competition-score-charts${grade.itemFeedback?' has-item-feedback':''}`}>
         {/* 老師自選評分項目時依該場項目顯示；舊課堂沿用固定五項。 */}
         {(grade.rubric ? grade.rubric.map(item => [item.key, item.evidence ? `${item.label}（${item.evidence}）` : item.label, item.points, item.score] as const) : sentenceScoreCriteria.map(([key, label, maximum]) => [key, label, maximum, grade.scores[key]] as const)).map(([key, label, maximum, score]) => {
           const percent = Math.round(score / maximum * 100);
           return <li key={key}>
             <span className="competition-score-pie" aria-hidden="true" style={{ background: `conic-gradient(#147747 ${percent}%, #e4ebdc 0)` }} />
-            <strong>{label}</strong><span>{score}／{maximum} 分 · {percent}%</span>
+            <strong>{label}</strong><span>{score}／{maximum} 分 · {percent}%</span>{grade.itemFeedback&&<SentenceItemFeedback feedback={grade.itemFeedback[key]} fullScore={score===maximum}/>}
           </li>;
         })}
       </ul>}

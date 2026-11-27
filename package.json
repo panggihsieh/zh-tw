@@ -1,9 +1,9 @@
 {
   "name": "hanzi-animation-notebook",
-  "version": "2.0.57",
+  "version": "2.0.58",
   "description": "生字動畫收藏本：本機繁體中文學習工具",
   "scripts": {
-    "test:sentence-api": "node --test server/sentence-api.check.mjs",
+    "test:sentence-api": "node --test server/sentence-api.check.mjs server/sentence-item-feedback.check.mjs server/sentence-item-feedback-integration.check.mjs",
     "test:competition-api": "node --test server/competition-api.check.mjs server/sentence-rubric.check.mjs server/competition-sentence-review.check.mjs server/competition-mistakes.check.mjs",
     "test:publisher-sync": "node --test server/publisher-sync.check.mjs",
     "test:quiz-api": "node --test server/quiz-api.check.mjs server/quiz-generation.check.mjs server/quiz-lesson-bank.check.mjs server/quiz-sources.check.mjs server/reading-context.check.mjs server/office-passage.check.mjs",

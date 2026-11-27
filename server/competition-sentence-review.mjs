@@ -30,6 +30,7 @@ export function sentenceReview(room, participants) {
     polished,suggestedWord:quotedWord(grade.suggestedWord,polished),
     qualityScore:Number.isFinite(grade.total)?grade.total:null,points:answer.points,competitionMaximum:100*(room.sentenceScoreScale??10),timedOut:answer.timedOut===true,
     targetOk:grade.targetOk,feedback:grade.feedback||'',issueReason:grade.issueReason||'',
+    itemFeedback:grade.itemFeedback,
     items:grade.rubric?.map(({key,label,points,score,evidence})=>({key,label,points,score,evidence:evidence||''}))||[
      ['correctness','用詞正確',30],['completeness','句意完整',20],['fluency','語句通順',20],['detail','內容具體',20],['mechanics','文字標點',10],
     ].map(([key,label,points])=>({key,label,points,score:Number.isFinite(grade.scores?.[key])?grade.scores[key]:null,evidence:''})),

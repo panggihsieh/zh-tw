@@ -1,3 +1,5 @@
+import { validateItemFeedback } from './sentence-item-feedback.mjs';
+import { RUBRIC_ITEMS } from './sentence-rubric.mjs';
 import { randomUUID, randomInt, createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { writingIdentity } from './writing-api.mjs';
@@ -36,6 +38,7 @@ export function scoreSentence(sentence,question,analysis) {
 }
 export function gradePractice(sentence,character,analysis) {
   if(!analysis||typeof analysis.targetOk!=='boolean'||typeof analysis.meaningOk!=='boolean'||typeof analysis.uncertain!=='boolean'||!bounded(analysis.feedback,1200))fail('AI 等第格式不符，請稍後再試。');
+  const itemFeedback=validateItemFeedback(RUBRIC_ITEMS.slice(0,5),analysis.itemFeedback,sentence);
   const scores={};
   for(const [key,max] of Object.entries({correctness:30,completeness:20,fluency:20,detail:20,mechanics:10})) {
     const score=analysis[key];
@@ -55,7 +58,7 @@ export function gradePractice(sentence,character,analysis) {
   const fullScoreExample = fullScore === sentence || fullScore === polished ? '' : fullScore;
   const creativeExample = [sentence, polished, fullScoreExample].includes(creative) ? '' : creative;
   const fullScoreExpression = bounded(analysis.fullScoreExpression, 40) && fullScoreExample.includes(analysis.fullScoreExpression) ? analysis.fullScoreExpression.trim() : '';
-  return {targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback,
+  return {...(Object.keys(itemFeedback).length?{itemFeedback,itemFeedbackVersion:1}:{}),targetOk,meaningOk:analysis.meaningOk,uncertain:analysis.uncertain,scores,total,level,highlight,feedback:analysis.feedback,
     issue, issueReason: issue && bounded(analysis.issueReason, 300) ? analysis.issueReason : '', polished, fullScoreExample, fullScoreExpression, creativeExample,
     targetWord:typeof analysis.targetWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.targetWord)&&analysis.targetWord.includes(character)&&sentence.includes(analysis.targetWord)?analysis.targetWord:'',
     suggestedWord:typeof analysis.suggestedWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.suggestedWord)&&analysis.suggestedWord.includes(character)&&polished.includes(analysis.suggestedWord)?analysis.suggestedWord:''};

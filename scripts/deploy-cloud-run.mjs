@@ -134,6 +134,7 @@ for (const file of [
   "competition-writing.mjs",
   "stroke-judge.mjs",
   "sentence-rubric.mjs",
+  "sentence-item-feedback.mjs",
   "sentence-bank.json",
   "publisher-sync.mjs",
 ])

@@ -1,0 +1,12 @@
+
+.sentence-item-feedback { grid-column:1/-1; margin-top:6px; font-size:.94em; line-height:1.65; }
+.sentence-item-feedback p { margin:4px 0; }
+.sentence-stat-items .sentence-item-feedback strong { display:inline; }
+.sentence-item-feedback-missing { display:block; grid-column:1/-1; margin-top:6px; color:#65746b; }
+
+.competition-score-charts.has-item-feedback { grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); }
+.competition-score-charts .sentence-item-feedback { text-align:left; }
+
+.practice-score-grid.has-item-feedback { grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); }
+.practice-score-grid .sentence-item-feedback { text-align:left; }
+.practice-score-grid .sentence-item-feedback strong { font-size:inherit; }

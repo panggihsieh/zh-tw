@@ -1,3 +1,4 @@
+import SentenceItemFeedback from './SentenceItemFeedback';
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { Check, Mic, RotateCcw, Sparkles, Square } from "lucide-react";
 import {
@@ -402,11 +403,12 @@ export default function SentencePractice({
                   </span>;
                 })()}
               </p>
-              <div className="practice-score-grid">
+              <div className={`practice-score-grid${grade.itemFeedback?' has-item-feedback':''}`}>
                 {Object.entries(scoreLabels).map(([key, label]) => (
                   <div key={key}>
                     <span>{label}</span>
                     <strong>{grade.scores[key as keyof typeof grade.scores]}／{key === "correctness" ? 30 : key === "mechanics" ? 10 : 20}</strong>
+                    {grade.itemFeedback&&<SentenceItemFeedback feedback={grade.itemFeedback[key]} fullScore={grade.scores[key as keyof typeof grade.scores]===(key==='correctness'?30:key==='mechanics'?10:20)}/>}
                   </div>
                 ))}
               </div>

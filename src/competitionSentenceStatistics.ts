@@ -1,6 +1,8 @@
+import type {SentenceItemFeedback} from './sentenceApi';
 export interface SentenceStatisticItem { key: string; label: string; points: number; score: number | null; evidence: string }
 export interface SentenceStatisticRow {
   id: string; name: string; seat: number | null; status: 'graded' | 'pending' | 'unanswered' | 'missing-history';
+  itemFeedback?:Record<string,SentenceItemFeedback>;
   sentence?: string; word?: string; polished?: string; suggestedWord?: string; qualityScore?: number | null;
   points?: number; competitionMaximum?: number; timedOut?: boolean; targetOk?: boolean; feedback?: string; issueReason?: string; items?: SentenceStatisticItem[];
 }

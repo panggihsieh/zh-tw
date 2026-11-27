@@ -21,9 +21,11 @@ export function competitionMistakes(room, participants) {
     sentenceDetails={qualityScore:grade.total,competitionMaximum:100*(room.sentenceScoreScale??10),timedOut:history?.timedOut===true||sentence.timedOut===true,targetOk:grade.targetOk,meaningOk:grade.meaningOk,
      items:rubric.map(item=>{
       const savedScore=snapshot?item.score:grade.scores?.[item.key];
+      const personal=grade.itemFeedback?.[item.key];
       const definition=RUBRIC_ITEMS.find(base=>base.key===item.key);
       const roomItem=room.rubric?.find(base=>base.key===item.key);
       return {key:item.key,label:item.label||definition?.label||item.key,points:Number.isFinite(item.points)?item.points:null,score:Number.isFinite(savedScore)?savedScore:null,
+       deductionReason:typeof personal?.reason==='string'?personal.reason:'',suggestion:typeof personal?.suggestion==='string'?personal.suggestion:'',feedbackQuote:typeof personal?.quote==='string'?personal.quote:'',
        evidence:typeof item.evidence==='string'?item.evidence:'',criterion:item.rule||roomItem?.rule||definition?.hint||''};
      })};
     correct=grade.targetOk&&grade.meaningOk&&grade.total>=50;

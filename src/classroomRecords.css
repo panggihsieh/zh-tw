@@ -22,3 +22,8 @@
 .mistake-score-items small { display:block; margin-top:4px; line-height:1.6; }
 .mistake-table td>p { margin:0 0 8px; }
 .mistake-table td>small { display:block; line-height:1.6; }
+
+.mistake-score-items .sentence-item-feedback strong { display:inline; }
+.mistake-score-items details { margin-top:6px; font-size:.9em; }
+
+@media(max-width:600px) { .mistake-table.has-sentence-scores .mistake-score-items { width:calc(100vw - 80px); min-width:260px; } }

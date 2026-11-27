@@ -1,9 +1,10 @@
+import SentenceItemFeedback from './SentenceItemFeedback';
 import { useEffect, useState } from 'react';
 import { competitionRequest, type CompetitionQuestion, type CompetitionRoom } from './competitionApi';
 import './classroomRecords.css';
 import './competitionSentenceStatistics.css';
 
-export interface MistakeScoreItem { key:string; label:string; points:number|null; score:number|null; evidence:string; criterion:string }
+export interface MistakeScoreItem { deductionReason?:string; suggestion?:string; feedbackQuote?:string; key:string; label:string; points:number|null; score:number|null; evidence:string; criterion:string }
 interface SentenceDetails { qualityScore:number;competitionMaximum:number;timedOut:boolean;targetOk:boolean;meaningOk:boolean;items:MistakeScoreItem[] }
 interface MistakeAnswer { sentenceDetails?:SentenceDetails; uid:string; name:string; seat:number|null; response?:string|number; points:number|null; reason:string; feedback:string }
 interface MistakeQuestion { questionIndex:number; question:CompetitionQuestion; wrongAnswers:MistakeAnswer[] }
@@ -16,9 +17,10 @@ export function MistakeScoreItems({items}:{items?:MistakeScoreItem[]}){
  if(!items?.length)return <p>此筆舊紀錄未保存評分明細。</p>;
  return <><ul className="mistake-score-items" aria-label="當次各項評分">{items.map(item=><li key={item.key}>
   <strong>{item.label}<span>{item.score??'未保存'}／{item.points??'未保存'}</span></strong>
-  {item.evidence&&<small>依據：{item.evidence}</small>}
-  {item.criterion&&<small>評分標準：{item.criterion}</small>}
- </li>)}</ul>{items.some(item=>!item.evidence)&&<small>未保存個別評語的項目僅列評分標準。</small>}</>;
+  <SentenceItemFeedback fullScore={item.score!==null&&item.score===item.points} feedback={item.deductionReason&&item.suggestion?{reason:item.deductionReason,suggestion:item.suggestion,quote:item.feedbackQuote}:undefined}/>
+  {item.evidence&&<small>計分依據：{item.evidence}</small>}
+  {item.criterion&&<details><summary>查看評分標準</summary><small>{item.criterion}</small></details>}
+ </li>)}</ul></>;
 }
 export default function CompetitionMistakeReview({request=competitionRequest,onOpenCompetition}:{request?:typeof competitionRequest;onOpenCompetition:()=>void}){
  const [rooms,setRooms]=useState<CompetitionRoom[]>([]),[roomId,setRoomId]=useState('');
@@ -53,7 +55,7 @@ export default function CompetitionMistakeReview({request=competitionRequest,onO
   {loading&&<p role="status">正在整理錯題…</p>}{error&&<p role="alert">{error}</p>}
   {!!roomId&&<button type="button" className="secondary" disabled={loading||busy} onClick={()=>setReload(value=>value+1)}>重新載入錯題</button>}
   {current&&<>
-   {current.room.gameType==='sentence-practice'&&<p>評分明細沿用作答當次勾選的項目與配分，不重新呼叫 AI。評分標準是項目說明；個別依據僅呈現當次已保存的內容。</p>}
+   {current.room.gameType==='sentence-practice'&&<p>逐項列出作答當次保存的 AI 個別扣分原因與修改建議，供老師覆核。舊紀錄缺少的回饋會明確標示，不自動重新評分。</p>}
    <p>{current.questions.length} 道需複習題目 · {current.summary.wrongAnswers} 筆錯答／逾時紀錄</p>
    <p>未作答 {current.summary.unanswered} 題次 · 舊紀錄缺漏 {current.summary.missingHistory} 題次 · 評分待確認 {current.summary.pending} 題次。這些紀錄不當成錯題。</p>
    {!current.questions.length&&<p role="status">這堂課目前沒有可確認的錯題。</p>}

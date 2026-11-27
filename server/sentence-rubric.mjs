@@ -1,3 +1,4 @@
+import { itemFeedbackInstruction, validateItemFeedback } from './sentence-item-feedback.mjs';
 // 一字多詞 AI 造句：老師在開課時自選評分項目與配分（伺服器與網頁共用）。
 // 人事時地物、成語須由 AI 逐字引用原句才給分；「用到課文語詞」由程式比對老師提供的語詞表，不靠 AI。
 
@@ -78,9 +79,11 @@ export function rubricInstruction(rubric) {
     scores: Object.fromEntries(scale.map(item => [item.key, item.points])),
     ...(evidence.length ? { evidence: Object.fromEntries(evidence.map(item => [item.key, ''])) } : {}),
     ...(idiom ? { idiom: '', idiomAppropriate: false } : {}),
+    itemFeedback:Object.fromEntries(rubric.map(item=>[item.key,{reason:'針對原句的評分原因',suggestion:'學生可操作的修改建議',quote:''}])),
     highlight: '原句短語', feedback: '回饋', polished: '建議句', targetWord: '原句使用的語詞', suggestedWord: '建議句使用的語詞',
   };
   lines.push('targetWord逐字引用原句實際使用且包含指定字的2至8字語詞；suggestedWord逐字引用polished中包含指定字的2至8字語詞；無法確定則空字串。');
+  lines.push(itemFeedbackInstruction(rubric));
   return lines.join('') + '只回JSON ' + JSON.stringify(example) + '。';
 }
 
@@ -88,6 +91,7 @@ export function rubricInstruction(rubric) {
 /** lessonWords：老師提供的課文語詞陣列；舊版課堂傳入課文生字字串。 */
 export function gradeRubric(sentence, character, rubric, analysis, lessonWords = []) {
   if (!analysis || typeof analysis.targetOk !== 'boolean' || typeof analysis.meaningOk !== 'boolean' || typeof analysis.uncertain !== 'boolean' || typeof analysis.feedback !== 'string' || !analysis.feedback.trim() || analysis.feedback.length > 1200) fail('AI 等第格式不符，請稍後再試。');
+  const itemFeedback=validateItemFeedback(rubric,analysis.itemFeedback,sentence);
   const quoted = value => typeof value === 'string' && value.length <= 100 && value && sentence.includes(value) ? value : '';
   const items = rubric.map(item => {
     if (item.kind === 'scale') {
@@ -116,6 +120,7 @@ export function gradeRubric(sentence, character, rubric, analysis, lessonWords =
   return {
     targetOk, meaningOk: analysis.meaningOk, uncertain: analysis.uncertain,
     scores: Object.fromEntries(items.map(item => [item.key, item.score])),
+    ...(Object.keys(itemFeedback).length?{itemFeedback,itemFeedbackVersion:1}:{}),
     rubric: items, total, level, highlight: quoted(analysis.highlight), feedback: analysis.feedback.trim(), polished,
     targetWord: typeof analysis.targetWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.targetWord)&&analysis.targetWord.includes(character)&&sentence.includes(analysis.targetWord)?analysis.targetWord:'',
     suggestedWord: typeof analysis.suggestedWord==='string'&&/^[\p{Script=Han}]{2,8}$/u.test(analysis.suggestedWord)&&analysis.suggestedWord.includes(character)&&polished.includes(analysis.suggestedWord)?analysis.suggestedWord:'',

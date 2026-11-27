@@ -10,6 +10,7 @@ export function normalizeLessonWords(value: unknown): string[];
 export function parseLessonWords(text: string): string[];
 export function rubricInstruction(rubric: RubricItem[]): string;
 export function gradeRubric(sentence: string, character: string, rubric: RubricItem[], analysis: unknown, lessonWords?: string[] | string): {
+  itemFeedback?:Record<string,{reason:string;suggestion:string;quote:string}>; itemFeedbackVersion?:number;
   targetOk: boolean; meaningOk: boolean; uncertain: boolean; scores: Record<string, number>; rubric: RubricScore[];
   total: number | null; level: string; highlight: string; feedback: string; polished: string; targetWord: string; suggestedWord: string;
 };

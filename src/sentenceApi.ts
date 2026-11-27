@@ -1,3 +1,4 @@
+export interface SentenceItemFeedback {reason:string;suggestion:string;quote?:string}
 export interface SentenceQuestion { id:string;character:string;reading:string;definition?:string;source?:string }
 export interface SentenceLesson {id:string;title:string;grade:number;term:string;year:string;characters:{character:string;contextWord?:string;readings:{reading:string;definition:string;source:string}[]}[]}
 export interface SentenceEvent {id:string;title:string;minutes:number;lessons:string[];lessonIds:string[];roster:string[];questions:SentenceQuestion[];status:'published'|'running'|'closed';startsAt?:number;endsAt?:number}
@@ -5,6 +6,8 @@ export const elementLabels={person:'人',event:'事',time:'時',place:'地',obje
 export interface SentenceGrade {targetOk:boolean;readingOk:boolean;idiom:{text:string;score:number};elements:Record<keyof typeof elementLabels,{evidence:string;score:number}>;fluency:number;feedback:string;total:number|null;uncertain:boolean}
 export interface TeacherSentenceGrade {targetOk:boolean;idiom:number;elements:Record<keyof typeof elementLabels,number>;fluency:number;feedback:string;total?:number}
 export interface SentencePracticeGrade {
+  itemFeedback?:Record<string,SentenceItemFeedback>;
+  itemFeedbackVersion?:number;
   polished?: string;
   fullScoreExample?: string;
   fullScoreExpression?: string;
