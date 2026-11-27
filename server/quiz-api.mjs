@@ -1,3 +1,4 @@
+import {extractOfficePassage} from './office-passage.mjs';
 import {readingContext} from './reading-context.mjs';
 import {makeQuizSourceHandlers} from './quiz-sources.mjs';
 import {makeLessonBankHandlers} from './quiz-lesson-bank.mjs';
@@ -432,6 +433,7 @@ export function createQuizHandler({
       }
       if (!user.admin)
         return send(403, { error: "僅管理者可組卷與查看全班統計" });
+      if(path==='/extract-passage'&&req.method==='POST')return send(200,await extractOfficePassage(await body(req,15000000)));
       if(path==='/reading-context'&&req.method==='POST'){if(!analyzeReadingContext)throw Error('AI服務尚未啟用');return send(200,await readingContext(await body(req),{store,scan,analyze:analyzeReadingContext}));}
       if (path.startsWith('/quiz-sources')) {
         const result=await quizSources(path,req.method,req.method==='POST'?await body(req,8000000):null);

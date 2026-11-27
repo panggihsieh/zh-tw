@@ -297,3 +297,6 @@
 .competition-article-generator fieldset { min-width:0; margin:16px 0; }
 
 .competition-generated-preview{padding:20px;border:1px solid #d9dfda;border-radius:14px;background:#fff}.competition-generated-preview p{overflow-wrap:anywhere}.competition-generated-preview li{padding:6px 0;overflow-wrap:anywhere}
+.competition-current-model { display:flex; align-items:center; flex-wrap:wrap; gap:8px 16px; margin:12px 0; }
+.competition-current-model p { margin:0; overflow-wrap:anywhere; min-width:0; }
+.competition-current-model button { font-size:16px; padding:8px 14px; }

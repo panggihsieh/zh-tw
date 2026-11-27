@@ -10,7 +10,9 @@
     "firebase-admin": "^14.5.1",
     "google-auth-library": "11.3.2",
     "jose": "6.2.14",
+    "mammoth": "^1.13.0",
     "pdfjs-dist": "^6.5.438",
-    "word-extractor": "^1.0.4"
+    "word-extractor": "^1.0.4",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }

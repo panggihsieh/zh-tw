@@ -1,3 +1,4 @@
+import CurrentGenerationModel from "./CurrentGenerationModel";
 import CompetitionSimulationButton from './CompetitionSimulationButton';
 import { correctedLessons } from './readingCorrections';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
@@ -176,13 +177,14 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
    <details className="competition-article-generator">
     <summary>上傳文章・依難度自動出題</summary>
     <p>文章將送至已設定的 AI 模型。涉及數量、比例或時間的題目，選項應寫出明確數字與適用單位，請開課前核對。</p>
-    <label>上傳文章（TXT、MD、文字型 PDF）
-      <input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={event => {
+    <label>上傳文章（DOCX、DOC、XLSX、XLS、TXT、MD、文字型 PDF）
+      <input type="file" accept=".docx,.doc,.xlsx,.xls,.txt,.md,.pdf" disabled={busy} onChange={event => {
         const file = event.currentTarget.files?.[0];
         event.currentTarget.value = "";
         if (file) void run(async () => {setArticle(await readQuizPassage(file));setArticleSource(file.name);setArticleProgress('');});
       }} />
     </label>
+    <p>Office檔先送本站解析，不呼叫AI；試算表讀取可見工作表。最多10MB、12000字，請核對下方內容後再產生題目。</p>
     <label>文章內容<textarea rows={8} maxLength={12000} value={article} disabled={busy} onChange={event => {setArticle(event.target.value);setArticleSource('');setArticleProgress('');}} /></label>
     {articleSource&&<p>已讀取：{articleSource} · {article.length} 字</p>}
     <fieldset disabled={busy}><legend>設定各難度題數</legend><div className="competition-article-plan">
@@ -191,6 +193,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     </div></fieldset>
     <p>{articleProblem||`共 ${articleTotal} 題，預計 ${articleBatches(articleCounts).length} 批。每批最多 10 題；按下產生時才傳送文章，可能使用 AI API 額度。`}</p>
     <p className="competition-notice" role="note"><strong>AI 費用提醒：</strong>按下產生題目會將文章傳送至已設定的 AI 服務並使用 API 額度。產生失敗、部分完成後重試或重新產生，都可能再次計費；實際費用依服務商與模型計價，請先確認題數與可用額度。</p>
+    <CurrentGenerationModel />
     <button type="button" className="secondary" disabled={busy || !!articleProblem || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
       if (questions.some(question => question.prompt.trim()) && !window.confirm(`用新產生的 ${articleTotal} 題取代目前題目？`)) return;
       setArticleProgress('正在準備文章出題…');
