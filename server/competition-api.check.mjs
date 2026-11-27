@@ -273,3 +273,8 @@ test('獨立測試課堂不進入錯題紀錄，也不能建立正式錯題練�
  const {request}=await fixture(t);const {room}=await request('/rooms',{...definition(),testRoom:true});await request(`/rooms/${room.id}/close`,{});
  assert.deepEqual((await request('/mistake-rooms')).items,[]);assert.equal((await request(`/rooms/${room.id}/mistake-review`)).status,409);
 });
+
+test('文章競賽題目保留難度，拒絕不合法難度',()=>{
+ const definitionValue=definition();definitionValue.questions[0].difficulty='難';
+ assert.equal(validateRoomInput(definitionValue).questions[0].difficulty,'難');definitionValue.questions[0].difficulty='極難';assert.throws(()=>validateRoomInput(definitionValue));
+});

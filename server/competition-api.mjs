@@ -35,7 +35,8 @@ export function validateRoomInput(value){
    return {id:String(index+1),type:'sentence-practice',prompt:`先想一個含「${character}」的語詞，再造一個完整句子`,phrase,character,reading:String(q.reading||'').slice(0,40),seconds:q.seconds};
   }
   if(!text(q.prompt,500)||!Array.isArray(q.options)||q.options.length<2||q.options.length>(gameType==='structure'?8:6)||q.options.some(v=>!text(v,200))||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||!Number.isInteger(q.seconds)||q.seconds<5||q.seconds>300)fail(`第 ${index+1} 題格式不完整。`);
-  return {id:String(index+1),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
+  if(q.difficulty!==undefined&&!['易','中','難'].includes(q.difficulty))fail(`第 ${index+1} 題難度格式不符。`);
+  return {id:String(index+1),...(q.difficulty?{difficulty:q.difficulty}:{}),...(gameType==='structure'?{type:'structure',character:String(q.character||'').trim()}:{}),prompt:q.prompt.trim(),options:q.options.map(v=>v.trim()),answer:q.answer,seconds:q.seconds};
  });
  // 一字多詞 AI 造句：老師自選評分項目（未設定則沿用原本固定五項）。
  const rubric=gameType==='sentence-practice'&&value.rubric!==undefined?validateRubric(value.rubric):undefined;

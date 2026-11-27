@@ -4,8 +4,9 @@ import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import {useEffect,useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {Maximize,Minimize,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
-import {quizRequest, type QuizPaper} from './quizApi';
+import {quizRequest} from './quizApi';
 import { readQuizPassage } from './quizPassage';
+import {ARTICLE_DIFFICULTIES,articleBatches,articlePlanProblem,generateArticleQuestions,ArticleGenerationError,type ArticleCounts} from './competitionArticleQuestions';
 import type {QuizClass} from './ClassRoster';
 import {sentenceRequest,type SentenceLesson} from './sentenceApi';
 import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type CompetitionQuestion,type CompetitionRoom,type LeaderboardItem} from './competitionApi';
@@ -61,6 +62,12 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const [showContextWords,setShowContextWords]=useState(true);
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
  const [article, setArticle] = useState("");
+ const [articleSource,setArticleSource]=useState('');
+ const [articleCounts,setArticleCounts]=useState<ArticleCounts>({易:4,中:4,難:4});
+ const [articleProgress,setArticleProgress]=useState('');
+ const articleProblem=articlePlanProblem(articleCounts);
+ const articleTotal=Object.values(articleCounts).reduce((sum,value)=>sum+value,0);
+
  const [classes,setClasses]=useState<QuizClass[]>([]),[classId,setClassId]=useState(''),[title,setTitle]=useState(gameTitles["sentence-practice"]),[questions,setQuestions]=useState<CompetitionQuestion[]>(()=>pilot?lessonSeven.rows.filter(row=>["際","璃","磁"].includes(row.character)).map(row=>({type:"sentence-practice",prompt:"用「"+row.character+"」組詞，再造句",phrase:row.character,character:row.character,reading:row.reading,seconds:90})):[]),[rooms,setRooms]=useState<CompetitionRoom[]>([]),[people,setPeople]=useState<Record<string,LeaderboardItem[]>>({}),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const [soundEnabled,setSoundEnabled]=useState(endSoundEnabled);
  const [soundVolume,setSoundVolume]=useState(endSoundVolume);
@@ -145,7 +152,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     })}>依下方班級與時間開放個人 AI 造句</button>}
   <p className="competition-notice">依 Kahoot 開課流程，在同一畫面完成生字來源、課堂設定、公仔等候、倒數排行與結束結果。語音在學生裝置轉文字，只有確認送出時呼叫一次 AI；本場費用上限由題數與參與人數控制。</p>
   <div className="competition-section-heading"><div><span>STEP 1</span><h2>選擇班級與遊戲內容</h2></div></div>
-  <div className="competition-form-grid"><label>班級<select value={classId} disabled={busy} onChange={e=>{setClassId(e.target.value);if(e.target.value==='__anonymous__')setMaxParticipants(value=>Math.min(value,30));}}><option value="">請選擇班級或匿名參加</option><option value="__anonymous__">匿名參加（小鳥公仔）</option>{classes.map(c=><option key={c.id} value={c.id}>{c.name}（{c.students?.filter(s=>s.active&&s.email).length??c.roster.length} 人）</option>)}</select></label><label>遊戲<select value={gameType} onChange={e=>{const nextType=e.target.value as typeof gameType;setGameType(nextType);setTitle(gameTitles[nextType]);setSelectedCharacters(null);setQuestions(e.target.value==='quiz'?[emptyQuestion()]:[]);}}>{Object.entries(gameTitles).map(([type, label]) => <option key={type} value={type}>{label}</option>)}</select></label><label>競賽名稱<input maxLength={100} value={title} onChange={e=>setTitle(e.target.value)}/></label><div><strong>學生加入方式</strong><p>{anonymous?'免登入：開課代碼＋暱稱＋小鳥公仔':'免登入：開課代碼＋名冊姓名'}</p><small>不需要 Google 或 SchoolIAM 帳號；開始後鎖定加入，逾時停止作答。</small></div><label>課堂時間（分鐘）<input type="number" min={1} max={120} value={classroomMinutes} onChange={e=>{setDuration(Number(e.target.value));setManualDuration(true);}}/></label><label>最多參與人數<input type="number" min={1} max={anonymous?30:100} value={maxParticipants} onChange={e=>setMaxParticipants(Number(e.target.value))}/></label></div>
+  <div className="competition-form-grid"><label>班級<select value={classId} disabled={busy} onChange={e=>{setClassId(e.target.value);if(e.target.value==='__anonymous__')setMaxParticipants(value=>Math.min(value,30));}}><option value="">請選擇班級或匿名參加</option><option value="__anonymous__">匿名參加（小鳥公仔）</option>{classes.map(c=><option key={c.id} value={c.id}>{c.name}（{c.students?.filter(s=>s.active&&s.email).length??c.roster.length} 人）</option>)}</select></label><label>遊戲<select disabled={busy} value={gameType} onChange={e=>{const nextType=e.target.value as typeof gameType;setGameType(nextType);setTitle(gameTitles[nextType]);setSelectedCharacters(null);setQuestions(e.target.value==='quiz'?[emptyQuestion()]:[]);}}>{Object.entries(gameTitles).map(([type, label]) => <option key={type} value={type}>{label}</option>)}</select></label><label>競賽名稱<input maxLength={100} value={title} onChange={e=>setTitle(e.target.value)}/></label><div><strong>學生加入方式</strong><p>{anonymous?'免登入：開課代碼＋暱稱＋小鳥公仔':'免登入：開課代碼＋名冊姓名'}</p><small>不需要 Google 或 SchoolIAM 帳號；開始後鎖定加入，逾時停止作答。</small></div><label>課堂時間（分鐘）<input type="number" min={1} max={120} value={classroomMinutes} onChange={e=>{setDuration(Number(e.target.value));setManualDuration(true);}}/></label><label>最多參與人數<input type="number" min={1} max={anonymous?30:100} value={maxParticipants} onChange={e=>setMaxParticipants(Number(e.target.value))}/></label></div>
   {pilot && <p>依目前 {questions.length} 題估算：{estimatedMinutes} 分鐘。{manualDuration && <button type="button" className="secondary" onClick={()=>setManualDuration(false)}>恢復自動估算</button>}</p>}
   {gameType!=='quiz'?<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>勾選課文生字，自動製作字卡</h2></div><strong>{questions.length} 題</strong></div>
@@ -176,46 +183,42 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
    {!!questions.length&&<>{gameType==='sentence-practice'&&<p className="competition-budget">本場最多呼叫 AI <strong>{questions.length*maxParticipants}</strong> 次（{questions.length} 題 × {maxParticipants} 人）；模擬學生不呼叫 AI。</p>}<div className="competition-card-preview">{questions.map((q,index)=><article key={`${q.character}-${index}`}><button type="button" aria-label={`移除${q.character}`} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/></button><strong>{q.character}</strong><span>{q.type==='structure'?q.options?.[q.answer??-1]:q.type==='writing'?`書寫限時 ${q.seconds} 秒`:q.reading||'讀音待核對'}</span><p>{q.prompt}</p>{q.type==='sentence-practice'&&q.phrase&&q.phrase!==q.character&&<p>課文圈詞參考：<strong>{q.phrase}</strong></p>}{q.type==='sentence-practice'&&showContextWords&&(!q.phrase||q.phrase===q.character)&&<p>課文圈詞待補</p>}{q.type==='structure'&&overrides[q.character??'']&&<small className="structure-override-badge">已人工修正</small>}{q.type==='structure'&&role.admin&&editingStructure!==q.character&&<button type="button" className="secondary competition-preview-action" onClick={()=>setEditingStructure(q.character??null)}>修正結構</button>}{q.type==='structure'&&role.admin&&editingStructure===q.character&&<StructureOverrideEditor character={q.character!} current={overrides[q.character!]} guess={q.options?.[q.answer??-1]} onDone={value=>{if(value===undefined)setEditingStructure(null);else void run(()=>applyStructureOverride(q.character!,value));}}/>}{q.type==='sentence-practice'&&<button type="button" className="secondary competition-preview-action" onClick={()=>setPreviewCard({phrase:q.phrase??q.character??"",character:q.character??""})}>試作「{q.character}」</button>}</article>)}</div></>}{gameType==='structure'&&role.admin&&Object.keys(overrides).length>0&&<details className="structure-override-list"><summary>已人工修正的生字結構（{Object.keys(overrides).length} 字）</summary><ul>{Object.values(overrides).sort((a,b)=>a.character.localeCompare(b.character,'zh-Hant')).map(item=><li key={item.character}><strong>{item.character}</strong><span>{item.exclude?'不出結構題':item.subtype||`${item.structure}（八大類題）`}</span>{editingStructure===`list:${item.character}`?<StructureOverrideEditor character={item.character} current={item} onDone={value=>{if(value===undefined)setEditingStructure(null);else void run(()=>applyStructureOverride(item.character,value));}}/>:<button type="button" className="secondary" onClick={()=>setEditingStructure(`list:${item.character}`)}>修改</button>}</li>)}</ul></details>}
   </>:<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>自訂 Kahoot 四選一遊戲題目</h2></div><strong>{questions.length} 題</strong></div>
-   <details>
-    <summary>上傳文章・AI 產生 12 題</summary>
+   <details className="competition-article-generator">
+    <summary>上傳文章・依難度自動出題</summary>
     <p>文章將送至已設定的 AI 模型。涉及數量、比例或時間的題目，選項應寫出明確數字與適用單位，請開課前核對。</p>
     <label>上傳文章（TXT、MD、文字型 PDF）
       <input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={event => {
         const file = event.currentTarget.files?.[0];
         event.currentTarget.value = "";
-        if (file) void run(async () => setArticle(await readQuizPassage(file)));
+        if (file) void run(async () => {setArticle(await readQuizPassage(file));setArticleSource(file.name);setArticleProgress('');});
       }} />
     </label>
-    <label>文章內容<textarea rows={8} maxLength={12000} value={article} disabled={busy} onChange={event => setArticle(event.target.value)} /></label>
-    <button type="button" className="secondary" disabled={busy || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
-      if (questions.some(question => question.prompt.trim()) && !window.confirm("用生成的 12 題取代目前題目？")) return;
-      const drafts = [];
-      for (const category of ["課文理解（閱讀素養）", "文意理解"]) {
-        const paper = await quizRequest<QuizPaper>("/generate", {
-          title: "Kahoot 文章閱讀草稿", className: selectedClass!.name,
-          grade, lesson: "文章閱讀。量化問題的四個選項必須使用明確阿拉伯數字及適用單位，正解須能由文章核對。",
-          passage: article.trim(), questionMode: "original", roster,
-          count: 6, categories: [category], difficulty: "中",
-        });
-        drafts.push(...paper.questions);
+    <label>文章內容<textarea rows={8} maxLength={12000} value={article} disabled={busy} onChange={event => {setArticle(event.target.value);setArticleSource('');setArticleProgress('');}} /></label>
+    {articleSource&&<p>已讀取：{articleSource} · {article.length} 字</p>}
+    <fieldset disabled={busy}><legend>設定各難度題數</legend><div className="competition-article-plan">
+      {ARTICLE_DIFFICULTIES.map(({key,label})=><label key={key}>{label}題數<input type="number" min={0} max={100} step={1} value={articleCounts[key]} onChange={event=>{setArticleCounts(previous=>({...previous,[key]:Number(event.target.value)}));setArticleProgress('');}}/></label>)}
+      <label>適用年級<select value={grade} onChange={event=>setGrade(Number(event.target.value))}>{[1,2,3,4,5,6].map(value=><option key={value} value={value}>{value} 年級</option>)}</select></label>
+    </div></fieldset>
+    <p>{articleProblem||`共 ${articleTotal} 題，預計 ${articleBatches(articleCounts).length} 批。每批最多 10 題；按下產生時才傳送文章，可能使用 AI API 額度。`}</p>
+    <button type="button" className="secondary" disabled={busy || !!articleProblem || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
+      if (questions.some(question => question.prompt.trim()) && !window.confirm(`用新產生的 ${articleTotal} 題取代目前題目？`)) return;
+      setArticleProgress('正在準備文章出題…');
+      try{
+        const drafts=await generateArticleQuestions({article,counts:articleCounts,grade,className:selectedClass!.name,roster,onProgress:setArticleProgress});
+        setQuestions(drafts);
+        const message=`已帶入 ${drafts.length} 題（簡單 ${articleCounts.易}、中等 ${articleCounts.中}、困難 ${articleCounts.難}），請逐題核對題目、答案與數字單位，再建立開課大廳。`;
+        setArticleProgress(message);setMessage(message);
+      }catch(error){
+        if(error instanceof ArticleGenerationError&&error.questions.length)setQuestions(error.questions);
+        setArticleProgress((error as Error).message);throw error;
       }
-      if (drafts.length !== 12 || new Set(drafts.map(question => question.stem.replace(/[\s\p{P}]/gu, ""))).size !== 12) {
-        throw Error("AI 未產出 12 道不同題目，請重新產生。");
-      }
-      if (drafts.some(question => /多少|幾(?:個|次|人|年|月|天|小時|分鐘|公尺|元|倍|％|%)/u.test(question.stem) &&
-        !/[0-9０-９]/u.test(question.options[question.answer] ?? ""))) {
-        throw Error("AI 出題含有未給出明確數字答案的量化題，請重新產生。");
-      }
-      setQuestions(drafts.map(question => ({
-        prompt: question.stem, options: question.options, answer: question.answer, seconds: 30,
-      })));
-      setMessage("已帶入 12 題，請核對題目、答案與數字單位，再建立開課大廳。");
-    })}>AI 產生 12 題</button>
+    })}>{busy?'正在處理文章…':`AI 產生 ${articleTotal} 題`}</button>
+    {articleProgress&&<p role="status" aria-live="polite">{articleProgress}</p>}
     {!roster.length && <p>請先選擇有學生名冊的班級。</p>}
    </details>
    <div className="competition-question-import"><button type="button" className="secondary" onClick={downloadQuestionExample}><Download size={18}/>下載題庫範例</button><label className="secondary competition-upload"><Upload size={18}/><span>上傳 CSV 題庫</span><input type="file" accept=".csv,text/csv" onChange={event=>{void importQuestions(event.target.files?.[0]);event.currentTarget.value='';}}/></label><span>下載範例後可用 Excel 編輯，再以相同欄位上傳；一次最多 100 題。</span></div>
    {importNotice&&<p className="competition-import-notice" role="status">{importNotice}</p>}
-   <div className="competition-question-list">{questions.map((q,index)=><article className="competition-question-editor" key={index}><div className="competition-question-title"><strong>第 {index+1} 題</strong><button type="button" className="secondary" disabled={questions.length===1} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/>移除</button></div><label>題目<input maxLength={500} value={q.prompt} onChange={e=>patchQuestion(index,{prompt:e.target.value})}/></label><div className="competition-options">{q.options!.map((option,optionIndex)=><label key={optionIndex} className={q.answer===optionIndex?'is-answer':''}><input type="radio" name={`answer-${index}`} checked={q.answer===optionIndex} onChange={()=>patchQuestion(index,{answer:optionIndex})}/><span>{String.fromCharCode(65+optionIndex)}</span><input aria-label={`第 ${index+1} 題選項 ${optionIndex+1}`} value={option} onChange={e=>patchQuestion(index,{options:q.options!.map((v,i)=>i===optionIndex?e.target.value:v)})}/></label>)}</div></article>)}</div><button className="secondary" disabled={questions.length>=100} onClick={()=>setQuestions(rows=>[...rows,emptyQuestion()])}><Plus size={18}/>新增題目</button>
+   <div className="competition-question-list">{questions.map((q,index)=><article className="competition-question-editor" key={index}><div className="competition-question-title"><strong>第 {index+1} 題{q.difficulty&&` · ${ARTICLE_DIFFICULTIES.find(item=>item.key===q.difficulty)?.label}`}</strong><button type="button" className="secondary" disabled={questions.length===1} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/>移除</button></div><label>題目<input maxLength={500} value={q.prompt} onChange={e=>patchQuestion(index,{prompt:e.target.value})}/></label><div className="competition-options">{q.options!.map((option,optionIndex)=><label key={optionIndex} className={q.answer===optionIndex?'is-answer':''}><input type="radio" name={`answer-${index}`} checked={q.answer===optionIndex} onChange={()=>patchQuestion(index,{answer:optionIndex})}/><span>{String.fromCharCode(65+optionIndex)}</span><input aria-label={`第 ${index+1} 題選項 ${optionIndex+1}`} value={option} onChange={e=>patchQuestion(index,{options:q.options!.map((v,i)=>i===optionIndex?e.target.value:v)})}/></label>)}</div></article>)}</div><button className="secondary" disabled={questions.length>=100} onClick={()=>setQuestions(rows=>[...rows,emptyQuestion()])}><Plus size={18}/>新增題目</button>
   </>}
   {gameType==='sentence-practice'&&!rubricReady&&<p role="status">正在讀取教師帳號的雲端評分設定；若讀取失敗，請重新載入。</p>}
   {gameType==='sentence-practice'&&rubricReady&&<button type="button" className="secondary" disabled={busy} onClick={()=>{const old=loadSavedRubricSettings();setRubricDraft(old.draft);setLessonWordsText(old.lessonWords);setRubricLocked(false);}}>帶入此瀏覽器舊設定（確認後鎖定上傳）</button>}
