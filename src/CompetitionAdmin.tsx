@@ -3,7 +3,7 @@ import CompetitionSimulationButton from './CompetitionSimulationButton';
 import { correctedLessons } from './readingCorrections';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import {useEffect,useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
-import {Maximize,Minimize,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Users} from 'lucide-react';
+import {Upload,ChevronDown,Maximize,Minimize,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest} from './quizApi';
 import { readQuizPassage } from './quizPassage';
@@ -175,7 +175,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
   </>:<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>自訂 Kahoot 四選一遊戲題目</h2></div><strong>{questions.length} 題</strong></div>
    <details className="competition-article-generator">
-    <summary>上傳文章・依難度自動出題</summary>
+    <summary><Upload size={24} aria-hidden="true"/><span>上傳文章・依難度自動出題</span><ChevronDown size={22} className="article-generator-chevron" aria-hidden="true"/></summary>
     <p>文章將送至已設定的 AI 模型。涉及數量、比例或時間的題目，選項應寫出明確數字與適用單位，請開課前核對。</p>
     <label>上傳文章（DOCX、DOC、XLSX、XLS、TXT、MD、文字型 PDF）
       <input type="file" accept=".docx,.doc,.xlsx,.xls,.txt,.md,.pdf" disabled={busy} onChange={event => {

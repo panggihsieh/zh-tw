@@ -300,3 +300,25 @@
 .competition-current-model { display:flex; align-items:center; flex-wrap:wrap; gap:8px 16px; margin:12px 0; }
 .competition-current-model p { margin:0; overflow-wrap:anywhere; min-width:0; }
 .competition-current-model button { font-size:16px; padding:8px 14px; }
+
+.competition-article-generator {
+ margin:20px 0; padding:0 24px; border:1px solid #b7cf9d;
+ border-radius:20px; background:#fffff7; box-shadow:0 4px 0 #dce7c9;
+ min-width:0;
+}
+.competition-article-generator > summary {
+ display:flex; align-items:center; gap:14px; padding:22px 0;
+ list-style:none; cursor:pointer; font-size:1.15em; font-weight:700; color:#285d46;
+}
+.competition-article-generator > summary::-webkit-details-marker { display:none; }
+.competition-article-generator > summary > span { flex:1; min-width:0; }
+.competition-article-generator > summary > svg { flex-shrink:0; }
+.competition-article-generator > summary:hover { color:#0b704b; }
+.competition-article-generator > summary:focus-visible { outline:3px solid #528257; outline-offset:4px; border-radius:8px; }
+.competition-article-generator[open] { padding-bottom:24px; }
+.competition-article-generator[open] > summary { border-bottom:1px solid #dce7c9; margin-bottom:18px; }
+.competition-article-generator[open] .article-generator-chevron { transform:rotate(180deg); }
+@media(max-width:600px) {
+ .competition-article-generator { padding-left:16px; padding-right:16px; }
+ .competition-article-generator > summary { padding:18px 0; gap:10px; font-size:1em; }
+}
