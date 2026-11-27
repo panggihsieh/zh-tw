@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';import JSZip from 'jszip';import * as XLSX from 'xlsx';import http from 'node:http';import {once}from'node:events';import{extractOfficePassage}from'./office-passage.mjs';import{createQuizHandler}from'./quiz-api.mjs';
+const input=(filename,bytes)=>({filename,base64:Buffer.from(bytes).toString('base64')});
+export async function docx(text){const zip=new JSZip();zip.file('word/document.xml',`<?xml version="1.0"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${text.map(t=>`<w:p><w:r><w:t>${t}</w:t></w:r></w:p>`).join('')}</w:body></w:document>`);return zip.generateAsync({type:'nodebuffer'});}
+test('DOCX保留段落，XLS與XLSX保留工作表、文字及顯示數值，不執行公式',async()=>{
+ const result=await extractOfficePassage(input('文章.docx',await docx(['這是測試文章。','第二段保留。'])));assert.match(result.content,/這是測試文章。\n\n第二段保留。/);
+ for(const ext of ['xls','xlsx']){const book=XLSX.utils.book_new();const sheet=XLSX.utils.aoa_to_sheet([['教材','數量'],['虛構文章',12],['合計',12]]);sheet.B3.f='SUM(B2:B2)';XLSX.utils.book_append_sheet(book,sheet,'第一頁');XLSX.utils.book_append_sheet(book,XLSX.utils.aoa_to_sheet([['不可讀隱藏資料']]),'隱藏');book.Workbook={Sheets:[{Hidden:0},{Hidden:1}]};const out=await extractOfficePassage(input('教材.'+ext,XLSX.write(book,{type:'buffer',bookType:ext==='xls'?'biff8':'xlsx'})));assert.match(out.content,/教材\t數量/);assert.match(out.content,/虛構文章\t12/);assert.doesNotMatch(out.content,/不可讀隱藏資料|SUM/);}
+});
+test('拒絕偽裝、空白、損壞、超量、未計算公式及不支援格式',async()=>{
+ await assert.rejects(extractOfficePassage(input('壞檔.doc',Buffer.from('不是Word'))),/副檔名/);await assert.rejects(extractOfficePassage(input('壞檔.docx',Buffer.from('不是Word'))),/格式/);await assert.rejects(extractOfficePassage(input('空白.docx',await docx(['  ']))),/沒有讀到文字/);await assert.rejects(extractOfficePassage(input('太長.docx',await docx(['字'.repeat(12001)]))),/12000/);await assert.rejects(extractOfficePassage(input('圖片.png',Buffer.from('test'))),/DOC/);
+ const book=XLSX.utils.book_new();XLSX.utils.book_append_sheet(book,{'!ref':'A1:A1001'},'太大');await assert.rejects(extractOfficePassage(input('太大.xlsx',XLSX.write(book,{type:'buffer',bookType:'xlsx'}))),/1000列/);
+ const zip=new JSZip();zip.file('word/document.xml','text');const huge=await zip.generateAsync({type:'nodebuffer'});const offset=huge.indexOf(Buffer.from('504b0102','hex'));huge.writeUInt32LE(50*1024*1024,offset+24);await assert.rejects(extractOfficePassage(input('過大.docx',huge)),/40MB/);
+});
+test('Office解析API僅教師可用，學生及未登入不可取得解析內容',async t=>{
+ const handler=createQuizHandler({store:{},origins:['https://test'],authenticate:async req=>{const role=req.headers['x-test-role'];if(!role)throw Error();return{uid:role,admin:role==='teacher'};}});const server=http.createServer(handler).listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());const body=JSON.stringify(input('文章.docx',await docx(['虛構介面測試文章。'])));
+ for(const [role,status]of [['',401],['student',403],['teacher',200]]){const r=await fetch(`http://127.0.0.1:${server.address().port}/api/structure/quiz/extract-passage`,{method:'POST',headers:{Origin:'https://test','x-notebook-request':'quiz','x-test-role':role,'Content-Type':'application/json'},body});assert.equal(r.status,status);if(status===200)assert.match((await r.json()).content,/虛構介面測試文章/);}
+});

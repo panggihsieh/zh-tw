@@ -186,13 +186,14 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
    <details className="competition-article-generator">
     <summary>上傳文章・依難度自動出題</summary>
     <p>文章將送至已設定的 AI 模型。涉及數量、比例或時間的題目，選項應寫出明確數字與適用單位，請開課前核對。</p>
-    <label>上傳文章（TXT、MD、文字型 PDF）
-      <input type="file" accept=".txt,.md,.pdf" disabled={busy} onChange={event => {
+    <label>上傳文章（DOCX、DOC、XLSX、XLS、TXT、MD、文字型 PDF）
+      <input type="file" accept=".docx,.doc,.xlsx,.xls,.txt,.md,.pdf" disabled={busy} onChange={event => {
         const file = event.currentTarget.files?.[0];
         event.currentTarget.value = "";
         if (file) void run(async () => {setArticle(await readQuizPassage(file));setArticleSource(file.name);setArticleProgress('');});
       }} />
     </label>
+    <p>Office檔先送本站解析，不呼叫AI；試算表讀取可見工作表。最多10MB、12000字，請核對下方內容後再產生題目。</p>
     <label>文章內容<textarea rows={8} maxLength={12000} value={article} disabled={busy} onChange={event => {setArticle(event.target.value);setArticleSource('');setArticleProgress('');}} /></label>
     {articleSource&&<p>已讀取：{articleSource} · {article.length} 字</p>}
     <fieldset disabled={busy}><legend>設定各難度題數</legend><div className="competition-article-plan">
