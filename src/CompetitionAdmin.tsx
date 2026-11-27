@@ -1,3 +1,4 @@
+import CurrentGenerationModel from "./CurrentGenerationModel";
 import CompetitionSimulationButton from './CompetitionSimulationButton';
 import { correctedLessons } from './readingCorrections';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
@@ -201,6 +202,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
       <label>適用年級<select value={grade} onChange={event=>setGrade(Number(event.target.value))}>{[1,2,3,4,5,6].map(value=><option key={value} value={value}>{value} 年級</option>)}</select></label>
     </div></fieldset>
     <p>{articleProblem||`共 ${articleTotal} 題，預計 ${articleBatches(articleCounts).length} 批。每批最多 10 題；按下產生時才傳送文章，可能使用 AI API 額度。`}</p>
+    <CurrentGenerationModel />
     <button type="button" className="secondary" disabled={busy || !!articleProblem || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
       if (questions.some(question => question.prompt.trim()) && !window.confirm(`用新產生的 ${articleTotal} 題取代目前題目？`)) return;
       setArticleProgress('正在準備文章出題…');
