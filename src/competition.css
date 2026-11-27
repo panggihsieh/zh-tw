@@ -295,3 +295,5 @@
 .competition-article-generator textarea { width:100%; min-height:180px; box-sizing:border-box; resize:vertical; }
 .competition-article-generator input[type=file] { width:100%; min-width:0; }
 .competition-article-generator fieldset { min-width:0; margin:16px 0; }
+
+.competition-generated-preview{padding:20px;border:1px solid #d9dfda;border-radius:14px;background:#fff}.competition-generated-preview p{overflow-wrap:anywhere}.competition-generated-preview li{padding:6px 0;overflow-wrap:anywhere}

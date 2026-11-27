@@ -2,7 +2,7 @@ import CompetitionSimulationButton from './CompetitionSimulationButton';
 import { correctedLessons } from './readingCorrections';
 import OriginalCompetitionAvatar from './OriginalCompetitionAvatar';
 import {useEffect,useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
-import {Maximize,Minimize,Download,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Upload,Users} from 'lucide-react';
+import {Maximize,Minimize,Play,Plus,RefreshCw,Send,Square,Trash2,Trophy,Users} from 'lucide-react';
 import {QRCodeSVG} from 'qrcode.react';
 import {quizRequest} from './quizApi';
 import { readQuizPassage } from './quizPassage';
@@ -13,7 +13,6 @@ import {competitionJoinUrl,competitionRequest,type CompetitionParticipant,type C
 import './competition.css';
 import lessonSeven from './lessonSevenPilot.json';
 import SentencePractice from './SentencePractice';
-import {parseQuestionCsv,questionCsvExample} from './competitionQuestionCsv';
 
 import {previewRequest} from './kahootPreview';
 import { endSoundEnabled, endSoundVolume, playClosedCompetitionSound, playCompetitionEndSound, setEndSoundEnabled, setEndSoundVolume, primeCompetitionEndSound } from "./competitionEndSound";
@@ -30,7 +29,6 @@ import { useUserRole } from './structureReview';
 const strokeCache=new Map<string,Promise<Stroke[]|null>>();
 function loadGameStrokes(character:string){if(!strokeCache.has(character))strokeCache.set(character,fetch(`/game-strokes/${character.codePointAt(0)!.toString(16)}.json`).then(response=>response.ok?response.json():null).catch(()=>null));return strokeCache.get(character)!;}
 
-const emptyQuestion=():CompetitionQuestion=>({prompt:'',options:['','','',''],answer:0,seconds:30});
 const gameTitles = {
   "sentence-practice": "一字多詞 AI 造句",
   structure: "生字結構遊戲",
@@ -57,7 +55,6 @@ function podiumLayout(count:number){
 
 export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
  const [selectedRooms,setSelectedRooms]=useState<string[]>([]);
- const [importNotice,setImportNotice]=useState('');
  const [useRealAi,setUseRealAi]=useState(false);
  const [showContextWords,setShowContextWords]=useState(true);
  const [previewCard,setPreviewCard]=useState<{phrase:string;character:string}|null>(null);
@@ -122,13 +119,6 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
   const failed=results.length-removed.length;
   setMessage(failed?`已移除 ${removed.length} 堂課，${failed} 堂未能移除，請重試。`:`已移除 ${removed.length} 堂課。`);
  }
- function patchQuestion(index:number,patch:Partial<CompetitionQuestion>){setQuestions(rows=>rows.map((row,i)=>i===index?{...row,...patch}:row));}
- function downloadQuestionExample(){const url=URL.createObjectURL(new Blob([questionCsvExample],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='四選一題庫範例.csv';link.click();URL.revokeObjectURL(url);}
- async function importQuestions(file?:File){
-  if(!file)return;setImportNotice('');
-  try{if(file.size>1024*1024)throw Error('題庫檔案不可超過 1 MB。');const imported=parseQuestionCsv(await file.text());setQuestions(imported);setImportNotice(`已匯入 ${imported.length} 題，請確認內容後再建立開課大廳。`);}
-  catch(error){setImportNotice((error as Error).message);}
- }
  function makeCards(){const rows=pilot?(lessonIds.length===1&&lessonIds[0]===lessonSeven.id?candidates.filter(row=>["際","璃","磁"].includes(row.character)):candidates.slice(0,3)):candidates.filter(row=>selectedCharacters.includes(row.character));if(gameType==='writing'){setQuestions(rows.map(c=>({type:'writing',character:c.character,prompt:`依筆順書寫「${c.character}」`,seconds:120})));setMessage(`已產生 ${rows.length} 題書寫題，請確認後開課。`);return;}if(gameType==='structure'){void run(async()=>{const cards=(await Promise.all(rows.map(c=>structureQuestion(c.character,structureIds,loadGameStrokes,overrides[c.character])))).filter((card):card is StructureQuestion=>card!==null);const detailed=cards.filter(card=>card.options.length===4).length;setQuestions(cards);setMessage(`已產生 ${cards.length} 題生字結構題（${detailed} 題細分結構四選一、${cards.length-detailed} 題八大類），請確認後開課。`);});return;}setQuestions(rows.map(c=>({type:'sentence-practice',prompt:`先想一個含「${c.character}」的語詞，再造一個完整句子`,phrase:showContextWords?(c.contextWord||c.character):c.character,character:c.character,reading:c.readings[0]?.reading||'',seconds:90})));setMessage(`已產生 ${rows.length} 張生字字卡，請預覽後開課。`);}
  if(previewCard) return <section className="competition-admin">
   <p>學生語音測試</p>
@@ -150,9 +140,9 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
       const session=await sentenceRequest<{code:string;expiresAt:number}>("/practice/open",{minutes:classroomMinutes,roster});
       setMessage(`個人 AI 造句代碼 ${session.code}，開放至 ${new Date(session.expiresAt).toLocaleString("zh-TW",{timeZone:"Asia/Taipei"})}。`);
     })}>依下方班級與時間開放個人 AI 造句</button>}
-  <p className="competition-notice">依 Kahoot 開課流程，在同一畫面完成生字來源、課堂設定、公仔等候、倒數排行與結束結果。語音在學生裝置轉文字，只有確認送出時呼叫一次 AI；本場費用上限由題數與參與人數控制。</p>
+  <p className="competition-notice">依 Kahoot 開課流程，在同一畫面完成生字來源、課堂設定、公仔等候、倒數排行與結束結果。語音在學生裝置轉文字；AI 文章出題與造句校正、評量會使用 API 額度，費用依模型、題數、參與人數與重試次數增加，請先確認服務商額度。</p>
   <div className="competition-section-heading"><div><span>STEP 1</span><h2>選擇班級與遊戲內容</h2></div></div>
-  <div className="competition-form-grid"><label>班級<select value={classId} disabled={busy} onChange={e=>{setClassId(e.target.value);if(e.target.value==='__anonymous__')setMaxParticipants(value=>Math.min(value,30));}}><option value="">請選擇班級或匿名參加</option><option value="__anonymous__">匿名參加（小鳥公仔）</option>{classes.map(c=><option key={c.id} value={c.id}>{c.name}（{c.students?.filter(s=>s.active&&s.email).length??c.roster.length} 人）</option>)}</select></label><label>遊戲<select disabled={busy} value={gameType} onChange={e=>{const nextType=e.target.value as typeof gameType;setGameType(nextType);setTitle(gameTitles[nextType]);setSelectedCharacters(null);setQuestions(e.target.value==='quiz'?[emptyQuestion()]:[]);}}>{Object.entries(gameTitles).map(([type, label]) => <option key={type} value={type}>{label}</option>)}</select></label><label>競賽名稱<input maxLength={100} value={title} onChange={e=>setTitle(e.target.value)}/></label><div><strong>學生加入方式</strong><p>{anonymous?'免登入：開課代碼＋暱稱＋小鳥公仔':'免登入：開課代碼＋名冊姓名'}</p><small>不需要 Google 或 SchoolIAM 帳號；開始後鎖定加入，逾時停止作答。</small></div><label>課堂時間（分鐘）<input type="number" min={1} max={120} value={classroomMinutes} onChange={e=>{setDuration(Number(e.target.value));setManualDuration(true);}}/></label><label>最多參與人數<input type="number" min={1} max={anonymous?30:100} value={maxParticipants} onChange={e=>setMaxParticipants(Number(e.target.value))}/></label></div>
+  <div className="competition-form-grid"><label>班級<select value={classId} disabled={busy} onChange={e=>{setClassId(e.target.value);if(e.target.value==='__anonymous__')setMaxParticipants(value=>Math.min(value,30));}}><option value="">請選擇班級或匿名參加</option><option value="__anonymous__">匿名參加（小鳥公仔）</option>{classes.map(c=><option key={c.id} value={c.id}>{c.name}（{c.students?.filter(s=>s.active&&s.email).length??c.roster.length} 人）</option>)}</select></label><label>遊戲<select disabled={busy} value={gameType} onChange={e=>{const nextType=e.target.value as typeof gameType;setGameType(nextType);setTitle(gameTitles[nextType]);setSelectedCharacters(null);setQuestions([]);}}>{Object.entries(gameTitles).map(([type, label]) => <option key={type} value={type}>{label}</option>)}</select></label><label>競賽名稱<input maxLength={100} value={title} onChange={e=>setTitle(e.target.value)}/></label><div><strong>學生加入方式</strong><p>{anonymous?'免登入：開課代碼＋暱稱＋小鳥公仔':'免登入：開課代碼＋名冊姓名'}</p><small>不需要 Google 或 SchoolIAM 帳號；開始後鎖定加入，逾時停止作答。</small></div><label>課堂時間（分鐘）<input type="number" min={1} max={120} value={classroomMinutes} onChange={e=>{setDuration(Number(e.target.value));setManualDuration(true);}}/></label><label>最多參與人數<input type="number" min={1} max={anonymous?30:100} value={maxParticipants} onChange={e=>setMaxParticipants(Number(e.target.value))}/></label></div>
   {pilot && <p>依目前 {questions.length} 題估算：{estimatedMinutes} 分鐘。{manualDuration && <button type="button" className="secondary" onClick={()=>setManualDuration(false)}>恢復自動估算</button>}</p>}
   {gameType!=='quiz'?<>
    <div className="competition-section-heading"><div><span>STEP 2</span><h2>勾選課文生字，自動製作字卡</h2></div><strong>{questions.length} 題</strong></div>
@@ -200,6 +190,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
       <label>適用年級<select value={grade} onChange={event=>setGrade(Number(event.target.value))}>{[1,2,3,4,5,6].map(value=><option key={value} value={value}>{value} 年級</option>)}</select></label>
     </div></fieldset>
     <p>{articleProblem||`共 ${articleTotal} 題，預計 ${articleBatches(articleCounts).length} 批。每批最多 10 題；按下產生時才傳送文章，可能使用 AI API 額度。`}</p>
+    <p className="competition-notice" role="note"><strong>AI 費用提醒：</strong>按下產生題目會將文章傳送至已設定的 AI 服務並使用 API 額度。產生失敗、部分完成後重試或重新產生，都可能再次計費；實際費用依服務商與模型計價，請先確認題數與可用額度。</p>
     <button type="button" className="secondary" disabled={busy || !!articleProblem || !selectedClass || !roster.length || !article.trim() || article.length > 12000} onClick={() => void run(async () => {
       if (questions.some(question => question.prompt.trim()) && !window.confirm(`用新產生的 ${articleTotal} 題取代目前題目？`)) return;
       setArticleProgress('正在準備文章出題…');
@@ -216,9 +207,12 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     {articleProgress&&<p role="status" aria-live="polite">{articleProgress}</p>}
     {!roster.length && <p>請先選擇有學生名冊的班級。</p>}
    </details>
-   <div className="competition-question-import"><button type="button" className="secondary" onClick={downloadQuestionExample}><Download size={18}/>下載題庫範例</button><label className="secondary competition-upload"><Upload size={18}/><span>上傳 CSV 題庫</span><input type="file" accept=".csv,text/csv" onChange={event=>{void importQuestions(event.target.files?.[0]);event.currentTarget.value='';}}/></label><span>下載範例後可用 Excel 編輯，再以相同欄位上傳；一次最多 100 題。</span></div>
-   {importNotice&&<p className="competition-import-notice" role="status">{importNotice}</p>}
-   <div className="competition-question-list">{questions.map((q,index)=><article className="competition-question-editor" key={index}><div className="competition-question-title"><strong>第 {index+1} 題{q.difficulty&&` · ${ARTICLE_DIFFICULTIES.find(item=>item.key===q.difficulty)?.label}`}</strong><button type="button" className="secondary" disabled={questions.length===1} onClick={()=>setQuestions(rows=>rows.filter((_,i)=>i!==index))}><Trash2 size={16}/>移除</button></div><label>題目<input maxLength={500} value={q.prompt} onChange={e=>patchQuestion(index,{prompt:e.target.value})}/></label><div className="competition-options">{q.options!.map((option,optionIndex)=><label key={optionIndex} className={q.answer===optionIndex?'is-answer':''}><input type="radio" name={`answer-${index}`} checked={q.answer===optionIndex} onChange={()=>patchQuestion(index,{answer:optionIndex})}/><span>{String.fromCharCode(65+optionIndex)}</span><input aria-label={`第 ${index+1} 題選項 ${optionIndex+1}`} value={option} onChange={e=>patchQuestion(index,{options:q.options!.map((v,i)=>i===optionIndex?e.target.value:v)})}/></label>)}</div></article>)}</div><button className="secondary" disabled={questions.length>=100} onClick={()=>setQuestions(rows=>[...rows,emptyQuestion()])}><Plus size={18}/>新增題目</button>
+   {!!questions.length&&<div className="competition-question-list" aria-label="AI 出題預覽">{questions.map((question,index)=><article className="competition-generated-preview" key={index}>
+    <strong>第 {index+1} 題{question.difficulty&&` · ${ARTICLE_DIFFICULTIES.find(item=>item.key===question.difficulty)?.label}`}</strong>
+    <p>{question.prompt}</p>
+    <ol type="A">{question.options?.map((option,optionIndex)=><li key={optionIndex}>{option}{question.answer===optionIndex&&<strong>（正確答案）</strong>}</li>)}</ol>
+   </article>)}</div>}
+
   </>}
   {gameType==='sentence-practice'&&!rubricReady&&<p role="status">正在讀取教師帳號的雲端評分設定；若讀取失敗，請重新載入。</p>}
   {gameType==='sentence-practice'&&rubricReady&&<button type="button" className="secondary" disabled={busy} onClick={()=>{const old=loadSavedRubricSettings();setRubricDraft(old.draft);setLessonWordsText(old.lessonWords);setRubricLocked(false);}}>帶入此瀏覽器舊設定（確認後鎖定上傳）</button>}
@@ -229,7 +223,7 @@ export default function CompetitionAdmin({pilot=false}:{pilot?:boolean}={}){
     maxParticipants:1,startedAt:null,expiresAt:null,closedAt:null,loginMode:anonymous?'anonymous':'roster',testRoom:true,
     ...(gameType==='sentence-practice'&&!rubricProblem(rubricDraft,lessonWordsText)?{rubric:rubricFromDraft(rubricDraft)}:{}),
   }}/><span>可先模擬學生完整流程，再建立正式課堂。</span></div>
-  <div className="competition-actions">{pilot && <label className="primary competition-test-toggle"><input type="checkbox" checked={testRoom} onChange={e=>setTestRoom(e.target.checked)}/><span>虛擬課堂測試用（非正式）</span></label>}{pilot && gameType === "sentence-practice" && <button className="secondary" disabled={busy||!candidates.length} onClick={makeCards}><Plus size={18}/>依勾選課文自動生成題目</button>}<button className="primary" disabled={busy||(!anonymous&&(!selectedClass||!roster.length))||!title.trim()||!questions.length||classroomMinutes<1||classroomMinutes>120||maxParticipants<1||maxParticipants>(anonymous?30:100)||gameType==='quiz'&&questions.some(q=>!q.prompt.trim()||q.options?.some(o=>!o.trim()))||gameType==='sentence-practice'&&(!rubricReady||!!rubricProblem(rubricDraft,lessonWordsText)||!rubricLocked)} onClick={()=>void run(async()=>{await competitionRequest('/rooms',{...(gameType==='sentence-practice'?{rubric:rubricFromDraft(rubricDraft),...(rubricDraft.lesson.enabled?{lessonWords:parseLessonWords(lessonWordsText)}:{})}:{}),title,lessonTitles:gameType==='quiz'?[]:lessons.filter(lesson=>lessonIds.includes(lesson.id)).map(lesson=>lesson.title),classId:anonymous?'':selectedClass!.id,className:anonymous?'匿名參加':selectedClass!.name,students:anonymous?[]:students,roster:anonymous?[]:roster,questions,gameType,loginMode:anonymous?'anonymous':'roster',duration:classroomMinutes*60,maxParticipants,testRoom});setQuestions(gameType==='quiz'?[emptyQuestion()]:[]);await load();setMessage('課堂大廳已建立，請先確認學生與公仔，再開始課程。');})}><Send size={18}/>建立開課大廳</button></div>
+  <div className="competition-actions">{pilot && <label className="primary competition-test-toggle"><input type="checkbox" checked={testRoom} onChange={e=>setTestRoom(e.target.checked)}/><span>虛擬課堂測試用（非正式）</span></label>}{pilot && gameType === "sentence-practice" && <button className="secondary" disabled={busy||!candidates.length} onClick={makeCards}><Plus size={18}/>依勾選課文自動生成題目</button>}<button className="primary" disabled={busy||(!anonymous&&(!selectedClass||!roster.length))||!title.trim()||!questions.length||classroomMinutes<1||classroomMinutes>120||maxParticipants<1||maxParticipants>(anonymous?30:100)||gameType==='quiz'&&questions.some(q=>!q.prompt.trim()||q.options?.some(o=>!o.trim()))||gameType==='sentence-practice'&&(!rubricReady||!!rubricProblem(rubricDraft,lessonWordsText)||!rubricLocked)} onClick={()=>void run(async()=>{await competitionRequest('/rooms',{...(gameType==='sentence-practice'?{rubric:rubricFromDraft(rubricDraft),...(rubricDraft.lesson.enabled?{lessonWords:parseLessonWords(lessonWordsText)}:{})}:{}),title,lessonTitles:gameType==='quiz'?[]:lessons.filter(lesson=>lessonIds.includes(lesson.id)).map(lesson=>lesson.title),classId:anonymous?'':selectedClass!.id,className:anonymous?'匿名參加':selectedClass!.name,students:anonymous?[]:students,roster:anonymous?[]:roster,questions,gameType,loginMode:anonymous?'anonymous':'roster',duration:classroomMinutes*60,maxParticipants,testRoom});setQuestions([]);await load();setMessage('課堂大廳已建立，請先確認學生與公仔，再開始課程。');})}><Send size={18}/>建立開課大廳</button></div>
   <div className="competition-section-heading"><div><span>STEP 3</span><h2>公仔等候、倒數排行與結束</h2></div><button className="secondary" disabled={busy} onClick={()=>void run(load)}><RefreshCw size={18}/>更新</button></div>
   <div className="competition-actions">
     <button className="secondary" disabled={busy||!completedRoomIds.length} onClick={()=>setSelectedRooms(allCompletedSelected?[]:completedRoomIds)}>
