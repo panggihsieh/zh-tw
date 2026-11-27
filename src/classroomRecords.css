@@ -14,3 +14,11 @@
 .mistake-table th,.mistake-table td { padding:12px; border:1px solid #dce5d0; vertical-align:top; overflow-wrap:anywhere; white-space:pre-wrap; }
 .mistake-table thead { background:#edf4df; }
 .competition-mistake-review input[type=text],.competition-mistake-review .classroom-room-picker input { width:100%; box-sizing:border-box; min-width:0; }
+
+.mistake-table.has-sentence-scores { min-width:1100px; }
+.mistake-score-items { display:grid; gap:8px; min-width:260px; padding:0; margin:0; list-style:none; }
+.mistake-score-items li { padding:8px 10px; border:1px solid #dce5d0; border-radius:8px; background:#fafcf5; }
+.mistake-score-items strong { display:flex; justify-content:space-between; gap:12px; }
+.mistake-score-items small { display:block; margin-top:4px; line-height:1.6; }
+.mistake-table td>p { margin:0 0 8px; }
+.mistake-table td>small { display:block; line-height:1.6; }

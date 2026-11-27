@@ -3,12 +3,22 @@ import { competitionRequest, type CompetitionQuestion, type CompetitionRoom } fr
 import './classroomRecords.css';
 import './competitionSentenceStatistics.css';
 
-interface MistakeAnswer { uid:string; name:string; seat:number|null; response?:string|number; points:number|null; reason:string; feedback:string }
+export interface MistakeScoreItem { key:string; label:string; points:number|null; score:number|null; evidence:string; criterion:string }
+interface SentenceDetails { qualityScore:number;competitionMaximum:number;timedOut:boolean;targetOk:boolean;meaningOk:boolean;items:MistakeScoreItem[] }
+interface MistakeAnswer { sentenceDetails?:SentenceDetails; uid:string; name:string; seat:number|null; response?:string|number; points:number|null; reason:string; feedback:string }
 interface MistakeQuestion { questionIndex:number; question:CompetitionQuestion; wrongAnswers:MistakeAnswer[] }
 interface MistakeReport { room:CompetitionRoom; questions:MistakeQuestion[]; summary:{wrongAnswers:number;missingHistory:number;unanswered:number;pending:number} }
 const labels={quiz:'四選一競賽',structure:'字體結構',writing:'筆順書寫','sentence-practice':'生字造詞'};
 function answerText(question:CompetitionQuestion,response?:string|number){
  return typeof response==='number'?`${String.fromCharCode(65+response)}．${question.options?.[response]??'未保存選項'}`:response||'未保存回答';
+}
+export function MistakeScoreItems({items}:{items?:MistakeScoreItem[]}){
+ if(!items?.length)return <p>此筆舊紀錄未保存評分明細。</p>;
+ return <><ul className="mistake-score-items" aria-label="當次各項評分">{items.map(item=><li key={item.key}>
+  <strong>{item.label}<span>{item.score??'未保存'}／{item.points??'未保存'}</span></strong>
+  {item.evidence&&<small>依據：{item.evidence}</small>}
+  {item.criterion&&<small>評分標準：{item.criterion}</small>}
+ </li>)}</ul>{items.some(item=>!item.evidence)&&<small>未保存個別評語的項目僅列評分標準。</small>}</>;
 }
 export default function CompetitionMistakeReview({request=competitionRequest,onOpenCompetition}:{request?:typeof competitionRequest;onOpenCompetition:()=>void}){
  const [rooms,setRooms]=useState<CompetitionRoom[]>([]),[roomId,setRoomId]=useState('');
@@ -43,6 +53,7 @@ export default function CompetitionMistakeReview({request=competitionRequest,onO
   {loading&&<p role="status">正在整理錯題…</p>}{error&&<p role="alert">{error}</p>}
   {!!roomId&&<button type="button" className="secondary" disabled={loading||busy} onClick={()=>setReload(value=>value+1)}>重新載入錯題</button>}
   {current&&<>
+   {current.room.gameType==='sentence-practice'&&<p>評分明細沿用作答當次勾選的項目與配分，不重新呼叫 AI。評分標準是項目說明；個別依據僅呈現當次已保存的內容。</p>}
    <p>{current.questions.length} 道需複習題目 · {current.summary.wrongAnswers} 筆錯答／逾時紀錄</p>
    <p>未作答 {current.summary.unanswered} 題次 · 舊紀錄缺漏 {current.summary.missingHistory} 題次 · 評分待確認 {current.summary.pending} 題次。這些紀錄不當成錯題。</p>
    {!current.questions.length&&<p role="status">這堂課目前沒有可確認的錯題。</p>}
@@ -54,8 +65,13 @@ export default function CompetitionMistakeReview({request=competitionRequest,onO
      {!!item.question.options?.length&&<ol type="A">{item.question.options.map((option,index)=><li key={index}>{option}</li>)}</ol>}
      <p><strong>正確答案：</strong>{item.question.answer!==undefined?answerText(item.question,item.question.answer):item.question.type==='writing'?`依正確筆順書寫「${item.question.character}」`:'開放作答，無唯一標準答案；請依當次評語檢討。'}</p>
      <div className="sentence-stat-scroll" role="region" aria-label={`第 ${item.questionIndex+1} 題錯題明細`} tabIndex={0}>
-      <table className="mistake-table"><caption>{item.wrongAnswers.length} 位學生需複習</caption><thead><tr><th scope="col">學生</th><th scope="col">個人作答</th><th scope="col">本題得分</th><th scope="col">原因／當次評語</th></tr></thead>
-      <tbody>{item.wrongAnswers.map(answer=><tr key={answer.uid}><th scope="row">{answer.seat?`${answer.seat} 號 `:''}{answer.name}</th><td>{answerText(item.question,answer.response)}</td><td>{answer.points??'未保存'}{answer.points!==null?' 分':''}</td><td>{answer.reason}{answer.feedback&&<p>{answer.feedback}</p>}</td></tr>)}</tbody></table>
+      <table className={`mistake-table${current.room.gameType==='sentence-practice'?' has-sentence-scores':''}`}><caption>{item.wrongAnswers.length} 位學生需複習</caption><thead><tr><th scope="col">學生</th><th scope="col">個人作答</th>{current.room.gameType==='sentence-practice'&&<th scope="col">各項評分（得分／配分）</th>}<th scope="col">本題得分</th><th scope="col">原因／當次評語</th></tr></thead>
+      <tbody>{item.wrongAnswers.map(answer=><tr key={answer.uid}><th scope="row">{answer.seat?`${answer.seat} 號 `:''}{answer.name}</th><td>{answerText(item.question,answer.response)}</td>{current.room.gameType==='sentence-practice'&&<td><MistakeScoreItems items={answer.sentenceDetails?.items}/></td>}<td>
+       {answer.sentenceDetails&&<p>造句品質：{answer.sentenceDetails.qualityScore}／100</p>}
+       <p>{answer.sentenceDetails?'競賽得分：':''}{answer.points??'未保存'}{answer.points!==null?' 分':''}{answer.sentenceDetails&&`／${answer.sentenceDetails.competitionMaximum} 分`}</p>
+       {answer.sentenceDetails?.timedOut&&<small>逾時；各項評分與造句品質分保留。</small>}
+       {answer.sentenceDetails&&(answer.sentenceDetails.targetOk===false||answer.sentenceDetails.meaningOk===false)&&<small>字詞或語意判定未通過，總分保留當次結果。</small>}
+      </td><td>{answer.reason}{answer.feedback&&<p>{answer.feedback}</p>}</td></tr>)}</tbody></table>
      </div>
     </article>)}
     <section aria-label="建立錯題複習競賽"><h3>依勾選錯題再次開課</h3>
