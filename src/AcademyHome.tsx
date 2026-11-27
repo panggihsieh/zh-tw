@@ -23,7 +23,7 @@ const backendCards = [
   { id: "readingCorrections", title: "課文讀音／圈詞修正", note: "修正多音字・設定學生語詞提示", art: "book", className: "card-reading-corrections", keywords: "課文 生字 注音 讀音 多音字 圈詞 語詞 修改 修正 提示" },
   { id: "quiz", title: "試題製作工作台", note: "檔案／連結・六類出題・題庫輸出", art: "book", className: "card-database", keywords: "試題 製作 工作台 命題 出題 檔案 連結 JSON 資料庫 生字 題庫 quiz" },
   { id: "competition", title: "Kahoot 競賽開課", note: "建立課程・課堂派送", art: "trophy", className: "card-competition", keywords: "Kahoot 遊戲 競賽 開課" },
-  { id: "mistakeReview", title: "錯題複習", note: "學生錯題檢討・勾選原題再次開課", art: "clipboard", className: "card-records", keywords: "錯題 複習 檢討 重練 再出題" },
+  { id: "mistakeReview", title: "錯題複習", note: "學生錯題檢討・勾選原題再次開課", art: "clipboard", className: "card-mistakes", keywords: "錯題 複習 檢討 重練 再出題" },
   { id: "gameReview", title: "課堂紀錄", note: "回顧學習與課堂成果", art: "clipboard", className: "card-records", keywords: "課堂 成績 紀錄" },
   { id: "structure", title: "字形結構資料庫", note: "部件拆解・教學資源", art: "puzzle", className: "card-radicals", keywords: "字形 結構 拆字 部件" },
   { id: "handwriting", title: "手寫檢核與筆順", note: "寫一寫，核對每一畫", art: "brush", className: "card-handwriting", keywords: "手寫 筆順 筆畫" },

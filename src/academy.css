@@ -105,6 +105,7 @@
 .card-calligraphy { position:absolute; top:50%; left:54%; z-index:2; font:700 44px 'Noto Serif TC',serif; color:#393929; transform:rotate(-6deg); }
 .academy-card-action { display:inline-flex; align-items:center; gap:14px; padding:7px 20px; border-radius:22px; border:3px double #ffedb6; background:linear-gradient(#bb7438,#945222); color:#fff9ea; font-weight:700; position:relative; z-index:2; margin-top:-16px; }
 .card-structure { --card-tint:#f5e2ba; --card-edge:#c8ac76; }
+.card-mistakes { --card-tint:#e0e9c9; --card-edge:#a4b680; }
 .card-writing,.card-records { --card-tint:#cbe1e8; --card-edge:#9cb7bd; }
 .card-games,.card-competition { --card-tint:#f7d6b5; --card-edge:#d4a67b; }
 .card-handwriting { --card-tint:#dfd6ee; --card-edge:#b8a8cb; }
@@ -143,9 +144,10 @@
 .teacher-academy-grid .card-records { grid-column:3; grid-row:1; }
 .teacher-academy-grid .card-radicals { grid-column:4; grid-row:1; }
 .teacher-academy-grid .card-handwriting { grid-column:5; grid-row:1; }
-.teacher-academy-grid .card-voice { grid-column:3; grid-row:2; }
+.teacher-academy-grid .card-mistakes { grid-column:3; grid-row:2; }
+.teacher-academy-grid .card-voice { grid-column:4; grid-row:2; }
 .academy-card-arrow { position:absolute; bottom:12px; right:12px; opacity:.6; }
-.teacher-academy-grid .card-reading-corrections { grid-column:4 / 6; grid-row:2; --card-tint:#f5e2ba; --card-edge:#c8ac76; }
+.teacher-academy-grid .card-reading-corrections { grid-column:5; grid-row:2; --card-tint:#f5e2ba; --card-edge:#c8ac76; }
 .academy-settings-card { grid-column:1 / -1; grid-row:3; padding:22px 18px; border:1px solid #c9b380; border-radius:22px; background:linear-gradient(#fffcf3e6,#f7e8cfe6); box-shadow:0 4px 6px #756c4422,inset 0 0 0 4px #fff9e1,inset 0 0 0 5px #d2bd93; display:flex; flex-direction:column; justify-content:center; gap:24px; }
 .academy-settings-card h2 { display:flex; align-items:center; gap:12px; font:700 22px 'Noto Serif TC',serif; margin:0; }
 .academy-settings-card > div { display:flex; flex-wrap:wrap; gap:8px; }
